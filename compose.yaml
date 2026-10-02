@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:17.9@sha256:2a0d0fe14825b0939f78a8cad5cd4e6aa68bf94d0e5dd96e24b6d23af4315545
+    environment:
+      POSTGRES_DB: inventory_intelligence
+      POSTGRES_USER: ii_owner
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ii_owner_local}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ii_owner -d inventory_intelligence"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+volumes:
+  pgdata:
