@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Milestone 1 is specified by the [frozen contract](docs/CONTRACT_V1.md), with [three parallel implementation handoffs](docs/PARALLEL_WORK.md). No database, application container, or inventory test suite exists yet.
+The [frozen milestone 1 contract](docs/CONTRACT_V1.md) is implemented and independently validated. See the [completion review](docs/STAGE1_REVIEW.md). The three handoffs are integrated; they no longer describe separate pending implementations.
 
 ## GitHub bootstrap
 
@@ -41,7 +41,7 @@ python3 -m json.tool docs/research/repositories.json > /dev/null
 
 Run checks appropriate to the change. Update README/operator instructions and the affected design documentation in the same PR. Document what changed, why, validation, and material limitations.
 
-Fetch again before pushing and compare the branch with current `origin/main`. Integrate new main commits if needed, rerun affected checks, then push. Verify the remote branch SHA; do not routinely wait for CI. Merging or publishing a deployment requires authorization covering that action.
+Fetch again before pushing and compare the branch with current `origin/main`. Integrate new main commits if needed, rerun affected checks, then push. Verify the remote branch SHA; do not routinely wait for CI. Merging or publishing a deployment requires authorization covering that action. Before each task, fetch with pruning and inspect existing branches. After an authorized merge, verify the remote main commit and ancestry, remove merged task branches locally/remotely, and retire clean temporary worktrees. Preserve dirty/active work and needed environments. Keep commits focused without rewriting published history for cleanup.
 
 ## CI policy
 

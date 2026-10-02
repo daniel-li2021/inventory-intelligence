@@ -1,6 +1,6 @@
 # Stage 1: Inventory Reliability — proposed plan
 
-Status: researched 2026-10-02; milestone 1 interfaces and scope are frozen in [CONTRACT_V1.md](CONTRACT_V1.md). That contract takes precedence over this design discussion. No application implementation has started. The reference evidence and version caveats are in [RESEARCH.md](RESEARCH.md).
+Status: milestone 1 is implemented and accepted against [CONTRACT_V1.md](CONTRACT_V1.md); see the [completion review](STAGE1_REVIEW.md). That contract takes precedence over this original design discussion. The temporal expansion below is future hardening beyond v1, not a claim of implemented functionality. Reference evidence and version caveats are in [RESEARCH.md](RESEARCH.md).
 
 ## Recommendation
 
