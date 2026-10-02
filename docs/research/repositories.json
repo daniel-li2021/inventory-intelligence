@@ -1,0 +1,221 @@
+{
+  "checked_on": "2026-10-02",
+  "method": "GitHub public REST repository metadata; stars are adoption proxies, not proof of production fitness; pushed_at may include branch/bot pushes",
+  "repositories": [
+    {
+      "full_name": "frappe/erpnext",
+      "html_url": "https://github.com/frappe/erpnext",
+      "stargazers_count": 39725,
+      "archived": false,
+      "pushed_at": "2026-10-01T14:29:00Z",
+      "default_branch": "develop",
+      "description": "Free and Open Source Enterprise Resource Planning (ERP)",
+      "license_spdx": "GPL-3.0",
+      "metadata_url": "https://api.github.com/repos/frappe/erpnext"
+    },
+    {
+      "full_name": "odoo/odoo",
+      "html_url": "https://github.com/odoo/odoo",
+      "stargazers_count": 54794,
+      "archived": false,
+      "pushed_at": "2026-10-02T08:26:06Z",
+      "default_branch": "20.0",
+      "description": "Odoo. Open Source Apps To Grow Your Business.",
+      "license_spdx": "NOASSERTION",
+      "metadata_url": "https://api.github.com/repos/odoo/odoo",
+      "license_file_review": "19.0/LICENSE: LGPLv3; bundled components may differ"
+    },
+    {
+      "full_name": "SQLMesh/sqlmesh",
+      "html_url": "https://github.com/SQLMesh/sqlmesh",
+      "stargazers_count": 3304,
+      "archived": false,
+      "pushed_at": "2026-10-01T03:24:01Z",
+      "default_branch": "main",
+      "description": "Scalable and efficient data transformation framework - backwards compatible with dbt.",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/SQLMesh/sqlmesh"
+    },
+    {
+      "full_name": "fivetran/great_expectations",
+      "html_url": "https://github.com/fivetran/great_expectations",
+      "stargazers_count": 11854,
+      "archived": false,
+      "pushed_at": "2026-10-02T08:02:04Z",
+      "default_branch": "develop",
+      "description": "Always know what to expect from your data.",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/fivetran/great_expectations"
+    },
+    {
+      "full_name": "elementary-data/elementary",
+      "html_url": "https://github.com/elementary-data/elementary",
+      "stargazers_count": 2416,
+      "archived": false,
+      "pushed_at": "2026-10-01T16:55:26Z",
+      "default_branch": "master",
+      "description": "The dbt-native data observability solution for data & analytics engineers. Monitor your data pipelines in minutes. Available as self-hosted or cloud service with premium features.",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/elementary-data/elementary"
+    },
+    {
+      "full_name": "dlt-hub/dlt",
+      "html_url": "https://github.com/dlt-hub/dlt",
+      "stargazers_count": 5923,
+      "archived": false,
+      "pushed_at": "2026-09-30T11:02:17Z",
+      "default_branch": "devel",
+      "description": "data load tool (dlt) is an open source Python library that makes data loading easy \ud83d\udee0\ufe0f ",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/dlt-hub/dlt"
+    },
+    {
+      "full_name": "inventree/InvenTree",
+      "html_url": "https://github.com/inventree/InvenTree",
+      "stargazers_count": 7663,
+      "archived": false,
+      "pushed_at": "2026-10-01T07:31:25Z",
+      "default_branch": "master",
+      "description": "Open Source Inventory Management System",
+      "license_spdx": "MIT",
+      "metadata_url": "https://api.github.com/repos/inventree/InvenTree"
+    },
+    {
+      "full_name": "dbt-labs/dbt",
+      "html_url": "https://github.com/dbt-labs/dbt",
+      "stargazers_count": 13957,
+      "archived": false,
+      "pushed_at": "2026-10-01T22:51:12Z",
+      "default_branch": "main",
+      "description": "dbt enables data analysts and engineers to transform their data using the same practices that software engineers use to build applications.",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/dbt-labs/dbt-core"
+    },
+    {
+      "full_name": "sodadata/soda-core",
+      "html_url": "https://github.com/sodadata/soda-core",
+      "stargazers_count": 2431,
+      "archived": false,
+      "pushed_at": "2026-10-02T07:49:32Z",
+      "default_branch": "main",
+      "description": "Data Contracts engine for the modern data stack. https://www.soda.io",
+      "license_spdx": "NOASSERTION",
+      "metadata_url": "https://api.github.com/repos/sodadata/soda-core",
+      "license_file_review": "main/LICENSE: Elastic License 2.0"
+    },
+    {
+      "full_name": "datafold/data-diff",
+      "html_url": "https://github.com/datafold/data-diff",
+      "stargazers_count": 2993,
+      "archived": true,
+      "pushed_at": "2024-05-17T13:45:03Z",
+      "default_branch": "master",
+      "description": "Compare tables within or across databases",
+      "license_spdx": "MIT",
+      "metadata_url": "https://api.github.com/repos/datafold/data-diff"
+    },
+    {
+      "full_name": "OpenLineage/OpenLineage",
+      "html_url": "https://github.com/OpenLineage/OpenLineage",
+      "stargazers_count": 2687,
+      "archived": false,
+      "pushed_at": "2026-10-01T10:18:02Z",
+      "default_branch": "main",
+      "description": "An Open Standard for lineage metadata collection",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/OpenLineage/OpenLineage"
+    },
+    {
+      "full_name": "Nixtla/statsforecast",
+      "html_url": "https://github.com/Nixtla/statsforecast",
+      "stargazers_count": 4919,
+      "archived": false,
+      "pushed_at": "2026-10-01T23:27:16Z",
+      "default_branch": "main",
+      "description": "Lightning \u26a1\ufe0f fast forecasting with statistical and econometric models.",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/nixtla/statsforecast"
+    },
+    {
+      "full_name": "psycopg/psycopg",
+      "html_url": "https://github.com/psycopg/psycopg",
+      "stargazers_count": 2504,
+      "archived": false,
+      "pushed_at": "2026-10-01T07:53:40Z",
+      "default_branch": "master",
+      "description": "New generation PostgreSQL database adapter for the Python programming language ",
+      "license_spdx": "LGPL-3.0",
+      "metadata_url": "https://api.github.com/repos/psycopg/psycopg"
+    },
+    {
+      "full_name": "crbnos/carbon",
+      "html_url": "https://github.com/crbnos/carbon",
+      "stargazers_count": 2661,
+      "archived": false,
+      "pushed_at": "2026-10-02T08:16:07Z",
+      "default_branch": "main",
+      "description": "Open-source manufacturing ERP, MES and QMS. Quoting, MRP, inventory, shop floor, quality and lot/serial traceability on one Postgres schema, with a REST API and MCP server. Self-host or use Carbon Cloud.",
+      "license_spdx": "NOASSERTION",
+      "metadata_url": "https://api.github.com/repos/crbnos/carbon",
+      "license_file_review": "main/LICENSE: AGPLv3 except enterprise files under Carbon Commercial License and third-party components"
+    },
+    {
+      "full_name": "bruin-data/bruin",
+      "html_url": "https://github.com/bruin-data/bruin",
+      "stargazers_count": 1760,
+      "archived": false,
+      "pushed_at": "2026-10-02T06:56:57Z",
+      "default_branch": "main",
+      "description": "Build data pipelines with SQL and Python, ingest data from different sources, add quality checks, and build end-to-end flows.",
+      "license_spdx": "Apache-2.0",
+      "metadata_url": "https://api.github.com/repos/bruin-data/bruin"
+    }
+  ],
+  "source_refs": [
+    {
+      "repository": "frappe/erpnext",
+      "ref": "develop",
+      "commit": "d607837e80fa731e2b3b285c9873f3f1185653bc"
+    },
+    {
+      "repository": "odoo/odoo",
+      "ref": "19.0",
+      "commit": "c9bd6ea5e343a5a3ff279ed0911808268e17f1e6"
+    },
+    {
+      "repository": "inventree/InvenTree",
+      "ref": "master",
+      "commit": "9478c25a70696feddafbff139e6f41d3b0abe78d"
+    },
+    {
+      "repository": "SQLMesh/sqlmesh",
+      "ref": "main",
+      "commit": "271b855b70cebfff35d9f2c247c32876d12cff77"
+    },
+    {
+      "repository": "fivetran/great_expectations",
+      "ref": "develop",
+      "commit": "88a054dfc0cb1d7bae86d3f81cb5c23da8c4d1bd"
+    },
+    {
+      "repository": "elementary-data/elementary",
+      "ref": "master",
+      "commit": "e34d8539b9c7f350c2de9ee954794d40b9260d93"
+    },
+    {
+      "repository": "dlt-hub/dlt",
+      "ref": "devel",
+      "commit": "98d2eb684f637d27afa6553f00775317b11f3820"
+    },
+    {
+      "repository": "dbt-labs/dbt",
+      "ref": "main",
+      "commit": "68ad83776b3d9cfd9e80aed0e35209a47d9ec514"
+    },
+    {
+      "repository": "sodadata/soda-core",
+      "ref": "main",
+      "commit": "8f652f4832d5534d5e0d8584cdb76d45fa087a7e"
+    }
+  ]
+}
