@@ -4,7 +4,8 @@ manifest_metadata AS (
         CASE WHEN m.kind IS DISTINCT FROM m.selected_kind THEN 'kind' END,
         CASE WHEN m.status NOT IN ('complete', 'incomplete') THEN 'status' END,
         CASE WHEN m.as_of IS DISTINCT FROM p.cutoff THEN 'as_of' END,
-        CASE WHEN m.watermark IS NULL OR m.watermark IS DISTINCT FROM l.watermark
+        CASE WHEN m.watermark IS NULL OR
+                       (l.watermark IS NOT NULL AND m.watermark IS DISTINCT FROM l.watermark)
              THEN 'watermark' END,
         CASE WHEN m.selected_kind = 'ledger' AND
                        (m.baseline_at IS NULL OR m.baseline_at > p.cutoff)
@@ -41,11 +42,6 @@ coverage_problems AS (
     SELECT 'ledger', o.row_id, o.sku_id, o.warehouse_id, 'unexpected_opening_key'
     FROM openings o WHERE NOT EXISTS (
         SELECT 1 FROM ledger_keys k WHERE (k.sku_id, k.warehouse_id) = (o.sku_id, o.warehouse_id)
-    )
-    UNION ALL
-    SELECT 'ledger', m.row_id, m.sku_id, m.warehouse_id, 'unexpected_movement_key'
-    FROM eligible m WHERE NOT EXISTS (
-        SELECT 1 FROM ledger_keys k WHERE (k.sku_id, k.warehouse_id) = (m.sku_id, m.warehouse_id)
     )
 ),
 row_metadata AS (
@@ -130,7 +126,6 @@ defects(rule_id, reason, sku_id, warehouse_id, row_ids, evidence) AS (
            jsonb_build_object('batch_id', s.selected_id, 'as_of', s.as_of,
                               'evaluated_at', p.evaluated_at, 'max_age_hours', %(max_snapshot_age_hours)s::integer)
     FROM snapshot s, p WHERE p.evaluated_at - s.as_of > p.max_age
-       OR EXISTS (SELECT 1 FROM snapshots r WHERE p.evaluated_at - r.as_of > p.max_age)
     UNION ALL
     SELECT 'R005', 'coverage_mismatch', NULL, NULL,
            array_remove(array_agg(DISTINCT c.row_id ORDER BY c.row_id), NULL),
