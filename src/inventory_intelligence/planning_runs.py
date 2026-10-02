@@ -4,7 +4,7 @@ from datetime import date, datetime, timedelta, timezone
 from fractions import Fraction
 import hashlib
 import json
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from psycopg.pq import TransactionStatus
 from psycopg.types.json import Jsonb
@@ -18,7 +18,7 @@ MIN_TRAIN = 28
 
 
 def _json_value(value):
-    if isinstance(value, Fraction):
+    if isinstance(value, (Fraction, UUID)):
         return str(value)
     if isinstance(value, datetime):
         return instant(value).isoformat()
@@ -72,6 +72,7 @@ def run_forecast(conn, *, batch_id, sku_id, warehouse_id, start_day, origin_day,
     origin = midnight(origin_day)
     with conn.transaction():
         conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ")
+        conn.execute("SET LOCAL TIME ZONE 'UTC'")
         series = read_series(conn, batch_id=batch_id, sku_id=sku_id, warehouse_id=warehouse_id,
                              start_day=start_day, end_day=origin_day, known_at=origin)
         result = prediction(series, method=method, horizon=horizon)
@@ -109,6 +110,7 @@ def run_benchmark(conn, *, batch_id, sku_id, warehouse_id, group, start_day,
     holdout_day = end_day - timedelta(days=28)
     with conn.transaction():
         conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ")
+        conn.execute("SET LOCAL TIME ZONE 'UTC'")
         def fold(day):
             training = read_series(conn, batch_id=batch_id, sku_id=sku_id, warehouse_id=warehouse_id,
                 start_day=start_day, end_day=day, known_at=midnight(day))

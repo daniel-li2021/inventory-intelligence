@@ -37,5 +37,12 @@ demand replay/eligibility now have their own slice and manual database checks.
 [Eligibility PR 3](https://github.com/daniel-li2021/inventory-intelligence/pull/3)
 passed both jobs in [CI run 36997926902](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36997926902).
 Origin-aware forecasts/benchmarks now append versioned PostgreSQL evidence with
-independent knowledge-time/holdout oracles. Inventory planning remains pending;
-Stage 2 is not complete.
+independent knowledge-time/holdout oracles.
+[Benchmark PR 4](https://github.com/daniel-li2021/inventory-intelligence/pull/4)
+passed [CI run 36998446346](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36998446346).
+The final slice adds inventory revalidation, complete supply gates, exact daily
+projection, prefix-aware replenishment and a deterministic PostgreSQL demo.
+Fresh local full acceptance: 45 tests, no failures/errors/skips. See
+[PLANNING.md](PLANNING.md) and [verified demo](examples/stage2.md). This stack
+requires contract/integration review, CI and an authorized merge; Stage 2 is not
+complete on main. Stage 3's working checkout remains untouched.

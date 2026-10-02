@@ -104,7 +104,14 @@ separately rather than hiding them in one average. Add more sophisticated models
 only when baseline comparisons expose a concrete weakness. Predictions must not
 overwrite earlier runs; unchanged inputs produce stable semantic results.
 
-### 4. Deterministic replenishment proposals
+### 4. Deterministic replenishment proposals — implemented slice
+
+`replenishment.run_plan` now reads trusted inventory, explicit supply manifests,
+reservations/confirmed inbound and lead/review/safety/pack/MOQ policy. It persists
+projections and proposals, or `not_assessable` with no recommendation. The policy
+uses the maximum daily safety deficit after supplier arrival; final inventory
+position alone can hide earlier shortages. Current source SQL is revalidated at
+decision time, reusing Stage 1 code without modifying its frozen interfaces.
 
 Require a current passing Stage 1 run at the planning cutoff, covering the
 selected keys, plus independently complete reservations/commitments, confirmed
@@ -123,10 +130,14 @@ time, inbound/reservation completeness, or an unassessable stock bucket yields
 `not_assessable` with no order recommendation. Default safety stock must not
 masquerade as a calibrated service-level guarantee.
 
-### 5. Portfolio acceptance
+### 5. Portfolio acceptance — local evidence; CI/integration pending
 
-Document fresh-database generation, baseline evaluation and clean/blocked
-planning demos. Test exact order proposals against independent manual arithmetic,
+[PLANNING.md](PLANNING.md) documents fresh-database generation, baseline
+evaluation, APIs and clean/blocked planning demos. [Verified summary](examples/stage2.md)
+records the deterministic downstream outcomes. The expanded suite has 45 tests:
+22 frozen Stage 1, six kernel and 17 demand/forecast/planning checks. All passed
+on a fresh local PostgreSQL database; each dependent PR must retain pinned CI
+acceptance and compatible contracts before integration. Test exact order proposals against independent manual arithmetic,
 including zero demand, stockout gaps, late corrections, pending/delayed inbound,
 duplicate orders, unit/pack boundaries and immutable history. Run the SQL adapter
 on real PostgreSQL in the existing CI job. Publish concise JSON/Markdown evidence.
@@ -135,10 +146,12 @@ No scheduler, ERP, web UI, LLM, cloud service or business-data import is needed
 for this stage. Its completion requires the demand/eligibility adapter, persisted
 evaluation and proven planning arithmetic; the baseline kernel alone is a start.
 
-## Resumption handoff
+## Integration handoff
 
-Demand contract and eligibility adapter are implemented in the first Stage 2 PR.
-Origin-aware forecasts and benchmarks are now persisted in the second PR.
-Next: integrate trusted Stage 1 inventory with complete supply inputs and
-independently tested proposals. Stage 2
-remains incomplete until integration and remote acceptance of those slices.
+The implementation is in three focused dependent PRs: eligibility/contract,
+versioned benchmarks, and inventory projection/proposals. Review them in that
+order against current main and planning-v1; do not infer completion from their
+names or local tests. No merge is authorized in this work. Stage 2 remains **not
+complete on main** pending contract approval, CI evidence and authorized integration.
+Stage 1 implementation/schema/checker signatures remain unchanged. No LLM,
+agent, web UI, scheduler, cloud service or advanced forecasting model was added.
