@@ -55,9 +55,13 @@ accepts **already validated daily demand values**. It does not validate dates,
 source coverage, availability, stockouts or reliability runs; it cannot be used
 as a complete operational forecasting workflow yet.
 
-### 2. Synthetic demand and eligibility contract — next
+### 2. Synthetic demand and eligibility contract — implemented slice
 
-Before adding tables, freeze `CONTRACT_PLANNING_V1.md` separately. Specify stable
+The separately frozen [CONTRACT_PLANNING_V1.md](CONTRACT_PLANNING_V1.md) now governs
+`demand.read_series`, `sql/planning_schema.sql` and `synthetic.demand.load_demand`.
+Five independent PostgreSQL tests cover zero/gaps, revisions, identity, knowledge
+time, DST and deterministic 180-day groups. See the independent
+[checkpoint](STAGE2_CHECKPOINT.md). Specify stable
 SKU/warehouse references, daily business calendar (`America/Los_Angeles`), source
 order-line/version identity, business time, observation time, coverage manifests,
 and the forecast origin. Include daylight-saving boundaries in calendar tests.
@@ -127,9 +131,7 @@ evaluation and proven planning arithmetic; the baseline kernel alone is a start.
 
 ## Resumption handoff
 
-The next implementation owns the new planning contract, small synthetic
-demand/availability fixtures, eligibility SQL and exact database tests. Reuse
-Stage 1 bootstrap/connection patterns without changing its frozen schema or
-checker signatures. Begin with independent complete-zero and missing-day cases;
-then connect eligible series to the existing baseline kernel. Keep each behavior
-in a focused PR, and remove its task branch after an authorized, verified merge.
+Demand contract and eligibility adapter are implemented in the first Stage 2 PR.
+Next: persist origin-aware forecasts/backtests, then integrate trusted Stage 1
+inventory with complete supply inputs and independently tested proposals. Stage 2
+remains incomplete until integration and remote acceptance of those slices.

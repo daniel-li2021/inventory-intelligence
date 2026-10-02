@@ -10,6 +10,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./sql/planning_schema.sql:/docker-entrypoint-initdb.d/02-planning.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ii_owner -d inventory_intelligence"]
       interval: 2s
