@@ -371,6 +371,23 @@ class Acceptance(unittest.TestCase):
         self.assert_checks(report, fail=("R005",), blocked=("R001",))
         self.assertFalse(any(f["rule_id"] == "R001" for f in report["findings"]))
 
+    def test_empty_coverage_cannot_pass(self):
+        for table in ("coverage", "opening_balances", "movements", "snapshots"):
+            self.admin.execute(sql.SQL("DELETE FROM operational_fixture.{} WHERE batch_id IN (%s, %s)")
+                               .format(sql.Identifier(table)),
+                               (self.key("ledger"), self.key("snapshot")))
+        for kind in ("ledger", "snapshot"):
+            self.recount(kind)
+        report = self.check()
+        self.assert_reasons(report, [("R005", "coverage_mismatch")] * 2,
+                            fail=("R005",), blocked=("R001",))
+        self.assertEqual({f["evidence"]["batch_id"] for f in report["findings"]},
+                         {self.key("ledger"), self.key("snapshot")})
+        for finding in report["findings"]:
+            self.assertEqual(finding["source_row_ids"], [])
+            self.assertEqual(finding["evidence"]["problems"], [dict(
+                sku_id=None, warehouse_id=None, row_id=None, problem="empty_coverage")])
+
     def test_repeat_run_history_and_operational_inputs_unchanged(self):
         self.update("snapshots", "snapshot:shirt:a", on_hand_qty=107)
         tables = ("styles", "skus", "warehouses", "batches", "coverage",

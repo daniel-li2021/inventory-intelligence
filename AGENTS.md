@@ -30,5 +30,7 @@ Optimize for correctness and token efficiency.
 - Stage explicit project files, inspect the staged diff, run focused checks, and commit a clear problem-oriented change.
 - Before pushing, fetch again and compare against current `origin/main`; reconcile upstream changes without overwriting others' work.
 - Verify the pushed remote ref. Do not wait for or continuously monitor CI after a push unless CI/deployment validation is requested or a failure is evident.
+- Before work, prune stale remote refs and inspect existing branches. Keep commits focused; do not rewrite published history merely for tidiness.
+- After an authorized merge, verify that remote `main` contains the work, then remove merged task branches locally and remotely and retire clean temporary worktrees. Preserve active branches, dirty work, and required local environments; never force-delete unmerged work.
 - Do not force-push, delete work, or merge a PR without authorization covering that action.
 - Keep these shared instructions in this file; avoid duplicating them in editor-specific always-on rules.

@@ -17,6 +17,12 @@ manifest_metadata AS (
     FROM manifests m, ledger l, p WHERE m.batch_id IS NOT NULL
 ),
 coverage_problems AS (
+    SELECT m.selected_kind AS kind, NULL::text AS row_id, NULL::text AS sku_id,
+           NULL::text AS warehouse_id, 'empty_coverage' AS problem
+    FROM manifests m WHERE m.batch_id IS NOT NULL AND NOT EXISTS (
+        SELECT 1 FROM coverage c WHERE c.kind = m.selected_kind
+    )
+    UNION ALL
     SELECT c.kind, c.row_id, c.sku_id, c.warehouse_id, 'unknown_coverage_reference' AS problem
     FROM coverage c LEFT JOIN operational_fixture.skus s USING (sku_id)
     LEFT JOIN operational_fixture.warehouses w USING (warehouse_id)

@@ -1,6 +1,6 @@
 # Three parallel implementation paths
 
-The owner requested prepared handoffs, not agent launches. No implementation agents have been started. All three begin from the same frozen `contract-v1` Git tag and read [CONTRACT_V1.md](CONTRACT_V1.md) first.
+Completion: all three handoffs have been implemented and integrated through the validation branch. See [STAGE1_REVIEW.md](STAGE1_REVIEW.md). The path ownership below records the original implementation boundaries; it does not require keeping completed branches alive. Preserve the frozen `contract-v1` tag.
 
 1. **Data foundation** — branch `codex/stage1-data`; [handoff](agents/01_DATA.md). Owns `sql/schema.sql`, `compose.yaml`, `synthetic/**`, `.env.example`, and `docs/DATA.md`.
 2. **Reliability engine** — branch `codex/stage1-engine`; [handoff](agents/02_ENGINE.md). Owns `src/inventory_intelligence/**`, `pyproject.toml`, `sql/views.sql`, `sql/checks.sql`, and `docs/ENGINE.md`.

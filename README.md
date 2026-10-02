@@ -56,6 +56,7 @@ The standard-library suite checks manually calculated balances, exact fault evid
 - [Checker, CLI, and SQL behavior](docs/ENGINE.md)
 - [Path ownership and handoffs](docs/PARALLEL_WORK.md)
 - [Stage 1 plan](docs/STAGE1_PLAN.md)
+- [Stage 1 completion review](docs/STAGE1_REVIEW.md)
 - [Research and reading guide](docs/RESEARCH.md)
 - [Development workflow](CONTRIBUTING.md) and [shared agent instructions](AGENTS.md)
 

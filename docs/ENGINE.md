@@ -178,3 +178,8 @@ converted to the contract's bigint output fields. A total or delta outside
 bigint range is an execution error with rollback. This implementation assumes
 the frozen input column types/nullability and source-retention contract; it
 does not validate arbitrary schemas or enforce retention for upstream writers.
+
+The completion review additionally rejects an empty declared coverage set with
+R005 `coverage_mismatch` evidence `empty_coverage`. Empty source batches cannot
+establish a successful inventory comparison. An explicitly covered zero-stock
+bucket still passes when its independent opening/snapshot observations are zero.

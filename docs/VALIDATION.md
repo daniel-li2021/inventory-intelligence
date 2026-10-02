@@ -66,4 +66,10 @@ python -m unittest discover -s tests -v
 
 Result: **21 tests passed**, zero failures/errors/skips. Compose fresh-volume initialization was separately verified with `COMPOSE_PROJECT_NAME=ii_validation_demo POSTGRES_PORT=55434 docker compose up -d --wait`. Both `combined` and `clean` were loaded through the documented generator command. Combined CLI returned exit 1 with exactly R001/R002/R004 (jacket expected 25, observed 26, delta +1); clean returned exit 0 without findings. The installed final report's retained fields exactly match [the curated example](examples/combined.md).
 
-CI YAML parsing, Compose configuration validation, Python compilation, research JSON parsing, and whitespace checks also passed. Remote verification also passed: [CI run 36993288732](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36993288732) on integration commit `090f048f4fbdd946fff0e27f708d6db996f347a3` completed successfully for both `Repository hygiene` and `PostgreSQL acceptance`. The final documentation-only commit records this result; tested implementation and workflow are unchanged. `main` integration/merging and branch-protection configuration remain the coordinator's responsibility.
+CI YAML parsing, Compose configuration validation, Python compilation, research JSON parsing, and whitespace checks also passed. Remote verification also passed: [CI run 36993288732](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36993288732) on integration commit `090f048f4fbdd946fff0e27f708d6db996f347a3` completed successfully for both `Repository hygiene` and `PostgreSQL acceptance`.
+
+The completion review reran the original suite and independently confirmed that
+remote run. It found and corrected an empty-coverage false pass; the expanded
+suite passed **22 tests**, zero failures/errors/skips, on a fresh PostgreSQL 17.9
+database using Python 3.12.12. See [STAGE1_REVIEW.md](STAGE1_REVIEW.md). Branch
+protection configuration remains separate from code/test acceptance.
