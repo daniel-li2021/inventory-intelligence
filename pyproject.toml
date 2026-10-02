@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventory-intelligence"
+version = "0.1.0"
+description = "Read-only inventory reconciliation with persisted reliability evidence"
+requires-python = ">=3.12"
+dependencies = ["psycopg[binary]==3.3.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.data-files]
+"share/inventory_intelligence" = ["sql/views.sql", "sql/checks.sql"]
