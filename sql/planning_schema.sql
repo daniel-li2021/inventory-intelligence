@@ -21,6 +21,28 @@ CREATE TABLE planning_input.day_observations (
     source_recorded_at timestamptz NOT NULL, observed_at timestamptz NOT NULL,
     coverage text NOT NULL, availability text NOT NULL, expected_lines integer NOT NULL
 );
+CREATE TABLE planning_input.supply_batches (
+    batch_id text PRIMARY KEY, version_id text NOT NULL,
+    sku_id text NOT NULL, warehouse_id text NOT NULL,
+    as_of timestamptz NOT NULL, observed_at timestamptz NOT NULL, status text NOT NULL,
+    reservations_complete boolean NOT NULL, inbound_complete boolean NOT NULL,
+    expected_reservations integer NOT NULL, expected_inbound integer NOT NULL
+);
+CREATE TABLE planning_input.reservations (
+    row_id text PRIMARY KEY, batch_id text NOT NULL, source_system text NOT NULL,
+    reservation_id text NOT NULL, remaining_qty bigint NOT NULL, due_day date NOT NULL,
+    status text NOT NULL, source_recorded_at timestamptz NOT NULL, observed_at timestamptz NOT NULL
+);
+CREATE TABLE planning_input.inbound (
+    row_id text PRIMARY KEY, batch_id text NOT NULL, source_system text NOT NULL,
+    inbound_id text NOT NULL, remaining_qty bigint NOT NULL, arrival_day date NOT NULL,
+    status text NOT NULL, source_recorded_at timestamptz NOT NULL, observed_at timestamptz NOT NULL
+);
+CREATE TABLE planning_input.policies (
+    row_id text PRIMARY KEY, batch_id text NOT NULL, lead_days integer NOT NULL,
+    review_days integer NOT NULL, safety_qty bigint NOT NULL, pack_size integer NOT NULL,
+    moq integer NOT NULL, source_recorded_at timestamptz NOT NULL, observed_at timestamptz NOT NULL
+);
 CREATE TABLE planning.runs (
     run_id uuid PRIMARY KEY, contract_version text NOT NULL, code_version text NOT NULL,
     model_version text NOT NULL, kind text NOT NULL, created_at timestamptz NOT NULL,

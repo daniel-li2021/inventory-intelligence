@@ -73,3 +73,15 @@ remote run. It found and corrected an empty-coverage false pass; the expanded
 suite passed **22 tests**, zero failures/errors/skips, on a fresh PostgreSQL 17.9
 database using Python 3.12.12. See [STAGE1_REVIEW.md](STAGE1_REVIEW.md). Branch
 protection configuration remains separate from code/test acceptance.
+
+## Stage 2 checkpoint and added acceptance
+
+An independent review at `dacdc8f` verified the unchanged frozen Stage 1 tests
+and implementation, then ran the complete original 27-test suite on a fresh
+PostgreSQL 17.6 database. See [STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md).
+The expanded planning suite is discovered by the SAME CI command and bootstrap;
+Stage 1 oracles were not weakened. Its fresh database now adds separate planning
+schemas. The final local suite passed 45 tests with no failures/errors/skips,
+including the persisted 180-day downstream demo. [Planning validation and
+manual oracles](PLANNING.md). Pinned remote CI and integration review are required
+before Stage 2 can be considered complete on main.

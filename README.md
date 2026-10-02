@@ -57,7 +57,8 @@ The standard-library suite checks manually calculated balances, exact fault evid
 - [Path ownership and handoffs](docs/PARALLEL_WORK.md)
 - [Stage 1 plan](docs/STAGE1_PLAN.md)
 - [Stage 1 completion review](docs/STAGE1_REVIEW.md)
-- [Stage 2 plan and initial baseline benchmark](docs/STAGE2_PLAN.md)
+- [Stage 2 plan and independent checkpoint](docs/STAGE2_PLAN.md)
+- [Planning contract and operations/acceptance](docs/PLANNING.md)
 - [Research and reading guide](docs/RESEARCH.md)
 - [Development workflow](CONTRIBUTING.md) and [shared agent instructions](AGENTS.md)
 
@@ -66,7 +67,11 @@ operational data. Run `PYTHONPATH=src python -m inventory_intelligence.forecasti
 for its synthetic demonstration. The [planning contract](docs/CONTRACT_PLANNING_V1.md) and demand eligibility adapter
 now distinguish complete zeros from gaps and replay revisions as known at origins.
 Origin-aware forecasts and 7/14/28-day evaluations now append versioned PostgreSQL
-results with a separate final holdout. Replenishment is pending; Stage 2 is not complete.
+results with a separate final holdout. Inventory projections and advisory orders
+now require trusted Stage 1 inventory and complete supply evidence; gaps return
+`not_assessable` with no order. [Stage 2 demo and acceptance](docs/PLANNING.md).
+These dependent PR slices await authorized integration; Stage 2 is not complete
+on main.
 Existing databases can add the isolated schemas once with owner-executed
 `psql "$TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f sql/planning_schema.sql`.
 Fresh Compose and test bootstrap install both schemas.
