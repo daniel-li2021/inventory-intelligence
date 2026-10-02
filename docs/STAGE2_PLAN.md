@@ -130,17 +130,20 @@ time, inbound/reservation completeness, or an unassessable stock bucket yields
 `not_assessable` with no order recommendation. Default safety stock must not
 masquerade as a calibrated service-level guarantee.
 
-### 5. Portfolio acceptance — local evidence; CI/integration pending
+### 5. Portfolio acceptance — local and remote CI evidence; integration pending
 
 [PLANNING.md](PLANNING.md) documents fresh-database generation, baseline
 evaluation, APIs and clean/blocked planning demos. [Verified summary](examples/stage2.md)
 records the deterministic downstream outcomes. The expanded suite has 45 tests:
 22 frozen Stage 1, six kernel and 17 demand/forecast/planning checks. All passed
-on a fresh local PostgreSQL database; each dependent PR must retain pinned CI
-acceptance and compatible contracts before integration. Test exact order proposals against independent manual arithmetic,
-including zero demand, stockout gaps, late corrections, pending/delayed inbound,
-duplicate orders, unit/pack boundaries and immutable history. Run the SQL adapter
-on real PostgreSQL in the existing CI job. Publish concise JSON/Markdown evidence.
+on a fresh local PostgreSQL database and in the pinned PostgreSQL 17.9 CI job.
+[Final code CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+ran all 45 tests successfully; hygiene also passed. Exact proposals are checked
+against manual arithmetic, including zero demand, stockout gaps, late corrections,
+pending/delayed inbound, duplicate orders, unit/pack boundaries and immutable history.
+The existing CI command includes the full downstream demo; JSON/Markdown output
+and a verified concise summary are available. Compatible contracts remain a
+prerequisite for authorized integration.
 
 No scheduler, ERP, web UI, LLM, cloud service or business-data import is needed
 for this stage. Its completion requires the demand/eligibility adapter, persisted
@@ -152,6 +155,6 @@ The implementation is in three focused dependent PRs: eligibility/contract,
 versioned benchmarks, and inventory projection/proposals. Review them in that
 order against current main and planning-v1; do not infer completion from their
 names or local tests. No merge is authorized in this work. Stage 2 remains **not
-complete on main** pending contract approval, CI evidence and authorized integration.
+complete on main** pending contract approval and authorized integration. CI evidence is recorded above.
 Stage 1 implementation/schema/checker signatures remain unchanged. No LLM,
 agent, web UI, scheduler, cloud service or advanced forecasting model was added.
