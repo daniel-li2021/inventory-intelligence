@@ -7,6 +7,18 @@ from inventory_intelligence.forecasting import backtest, forecast
 
 
 class Baselines(unittest.TestCase):
+    def test_overlapping_multistep_metric_oracle(self):
+        report = backtest([0, 2, 4, 6, 8], min_train=2, horizon=2,
+                          step=1, season_length=2)
+        self.assertEqual([f["origin"] for f in report["folds"]], [2, 3])
+        self.assertEqual([f["actual"] for f in report["folds"]], [[4, 6], [6, 8]])
+        self.assertEqual(report["scored_points"], 4)
+        self.assertEqual(report["scores"], {
+            "naive": dict(mae=3, bias=-3, wape=Fraction(1, 2)),
+            "mean": dict(mae=Fraction(9, 2), bias=Fraction(-9, 2), wape=Fraction(3, 4)),
+            "seasonal_naive": dict(mae=4, bias=-4, wape=Fraction(2, 3)),
+        })
+
     def test_forecasts_and_fractional_expected_demand(self):
         self.assertEqual(forecast([0, 1], method="naive", horizon=3), [1, 1, 1])
         self.assertEqual(forecast([0, 1], method="mean", horizon=3), [Fraction(1, 2)] * 3)

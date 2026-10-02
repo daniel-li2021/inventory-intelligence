@@ -12,6 +12,7 @@ def main():
         if conn.execute("SELECT to_regnamespace('operational_fixture')").fetchone()[0]:
             raise RuntimeError("Use a fresh acceptance database; bootstrap refuses existing source schemas")
         conn.execute((root / "sql/schema.sql").read_text())
+        conn.execute((root / "sql/planning_schema.sql").read_text())
 
 
 if __name__ == "__main__":
