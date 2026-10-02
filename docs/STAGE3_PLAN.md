@@ -133,3 +133,12 @@ PYTHONPATH=src python -m unittest tests.test_copilot tests.test_copilot_language
 # With an isolated bootstrapped acceptance DB and its two existing URLs:
 PYTHONPATH=src python -m unittest tests.test_copilot_db tests.test_forecasting -v
 ```
+
+## Main integration — 2026-10-02
+
+The Stage 3 branch incorporates current main's Stage 2 eligibility foundation.
+This integration delivers the original copilot-1 evidence interface; the separate
+three-stage review branch retains the later planning adapter and review fixes.
+Readiness remains blocked without a validated proposal interface. Existing
+PostgreSQL evidence is reused, with focused offline and persisted-run checks at
+integration; no new model API request is needed for this merge.

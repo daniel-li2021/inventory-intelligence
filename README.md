@@ -65,8 +65,12 @@ The standard-library suite checks manually calculated balances, exact fault evid
 
 Stage 2 has started with a stdlib forecast/backtest benchmark, independent of
 operational data. Run `PYTHONPATH=src python -m inventory_intelligence.forecasting`
-for its synthetic demonstration. Demand eligibility and replenishment are the
-next planned slices; the benchmark does not authorize inventory decisions.
+for its synthetic demonstration. The [planning contract](docs/CONTRACT_PLANNING_V1.md) and demand eligibility adapter
+now distinguish complete zeros from gaps and replay revisions as known at origins.
+Versioned evaluation and replenishment are still pending; Stage 2 is not complete.
+Existing databases can add the isolated schemas once with owner-executed
+`psql "$TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f sql/planning_schema.sql`.
+Fresh Compose and test bootstrap install both schemas.
 
 ## Evidence copilot
 
