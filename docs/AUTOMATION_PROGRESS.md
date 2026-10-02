@@ -77,3 +77,12 @@ validated `codex/three-stage-review` branch using the configured credentials
 outside the sandbox. Stage 3 remote head matches local `d7feed5`; no main merge
 or branch deletion. The review branch contains all three stages and the review
 fixes. No new test/CI run was needed for branch publication.
+
+## Remaining-fixes authorized integration — 2026-10-02
+
+The user authorized merging the remaining three-stage review fixes. The combined
+branch incorporates main's original Stage 3 merge and the complete Stage 2
+benchmark/planner. Reviewed source and tests are retained; documentation records
+the superseded partial checkpoints. Fresh PostgreSQL acceptance passed all
+76 tests with zero failures/errors/skips; comparative benchmark outputs are
+reused unchanged. No model API calls or production-data imports were made.

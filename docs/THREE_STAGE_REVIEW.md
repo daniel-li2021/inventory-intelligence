@@ -1,7 +1,8 @@
 # Three-stage review and comparative benchmarks
 
 Review date: 2026-10-02. Review branch: `codex/three-stage-review`.
-Main still requires an authorized integration; no merge was performed.
+The user authorized merging the remaining fixes on 2026-10-02. The integration
+incorporates the original Stage 3 main merge and all three Stage 2 slices.
 
 ## Evidence and live-data boundary
 
@@ -173,4 +174,13 @@ explicit expected routes and separately reported latency/routing accuracy.
 - [Persisted planning explanation contract](CONTRACT_COPILOT_V2.md)
 
 Production-data integration, live language accuracy, PostgreSQL 17.9 CI on this
-combined branch and a merge to main are not established by these local results.
+combined branch are not established by these local results. Git merge status is
+verified separately from acceptance and benchmark evidence.
+
+## Authorized merge validation — 2026-10-02
+
+After incorporating main's original Stage 3 merge, all **76 tests passed**
+with zero failures, errors or skips on fresh database `review_merge_final`
+(PostgreSQL 17.6, Python 3.12.14, Psycopg 3.3.6). The reviewed implementation
+and stored comparative benchmark data are unchanged by conflict resolution.
+This additional integration round made no model API requests.

@@ -130,7 +130,7 @@ time, inbound/reservation completeness, or an unassessable stock bucket yields
 `not_assessable` with no order recommendation. Default safety stock must not
 masquerade as a calibrated service-level guarantee.
 
-### 5. Portfolio acceptance — local and remote CI evidence; integration pending
+### 5. Portfolio acceptance — local and remote CI evidence
 
 [PLANNING.md](PLANNING.md) documents fresh-database generation, baseline
 evaluation, APIs and clean/blocked planning demos. [Verified summary](examples/stage2.md)
@@ -151,10 +151,11 @@ evaluation and proven planning arithmetic; the baseline kernel alone is a start.
 
 ## Integration handoff
 
-The implementation is in three focused dependent PRs: eligibility/contract,
-versioned benchmarks, and inventory projection/proposals. Review them in that
-order against current main and planning-v1; do not infer completion from their
-names or local tests. No merge is authorized in this work. Stage 2 remains **not
-complete on main** pending contract approval and authorized integration. CI evidence is recorded above.
-Stage 1 implementation/schema/checker signatures remain unchanged. No LLM,
-agent, web UI, scheduler, cloud service or advanced forecasting model was added.
+The three dependent slices cover eligibility/contract, versioned benchmarks,
+and inventory projection/proposals. The combined three-stage review integrates
+all three with the existing main and corrects holdout selection truth timing.
+[Review evidence and final benchmarks](THREE_STAGE_REVIEW.md) record the later
+76-test acceptance and exact downstream results. The user authorized merging
+the remaining fixes on 2026-10-02; this integration preserves the frozen Stage 1
+interfaces and adds the separately versioned planning explanation contract.
+No web UI, scheduler, cloud service or advanced forecasting model was added.

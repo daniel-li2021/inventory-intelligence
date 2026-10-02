@@ -141,3 +141,20 @@ The Stage 2 interface is now integrated on the review branch. The additive
 benchmark and proposal runs. It retains exact evidence and explains blocked
 plans without approving a current order. The legacy readiness route remains
 fail closed. See [repeated validation and final benchmarks](THREE_STAGE_REVIEW.md).
+
+## Original copilot-1 main integration — 2026-10-02
+
+The Stage 3 branch incorporates current main's Stage 2 eligibility foundation.
+This integration delivers the original copilot-1 evidence interface; the separate
+three-stage review branch retains the later planning adapter and review fixes.
+Readiness remains blocked without a validated proposal interface. Existing
+PostgreSQL evidence is reused, with focused offline and persisted-run checks at
+integration; no new model API request is needed for this merge.
+
+## Remaining-fixes integration — 2026-10-02
+
+The user authorized integration of the combined review. This supersedes the
+original copilot-1-only checkpoint above: copilot-2 now explains persisted Stage 2
+results with historical proposal citations and blocked current readiness.
+The reviewed code is retained while incorporating the original Stage 3 merge;
+validation uses a fresh synthetic PostgreSQL database with no model API calls.
