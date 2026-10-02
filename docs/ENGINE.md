@@ -183,3 +183,8 @@ The completion review additionally rejects an empty declared coverage set with
 R005 `coverage_mismatch` evidence `empty_coverage`. Empty source batches cannot
 establish a successful inventory comparison. An explicitly covered zero-stock
 bucket still passes when its independent opening/snapshot observations are zero.
+
+Known SKU/warehouse movement rows outside declared ledger coverage emit R005
+`coverage_mismatch` with `unexpected_movement_key` evidence. They cannot escape
+balance checking. Unknown references retain the existing R003 local blocking
+behavior, so unrelated assessable controls continue to be checked.

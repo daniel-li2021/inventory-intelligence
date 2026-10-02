@@ -115,3 +115,9 @@ on PR 5 head `f01a2e7` passed both jobs; the PostgreSQL job log reports 45 tests
 `OK`. Eligibility PR 3 and benchmark PR 4 also passed their pinned CI jobs.
 All three branches remain unmerged; this evidence does not approve their contract
 or establish Stage 2 completion on main.
+
+Selection truth is frozen no later than holdout start, including source recording
+and observation gates on revisions. Holdout truth alone uses the final evaluation
+cutoff. This prevents a correction learned during holdout from changing model
+selection even when its business day belongs to a selection fold. The repeated
+[three-stage review](THREE_STAGE_REVIEW.md) includes this independent oracle.

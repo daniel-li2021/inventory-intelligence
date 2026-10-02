@@ -133,3 +133,11 @@ PYTHONPATH=src python -m unittest tests.test_copilot tests.test_copilot_language
 # With an isolated bootstrapped acceptance DB and its two existing URLs:
 PYTHONPATH=src python -m unittest tests.test_copilot_db tests.test_forecasting -v
 ```
+
+## Three-stage integration review — 2026-10-02
+
+The Stage 2 interface is now integrated on the review branch. The additive
+[copilot-2 contract](CONTRACT_COPILOT_V2.md) reads explicit persisted forecasting,
+benchmark and proposal runs. It retains exact evidence and explains blocked
+plans without approving a current order. The legacy readiness route remains
+fail closed. See [repeated validation and final benchmarks](THREE_STAGE_REVIEW.md).

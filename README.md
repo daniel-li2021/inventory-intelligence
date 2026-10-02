@@ -61,6 +61,8 @@ The standard-library suite checks manually calculated balances, exact fault evid
 - [Planning contract and operations/acceptance](docs/PLANNING.md)
 - [Stage 3 copilot plan and validation](docs/STAGE3_PLAN.md)
 - [Copilot interface contract](docs/CONTRACT_COPILOT_V1.md)
+- [Persisted planning explanations](docs/CONTRACT_COPILOT_V2.md)
+- [Three-stage review, final data and benchmarks](docs/THREE_STAGE_REVIEW.md)
 - [Research and reading guide](docs/RESEARCH.md)
 - [Development workflow](CONTRIBUTING.md) and [shared agent instructions](AGENTS.md)
 
@@ -98,8 +100,10 @@ PYTHONPATH=src python -m inventory_intelligence.copilot \
 ```
 
 Only the question reaches the language model; code determines all facts and
-readiness. No stock changes or orders are possible. Planning readiness remains
-explicitly blocked until the separate Stage 2 proposal interface is integrated.
+readiness. No stock changes or orders are possible. Stage 3 now explains an explicit persisted
+Stage 2 forecast, benchmark or proposal using `--intent planning --planning-run-id UUID`.
+Historical proposal quantities stay inside their citations; current readiness
+remains blocked until current inputs are assessed at a new planning cutoff.
 [Complete examples, inputs and exit codes](docs/examples/copilot.md).
 
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.

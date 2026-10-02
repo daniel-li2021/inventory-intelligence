@@ -128,6 +128,12 @@ class Copilot(unittest.TestCase):
         result = answer(intent="readiness", report=source, now=NOW)
         self.assertTrue(any("blocked globally" in s for s in result["limitations"]))
 
+    def test_future_cutoff_without_metadata_failure_is_contradictory(self):
+        source = report()
+        source["evaluated_at"] = (NOW-timedelta(microseconds=1)).isoformat()
+        with self.assertRaises(ValueError):
+            answer(intent="reliability", report=source)
+
     def test_readiness_freshness_and_future_boundaries(self):
         for hours, seconds, stale in ((24, 0, False), (24, 1, True), (1000, 0, True)):
             with self.subTest(hours=hours, seconds=seconds):

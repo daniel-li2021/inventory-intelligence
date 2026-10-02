@@ -51,3 +51,20 @@ passed both jobs in [CI run 36999887817](https://github.com/daniel-li2021/invent
 on code head `f01a2e7`; the PostgreSQL job log explicitly confirms **45 tests / OK**.
 All three PRs remain unmerged. No Stage 1 code/schema/acceptance oracle changed;
 main remains `dacdc8f`.
+
+## Three-stage review — 2026-10-02
+
+Review branch `codex/three-stage-review` combines the committed Stage 2 demand,
+benchmark and replenishment slices with Stage 3. Main is unchanged pending an
+authorized integration. [Full review and final data](THREE_STAGE_REVIEW.md).
+
+Corrected known uncovered movements escaping reconciliation, selection truth
+using revisions learned during holdout, and contradictory future-cutoff passes.
+Added the separately versioned read-only persisted-planning copilot adapter.
+Final fresh PostgreSQL 17.6 acceptance: 76/76 twice, plus four adapter followup
+checks. Each final benchmark repeated seven demand groups three times; exact
+scores/proposals were identical and source digests stayed unchanged. The clean
+historical proposal remains 12 pieces; incomplete supply stays null. Drift and
+irregular controls make the forecast comparison less dependent on ideal seasons.
+Live model testing remains pending explicit approval to reuse the configured key;
+no API requests were made in this review. Business data remains synthetic only.

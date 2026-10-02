@@ -57,8 +57,9 @@ with null predictions/scores, never a fabricated zero forecast.
 
 Benchmark horizons 7/14/28 use identical candidate origins (weekly spacing) and
 require the maximum horizon to fit before selection end. Reconstruct each origin's
-training using that origin's knowledge time. Truth uses a separate explicit
-evaluation cutoff and must itself be eligible. Retain reasons for excluded folds.
+training using that origin's knowledge time. Selection truth uses the earlier of the explicit evaluation cutoff and holdout
+start; revisions learned during/after holdout cannot influence model selection.
+Holdout truth uses the explicit evaluation cutoff and must itself be eligible. Retain reasons for excluded folds.
 Use only origins eligible for ALL horizons/models. Score every origin/lead pair;
 MAE = sum absolute error / points, bias = sum(forecast-actual) / points,
 WAPE = sum absolute error / sum(actual), null for zero actual volume.

@@ -111,11 +111,11 @@ def run_benchmark(conn, *, batch_id, sku_id, warehouse_id, group, start_day,
     with conn.transaction():
         conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ")
         conn.execute("SET LOCAL TIME ZONE 'UTC'")
-        def fold(day):
+        def fold(day, truth_known_at):
             training = read_series(conn, batch_id=batch_id, sku_id=sku_id, warehouse_id=warehouse_id,
                 start_day=start_day, end_day=day, known_at=midnight(day))
             truth = read_series(conn, batch_id=batch_id, sku_id=sku_id, warehouse_id=warehouse_id,
-                start_day=day, end_day=day+timedelta(days=28), known_at=evaluated_at)
+                start_day=day, end_day=day+timedelta(days=28), known_at=truth_known_at)
             allowed = (training["status"] == truth["status"] == "eligible"
                        and len(training["days"]) >= MIN_TRAIN)
             return dict(origin_day=day, origin=midnight(day), training=training, truth=truth,
@@ -123,13 +123,15 @@ def run_benchmark(conn, *, batch_id, sku_id, warehouse_id, group, start_day,
                 actual=[d["quantity"] for d in truth["days"]] if allowed else None,
                 predictions={m: forecast([d["quantity"] for d in training["days"]], method=m,
                                          horizon=28) for m in METHODS} if allowed else None)
-        candidates = [fold(start_day+timedelta(days=i)) for i in
+        # Freeze selection truth before holdout, including revision knowledge.
+        selection_known_at = min(evaluated_at, midnight(holdout_day))
+        candidates = [fold(start_day+timedelta(days=i), selection_known_at) for i in
                       range(MIN_TRAIN, (holdout_day-start_day).days-28+1, 7)]
         included = [f for f in candidates if f["status"] == "assessable"]
         selection = {str(h): _scores(included, h) for h in HORIZONS}
         chosen = min(METHODS, key=lambda m: selection["28"]["scores"][m]["mae"]) if included else None
         # No holdout evidence or scores participate in selecting chosen.
-        holdout = fold(holdout_day) if (holdout_day-start_day).days >= MIN_TRAIN else None
+        holdout = fold(holdout_day, evaluated_at) if (holdout_day-start_day).days >= MIN_TRAIN else None
         holdout_scores = {str(h): _scores([holdout] if holdout and
                           holdout["status"] == "assessable" else [], h) for h in HORIZONS}
         result = dict(status="assessable" if chosen and holdout and holdout["status"] == "assessable"

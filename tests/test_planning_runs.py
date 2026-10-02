@@ -97,6 +97,24 @@ class PlanningRuns(unittest.TestCase):
         self.assertEqual(zero["chosen_method"], "naive")
         self.assertEqual(zero["selection"]["28"]["scores"]["mean"], dict(mae="0", bias="0", wape=None))
 
+    def test_selection_truth_cannot_use_revisions_learned_during_holdout(self):
+        before = run_benchmark(self.runner, **self.benchmark_args)["result"]
+        row = self.owner.execute("SELECT * FROM planning_input.order_versions WHERE row_id=%s",
+                                 (self.prefix+":order:41",)).fetchone()
+        put(self.owner, "order_versions", **(dict(row) | dict(row_id=self.prefix+":holdout-revision",
+            revision=2, accepted_qty=700,
+            source_recorded_at=midnight(START+timedelta(days=60)),
+            observed_at=midnight(START+timedelta(days=60)))))
+        self.owner.execute("UPDATE planning_input.demand_batches SET expected_orders=85 WHERE batch_id=%s",
+                           (self.args["batch_id"],))
+        after = run_benchmark(self.runner, **self.benchmark_args)["result"]
+        self.assertEqual(after["selection"], before["selection"])
+        self.assertEqual(after["chosen_method"], before["chosen_method"])
+        self.assertEqual(after["candidates"][0]["truth"]["days"][13]["quantity"], 7)
+        self.assertEqual(after["holdout"]["predictions"], before["holdout"]["predictions"])
+        self.assertEqual(after["holdout"]["training"]["order_versions"],
+                         before["holdout"]["training"]["order_versions"])
+
     def test_atomic_failure_and_append_only_role(self):
         before = self.owner.execute("SELECT count(*) AS n FROM planning.runs").fetchone()["n"]
         self.owner.execute("ALTER TABLE planning.runs ADD CONSTRAINT reject_test CHECK (kind <> 'forecast') NOT VALID")

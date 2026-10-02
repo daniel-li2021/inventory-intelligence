@@ -90,3 +90,20 @@ before Stage 2 can be considered complete on main.
 on `f01a2e7` independently completed both jobs successfully. The PostgreSQL job's
 full log records **45 tests / OK**, including the unchanged Stage 1 oracles and
 Stage 2 downstream demo. All three Stage 2 PRs are unmerged.
+
+## Repeated three-stage review
+
+The combined review adds uncovered-movement, holdout knowledge-time, contradictory
+future-run and persisted-planning explanation checks. Run the complete suite once
+on a fresh database; named fixture loaders intentionally refuse a second load.
+Then repeat the benchmarks without reloading or mutating those source records:
+
+```sh
+PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=src python -m scripts.review_benchmark --repeats 3 --output /tmp/review.json
+```
+
+Use another fresh database for another complete suite run. The benchmark adds
+only its own immutable synthetic drifting/irregular archive once, then reuses it.
+It asserts exact scenario outcomes, stable repeated semantic results, Stage 3
+citations and unchanged source digests. [Final evidence](THREE_STAGE_REVIEW.md).
