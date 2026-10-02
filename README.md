@@ -57,9 +57,15 @@ The standard-library suite checks manually calculated balances, exact fault evid
 - [Path ownership and handoffs](docs/PARALLEL_WORK.md)
 - [Stage 1 plan](docs/STAGE1_PLAN.md)
 - [Stage 1 completion review](docs/STAGE1_REVIEW.md)
+- [Stage 2 plan and initial baseline benchmark](docs/STAGE2_PLAN.md)
 - [Research and reading guide](docs/RESEARCH.md)
 - [Development workflow](CONTRIBUTING.md) and [shared agent instructions](AGENTS.md)
 
-All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, forecasting, scheduled jobs, deployment, and dashboards are outside this milestone.
+Stage 2 has started with a stdlib forecast/backtest benchmark, independent of
+operational data. Run `PYTHONPATH=src python -m inventory_intelligence.forecasting`
+for its synthetic demonstration. Demand eligibility and replenishment are the
+next planned slices; the benchmark does not authorize inventory decisions.
+
+All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
 
 Original project material is available under the [MIT license](LICENSE). Dependencies retain their own licenses.
