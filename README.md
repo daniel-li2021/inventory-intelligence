@@ -59,6 +59,8 @@ The standard-library suite checks manually calculated balances, exact fault evid
 - [Stage 1 completion review](docs/STAGE1_REVIEW.md)
 - [Stage 2 plan and independent checkpoint](docs/STAGE2_PLAN.md)
 - [Planning contract and operations/acceptance](docs/PLANNING.md)
+- [Stage 3 copilot plan and validation](docs/STAGE3_PLAN.md)
+- [Copilot interface contract](docs/CONTRACT_COPILOT_V1.md)
 - [Research and reading guide](docs/RESEARCH.md)
 - [Development workflow](CONTRIBUTING.md) and [shared agent instructions](AGENTS.md)
 
@@ -75,6 +77,30 @@ on main.
 Existing databases can add the isolated schemas once with owner-executed
 `psql "$TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f sql/planning_schema.sql`.
 Fresh Compose and test bootstrap install both schemas.
+
+## Evidence copilot
+
+Stage 3 explains saved reliability reports, explicit persisted run UUIDs and
+existing baseline benchmarks. Exact quantities and citations come from validated
+structured evidence. Natural-language routing defaults to GPT-6 Luna; recognized
+phrases and explicit intents work entirely offline. The ignored `.env` may use
+`OPENAI_API_KEY` or the existing `openai_api_key` spelling. No key is committed
+or rewritten. API errors fall back explicitly; Sol requires an explicit flag.
+
+```sh
+PYTHONPATH=src python -m inventory_intelligence.copilot \
+  --question 'What failed?' --report /tmp/reliability.json --format markdown
+PYTHONPATH=src python -m inventory_intelligence.copilot \
+  --question 'Please explain the failures in this inventory check' \
+  --report /tmp/reliability.json
+PYTHONPATH=src python -m inventory_intelligence.copilot \
+  --intent benchmark --benchmark /tmp/benchmark.json --language-model offline
+```
+
+Only the question reaches the language model; code determines all facts and
+readiness. No stock changes or orders are possible. Planning readiness remains
+explicitly blocked until the separate Stage 2 proposal interface is integrated.
+[Complete examples, inputs and exit codes](docs/examples/copilot.md).
 
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
 
