@@ -34,4 +34,55 @@ Independent checkpoint of current main: all 27 original tests passed on fresh
 PostgreSQL 17.6 (Python 3.12.14), with no Stage 1 change or material defect; see
 [STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md). Planning contract and deterministic
 demand replay/eligibility now have their own slice and manual database checks.
-Versioned benchmarking and inventory planning remain pending; Stage 2 is not complete.
+[Eligibility PR 3](https://github.com/daniel-li2021/inventory-intelligence/pull/3)
+passed both jobs in [CI run 36997926902](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36997926902).
+Origin-aware forecasts/benchmarks now append versioned PostgreSQL evidence with
+independent knowledge-time/holdout oracles.
+[Benchmark PR 4](https://github.com/daniel-li2021/inventory-intelligence/pull/4)
+passed [CI run 36998446346](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36998446346).
+The final slice adds inventory revalidation, complete supply gates, exact daily
+projection, prefix-aware replenishment and a deterministic PostgreSQL demo.
+Fresh local full acceptance: 45 tests, no failures/errors/skips. See
+[PLANNING.md](PLANNING.md) and [verified demo](examples/stage2.md). This stack
+requires contract/integration review, CI and an authorized merge; Stage 2 is not
+complete on main. Stage 3's working checkout remains untouched.
+[Replenishment PR 5](https://github.com/daniel-li2021/inventory-intelligence/pull/5)
+passed both jobs in [CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+on code head `f01a2e7`; the PostgreSQL job log explicitly confirms **45 tests / OK**.
+All three PRs remain unmerged. No Stage 1 code/schema/acceptance oracle changed;
+main remains `dacdc8f`.
+
+## Three-stage review — 2026-10-02
+
+Review branch `codex/three-stage-review` combines the committed Stage 2 demand,
+benchmark and replenishment slices with Stage 3. Main is unchanged pending an
+authorized integration. [Full review and final data](THREE_STAGE_REVIEW.md).
+
+Corrected known uncovered movements escaping reconciliation, selection truth
+using revisions learned during holdout, and contradictory future-cutoff passes.
+Added the separately versioned read-only persisted-planning copilot adapter.
+Final fresh PostgreSQL 17.6 acceptance: 76/76 twice, plus four adapter followup
+checks. Each final benchmark repeated seven demand groups three times; exact
+scores/proposals were identical and source digests stayed unchanged. The clean
+historical proposal remains 12 pieces; incomplete supply stays null. Drift and
+irregular controls make the forecast comparison less dependent on ideal seasons.
+Live model testing remains pending explicit approval to reuse the configured key;
+no API requests were made in this review. Business data remains synthetic only.
+
+### Publication followup — 2026-10-02
+
+Verified the existing Stage 2 eligibility, benchmark and replenishment branches
+on origin. Pushed the original Stage 3 `codex/stage3-copilot` and the combined
+validated `codex/three-stage-review` branch using the configured credentials
+outside the sandbox. Stage 3 remote head matches local `d7feed5`; no main merge
+or branch deletion. The review branch contains all three stages and the review
+fixes. No new test/CI run was needed for branch publication.
+
+## Remaining-fixes authorized integration — 2026-10-02
+
+The user authorized merging the remaining three-stage review fixes. The combined
+branch incorporates main's original Stage 3 merge and the complete Stage 2
+benchmark/planner. Reviewed source and tests are retained; documentation records
+the superseded partial checkpoints. Fresh PostgreSQL acceptance passed all
+76 tests with zero failures/errors/skips; comparative benchmark outputs are
+reused unchanged. No model API calls or production-data imports were made.

@@ -1,5 +1,8 @@
 # Evidence copilot contract — v1
 
+This is the original evidence-only scope. The additive persisted Stage 2 adapter
+is specified separately in [copilot-2](CONTRACT_COPILOT_V2.md).
+
 Separate from the frozen reliability v1 contract. No database/schema changes.
 Synthetic inputs only. Public entry points in `inventory_intelligence.copilot`:
 

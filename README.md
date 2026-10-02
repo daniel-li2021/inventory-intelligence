@@ -57,17 +57,25 @@ The standard-library suite checks manually calculated balances, exact fault evid
 - [Path ownership and handoffs](docs/PARALLEL_WORK.md)
 - [Stage 1 plan](docs/STAGE1_PLAN.md)
 - [Stage 1 completion review](docs/STAGE1_REVIEW.md)
-- [Stage 2 plan and initial baseline benchmark](docs/STAGE2_PLAN.md)
+- [Stage 2 plan and independent checkpoint](docs/STAGE2_PLAN.md)
+- [Planning contract and operations/acceptance](docs/PLANNING.md)
 - [Stage 3 copilot plan and validation](docs/STAGE3_PLAN.md)
 - [Copilot interface contract](docs/CONTRACT_COPILOT_V1.md)
+- [Persisted planning explanations](docs/CONTRACT_COPILOT_V2.md)
+- [Three-stage review, final data and benchmarks](docs/THREE_STAGE_REVIEW.md)
 - [Research and reading guide](docs/RESEARCH.md)
 - [Development workflow](CONTRIBUTING.md) and [shared agent instructions](AGENTS.md)
 
-Stage 2 has started with a stdlib forecast/backtest benchmark, independent of
+Stage 2 includes a stdlib forecast/backtest benchmark, independent of
 operational data. Run `PYTHONPATH=src python -m inventory_intelligence.forecasting`
 for its synthetic demonstration. The [planning contract](docs/CONTRACT_PLANNING_V1.md) and demand eligibility adapter
 now distinguish complete zeros from gaps and replay revisions as known at origins.
-Versioned evaluation and replenishment are still pending; Stage 2 is not complete.
+Origin-aware forecasts and 7/14/28-day evaluations now append versioned PostgreSQL
+results with a separate final holdout. Inventory projections and advisory orders
+now require trusted Stage 1 inventory and complete supply evidence; gaps return
+`not_assessable` with no order. [Stage 2 demo and acceptance](docs/PLANNING.md).
+The combined implementation includes all three Stage 2 slices and the
+[review corrections and comparative benchmarks](docs/THREE_STAGE_REVIEW.md).
 Existing databases can add the isolated schemas once with owner-executed
 `psql "$TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f sql/planning_schema.sql`.
 Fresh Compose and test bootstrap install both schemas.
@@ -92,8 +100,10 @@ PYTHONPATH=src python -m inventory_intelligence.copilot \
 ```
 
 Only the question reaches the language model; code determines all facts and
-readiness. No stock changes or orders are possible. Planning readiness remains
-explicitly blocked until the separate Stage 2 proposal interface is integrated.
+readiness. No stock changes or orders are possible. Stage 3 now explains an explicit persisted
+Stage 2 forecast, benchmark or proposal using `--intent planning --planning-run-id UUID`.
+Historical proposal quantities stay inside their citations; current readiness
+remains blocked until current inputs are assessed at a new planning cutoff.
 [Complete examples, inputs and exit codes](docs/examples/copilot.md).
 
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.

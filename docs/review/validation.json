@@ -1,0 +1,114 @@
+{
+  "benchmark_scores_identical_between_final_rounds": true,
+  "business_data": "synthetic only",
+  "final_adapter_followup": {
+    "elapsed_seconds": 0.485,
+    "scope": "forecast/proposal/benchmark; null UUID and fractional/nested quantity checks",
+    "status": "passed",
+    "tests": 4
+  },
+  "final_benchmark_rounds": 2,
+  "fixes": [
+    {
+      "after": "R005 coverage_mismatch; R001 blocked",
+      "before": "false pass",
+      "issue": "known movement outside coverage",
+      "stage": 1
+    },
+    {
+      "after": "selection frozen at holdout start",
+      "before": "selection scores changed",
+      "issue": "late selection-truth revision learned during holdout",
+      "stage": 2
+    },
+    {
+      "after": "ValueError",
+      "before": "accepted contradictory report",
+      "issue": "future cutoff pass without metadata failure",
+      "stage": 3
+    },
+    {
+      "after": "exact historical forecasts, scores, proposals cited; current order null",
+      "before": "no adapter",
+      "issue": "persisted planning evidence unavailable",
+      "stage": 3
+    }
+  ],
+  "generated_at": "2026-10-02T15:15:30.866131+00:00",
+  "live_database": true,
+  "live_model": false,
+  "model_test_status": "pending explicit credential reuse choice; no API requests made in this review",
+  "postgresql": "17.6",
+  "psycopg": "3.3.6",
+  "python": "3.12.14",
+  "repetitions_per_round": 3,
+  "rounds": [
+    {
+      "elapsed_seconds": 2.33,
+      "modules": {
+        "test_acceptance": 22,
+        "test_copilot": 13,
+        "test_copilot_db": 3,
+        "test_copilot_language": 8,
+        "test_demand": 5,
+        "test_forecasting": 6,
+        "test_planning_runs": 5,
+        "test_replenishment": 7
+      },
+      "round": 1,
+      "status": "passed",
+      "tests": 69
+    },
+    {
+      "elapsed_seconds": 2.807,
+      "modules": {
+        "test_acceptance": 23,
+        "test_copilot": 14,
+        "test_copilot_db": 3,
+        "test_copilot_language": 8,
+        "test_copilot_planning": 4,
+        "test_demand": 5,
+        "test_forecasting": 6,
+        "test_planning_runs": 6,
+        "test_replenishment": 7
+      },
+      "round": 2,
+      "status": "failed",
+      "tests": 76
+    },
+    {
+      "elapsed_seconds": 2.842,
+      "modules": {
+        "test_acceptance": 23,
+        "test_copilot": 14,
+        "test_copilot_db": 3,
+        "test_copilot_language": 8,
+        "test_copilot_planning": 4,
+        "test_demand": 5,
+        "test_forecasting": 6,
+        "test_planning_runs": 6,
+        "test_replenishment": 7
+      },
+      "round": 3,
+      "status": "passed",
+      "tests": 76
+    },
+    {
+      "elapsed_seconds": 2.829,
+      "modules": {
+        "test_acceptance": 23,
+        "test_copilot": 14,
+        "test_copilot_db": 3,
+        "test_copilot_language": 8,
+        "test_copilot_planning": 4,
+        "test_demand": 5,
+        "test_forecasting": 6,
+        "test_planning_runs": 6,
+        "test_replenishment": 7
+      },
+      "round": 4,
+      "status": "passed",
+      "tests": 76
+    }
+  ]
+}

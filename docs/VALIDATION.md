@@ -73,3 +73,37 @@ remote run. It found and corrected an empty-coverage false pass; the expanded
 suite passed **22 tests**, zero failures/errors/skips, on a fresh PostgreSQL 17.9
 database using Python 3.12.12. See [STAGE1_REVIEW.md](STAGE1_REVIEW.md). Branch
 protection configuration remains separate from code/test acceptance.
+
+## Stage 2 checkpoint and added acceptance
+
+An independent review at `dacdc8f` verified the unchanged frozen Stage 1 tests
+and implementation, then ran the complete original 27-test suite on a fresh
+PostgreSQL 17.6 database. See [STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md).
+The expanded planning suite is discovered by the SAME CI command and bootstrap;
+Stage 1 oracles were not weakened. Its fresh database now adds separate planning
+schemas. The final local suite passed 45 tests with no failures/errors/skips,
+including the persisted 180-day downstream demo. [Planning validation and
+manual oracles](PLANNING.md). Pinned remote CI and integration review are required
+before Stage 2 can be considered complete on main.
+
+[Final Stage 2 code CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+on `f01a2e7` independently completed both jobs successfully. The PostgreSQL job's
+full log records **45 tests / OK**, including the unchanged Stage 1 oracles and
+Stage 2 downstream demo. All three Stage 2 PRs are unmerged.
+
+## Repeated three-stage review
+
+The combined review adds uncovered-movement, holdout knowledge-time, contradictory
+future-run and persisted-planning explanation checks. Run the complete suite once
+on a fresh database; named fixture loaders intentionally refuse a second load.
+Then repeat the benchmarks without reloading or mutating those source records:
+
+```sh
+PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=src python -m scripts.review_benchmark --repeats 3 --output /tmp/review.json
+```
+
+Use another fresh database for another complete suite run. The benchmark adds
+only its own immutable synthetic drifting/irregular archive once, then reuses it.
+It asserts exact scenario outcomes, stable repeated semantic results, Stage 3
+citations and unchanged source digests. [Final evidence](THREE_STAGE_REVIEW.md).

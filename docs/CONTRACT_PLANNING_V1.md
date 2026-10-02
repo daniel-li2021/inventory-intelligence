@@ -57,8 +57,9 @@ with null predictions/scores, never a fabricated zero forecast.
 
 Benchmark horizons 7/14/28 use identical candidate origins (weekly spacing) and
 require the maximum horizon to fit before selection end. Reconstruct each origin's
-training using that origin's knowledge time. Truth uses a separate explicit
-evaluation cutoff and must itself be eligible. Retain reasons for excluded folds.
+training using that origin's knowledge time. Selection truth uses the earlier of the explicit evaluation cutoff and holdout
+start; revisions learned during/after holdout cannot influence model selection.
+Holdout truth uses the explicit evaluation cutoff and must itself be eligible. Retain reasons for excluded folds.
 Use only origins eligible for ALL horizons/models. Score every origin/lead pair;
 MAE = sum absolute error / points, bias = sum(forecast-actual) / points,
 WAPE = sum absolute error / sum(actual), null for zero actual volume.
@@ -79,11 +80,13 @@ Read, compute and persist in one Repeatable Read transaction. Errors roll back.
 
 Use an explicit persisted Stage 1 run, contract 1, all FIVE stored checks passing,
 no findings, overall pass, selected key covered and a single matching snapshot.
-Run and all selected inventory evidence must be observed by planning origin T;
+Run evaluated_at must equal T, and all selected inventory evidence must be observed by planning origin T;
 the run cannot have been evaluated in the future. Require snapshot/run as_of = T,
 with freshness recomputed at T, never the old evaluation time. A mismatched,
 historical or failing run yields `not_assessable`. No per-bucket rescue from a
-globally nonpassing run. Reject negative stock. Keep the run and batch identities.
+globally nonpassing run. Reuse Stage 1's read-only SQL at T to revalidate current
+source evidence, so a source change after a saved pass cannot silently authorize
+stock. Retain that current validation separately; never rewrite the saved run. Reject negative stock. Keep the run and batch identities.
 
 A separate immutable supply batch for a single key/cutoff declares explicit
 reservation AND inbound completeness, exact raw row counts, observation time and
@@ -95,12 +98,14 @@ contribute zero. Duplicate natural IDs, negative quantities, invalid statuses,
 overdue open reservations/confirmed receipts, future observations, missing policy
 or incomplete manifests block recommendations. No implicit empty input is complete.
 
-One explicit policy: positive integer lead days L, review days R, pack size P and
+One explicit policy (H <= 366 days): positive integer lead days L, review days R, pack size P and
 MOQ M; nonnegative integer safety pieces S. Protection horizon H=L+R. Daily demand
 is the selected caller-declared baseline's H-day forecast (no automatic model
 promotion). Reservations and forecast refer to disjoint targets: forecasts cover
 **new acceptances after T**; reservations cover previously accepted unshipped
-commitments. This assumption is explicit; quantities cannot be counted twice.
+commitments. New acceptances are assumed to require stock on their acceptance day; customer
+fulfillment-lag modeling is deferred. These assumptions are explicit; quantities
+cannot be counted twice.
 Confirmed inbound arrives at the START of the named local day; reservation and
 forecast demand deplete at its END. Proposed stock arrives at local midnight T + L calendar days
 (after L full days; the first forecast day starts at T). All dates are future business dates starting T's

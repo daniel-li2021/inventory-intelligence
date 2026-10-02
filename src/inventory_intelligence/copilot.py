@@ -50,7 +50,7 @@ def _time(value):
         raise ValueError("timestamps must use aware UTC") from None
 
 
-def _bounded(value, *, rationals=False):
+def _bounded(value, *, rationals=False, max_bytes=MAX_BYTES):
     def encode(obj):
         if rationals and isinstance(obj, Fraction):
             return str(obj)
@@ -59,8 +59,8 @@ def _bounded(value, *, rationals=False):
         encoded = json.dumps(value, allow_nan=False, default=encode).encode("utf-8")
     except (TypeError, ValueError):
         raise ValueError("evidence must be JSON-compatible") from None
-    if len(encoded) > MAX_BYTES:
-        raise ValueError("evidence exceeds the 2 MiB limit")
+    if len(encoded) > max_bytes:
+        raise ValueError("evidence exceeds the size limit")
 
 
 def _validate_report(report):
@@ -115,6 +115,10 @@ def _validate_report(report):
             elif any(q is not None for q in quantities):
                 raise ValueError
         if failed != {rule for rule, state in states.items() if state == "fail"}:
+            raise ValueError
+        if (_time(report["evaluated_at"]) < _time(report["as_of"])
+                and not any(f["rule_id"] == "R005" and f["reason"] == "metadata_mismatch"
+                            for f in findings)):
             raise ValueError
     except (KeyError, TypeError, ValueError, AttributeError):
         raise ValueError("invalid or inconsistent contract-v1 reliability report") from None
@@ -224,9 +228,9 @@ def answer(*, intent, report=None, benchmark=None, finding_id=None, now=None, ma
                 result["limitations"].append(f"The run is in the future relative to question time [{run_ref}].")
             elif decision_time - _time(report["as_of"]) > timedelta(hours=max_age_hours):
                 result["limitations"].append(f"Inventory evidence exceeds the question-time freshness limit [{run_ref}].")
-        result["limitations"].append("Validated demand, reservations, inbound supply, lead times and a versioned replenishment proposal are unavailable in the current Stage 2 interface.")
+        result["limitations"].append("No validated Stage 2 proposal was supplied to this request. Use the planning intent to explain an explicit persisted planning run.")
         result.update(summary="A replenishment decision is not assessable; no order quantity is proposed.")
-        result["next_steps"] = ["Complete and validate the Stage 2 planning contract and proposal before requesting an order explanation."]
+        result["next_steps"] = ["Supply an explicit persisted Stage 2 run for historical explanation; assess current inputs at a new planning cutoff before acting."]
         return result
     if report is None:
         return result
@@ -325,11 +329,12 @@ def _read(path):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Explain existing inventory evidence without stock writes or orders")
     route = parser.add_mutually_exclusive_group(required=True)
-    route.add_argument("--intent", choices=("reliability", "finding", "benchmark", "readiness"))
+    route.add_argument("--intent", choices=("reliability", "finding", "benchmark", "readiness", "planning"))
     route.add_argument("--question", help="Supported phrases: " + "; ".join(QUESTIONS))
     source = parser.add_mutually_exclusive_group()
     source.add_argument("--report", help="Complete saved reliability JSON report")
     source.add_argument("--run-id", help="Explicit persisted UUID, read through DATABASE_URL")
+    source.add_argument("--planning-run-id", help="Explicit persisted Stage 2 UUID; use --intent planning")
     parser.add_argument("--benchmark", help="Saved baseline benchmark JSON")
     parser.add_argument("--finding-id")
     parser.add_argument("--now", help="UTC question time; defaults to current UTC")
@@ -348,6 +353,18 @@ def main(argv=None):
             intent = routing["intent"]
         # A refusal needs no source retrieval, credentials or evidence validation.
         supported = intent != "unsupported"
+        if intent == "planning" or (args.planning_run_id and supported):
+            from .copilot_planning import load_planning_run, answer_planning
+            if intent != "planning" or not args.planning_run_id:
+                raise ValueError("planning requires --intent planning and --planning-run-id")
+            import psycopg
+            dsn = os.environ.get("DATABASE_URL")
+            if not dsn:
+                raise ValueError("DATABASE_URL is required for --planning-run-id")
+            with psycopg.connect(dsn, autocommit=True) as conn:
+                result = answer_planning(load_planning_run(conn, args.planning_run_id))
+        else:
+            result = None
         report = _read(args.report) if args.report and supported else None
         if args.run_id and supported:
             import psycopg
@@ -356,7 +373,7 @@ def main(argv=None):
                 raise ValueError("DATABASE_URL is required for --run-id")
             with psycopg.connect(dsn, autocommit=True) as conn:
                 report = load_run(conn, args.run_id)
-        result = answer(intent=intent, report=report,
+        result = result if result is not None else answer(intent=intent, report=report,
                         benchmark=_read(args.benchmark) if args.benchmark and supported else None,
                         finding_id=args.finding_id,
                         now=_time(args.now) if args.now else datetime.now(timezone.utc),

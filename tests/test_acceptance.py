@@ -388,6 +388,20 @@ class Acceptance(unittest.TestCase):
             self.assertEqual(finding["evidence"]["problems"], [dict(
                 sku_id=None, warehouse_id=None, row_id=None, problem="empty_coverage")])
 
+    def test_uncovered_movement_cannot_escape_reconciliation(self):
+        # Both references exist, but coat/b has no declared balance coverage.
+        self.clone("movements", "receipt", "uncovered", event_id=self.key("uncovered-event"),
+                   sku_id=self.key("coat"), warehouse_id=self.key("b"))
+        self.recount("ledger")
+        report = self.check()
+        self.assert_reasons(report, [("R005", "coverage_mismatch")],
+                            fail=("R005",), blocked=("R001",))
+        finding = report["findings"][0]
+        self.assertEqual(finding["source_row_ids"], [self.key("uncovered")])
+        self.assertEqual(finding["evidence"]["problems"], [dict(
+            sku_id=self.key("coat"), warehouse_id=self.key("b"),
+            row_id=self.key("uncovered"), problem="unexpected_movement_key")])
+
     def test_repeat_run_history_and_operational_inputs_unchanged(self):
         self.update("snapshots", "snapshot:shirt:a", on_hand_qty=107)
         tables = ("styles", "skus", "warehouses", "batches", "coverage",

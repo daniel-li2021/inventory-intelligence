@@ -49,6 +49,13 @@ coverage_problems AS (
     FROM openings o WHERE NOT EXISTS (
         SELECT 1 FROM ledger_keys k WHERE (k.sku_id, k.warehouse_id) = (o.sku_id, o.warehouse_id)
     )
+    UNION ALL
+    SELECT 'ledger', m.row_id, m.sku_id, m.warehouse_id, 'unexpected_movement_key'
+    FROM movements m WHERE NOT EXISTS (
+        SELECT 1 FROM unknown_rows r WHERE r.source = 'movement' AND r.row_id = m.row_id
+    ) AND NOT EXISTS (
+        SELECT 1 FROM ledger_keys k WHERE (k.sku_id, k.warehouse_id) = (m.sku_id, m.warehouse_id)
+    )
 ),
 row_metadata AS (
     SELECT 'snapshot' AS kind, s.row_id, jsonb_build_object(

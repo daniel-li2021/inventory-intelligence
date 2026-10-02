@@ -83,9 +83,15 @@ zero. An unknown or stockout-constrained observation is unavailable for baseline
 eligibility, not an imputed zero. Stockout recovery/lost-sales estimation is
 deferred until its assumptions can be evaluated.
 
-### 3. Versioned forecast runs and evaluation
+### 3. Versioned forecast runs and evaluation — implemented slice
 
-Add a bounded PostgreSQL adapter using existing Psycopg and stdlib. Persist
+`planning_runs.run_forecast` and `run_benchmark` now use existing Psycopg and
+stdlib, replay origin-known training and persist exact JSONB evidence/results
+under Repeatable Read. Five independent database tests assert manual weekly
+scores, common exclusions, late revisions, held-out truth isolation, zero WAPE,
+immutable history and rollback. Model selection uses 28-day selection MAE; the
+other horizons remain explicit comparisons. The final 28 days never choose the
+method. This is per-key evaluation, not a claim of model general superiority. Persist
 planning results separately from source inputs and reliability findings. Store
 input batch/version IDs, training interval, business timezone, cutoff, model
 version, horizon, eligibility outcome, forecasts and rolling-origin scores.
@@ -98,7 +104,14 @@ separately rather than hiding them in one average. Add more sophisticated models
 only when baseline comparisons expose a concrete weakness. Predictions must not
 overwrite earlier runs; unchanged inputs produce stable semantic results.
 
-### 4. Deterministic replenishment proposals
+### 4. Deterministic replenishment proposals — implemented slice
+
+`replenishment.run_plan` now reads trusted inventory, explicit supply manifests,
+reservations/confirmed inbound and lead/review/safety/pack/MOQ policy. It persists
+projections and proposals, or `not_assessable` with no recommendation. The policy
+uses the maximum daily safety deficit after supplier arrival; final inventory
+position alone can hide earlier shortages. Current source SQL is revalidated at
+decision time, reusing Stage 1 code without modifying its frozen interfaces.
 
 Require a current passing Stage 1 run at the planning cutoff, covering the
 selected keys, plus independently complete reservations/commitments, confirmed
@@ -117,21 +130,32 @@ time, inbound/reservation completeness, or an unassessable stock bucket yields
 `not_assessable` with no order recommendation. Default safety stock must not
 masquerade as a calibrated service-level guarantee.
 
-### 5. Portfolio acceptance
+### 5. Portfolio acceptance — local and remote CI evidence
 
-Document fresh-database generation, baseline evaluation and clean/blocked
-planning demos. Test exact order proposals against independent manual arithmetic,
-including zero demand, stockout gaps, late corrections, pending/delayed inbound,
-duplicate orders, unit/pack boundaries and immutable history. Run the SQL adapter
-on real PostgreSQL in the existing CI job. Publish concise JSON/Markdown evidence.
+[PLANNING.md](PLANNING.md) documents fresh-database generation, baseline
+evaluation, APIs and clean/blocked planning demos. [Verified summary](examples/stage2.md)
+records the deterministic downstream outcomes. The expanded suite has 45 tests:
+22 frozen Stage 1, six kernel and 17 demand/forecast/planning checks. All passed
+on a fresh local PostgreSQL database and in the pinned PostgreSQL 17.9 CI job.
+[Final code CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+ran all 45 tests successfully; hygiene also passed. Exact proposals are checked
+against manual arithmetic, including zero demand, stockout gaps, late corrections,
+pending/delayed inbound, duplicate orders, unit/pack boundaries and immutable history.
+The existing CI command includes the full downstream demo; JSON/Markdown output
+and a verified concise summary are available. Compatible contracts remain a
+prerequisite for authorized integration.
 
 No scheduler, ERP, web UI, LLM, cloud service or business-data import is needed
 for this stage. Its completion requires the demand/eligibility adapter, persisted
 evaluation and proven planning arithmetic; the baseline kernel alone is a start.
 
-## Resumption handoff
+## Integration handoff
 
-Demand contract and eligibility adapter are implemented in the first Stage 2 PR.
-Next: persist origin-aware forecasts/backtests, then integrate trusted Stage 1
-inventory with complete supply inputs and independently tested proposals. Stage 2
-remains incomplete until integration and remote acceptance of those slices.
+The three dependent slices cover eligibility/contract, versioned benchmarks,
+and inventory projection/proposals. The combined three-stage review integrates
+all three with the existing main and corrects holdout selection truth timing.
+[Review evidence and final benchmarks](THREE_STAGE_REVIEW.md) record the later
+76-test acceptance and exact downstream results. The user authorized merging
+the remaining fixes on 2026-10-02; this integration preserves the frozen Stage 1
+interfaces and adds the separately versioned planning explanation contract.
+No web UI, scheduler, cloud service or advanced forecasting model was added.
