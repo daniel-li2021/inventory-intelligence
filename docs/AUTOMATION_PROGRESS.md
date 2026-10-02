@@ -68,3 +68,12 @@ historical proposal remains 12 pieces; incomplete supply stays null. Drift and
 irregular controls make the forecast comparison less dependent on ideal seasons.
 Live model testing remains pending explicit approval to reuse the configured key;
 no API requests were made in this review. Business data remains synthetic only.
+
+### Publication followup — 2026-10-02
+
+Verified the existing Stage 2 eligibility, benchmark and replenishment branches
+on origin. Pushed the original Stage 3 `codex/stage3-copilot` and the combined
+validated `codex/three-stage-review` branch using the configured credentials
+outside the sandbox. Stage 3 remote head matches local `d7feed5`; no main merge
+or branch deletion. The review branch contains all three stages and the review
+fixes. No new test/CI run was needed for branch publication.
