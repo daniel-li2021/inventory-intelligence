@@ -103,9 +103,12 @@ higher-sequence arrivals are excluded from arithmetic, identity, and transfer
 checks. Posted reversals are summed as signed legs; their originals remain in
 the sum. Reference validation examines all selected source rows, including
 ineligible movements, and preserves their evidence. Unknown references include
-SKU, warehouse, SKU style, and non-null reversal row references. Freshness is
-checked on the manifest and available snapshot rows; row cutoff/watermark
-disagreement is also a metadata defect.
+SKU, warehouse, SKU style, and non-null reversal row references. Freshness uses
+the snapshot manifest cutoff; disagreeing row cutoffs/watermarks are metadata
+defects and do not establish an additional freshness conclusion. Watermarks
+are compared between manifests only when the ledger watermark is available.
+Unknown movement references remain local R003 defects, allowing unrelated
+covered buckets to retain their quantity comparisons.
 
 Manifest, count, metadata, freshness, and coverage defects suppress every
 quantity comparison. Opening, reference, duplicate-leg, transfer, and snapshot
@@ -157,10 +160,18 @@ inserts, custom connection row factories, and CLI JSON/Markdown/exit behavior.
 The installed wheel also passed all three maintained self-checks, including
 the database smoke check, when run outside the source checkout.
 
-The foundation branch did not yet supply `sql/schema.sql`, Compose, or
-`synthetic.generate` at implementation time. Validation against that actual
-bootstrap/loader and Agent 3's independent oracle remains pending. No Docker
-integration or complete milestone acceptance is claimed here.
+Subsequent integration uses data foundation `f6115547a39f9d9eb714145c8a55129b3c552002`
+and the independent `tests/test_acceptance.py` suite from the validation
+worktree. Actual schema/bootstrap, loader scenarios, and independent acceptance
+now run against a fresh PostgreSQL 17.6 database with Python 3.12.14 and Psycopg
+3.3.6. All 21 independent acceptance tests passed with
+`python -m unittest tests.test_acceptance -v`; `PYTHONPATH` selected this
+worktree's `src`, the data worktree, and the validation worktree. Each complete
+suite used a new database bootstrapped from the actual data-owned schema.
+The engine-only integration fixes preserve local unknown-reference
+assessment and avoid watermark/freshness conclusions from absent or invalid
+metadata. Docker/PostgreSQL 17.9, combined-branch publication, and remote CI
+validation remain the coordinator's final delivery checks.
 
 Quantities use PostgreSQL exact numeric arithmetic and are checked when
 converted to the contract's bigint output fields. A total or delta outside
