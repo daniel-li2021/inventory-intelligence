@@ -49,7 +49,22 @@ The initial `Repository hygiene` job validates whitespace across the submitted c
 
 The **first implementation PR** must introduce a PostgreSQL service, install reviewed/pinned Python dependencies, and run the same inventory tests locally and in CI. Use standard-library `unittest` initially. Tests must fail on missed faults, unexpected clean-data findings, wrong record IDs, and wrong quantity deltas. Intentionally dirty demo data is a successful test when the expected findings match; running the checker normally against dirty data should return a nonzero findings status.
 
-No scheduled runs, deployment pipeline, external business database, or paid/cloud service is needed for Stage 1. Do not add placeholders that pass without executing inventory tests.
+No scheduled data pipeline, deployment pipeline, external business database, or paid/cloud service is needed for Stage 1. Do not add placeholders that pass without executing inventory tests.
+
+## Scheduled development
+
+Two daily Codex app schedules return to the project coordination chat, using Pacific time (`America/Los_Angeles`):
+
+| Time | Automation | Work |
+| --- | --- | --- |
+| 3:30 AM | Inventory overnight build | Resume unfinished work, fix failures, integrate validated changes, and continue the next ready milestone with a durable goal. |
+| 9:20 AM | Inventory morning review | Check overnight progress and publication, review correctness, finish remaining work, and investigate unresolved risks. |
+
+The owner authorizes this coordination agent to commit, push, and merge validated project work into `main` without another approval. Preserve other agents' unfinished work and use isolated worktrees when paths overlap. This authorization does not permit force pushes, discarding work, or merging unrelated changes. Follow the existing Git and validation checks above.
+
+Record resumable checkpoints in `docs/AUTOMATION_PROGRESS.md` as work proceeds: completed work, commit references, validation, blockers, and the next action. Continue an existing goal before creating another. Finish Stage 1 acceptance before starting Forecasting & Planning; preserve `contract-v1` and document subsequent contracts separately.
+
+The requested five-hour work window is a preference for sustained useful work, not a supported goal timer or guaranteed runtime. Goals continue according to completion, usage limits, and tool availability. Local scheduled work requires the computer awake, the app running, and the repository available. Manage schedules in the app; they are not GitHub Actions or repository-hosted cron jobs.
 
 ## Data and dependencies
 
