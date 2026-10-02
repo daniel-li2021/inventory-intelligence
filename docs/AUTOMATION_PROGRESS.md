@@ -30,7 +30,8 @@ package's synthetic demo also matches the manually expected scores. No new
 dependency or external model call. This is a benchmark, not the complete
 forecasting stage.
 
-Next: freeze `CONTRACT_PLANNING_V1.md`; add independent synthetic daily demand,
-coverage and availability evidence plus fail-closed eligibility tests. Then add
-versioned PostgreSQL evaluation and deterministic replenishment proposals. Do
-not treat shipments as uncensored demand or a v1 pass as proof of complete demand.
+Independent checkpoint of current main: all 27 original tests passed on fresh
+PostgreSQL 17.6 (Python 3.12.14), with no Stage 1 change or material defect; see
+[STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md). Planning contract and deterministic
+demand replay/eligibility now have their own slice and manual database checks.
+Versioned benchmarking and inventory planning remain pending; Stage 2 is not complete.
