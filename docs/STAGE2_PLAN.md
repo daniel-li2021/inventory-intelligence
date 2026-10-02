@@ -83,9 +83,15 @@ zero. An unknown or stockout-constrained observation is unavailable for baseline
 eligibility, not an imputed zero. Stockout recovery/lost-sales estimation is
 deferred until its assumptions can be evaluated.
 
-### 3. Versioned forecast runs and evaluation
+### 3. Versioned forecast runs and evaluation — implemented slice
 
-Add a bounded PostgreSQL adapter using existing Psycopg and stdlib. Persist
+`planning_runs.run_forecast` and `run_benchmark` now use existing Psycopg and
+stdlib, replay origin-known training and persist exact JSONB evidence/results
+under Repeatable Read. Five independent database tests assert manual weekly
+scores, common exclusions, late revisions, held-out truth isolation, zero WAPE,
+immutable history and rollback. Model selection uses 28-day selection MAE; the
+other horizons remain explicit comparisons. The final 28 days never choose the
+method. This is per-key evaluation, not a claim of model general superiority. Persist
 planning results separately from source inputs and reliability findings. Store
 input batch/version IDs, training interval, business timezone, cutoff, model
 version, horizon, eligibility outcome, forecasts and rolling-origin scores.
@@ -132,6 +138,7 @@ evaluation and proven planning arithmetic; the baseline kernel alone is a start.
 ## Resumption handoff
 
 Demand contract and eligibility adapter are implemented in the first Stage 2 PR.
-Next: persist origin-aware forecasts/backtests, then integrate trusted Stage 1
-inventory with complete supply inputs and independently tested proposals. Stage 2
+Origin-aware forecasts and benchmarks are now persisted in the second PR.
+Next: integrate trusted Stage 1 inventory with complete supply inputs and
+independently tested proposals. Stage 2
 remains incomplete until integration and remote acceptance of those slices.

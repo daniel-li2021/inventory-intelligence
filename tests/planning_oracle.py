@@ -15,15 +15,15 @@ def put(conn, table, **row):
         sql.SQL(",").join(sql.Placeholder() for _ in row)), tuple(row.values()))
 
 
-def manual_demand(conn, prefix):
+def manual_demand(conn, prefix, values=(0, 2, 4, 6, 8, 10, 12)):
     context = load_golden(conn, prefix)
     batch = prefix + ":demand"
     with conn.transaction():
         put(conn, "demand_batches", batch_id=batch, version_id="manual-v1",
-            business_timezone="America/Los_Angeles", start_day=START, end_day=START + timedelta(days=7),
-            assembled_at=ORIGIN + timedelta(days=10), status="complete", expected_orders=6, expected_days=7)
+            business_timezone="America/Los_Angeles", start_day=START, end_day=START + timedelta(days=len(values)),
+            assembled_at=ORIGIN + timedelta(days=len(values)+3), status="complete", expected_orders=sum(q > 0 for q in values), expected_days=len(values))
         # Truth = [0,2,4,6,8,10,12]. Hand-entered independently of production functions.
-        for i, quantity in enumerate((0, 2, 4, 6, 8, 10, 12)):
+        for i, quantity in enumerate(values):
             accepted = datetime(2025, 12, 28, 20, tzinfo=timezone.utc) + timedelta(days=i)
             observed = datetime(2025, 12, 29, 8, tzinfo=timezone.utc) + timedelta(days=i)
             put(conn, "day_observations", row_id=f"{prefix}:day:{i}", batch_id=batch,
@@ -36,4 +36,4 @@ def manual_demand(conn, prefix):
                     sku_id=prefix + ":shirt", warehouse_id=prefix + ":a", accepted_at=accepted,
                     source_recorded_at=accepted, observed_at=accepted, accepted_qty=quantity, status="accepted")
     return context, dict(batch_id=batch, sku_id=prefix + ":shirt", warehouse_id=prefix + ":a",
-                         start_day=START, end_day=START + timedelta(days=7), known_at=ORIGIN)
+                         start_day=START, end_day=START + timedelta(days=len(values)), known_at=ORIGIN + timedelta(days=len(values)-7))

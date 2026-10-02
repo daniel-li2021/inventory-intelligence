@@ -34,4 +34,8 @@ Independent checkpoint of current main: all 27 original tests passed on fresh
 PostgreSQL 17.6 (Python 3.12.14), with no Stage 1 change or material defect; see
 [STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md). Planning contract and deterministic
 demand replay/eligibility now have their own slice and manual database checks.
-Versioned benchmarking and inventory planning remain pending; Stage 2 is not complete.
+[Eligibility PR 3](https://github.com/daniel-li2021/inventory-intelligence/pull/3)
+passed both jobs in [CI run 36997926902](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36997926902).
+Origin-aware forecasts/benchmarks now append versioned PostgreSQL evidence with
+independent knowledge-time/holdout oracles. Inventory planning remains pending;
+Stage 2 is not complete.
