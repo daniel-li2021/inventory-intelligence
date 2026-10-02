@@ -21,6 +21,13 @@ CREATE TABLE planning_input.day_observations (
     source_recorded_at timestamptz NOT NULL, observed_at timestamptz NOT NULL,
     coverage text NOT NULL, availability text NOT NULL, expected_lines integer NOT NULL
 );
+CREATE TABLE planning.runs (
+    run_id uuid PRIMARY KEY, contract_version text NOT NULL, code_version text NOT NULL,
+    model_version text NOT NULL, kind text NOT NULL, created_at timestamptz NOT NULL,
+    input_digest text NOT NULL, status text NOT NULL, context jsonb NOT NULL, result jsonb NOT NULL
+);
+REVOKE ALL ON ALL TABLES IN SCHEMA planning FROM PUBLIC, ii_runner;
+GRANT SELECT, INSERT ON ALL TABLES IN SCHEMA planning TO ii_runner;
 REVOKE ALL ON SCHEMA planning_input, planning FROM PUBLIC;
 REVOKE ALL ON ALL TABLES IN SCHEMA planning_input FROM PUBLIC, ii_runner;
 GRANT USAGE ON SCHEMA planning_input, planning TO ii_runner;
