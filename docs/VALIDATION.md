@@ -85,3 +85,8 @@ schemas. The final local suite passed 45 tests with no failures/errors/skips,
 including the persisted 180-day downstream demo. [Planning validation and
 manual oracles](PLANNING.md). Pinned remote CI and integration review are required
 before Stage 2 can be considered complete on main.
+
+[Final Stage 2 code CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+on `f01a2e7` independently completed both jobs successfully. The PostgreSQL job's
+full log records **45 tests / OK**, including the unchanged Stage 1 oracles and
+Stage 2 downstream demo. All three Stage 2 PRs are unmerged.

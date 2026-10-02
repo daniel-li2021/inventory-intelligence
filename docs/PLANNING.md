@@ -109,3 +109,9 @@ restricted roles, and rollback. A separate downstream demo check verifies the
 Local final acceptance uses Python 3.12.14 / Psycopg 3.3.6 / PostgreSQL 17.6;
 pinned CI uses Python 3.12.12 / PostgreSQL 17.9. Both environments are reported
 explicitly. Schema/report/contract review remains a merge prerequisite.
+
+Remote final-code evidence: [CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+on PR 5 head `f01a2e7` passed both jobs; the PostgreSQL job log reports 45 tests,
+`OK`. Eligibility PR 3 and benchmark PR 4 also passed their pinned CI jobs.
+All three branches remain unmerged; this evidence does not approve their contract
+or establish Stage 2 completion on main.

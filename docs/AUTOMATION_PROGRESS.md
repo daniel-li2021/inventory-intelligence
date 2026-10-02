@@ -46,3 +46,8 @@ Fresh local full acceptance: 45 tests, no failures/errors/skips. See
 [PLANNING.md](PLANNING.md) and [verified demo](examples/stage2.md). This stack
 requires contract/integration review, CI and an authorized merge; Stage 2 is not
 complete on main. Stage 3's working checkout remains untouched.
+[Replenishment PR 5](https://github.com/daniel-li2021/inventory-intelligence/pull/5)
+passed both jobs in [CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
+on code head `f01a2e7`; the PostgreSQL job log explicitly confirms **45 tests / OK**.
+All three PRs remain unmerged. No Stage 1 code/schema/acceptance oracle changed;
+main remains `dacdc8f`.
