@@ -19,7 +19,7 @@ Tests deliberately change observations by +1 to prove all four expected quantiti
 
 Additional cases cover identical/conflicting duplicate natural keys, missing/duplicate/wrong-cutoff opening balances, references in movements/openings/snapshots, invalid/missing transfer legs, absent/incomplete/count-mismatched manifests, manifest and row metadata, missing/duplicate snapshots, and coverage discrepancies. Blocked buckets cannot receive invented deltas; assessable controls remain independently checked. The eight generator scenarios have separately written expected findings, including the combined jacket delta `26 − 25 = +1`.
 
-Repeat checks assert semantic equality excluding only `run_id`, distinct persisted runs, exact stored check/findings values, and complete operational row equality before/after. Runtime role tests execute prohibited writes/DDL against PostgreSQL and require permission-denied errors. CLI assertions require exit 0 for clean data, 1 for dirty data, and 2 for configuration errors, with JSON/Markdown output checks.
+Repeat checks assert semantic equality excluding only `run_id`, distinct persisted runs, exact stored check/findings values, and complete operational row equality before/after. A forced child-result constraint failure proves that a partially inserted run rolls back completely. Quantities above floating-point precision remain exact integer pieces. Runtime role tests execute prohibited writes/DDL against PostgreSQL and require permission-denied errors. CLI assertions require exit 0 for clean data, 1 for dirty data, and 2 for configuration errors, with JSON/Markdown output checks.
 
 ## Run locally
 
@@ -48,4 +48,22 @@ There are no secrets, external operational data, deployment jobs, or schedules. 
 
 ## Integration evidence
 
-Pending final data/engine commits and acceptance execution. Preliminary runs against the owners' in-progress files are diagnostics, not final milestone evidence. The final record must identify integrated commits, exact commands/results, and any unresolved contract violations before reporting acceptance.
+Final local acceptance on 2026-10-02 uses Python 3.12.12, Psycopg 3.3.6, and PostgreSQL 17.9. The validation branch integrates:
+
+- Data foundation: `f6115547a39f9d9eb714145c8a55129b3c552002`.
+- Original engine: `0502c2f`.
+- Engine corrections found by independent acceptance: `a90d7a167c66ee6ddc61c83fb511a703c3160f45`.
+
+The corrections preserve local reference blocking, avoid comparison against an unavailable ledger watermark, and assess freshness at the manifest cutoff while reporting disagreeing row metadata separately. No independent oracle was weakened to accept those defects.
+
+Executed in the combined checkout against a fresh dedicated database (`validation_final`, local port 55433):
+
+```sh
+python -m pip install --no-build-isolation .
+python -m tests.bootstrap
+python -m unittest discover -s tests -v
+```
+
+Result: **21 tests passed**, zero failures/errors/skips. Compose fresh-volume initialization was separately verified with `COMPOSE_PROJECT_NAME=ii_validation_demo POSTGRES_PORT=55434 docker compose up -d --wait`. Both `combined` and `clean` were loaded through the documented generator command. Combined CLI returned exit 1 with exactly R001/R002/R004 (jacket expected 25, observed 26, delta +1); clean returned exit 0 without findings. The installed final report's retained fields exactly match [the curated example](examples/combined.md).
+
+CI YAML parsing, Compose configuration validation, Python compilation, research JSON parsing, and whitespace checks also passed. Remote workflow verification is recorded below after the branch is published. `main` integration/merging and branch-protection configuration remain the coordinator's responsibility.

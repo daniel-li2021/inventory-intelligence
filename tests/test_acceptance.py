@@ -65,7 +65,21 @@ class Acceptance(unittest.TestCase):
         self.update("batches", kind, expected_row_count=count)
 
     def check(self, **overrides):
-        return run_checks(self.runner, **(self.context | overrides), code_version="acceptance-v1")
+        report = run_checks(self.runner, **(self.context | overrides), code_version="acceptance-v1")
+        self.assertEqual(set(report), {"run_id", "contract_version", "code_version", "ledger_batch_id",
+                                      "snapshot_batch_id", "as_of", "evaluated_at", "overall_status", "checks", "findings"})
+        order = [(f["rule_id"], f["reason"], f["sku_id"] or "", f["warehouse_id"] or "",
+                  f["source_row_ids"]) for f in report["findings"]]
+        self.assertEqual(order, sorted(order))
+        for finding in report["findings"]:
+            self.assertEqual(set(finding), {"finding_id", "rule_id", "severity", "reason", "sku_id",
+                                           "warehouse_id", "source_row_ids", "expected_qty", "observed_qty", "delta_qty", "evidence"})
+            self.assertEqual(finding["severity"], "error")
+            self.assertEqual(finding["source_row_ids"], sorted(finding["source_row_ids"]))
+            if finding["rule_id"] != "R001":
+                self.assertEqual((finding["expected_qty"], finding["observed_qty"], finding["delta_qty"]),
+                                 (None, None, None))
+        return report
 
     def assert_checks(self, report, *, fail=(), blocked=()):
         self.assertEqual(report["checks"], [dict(rule_id=rule, status=
@@ -133,11 +147,8 @@ class Acceptance(unittest.TestCase):
         self.assertEqual((f["rule_id"], f["reason"], f["sku_id"], f["warehouse_id"],
                           f["expected_qty"], f["observed_qty"], f["delta_qty"]),
                          ("R001", "quantity_mismatch", self.key("shirt"), self.key("a"), 109, 107, -2))
-        self.assertIn(self.key("snapshot:shirt:a"), f["source_row_ids"])
-        self.assertIn(self.key("opening:shirt:a"), f["source_row_ids"])
-        self.assertFalse({self.key(n) for n in ("pending", "at-baseline", "late", "after-cutoff")}
-                         & set(f["source_row_ids"]))
-        self.assertEqual(f["source_row_ids"], sorted(f["source_row_ids"]))
+        self.assertEqual(f["source_row_ids"], sorted(self.key(n) for n in (
+            "snapshot:shirt:a", "opening:shirt:a", "receipt", "shipment", "transfer-out", "reversal", "return")))
 
     def test_whole_piece_arithmetic_above_float_precision(self):
         opening = 2 ** 53 + 1
@@ -174,6 +185,16 @@ class Acceptance(unittest.TestCase):
         self.update("snapshots", "snapshot:coat:a", on_hand_qty=14)
         report = self.check()
         self.assert_checks(report, fail=("R001", "R003"))
+        self.assert_findings(report, [
+            self.expected_finding("R001", "quantity_mismatch",
+                                  ["opening:coat:a", "snapshot:coat:a", "line-1", "line-2"],
+                                  "coat", "a", 15, 14, -1),
+            self.expected_finding("R001", "quantity_mismatch",
+                                  ["opening:shirt:a", "snapshot:shirt:a", "shipment",
+                                   "transfer-out", "reversal", "return"],
+                                  "shirt", "a", 99, 109, 10),
+            self.expected_finding("R003", "unknown_reference", ["receipt"], "unknown", "a"),
+        ])
         unknown = [f for f in report["findings"] if f["rule_id"] == "R003"]
         self.assertEqual(len(unknown), 1)
         self.assertEqual(unknown[0]["reason"], "unknown_reference")
