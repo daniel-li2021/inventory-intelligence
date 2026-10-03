@@ -109,6 +109,12 @@ resources or changing the core PostgreSQL demo.
 The current macOS workspace has no Docker command/runtime. Local ASGI/live HTTP
 acceptance can proceed; container build, Compose/Caddy runtime validation,
 Linux resource enforcement and restart tests remain **unverified** until a
-runtime is available. No host, domain or paid budget has been selected. Public
+runtime is available. Native Caddy configuration validation and localhost private-CA HTTPS checks can
+be completed without Docker; they do not establish public TLS. No host, domain or
+paid budget has been selected. Public
 TLS, public uptime, release integration and production-scale capacity remain
 unverified. Those gates do not block the other independent research packages.
+
+Readiness implementation and current evidence are described in the
+[deployment package](../deploy/lab/README.md). The original planning commit is
+`6030d9f`; subsequent validation updates do not claim a public release.

@@ -3,7 +3,39 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — bounded startup attribution implemented
+## Current checkpoint — hosted synthetic Lab readiness implemented
+
+Started from fetched/pruned `origin/main` at `f6d3d16` on
+`codex/hosted-lab-readiness`. Architecture/resource/cost/release plan `6030d9f`
+precedes the separate hosted ASGI entry point. Existing local app and inventory
+contracts remain unchanged. Hosted serving bounds scenario body bytes/read time,
+API admission and active work, restricts exposed paths, and adds browser headers.
+Pinned Python/Caddy manifest bytes and 18 runtime dependency versions accompany
+non-root/read-only app and HTTPS proxy Compose templates.
+
+Focused acceptance passes 34 tests (11 new hosted + 23 existing Lab/API). A newly
+built wheel served outside the checkout passes 13 live HTTPS response checks
+through checksum-verified Caddy 2.10.2, using only a localhost private CA with no
+trust-store installation. The proxy-generated oversized-body error exposed a
+missing-header boundary; corrected headers pass the natural proxy check.
+[Plan](HOSTED_LAB_PLAN.md), [operations/current limits](../deploy/lab/README.md),
+[acceptance receipt](review/hosted-lab-acceptance.json).
+
+Docker CLI/runtime is unavailable; container build, Compose runtime, Linux limits,
+restart, real public TLS/redirect and uptime remain unverified. No cloud resource,
+public service, domain or paid subscription was created. Public release also
+requires integration/recheck of the PR 18 accessibility work and a concrete
+reviewed host/domain/cost. Default-branch merge remains pending after the earlier
+automatic approval rejection; independent scoped work continues.
+
+The all-22 roadmap/status package is in
+[PR 19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+Prospective calibration, independent lost-sales semantics and physical-count
+corroboration are in PRs 20–22 respectively, all still awaiting integration.
+Next useful independent work: broader artifact attestation and combined
+integration acceptance; do not infer a public release from this local readiness.
+
+## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
 Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes
