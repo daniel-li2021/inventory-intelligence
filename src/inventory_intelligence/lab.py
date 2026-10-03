@@ -61,6 +61,70 @@ def _saved_digest(report):
     _require(report['input_digest'] == _digest(dict(context=report['context'], inputs=inputs)))
 
 
+def _clock(value):
+    instant = datetime.fromisoformat(value)
+    _require(instant.utcoffset() is not None)
+    return instant
+
+
+def _known(row, cutoff, *, recorded=True):
+    observed = _clock(row['observed_at'])
+    _require(observed <= cutoff)
+    if recorded:
+        _require(_clock(row['source_recorded_at']) <= observed)
+
+
+def _identities(rows, field):
+    values = [row[field] for row in rows]
+    _require(all(isinstance(value, str) and value.strip() for value in values)
+             and len(set(values)) == len(values))
+
+
+def _validate_inventory(source, cutoff):
+    # The saved pass covers every retained key, not just the selected Lab SKU.
+    _require(set(source) == {'batches', 'coverage', 'opening_balances', 'movements', 'snapshots'}
+             and not source['movements'])
+    batches = source['batches']
+    _identities(batches, 'batch_id')
+    _require(len(batches) == 2)
+    keysets, quantities = {}, {}
+    for kind, table, quantity in (('ledger', 'opening_balances', 'quantity'),
+                                  ('snapshot', 'snapshots', 'on_hand_qty')):
+        identity = 'planning-demo:'+kind
+        selected = [row for row in batches if row['batch_id'] == identity]
+        _require(len(selected) == 1)
+        batch = selected[0]
+        _require(batch['kind'] == kind and batch['status'] == 'complete'
+                 and _clock(batch['as_of']) == cutoff and type(batch['watermark']) is int
+                 and batch['watermark'] == 0)
+        _known(batch, cutoff, recorded=False)
+        rows = source[table]
+        _identities(rows, 'row_id')
+        keys = [(row['sku_id'], row['warehouse_id']) for row in rows]
+        _require(len(keys) == len(set(keys)) and keys and
+                 all(all(isinstance(value, str) and value.startswith('planning-demo:')
+                         for value in key) for key in keys))
+        expected_count = 0 if kind == 'ledger' else len(rows)
+        _require(type(batch['expected_row_count']) is int and batch['expected_row_count'] == expected_count)
+        for row in rows:
+            _require(row['batch_id'] == identity and type(row[quantity]) is int and row[quantity] >= 0)
+            if kind == 'snapshot':
+                _require(_clock(row['as_of']) == cutoff and type(row['watermark']) is int
+                         and row['watermark'] == batch['watermark'])
+                _known(row, cutoff, recorded=False)
+            else:
+                _require(_clock(row['as_of']) == _clock(batch['baseline_at']) <= cutoff)
+        coverage = [row for row in source['coverage'] if row['batch_id'] == identity]
+        _require(len(coverage) == len(rows) and
+                 {(row['sku_id'], row['warehouse_id']) for row in coverage} == set(keys))
+        keysets[kind] = set(keys)
+        quantities[kind] = {key: row[quantity] for key, row in zip(keys, rows)}
+    _identities(source['coverage'], 'row_id')
+    _require(len(source['coverage']) == sum(len(keys) for keys in keysets.values())
+             and keysets['ledger'] == keysets['snapshot']
+             and quantities['ledger'] == quantities['snapshot'])
+
+
 def _validate_training(training, context):
     _require(training['status'] == 'eligible' and not training['reasons'])
     _require(all(training[k] == KEY[k] for k in KEY))
@@ -69,25 +133,34 @@ def _validate_training(training, context):
              training['known_at'] == context['origin'])
     start, origin = date.fromisoformat(context['start_day']), date.fromisoformat(context['origin_day'])
     _require((origin-start).days == 28 and len(training['days']) == 28)
+    source_rows, order_ids = [], []
     for i, day in enumerate(training['days']):
         expected_day = start+timedelta(days=i)
         record, orders = day['day_record'], day['order_records']
         _require(day['day'] == expected_day.isoformat() and not day['reasons'] and
                  type(day['quantity']) is int and day['quantity'] == 4)
         _require(record['business_day'] == day['day'] and record['coverage'] == 'complete'
-                 and record['availability'] == 'available' and record['expected_lines'] == len(orders))
+                 and record['availability'] == 'available' and type(record['expected_lines']) is int
+                 and record['expected_lines'] == len(orders))
         _require(len(orders) == 1 and sum(r['accepted_qty'] for r in orders) == day['quantity'])
         for row in [record, *orders]:
+            source_rows.append(row)
             _require(all(row[k] == KEY[k] for k in KEY))
             _require(row['batch_id'] == context['batch_id'] and row['row_id'].startswith('planning-demo:'))
-            _require(datetime.fromisoformat(row['source_recorded_at']) <=
-                     datetime.fromisoformat(row['observed_at']) <= datetime.fromisoformat(context['origin']))
+            _require(type(row['revision']) is int and row['revision'] >= 1)
+            _known(row, _clock(context['origin']))
         _require(orders[0]['source_system'] == 'synthetic-orders' and orders[0]['status'] == 'accepted'
                  and type(orders[0]['accepted_qty']) is int and orders[0]['accepted_qty'] == 4)
         _require(midnight(expected_day+timedelta(days=1)) <=
                  datetime.fromisoformat(record['source_recorded_at']))
         _require(midnight(expected_day) <= datetime.fromisoformat(orders[0]['accepted_at']) <
                  midnight(expected_day+timedelta(days=1)))
+        _require(_clock(orders[0]['accepted_at']) <= _clock(orders[0]['source_recorded_at']))
+        _require(all(isinstance(orders[0][key], str) and orders[0][key].strip()
+                     for key in ('order_id', 'line_id')))
+        order_ids.append((orders[0]['source_system'], orders[0]['order_id'], orders[0]['line_id']))
+    _identities(source_rows, 'row_id')
+    _require(len(set(order_ids)) == len(order_ids))
 
 
 def validate_evidence(evidence):
@@ -121,6 +194,12 @@ def validate_evidence(evidence):
         _require(saved_forecast['result']['training'] == clean['result']['training'] == blocked['result']['training'])
         expected = exact_json(forecast([d['quantity'] for d in clean['result']['training']['days']], method='mean', horizon=28))
         _require(saved_forecast['result']['predictions'] == expected)
+        _require(len({report['run_id'] for report in (clean, blocked, saved_forecast)}) == 3)
+        _require(clean['context']['policy_version'] == blocked['context']['policy_version'] == 'prefix-stock-v1'
+                 and type(clean['context']['horizon']) is int and clean['context']['horizon'] == 5
+                 and blocked['context']['horizon'] is None and blocked['result']['forecast'] is None)
+        _require(clean['result']['forecast'] == dict(status='assessable', reasons=[],
+                 training=clean['result']['training'], predictions=expected[:5]))
         inv = clean['result']['inventory']
         reliability = evidence['reliability']
         _require(reliability['overall_status'] == 'pass' and not reliability['findings'] and
@@ -134,6 +213,8 @@ def validate_evidence(evidence):
                  not inv['current_validation']['findings'] and
                  all(c['status'] == 'pass' for c in inv['current_validation']['checks']))
         source = inv['source']
+        _validate_inventory(source, _clock(reliability['as_of']))
+        _require(inv['current_validation']['checks'] == inv['checks'] and not inv['findings'])
         snapshots = [r for r in source['snapshots'] if all(r[k] == KEY[k] for k in KEY)]
         openings = [r for r in source['opening_balances'] if all(r[k] == KEY[k] for k in KEY)]
         _require(len(snapshots) == len(openings) == 1 and not source['movements'])
@@ -155,6 +236,17 @@ def validate_evidence(evidence):
             _require(supply['batch']['inbound_complete'] is True and
                      supply['batch']['reservations_complete'] is (case == 'clean'))
             _require(len(supply['reservations']) == 1 and len(supply['inbound']) == 2 and len(supply['policies']) == 1)
+            batch = supply['batch']
+            _require(batch['status'] == 'complete' and all(batch[k] == KEY[k] for k in KEY)
+                     and _clock(batch['as_of']) == _clock(report['context']['origin'])
+                     and type(batch['expected_reservations']) is int and batch['expected_reservations'] == 1
+                     and type(batch['expected_inbound']) is int and batch['expected_inbound'] == 2)
+            _known(batch, _clock(report['context']['origin']), recorded=False)
+            expected_reasons = [] if case == 'clean' else ['incomplete_or_mismatched_supply']
+            _require(supply['reasons'] == expected_reasons)
+            if case != 'clean':
+                _require(report['result']['reasons'] ==
+                         ['incomplete_or_mismatched_supply', 'ineligible_or_unavailable_forecast'])
             _require(supply['policy'] == supply['policies'][0])
             _require(all(supply['policy'][k] == DEFAULTS[k] and type(supply['policy'][k]) is int
                          for k in ('lead_days', 'review_days', 'safety_qty', 'pack_size', 'moq')))
@@ -165,12 +257,21 @@ def validate_evidence(evidence):
             confirmed = [r for r in supply['inbound'] if r['status'] == 'confirmed']
             pending = [r for r in supply['inbound'] if r['status'] == 'pending']
             _require(len(confirmed) == len(pending) == 1 and type(confirmed[0]['remaining_qty']) is int and
-                     confirmed[0]['remaining_qty'] == 5 and pending[0]['remaining_qty'] == 100)
+                     confirmed[0]['remaining_qty'] == 5 and type(pending[0]['remaining_qty']) is int
+                     and pending[0]['remaining_qty'] == 100)
             _require(confirmed[0]['arrival_day'] == (date.fromisoformat(report['context']['origin_day'])+timedelta(days=1)).isoformat())
-            for row in [supply['batch'], *supply['reservations'], *supply['inbound'], *supply['policies']]:
+            records = [*supply['reservations'], *supply['inbound'], *supply['policies']]
+            _identities(records, 'row_id')
+            _identities(supply['reservations'], 'reservation_id')
+            _identities(supply['inbound'], 'inbound_id')
+            for row in [supply['batch'], *records]:
                 _require(row['batch_id'] == report['context']['supply_batch_id'])
-                for clock in ('source_recorded_at', 'observed_at'):
-                    _require(row.get(clock) is None or datetime.fromisoformat(row[clock]) <= datetime.fromisoformat(reliability['as_of']))
+            for row in records:
+                _known(row, _clock(reliability['as_of']))
+                _require(row['row_id'].startswith('planning-demo:'))
+            for row in supply['inbound']:
+                _require(row['source_system'] == 'synthetic')
+                date.fromisoformat(row['arrival_day'])
         future = evidence['future_demand']
         _require(future == dict(origin_day=clean['context']['origin_day'], quantities=[4]*28,
                 source='declared synthetic constant demand', id='decision-lab:future-constant-v1'))

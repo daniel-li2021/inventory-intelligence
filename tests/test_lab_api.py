@@ -1,10 +1,12 @@
 """Strict local HTTP boundary and offline app smoke tests."""
 import unittest
+import hashlib
+import json
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from inventory_intelligence.lab import load_evidence
+from inventory_intelligence.lab import archive_digest, load_evidence
 from inventory_intelligence.lab_api import create_app
 
 
@@ -72,6 +74,23 @@ class DecisionLabAPITests(unittest.TestCase):
                 response = getattr(client, method)(path, **({"json": {}} if method == "post" else {}))
                 self.assertEqual(response.status_code, 503)
                 self.assertNotIn("proposed_order_qty", response.text)
+
+    def test_rehashed_invalid_receipt_identity_fails_with_503_not_server_error(self):
+        evidence = load_evidence()
+        for report in evidence['plans'].values():
+            result = report['result']
+            result['supply']['inbound'][0]['inbound_id'] = None
+            payload = dict(context=report['context'], inputs={
+                key: result[key] for key in ('inventory', 'supply', 'training')})
+            report['input_digest'] = hashlib.sha256(json.dumps(payload, sort_keys=True,
+                separators=(',', ':')).encode()).hexdigest()
+        evidence['digest'] = archive_digest(evidence)
+        client = TestClient(create_app(evidence=evidence))
+        for method, path in (('get', '/api/lab'), ('get', '/api/evidence'), ('post', '/api/scenarios')):
+            with self.subTest(path=path):
+                response = getattr(client, method)(path, **({'json': {}} if method == 'post' else {}))
+                self.assertEqual(response.status_code, 503)
+                self.assertNotIn('proposed_order_qty', response.text)
 
     def test_app_owns_an_immutable_copy_of_injected_evidence(self):
         evidence = load_evidence()

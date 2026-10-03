@@ -47,6 +47,10 @@ no source-upload or order-execution endpoint.
   holding pieces/day, backlog pieces/day and each positive order setup. Scored
   days, fixed runoff, total components and terminal obligations remain visible.
   These amounts do not establish profit or real business savings.
+  The UI displays both accounting-window lengths: each replay's runoff is
+  `lead_days + supplier_delay_days + review_days`, so combined cost deltas can
+  include different durations. Compare scored costs separately before drawing
+  conclusions about a policy change.
 
 The Decision Trace links reliability run → inventory input row IDs → eligible
 demand and forecast → supply assumptions → policy → raw requirement → rounding
@@ -78,6 +82,11 @@ SHA-256 catches accidental changes, and the existing Copilot planning validator
 recomputes saved recommendation arithmetic. It is a local integrity check, not a
 cryptographic attestation of live business data. The local app exposes only this
 packaged synthetic replay, with no arbitrary external evidence import.
+Semantic checks also require consistent inventory reconciliation across all
+retained keys, complete coverage/counts, temporal cutoffs, unique source identities,
+supply manifests and saved report links. Recomputing hashes cannot approve a
+contradictory archive. These checks cover this bounded zero-movement fixture;
+they do not replace Stage 1 SQL validation for arbitrary operational data.
 
 FastAPI's [static-file serving](https://fastapi.tiangolo.com/tutorial/static-files/)
 and [TestClient](https://fastapi.tiangolo.com/tutorial/testing/) support the thin
@@ -85,11 +94,16 @@ same-origin application and API boundary checks.
 
 ## Validation
 
-All 18 independent lab/API tests pass. Combined acceptance passes **124/124**
+Original acceptance: 18 independent lab/API tests passed. Combined acceptance passed **124/124**
 tests against fresh isolated local PostgreSQL **17.6** / Python **3.12.14**.
 The final calculation-reference correction was revalidated with the 18 lab/API
 tests. Existing reliability, forecasting, replenishment, simulation and Copilot
 source modules have no changes.
+
+The later [adversarial readiness review](READINESS_LAB_REVIEW.md) passes 23
+Lab/API tests, including independently rehashed malformed evidence and HTTP
+fail-closed checks. Its combined database/browser acceptance is recorded by the
+integration owner separately.
 
 The built wheel was installed and served from outside the checkout. Its archive,
 HTML, CSS and JavaScript assets are present and all five root/asset/evidence API
