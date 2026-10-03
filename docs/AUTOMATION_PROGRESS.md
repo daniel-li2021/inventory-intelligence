@@ -13,8 +13,10 @@ directly under the standing authorization; no per-agent PRs are needed.
 
 Published batch `722873e` is verified on remote `main`.
 [Integration CI 37104968788](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37104968788)
-passed Repository hygiene and PostgreSQL acceptance; its log records **106 tests
-/ OK** on pinned PostgreSQL 17.9 / Python 3.12.12. This task's merged branch was
+passed Repository hygiene and PostgreSQL acceptance. The workflow pins PostgreSQL
+17.9 / Python 3.12.12; archived logs returned HTTP 403, so the remote test count
+is unverified. The **106/106** count below is verified local acceptance.
+This task's merged branch was
 removed locally/remotely; other branches, worktrees and environments were preserved.
 This final checkpoint update changes documentation only.
 
