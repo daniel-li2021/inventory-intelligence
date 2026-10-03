@@ -86,6 +86,21 @@ Existing holdouts are consumed; they are regression evidence, not fresh tuning
 sets. Optional live Copilot routing has a bounded synthetic evaluation, separate
 from deterministic evidence checks. [Routing evidence](docs/STAGE3_STABILIZATION.md).
 
+The [long-term roadmap](docs/RESEARCH_ROADMAP.md) records 22 assigned or gated
+directions. Its first [fresh warmup study](docs/FRESH_WARMUP_RESULTS.md) evaluates
+720 arms with fully costed inventory carryover: warmup improves fill in 70/360
+pairs, regresses it in 35/360, and lowers complete intervention cost in only two.
+Empirical 90%/95% forecast targets still do not guarantee achieved inventory
+service. Repeated controls and origins are not independent replications.
+The [fresh retention study](docs/SAFETY_RETENTION_RESULTS.md) compares expanding,
+recent and decay-weighted safety with identical point forecasts. Both challengers
+can shrink safety to zero while leaving large owned inventory; neither passes
+the cost-and-service gate across its 21 path labels.
+The [supply and intervention study](docs/SUPPLY_SENSITIVITY_RESULTS.md) pairs
+lead2/5/10 and supplier variability with stock/review/pack controls over equal
+settlement windows. Signed effects explain startup versus later failures while
+retaining interactions; faster reviews and more stock are not universal fixes.
+
 ## Run the PostgreSQL core
 
 Use the Python environment above and Docker with Compose. From the repository

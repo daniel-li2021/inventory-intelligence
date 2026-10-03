@@ -1,7 +1,9 @@
 # Proposed public observed-sales research — v1
 
-Prepared 2026-10-02; **pending explicit public-data boundary authorization**.
-This is a concrete later handoff, not a relaxation of planning-v1 or AGENTS.md.
+Prepared 2026-10-02; **assigned by the user on 2026-10-03** as part of the
+[long-term roadmap](RESEARCH_ROADMAP.md). This authorizes official UCI acquisition
+and the bounded separate research described here. It is not a relaxation of the
+operational planning contract or permission to import confidential inputs.
 The operational portfolio stays synthetic. Public observations would live in a
 separate offline research adapter and ignored local outputs, never as accepted
 orders, verified inventory, warehouses or uncensored demand.
@@ -47,7 +49,7 @@ item have observed sales zero only within a verified complete extraction of the
 declared archive range; this never proves zero unconstrained demand or availability.
 No prices, promotions or customer attributes enter forecasting features.
 
-## Frozen bounded benchmark after authorization
+## Frozen bounded benchmark
 
 Use source dates [2010-12-01,2011-12-09), excluding the final potentially partial
 day. Final 28 complete dates [2011-11-11,2011-12-09) are the internal holdout.
@@ -73,9 +75,11 @@ segment checks. Aggregate results may justify a new aggregation or global-model
 handoff; ADIDA/IMAPA/LightGBM are not automatic additions. A failed or blocked
 benchmark leaves the existing approved methods untouched.
 
-## Authorization requested
+## Implementation checkpoint
 
-Approve this named public observed-sales boundary and official UCI acquisition,
-with real rows/series local and ignored and only aggregate metrics published,
-or retain synthetic-only research. Dataset acquisition and real evaluation must
-wait for this answer; elapsed time is not approval.
+The current assignment permits this named public observed-sales boundary and
+official UCI acquisition, with real rows/series local and ignored and only
+aggregate metrics published. The official UCI source/license was rechecked on
+2026-10-03. Adapter acceptance must still precede acquisition. No real rows have
+yet been imported or evaluated in this package; the operational demo remains
+synthetic. Follow the roadmap checkpoint for subsequent progress.
