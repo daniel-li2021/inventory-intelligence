@@ -3,13 +3,63 @@
 Updated 2026-10-02. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Continued plan — intermittent/safety research
+## Current checkpoint — stabilization complete
+
+Started from fetched/pruned `origin/main` at `43a952d`, containing decision PR 10
+(`33ced64`), intermittent PR 11 (`429f0f9`) and updated integration-owner workflow.
+Focused commits freeze the routing holdout (`363957c`) before implementing the
+classification/selector boundary (`4f3d7c8`). Small validated fixes integrate
+directly under the standing authorization; no per-agent PRs are needed.
+
+Fresh combined acceptance passed **104/104** on that untouched main, then
+**106/106** on locally integrated main at `4f3d7c8`: Stage 1 23, Stage 2 24,
+Stage 3 34, offline decision/intermittent 25. Python 3.12.14 / Psycopg 3.3.6 /
+PostgreSQL 17.6, separate new databases, no failures/errors/skips, unchanged
+independent oracles. [Exact revisions, hashes and test outcomes](review/stabilization-acceptance.json).
+The existing 480 decision and 5,544 intermittent results remain unchanged and
+were verified through current provenance/input/arithmetic/settlement tests.
+
+**Complete within the synthetic boundary:** Stage 1 reconciliation, planning-v1,
+copilot-1/2 deterministic explanations, both offline research harnesses, and this
+focused Stage 3 stabilization. Intent classification is independent of selector
+availability; deterministic code alone selects findings. Fresh live routing
+passed **32/32**, evidence fidelity **32/32**, numeric fidelity **32/32**, including
+**10/10** cases with quantities/scores. [Protocol and limitations](STAGE3_STABILIZATION.md).
+The original failed benchmark and all research artifacts remain historical evidence.
+
+**Still experimental:** optional natural-language routing (one synthetic live
+holdout, no production/population guarantee), intermittent methods and empirical
+safety (offline research only), and cell-wise decision promotion findings.
+No runtime champion, current-order authorization or real-data claim follows.
+Public-sales acquisition remains gated by the synthetic-only boundary. No new
+forecasting models or large features were added in this stabilization wave.
+
+### Consumed evaluation sets — regression only
+
+| Set | Consumed boundary; do not use for tuning |
+| --- | --- |
+| Original Stage 2 / three-stage review | Seven 180-day synthetic groups and their final holdouts; repeated results are correlated regression evidence. |
+| Original Stage 3 benchmark | All 45 cases, including five observed misroutes and five later explicit controls. Preserve the original 40/45 artifact. |
+| Fresh routing holdout v1 | All 32 new English/Chinese cases; frozen in `363957c`, evaluated once at `4f3d7c8`. Now consumed. |
+| Decision benchmark v1 | Seeds 11/29/47; all 60 paired cells, 480 candidate/split results and final 56-day holdouts. |
+| Intermittent research v1 | Seeds 101/211/307; all 84 cells, 5,544 results and final 56-day holdouts. |
+
+Known questions, holdouts and observed service/cost failures must not tune prompts,
+allowlists, models, smoothing/safety parameters, initial stock or policy and then
+be relabeled fresh validation. Keep frozen selection rules; any new iteration
+needs a separately declared counterfactual/protocol and fresh evaluation set
+before outcomes are inspected. Existing fixtures remain independent regression
+oracles. Next work requires a focused handoff; speculative expansion is deferred.
+
+The sections below preserve prior milestones and investigation chronology.
+
+## Integrated milestone — intermittent/safety research
 
 The user authorized integration of PRs 10 and 11 on 2026-10-02. PR 10 merged at
 `33ced649a7a1271e1272d0138e6b7ffc9b112f67`, verified on remote main after resolving
 README, checkpoint and research-note conflicts with PR 9. The continuation in
-[PR 11](https://github.com/daniel-li2021/inventory-intelligence/pull/11) incorporates
-that merged ancestry and targets main. It freezes
+[PR 11](https://github.com/daniel-li2021/inventory-intelligence/pull/11) merged at
+`429f0f9`, incorporating that ancestry. It freezes
 [CONTRACT_INTERMITTENT_V1.md](CONTRACT_INTERMITTENT_V1.md), adds exact offline
 Croston/SBA/TSB with cumulative-error empirical safety, and evaluates fresh
 seeds 101/211/307. [Protocol/results](INTERMITTENT_BENCHMARK.md) retain all 5,544
@@ -34,7 +84,7 @@ has been acquired. M5 terms were unreadable; no rights are inferred. ADIDA/IMAPA
 LightGBM and registry/drift/scheduling infrastructure remain conditional on new
 evidence and a separately frozen handoff, not automatic expansions.
 
-## Current milestone — offline decision-benchmark-v1 implemented
+## Integrated milestone — offline decision-benchmark-v1
 
 The user assigned the next milestone from
 [NEXT_ROUND_RESEARCH.md](NEXT_ROUND_RESEARCH.md). Work began on
@@ -105,8 +155,9 @@ At that earlier checkpoint, inventory-cost/service outcomes had not yet been mea
 The later [Copilot benchmark](STAGE3_BENCHMARK.md) is merged and retains
 observed live routing failures: five finding questions were classified as
 unsupported. This is separate from deterministic evidence/test acceptance.
-A focused routing follow-up should use fresh held-out paraphrases and keep
-selector validation deterministic; this research made no new API calls.
+That historical research made no new API calls. The completed stabilization at
+the top of this checkpoint uses fresh held-out paraphrases and deterministic
+selector validation; it preserves the original failures as recorded evidence.
 
 ## Authorized publication cleanup
 

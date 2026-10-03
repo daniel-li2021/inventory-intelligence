@@ -2,8 +2,10 @@
 
 ## Current phase
 
-All three bounded synthetic stages are implemented and integrated on `main`
-at `ce8ab0d`, with 79-test pinned main acceptance. The
+All three bounded synthetic stages and the decision/intermittent research are
+integrated on `main`. The stabilization from `43a952d` passes 106-test fresh
+local combined acceptance; [evidence and routing evaluation](docs/STAGE3_STABILIZATION.md).
+The earlier 79-test pinned CI result remains historical. The
 [frozen milestone 1 contract](docs/CONTRACT_V1.md) remains separate from planning
 and copilot contracts. See [current status](docs/AUTOMATION_PROGRESS.md) and
 [next-round research](docs/NEXT_ROUND_RESEARCH.md). Research proposals are not

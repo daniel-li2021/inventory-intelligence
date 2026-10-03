@@ -17,8 +17,11 @@ The subsequent request to continue the plan assigns the separate
 [public observed-sales protocol](PUBLIC_SALES_PROTOCOL_V1.md) is concrete and
 awaits the public-data boundary choice; no real observations have been imported.
 The user authorized integration of these milestones through PRs 10/11 on
-2026-10-02. PR 10 is merged; PR 11 incorporates that ancestry and the refreshed
-PR 9 documentation. This authorization does not import real observations.
+2026-10-02. Both PRs 10/11 are merged with the refreshed PR 9 documentation.
+The [stabilization wave](STAGE3_STABILIZATION.md) then verifies combined acceptance
+and the classification/selector fix on a fresh routing holdout. Those evaluation
+sets are now consumed; [checkpoint boundaries](AUTOMATION_PROGRESS.md) govern
+future tuning. This authorization does not import real observations.
 For the original research, existing benchmark JSON and acceptance evidence were reused; no data
 download, new forecast fit, database pipeline or model API request occurred.
 

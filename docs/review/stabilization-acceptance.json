@@ -1,0 +1,933 @@
+{
+  "business_data": "synthetic only",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -v",
+  "database_policy": "Separate new disposable database bootstrapped for each complete suite; fixture-owner and restricted ii_runner connections",
+  "generated_at": "2026-10-03T06:57:34.707380+00:00",
+  "notes": [
+    "No independent oracle or grader weakened.",
+    "No decision or intermittent experiment regenerated; retained provenance, inputs and exact terminals checked by current tests.",
+    "Final complete suite ran on locally integrated main before publication."
+  ],
+  "postgresql": "17.6",
+  "preserved_artifact_sha256": {
+    "docs/STAGE3_BENCHMARK.md": "ee65f42262dd30b0d8fe4c251488e9a334a328021093fe446f3a96e325e0ca15",
+    "docs/review/copilot-benchmark.json": "4fd0ba6d2905e825f6e667ee1e67d1cddb5091e745214d9a80c0bdd0853c47b9",
+    "docs/review/decision-benchmark.json": "2958c37b9a00fe3e98bc99a10515d68ad009472d882a9c6a7be1f7e07e5c4556",
+    "docs/review/intermittent-benchmark.json": "a022cd9af2542f7a3d4612275169511ebdd626d7a3859907a0bcdc6a04dec8cc"
+  },
+  "psycopg": "3.3.6",
+  "python": "3.12.14",
+  "reused_evaluations": {
+    "decision_candidate_splits": 480,
+    "intermittent_candidate_splits": 5544
+  },
+  "runs": {
+    "baseline": {
+      "elapsed_seconds": 4.807,
+      "errors": 0,
+      "executed_on_branch": "codex/stage3-stabilization",
+      "failures": 0,
+      "result": "OK",
+      "revision": "43a952dac265dc20492a007af432853471780cd3",
+      "skips": 0,
+      "test_results": [
+        {
+          "name": "test_cli_pass_dirty_markdown_and_configuration_error (test_acceptance.Acceptance.test_cli_pass_dirty_markdown_and_configuration_error)",
+          "result": "ok"
+        },
+        {
+          "name": "test_coverage_and_unexpected_snapshot_keys (test_acceptance.Acceptance.test_coverage_and_unexpected_snapshot_keys)",
+          "result": "ok"
+        },
+        {
+          "name": "test_each_manifest_incomplete_and_count_mismatch (test_acceptance.Acceptance.test_each_manifest_incomplete_and_count_mismatch)",
+          "result": "ok"
+        },
+        {
+          "name": "test_each_missing_manifest (test_acceptance.Acceptance.test_each_missing_manifest)",
+          "result": "ok"
+        },
+        {
+          "name": "test_empty_coverage_cannot_pass (test_acceptance.Acceptance.test_empty_coverage_cannot_pass)",
+          "result": "ok"
+        },
+        {
+          "name": "test_every_transfer_condition (test_acceptance.Acceptance.test_every_transfer_condition)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_quantity_evidence (test_acceptance.Acceptance.test_exact_quantity_evidence)",
+          "result": "ok"
+        },
+        {
+          "name": "test_identical_and_conflicting_duplicates_block_quantity (test_acceptance.Acceptance.test_identical_and_conflicting_duplicates_block_quantity)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_transfer_blocks_both_buckets (test_acceptance.Acceptance.test_invalid_transfer_blocks_both_buckets)",
+          "result": "ok"
+        },
+        {
+          "name": "test_manifest_cutoff_watermark_and_snapshot_row_metadata (test_acceptance.Acceptance.test_manifest_cutoff_watermark_and_snapshot_row_metadata)",
+          "result": "ok"
+        },
+        {
+          "name": "test_manual_golden_clean_and_temporal_controls (test_acceptance.Acceptance.test_manual_golden_clean_and_temporal_controls)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_and_duplicate_snapshots (test_acceptance.Acceptance.test_missing_and_duplicate_snapshots)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_duplicate_and_wrong_baseline_openings (test_acceptance.Acceptance.test_missing_duplicate_and_wrong_baseline_openings)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_transfer_leg_and_incomplete_extraction (test_acceptance.Acceptance.test_missing_transfer_leg_and_incomplete_extraction)",
+          "result": "ok"
+        },
+        {
+          "name": "test_named_scenarios (test_acceptance.Acceptance.test_named_scenarios)",
+          "result": "ok"
+        },
+        {
+          "name": "test_persistence_failure_rolls_back_the_entire_run (test_acceptance.Acceptance.test_persistence_failure_rolls_back_the_entire_run)",
+          "result": "ok"
+        },
+        {
+          "name": "test_repeat_run_history_and_operational_inputs_unchanged (test_acceptance.Acceptance.test_repeat_run_history_and_operational_inputs_unchanged)",
+          "result": "ok"
+        },
+        {
+          "name": "test_runtime_role_cannot_mutate_operational_inputs (test_acceptance.Acceptance.test_runtime_role_cannot_mutate_operational_inputs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_staleness_boundary_and_future_snapshot (test_acceptance.Acceptance.test_staleness_boundary_and_future_snapshot)",
+          "result": "ok"
+        },
+        {
+          "name": "test_uncovered_movement_cannot_escape_reconciliation (test_acceptance.Acceptance.test_uncovered_movement_cannot_escape_reconciliation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_unknown_opening_and_snapshot_references (test_acceptance.Acceptance.test_unknown_opening_and_snapshot_references)",
+          "result": "ok"
+        },
+        {
+          "name": "test_unknown_reference_blocks_affected_bucket_only (test_acceptance.Acceptance.test_unknown_reference_blocks_affected_bucket_only)",
+          "result": "ok"
+        },
+        {
+          "name": "test_whole_piece_arithmetic_above_float_precision (test_acceptance.Acceptance.test_whole_piece_arithmetic_above_float_precision)",
+          "result": "ok"
+        },
+        {
+          "name": "test_benchmark_contradictions_and_inexact_numbers_are_rejected (test_copilot.Copilot.test_benchmark_contradictions_and_inexact_numbers_are_rejected)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cli_answers_refusals_errors_and_safe_markdown (test_copilot.Copilot.test_cli_answers_refusals_errors_and_safe_markdown)",
+          "result": "ok"
+        },
+        {
+          "name": "test_failed_run_blocks_readiness_without_bucket_promotion (test_copilot.Copilot.test_failed_run_blocks_readiness_without_bucket_promotion)",
+          "result": "ok"
+        },
+        {
+          "name": "test_future_cutoff_without_metadata_failure_is_contradictory (test_copilot.Copilot.test_future_cutoff_without_metadata_failure_is_contradictory)",
+          "result": "ok"
+        },
+        {
+          "name": "test_historic_clean_and_failed_reports_keep_exact_citations (test_copilot.Copilot.test_historic_clean_and_failed_reports_keep_exact_citations)",
+          "result": "ok"
+        },
+        {
+          "name": "test_incomplete_check_status_preserves_not_assessable (test_copilot.Copilot.test_incomplete_check_status_preserves_not_assessable)",
+          "result": "ok"
+        },
+        {
+          "name": "test_manual_benchmark_scores_and_rationals (test_copilot.Copilot.test_manual_benchmark_scores_and_rationals)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_checks_or_inconsistent_data_never_become_a_pass (test_copilot.Copilot.test_missing_checks_or_inconsistent_data_never_become_a_pass)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_evidence_and_unknown_findings_are_unavailable (test_copilot.Copilot.test_missing_evidence_and_unknown_findings_are_unavailable)",
+          "result": "ok"
+        },
+        {
+          "name": "test_nonquantity_findings_do_not_get_repair_quantities (test_copilot.Copilot.test_nonquantity_findings_do_not_get_repair_quantities)",
+          "result": "ok"
+        },
+        {
+          "name": "test_quantity_explanation_and_large_pieces (test_copilot.Copilot.test_quantity_explanation_and_large_pieces)",
+          "result": "ok"
+        },
+        {
+          "name": "test_readiness_freshness_and_future_boundaries (test_copilot.Copilot.test_readiness_freshness_and_future_boundaries)",
+          "result": "ok"
+        },
+        {
+          "name": "test_untrusted_source_strings_are_only_data (test_copilot.Copilot.test_untrusted_source_strings_are_only_data)",
+          "result": "ok"
+        },
+        {
+          "name": "test_zero_demand_wape_is_null (test_copilot.Copilot.test_zero_demand_wape_is_null)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_evidence_and_independent_negative_controls (test_copilot_benchmark.BenchmarkGrader.test_exact_evidence_and_independent_negative_controls)",
+          "result": "ok"
+        },
+        {
+          "name": "test_unknown_usage_is_not_a_zero_or_success (test_copilot_benchmark.BenchmarkGrader.test_unknown_usage_is_not_a_zero_or_success)",
+          "result": "ok"
+        },
+        {
+          "name": "test_absent_run_invalid_id_role_and_nonidle_connection (test_copilot_db.CopilotDatabase.test_absent_run_invalid_id_role_and_nonidle_connection)",
+          "result": "ok"
+        },
+        {
+          "name": "test_engine_future_cutoff_is_explainable_failed_evidence (test_copilot_db.CopilotDatabase.test_engine_future_cutoff_is_explainable_failed_evidence)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_persisted_report_readonly_snapshot_and_no_new_history (test_copilot_db.CopilotDatabase.test_exact_persisted_report_readonly_snapshot_and_no_new_history)",
+          "result": "ok"
+        },
+        {
+          "name": "test_bounds_and_sol_is_explicit (test_copilot_language.Language.test_bounds_and_sol_is_explicit)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cli_refusal_avoids_retrieval_and_model_readiness_stays_blocked (test_copilot_language.Language.test_cli_refusal_avoids_retrieval_and_model_readiness_stays_blocked)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_phrases_and_explicit_offline_never_use_keys_or_network (test_copilot_language.Language.test_exact_phrases_and_explicit_offline_never_use_keys_or_network)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_model_output_cannot_add_quantities_or_new_intents (test_copilot_language.Language.test_invalid_model_output_cannot_add_quantities_or_new_intents)",
+          "result": "ok"
+        },
+        {
+          "name": "test_lowercase_env_key_and_environment_precedence_without_execution (test_copilot_language.Language.test_lowercase_env_key_and_environment_precedence_without_execution)",
+          "result": "ok"
+        },
+        {
+          "name": "test_opt_in_measurements_keep_missing_usage_unknown_and_capture_failed_calls (test_copilot_language.Language.test_opt_in_measurements_keep_missing_usage_unknown_and_capture_failed_calls)",
+          "result": "ok"
+        },
+        {
+          "name": "test_refusal_and_redirects_cannot_change_policy_or_send_keys_elsewhere (test_copilot_language.Language.test_refusal_and_redirects_cannot_change_policy_or_send_keys_elsewhere)",
+          "result": "ok"
+        },
+        {
+          "name": "test_timeout_and_service_errors_fail_closed_without_diagnostics_leaks (test_copilot_language.Language.test_timeout_and_service_errors_fail_closed_without_diagnostics_leaks)",
+          "result": "ok"
+        },
+        {
+          "name": "test_valid_request_has_no_evidence_tools_or_storage_and_defaults_to_luna (test_copilot_language.Language.test_valid_request_has_no_evidence_tools_or_storage_and_defaults_to_luna)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cli_planning_reads_persisted_run_and_requires_explicit_intent (test_copilot_planning.CopilotPlanning.test_cli_planning_reads_persisted_run_and_requires_explicit_intent)",
+          "result": "ok"
+        },
+        {
+          "name": "test_corrupt_orders_float_pieces_and_evidence_limits (test_copilot_planning.CopilotPlanning.test_corrupt_orders_float_pieces_and_evidence_limits)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_proposal_blocked_inputs_and_no_new_history (test_copilot_planning.CopilotPlanning.test_exact_proposal_blocked_inputs_and_no_new_history)",
+          "result": "ok"
+        },
+        {
+          "name": "test_shared_horizons_holdout_scores_and_contradiction (test_copilot_planning.CopilotPlanning.test_shared_horizons_holdout_scores_and_contradiction)",
+          "result": "ok"
+        },
+        {
+          "name": "test_clean_zero_rates_null_and_empty_shelf_not_shortage (test_decision.DecisionOracleTests.test_clean_zero_rates_null_and_empty_shelf_not_shortage)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cycle_denominator_excludes_phase_prefix_and_incomplete_suffix (test_decision.DecisionOracleTests.test_cycle_denominator_excludes_phase_prefix_and_incomplete_suffix)",
+          "result": "ok"
+        },
+        {
+          "name": "test_delayed_pipeline_prevents_repeat_orders_and_counts_zero_slots (test_decision.DecisionOracleTests.test_delayed_pipeline_prevents_repeat_orders_and_counts_zero_slots)",
+          "result": "ok"
+        },
+        {
+          "name": "test_forecast_daily_and_cumulative_scores_use_complete_origins (test_decision.DecisionOracleTests.test_forecast_daily_and_cumulative_scores_use_complete_origins)",
+          "result": "ok"
+        },
+        {
+          "name": "test_full_event_sequence_fifo_and_rational_costs (test_decision.DecisionOracleTests.test_full_event_sequence_fifo_and_rational_costs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_future_observations_and_hidden_trace_are_not_policy_inputs (test_decision.DecisionOracleTests.test_future_observations_and_hidden_trace_are_not_policy_inputs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_trust_boundary_inputs_are_rejected (test_decision.DecisionOracleTests.test_invalid_trust_boundary_inputs_are_rejected)",
+          "result": "ok"
+        },
+        {
+          "name": "test_lead_time_shortage_and_terminal_holding_are_not_erased (test_decision.DecisionOracleTests.test_lead_time_shortage_and_terminal_holding_are_not_erased)",
+          "result": "ok"
+        },
+        {
+          "name": "test_pack_moq_rounding_and_fixed_runoff_no_forecast (test_decision.DecisionOracleTests.test_pack_moq_rounding_and_fixed_runoff_no_forecast)",
+          "result": "ok"
+        },
+        {
+          "name": "test_prior_identity_tie_order_and_no_early_fulfillment (test_decision.DecisionOracleTests.test_prior_identity_tie_order_and_no_early_fulfillment)",
+          "result": "ok"
+        },
+        {
+          "name": "test_promotion_exact_cost_boundary_and_service_regression (test_decision_benchmark.DecisionBenchmarkTests.test_promotion_exact_cost_boundary_and_service_regression)",
+          "result": "ok"
+        },
+        {
+          "name": "test_retained_artifact_inputs_hashes_and_settled_obligations (test_decision_benchmark.DecisionBenchmarkTests.test_retained_artifact_inputs_hashes_and_settled_obligations)",
+          "result": "ok"
+        },
+        {
+          "name": "test_selection_floors_ties_and_holdout_cannot_reselect (test_decision_benchmark.DecisionBenchmarkTests.test_selection_floors_ties_and_holdout_cannot_reselect)",
+          "result": "ok"
+        },
+        {
+          "name": "test_business_calendar_dst_and_unfinished_day (test_demand.Demand.test_business_calendar_dst_and_unfinished_day)",
+          "result": "ok"
+        },
+        {
+          "name": "test_complete_zero_missing_and_constrained_days (test_demand.Demand.test_complete_zero_missing_and_constrained_days)",
+          "result": "ok"
+        },
+        {
+          "name": "test_deterministic_180_day_groups_and_input_permissions (test_demand.Demand.test_deterministic_180_day_groups_and_input_permissions)",
+          "result": "ok"
+        },
+        {
+          "name": "test_duplicate_identity_changed_key_and_manifest_do_not_pass (test_demand.Demand.test_duplicate_identity_changed_key_and_manifest_do_not_pass)",
+          "result": "ok"
+        },
+        {
+          "name": "test_late_correction_cancellation_and_two_knowledge_clocks (test_demand.Demand.test_late_correction_cancellation_and_two_knowledge_clocks)",
+          "result": "ok"
+        },
+        {
+          "name": "test_forecasts_and_fractional_expected_demand (test_forecasting.Baselines.test_forecasts_and_fractional_expected_demand)",
+          "result": "ok"
+        },
+        {
+          "name": "test_future_values_cannot_change_earlier_predictions (test_forecasting.Baselines.test_future_values_cannot_change_earlier_predictions)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_or_insufficient_data_is_not_a_zero_forecast (test_forecasting.Baselines.test_invalid_or_insufficient_data_is_not_a_zero_forecast)",
+          "result": "ok"
+        },
+        {
+          "name": "test_overlapping_multistep_metric_oracle (test_forecasting.Baselines.test_overlapping_multistep_metric_oracle)",
+          "result": "ok"
+        },
+        {
+          "name": "test_weekly_golden_scores_and_common_origins (test_forecasting.Baselines.test_weekly_golden_scores_and_common_origins)",
+          "result": "ok"
+        },
+        {
+          "name": "test_zero_and_intermittent_observations (test_forecasting.Baselines.test_zero_and_intermittent_observations)",
+          "result": "ok"
+        },
+        {
+          "name": "test_baselines_and_large_quantities_remain_exact (test_intermittent.IntermittentOracleTests.test_baselines_and_large_quantities_remain_exact)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cumulative_quantile_ranks_sign_and_only_completed_labels (test_intermittent.IntermittentOracleTests.test_cumulative_quantile_ranks_sign_and_only_completed_labels)",
+          "result": "ok"
+        },
+        {
+          "name": "test_fractional_calibration_ceiling_and_insufficient_samples (test_intermittent.IntermittentOracleTests.test_fractional_calibration_ceiling_and_insufficient_samples)",
+          "result": "ok"
+        },
+        {
+          "name": "test_gap_updates_sba_factor_and_trailing_zero_tsb_decay (test_intermittent.IntermittentOracleTests.test_gap_updates_sba_factor_and_trailing_zero_tsb_decay)",
+          "result": "ok"
+        },
+        {
+          "name": "test_initialization_leading_zeros_and_all_zero (test_intermittent.IntermittentOracleTests.test_initialization_leading_zeros_and_all_zero)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_parameters_and_unsafe_calibration_are_rejected (test_intermittent.IntermittentOracleTests.test_invalid_parameters_and_unsafe_calibration_are_rejected)",
+          "result": "ok"
+        },
+        {
+          "name": "test_wrapper_nonzero_pinball_no_future_or_hidden_supplier_leak (test_intermittent.IntermittentOracleTests.test_wrapper_nonzero_pinball_no_future_or_hidden_supplier_leak)",
+          "result": "ok"
+        },
+        {
+          "name": "test_wrapper_preserves_event_timing_costs_and_conservation (test_intermittent.IntermittentOracleTests.test_wrapper_preserves_event_timing_costs_and_conservation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_wrapper_rounded_protection_pinball_and_completed_dynamic_calibration (test_intermittent.IntermittentOracleTests.test_wrapper_rounded_protection_pinball_and_completed_dynamic_calibration)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_repricing_reuses_physical_outcomes_without_mutation (test_intermittent_benchmark.IntermittentBenchmarkTests.test_exact_repricing_reuses_physical_outcomes_without_mutation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_reference_absence_and_holdout_service_cannot_change_selection (test_intermittent_benchmark.IntermittentBenchmarkTests.test_reference_absence_and_holdout_service_cannot_change_selection)",
+          "result": "ok"
+        },
+        {
+          "name": "test_retained_protocol_provenance_completed_calibration_and_terminals (test_intermittent_benchmark.IntermittentBenchmarkTests.test_retained_protocol_provenance_completed_calibration_and_terminals)",
+          "result": "ok"
+        },
+        {
+          "name": "test_atomic_failure_and_append_only_role (test_planning_runs.PlanningRuns.test_atomic_failure_and_append_only_role)",
+          "result": "ok"
+        },
+        {
+          "name": "test_common_exclusion_zero_wape_and_no_selection (test_planning_runs.PlanningRuns.test_common_exclusion_zero_wape_and_no_selection)",
+          "result": "ok"
+        },
+        {
+          "name": "test_forecast_exact_history_and_blocked_result (test_planning_runs.PlanningRuns.test_forecast_exact_history_and_blocked_result)",
+          "result": "ok"
+        },
+        {
+          "name": "test_late_revision_replayed_at_each_origin_not_present_day (test_planning_runs.PlanningRuns.test_late_revision_replayed_at_each_origin_not_present_day)",
+          "result": "ok"
+        },
+        {
+          "name": "test_selection_truth_cannot_use_revisions_learned_during_holdout (test_planning_runs.PlanningRuns.test_selection_truth_cannot_use_revisions_learned_during_holdout)",
+          "result": "ok"
+        },
+        {
+          "name": "test_shared_origins_scores_and_temporal_holdout (test_planning_runs.PlanningRuns.test_shared_origins_scores_and_temporal_holdout)",
+          "result": "ok"
+        },
+        {
+          "name": "test_completeness_policy_and_time_gates_have_no_recommendation (test_replenishment.Replenishment.test_completeness_policy_and_time_gates_have_no_recommendation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_duplicate_supply_and_stockout_block_while_preserving_history (test_replenishment.Replenishment.test_duplicate_supply_and_stockout_block_while_preserving_history)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_manual_projection_order_and_immutable_inputs (test_replenishment.Replenishment.test_exact_manual_projection_order_and_immutable_inputs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_fraction_ceiling_zero_moq_and_exact_big_pieces (test_replenishment.Replenishment.test_fraction_ceiling_zero_moq_and_exact_big_pieces)",
+          "result": "ok"
+        },
+        {
+          "name": "test_late_inbound_does_not_mask_prefix_shortage (test_replenishment.Replenishment.test_late_inbound_does_not_mask_prefix_shortage)",
+          "result": "ok"
+        },
+        {
+          "name": "test_stage1_run_coverage_freshness_and_revalidation (test_replenishment.Replenishment.test_stage1_run_coverage_freshness_and_revalidation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_synthetic_demo_downstream_benchmark_and_both_supply_outcomes (test_replenishment.Replenishment.test_synthetic_demo_downstream_benchmark_and_both_supply_outcomes)",
+          "result": "ok"
+        }
+      ],
+      "tests": 104
+    },
+    "final": {
+      "elapsed_seconds": 3.621,
+      "errors": 0,
+      "executed_on_branch": "main",
+      "failures": 0,
+      "result": "OK",
+      "revision": "4f3d7c8a4365e56722221b8d4f98f534eee324ed",
+      "skips": 0,
+      "test_results": [
+        {
+          "name": "test_cli_pass_dirty_markdown_and_configuration_error (test_acceptance.Acceptance.test_cli_pass_dirty_markdown_and_configuration_error)",
+          "result": "ok"
+        },
+        {
+          "name": "test_coverage_and_unexpected_snapshot_keys (test_acceptance.Acceptance.test_coverage_and_unexpected_snapshot_keys)",
+          "result": "ok"
+        },
+        {
+          "name": "test_each_manifest_incomplete_and_count_mismatch (test_acceptance.Acceptance.test_each_manifest_incomplete_and_count_mismatch)",
+          "result": "ok"
+        },
+        {
+          "name": "test_each_missing_manifest (test_acceptance.Acceptance.test_each_missing_manifest)",
+          "result": "ok"
+        },
+        {
+          "name": "test_empty_coverage_cannot_pass (test_acceptance.Acceptance.test_empty_coverage_cannot_pass)",
+          "result": "ok"
+        },
+        {
+          "name": "test_every_transfer_condition (test_acceptance.Acceptance.test_every_transfer_condition)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_quantity_evidence (test_acceptance.Acceptance.test_exact_quantity_evidence)",
+          "result": "ok"
+        },
+        {
+          "name": "test_identical_and_conflicting_duplicates_block_quantity (test_acceptance.Acceptance.test_identical_and_conflicting_duplicates_block_quantity)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_transfer_blocks_both_buckets (test_acceptance.Acceptance.test_invalid_transfer_blocks_both_buckets)",
+          "result": "ok"
+        },
+        {
+          "name": "test_manifest_cutoff_watermark_and_snapshot_row_metadata (test_acceptance.Acceptance.test_manifest_cutoff_watermark_and_snapshot_row_metadata)",
+          "result": "ok"
+        },
+        {
+          "name": "test_manual_golden_clean_and_temporal_controls (test_acceptance.Acceptance.test_manual_golden_clean_and_temporal_controls)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_and_duplicate_snapshots (test_acceptance.Acceptance.test_missing_and_duplicate_snapshots)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_duplicate_and_wrong_baseline_openings (test_acceptance.Acceptance.test_missing_duplicate_and_wrong_baseline_openings)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_transfer_leg_and_incomplete_extraction (test_acceptance.Acceptance.test_missing_transfer_leg_and_incomplete_extraction)",
+          "result": "ok"
+        },
+        {
+          "name": "test_named_scenarios (test_acceptance.Acceptance.test_named_scenarios)",
+          "result": "ok"
+        },
+        {
+          "name": "test_persistence_failure_rolls_back_the_entire_run (test_acceptance.Acceptance.test_persistence_failure_rolls_back_the_entire_run)",
+          "result": "ok"
+        },
+        {
+          "name": "test_repeat_run_history_and_operational_inputs_unchanged (test_acceptance.Acceptance.test_repeat_run_history_and_operational_inputs_unchanged)",
+          "result": "ok"
+        },
+        {
+          "name": "test_runtime_role_cannot_mutate_operational_inputs (test_acceptance.Acceptance.test_runtime_role_cannot_mutate_operational_inputs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_staleness_boundary_and_future_snapshot (test_acceptance.Acceptance.test_staleness_boundary_and_future_snapshot)",
+          "result": "ok"
+        },
+        {
+          "name": "test_uncovered_movement_cannot_escape_reconciliation (test_acceptance.Acceptance.test_uncovered_movement_cannot_escape_reconciliation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_unknown_opening_and_snapshot_references (test_acceptance.Acceptance.test_unknown_opening_and_snapshot_references)",
+          "result": "ok"
+        },
+        {
+          "name": "test_unknown_reference_blocks_affected_bucket_only (test_acceptance.Acceptance.test_unknown_reference_blocks_affected_bucket_only)",
+          "result": "ok"
+        },
+        {
+          "name": "test_whole_piece_arithmetic_above_float_precision (test_acceptance.Acceptance.test_whole_piece_arithmetic_above_float_precision)",
+          "result": "ok"
+        },
+        {
+          "name": "test_benchmark_contradictions_and_inexact_numbers_are_rejected (test_copilot.Copilot.test_benchmark_contradictions_and_inexact_numbers_are_rejected)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cli_answers_refusals_errors_and_safe_markdown (test_copilot.Copilot.test_cli_answers_refusals_errors_and_safe_markdown)",
+          "result": "ok"
+        },
+        {
+          "name": "test_failed_run_blocks_readiness_without_bucket_promotion (test_copilot.Copilot.test_failed_run_blocks_readiness_without_bucket_promotion)",
+          "result": "ok"
+        },
+        {
+          "name": "test_future_cutoff_without_metadata_failure_is_contradictory (test_copilot.Copilot.test_future_cutoff_without_metadata_failure_is_contradictory)",
+          "result": "ok"
+        },
+        {
+          "name": "test_historic_clean_and_failed_reports_keep_exact_citations (test_copilot.Copilot.test_historic_clean_and_failed_reports_keep_exact_citations)",
+          "result": "ok"
+        },
+        {
+          "name": "test_incomplete_check_status_preserves_not_assessable (test_copilot.Copilot.test_incomplete_check_status_preserves_not_assessable)",
+          "result": "ok"
+        },
+        {
+          "name": "test_manual_benchmark_scores_and_rationals (test_copilot.Copilot.test_manual_benchmark_scores_and_rationals)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_checks_or_inconsistent_data_never_become_a_pass (test_copilot.Copilot.test_missing_checks_or_inconsistent_data_never_become_a_pass)",
+          "result": "ok"
+        },
+        {
+          "name": "test_missing_evidence_and_unknown_findings_are_unavailable (test_copilot.Copilot.test_missing_evidence_and_unknown_findings_are_unavailable)",
+          "result": "ok"
+        },
+        {
+          "name": "test_nonquantity_findings_do_not_get_repair_quantities (test_copilot.Copilot.test_nonquantity_findings_do_not_get_repair_quantities)",
+          "result": "ok"
+        },
+        {
+          "name": "test_quantity_explanation_and_large_pieces (test_copilot.Copilot.test_quantity_explanation_and_large_pieces)",
+          "result": "ok"
+        },
+        {
+          "name": "test_readiness_freshness_and_future_boundaries (test_copilot.Copilot.test_readiness_freshness_and_future_boundaries)",
+          "result": "ok"
+        },
+        {
+          "name": "test_untrusted_source_strings_are_only_data (test_copilot.Copilot.test_untrusted_source_strings_are_only_data)",
+          "result": "ok"
+        },
+        {
+          "name": "test_zero_demand_wape_is_null (test_copilot.Copilot.test_zero_demand_wape_is_null)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_evidence_and_independent_negative_controls (test_copilot_benchmark.BenchmarkGrader.test_exact_evidence_and_independent_negative_controls)",
+          "result": "ok"
+        },
+        {
+          "name": "test_frozen_holdout_resolves_only_explicit_selectors (test_copilot_benchmark.BenchmarkGrader.test_frozen_holdout_resolves_only_explicit_selectors)",
+          "result": "ok"
+        },
+        {
+          "name": "test_unknown_usage_is_not_a_zero_or_success (test_copilot_benchmark.BenchmarkGrader.test_unknown_usage_is_not_a_zero_or_success)",
+          "result": "ok"
+        },
+        {
+          "name": "test_absent_run_invalid_id_role_and_nonidle_connection (test_copilot_db.CopilotDatabase.test_absent_run_invalid_id_role_and_nonidle_connection)",
+          "result": "ok"
+        },
+        {
+          "name": "test_engine_future_cutoff_is_explainable_failed_evidence (test_copilot_db.CopilotDatabase.test_engine_future_cutoff_is_explainable_failed_evidence)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_persisted_report_readonly_snapshot_and_no_new_history (test_copilot_db.CopilotDatabase.test_exact_persisted_report_readonly_snapshot_and_no_new_history)",
+          "result": "ok"
+        },
+        {
+          "name": "test_bounds_and_sol_is_explicit (test_copilot_language.Language.test_bounds_and_sol_is_explicit)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cli_refusal_avoids_retrieval_and_model_readiness_stays_blocked (test_copilot_language.Language.test_cli_refusal_avoids_retrieval_and_model_readiness_stays_blocked)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_phrases_and_explicit_offline_never_use_keys_or_network (test_copilot_language.Language.test_exact_phrases_and_explicit_offline_never_use_keys_or_network)",
+          "result": "ok"
+        },
+        {
+          "name": "test_finding_classification_is_independent_of_deterministic_selector (test_copilot_language.Language.test_finding_classification_is_independent_of_deterministic_selector)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_model_output_cannot_add_quantities_or_new_intents (test_copilot_language.Language.test_invalid_model_output_cannot_add_quantities_or_new_intents)",
+          "result": "ok"
+        },
+        {
+          "name": "test_lowercase_env_key_and_environment_precedence_without_execution (test_copilot_language.Language.test_lowercase_env_key_and_environment_precedence_without_execution)",
+          "result": "ok"
+        },
+        {
+          "name": "test_opt_in_measurements_keep_missing_usage_unknown_and_capture_failed_calls (test_copilot_language.Language.test_opt_in_measurements_keep_missing_usage_unknown_and_capture_failed_calls)",
+          "result": "ok"
+        },
+        {
+          "name": "test_refusal_and_redirects_cannot_change_policy_or_send_keys_elsewhere (test_copilot_language.Language.test_refusal_and_redirects_cannot_change_policy_or_send_keys_elsewhere)",
+          "result": "ok"
+        },
+        {
+          "name": "test_timeout_and_service_errors_fail_closed_without_diagnostics_leaks (test_copilot_language.Language.test_timeout_and_service_errors_fail_closed_without_diagnostics_leaks)",
+          "result": "ok"
+        },
+        {
+          "name": "test_valid_request_has_no_evidence_tools_or_storage_and_defaults_to_luna (test_copilot_language.Language.test_valid_request_has_no_evidence_tools_or_storage_and_defaults_to_luna)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cli_planning_reads_persisted_run_and_requires_explicit_intent (test_copilot_planning.CopilotPlanning.test_cli_planning_reads_persisted_run_and_requires_explicit_intent)",
+          "result": "ok"
+        },
+        {
+          "name": "test_corrupt_orders_float_pieces_and_evidence_limits (test_copilot_planning.CopilotPlanning.test_corrupt_orders_float_pieces_and_evidence_limits)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_proposal_blocked_inputs_and_no_new_history (test_copilot_planning.CopilotPlanning.test_exact_proposal_blocked_inputs_and_no_new_history)",
+          "result": "ok"
+        },
+        {
+          "name": "test_shared_horizons_holdout_scores_and_contradiction (test_copilot_planning.CopilotPlanning.test_shared_horizons_holdout_scores_and_contradiction)",
+          "result": "ok"
+        },
+        {
+          "name": "test_clean_zero_rates_null_and_empty_shelf_not_shortage (test_decision.DecisionOracleTests.test_clean_zero_rates_null_and_empty_shelf_not_shortage)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cycle_denominator_excludes_phase_prefix_and_incomplete_suffix (test_decision.DecisionOracleTests.test_cycle_denominator_excludes_phase_prefix_and_incomplete_suffix)",
+          "result": "ok"
+        },
+        {
+          "name": "test_delayed_pipeline_prevents_repeat_orders_and_counts_zero_slots (test_decision.DecisionOracleTests.test_delayed_pipeline_prevents_repeat_orders_and_counts_zero_slots)",
+          "result": "ok"
+        },
+        {
+          "name": "test_forecast_daily_and_cumulative_scores_use_complete_origins (test_decision.DecisionOracleTests.test_forecast_daily_and_cumulative_scores_use_complete_origins)",
+          "result": "ok"
+        },
+        {
+          "name": "test_full_event_sequence_fifo_and_rational_costs (test_decision.DecisionOracleTests.test_full_event_sequence_fifo_and_rational_costs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_future_observations_and_hidden_trace_are_not_policy_inputs (test_decision.DecisionOracleTests.test_future_observations_and_hidden_trace_are_not_policy_inputs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_trust_boundary_inputs_are_rejected (test_decision.DecisionOracleTests.test_invalid_trust_boundary_inputs_are_rejected)",
+          "result": "ok"
+        },
+        {
+          "name": "test_lead_time_shortage_and_terminal_holding_are_not_erased (test_decision.DecisionOracleTests.test_lead_time_shortage_and_terminal_holding_are_not_erased)",
+          "result": "ok"
+        },
+        {
+          "name": "test_pack_moq_rounding_and_fixed_runoff_no_forecast (test_decision.DecisionOracleTests.test_pack_moq_rounding_and_fixed_runoff_no_forecast)",
+          "result": "ok"
+        },
+        {
+          "name": "test_prior_identity_tie_order_and_no_early_fulfillment (test_decision.DecisionOracleTests.test_prior_identity_tie_order_and_no_early_fulfillment)",
+          "result": "ok"
+        },
+        {
+          "name": "test_promotion_exact_cost_boundary_and_service_regression (test_decision_benchmark.DecisionBenchmarkTests.test_promotion_exact_cost_boundary_and_service_regression)",
+          "result": "ok"
+        },
+        {
+          "name": "test_retained_artifact_inputs_hashes_and_settled_obligations (test_decision_benchmark.DecisionBenchmarkTests.test_retained_artifact_inputs_hashes_and_settled_obligations)",
+          "result": "ok"
+        },
+        {
+          "name": "test_selection_floors_ties_and_holdout_cannot_reselect (test_decision_benchmark.DecisionBenchmarkTests.test_selection_floors_ties_and_holdout_cannot_reselect)",
+          "result": "ok"
+        },
+        {
+          "name": "test_business_calendar_dst_and_unfinished_day (test_demand.Demand.test_business_calendar_dst_and_unfinished_day)",
+          "result": "ok"
+        },
+        {
+          "name": "test_complete_zero_missing_and_constrained_days (test_demand.Demand.test_complete_zero_missing_and_constrained_days)",
+          "result": "ok"
+        },
+        {
+          "name": "test_deterministic_180_day_groups_and_input_permissions (test_demand.Demand.test_deterministic_180_day_groups_and_input_permissions)",
+          "result": "ok"
+        },
+        {
+          "name": "test_duplicate_identity_changed_key_and_manifest_do_not_pass (test_demand.Demand.test_duplicate_identity_changed_key_and_manifest_do_not_pass)",
+          "result": "ok"
+        },
+        {
+          "name": "test_late_correction_cancellation_and_two_knowledge_clocks (test_demand.Demand.test_late_correction_cancellation_and_two_knowledge_clocks)",
+          "result": "ok"
+        },
+        {
+          "name": "test_forecasts_and_fractional_expected_demand (test_forecasting.Baselines.test_forecasts_and_fractional_expected_demand)",
+          "result": "ok"
+        },
+        {
+          "name": "test_future_values_cannot_change_earlier_predictions (test_forecasting.Baselines.test_future_values_cannot_change_earlier_predictions)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_or_insufficient_data_is_not_a_zero_forecast (test_forecasting.Baselines.test_invalid_or_insufficient_data_is_not_a_zero_forecast)",
+          "result": "ok"
+        },
+        {
+          "name": "test_overlapping_multistep_metric_oracle (test_forecasting.Baselines.test_overlapping_multistep_metric_oracle)",
+          "result": "ok"
+        },
+        {
+          "name": "test_weekly_golden_scores_and_common_origins (test_forecasting.Baselines.test_weekly_golden_scores_and_common_origins)",
+          "result": "ok"
+        },
+        {
+          "name": "test_zero_and_intermittent_observations (test_forecasting.Baselines.test_zero_and_intermittent_observations)",
+          "result": "ok"
+        },
+        {
+          "name": "test_baselines_and_large_quantities_remain_exact (test_intermittent.IntermittentOracleTests.test_baselines_and_large_quantities_remain_exact)",
+          "result": "ok"
+        },
+        {
+          "name": "test_cumulative_quantile_ranks_sign_and_only_completed_labels (test_intermittent.IntermittentOracleTests.test_cumulative_quantile_ranks_sign_and_only_completed_labels)",
+          "result": "ok"
+        },
+        {
+          "name": "test_fractional_calibration_ceiling_and_insufficient_samples (test_intermittent.IntermittentOracleTests.test_fractional_calibration_ceiling_and_insufficient_samples)",
+          "result": "ok"
+        },
+        {
+          "name": "test_gap_updates_sba_factor_and_trailing_zero_tsb_decay (test_intermittent.IntermittentOracleTests.test_gap_updates_sba_factor_and_trailing_zero_tsb_decay)",
+          "result": "ok"
+        },
+        {
+          "name": "test_initialization_leading_zeros_and_all_zero (test_intermittent.IntermittentOracleTests.test_initialization_leading_zeros_and_all_zero)",
+          "result": "ok"
+        },
+        {
+          "name": "test_invalid_parameters_and_unsafe_calibration_are_rejected (test_intermittent.IntermittentOracleTests.test_invalid_parameters_and_unsafe_calibration_are_rejected)",
+          "result": "ok"
+        },
+        {
+          "name": "test_wrapper_nonzero_pinball_no_future_or_hidden_supplier_leak (test_intermittent.IntermittentOracleTests.test_wrapper_nonzero_pinball_no_future_or_hidden_supplier_leak)",
+          "result": "ok"
+        },
+        {
+          "name": "test_wrapper_preserves_event_timing_costs_and_conservation (test_intermittent.IntermittentOracleTests.test_wrapper_preserves_event_timing_costs_and_conservation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_wrapper_rounded_protection_pinball_and_completed_dynamic_calibration (test_intermittent.IntermittentOracleTests.test_wrapper_rounded_protection_pinball_and_completed_dynamic_calibration)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_repricing_reuses_physical_outcomes_without_mutation (test_intermittent_benchmark.IntermittentBenchmarkTests.test_exact_repricing_reuses_physical_outcomes_without_mutation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_reference_absence_and_holdout_service_cannot_change_selection (test_intermittent_benchmark.IntermittentBenchmarkTests.test_reference_absence_and_holdout_service_cannot_change_selection)",
+          "result": "ok"
+        },
+        {
+          "name": "test_retained_protocol_provenance_completed_calibration_and_terminals (test_intermittent_benchmark.IntermittentBenchmarkTests.test_retained_protocol_provenance_completed_calibration_and_terminals)",
+          "result": "ok"
+        },
+        {
+          "name": "test_atomic_failure_and_append_only_role (test_planning_runs.PlanningRuns.test_atomic_failure_and_append_only_role)",
+          "result": "ok"
+        },
+        {
+          "name": "test_common_exclusion_zero_wape_and_no_selection (test_planning_runs.PlanningRuns.test_common_exclusion_zero_wape_and_no_selection)",
+          "result": "ok"
+        },
+        {
+          "name": "test_forecast_exact_history_and_blocked_result (test_planning_runs.PlanningRuns.test_forecast_exact_history_and_blocked_result)",
+          "result": "ok"
+        },
+        {
+          "name": "test_late_revision_replayed_at_each_origin_not_present_day (test_planning_runs.PlanningRuns.test_late_revision_replayed_at_each_origin_not_present_day)",
+          "result": "ok"
+        },
+        {
+          "name": "test_selection_truth_cannot_use_revisions_learned_during_holdout (test_planning_runs.PlanningRuns.test_selection_truth_cannot_use_revisions_learned_during_holdout)",
+          "result": "ok"
+        },
+        {
+          "name": "test_shared_origins_scores_and_temporal_holdout (test_planning_runs.PlanningRuns.test_shared_origins_scores_and_temporal_holdout)",
+          "result": "ok"
+        },
+        {
+          "name": "test_completeness_policy_and_time_gates_have_no_recommendation (test_replenishment.Replenishment.test_completeness_policy_and_time_gates_have_no_recommendation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_duplicate_supply_and_stockout_block_while_preserving_history (test_replenishment.Replenishment.test_duplicate_supply_and_stockout_block_while_preserving_history)",
+          "result": "ok"
+        },
+        {
+          "name": "test_exact_manual_projection_order_and_immutable_inputs (test_replenishment.Replenishment.test_exact_manual_projection_order_and_immutable_inputs)",
+          "result": "ok"
+        },
+        {
+          "name": "test_fraction_ceiling_zero_moq_and_exact_big_pieces (test_replenishment.Replenishment.test_fraction_ceiling_zero_moq_and_exact_big_pieces)",
+          "result": "ok"
+        },
+        {
+          "name": "test_late_inbound_does_not_mask_prefix_shortage (test_replenishment.Replenishment.test_late_inbound_does_not_mask_prefix_shortage)",
+          "result": "ok"
+        },
+        {
+          "name": "test_stage1_run_coverage_freshness_and_revalidation (test_replenishment.Replenishment.test_stage1_run_coverage_freshness_and_revalidation)",
+          "result": "ok"
+        },
+        {
+          "name": "test_synthetic_demo_downstream_benchmark_and_both_supply_outcomes (test_replenishment.Replenishment.test_synthetic_demo_downstream_benchmark_and_both_supply_outcomes)",
+          "result": "ok"
+        }
+      ],
+      "tests": 106
+    }
+  },
+  "source_sha256": {
+    ".github/workflows/ci.yml": "e0bb5ce410d7833516f069381dff75a2f233dc7bce8f69657a750d6514a80d4c",
+    "pyproject.toml": "833dd1c565148f4550f6d7cd35a2eb04c8abccbb603f22f342eb55dbd6a90f27",
+    "scripts/copilot_benchmark.py": "3f318c56179ae6cd7021ad83de0bdac00642e5a4f8da9c8c369b9210a8286905",
+    "scripts/decision_benchmark.py": "0d3a34f2b4633267855282bf36847ffb3e7e6f71a39c84cd68700db6d09a16df",
+    "scripts/intermittent_benchmark.py": "d6bcf44fe674159e3035a278d6d5eaa739e9b14b677f3dc8d2f060f3c7cb7e5b",
+    "scripts/review_benchmark.py": "a3fed00585fbdc8b8573ee79aec9e68a98862084b1bc72d9c6c7da83ea7ee140",
+    "sql/checks.sql": "a60fd73374308f32a53b727eefe8cc7d823cb4d1cd59cbe94fc891c77dbeb301",
+    "sql/planning_schema.sql": "09dbfb71dfe557dbe75bb67431f5a35e175a36894f2363439f799e9e3fdbc7b8",
+    "sql/schema.sql": "1bd4a6ae01a8dfa766742c2c690b6b096ab5aed391f21a845fd2db3de43b831c",
+    "sql/views.sql": "1fc4a143d660aff8573556fbf6562c2290e4777126e90ed1ab7fd4d9d3bbaf6f",
+    "src/inventory_intelligence/__init__.py": "84f8634c408d0bed87106b557cab4ca4072f306689d3c0f436b744d40b74fe30",
+    "src/inventory_intelligence/__main__.py": "45cef68b8d15007929370ec2f8ab5a8a707ebebad151753e20598a5da7e773aa",
+    "src/inventory_intelligence/copilot.py": "7d777b10dead6acb2f006f7b9ce632ac7d5afbb6b41513943b50114b08fc4b1c",
+    "src/inventory_intelligence/copilot_language.py": "4307bc714523f2fcc88af7da5e5d7b89d604be01c36e56a68569e7b43350f01a",
+    "src/inventory_intelligence/copilot_planning.py": "5d3981402352c37c89cf8cbdd138bc98258d4b7aedd51fbd120f387bae1a68b4",
+    "src/inventory_intelligence/decision.py": "f68d13d43b74c1233d94e2c67cfc7a709298c14c8b5a4b5a349c65bc5d1e57db",
+    "src/inventory_intelligence/demand.py": "2a4b6c0320731317a7401f17f355091444a37e8602085af2a6f86057f2c38f72",
+    "src/inventory_intelligence/forecasting.py": "5a0e6f1377e4327fdf0f61d7525eccdac4c434a10a95beff30adeaffbfd9aee7",
+    "src/inventory_intelligence/intermittent.py": "f6570334af2e8270857b191aac399f810e7c70a0ddf800c4311635185a06b67b",
+    "src/inventory_intelligence/planning_runs.py": "bf26dc7eeff59cb9956d47e916daae46a9c5823b89a9fcdf8afa574ab3197d04",
+    "src/inventory_intelligence/reliability.py": "4cd0d0998b2f199d3abf95bed78c5fe72edf0478b5408a99513d9f999a28e3db",
+    "src/inventory_intelligence/replenishment.py": "a0c4b38cbba79296ac1787fb44a23dd2e69e2c63916a109fcdd4664c14bf3bda",
+    "src/inventory_intelligence/selfcheck.py": "fbd5093c0de201ca553fc0eaf4736c250fcca6ef50ab23e7c17ac0daa9a88db6",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/bootstrap.py": "248f35f1e30c29719fb3ecc77665701ce1a7ee14daf3f9aeb18dd25f8e1a3d76",
+    "tests/golden.py": "abcbe4f4589581418b63c1a30dbba5db73a483f6c06f14193b6f661be3a81246",
+    "tests/planning_oracle.py": "a1c337c581439ddc1f4945a6ab87423f550340271cbe50d7f289da3c5014c570",
+    "tests/test_acceptance.py": "171e2da701fe05de3cc89482073abe166f259b8c4249f948b5075df65db2f2ed",
+    "tests/test_copilot.py": "4ad9b1c835c35b4366e751e619c029fba8befbe50cbaccb51b14c92139a85822",
+    "tests/test_copilot_benchmark.py": "cbe28bd65d9806145ee9cce439bbc7b98d593e093e6c5c6dcb624d83c737d681",
+    "tests/test_copilot_db.py": "8a029342888668296c80df6eb32116abd1dc43b80d3046726504e2782b518a54",
+    "tests/test_copilot_language.py": "7fd6ece4600ad5f386a1485c4956e0661062f15ac7b4e3df7ba6a2e0197e48e3",
+    "tests/test_copilot_planning.py": "4d4e70bbd44f82bf9c36604ff9df7a1725b0841b5e03a361f8ae06af589ae8ff",
+    "tests/test_decision.py": "773bc2bb6d2d1f09904531ec761365da6f9977966f5118ce71fde7835e8c6285",
+    "tests/test_decision_benchmark.py": "0172b7cc24379f382afd64362cb15af7df3c5edbf40d04821b1e438532d491d9",
+    "tests/test_demand.py": "540be6a8d915811d10474f9945a4352e8b47b9847f010c662cc9be693339cc52",
+    "tests/test_forecasting.py": "6275f60a6f833aa921e4cdb7670b2c1ff2f81ecb03a52cb7e789a09ea7cd4bf2",
+    "tests/test_intermittent.py": "c7bf2c6417331c28b98b976f724cb11eac723be52820614912016d7f81098621",
+    "tests/test_intermittent_benchmark.py": "1b31ebcd32ab7b08a0693addec0f36338690e2030445fa6478b16ab426428bcb",
+    "tests/test_planning_runs.py": "7d488a17c09b31d792ea93ba844725fddc7a566bbf7d13539d6579b14bb469f8",
+    "tests/test_replenishment.py": "cc6f20793568dbcd298475d767cda34d7b1f163aabfdb4cc5bc436ce423636ee"
+  }
+}

@@ -1,5 +1,13 @@
 # Independent milestone 1 validation
 
+Latest stabilization (2026-10-02) starts from integrated main `43a952d`, including
+decision/intermittent research and the updated integration workflow. Fresh local
+PostgreSQL 17.6 / Python 3.12.14 acceptance passed 104 tests there and 106 on
+locally integrated main at `4f3d7c8`, with zero failures/errors/skips and unchanged
+independent oracles. [Complete evidence](review/stabilization-acceptance.json) and
+[separate live routing/fidelity results](STAGE3_STABILIZATION.md). Earlier CI
+revisions/counts below are historical; they do not establish current push CI.
+
 Current combined status (2026-10-02): `main` at `ce8ab0d` integrates all three
 bounded stages. [Main CI run 37085401000](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
 passed `Repository hygiene` and `PostgreSQL acceptance`; the log records

@@ -8,6 +8,11 @@ All three bounded synthetic stages are integrated through PRs 7/8; PR 9
 refreshes their research and documentation. The
 [prior main acceptance run](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
 passed all 79 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
+Decision and intermittent research are also integrated through PRs 10/11.
+The latest [stabilization acceptance](docs/STAGE3_STABILIZATION.md) passes 106
+local combined tests and 32/32 fresh live routing cases, with evidence and
+numeric fidelity reported separately. [Current checkpoint](docs/AUTOMATION_PROGRESS.md)
+marks consumed evaluation sets and experimental boundaries.
 Offline research evaluates forecast-plus-policy cost and service in a
 separate offline backlog simulator. [Decision contract](docs/CONTRACT_DECISION_V1.md),
 [benchmark and results](docs/DECISION_BENCHMARK.md),
