@@ -96,6 +96,10 @@ The [fresh retention study](docs/SAFETY_RETENTION_RESULTS.md) compares expanding
 recent and decay-weighted safety with identical point forecasts. Both challengers
 can shrink safety to zero while leaving large owned inventory; neither passes
 the cost-and-service gate across its 21 path labels.
+The [supply and intervention study](docs/SUPPLY_SENSITIVITY_RESULTS.md) pairs
+lead2/5/10 and supplier variability with stock/review/pack controls over equal
+settlement windows. Signed effects explain startup versus later failures while
+retaining interactions; faster reviews and more stock are not universal fixes.
 
 ## Run the PostgreSQL core
 

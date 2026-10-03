@@ -34,11 +34,14 @@ do not establish unconstrained demand or historical inventory availability.
    [Measured result](FRESH_WARMUP_RESULTS.md): 360 pairs/720 arms, 18 distinct
    generated demand paths and 72 supplier paths; 44 focused tests pass. Warmup
    improves fill in 70 pairs, regresses it in 35, and lowers full cost in two.
-2. **Service feasibility attribution — next ready.** Preserve the independent
+2. **Service feasibility attribution — implemented as bounded interventions.** Preserve the independent
    earliest-receipt bound. Compare initial stock, lead, supplier delay, review
    calendar and packs/MOQ using predeclared interventions. Report signed paired
    effects and interaction/residual, rather than inventing an additive causal
    partition. Initial feasibility and subsequent policy misses remain distinct.
+   [Supply/intervention results](SUPPLY_SENSITIVITY_RESULTS.md) retain startup
+   bounds and signed stock/review/pack/lead/supplier effects; no fabricated
+   additive causal shortage partition.
 3. **Nominal safety versus achieved service — initial study measured.** Compare
    fixed zero safety and empirical 90%/95% targets with actual fill and complete
    cycle service, cumulative target coverage and pinball loss. Report all sample
@@ -54,11 +57,14 @@ do not establish unconstrained demand or historical inventory availability.
    17 distinct demand paths, recent0/21 and decay0/21 descriptive dual-reference
    passes. Final safety shrinks to zero on permanent cessation, but owned stock
    remains and pause-recovery service can regress. Eight new oracles pass.
-5. **Lead-time and supplier-reliability study — next ready.** Lead 2/5/10 days,
+5. **Lead-time and supplier-reliability study — implemented and measured.** Lead 2/5/10 days,
    low/medium/high hidden variability; use absolute calendar supplier traces and
    a common settlement end. Hold forecast/policy fixed while changing supply,
    and supply fixed while changing forecast. Report family/path results and
    interactions; cost repricings are not independent replications.
+   351 pairs/702 logical arms over seven distinct demand paths; expected supplier
+   delay held at one day while variability changes. All settlement/cost checks
+   pass, and effects remain path-dependent. Five new oracles pass.
 6. **Forecast uncertainty — starts with target coverage/pinball in Wave 1.**
    Extend to cumulative protection-period quantiles and empirical coverage on
    fresh labels if the initial gaps warrant it. No new dependency required.
@@ -141,8 +147,9 @@ do not establish unconstrained demand or historical inventory availability.
 
 The initial package implements Wave 1 item 1 plus the first measured part of
 items 3/6/11. Evidence is local until the reviewed task branch is published.
-Retention challengers are now independently measured with a negative promotion
-gate. Next: lead/supplier interventions and attribution; adapter validation
+Retention challengers and supply/intervention attribution are now independently
+measured, retaining negative results and causal limits. Next: public observed-sales
+adapter/benchmark and the explicit small policy comparison; adapter validation
 can proceed independently if simulation becomes blocked. No listed direction is
 discarded merely because it is outside the current package. Large expansions
 remain concrete gated options, not promised production capabilities.
