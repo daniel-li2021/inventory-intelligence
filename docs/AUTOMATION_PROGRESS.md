@@ -3,6 +3,37 @@
 Updated 2026-10-02. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
+## Continued plan — intermittent/safety research
+
+The user authorized integration of PRs 10 and 11 on 2026-10-02. PR 10 merged at
+`33ced649a7a1271e1272d0138e6b7ffc9b112f67`, verified on remote main after resolving
+README, checkpoint and research-note conflicts with PR 9. The continuation in
+[PR 11](https://github.com/daniel-li2021/inventory-intelligence/pull/11) incorporates
+that merged ancestry and targets main. It freezes
+[CONTRACT_INTERMITTENT_V1.md](CONTRACT_INTERMITTENT_V1.md), adds exact offline
+Croston/SBA/TSB with cumulative-error empirical safety, and evaluates fresh
+seeds 101/211/307. [Protocol/results](INTERMITTENT_BENCHMARK.md) retain all 5,544
+candidate/split results across 84 cells and 33 configurations; 2,376 unique
+physical simulations reuse the rest. All terminal obligations settle.
+
+Selected new methods pass ten cell-wise comparisons against the selection-chosen
+baseline; only four overall selections pass both reference comparisons. These
+are synthetic, correlated comparisons, not a global promotion. No lumpy or
+obsolescence cell supports new-method promotion. Complete target coverage can
+coexist with failed fill because initial stock cannot meet demand before receipt.
+The old v1 artifact's semantic scenarios reproduce exactly after sharing the
+event kernel; only current source provenance is refreshed.
+Integrated Python 3.12.14 validation passed all 31 focused tests, including
+current-interpreter demand reproduction, artifact provenance and completed-only
+calibration checks. The valid intermittent outputs were reused.
+
+The [public-sales protocol](PUBLIC_SALES_PROTOCOL_V1.md) is prepared with verified
+official UCI license attribution and a separate observed-sales target. It awaits
+the explicit boundary choice required by synthetic-only AGENTS.md. No real data
+has been acquired. M5 terms were unreadable; no rights are inferred. ADIDA/IMAPA,
+LightGBM and registry/drift/scheduling infrastructure remain conditional on new
+evidence and a separately frozen handoff, not automatic expansions.
+
 ## Current milestone — offline decision-benchmark-v1 implemented
 
 The user assigned the next milestone from
@@ -27,7 +58,8 @@ Main already contains all three bounded synthetic stages through PRs 7/8.
 The prior baseline and investigation below retain their original chronology
 and are not current blockers. This milestone adds no public data, model dependency, database
 schema, runtime order execution or change to planning-v1/Copilot contracts.
-SBA/TSB, uncertainty calibration and public-sales evidence remain later steps.
+The original later SBA/TSB and safety-calibration steps are delivered by the
+continuation above; public-sales evidence remains gated by its separate protocol.
 
 ## Prior verified integration — PRs 1–8
 

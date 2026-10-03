@@ -8,7 +8,7 @@ All three bounded synthetic stages are integrated through PRs 7/8; PR 9
 refreshes their research and documentation. The
 [prior main acceptance run](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
 passed all 79 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
-The next research milestone evaluates forecast-plus-policy cost and service in a
+Offline research evaluates forecast-plus-policy cost and service in a
 separate offline backlog simulator. [Decision contract](docs/CONTRACT_DECISION_V1.md),
 [benchmark and results](docs/DECISION_BENCHMARK.md),
 [research handoff](docs/NEXT_ROUND_RESEARCH.md), and
@@ -138,6 +138,20 @@ separate from the existing planning-v1 prefix projection. Method selection uses
 selection data; held-out comparisons can propose research promotion but never
 change an approved model or place an order. The [protocol and retained evidence](docs/DECISION_BENCHMARK.md)
 state the bounded conclusions and deferred work.
+
+The [intermittent research contract](docs/CONTRACT_INTERMITTENT_V1.md)
+adds offline Croston/SBA/TSB challengers and empirically calibrated cumulative
+protection-period safety. Its fresh synthetic holdouts and paired comparisons
+are separate from historical planning methods. [Protocol and outcomes](docs/INTERMITTENT_BENCHMARK.md).
+
+```sh
+PYTHONPATH=src python scripts/intermittent_benchmark.py --output /tmp/intermittent-benchmark.json
+PYTHONPATH=src python -m unittest tests.test_intermittent tests.test_intermittent_benchmark -v
+```
+
+The [proposed public-sales protocol](docs/PUBLIC_SALES_PROTOCOL_V1.md) requires
+explicit authorization of its separate observed-sales boundary before acquiring
+real observations. Raw data and reconstructable series would stay local/ignored.
 
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
 

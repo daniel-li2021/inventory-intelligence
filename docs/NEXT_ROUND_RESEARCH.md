@@ -11,6 +11,14 @@ Its separate [frozen decision contract](CONTRACT_DECISION_V1.md) and
 [implementation/evaluation](DECISION_BENCHMARK.md) supersede the proposed
 synthetic simulator handoff below. Public-data acquisition, advanced models and
 changes to existing frozen contracts remain outside that assignment.
+The subsequent request to continue the plan assigns the separate
+[intermittent/safety contract](CONTRACT_INTERMITTENT_V1.md) and
+[fresh held-out evaluation](INTERMITTENT_BENCHMARK.md). The
+[public observed-sales protocol](PUBLIC_SALES_PROTOCOL_V1.md) is concrete and
+awaits the public-data boundary choice; no real observations have been imported.
+The user authorized integration of these milestones through PRs 10/11 on
+2026-10-02. PR 10 is merged; PR 11 incorporates that ancestry and the refreshed
+PR 9 documentation. This authorization does not import real observations.
 For the original research, existing benchmark JSON and acceptance evidence were reused; no data
 download, new forecast fit, database pipeline or model API request occurred.
 
