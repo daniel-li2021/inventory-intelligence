@@ -11,6 +11,13 @@ Focused commits freeze the routing holdout (`363957c`) before implementing the
 classification/selector boundary (`4f3d7c8`). Small validated fixes integrate
 directly under the standing authorization; no per-agent PRs are needed.
 
+Published batch `722873e` is verified on remote `main`.
+[Integration CI 37104968788](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37104968788)
+passed Repository hygiene and PostgreSQL acceptance; its log records **106 tests
+/ OK** on pinned PostgreSQL 17.9 / Python 3.12.12. This task's merged branch was
+removed locally/remotely; other branches, worktrees and environments were preserved.
+This final checkpoint update changes documentation only.
+
 Fresh combined acceptance passed **104/104** on that untouched main, then
 **106/106** on locally integrated main at `4f3d7c8`: Stage 1 23, Stage 2 24,
 Stage 3 34, offline decision/intermittent 25. Python 3.12.14 / Psycopg 3.3.6 /
