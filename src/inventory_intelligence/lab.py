@@ -356,6 +356,8 @@ def evaluate(overrides=None, evidence=None):
         source_run_ids=dict(reliability=archive['reliability']['run_id'], forecast=archive['forecast']['run_id'],
                            clean_plan=clean['run_id'], incomplete_supply_plan=archive['plans']['incomplete_supply']['run_id']),
         archive_digest=archive['digest'], on_hand=inventory['on_hand'], units='whole pieces',
+        confirmed_inbound_qty=sum(r['remaining_qty'] for r in clean['result']['supply']['inbound']
+                                 if r['status'] == 'confirmed'),
         trusted_state=dict(on_hand=inventory['on_hand'], status='pass', cutoff=clean['context']['origin'],
                            ledger_batch_id=archive['reliability']['ledger_batch_id'],
                            snapshot_batch_id=archive['reliability']['snapshot_batch_id']))
