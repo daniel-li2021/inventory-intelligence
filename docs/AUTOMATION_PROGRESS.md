@@ -3,7 +3,27 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — bounded startup attribution implemented
+## Current checkpoint — independent Lab accessibility branch
+
+`codex/lab-accessibility` starts from current main `f6d3d1`. The
+[targeted review](LAB_ACCESSIBILITY_REVIEW.md) fixes submit focus loss, repeated
+control hints, keyboard table scrolling, 320px blocked-state overflow and faint
+text/graph/input boundaries. Existing presets are sufficient; no new scenario
+framework was added. Browser evidence and source hashes are retained.23 Lab/API
+tests and JavaScript syntax pass. Backend/evidence/contracts are unchanged.
+
+Previously published, unmerged research: PR14 (complete22-direction roadmap,
+fresh paid warmup, retention and supply attribution), PR15 (public adapter/forecast),
+PR16 (policy comparison), PR17 (paid public sales-proxy safety/service, dependent
+on PR15). PR14 integration remains pending explicit owner approval after automatic
+review rejected the merge. This branch does not retry shared-main integration.
+
+Next independent work: portfolio case study using verified negative results,
+remaining provenance/property gaps and separately frozen fresh calibration labels.
+Large lost-sales/physical-count/hosting extensions keep their contract/target gates;
+the full roadmap is preserved in PR14 rather than narrowed to completed work.
+
+## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
 Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes
