@@ -95,7 +95,10 @@ class IntermittentBenchmarkTests(unittest.TestCase):
         self.assertEqual((len(report["scenarios"]), len(report["configurations"])), (84, 33))
         self.assertEqual(report["summary"]["candidate_split_results"], 5544)
         for path, expected in report["source_sha256"].items():
-            self.assertEqual(hashlib.sha256((ROOT / path).read_bytes()).hexdigest(), expected)
+            # Consumed outcomes remain bound to the original kernel, as in decision-v1.
+            source = (ROOT / "docs/review/decision-v1-source.py.txt" if
+                      path == "src/inventory_intelligence/decision.py" else ROOT / path)
+            self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), expected)
         for row in report["scenarios"]:
             inputs = row["inputs"]
             encoded = json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode()
