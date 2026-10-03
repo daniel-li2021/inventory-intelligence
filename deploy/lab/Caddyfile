@@ -1,0 +1,28 @@
+{
+	admin off
+	servers {
+		timeouts {
+			read_header 5s
+			read_body 5s
+			idle 30s
+		}
+	}
+}
+{$LAB_DOMAIN} {
+	request_body {
+		max_size 4096
+	}
+	header {
+		Strict-Transport-Security "max-age=86400"
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+	}
+	reverse_proxy lab:8000 {
+		transport http {
+			dial_timeout 2s
+			response_header_timeout 10s
+		}
+	}
+}

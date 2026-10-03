@@ -12,6 +12,19 @@ The core system, offline decision research and local **Decision Lab** are comple
 within their synthetic scope. Real demand performance, calibrated service and
 business savings remain unmeasured. [Current independent assessment](docs/READINESS_REVIEW.md).
 
+Separate [public observed-sales research](docs/PUBLIC_SALES_RESULTS.md) now adapts
+official UCI Online Retail with immutable provenance and evaluates a training-only
+32-item subset. Raw/derived observations stay local and ignored; published metrics
+are aggregate. Fixed mean beats the selected method mix on the 28-day holdout.
+Observed sales do not establish unconstrained demand or historical stock availability.
+
+[Portfolio case study and resume wording](docs/PORTFOLIO_CASE_STUDY.md) connect
+the architecture to measured failures and negative results. The
+[22-direction delivery/continuation ledger](docs/RESEARCH_STATUS.md) distinguishes
+merged core evidence from published research and accessibility PRs. New public
+observed-sales studies remain separate exploratory research, with synthetic
+suppliers/costs and unknown stock availability.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]
@@ -30,6 +43,12 @@ reservations/inbound. The Copilot explains saved results with exact quantities
 and citations; its optional language model routes intent only. The offline
 simulator evaluates a separate periodic ordering policy and does not simulate
 execution of the planner's proposal.
+
+The [combined research candidate](docs/RESEARCH_INTEGRATION.md) retains PRs 14–23
+and all original report bytes. One fresh PostgreSQL 17.6 acceptance run passes
+240 tests; a 24-artifact / 119-node lineage manifest keeps historical source drift
+explicit. This is candidate validation: main, CI and public hosting status remain
+separate. [All 22 directions and next gates](docs/RESEARCH_STATUS.md).
 
 ## Try the Decision Lab
 
@@ -59,9 +78,34 @@ but reduces simulated immediate fill to `11/28`, with 17 shortage days and cost
 metrics; zero-demand fill remains undefined. These are deterministic synthetic
 cases, not commercial savings or service guarantees.
 [Lab semantics, API and operating instructions](docs/DECISION_LAB.md).
+[Hosted-demo readiness package](deploy/lab/README.md) prepares a bounded anonymous
+entry point, pinned container/proxy templates and release acceptance. No public
+service has been deployed; container and public-domain checks remain pending.
+
+Keyboard users can run the presets, inspect focusable evidence tables with arrow
+keys and use the skip link. [Local accessibility review and limits](docs/LAB_ACCESSIBILITY_REVIEW.md)
+records focus, contrast and narrow-screen validation.
 
 ## What the evidence shows
 
+- **Public sales-proxy safety:** q95 demand calibration does not guarantee 95%
+  immediate fill or cycle service. A paid 56-day warmup and 768 synthetic inventory
+  arms over public observations expose different coverage/service/cost outcomes.
+  [Measured results and boundaries](docs/PUBLIC_SAFETY_RESULTS.md).
+  A [prospectively frozen disjoint 32-item replication](docs/PUBLIC_CALIBRATION_RESULTS.md)
+  retains another 768 arms: mean/q95 and SBA/q95 achieve 92.12% and 93.35% fill
+  in the lead-two/no-extra-delay case. Same retailer/calendar; no service guarantee.
+
+- **Policy comparison:** with identical forecasts, prefix arithmetic improves
+  service and paid cost only in a known-late-inbound control. A periodic threshold
+  rule regresses fill in 34/40 cells. [Exact experiment and limitations](docs/POLICY_COMPARISON_RESULTS.md).
+
+
+- **Physical-count research:** frozen synthetic count/recount evidence can
+  distinguish system stock 100 from corroborated physical stock 96 and bind a
+  separate advisory adjustment review. Forty independent controls and 86 lineage
+  nodes are audited; no source inventory is changed.
+  [Protocol, outcomes and limits](docs/PHYSICAL_COUNT_RESULTS.md).
 - **Engineering:** exact arithmetic, two knowledge clocks, append-only run
   history, restricted database roles, independent hand-calculated oracles, and
   fail-closed API/evidence boundaries. See [fresh review and acceptance](docs/READINESS_REVIEW.md).
@@ -75,6 +119,10 @@ cases, not commercial savings or service guarantees.
 - **Negative results matter:** stock can run out before any order can arrive,
   and historically calibrated safety stock can persist after demand collapses.
   Adding a more complex forecast does not necessarily solve either problem.
+- **Fulfillment semantics:** a separate [lost-sales research contract and results](docs/LOST_SALES_RESULTS.md)
+  compare 288 matched synthetic pairs with identical attempted-demand forecasts.
+  First orders match, but subsequent purchases differ in 199 pairs; permanent
+  losses, owed backlog and their different penalty units remain explicit.
 
 [Decision protocol/results](docs/DECISION_BENCHMARK.md),
 [intermittent protocol/results](docs/INTERMITTENT_BENCHMARK.md), and
@@ -85,6 +133,21 @@ attributes eight of the delayed replay's 68 missed units to unavoidable startup;
 Existing holdouts are consumed; they are regression evidence, not fresh tuning
 sets. Optional live Copilot routing has a bounded synthetic evaluation, separate
 from deterministic evidence checks. [Routing evidence](docs/STAGE3_STABILIZATION.md).
+
+The [long-term roadmap](docs/RESEARCH_ROADMAP.md) records 22 assigned or gated
+directions. Its first [fresh warmup study](docs/FRESH_WARMUP_RESULTS.md) evaluates
+720 arms with fully costed inventory carryover: warmup improves fill in 70/360
+pairs, regresses it in 35/360, and lowers complete intervention cost in only two.
+Empirical 90%/95% forecast targets still do not guarantee achieved inventory
+service. Repeated controls and origins are not independent replications.
+The [fresh retention study](docs/SAFETY_RETENTION_RESULTS.md) compares expanding,
+recent and decay-weighted safety with identical point forecasts. Both challengers
+can shrink safety to zero while leaving large owned inventory; neither passes
+the cost-and-service gate across its 21 path labels.
+The [supply and intervention study](docs/SUPPLY_SENSITIVITY_RESULTS.md) pairs
+lead2/5/10 and supplier variability with stock/review/pack controls over equal
+settlement windows. Signed effects explain startup versus later failures while
+retaining interactions; faster reviews and more stock are not universal fixes.
 
 ## Run the PostgreSQL core
 

@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "docs/review/lost-sales-v1-summary.json": {
+      "bytes": 168501,
+      "sha256": "9c4daa35ce12949cf664b630d63be19e26db64fe690623f98a02a89d3174f522"
+    },
+    "docs/review/lost-sales-v1.json.gz": {
+      "bytes": 1301214,
+      "sha256": "8a51ccba382673f37cd10129a3fd8b93ed26ed50e5f98001372d4383d735cfa4"
+    }
+  },
+  "cache_reuse": {
+    "archive_and_summary_bytes_unchanged": true,
+    "experiment_disabled": true
+  },
+  "focused_validation": {
+    "command": "PYTHONPATH=src python -m unittest tests.test_lost_sales tests.test_decision tests.test_decision_benchmark -q",
+    "passed": 24,
+    "purposeful_rehashed_faults_rejected": 6,
+    "runtime": "Python 3.12.14 / Psycopg 3.3.6"
+  },
+  "implementation_commit": "54ded62",
+  "limitations": [
+    "Synthetic captured attempted demand; not ordinary censored sales feedback.",
+    "Different obligations and unit-day versus unit penalty meanings; no retailer savings or automatic policy choice.",
+    "No main merge, remote CI or hosted deployment validation."
+  ],
+  "protocol_commit": "7550cc4",
+  "saved_event_audit": {
+    "command": "PYTHONPATH=src python -m scripts.lost_sales_audit",
+    "logical_arms": 576,
+    "model_invocations": 0,
+    "pairs": 288,
+    "simulation_replays": 0,
+    "unique_arm_audits": 480
+  },
+  "test_source_sha256": "0ff2dbaec479b674fac055b8ea56d5561a6d36c15118de91000715addad2bceb",
+  "unchanged_against_main": [
+    "src/inventory_intelligence/decision.py",
+    "src/inventory_intelligence/replenishment.py",
+    "src/inventory_intelligence/lab.py",
+    "src/inventory_intelligence/lab_api.py",
+    "docs/CONTRACT_DECISION_V1.md",
+    "docs/review/decision-benchmark.json"
+  ],
+  "verified_at_utc": "2026-10-03T21:30:35.068786+00:00"
+}

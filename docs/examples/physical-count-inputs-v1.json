@@ -1,0 +1,3007 @@
+{
+  "cases": [
+    {
+      "expected": {
+        "adjustment_status": "review_required",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "confirmed_shortage",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [],
+        "physical_quantity": 100,
+        "physical_status": "confirmed_match",
+        "system_quantity": 100,
+        "variance_quantity": 0
+      },
+      "id": "confirmed_match",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "review_required",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [],
+        "physical_quantity": 104,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": 4
+      },
+      "id": "confirmed_surplus",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 104,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 104,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [],
+        "physical_quantity": 0,
+        "physical_status": "confirmed_match",
+        "system_quantity": 0,
+        "variance_quantity": 0
+      },
+      "id": "confirmed_zero",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 0,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 0,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 0,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "single_observer",
+        "finding_reasons": [
+          "independent_recount_required"
+        ],
+        "physical_quantity": null,
+        "physical_status": "recount_required",
+        "system_quantity": 100,
+        "variance_quantity": null
+      },
+      "id": "single_count",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 1,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "single_observer",
+        "finding_reasons": [
+          "independent_recount_required"
+        ],
+        "physical_quantity": null,
+        "physical_status": "recount_required",
+        "system_quantity": 100,
+        "variance_quantity": null
+      },
+      "id": "observer_reused",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "independent_recount_required"
+        ],
+        "physical_quantity": null,
+        "physical_status": "recount_required",
+        "system_quantity": 100,
+        "variance_quantity": null
+      },
+      "id": "no_physical_observations",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 0,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "conflicting",
+        "finding_reasons": [
+          "conflicting_counts"
+        ],
+        "physical_quantity": null,
+        "physical_status": "recount_required",
+        "system_quantity": 100,
+        "variance_quantity": null
+      },
+      "id": "conflicting_counts",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "conflicting",
+        "finding_reasons": [
+          "conflicting_counts"
+        ],
+        "physical_quantity": null,
+        "physical_status": "recount_required",
+        "system_quantity": 100,
+        "variance_quantity": null
+      },
+      "id": "majority_must_not_win",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-3",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-3",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 3,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_source_context"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "missing_system",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": null
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_source_context"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "missing_manifest",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": null,
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "missing_count_records"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "missing_count_records",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": null,
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_source_context"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "missing_book_quantity",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": null,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "system_not_pass"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "untrusted_book",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "not_assessable",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "incomplete_count_coverage"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "incomplete_coverage",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": false,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "inventory_not_frozen"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "unfrozen_inventory",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": false,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "count_not_blind"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "not_blind",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": false,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "count_row_count_mismatch"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "manifest_count_mismatch",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 3,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "duplicate_count_identity"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "identical_duplicate_count",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "duplicate_count_identity"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "conflicting_duplicate_count",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "count_scope_mismatch"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "foreign_key",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "other-sku",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_count_row"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "missing_count_quantity",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": null,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_count_row"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "boolean_count_quantity",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": true,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_count_row"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "fractional_count_quantity",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96.0,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_count_row"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "naive_count_clock",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "manifest_not_available"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "future_complete_batch",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:30:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "count_not_available",
+          "count_observation_invalid"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "future_count_observation",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:21:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "count_outside_freeze"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "count_after_freeze",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:11:00+00:00",
+            "observed_at": "2026-02-01T00:12:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:15:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "system_not_available"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "future_book",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:21:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "no_proposal",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "none",
+        "finding_reasons": [
+          "invalid_source_context"
+        ],
+        "physical_quantity": null,
+        "physical_status": "not_assessable",
+        "system_quantity": null,
+        "variance_quantity": null
+      },
+      "id": "ambiguous_book_schema",
+      "inputs": {
+        "adjustment_reviews": [],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "other_quantity": 100,
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "approved_evidence",
+        "approved_adjustment_quantity": -4,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "approved_review",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "rejected",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "rejected_review",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "reject",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "review_binding_mismatch"
+        ],
+        "physical_quantity": 98,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -2
+      },
+      "id": "stale_proposal_binding",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 98,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 98,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "reviewer_not_independent"
+        ],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "observer_self_review",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "observer-1",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "review_clock_invalid"
+        ],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "approval_before_evidence",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:08:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:08:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "review_clock_invalid"
+        ],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "future_approval",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:26:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:25:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "ambiguous_review_history"
+        ],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "contradictory_reviews",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          },
+          {
+            "decision": "reject",
+            "observed_at": "2026-02-01T00:19:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-2",
+            "reviewed_at": "2026-02-01T00:18:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "ambiguous_review_history",
+          "duplicate_review_identity"
+        ],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "duplicate_review_identity",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          },
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "review_without_proposal"
+        ],
+        "physical_quantity": 100,
+        "physical_status": "confirmed_match",
+        "system_quantity": 100,
+        "variance_quantity": 0
+      },
+      "id": "approval_without_current_proposal",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "unexplained_variance",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 100,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    },
+    {
+      "expected": {
+        "adjustment_status": "not_assessable",
+        "approved_adjustment_quantity": null,
+        "evidence_confidence": "corroborated",
+        "finding_reasons": [
+          "invalid_review_decision"
+        ],
+        "physical_quantity": 96,
+        "physical_status": "confirmed_variance",
+        "system_quantity": 100,
+        "variance_quantity": -4
+      },
+      "id": "unapproved_reason_type",
+      "inputs": {
+        "adjustment_reviews": [
+          {
+            "decision": "approve",
+            "observed_at": "2026-02-01T00:16:00+00:00",
+            "proposal_id": "ccc019c879383526418a3a59ae78f797052920dd8c51e6c85d4ac40c932b985e",
+            "reason_code": "inferred_theft",
+            "review_id": "review-1",
+            "reviewed_at": "2026-02-01T00:15:00+00:00",
+            "reviewer_id": "controller",
+            "source_system": "synthetic-review"
+          }
+        ],
+        "counts": [
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-1",
+            "counted_at": "2026-02-01T00:03:00+00:00",
+            "observed_at": "2026-02-01T00:04:00+00:00",
+            "observer_id": "observer-1",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          },
+          {
+            "as_of": "2026-02-01T00:00:00+00:00",
+            "blind_count": true,
+            "count_id": "count-2",
+            "counted_at": "2026-02-01T00:06:00+00:00",
+            "observed_at": "2026-02-01T00:07:00+00:00",
+            "observer_id": "observer-2",
+            "quantity": 96,
+            "session_id": "frozen-session",
+            "sku_id": "tee-m-blue",
+            "source_system": "synthetic-count",
+            "uom": "each",
+            "warehouse_id": "wh-a"
+          }
+        ],
+        "evaluated_at": "2026-02-01T00:20:00+00:00",
+        "manifest": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "coverage_complete": true,
+          "expected_rows": 2,
+          "freeze_end": "2026-02-01T00:10:00+00:00",
+          "freeze_start": "2026-02-01T00:00:00+00:00",
+          "frozen": true,
+          "observed_at": "2026-02-01T00:10:00+00:00",
+          "session_id": "frozen-session",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-count",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        },
+        "system": {
+          "as_of": "2026-02-01T00:00:00+00:00",
+          "observed_at": "2026-02-01T00:01:00+00:00",
+          "quantity": 100,
+          "record_id": "stock-v1",
+          "sku_id": "tee-m-blue",
+          "source_system": "synthetic-book",
+          "status": "pass",
+          "uom": "each",
+          "warehouse_id": "wh-a"
+        }
+      }
+    }
+  ],
+  "note": "Independent hand-declared outcome controls; source identities/clocks/statuses are fictional assertions, not real warehouse attestations.",
+  "protocol_version": "physical-count-evidence-v1",
+  "synthetic": true
+}

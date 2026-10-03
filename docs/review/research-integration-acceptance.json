@@ -1,0 +1,98 @@
+{
+  "base_commit": "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6",
+  "browser_tab_closed": true,
+  "container_runtime_verified": false,
+  "evidence_sha256": {
+    "docs/review/research-integration-browser.jpg": "827b2573e00a59087c16d97afece368916c1d7625f9b0efc540816c0b58f6af1",
+    "docs/review/research-integration-browser.json": "b3c24be39a4daaa06b68de53e81047e1e239ccdc34f24d257a6ecf07528e7fa8",
+    "docs/review/research-integration-lineage-v1.json": "b1378491641a680554731cd6d77b2ed3b5a4dff1974612867d5b1b73f1cf4bfd",
+    "docs/review/research-integration-local-http.json": "fba71a53c4f4483c96151109ccabb494d8d4a066d0cc32184f4edf5442778a3c",
+    "docs/review/research-integration-mobile.jpg": "07973c8b70920e14df9788371ae1d70219d22e5a89935bcf440161e53906d94d",
+    "docs/review/research-integration-saved-audits.json": "89330208434d26b00117ee0a13f44f3c1905f82d73444119dd193731c13cdffb"
+  },
+  "full_acceptance": {
+    "cluster_stopped": true,
+    "elapsed_seconds": 23.372,
+    "errors": 0,
+    "failures": 0,
+    "fresh_disposable_database": true,
+    "log_sha256": "5a02b2b79e4183e111c11cb33ee5463adca9d9e4476a78380a657d1a303cfbfb",
+    "postgresql": "17.6",
+    "psycopg": "3.3.6",
+    "python": "3.12.14",
+    "skips": 0,
+    "tests": 240
+  },
+  "historical_semantic_audits": {
+    "disjoint_public_arms": 768,
+    "lost_sales_unique_arms": 480,
+    "model_refits": 0,
+    "parent_public_arms": 768,
+    "simulation_replays": 0
+  },
+  "lineage": {
+    "artifacts": 24,
+    "current_drift_bindings": 13,
+    "deliveries": 10,
+    "model_refits": 0,
+    "nodes": 119,
+    "operational_writes": 0,
+    "parent_bindings": 5,
+    "simulation_replays": 0,
+    "source_maps": 17
+  },
+  "lineage_faults_rejected": 7,
+  "lineage_tests": 4,
+  "live_browser": {
+    "baseline_cost": 327,
+    "baseline_proposal": 12,
+    "blocked_outputs": true,
+    "console_errors_or_warnings": 0,
+    "focus_restored": true,
+    "keyboard_run": true,
+    "mobile_scroll_width": 320,
+    "mobile_width": 320,
+    "spike_cost": 351,
+    "spike_proposal": 18
+  },
+  "main_changed": false,
+  "natural_http_checks": 13,
+  "operational_writes": 0,
+  "original_artifacts_preserved": 24,
+  "physical_count_cached_audit": {
+    "cases": 40,
+    "lineage_nodes": 86,
+    "reassessments": 0
+  },
+  "public_deployed": false,
+  "remaining_gates": [
+    "explicit main integration approval",
+    "Docker/Compose/Linux controls and restart",
+    "host/domain/cost decision and public TLS/uptime",
+    "planner closed-loop contract/implementation",
+    "conditional model/allocation/capacity/scale evidence"
+  ],
+  "remote_ci_verified": false,
+  "retained_delivery_heads": {
+    "14": "d2cb98ba1016f80bd2c2dd40159092f4f1b21395",
+    "15": "97d1f8a00a00cecdcd01368403bdfeab8b92d510",
+    "16": "39bf64d7e70b9221afbe1d697fe49fd348fcdc04",
+    "17": "706fa82c7520f5119ffd85b8c6a2a65f40fc2f10",
+    "18": "3d66b4309cc465d39ed830b4db59ef0860807c25",
+    "19": "758d5d317ff8470841cc376bba49b86909ebb69c",
+    "20": "e7473a595d4ef6deca33c283ea6b27e23ad83bc4",
+    "21": "d06badeb2a61b2f76da5ebb4afbd9ff6ffc38023",
+    "22": "c916c046b3af06503574aaea208a0197e0615a3e",
+    "23": "c337a5616dda27398b0f82e9b9e011aba9fe9c6f"
+  },
+  "source_commit": "87caa748560285ec6330e22fa3156791f6e17720",
+  "temporary_servers_stopped": true,
+  "verified_at": "2026-10-03T22:45:19.624398+00:00",
+  "viewport_reset": true,
+  "wheel": {
+    "bytes": 117675,
+    "package_bytes_match": true,
+    "served_outside_checkout": true,
+    "sha256": "91bd3f5de63bc5e631d2a8d67f9b9fd2e4ecc4273367f2cc2dc346746f12e1d6"
+  }
+}

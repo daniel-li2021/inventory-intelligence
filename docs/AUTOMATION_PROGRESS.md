@@ -3,7 +3,234 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — bounded startup attribution implemented
+## Current checkpoint — combined candidate and historical source lineage validated
+
+`codex/research-integration` begins at main `f6d3d16` and retains PR 14–23 exact
+heads by ancestry. Shared documentation conflicts are resolved; original reports
+remain byte-identical. The added lineage protocol precedes verifier/oracles commit
+`87caa74`; its saved manifest binds 24 artifacts / 119 nodes, 17 complete source
+maps and five parent/freeze links. Thirteen historical/current bindings stay
+explicit; no consumed evidence is rehashed to the combined kernel.
+
+A single fresh disposable PostgreSQL 17.6 run passes 240/240 tests without
+failures/errors/skips. Saved historical-source audits pass parent768 + disjoint768
+public arms and480 unique lost-sales saved trajectories without model refit or
+simulation replay. A newly installed combined wheel outside the checkout passes
+13 local private-CA HTTPS checks and an actual hosted-CSP keyboard/mobile browser
+smoke (spike18/cost351, baseline12/cost327; blocked320px/no overflow). Temporary
+DB/app/proxy/tab are retired. [Combined receipt and limits](RESEARCH_INTEGRATION.md).
+
+Main is unchanged; the earlier automatic merge approval rejection still requires
+explicit integration-owner approval. Docker/Linux enforcement/public hosting and
+CI are unverified. [All22 current statuses](RESEARCH_STATUS.md) supersede the
+historical package snapshots below, which preserve previous continuation context.
+Next independent work: actual planner closed-loop execution boundary/protocol.
+
+## Historical package checkpoint — prospective disjoint calibration task branch
+
+`codex/public-calibration-generalization` stacks on PR17's published sources;
+main remains unchanged. [Protocol](PUBLIC_CALIBRATION_V1.md) and exact public
+freeze were committed at `6b76a2a` before any new-item simulation. Training-only
+seed1709 excludes all32 consumed parent items and selects32 new ones, overlap0.
+[Results](PUBLIC_CALIBRATION_RESULTS.md) retain768 continuous paid arms/512pairs,
+6207 holdout units,25 positive-item and7 null-fill denominators. Mean/q95/L2/no
+extra delay has92.12% fill/85.94% cycle; SBA/q95 has93.35%/89.84% even though its
+target coverage is95.83%. Same retailer/calendar and prior-informed design,
+not statistical independence, later-time validation or a service guarantee.
+
+29 focused tests pass. A separate cached audit validates all768 new arms with
+zero refits/replays; unchanged parent768-arm audit passes. An explicitly disabled
+simulation cache-hit check preserves exact public bytes. Raw source/extraction
+caches are reused without download or workbook parse. All item evidence stays
+ignored/local. No model/policy selection, main merge or hosted deployment.
+
+Accessibility and portfolio work were independently published in
+[PR18](https://github.com/daniel-li2021/inventory-intelligence/pull/18) and
+[PR19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+The latter preserves [all22 statuses and the long-term sequence](https://github.com/daniel-li2021/inventory-intelligence/blob/758d5d317ff8470841cc376bba49b86909ebb69c/docs/RESEARCH_STATUS.md).
+Integration still needs explicit owner approval after automatic review rejected
+the PR14 main merge; do not retry it on a goal continuation. Next independent
+package: separately versioned research-only lost sales, then physical-count/
+provenance boundaries. Hosted resources still need a concrete target and budget.
+
+## Prior checkpoint — sales-proxy safety task branch
+
+The dependent `codex/public-safety-service` branch extends PR15's attested adapter
+without changing its archived forecast results. [Protocol](PUBLIC_SAFETY_V1.md)
+was committed before real-sales simulation; [results](PUBLIC_SAFETY_RESULTS.md)
+retain768 arms/512 contrasts over the same32 training-selected items. These are
+explicitly consumed public observations, not fresh holdout or actual stockouts.
+All56 warmup days, purchases and common15-day settlement are charged. q95 does
+not guarantee95% fill/cycle service.31 focused tests pass; a separate audit
+reconciles every cached arm and public aggregate with zero refits/replays.
+
+Published prior packages remain unmerged: [PR14](https://github.com/daniel-li2021/inventory-intelligence/pull/14)
+(all22 useful directions, fresh warmup, safety retention, supply interventions),
+[PR15](https://github.com/daniel-li2021/inventory-intelligence/pull/15) (public
+adapter/forecast), [PR16](https://github.com/daniel-li2021/inventory-intelligence/pull/16)
+(fixed-forecast policy comparison). PR14 integration was rejected by automatic
+approval review; the required explicit integration-owner approval is still pending.
+No main integration is retried, and independent ready work continues.
+
+Next: local accessibility/UX audit, missing provenance/invariant checks and a
+portfolio case study with the negative public/synthetic findings. Advanced models
+remain conditional; bigger lost-sales/physical-count/allocation/hosting work keeps
+its separate contract/target gates in PR14's complete roadmap.
+
+## Prior checkpoint — public observed-sales task branch
+
+The user assigned the long-term research directions on2026-10-03. Fresh costed
+warmup, retention and supply-intervention work is published in PR14 and awaits
+merge approval after automatic review rejected default-branch integration.
+Remote main has not been advanced by that batch.
+
+The independent `codex/public-observed-sales` branch implements the official UCI
+adapter and first forecast-only benchmark. The541909-row extraction passes;
+32 train-stratified items show fixed mean outperforming selection-chosen methods
+on the28-day holdout.22 focused tests pass. Raw observations and item-level
+results stay ignored/local. [Full evidence](PUBLIC_SALES_RESULTS.md).
+
+Next ready work: explicit small policy comparison, sales-proxy safety evaluation,
+cross-layer provenance/QA and demo accessibility. Advanced models remain gated;
+public sales do not become accepted-order demand. The full22-direction roadmap
+is retained on the research-roadmap branch/PR14, not silently narrowed here.
+
+## Historical package checkpoint — policy comparison branch, integration pending
+
+The continuing research goal includes a frozen three-rule comparison with
+identical forecasts, known supply, prior commitments and review calendars.
+[Protocol](POLICY_COMPARISON_V1.md) / [results](POLICY_COMPARISON_RESULTS.md):
+120 logical arms / 65 distinct physical trajectories; prefix arithmetic improves
+four repeated late-inbound cells, while periodic `(s,S)` regresses fill in 34/40.
+All initial/inbound/ordered units and settlement costs are charged. This is a
+research arithmetic adapter, not operational planner execution or source approval.
+Focused acceptance: **61 tests pass** on Python 3.12.14 / Psycopg 3.3.6, including
+Lab/API regressions and the archived default-kernel oracle. No database or API run.
+
+Other independent packages are published but unmerged: PR #14 (22-direction
+roadmap, fresh costed warmup, safety retention and supply interventions), PR #15
+(attested UCI observed-sales adapter and train-only forecast benchmark). Their
+branches retain their artifacts; this independent branch starts from current main.
+The automatic approval reviewer rejected PR #14 integration because it requires
+explicit integration-owner approval; the human approval question remains pending.
+No merger is retried. Independent research continues toward public sales-proxy
+safety/service evaluation, probabilistic calibration and demo accessibility.
+
+## Historical package checkpoint — independent Lab accessibility branch
+
+`codex/lab-accessibility` starts from current main `f6d3d1`. The
+[targeted review](LAB_ACCESSIBILITY_REVIEW.md) fixes submit focus loss, repeated
+control hints, keyboard table scrolling, 320px blocked-state overflow and faint
+text/graph/input boundaries. Existing presets are sufficient; no new scenario
+framework was added. Browser evidence and source hashes are retained.23 Lab/API
+tests and JavaScript syntax pass. Backend/evidence/contracts are unchanged.
+
+Previously published, unmerged research: PR14 (complete22-direction roadmap,
+fresh paid warmup, retention and supply attribution), PR15 (public adapter/forecast),
+PR16 (policy comparison), PR17 (paid public sales-proxy safety/service, dependent
+on PR15). PR14 integration remains pending explicit owner approval after automatic
+review rejected the merge. This branch does not retry shared-main integration.
+
+Next independent work: portfolio case study using verified negative results,
+remaining provenance/property gaps and separately frozen fresh calibration labels.
+Large lost-sales/physical-count/hosting extensions keep their contract/target gates;
+the full roadmap is preserved in PR14 rather than narrowed to completed work.
+
+## Historical package checkpoint — independent lost-sales research branch
+
+The continuing goal's separate lost-sales boundary is frozen in
+[CONTRACT_LOST_SALES_V1](CONTRACT_LOST_SALES_V1.md) at7550cc4; isolated kernel,
+generator/oracles/auditor commit54ded62 precedes fresh scoring. No accepted-order
+backlog contract or planner/Lab file changes. Both semantics use synthetic
+completed attempted-demand feedback, not inferred lost demand from sales.
+
+[Results](LOST_SALES_RESULTS.md) retain288 matched pairs/576 logical arms,
+480 exact-input computations/376 distinct native trajectories,12 distinct
+demand paths and19 supplier paths. First orders all match; later purchased
+quantities differ in199 pairs. Immediate fill improves89, regresses10, equals93
+and is undefined96. Lost penalties10/40 yield171/25 lower-cost pairs, respectively;
+different unit-day/once-per-unit business penalties are not interchangeable ROI.
+All warmup, purchases and common100-day settlement accounting are paid.
+
+24 focused tests and the separate480-arm saved-event audit pass; six rehashed
+faults are detected. Cache reuse with evaluation disabled preserves exact bytes.
+Full synthetic traces are compressed in Git alongside a readable exact summary.
+No database/model API, dependency, source import, CI monitoring or main merge.
+
+The independent public calibration replication is published in
+[PR20](https://github.com/daniel-li2021/inventory-intelligence/pull/20), with its
+disjoint32-item/frozen source evidence on that branch. The complete22-direction
+status/case study is preserved in
+[PR19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+Main integration remains pending explicit owner approval after automatic review
+rejected PR14's merge. Next independent package: additive synthetic physical-count
+truth/provenance, then a concrete hosted read-only target/ownership proposal.
+
+## Historical package checkpoint — physical-count evidence and local lineage implemented
+
+Started from fetched/pruned `origin/main` at `f6d3d16` on the isolated
+`codex/physical-count-evidence` branch. Frozen additive contract `605b34a` precedes
+implementation/oracles/archive code `340cb1f`; all are committed before first
+archived outcomes. This is read-only synthetic research, with no Stage 1 schema,
+operational planner, Lab or source-inventory changes.
+
+System stock 100 with two declared blind independent counts of 96 yields variance
+−4 and a source-bound advisory proposal. Missing, duplicate, incomplete or future
+evidence blocks quantities; single/conflicting observations require recount.
+Only a valid independent source-bound review can approve adjustment evidence.
+Approved evidence still performs zero inventory writes. Source declarations are
+not authenticated warehouse truth or calibrated confidence.
+
+Focused acceptance passes 7 tests over 40 independently declared control outcomes.
+The saved artifact verifies 86 dependency nodes with zero reassessments; disabling
+the evaluator preserves cached output bytes. Ten purposeful rehashed-result / graph
+mutations are rejected. [Results and reproduction](PHYSICAL_COUNT_RESULTS.md),
+[receipt](review/physical-count-acceptance.json).
+
+The broader roadmap and all 22 direction statuses are preserved in
+[PR 19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+[PR 20](https://github.com/daniel-li2021/inventory-intelligence/pull/20) contains the
+prospectively frozen disjoint-item calibration study;
+[PR 21](https://github.com/daniel-li2021/inventory-intelligence/pull/21) contains the
+independent lost-sales contract and paired synthetic study. These and this package
+are not integrated into main. Default-branch merge remains pending after automatic
+approval review rejected that action; continue independent scoped work without
+retrying the merge. Next: concrete hosted synthetic-demo operating/acceptance plan.
+Global lineage and operational physical adjustments require separate boundaries.
+
+## Historical package checkpoint — hosted synthetic Lab readiness implemented
+
+Started from fetched/pruned `origin/main` at `f6d3d16` on
+`codex/hosted-lab-readiness`. Architecture/resource/cost/release plan `6030d9f`
+precedes the separate hosted ASGI entry point. Existing local app and inventory
+contracts remain unchanged. Hosted serving bounds scenario body bytes/read time,
+API admission and active work, restricts exposed paths, and adds browser headers.
+Pinned Python/Caddy manifest bytes and 18 runtime dependency versions accompany
+non-root/read-only app and HTTPS proxy Compose templates.
+
+Focused acceptance passes 34 tests (11 new hosted + 23 existing Lab/API). A newly
+built wheel served outside the checkout passes 13 live HTTPS response checks
+through checksum-verified Caddy 2.10.2, using only a localhost private CA with no
+trust-store installation. The proxy-generated oversized-body error exposed a
+missing-header boundary; corrected headers pass the natural proxy check.
+[Plan](HOSTED_LAB_PLAN.md), [operations/current limits](../deploy/lab/README.md),
+[acceptance receipt](review/hosted-lab-acceptance.json).
+
+Docker CLI/runtime is unavailable; container build, Compose runtime, Linux limits,
+restart, real public TLS/redirect and uptime remain unverified. No cloud resource,
+public service, domain or paid subscription was created. Public release also
+requires integration/recheck of the PR 18 accessibility work and a concrete
+reviewed host/domain/cost. Default-branch merge remains pending after the earlier
+automatic approval rejection; independent scoped work continues.
+
+The all-22 roadmap/status package is in
+[PR 19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+Prospective calibration, independent lost-sales semantics and physical-count
+corroboration are in PRs 20–22 respectively, all still awaiting integration.
+Next useful independent work: broader artifact attestation and combined
+integration acceptance; do not infer a public release from this local readiness.
+
+## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
 Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes

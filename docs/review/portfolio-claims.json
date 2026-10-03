@@ -1,0 +1,385 @@
+{
+  "claims": {
+    "accessibility": {
+      "contrast": {
+        "inputBoundary": 3.459902291074141,
+        "series": [
+          {
+            "color": "#61776b",
+            "ratio": 4.817270503880207
+          },
+          {
+            "color": "#947154",
+            "ratio": 4.421751264384814
+          }
+        ],
+        "text": [
+          {
+            "background": "rgb(245, 244, 238)",
+            "foreground": "rgb(86, 102, 106)",
+            "name": "helper on paper",
+            "ratio": 5.438195908445576
+          },
+          {
+            "background": "rgb(251, 237, 227)",
+            "foreground": "rgb(157, 68, 32)",
+            "name": "blocked label",
+            "ratio": 5.584551434159471
+          },
+          {
+            "background": "rgb(233,242,235)",
+            "foreground": "rgb(86, 102, 106)",
+            "name": "helper on green",
+            "ratio": 5.240679877034493
+          }
+        ]
+      },
+      "mobile": {
+        "assessment": "NOT ASSESSABLEThe evidence gate blocks this scenario.Supply evidence is incomplete or inconsistent. A forecast cannot be assessed from the available evidence. The clean baseline remains available below.",
+        "focus": "run-button",
+        "scrollWidth": 320,
+        "status": "Scenario evidence is incomplete. Outputs are not assessable. Clean baseline remains available.",
+        "viewport": 320
+      },
+      "validation": {
+        "export_test": "Keyboard trigger reached download announcement; download event retrieval timed out, file bytes not independently rechecked this round.",
+        "javascript_syntax_check": "passed",
+        "lab_api_tests_passed": 23,
+        "runtime": "Python 3.12.14 / Psycopg 3.3.6"
+      }
+    },
+    "policy": {
+      "arms": 120,
+      "distinct_demand_paths": 9,
+      "distinct_physical_trajectories": 65,
+      "forecast_safety_cells": 40,
+      "pairs": 80,
+      "policies": {
+        "periodic_sS": {
+          "cost_equal": 6,
+          "cost_higher": 32,
+          "cost_lower": 2,
+          "fill_equal": 2,
+          "fill_improved": 0,
+          "fill_regressed": 34,
+          "fill_undefined": 4,
+          "lower_cost_without_fill_or_cycle_regression": 0,
+          "paired_cells": 40
+        },
+        "prefix_projection": {
+          "cost_equal": 36,
+          "cost_higher": 0,
+          "cost_lower": 4,
+          "fill_equal": 32,
+          "fill_improved": 4,
+          "fill_regressed": 0,
+          "fill_undefined": 4,
+          "lower_cost_without_fill_or_cycle_regression": 4,
+          "paired_cells": 40
+        }
+      },
+      "scenario_labels": 10
+    },
+    "public_forecast": {
+      "extraction_counts": {
+        "cancellation_rows": 9288,
+        "gross_positive_units": 5660981,
+        "included_rows": 531285,
+        "invalid_rows": 0,
+        "nonpositive_non_cancelled_rows": 1336,
+        "raw_rows": 541909,
+        "repeated_invoice_stock_pairs": 10684
+      },
+      "horizon28": {
+        "mean": {
+          "actual_units": 15373,
+          "cumulative_mae": {
+            "denominator_hex": "8a0",
+            "numerator_hex": "859b5"
+          },
+          "items": 32,
+          "origins": 32,
+          "points": 896
+        },
+        "selection_chosen": {
+          "actual_units": 15373,
+          "cumulative_mae": {
+            "denominator_hex": "f782d1228733d63fe00cdee8300b8286e4161dfd6d21a7a9e3c19d579fcf43833699cf7390c448eab1334140db7f80949947c5a55d6a2bd07c941983bfdab47c149f4a2fb58b5da8769e6daf2a9f0829513db01691a29f526af7dd067cb22e20f620caadb7721c584e8982ed4dc429175f3a666250e02da237f9a7a6922d1eb2f1776f919e740c51c9d683bee584b2c1ff5d69ec6f7e8044dfe30756b8bcc3bc5ef6bcb44c5d554edb775cd9ef139e47a8b271d9774446a2209100c7f577f7c54cfb42df70cbcd1180a00e11e59143946faf1280aeddee7d43810d0e863684f84c2640fe8172ceb3deff9dc211187a731342586e844b9963f056c8a0e480",
+            "numerator_hex": "1ace56faf2a66649af4ffbf3e14e89b0cc1a81cf78af7fe16aaf4dd065944f88e95b3289e220a35834a340064db8bcceb63059d155a299c35550e8fe26255cca878b2b6164af1dab91cbd9ee63926df94b3f81381750a46996ecdfc4558e4d8f6c52ac9669c5f1097ef277621aac1189a3f836e53aec2edccd17693e227459310692c2854f64227318e4c4bf6cbfa030d0657c92b534a4012fc140747e41db5951604cac9c9b3563c15c348ac9c5b529ba55fc7a5d202c3c6e1425e48cf2b2db5cba627f4eb3daed3c04671eadc2ad509154a4c6e70ef3b254fc284622b92cd9545711d018d081ba139e83e6085099ab9ede171a3673cf7441a34dde17a951b"
+          },
+          "items": 32,
+          "origins": 32,
+          "points": 896
+        }
+      },
+      "selected_items": 32,
+      "training_known_items": 3838
+    },
+    "public_safety": {
+      "arms": 768,
+      "configurations": {
+        "mean:q95:L2:delay0": {
+          "full_cost": {
+            "denominator_hex": "1",
+            "numerator_hex": "bd34c"
+          },
+          "holdout": {
+            "cycle_service": {
+              "denominator_hex": "20",
+              "numerator_hex": "1b"
+            },
+            "cycles": 128,
+            "defined_fill_items": 30,
+            "demand_units": 15373,
+            "immediate_fill": {
+              "denominator_hex": "3c0d",
+              "numerator_hex": "37ef"
+            },
+            "immediate_units": 14319,
+            "protection_coverage": {
+              "denominator_hex": "c",
+              "numerator_hex": "b"
+            },
+            "protection_covered": 88,
+            "protection_origins": 96,
+            "shortage_free_cycles": 108,
+            "undefined_fill_items": 2
+          }
+        },
+        "mean:q95:L2:delay3": {
+          "full_cost": {
+            "denominator_hex": "1",
+            "numerator_hex": "10010b"
+          },
+          "holdout": {
+            "cycle_service": {
+              "denominator_hex": "80",
+              "numerator_hex": "65"
+            },
+            "cycles": 128,
+            "defined_fill_items": 30,
+            "demand_units": 15373,
+            "immediate_fill": {
+              "denominator_hex": "3c0d",
+              "numerator_hex": "291d"
+            },
+            "immediate_units": 10525,
+            "protection_coverage": {
+              "denominator_hex": "c",
+              "numerator_hex": "b"
+            },
+            "protection_covered": 88,
+            "protection_origins": 96,
+            "shortage_free_cycles": 101,
+            "undefined_fill_items": 2
+          }
+        },
+        "sba:q95:L2:delay0": {
+          "full_cost": {
+            "denominator_hex": "1",
+            "numerator_hex": "d3954"
+          },
+          "holdout": {
+            "cycle_service": {
+              "denominator_hex": "80",
+              "numerator_hex": "79"
+            },
+            "cycles": 128,
+            "defined_fill_items": 30,
+            "demand_units": 15373,
+            "immediate_fill": {
+              "denominator_hex": "3c0d",
+              "numerator_hex": "3aa8"
+            },
+            "immediate_units": 15016,
+            "protection_coverage": {
+              "denominator_hex": "20",
+              "numerator_hex": "1f"
+            },
+            "protection_covered": 93,
+            "protection_origins": 96,
+            "shortage_free_cycles": 121,
+            "undefined_fill_items": 2
+          }
+        },
+        "sba:qoff:L2:delay0": {
+          "full_cost": {
+            "denominator_hex": "1",
+            "numerator_hex": "c0803"
+          },
+          "holdout": {
+            "cycle_service": {
+              "denominator_hex": "80",
+              "numerator_hex": "43"
+            },
+            "cycles": 128,
+            "defined_fill_items": 30,
+            "demand_units": 15373,
+            "immediate_fill": {
+              "denominator_hex": "3c0d",
+              "numerator_hex": "3482"
+            },
+            "immediate_units": 13442,
+            "protection_coverage": {
+              "denominator_hex": "10",
+              "numerator_hex": "b"
+            },
+            "protection_covered": 66,
+            "protection_origins": 96,
+            "shortage_free_cycles": 67,
+            "undefined_fill_items": 2
+          }
+        }
+      },
+      "dates": {
+        "common_settlement_days": 15,
+        "end_exclusive": "2011-12-09",
+        "holdout_days": 28,
+        "holdout_start": "2011-11-11",
+        "training_end": "2011-09-16",
+        "warmup_days": 56
+      },
+      "paired_contrasts": 512
+    },
+    "retention": {
+      "distinct_demand_paths": 17,
+      "passed_gates": {
+        "tsb:decay90": 0,
+        "tsb:recent90": 0
+      },
+      "path_labels": 21,
+      "simulations": 105
+    },
+    "supply": {
+      "distinct_demand_paths": 7,
+      "intervention_cells": 13,
+      "logical_arm_simulations": 702,
+      "paired_comparisons": 351,
+      "path_labels": 9,
+      "unique_paired_simulations": 333
+    },
+    "warmup": {
+      "demand_path_labels": 24,
+      "distinct_generated_demand_paths": 18,
+      "logical_arm_simulations": 720,
+      "null_fill_pairs": 75,
+      "origin_trials": 72,
+      "paired_comparisons": 360,
+      "supplier_paths": 72,
+      "unique_paired_simulations": 360,
+      "warm_equal_fill_pairs": 180,
+      "warm_improved_fill_pairs": 70,
+      "warm_lower_full_cost_pairs": 2,
+      "warm_regressed_fill_pairs": 35
+    }
+  },
+  "main_commit": "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6",
+  "protocol_version": "portfolio-claims-v1",
+  "pull_requests": [
+    {
+      "base": "main",
+      "base_sha": "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6",
+      "head": "codex/research-roadmap",
+      "head_sha": "d2cb98ba1016f80bd2c2dd40159092f4f1b21395",
+      "merged": false,
+      "number": 14,
+      "state": "open",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/pull/14"
+    },
+    {
+      "base": "main",
+      "base_sha": "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6",
+      "head": "codex/public-observed-sales",
+      "head_sha": "97d1f8a00a00cecdcd01368403bdfeab8b92d510",
+      "merged": false,
+      "number": 15,
+      "state": "open",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/pull/15"
+    },
+    {
+      "base": "main",
+      "base_sha": "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6",
+      "head": "codex/policy-comparison",
+      "head_sha": "39bf64d7e70b9221afbe1d697fe49fd348fcdc04",
+      "merged": false,
+      "number": 16,
+      "state": "open",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/pull/16"
+    },
+    {
+      "base": "codex/public-observed-sales",
+      "base_sha": "97d1f8a00a00cecdcd01368403bdfeab8b92d510",
+      "head": "codex/public-safety-service",
+      "head_sha": "706fa82c7520f5119ffd85b8c6a2a65f40fc2f10",
+      "merged": false,
+      "number": 17,
+      "state": "open",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/pull/17"
+    },
+    {
+      "base": "main",
+      "base_sha": "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6",
+      "head": "codex/lab-accessibility",
+      "head_sha": "3d66b4309cc465d39ed830b4db59ef0860807c25",
+      "merged": false,
+      "number": 18,
+      "state": "open",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/pull/18"
+    }
+  ],
+  "rational_encoding": "Lossless hexadecimal numerator/denominator; values retained from source.",
+  "scope": "Existing retained reports only. Source bytes and selected claim denominators reconciled. No refit, simulation replay, new UI check, CI or deployment validation.",
+  "sources": {
+    "accessibility": {
+      "commit": "3d66b4309cc465d39ed830b4db59ef0860807c25",
+      "path": "docs/review/lab-accessibility-browser.json",
+      "sha256": "0ea52cd1b830e67c077fe1cd72e25ee41acc6ed80c47ebbc46cac7290d6da24a",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/3d66b4309cc465d39ed830b4db59ef0860807c25/docs/review/lab-accessibility-browser.json",
+      "verified_source_files": 4
+    },
+    "policy": {
+      "commit": "39bf64d7e70b9221afbe1d697fe49fd348fcdc04",
+      "path": "docs/review/policy-comparison-v1.json",
+      "sha256": "6571c87a89cec6ded46cd048cd90ec5160497ff9e0fc630b3dedf3d30e562dd3",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/39bf64d7e70b9221afbe1d697fe49fd348fcdc04/docs/review/policy-comparison-v1.json",
+      "verified_source_files": 6
+    },
+    "public_forecast": {
+      "commit": "97d1f8a00a00cecdcd01368403bdfeab8b92d510",
+      "path": "docs/review/public-sales-forecast-v1.json",
+      "sha256": "0daa727e8a9501d1cae090f315e1ae9e0d821c5563ce637acc429464fa967f4f",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/97d1f8a00a00cecdcd01368403bdfeab8b92d510/docs/review/public-sales-forecast-v1.json",
+      "verified_source_files": 5
+    },
+    "public_safety": {
+      "commit": "706fa82c7520f5119ffd85b8c6a2a65f40fc2f10",
+      "path": "docs/review/public-sales-safety-v1.json",
+      "sha256": "c972acdc9074c1fa77107fd8342e7126a9e82f90f6b18ddbf70c29b0f6e66f32",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/706fa82c7520f5119ffd85b8c6a2a65f40fc2f10/docs/review/public-sales-safety-v1.json",
+      "verified_source_files": 8
+    },
+    "retention": {
+      "commit": "d2cb98ba1016f80bd2c2dd40159092f4f1b21395",
+      "path": "docs/review/safety-retention-v1.json",
+      "sha256": "c4b64eb4e798a535a305ad84302a51342281fe4c7cff8f6cfbdd3de0ee276c37",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/d2cb98ba1016f80bd2c2dd40159092f4f1b21395/docs/review/safety-retention-v1.json",
+      "verified_source_files": 10
+    },
+    "supply": {
+      "commit": "d2cb98ba1016f80bd2c2dd40159092f4f1b21395",
+      "path": "docs/review/supply-sensitivity-v1.json",
+      "sha256": "84be025a13b950c2c5e9782eca4cf9e8fcf1f5ae0ff25ff1a079fbfe56746637",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/d2cb98ba1016f80bd2c2dd40159092f4f1b21395/docs/review/supply-sensitivity-v1.json",
+      "verified_source_files": 9
+    },
+    "warmup": {
+      "commit": "d2cb98ba1016f80bd2c2dd40159092f4f1b21395",
+      "path": "docs/review/fresh-warmup-v1.json",
+      "sha256": "a045d1e5b0e484326059e464d0111538eb0bdf36d495147f13bcfaf23c4b3814",
+      "url": "https://github.com/daniel-li2021/inventory-intelligence/blob/d2cb98ba1016f80bd2c2dd40159092f4f1b21395/docs/review/fresh-warmup-v1.json",
+      "verified_source_files": 8
+    }
+  },
+  "status_verified_at_utc": "2026-10-03 20:50:02 UTC",
+  "verified_at_utc": "2026-10-03T20:44:38Z"
+}

@@ -1,5 +1,12 @@
 # Readiness and the next useful investigation
 
+The user assigned the useful follow-ups on 2026-10-03. Current execution is
+tracked in [the long-term roadmap](RESEARCH_ROADMAP.md); the first
+[fresh costed warmup results](FRESH_WARMUP_RESULTS.md) are now measured.
+Pending-authorization statements below describe the earlier assessment, not the
+current research assignment. Public observations remain separate from the
+synthetic operational portfolio.
+
 Assessed 2026-10-03 from main `429cc71`. This investigation reused the saved
 decision/intermittent artifacts and checked primary external sources. No new
 experiment, model fit, public-data acquisition or deployment was performed.

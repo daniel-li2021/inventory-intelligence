@@ -1,7 +1,9 @@
 # Proposed public observed-sales research — v1
 
-Prepared 2026-10-02; **pending explicit public-data boundary authorization**.
-This is a concrete later handoff, not a relaxation of planning-v1 or AGENTS.md.
+Prepared 2026-10-02; **assigned by the user on 2026-10-03** as part of the
+[long-term roadmap](RESEARCH_ROADMAP.md). This authorizes official UCI acquisition
+and the bounded separate research described here. It is not a relaxation of the
+operational planning contract or permission to import confidential inputs.
 The operational portfolio stays synthetic. Public observations would live in a
 separate offline research adapter and ignored local outputs, never as accepted
 orders, verified inventory, warehouses or uncensored demand.
@@ -47,7 +49,7 @@ item have observed sales zero only within a verified complete extraction of the
 declared archive range; this never proves zero unconstrained demand or availability.
 No prices, promotions or customer attributes enter forecasting features.
 
-## Frozen bounded benchmark after authorization
+## Frozen bounded benchmark
 
 Use source dates [2010-12-01,2011-12-09), excluding the final potentially partial
 day. Final 28 complete dates [2011-11-11,2011-12-09) are the internal holdout.
@@ -73,9 +75,22 @@ segment checks. Aggregate results may justify a new aggregation or global-model
 handoff; ADIDA/IMAPA/LightGBM are not automatic additions. A failed or blocked
 benchmark leaves the existing approved methods untouched.
 
-## Authorization requested
+## Current implementation checkpoint
 
-Approve this named public observed-sales boundary and official UCI acquisition,
-with real rows/series local and ignored and only aggregate metrics published,
-or retain synthetic-only research. Dataset acquisition and real evaluation must
-wait for this answer; elapsed time is not approval.
+The [adapter](PUBLIC_ADAPTER_V1.md) and [forecast-only evaluation](PUBLIC_FORECAST_V1.md)
+are implemented and independently validated on the public-observed-sales task
+branch. [Measured results](PUBLIC_SALES_RESULTS.md) preserve raw/derived observations
+locally and publish aggregates only. Initial forecast comparison and train-only
+subset selection are complete. The dependent public-safety-service branch adds
+the [frozen sales-proxy safety study](PUBLIC_SAFETY_V1.md) and
+[achieved-service results](PUBLIC_SAFETY_RESULTS.md), with paid continuous warmup,
+q90/q95 coverage/pinball and synthetic supply timing. The original forecast report
+remains forecast-only. These exploratory reused observations authorize no advanced
+method or operational import. See the research roadmap in PR14 for remaining work.
+
+The subsequent [disjoint-item protocol](PUBLIC_CALIBRATION_V1.md) commits a
+training-only seed-1709 subset/grid before any new-item simulation, excludes all
+32 consumed identities and reuses attested source caches. Its
+[measured replication](PUBLIC_CALIBRATION_RESULTS.md) retains all 768 arms and
+null denominators, with no policy/model promotion. This is cross-item evidence
+in the same retailer/calendar, not independent-market or later-time validation.

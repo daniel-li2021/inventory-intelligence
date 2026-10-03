@@ -1,0 +1,41 @@
+[
+  {
+    "acquisition_parsing_forecast_simulation_disabled": true,
+    "package": "public",
+    "result": {
+      "disjoint": {
+        "arms": 768,
+        "local_bytes": 58220312,
+        "model_refits": 0,
+        "overlap_items": 0,
+        "pairs": 512,
+        "public_bytes": 488745,
+        "simulation_replays": 0
+      },
+      "parent": {
+        "arms": 768,
+        "local_bytes": 58607581,
+        "model_refits": 0,
+        "pairs": 512,
+        "public_bytes": 492832,
+        "simulation_replays": 0
+      }
+    },
+    "source_snapshot": "e7473a595d4ef6deca33c283ea6b27e23ad83bc4",
+    "temporary_source_view": "/private/tmp/ii-source-audit-public-9t7xhfkj"
+  },
+  {
+    "acquisition_parsing_forecast_simulation_disabled": true,
+    "package": "lost",
+    "result": {
+      "archive_bytes": 1301214,
+      "logical_arms": 576,
+      "model_invocations": 0,
+      "pairs": 288,
+      "simulation_replays": 0,
+      "unique_arm_audits": 480
+    },
+    "source_snapshot": "d06badeb2a61b2f76da5ebb4afbd9ff6ffc38023",
+    "temporary_source_view": "/private/tmp/ii-source-audit-lost-85a8v4j3"
+  }
+]

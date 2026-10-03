@@ -1,0 +1,98 @@
+{
+  "contrast": {
+    "inputBoundary": 3.459902291074141,
+    "series": [
+      {
+        "color": "#61776b",
+        "ratio": 4.817270503880207
+      },
+      {
+        "color": "#947154",
+        "ratio": 4.421751264384814
+      }
+    ],
+    "text": [
+      {
+        "background": "rgb(245, 244, 238)",
+        "foreground": "rgb(86, 102, 106)",
+        "name": "helper on paper",
+        "ratio": 5.438195908445576
+      },
+      {
+        "background": "rgb(251, 237, 227)",
+        "foreground": "rgb(157, 68, 32)",
+        "name": "blocked label",
+        "ratio": 5.584551434159471
+      },
+      {
+        "background": "rgb(233,242,235)",
+        "foreground": "rgb(86, 102, 106)",
+        "name": "helper on green",
+        "ratio": 5.240679877034493
+      }
+    ]
+  },
+  "desktop": {
+    "cards": "Recommended replenishment12Baseline 12pieces \u00b7 prefix proposal\u0394 0Immediate fill rate39.3%Baseline 100.0%new demand \u00b7 scored days\u0394 -60.7 percentage pointsShortage-free cycles11.1%Baseline 100.0%complete review cycles\u0394 -88.9 percentage pointsTotal synthetic cost1171Baseline 327scored + runoff cost units\u0394 +844Simulated shortage days17Baseline 0days with ending backlog\u0394 +17Average physical stock1/4Baseline 219/28pieces \u00b7 scored days\u0394 -53/7Backlog exposure100Baseline 0piece-days \u00b7 scored days\u0394 +100Forecast demand112Baseline 112 \u00b7 28-day windowmean \u00b7 28 days",
+    "focus": "run-button",
+    "namedInputs": true,
+    "patterns": [
+      "12 5",
+      "solid",
+      "1 5",
+      "5 4"
+    ],
+    "scrollWidth": 1280,
+    "viewport": 1280
+  },
+  "mobile": {
+    "assessment": "NOT ASSESSABLEThe evidence gate blocks this scenario.Supply evidence is incomplete or inconsistent. A forecast cannot be assessed from the available evidence. The clean baseline remains available below.",
+    "focus": "run-button",
+    "scrollWidth": 320,
+    "status": "Scenario evidence is incomplete. Outputs are not assessable. Clean baseline remains available.",
+    "viewport": 320
+  },
+  "requestFailure": {
+    "baselineRetained": true,
+    "focus": "form-errors",
+    "message": "Failed to fetchThe displayed results remain from the previous successful run.",
+    "role": "alert",
+    "visible": true
+  },
+  "retry": {
+    "errorHidden": true,
+    "focus": "run-button",
+    "status": "Scenario evidence is incomplete. Outputs are not assessable. Clean baseline remains available."
+  },
+  "reviewedAt": "2026-10-03T20:32:59.224Z",
+  "scope": "local synthetic replay; targeted browser review; screen-reader speech and full WCAG conformance unverified",
+  "screenshots_sha256": {
+    "docs/review/lab-accessibility-blocked.jpg": "776e9344aa96ddcc7a1154b722bfeb624a3ee47b9070afc886e77bdbf46a847d",
+    "docs/review/lab-accessibility-desktop.jpg": "e09a01eb6ce0a9e5fa8570d7474f0a8b8da0c505a04e6ec9c7f42d1f6088989e",
+    "docs/review/lab-accessibility-mobile.jpg": "61bc6ca9483843e6e5499c75375a383fdc940bea60d58905120b057a2a9c0003"
+  },
+  "skipLink": {
+    "focus": "main",
+    "fragment": "#main"
+  },
+  "source_sha256": {
+    "src/inventory_intelligence/lab_api.py": "8a34cd9ab3ae1b5ad3ce26a070b7b3a98b07d13c290f74f29c38743e657b260c",
+    "src/inventory_intelligence/lab_static/index.html": "1efc5bf99f92490dfeccd545167b3605c8f9c64523b5f3d3e44b11a93bc76838",
+    "src/inventory_intelligence/lab_static/lab.css": "52597242a70aa75a7a6399c5eed26af56fab1facf6959ec4f815b9db3ffc75b6",
+    "src/inventory_intelligence/lab_static/lab.js": "6308f371748d38a90709af2c7784643e9adf79475dcce52cb09865209957377d"
+  },
+  "table": {
+    "focus": "table-scroll",
+    "outline": "solid",
+    "pageWidth": 320,
+    "role": "region",
+    "scrollLeft": 80,
+    "viewport": 320
+  },
+  "validation": {
+    "export_test": "Keyboard trigger reached download announcement; download event retrieval timed out, file bytes not independently rechecked this round.",
+    "javascript_syntax_check": "passed",
+    "lab_api_tests_passed": 23,
+    "runtime": "Python 3.12.14 / Psycopg 3.3.6"
+  }
+}

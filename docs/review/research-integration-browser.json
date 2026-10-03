@@ -1,0 +1,26 @@
+{
+  "scope": "installed integration wheel; localhost HTTP Caddy proxy; actual hosted CSP; synthetic only",
+  "desktop": {
+    "keyboardRun": "Enter",
+    "proposal": 18,
+    "baselineProposal": 12,
+    "cost": 351,
+    "baselineCost": 327,
+    "completedFocus": "run-button",
+    "svgCharts": 4
+  },
+  "mobile": {
+    "width": 320,
+    "height": 740,
+    "documentScrollWidth": 320,
+    "status": "not_assessable",
+    "cleanBaselinePreserved": true,
+    "completedFocus": "run-button"
+  },
+  "consoleErrorsOrWarnings": [],
+  "limitations": [
+    "local HTTP browser check, not public TLS",
+    "bounded smoke, not full WCAG or screen-reader speech",
+    "downloaded comparison bytes not rechecked"
+  ]
+}
