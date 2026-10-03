@@ -7,8 +7,8 @@ It also tests whether a plausible forecast and ordering rule actually deliver
 service when demand, starting state and supply timing change.
 
 The operational core and local Decision Lab are implemented on main with
-synthetic business data. Five subsequent research/UX packages are implemented,
-locally validated and published as **unmerged PRs** as of 2026-10-03. Public
+synthetic business data. Ten subsequent research/UX/readiness PRs are retained in a combined, locally
+validated **integration candidate** as of 2026-10-03; main is unchanged. Public
 transaction research is a separate observed-sales boundary. There is no hosted
 deployment, purchase execution, measured retailer saving or production claim.
 [Verified delivery status](RESEARCH_STATUS.md), [exact claim receipt](review/portfolio-claims.json).

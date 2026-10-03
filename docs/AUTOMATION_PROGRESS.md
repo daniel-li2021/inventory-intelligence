@@ -3,7 +3,30 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — prospective disjoint calibration task branch
+## Current checkpoint — combined candidate and historical source lineage validated
+
+`codex/research-integration` begins at main `f6d3d16` and retains PR 14–23 exact
+heads by ancestry. Shared documentation conflicts are resolved; original reports
+remain byte-identical. The added lineage protocol precedes verifier/oracles commit
+`87caa74`; its saved manifest binds 24 artifacts / 119 nodes, 17 complete source
+maps and five parent/freeze links. Thirteen historical/current bindings stay
+explicit; no consumed evidence is rehashed to the combined kernel.
+
+A single fresh disposable PostgreSQL 17.6 run passes 240/240 tests without
+failures/errors/skips. Saved historical-source audits pass parent768 + disjoint768
+public arms and480 unique lost-sales saved trajectories without model refit or
+simulation replay. A newly installed combined wheel outside the checkout passes
+13 local private-CA HTTPS checks and an actual hosted-CSP keyboard/mobile browser
+smoke (spike18/cost351, baseline12/cost327; blocked320px/no overflow). Temporary
+DB/app/proxy/tab are retired. [Combined receipt and limits](RESEARCH_INTEGRATION.md).
+
+Main is unchanged; the earlier automatic merge approval rejection still requires
+explicit integration-owner approval. Docker/Linux enforcement/public hosting and
+CI are unverified. [All22 current statuses](RESEARCH_STATUS.md) supersede the
+historical package snapshots below, which preserve previous continuation context.
+Next independent work: actual planner closed-loop execution boundary/protocol.
+
+## Historical package checkpoint — prospective disjoint calibration task branch
 
 `codex/public-calibration-generalization` stacks on PR17's published sources;
 main remains unchanged. [Protocol](PUBLIC_CALIBRATION_V1.md) and exact public
@@ -72,7 +95,7 @@ cross-layer provenance/QA and demo accessibility. Advanced models remain gated;
 public sales do not become accepted-order demand. The full22-direction roadmap
 is retained on the research-roadmap branch/PR14, not silently narrowed here.
 
-## Current checkpoint — policy comparison branch, integration pending
+## Historical package checkpoint — policy comparison branch, integration pending
 
 The continuing research goal includes a frozen three-rule comparison with
 identical forecasts, known supply, prior commitments and review calendars.
@@ -93,7 +116,7 @@ explicit integration-owner approval; the human approval question remains pending
 No merger is retried. Independent research continues toward public sales-proxy
 safety/service evaluation, probabilistic calibration and demo accessibility.
 
-## Current checkpoint — independent Lab accessibility branch
+## Historical package checkpoint — independent Lab accessibility branch
 
 `codex/lab-accessibility` starts from current main `f6d3d1`. The
 [targeted review](LAB_ACCESSIBILITY_REVIEW.md) fixes submit focus loss, repeated
@@ -113,7 +136,7 @@ remaining provenance/property gaps and separately frozen fresh calibration label
 Large lost-sales/physical-count/hosting extensions keep their contract/target gates;
 the full roadmap is preserved in PR14 rather than narrowed to completed work.
 
-## Current checkpoint — independent lost-sales research branch
+## Historical package checkpoint — independent lost-sales research branch
 
 The continuing goal's separate lost-sales boundary is frozen in
 [CONTRACT_LOST_SALES_V1](CONTRACT_LOST_SALES_V1.md) at7550cc4; isolated kernel,
@@ -143,7 +166,7 @@ Main integration remains pending explicit owner approval after automatic review
 rejected PR14's merge. Next independent package: additive synthetic physical-count
 truth/provenance, then a concrete hosted read-only target/ownership proposal.
 
-## Current checkpoint — physical-count evidence and local lineage implemented
+## Historical package checkpoint — physical-count evidence and local lineage implemented
 
 Started from fetched/pruned `origin/main` at `f6d3d16` on the isolated
 `codex/physical-count-evidence` branch. Frozen additive contract `605b34a` precedes
@@ -175,7 +198,7 @@ approval review rejected that action; continue independent scoped work without
 retrying the merge. Next: concrete hosted synthetic-demo operating/acceptance plan.
 Global lineage and operational physical adjustments require separate boundaries.
 
-## Current checkpoint — hosted synthetic Lab readiness implemented
+## Historical package checkpoint — hosted synthetic Lab readiness implemented
 
 Started from fetched/pruned `origin/main` at `f6d3d16` on
 `codex/hosted-lab-readiness`. Architecture/resource/cost/release plan `6030d9f`

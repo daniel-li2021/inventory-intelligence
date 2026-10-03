@@ -145,11 +145,10 @@ do not establish unconstrained demand or historical inventory availability.
 
 ## Current checkpoint and continuation
 
-The initial package implements Wave 1 item 1 plus the first measured part of
-items 3/6/11. Evidence is local until the reviewed task branch is published.
-Retention challengers and supply/intervention attribution are now independently
-measured, retaining negative results and causal limits. Next: public observed-sales
-adapter/benchmark and the explicit small policy comparison; adapter validation
-can proceed independently if simulation becomes blocked. No listed direction is
-discarded merely because it is outside the current package. Large expansions
-remain concrete gated options, not promised production capabilities.
+The original Wave 1 package and later public-sales, prospective calibration,
+policy comparison, lost-sales, physical-count, accessibility and hosted-readiness
+packages are now retained in a combined integration candidate. Main is unchanged.
+Use [all 22 current statuses](RESEARCH_STATUS.md) and
+[combined acceptance/provenance](RESEARCH_INTEGRATION.md) instead of the initial
+package checkpoint. No original direction is dropped; conditional models/large
+extensions retain their gates. Saved report bytes remain consumed evidence.

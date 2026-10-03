@@ -44,6 +44,12 @@ and citations; its optional language model routes intent only. The offline
 simulator evaluates a separate periodic ordering policy and does not simulate
 execution of the planner's proposal.
 
+The [combined research candidate](docs/RESEARCH_INTEGRATION.md) retains PRs 14–23
+and all original report bytes. One fresh PostgreSQL 17.6 acceptance run passes
+240 tests; a 24-artifact / 119-node lineage manifest keeps historical source drift
+explicit. This is candidate validation: main, CI and public hosting status remain
+separate. [All 22 directions and next gates](docs/RESEARCH_STATUS.md).
+
 ## Try the Decision Lab
 
 The browser demo needs Python 3.12, with no database or model API key. From the
