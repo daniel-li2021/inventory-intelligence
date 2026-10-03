@@ -101,6 +101,56 @@ class CopilotPlanning(unittest.TestCase):
         with self.runner.transaction(),self.assertRaises(ValueError):
             cp.load_planning_run(self.runner,r['run_id'])
 
+    def test_assessable_forecast_requires_contiguous_known_training_for_its_key(self):
+        _,args=manual_demand(self.owner,'copilot-evidence:'+str(uuid4()),values=[4]*28)
+        r=run_forecast(self.runner,**{k:args[k] for k in ('batch_id','sku_id','warehouse_id','start_day')},
+                       origin_day=START+timedelta(days=28),method='mean',horizon=7)
+        self.assertEqual(cp.answer_planning(r)['citations'][0]['data']['result']['predictions'],['4']*7)
+        for mutate in (
+                lambda x:x['result']['training']['days'][0].update(quantity=None),
+                lambda x:x['result']['training']['days'][0].update(quantity=True),
+                lambda x:x['result']['training']['days'][0].update(reasons=['missing_day_evidence']),
+                lambda x:x['result']['training']['days'][0]['day_record'].update(availability='stockout'),
+                lambda x:x['result']['training']['days'][0]['day_record'].update(expected_lines=0),
+                lambda x:x['result']['training']['days'][0]['order_records'][0].update(accepted_qty=0),
+                lambda x:x['result']['training']['days'][0]['order_records'][0].update(observed_at='2026-01-26T08:00:00+00:00'),
+                lambda x:x['result']['training']['days'][1].update(day=x['result']['training']['days'][0]['day']),
+                lambda x:x['result']['training'].update(sku_id='another-sku'),
+                lambda x:x['result']['training'].update(known_at='2026-01-26T08:00:00+00:00'),
+                lambda x:x['context'].update(origin='2026-01-26T08:00:00+00:00'),
+                lambda x:x['context'].update(method='unsupported')):
+            corrupt=deepcopy(r); mutate(corrupt)
+            with self.assertRaises(ValueError):
+                cp.answer_planning(corrupt)
+
+    def test_scores_cannot_contradict_cited_truth_or_temporal_fold_schedule(self):
+        _,args=manual_demand(self.owner,'copilot-fold-evidence:'+str(uuid4()),values=[4]*84)
+        r=run_benchmark(self.runner,**{k:args[k] for k in ('batch_id','sku_id','warehouse_id','start_day','end_day')},
+                        group='constant',evaluated_at=args['known_at']+timedelta(days=10))
+        self.assertEqual(cp.answer_planning(r)['citations'][0]['data']['result']['selection']['28']['scores']['mean']['mae'],'0')
+        # Scores/actual/predictions stay mutually consistent. Only the cited
+        # source truth, training or schedule contradicts them.
+        for mutate in (
+                lambda x:x['result']['candidates'][0]['truth']['days'][0].update(quantity=99),
+                lambda x:x['result']['holdout']['truth']['days'][0].update(quantity=None),
+                lambda x:x['result']['holdout']['training'].update(known_at=x['context']['evaluated_at']),
+                lambda x:x['result']['candidates'][0].update(origin_day=x['context']['holdout_day']),
+                lambda x:x['result']['candidates'].clear(),
+                lambda x:x['context'].update(end_day='2026-03-23')):
+            corrupt=deepcopy(r); mutate(corrupt)
+            with self.assertRaises(ValueError):
+                cp.answer_planning(corrupt)
+
+    def test_replenishment_cannot_cite_other_or_null_training(self):
+        _,r=self.plan()
+        for mutate in (
+                lambda x:x['result']['forecast']['training']['days'][0].update(quantity=None),
+                lambda x:x['result']['training'].update(warehouse_id='another-warehouse'),
+                lambda x:x['context'].update(horizon=6)):
+            corrupt=deepcopy(r); mutate(corrupt)
+            with self.assertRaises(ValueError):
+                cp.answer_planning(corrupt)
+
     def test_cli_planning_reads_persisted_run_and_requires_explicit_intent(self):
         _,r=self.plan()
         args=[sys.executable,'-m','inventory_intelligence.copilot','--language-model','offline',
