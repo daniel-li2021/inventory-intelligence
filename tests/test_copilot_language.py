@@ -101,6 +101,41 @@ class Language(unittest.TestCase):
         self.assertEqual(payload["model"], "gpt-6-sol")
         self.assertEqual(payload["reasoning"], {"effort": "low"})
 
+    def test_opt_in_measurements_keep_missing_usage_unknown_and_capture_failed_calls(self):
+        usage = dict(input_tokens=37, output_tokens=11, total_tokens=48,
+                     input_tokens_details=dict(cached_tokens=0),
+                     output_tokens_details=dict(reasoning_tokens=3))
+        raw = json.loads(response())
+        raw.update(id="resp_test", model="measured-model", usage=usage)
+        measured = {}
+        with patch.object(language, "build_opener", return_value=self.fake_network(json.dumps(raw).encode())), patch.object(language, "_key", return_value="fake-test-key"):
+            result = language.route_question("Summarize saved checks please", telemetry=measured)
+        self.assertEqual(result["intent"], "reliability")
+        self.assertEqual(measured["usage"], dict(input_tokens=37, output_tokens=11,
+                         total_tokens=48, cached_tokens=0, reasoning_tokens=3))
+        self.assertEqual(measured["response_model"], "measured-model")
+        self.assertEqual(measured["attempted_calls"], 1)
+        self.assertGreaterEqual(measured["api_latency_ms"], 0)
+        raw["status"] = "incomplete"
+        with patch.object(language, "build_opener", return_value=self.fake_network(json.dumps(raw).encode())), patch.object(language, "_key", return_value="fake-test-key"):
+            self.assertEqual(language.route_question("Summarize saved checks please", telemetry=measured)["source"], "fallback")
+        self.assertEqual(measured["usage"]["total_tokens"], 48)
+        with patch.object(language, "build_opener", return_value=self.fake_network(response())), patch.object(language, "_key", return_value="fake-test-key"):
+            language.route_question("Summarize saved checks please", telemetry=measured)
+        self.assertIsNone(measured["usage"]["total_tokens"])
+        opener = MagicMock()
+        opener.open.side_effect = TimeoutError("fake-secret")
+        with patch.object(language, "build_opener", return_value=opener), patch.object(language, "_key", return_value="fake-test-key"):
+            language.route_question("Summarize saved checks please", telemetry=measured)
+        self.assertEqual(measured["attempted_calls"], 1)
+        self.assertIsNone(measured["usage"]["total_tokens"])
+        language.route_question("What failed?", telemetry=measured)
+        self.assertEqual(measured["attempted_calls"], 0)
+        self.assertIsNone(measured["api_latency_ms"])
+        with redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(main(["--question", "What failed?", "--measure-usage"]), 1)
+        self.assertEqual(json.loads(output.getvalue())["routing"]["telemetry"]["attempted_calls"], 0)
+
     def test_cli_refusal_avoids_retrieval_and_model_readiness_stays_blocked(self):
         for intent, status in (("unsupported", "refused"), ("readiness", "not_assessable")):
             routed = dict(intent=intent, source="model", model="gpt-6-luna", limitation=None)
