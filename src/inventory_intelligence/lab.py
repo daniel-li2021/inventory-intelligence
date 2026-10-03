@@ -220,7 +220,10 @@ def _side(parameters, evidence):
     report = evidence['plans'][parameters['evidence_case']]
     result = report['result']
     inv, supply = result['inventory'], result['supply']
-    refs = [_ref('planning.runs', report['run_id'])]
+    run_id = 'lab:'+_digest(dict(contract_version=CONTRACT_VERSION,
+                                archive_digest=evidence['digest'], parameters=parameters))
+    calculation_ref = _ref('lab.calculation', run_id)
+    refs = [calculation_ref, _ref('planning.runs.inputs', report['run_id'])]
     trace = [_node('reliability', 'Reliability run',
         'Saved synthetic inventory passed R001–R005 at the replay cutoff.',
         [_ref('reliability.runs', evidence['reliability']['run_id'])], evidence['reliability']),
@@ -283,7 +286,8 @@ def _side(parameters, evidence):
         total=sum(predictions, Fraction(0)), demand=demand, source_run_id=evidence['forecast']['run_id'])
     trace += [_node('demand_forecast', 'Demand and forecast',
         'Counterfactual copies use ceil(source pieces × demand_percent / 100); saved orders remain unchanged. Mean forecast reuses the exact core.',
-        [_ref('planning.runs', evidence['forecast']['run_id']), _ref('synthetic.future_demand', evidence['future_demand']['id'])],
+        [calculation_ref, _ref('planning.runs', evidence['forecast']['run_id']),
+         _ref('synthetic.future_demand', evidence['future_demand']['id'])],
         dict(saved_training=result['training'], counterfactual=forecast_result, demand_percent=percent)),
         _node('supply', 'Supply assumptions',
         'Only five confirmed inbound pieces count; pending inbound is excluded. Reservations are separate prior demand due at day zero. Supplier delay affects simulated orders and is hidden from ordering.',
@@ -304,13 +308,12 @@ def _side(parameters, evidence):
         'Advisory prefix-stock-v1 proposal; any pre-arrival shortage remains explicit.', refs, plan),
         _node('simulation', 'Simulated outcome',
         'Distinct periodic inventory-position policy reevaluates each review using completed demand only; scored and runoff costs are separate synthetic penalties.',
-        [_ref('decision.simulate', simulation['contract_version'])], dict(simulation=simulation, costs=costs, risk=risk,
+        [calculation_ref, _ref('decision.simulate', simulation['contract_version'])], dict(simulation=simulation, costs=costs, risk=risk,
             prefix_proposal_qty=plan['proposed_order_qty'],
             first_periodic_review=simulation['reviews'][0] | dict(
                 raw_requirement=max(Fraction(0), simulation['reviews'][0]['target']-simulation['reviews'][0]['inventory_position'])),
             event_sequence=['receipts', 'prior commitments and backlog fulfillment',
                             'periodic review and order', 'new demand and fulfillment', 'end-of-day costs']))]
-    run_id = 'lab:'+_digest(dict(archive_digest=evidence['digest'], parameters=parameters))
     return exact_json(dict(status='assessable', reasons=[], parameters=parameters,
         forecast=forecast_result, plan=plan, simulation=simulation, costs=costs, risk=risk,
         trace=trace, run_id=run_id))

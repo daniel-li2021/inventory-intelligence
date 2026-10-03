@@ -52,6 +52,9 @@ The Decision Trace links reliability run → inventory input row IDs → eligibl
 demand and forecast → supply assumptions → policy → raw requirement → rounding
 → recommendation → simulated outcome. Lab run hashes identify copied scenario
 inputs and deterministic calculations separately from persisted run UUIDs.
+Derived forecast, raw requirement, rounding, proposal and simulation trace nodes
+cite their lab calculation hash. Saved planning UUIDs are labelled as input-run
+references so scenario values cannot appear to be stored baseline outputs.
 The incomplete-supply control suppresses the scenario proposal, projection,
 simulation, risk and costs; it retains the clean baseline for comparison.
 
@@ -82,6 +85,23 @@ same-origin application and API boundary checks.
 
 ## Validation
 
-Independent control/API tests and combined integration evidence will be recorded
-here after implementation. Separate local Python/PostgreSQL validation from
-remote CI and any unmeasured real-world inventory performance.
+All 18 independent lab/API tests pass. Combined acceptance passes **124/124**
+tests against fresh isolated local PostgreSQL **17.6** / Python **3.12.14**.
+The final calculation-reference correction was revalidated with the 18 lab/API
+tests. Existing reliability, forecasting, replenishment, simulation and Copilot
+source modules have no changes.
+
+The built wheel was installed and served from outside the checkout. Its archive,
+HTML, CSS and JavaScript assets are present and all five root/asset/evidence API
+smoke routes return 200. `pip check` and JavaScript syntax checks pass. A real
+in-app browser verified demand 125% (proposal 18 vs 12, costs 351 vs 327), hidden
+delay 3 (immediate fill 11/28, shortages 17, cost 1171), incomplete-supply blocking,
+zero-demand undefined fill, stale-input indication and expanded rounding lineage.
+The browser-downloaded comparison JSON was parsed and checked for preserved
+baseline and null blocked outputs. No runtime database or model API was used.
+
+![Synthetic baseline versus demand scenario](review/decision-lab.jpg)
+
+These are local synthetic results, not PostgreSQL 17.9 remote CI evidence,
+production inventory performance, calibrated service/risk, or measured savings.
+See [independent oracles and API boundaries](DECISION_LAB_VALIDATION.md).

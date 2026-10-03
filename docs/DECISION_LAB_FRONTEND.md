@@ -34,6 +34,8 @@ are needed. Semantic headings/forms, native integer bounds, visible focus,
 live-region status, chart descriptions, exact-value tables, reduced motion and
 responsive layouts support keyboard and small-screen use.
 
-Validation: JavaScript syntax checked with the bundled Node runtime. The
-integration owner validates API-backed browser interaction, blocked evidence,
-trace and export after combining backend and frontend branches.
+Validation: JavaScript syntax passes with the bundled Node runtime. Combined
+API-backed browser checks verify demand and supplier-delay presets, blocked
+evidence, zero-demand undefined fill, stale inputs, exact rounding trace and a
+downloaded/parsed JSON export. Assets also pass from an installed wheel outside
+the checkout. [Combined acceptance and screenshot](DECISION_LAB.md).

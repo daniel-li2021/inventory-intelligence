@@ -185,6 +185,8 @@ class DecisionLabTests(unittest.TestCase):
                 self.assertTrue(node["explanation"])
                 self.assertTrue(node["references"])
                 self.assertIn("data", node)
+                if node["stage"] in ("demand_forecast", "raw_requirement", "rounding", "recommendation", "simulation"):
+                    self.assertIn(dict(source="lab.calculation", id=side["run_id"]), node["references"])
 
     def test_incomplete_supply_suppresses_outputs_and_retains_baseline(self):
         result = self.evaluate({"evidence_case": "incomplete_supply"})

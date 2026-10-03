@@ -240,7 +240,9 @@
       row.append(badge); row.append(el("p", `Before arrival: ${risk.pre_arrival_shortage_days.length ? risk.pre_arrival_shortage_days.join(", ") : "No shortages"}.`));
       if (risk.stockout_days.length) row.append(el("p", `Stockout dates: ${risk.stockout_days.join(", ")}.`));
       row.append(el("p", `Peak surplus above safety: ${exact(risk.peak_excess_qty)} pieces · excess exposure: ${exact(risk.excess_piece_days)} piece-days.`));
-      row.append(el("p", `Immediate fill ${risk.meets_service_target === null ? "has an undefined denominator" : risk.meets_service_target ? "meets" : "falls below"} the ${percentage(risk.service_target)} service threshold.`)); root.append(row);
+      row.append(el("p", risk.meets_service_target === null
+        ? `Immediate fill has an undefined denominator; the ${percentage(risk.service_target)} service threshold remains unassessed.`
+        : `Immediate fill ${risk.meets_service_target ? "meets" : "falls below"} the ${percentage(risk.service_target)} service threshold.`)); root.append(row);
     });
     root.append(el("p", data.scenario.risk?.definition || data.baseline.risk?.definition || "", "table-note"));
   }

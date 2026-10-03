@@ -48,6 +48,9 @@ its outcomes do not claim to simulate execution of the prefix proposal. Service
 target is a comparison threshold, not a calibrated guarantee. All quantities and
 comparisons come from deterministic Python evidence. No orders are executed.
 [Architecture, UX, bounds and implementation handoff](docs/DECISION_LAB_PLAN.md).
+[Operations and verified local acceptance](docs/DECISION_LAB.md).
+
+![Synthetic Decision Lab baseline versus demand scenario](docs/review/decision-lab.jpg)
 
 Requires Python 3.12 and Docker with Compose. From the repository root:
 

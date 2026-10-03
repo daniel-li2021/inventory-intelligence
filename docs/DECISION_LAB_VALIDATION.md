@@ -42,11 +42,16 @@ python -m unittest tests.test_lab tests.test_lab_api
 python -m unittest tests.test_decision tests.test_forecasting
 ```
 
-Measured before frontend integration: 17 of 18 lab/API tests pass against the
-backend worktree and real generated archive; all 16 existing decision and
-forecast tests pass. The remaining lab test intentionally requires packaged
-frontend assets; the API-only worktree currently returns 503 for `/`.
-The integration owner must rerun this check after combining frontend assets,
-then verify the installed package and real browser interaction. No production
-inventory, calibrated risk, live service, cloud deployment or performance claim
-is implied by these local synthetic checks.
+Final combined integration: **18/18 lab/API tests pass**, including packaged
+frontend assets. The full existing-plus-lab suite passes **124/124** tests against
+a fresh isolated local PostgreSQL 17.6 database on Python 3.12.14. The final trace
+reference correction was rechecked with the 18 lab/API tests: derived values
+cite their lab calculation hash and saved planning UUIDs refer to input reports.
+
+Installed-wheel assets and offline HTTP routes pass from outside the checkout.
+Real browser demand, supplier-delay, incomplete-supply and zero-demand scenarios,
+stale inputs, rounding trace and downloaded JSON were verified; the export was
+parsed to confirm baseline preservation and blocked nulls. [Integration evidence
+and screenshot](DECISION_LAB.md). No production inventory, calibrated risk, live
+service, remote PostgreSQL 17.9 CI, cloud deployment or performance claim is
+implied by these local synthetic checks.
