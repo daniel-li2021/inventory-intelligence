@@ -236,9 +236,10 @@
       const risk = data[side].risk;
       const row = el("div", null, "risk-row"); row.append(el("strong", side === "baseline" ? "Clean baseline" : "Current scenario"));
       if (!risk) { row.append(el("p", "Not assessable. The evidence gate suppresses risk outputs.")); root.append(row); return; }
-      const badge = el("span", risk.stockout_days.length ? "Projected stockout" : "No projected stockout", "risk-badge" + (!risk.stockout_days.length ? " good" : ""));
+      const badge = el("span", risk.stockout_days.length ? "Prefix projection shortage" : "No prefix projection shortage", "risk-badge" + (!risk.stockout_days.length ? " good" : ""));
       row.append(badge); row.append(el("p", `Before arrival: ${risk.pre_arrival_shortage_days.length ? risk.pre_arrival_shortage_days.join(", ") : "No shortages"}.`));
       if (risk.stockout_days.length) row.append(el("p", `Stockout dates: ${risk.stockout_days.join(", ")}.`));
+      row.append(el("p", `Periodic simulation: ${exact(data[side].simulation?.metrics.shortage_days)} scored days with ending backlog.`));
       row.append(el("p", `Peak surplus above safety: ${exact(risk.peak_excess_qty)} pieces · excess exposure: ${exact(risk.excess_piece_days)} piece-days.`));
       row.append(el("p", risk.meets_service_target === null
         ? `Immediate fill has an undefined denominator; the ${percentage(risk.service_target)} service threshold remains unassessed.`
@@ -260,6 +261,11 @@
     node.querySelector("tbody tr:last-child").classList.add("total-row");
     const rates = data.baseline.costs?.rates;
     root.append(el("p", rates ? `Synthetic rates: holding ${exact(rates.holding)} / piece-day · backlog ${exact(rates.backlog)} / piece-day · setup ${exact(rates.setup)} / placed order. No currency or commercial cost claim.` : "Synthetic cost rates unavailable.", "table-note"));
+    const window = (side) => {
+      const assumptions = data[side].simulation?.assumptions;
+      return assumptions ? `${assumptions.scored_days} scored + ${assumptions.runoff_days} runoff days` : "Not assessable";
+    };
+    root.append(el("p", `Accounting windows: baseline ${window("baseline")}; scenario ${window("scenario")}. Runoff length changes with lead time, delay and review interval; combined totals can cover different durations.`, "table-note"));
   }
   function renderForecast(data) {
     const baseline = data.baseline.forecast, scenario = data.scenario.forecast;
@@ -373,6 +379,11 @@
       if (!data) return;
       buildControls(data); render(data); $("live-status").textContent = "Default clean baseline and scenario are ready.";
     } catch (error) {
+      if (!result) {
+        clear("trust-strip").append(el("strong", "Synthetic evidence unavailable"));
+        clear("assessment").append(el("p", "Not assessable. No replay results are available."));
+        clear("controls").append(el("p", "Scenario controls require validated replay evidence."));
+      }
       const root = clear("global-error"); root.hidden = false; root.append(el("p", `${errorMessage(error)} Start the local Lab server and retry.`));
       const retry = el("button", "Retry loading evidence", "button secondary"); retry.type = "button"; retry.addEventListener("click", initialize); root.append(retry);
       $("live-status").textContent = "Evidence could not be loaded.";

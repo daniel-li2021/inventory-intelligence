@@ -1,12 +1,27 @@
 """Independent offline Decision Lab oracles; no database or model calls."""
 from copy import deepcopy
 from fractions import Fraction
+import hashlib
 import json
 from pathlib import Path
 import tempfile
 import unittest
 
 from inventory_intelligence import lab
+
+
+def rehash_archive(evidence):
+    """Rebuild transport hashes independently, leaving semantic validation to SUT."""
+    def digest(value):
+        return hashlib.sha256(json.dumps(value, sort_keys=True,
+                              separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+    for report in (evidence['forecast'], *evidence['plans'].values()):
+        result = report['result']
+        inputs = result['training'] if report['kind'] == 'forecast' else {
+            key: result[key] for key in ('inventory', 'supply', 'training')}
+        report['input_digest'] = digest(dict(context=report['context'], inputs=inputs))
+    evidence['digest'] = digest({key: value for key, value in evidence.items() if key != 'digest'})
+    return evidence
 
 
 class DecisionLabTests(unittest.TestCase):
@@ -232,6 +247,84 @@ class DecisionLabTests(unittest.TestCase):
                        {"pack_size": 0}, {"inbound_day": 28}, {"unknown": 1}):
             with self.subTest(change=change), self.assertRaises(ValueError):
                 self.evaluate(change)
+
+    def test_rehashed_supply_archive_requires_complete_consistent_manifest(self):
+        changes = {
+            'wrong key': lambda s: s['batch'].update(sku_id='other'),
+            'wrong cutoff': lambda s: s['batch'].update(as_of='2026-01-03T08:00:00+00:00'),
+            'missing status': lambda s: s['batch'].pop('status'),
+            'wrong declared count': lambda s: s['batch'].update(expected_inbound=999),
+            'boolean declared count': lambda s: s['batch'].update(expected_reservations=True),
+            'missing observation': lambda s: s['inbound'][0].pop('observed_at'),
+            'clock inversion': lambda s: s['inbound'][0].update(observed_at='2026-01-01T08:00:00+00:00'),
+            'null receipt identity': lambda s: s['inbound'][0].update(inbound_id=None),
+            'duplicate receipt identity': lambda s: s['inbound'][1].update(inbound_id='confirmed'),
+            'duplicate row identity': lambda s: s['inbound'][1].update(row_id=s['inbound'][0]['row_id']),
+            'invented clean reason': lambda s: s.update(reasons=['incomplete_or_mismatched_supply']),
+        }
+        for label, change in changes.items():
+            with self.subTest(label=label):
+                archive = deepcopy(self.evidence)
+                change(archive['plans']['clean']['result']['supply'])
+                rehash_archive(archive)
+                self.assert_blocked(lab.evaluate(evidence=archive)['baseline'])
+
+    def test_rehashed_inventory_archive_reconciles_every_saved_key(self):
+        changes = {
+            'unreconciled other key': lambda s: s['snapshots'][1].update(on_hand_qty=999),
+            'future snapshot cutoff': lambda s: s['snapshots'][0].update(as_of='2026-01-03T08:00:00+00:00'),
+            'missing observation': lambda s: s['snapshots'][0].pop('observed_at'),
+            'duplicate source row': lambda s: s['snapshots'][1].update(row_id=s['snapshots'][0]['row_id']),
+            'wrong watermark': lambda s: s['snapshots'][0].update(watermark=1),
+            'wrong count': lambda s: s['batches'][1].update(expected_row_count=99),
+            'missing other coverage': lambda s: s['coverage'].pop(1),
+            'wrong opening batch': lambda s: s['opening_balances'][0].update(batch_id='planning-demo:snapshot'),
+        }
+        for label, change in changes.items():
+            with self.subTest(label=label):
+                archive = deepcopy(self.evidence)
+                for report in archive['plans'].values():
+                    change(report['result']['inventory']['source'])
+                rehash_archive(archive)
+                self.assert_blocked(lab.evaluate(evidence=archive)['baseline'])
+
+    def test_rehashed_demand_archive_preserves_unique_observation_lineage(self):
+        changes = {
+            'duplicate row identity': lambda t: t['days'][1]['order_records'][0].update(
+                row_id=t['days'][0]['order_records'][0]['row_id']),
+            'duplicate order line': lambda t: t['days'][1]['order_records'][0].update(
+                order_id=t['days'][0]['order_records'][0]['order_id']),
+            'boolean expected lines': lambda t: t['days'][0]['day_record'].update(expected_lines=True),
+            'boolean revision': lambda t: t['days'][0]['day_record'].update(revision=True),
+            'order before acceptance': lambda t: t['days'][0]['order_records'][0].update(
+                source_recorded_at='2025-12-05T08:00:00+00:00'),
+        }
+        for label, change in changes.items():
+            with self.subTest(label=label):
+                archive = deepcopy(self.evidence)
+                for report in (archive['forecast'], *archive['plans'].values()):
+                    change(report['result']['training'])
+                archive['plans']['clean']['result']['forecast']['training'] = deepcopy(
+                    archive['plans']['clean']['result']['training'])
+                rehash_archive(archive)
+                self.assert_blocked(lab.evaluate(evidence=archive)['baseline'])
+
+    def test_rehashed_report_links_and_gate_remain_consistent(self):
+        changes = {
+            'wrong horizon': lambda e: e['plans']['clean']['context'].update(horizon=99),
+            'wrong policy': lambda e: e['plans']['clean']['context'].update(policy_version='other'),
+            'reused run identity': lambda e: e['forecast'].update(run_id=e['plans']['clean']['run_id']),
+            'blocked forecast leaked': lambda e: e['plans']['incomplete_supply']['result'].update(
+                forecast=e['plans']['clean']['result']['forecast']),
+            'blocked reason invented': lambda e: e['plans']['incomplete_supply']['result'].update(
+                reasons=['incomplete_or_mismatched_supply', 'invented']),
+        }
+        for label, change in changes.items():
+            with self.subTest(label=label):
+                archive = deepcopy(self.evidence)
+                change(archive)
+                rehash_archive(archive)
+                self.assert_blocked(lab.evaluate(evidence=archive)['baseline'])
 
 
 if __name__ == "__main__":
