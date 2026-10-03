@@ -105,3 +105,5 @@ baseline and null blocked outputs. No runtime database or model API was used.
 These are local synthetic results, not PostgreSQL 17.9 remote CI evidence,
 production inventory performance, calibrated service/risk, or measured savings.
 See [independent oracles and API boundaries](DECISION_LAB_VALIDATION.md).
+Integrated through [PR 12](https://github.com/daniel-li2021/inventory-intelligence/pull/12)
+at `089d28f`, verified on remote main. Remote CI was not monitored for this task.

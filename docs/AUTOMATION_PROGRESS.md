@@ -3,7 +3,7 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — Decision Lab accepted locally
+## Current checkpoint — Decision Lab integrated
 
 The user assigned the synthetic portfolio-facing Inventory Decision Lab. Its
 [compact plan and isolated handoffs](DECISION_LAB_PLAN.md) precede implementation.
@@ -17,8 +17,12 @@ isolated PostgreSQL 17.6 / Python 3.12.14. Installed-wheel and real-browser chec
 pass; zero-demand and incomplete-evidence outputs stay fail closed. Scenario
 derivations cite calculation hashes separately from saved source UUIDs.
 [Operations, exact results and synthetic screenshot](DECISION_LAB.md).
-Publication uses one integration PR because this adds dependencies and a
-portfolio capability. Remote CI is not represented by these local results.
+Integrated through [PR 12](https://github.com/daniel-li2021/inventory-intelligence/pull/12)
+at `089d28f`, verified on remote main. All four task branches were ancestry-merged
+and removed; the three clean task worktrees were retired. Existing active
+branches/worktrees and the local app environment were preserved. The disposable
+lab PostgreSQL service was stopped; its data and test logs remain local.
+Remote CI was not monitored and is not represented by the local test count.
 The lab remains a historical synthetic replay, with no operational execution,
 new models, live data, scheduled jobs or cloud infrastructure.
 
