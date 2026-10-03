@@ -62,6 +62,10 @@ cases, not commercial savings or service guarantees.
 
 ## What the evidence shows
 
+- **Policy comparison:** with identical forecasts, prefix arithmetic improves
+  service and paid cost only in a known-late-inbound control. A periodic threshold
+  rule regresses fill in 34/40 cells. [Exact experiment and limitations](docs/POLICY_COMPARISON_RESULTS.md).
+
 - **Engineering:** exact arithmetic, two knowledge clocks, append-only run
   history, restricted database roles, independent hand-calculated oracles, and
   fail-closed API/evidence boundaries. See [fresh review and acceptance](docs/READINESS_REVIEW.md).

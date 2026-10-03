@@ -3,7 +3,28 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — bounded startup attribution implemented
+## Current checkpoint — policy comparison branch, integration pending
+
+The continuing research goal includes a frozen three-rule comparison with
+identical forecasts, known supply, prior commitments and review calendars.
+[Protocol](POLICY_COMPARISON_V1.md) / [results](POLICY_COMPARISON_RESULTS.md):
+120 logical arms / 65 distinct physical trajectories; prefix arithmetic improves
+four repeated late-inbound cells, while periodic `(s,S)` regresses fill in 34/40.
+All initial/inbound/ordered units and settlement costs are charged. This is a
+research arithmetic adapter, not operational planner execution or source approval.
+Focused acceptance: **61 tests pass** on Python 3.12.14 / Psycopg 3.3.6, including
+Lab/API regressions and the archived default-kernel oracle. No database or API run.
+
+Other independent packages are published but unmerged: PR #14 (22-direction
+roadmap, fresh costed warmup, safety retention and supply interventions), PR #15
+(attested UCI observed-sales adapter and train-only forecast benchmark). Their
+branches retain their artifacts; this independent branch starts from current main.
+The automatic approval reviewer rejected PR #14 integration because it requires
+explicit integration-owner approval; the human approval question remains pending.
+No merger is retried. Independent research continues toward public sales-proxy
+safety/service evaluation, probabilistic calibration and demo accessibility.
+
+## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
 Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes

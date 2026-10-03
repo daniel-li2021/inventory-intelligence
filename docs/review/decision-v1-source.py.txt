@@ -77,8 +77,8 @@ def simulate(history, demand, *, method, on_hand, lead_days, review_days,
 def _simulate(history, demand, *, method, on_hand, lead_days, review_days,
               safety_qty=0, pack_size=1, moq=1, review_phase=0,
               commitments=(), inbound=(), supplier_delays=(), holding_cost=1,
-              backlog_cost=10, order_cost=0, _review_provider=None, _order_provider=None):
-    """Shared kernel; private hooks see only completed/origin-known inputs."""
+              backlog_cost=10, order_cost=0, _review_provider=None):
+    """Shared event kernel; the private provider sees completed observations only."""
     history = _observations("history", history)
     demand = _observations("demand", demand)
     if _review_provider is None and method not in (*METHODS, "zero"):
@@ -118,7 +118,7 @@ def _simulate(history, demand, *, method, on_hand, lead_days, review_days,
     k = _rate("order_cost", order_cost)
 
     stock = on_hand
-    pending = [dict(row, kind="inbound", promised_day=row["arrival_day"]) for row in inbound]
+    pending = [dict(row, kind="inbound") for row in inbound]
     queue = []
     days, reviews = [], []
     completed = list(history)
@@ -177,25 +177,11 @@ def _simulate(history, demand, *, method, on_hand, lead_days, review_days,
             target = sum(predictions, Fraction(0)) + review_safety + future_prior if scored else Fraction(0)
             position = stock + outstanding - backlog
             need = max(Fraction(0), target - position)
-            if scored and _order_provider is not None:
-                ordering = _order_provider(dict(
-                    day=day, on_hand=stock, forecast=tuple(predictions), safety_qty=review_safety,
-                    lead_days=lead_days, review_days=review_days, pack_size=pack_size, moq=moq,
-                    target=target, inventory_position=position,
-                    backlog=[dict(row) for row in queue],
-                    commitments=[dict(row) for row in commitments if row["due_day"] > day],
-                    inbound=[dict(id=row["id"], quantity=row["quantity"],
-                                  arrival_day=row["promised_day"]) for row in pending]))
-                if not isinstance(ordering, dict) or "need" not in ordering:
-                    raise ValueError("order provider must return exact need/evidence")
-                need = _rate("provider need", ordering["need"])
-                evidence = dict(evidence, ordering=ordering)
             if need:
                 whole_need = max(ceil(need), moq)
                 order_qty = pack_size * ((whole_need + pack_size - 1) // pack_size)
                 pending.append(dict(id=f"order:{day}", kind="order", quantity=order_qty,
-                                    arrival_day=day + lead_days + delays[day // review_days],
-                                    promised_day=day + lead_days))
+                                    arrival_day=day + lead_days + delays[day // review_days]))
                 outstanding += order_qty
             reviews.append(dict(day=day, runoff=not scored, forecast=predictions,
                                 target=target, inventory_position=position, order_qty=order_qty, **{
