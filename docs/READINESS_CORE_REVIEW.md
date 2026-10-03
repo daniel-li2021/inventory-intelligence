@@ -16,7 +16,9 @@ these report boundaries.
 
 The explainer now checks eligible daily evidence against its declared batch/key,
 calendar interval, knowledge time, complete/available day record, exact selected
-order quantities and source clocks. It requires contiguous complete training,
+order quantities and source clocks. Archive metadata must cover the interval;
+selected records require valid row/revision identities and exact membership in
+the retained visible raw evidence. It requires contiguous complete training,
 checks the shared weekly selection origins and holdout timing, and compares fold
 actuals against the retained eligible truth. Replenishment training must agree
 with its forecast training and declared policy horizon. Invalid evidence raises

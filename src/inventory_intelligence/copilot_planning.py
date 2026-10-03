@@ -29,14 +29,22 @@ def _exact(value):
 
 def _eligible_series(series, context, *, start, end, known_at, minimum=1):
     """Check retained daily evidence without replaying inputs or forecasting."""
+    batch = series['batch']
     if (series['status'] != 'eligible' or series['reasons']
             or series['business_timezone'] != context['business_timezone']
-            or series['batch']['batch_id'] != context['batch_id']
+            or batch['batch_id'] != context['batch_id'] or batch['status'] != 'complete'
+            or batch['business_timezone'] != context['business_timezone']
+            or date.fromisoformat(batch['start_day']) > start
+            or date.fromisoformat(batch['end_day']) < end
             or any(series[k] != context[k] for k in ('sku_id', 'warehouse_id'))
             or date.fromisoformat(series['start_day']) != start
             or date.fromisoformat(series['end_day']) != end
             or _time(series['known_at']) != known_at
             or len(series['days']) != (end-start).days or len(series['days']) < minimum):
+        raise ValueError
+    raw_orders = {r['row_id']: r for r in series['order_versions']}
+    raw_days = {r['row_id']: r for r in series['day_versions']}
+    if len(raw_orders) != len(series['order_versions']) or len(raw_days) != len(series['day_versions']):
         raise ValueError
     values = []
     for i, day in enumerate(series['days']):
@@ -47,6 +55,8 @@ def _eligible_series(series, context, *, start, end, known_at, minimum=1):
             raise ValueError
         evidence, orders = day['day_record'], day['order_records']
         if (evidence['coverage'] != 'complete' or evidence['availability'] != 'available'
+                or not _text(evidence['row_id']) or type(evidence['revision']) is not int
+                or evidence['revision'] < 1 or raw_days.get(evidence['row_id']) != evidence
                 or type(evidence['expected_lines']) is not int
                 or evidence['expected_lines'] != len(orders)
                 or date.fromisoformat(evidence['business_day']) != business_day
@@ -56,6 +66,8 @@ def _eligible_series(series, context, *, start, end, known_at, minimum=1):
             raise ValueError
         for order in orders:
             if (type(order['accepted_qty']) is not int or order['accepted_qty'] < 0
+                    or not _text(order['row_id']) or type(order['revision']) is not int
+                    or order['revision'] < 1 or raw_orders.get(order['row_id']) != order
                     or order['status'] not in ('accepted','cancelled')
                     or _time(order['accepted_at']).astimezone(CALENDAR).date() != business_day
                     or not _time(order['accepted_at']) <= _time(order['source_recorded_at'])
