@@ -171,7 +171,7 @@ def main():
     args = parser.parse_args()
     self_check()
     report = run()
-    encoded = json.dumps(report, default=exact, sort_keys=True, indent=2) + "\n"
+    encoded = json.dumps(report, default=exact, sort_keys=True, separators=(",", ":")) + "\n"
     args.output.parent.mkdir(parents=True, exist_ok=True)
     # Build/serialize first; a failed experiment never truncates a previous artifact.
     temporary = args.output.with_name(args.output.name + ".tmp")

@@ -2,6 +2,33 @@
 
 Updated 2026-10-02.
 
+## Current milestone — offline decision-benchmark-v1 implemented
+
+The user assigned the next milestone from
+[NEXT_ROUND_RESEARCH.md](NEXT_ROUND_RESEARCH.md). Work began on
+`codex/decision-benchmark-v1` from fetched remote main `ce8ab0d`; the previous
+research branch is preserved. The separate
+[decision contract](CONTRACT_DECISION_V1.md) fixes backlog semantics, local-day
+event timing, inventory-position policy, exact costs, service denominators,
+paired synthetic scenarios, selection/holdout boundaries and fixed runoff.
+Simulator, independent oracle and evaluation authoring used isolated worktrees.
+Integrated offline validation passed 19 focused tests on Python 3.12.14 and
+completed 480 candidate/split simulations across 60 paired cells. All terminal
+obligations settled; 22 cells lacked eligible selection and all eight selected
+lumpy cells failed held-out service. Six weekly and ten obsolescence cells passed
+the declared promotion rule, including repeated controls; no champion is changed.
+Results, exact provenance and validation are recorded in
+[DECISION_BENCHMARK.md](DECISION_BENCHMARK.md). Implementation is on the review
+branch pending merge; the three-stage main baseline remains `ce8ab0d`.
+
+Main already contains all three bounded synthetic stages through PRs 7/8.
+The historical checkpoints below retain their original chronology and are not
+current blockers. This milestone adds no public data, model dependency, database
+schema, runtime order execution or change to planning-v1/Copilot contracts.
+SBA/TSB, uncertainty calibration and public-sales evidence remain later steps.
+
+## Historical checkpoints
+
 ## Stage 1
 
 All three implementation handoffs are integrated. Completion review reused the

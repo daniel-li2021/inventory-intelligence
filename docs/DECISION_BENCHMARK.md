@@ -113,3 +113,22 @@ These are exact findings about the declared synthetic cases. There is no
 supported global champion, calibrated service guarantee, statistical confidence
 or business-savings claim. Full rational scores and rejection reasons are in
 [the reproducible artifact](review/decision-benchmark.json).
+
+## Validation and next boundary
+
+Integrated validation on Python 3.12.14 passed all 19 focused tests: ten
+independent hand-calculated simulator oracles, three selection/promotion and
+retained-evidence checks, and the six unchanged forecast tests. The final CLI
+completed all 480 simulations; every source/input hash and terminal obligation
+was checked. Run the same checks without a database:
+
+```sh
+PYTHONPATH=src python -m unittest tests.test_decision tests.test_decision_benchmark tests.test_forecasting -v
+```
+
+The lumpy selection/holdout failures justify a later bounded intermittent-method
+experiment; they do not establish which challenger will help. This milestone
+delivers the deterministic benchmark only. SBA/TSB, calibrated uncertainty,
+lost-sales semantics and public-sales acquisition require their separate next
+handoffs. Existing operational planning and historical decoding are unchanged;
+their PostgreSQL acceptance was not rerun for these isolated offline additions.
