@@ -1,0 +1,111 @@
+{
+  "artifact": {
+    "bytes": 105627,
+    "path": "docs/review/physical-count-v1.json",
+    "sha256": "6bb206d502e667de641ede9d708b9950c3cde95b1c72005a63f2f942af0a70b5"
+  },
+  "cache_reuse": {
+    "artifact_bytes_identical": true,
+    "evaluate_disabled": true
+  },
+  "cached_audit": {
+    "cases": 40,
+    "lineage_nodes": 86,
+    "operational_writes": 0,
+    "reassessments": 0
+  },
+  "limitations": [
+    "Declared synthetic upstream status, blind observers and freeze; not externally authenticated warehouse truth.",
+    "Categorical corroboration, not calibrated probability or measured shrinkage rate.",
+    "Adjustment evidence is advisory; no source write or operational planner integration."
+  ],
+  "mutation_checks": [
+    {
+      "name": "invented_physical_quantity",
+      "rejected_by": "hand-declared semantic outcome changed",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "invented_corroboration",
+      "rejected_by": "hand-declared semantic outcome changed",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "changed_knowledge_clock",
+      "rejected_by": "source/knowledge-clock identity changed",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "changed_source_binding",
+      "rejected_by": "source/knowledge-clock identity changed",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "changed_proposal_quantity",
+      "rejected_by": "proposal source/quantity binding changed",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "changed_approved_adjustment",
+      "rejected_by": "hand-declared semantic outcome changed",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "dropped_raw_count",
+      "rejected_by": "raw count evidence changed/dropped",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "dropped_review",
+      "rejected_by": "review evidence changed/dropped",
+      "result_and_lineage_rehashed": true
+    },
+    {
+      "name": "dangling_dependency",
+      "rejected_by": "dependency graph changed",
+      "result_and_lineage_rehashed": false
+    },
+    {
+      "name": "cyclic_dependency",
+      "rejected_by": "dependency graph changed",
+      "result_and_lineage_rehashed": false
+    }
+  ],
+  "mutation_checks_passed": 10,
+  "operational_changed_paths": [
+    "src/inventory_intelligence/physical_count.py"
+  ],
+  "operational_writes": 0,
+  "scope": "synthetic finite correctness controls; no real warehouse validation",
+  "source_commit": "340cb1f4bd7594b5ba6d95f5f617555714da8ac1",
+  "source_sha256": {
+    "docs/CONTRACT_PHYSICAL_COUNT_V1.md": "d1a8cfa5e7a5c1ab59bf08436c1f6eb980e7203f6d8ba6b32ddeebcca19f860b",
+    "docs/examples/physical-count-inputs-v1.json": "1ccf1017f7009f05583ba8276afe5b6d73acfd8f3d36ba4212553b5efa7af6f2",
+    "scripts/physical_count_benchmark.py": "33978dd416bc910ff4d79347e13558c7ff0d68339ec57a459109df9ec68ec208",
+    "src/inventory_intelligence/physical_count.py": "a171b3653841bc9953445aba746ce266eef80ae6667d42bb560d238f69f028b3",
+    "tests/test_physical_count.py": "95e7487951651dbd32b9a489ce41261e0518af04e20c2bebac434cff0f359a19"
+  },
+  "summary": {
+    "adjustment_statuses": {
+      "approved_evidence": 1,
+      "no_proposal": 28,
+      "not_assessable": 8,
+      "rejected": 1,
+      "review_required": 2
+    },
+    "cases": 40,
+    "physical_statuses": {
+      "confirmed_match": 3,
+      "confirmed_variance": 11,
+      "not_assessable": 21,
+      "recount_required": 5
+    }
+  },
+  "tests": {
+    "command": "PYTHONPATH=src python -m unittest tests.test_physical_count",
+    "failed": 0,
+    "independent_declared_cases": 40,
+    "passed": 7
+  },
+  "verified_at": "2026-10-03T22:04:51.743638+00:00"
+}

@@ -62,6 +62,11 @@ cases, not commercial savings or service guarantees.
 
 ## What the evidence shows
 
+- **Physical-count research:** frozen synthetic count/recount evidence can
+  distinguish system stock 100 from corroborated physical stock 96 and bind a
+  separate advisory adjustment review. Forty independent controls and 86 lineage
+  nodes are audited; no source inventory is changed.
+  [Protocol, outcomes and limits](docs/PHYSICAL_COUNT_RESULTS.md).
 - **Engineering:** exact arithmetic, two knowledge clocks, append-only run
   history, restricted database roles, independent hand-calculated oracles, and
   fail-closed API/evidence boundaries. See [fresh review and acceptance](docs/READINESS_REVIEW.md).
