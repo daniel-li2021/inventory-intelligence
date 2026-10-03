@@ -91,6 +91,12 @@ records focus, contrast and narrow-screen validation.
   service and paid cost only in a known-late-inbound control. A periodic threshold
   rule regresses fill in 34/40 cells. [Exact experiment and limitations](docs/POLICY_COMPARISON_RESULTS.md).
 
+
+- **Physical-count research:** frozen synthetic count/recount evidence can
+  distinguish system stock 100 from corroborated physical stock 96 and bind a
+  separate advisory adjustment review. Forty independent controls and 86 lineage
+  nodes are audited; no source inventory is changed.
+  [Protocol, outcomes and limits](docs/PHYSICAL_COUNT_RESULTS.md).
 - **Engineering:** exact arithmetic, two knowledge clocks, append-only run
   history, restricted database roles, independent hand-calculated oracles, and
   fail-closed API/evidence boundaries. See [fresh review and acceptance](docs/READINESS_REVIEW.md).

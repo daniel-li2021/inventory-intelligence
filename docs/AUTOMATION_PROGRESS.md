@@ -143,6 +143,38 @@ Main integration remains pending explicit owner approval after automatic review
 rejected PR14's merge. Next independent package: additive synthetic physical-count
 truth/provenance, then a concrete hosted read-only target/ownership proposal.
 
+## Current checkpoint — physical-count evidence and local lineage implemented
+
+Started from fetched/pruned `origin/main` at `f6d3d16` on the isolated
+`codex/physical-count-evidence` branch. Frozen additive contract `605b34a` precedes
+implementation/oracles/archive code `340cb1f`; all are committed before first
+archived outcomes. This is read-only synthetic research, with no Stage 1 schema,
+operational planner, Lab or source-inventory changes.
+
+System stock 100 with two declared blind independent counts of 96 yields variance
+−4 and a source-bound advisory proposal. Missing, duplicate, incomplete or future
+evidence blocks quantities; single/conflicting observations require recount.
+Only a valid independent source-bound review can approve adjustment evidence.
+Approved evidence still performs zero inventory writes. Source declarations are
+not authenticated warehouse truth or calibrated confidence.
+
+Focused acceptance passes 7 tests over 40 independently declared control outcomes.
+The saved artifact verifies 86 dependency nodes with zero reassessments; disabling
+the evaluator preserves cached output bytes. Ten purposeful rehashed-result / graph
+mutations are rejected. [Results and reproduction](PHYSICAL_COUNT_RESULTS.md),
+[receipt](review/physical-count-acceptance.json).
+
+The broader roadmap and all 22 direction statuses are preserved in
+[PR 19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+[PR 20](https://github.com/daniel-li2021/inventory-intelligence/pull/20) contains the
+prospectively frozen disjoint-item calibration study;
+[PR 21](https://github.com/daniel-li2021/inventory-intelligence/pull/21) contains the
+independent lost-sales contract and paired synthetic study. These and this package
+are not integrated into main. Default-branch merge remains pending after automatic
+approval review rejected that action; continue independent scoped work without
+retrying the merge. Next: concrete hosted synthetic-demo operating/acceptance plan.
+Global lineage and operational physical adjustments require separate boundaries.
+
 ## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
