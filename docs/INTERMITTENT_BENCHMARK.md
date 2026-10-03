@@ -167,3 +167,19 @@ before expanding the model grid. Such changes need a new frozen counterfactual;
 this holdout must not become a tuning set. Complete exact metrics, pinball loss,
 failures and selected/reference calibration evidence are in
 [the artifact](review/intermittent-benchmark.json).
+
+## Integrated validation
+
+Python 3.12.14 passed all 31 focused decision, forecast, intermittent and harness
+tests. These include independent exact initialization/smoothing/calibration and
+event/cost oracles, repricing and selection boundaries, source/input provenance,
+completed-only calibration windows and terminal settlement. The retained demand
+generation matches Python 3.12.14 for every seed/family. The 5,544 valid results
+were reused rather than rerunning the experiment. A required compatibility run
+confirmed every original decision-v1 scenario and result unchanged apart from
+current source hashes after sharing the event kernel. No PostgreSQL or API run
+was needed; existing operational methods and historical contracts are preserved.
+
+```sh
+PYTHONPATH=src python -m unittest tests.test_decision tests.test_decision_benchmark tests.test_forecasting tests.test_intermittent tests.test_intermittent_benchmark -v
+```

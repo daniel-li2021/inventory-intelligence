@@ -2,6 +2,35 @@
 
 Updated 2026-10-02.
 
+## Continued plan — intermittent/safety research
+
+The user requested committing and continuing the rest of the plan. The first
+milestone is committed/pushed at `c0af205` in draft PR 10. The dependent
+`codex/intermittent-research` branch freezes
+[CONTRACT_INTERMITTENT_V1.md](CONTRACT_INTERMITTENT_V1.md), adds exact offline
+Croston/SBA/TSB with cumulative-error empirical safety, and evaluates fresh
+seeds 101/211/307. [Protocol/results](INTERMITTENT_BENCHMARK.md) retain all 5,544
+candidate/split results across 84 cells and 33 configurations; 2,376 unique
+physical simulations reuse the rest. All terminal obligations settle.
+
+Selected new methods pass ten cell-wise comparisons against the selection-chosen
+baseline; only four overall selections pass both reference comparisons. These
+are synthetic, correlated comparisons, not a global promotion. No lumpy or
+obsolescence cell supports new-method promotion. Complete target coverage can
+coexist with failed fill because initial stock cannot meet demand before receipt.
+The old v1 artifact's semantic scenarios reproduce exactly after sharing the
+event kernel; only current source provenance is refreshed.
+Integrated Python 3.12.14 validation passed all 31 focused tests, including
+current-interpreter demand reproduction, artifact provenance and completed-only
+calibration checks. The valid intermittent outputs were reused.
+
+The [public-sales protocol](PUBLIC_SALES_PROTOCOL_V1.md) is prepared with verified
+official UCI license attribution and a separate observed-sales target. It awaits
+the explicit boundary choice required by synthetic-only AGENTS.md. No real data
+has been acquired. M5 terms were unreadable; no rights are inferred. ADIDA/IMAPA,
+LightGBM and registry/drift/scheduling infrastructure remain conditional on new
+evidence and a separately frozen handoff, not automatic expansions.
+
 ## Current milestone — offline decision-benchmark-v1 implemented
 
 The user assigned the next milestone from

@@ -134,6 +134,20 @@ selection data; held-out comparisons can propose research promotion but never
 change an approved model or place an order. The [protocol and retained evidence](docs/DECISION_BENCHMARK.md)
 state the bounded conclusions and deferred work.
 
+The next [intermittent research contract](docs/CONTRACT_INTERMITTENT_V1.md)
+adds offline Croston/SBA/TSB challengers and empirically calibrated cumulative
+protection-period safety. Its fresh synthetic holdouts and paired comparisons
+are separate from historical planning methods. [Protocol and outcomes](docs/INTERMITTENT_BENCHMARK.md).
+
+```sh
+PYTHONPATH=src python scripts/intermittent_benchmark.py --output /tmp/intermittent-benchmark.json
+PYTHONPATH=src python -m unittest tests.test_intermittent tests.test_intermittent_benchmark -v
+```
+
+The [proposed public-sales protocol](docs/PUBLIC_SALES_PROTOCOL_V1.md) requires
+explicit authorization of its separate observed-sales boundary before acquiring
+real observations. Raw data and reconstructable series would stay local/ignored.
+
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
 
 Original project material is available under the [MIT license](LICENSE). Dependencies retain their own licenses.
