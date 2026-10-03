@@ -2,13 +2,13 @@
 
 ## Current phase
 
-All three bounded synthetic stages and the decision/intermittent research are
-integrated on `main`. The stabilization from `43a952d` passes 106-test fresh
-local combined acceptance; [evidence and routing evaluation](docs/STAGE3_STABILIZATION.md).
-The earlier 79-test pinned CI result remains historical. The
+All three bounded synthetic stages, decision/intermittent research and the local
+Decision Lab are integrated on `main`. See the
+[current independent review and fresh acceptance](docs/READINESS_REVIEW.md).
+Earlier 79/106/124-test results remain historical checkpoints. The
 [frozen milestone 1 contract](docs/CONTRACT_V1.md) remains separate from planning
 and copilot contracts. See [current status](docs/AUTOMATION_PROGRESS.md) and
-[next-round research](docs/NEXT_ROUND_RESEARCH.md). Research proposals are not
+[current next-step investigation](docs/READINESS_NEXT_STEPS.md). Research proposals are not
 implementation handoffs; public real data requires an explicit separate boundary
 decision before import under the current synthetic-only project instructions.
 
@@ -37,7 +37,7 @@ git fetch origin
 git switch -c codex/<task> origin/main
 ```
 
-If the checkout has unrelated modifications or another task is using it, leave that work intact and use a clean worktree. Keep each task commit focused. Sub-agents should commit and push their branch, but should not open a PR unless the integration owner explicitly asks for one. Do not mix generated report refreshes with unrelated refactors.
+If the checkout has unrelated modifications or another task is using it, leave that work intact and use a clean worktree. Keep each task commit focused. Sub-agents commit their isolated changes; the integration owner controls publication and PR creation. Do not mix generated report refreshes with unrelated refactors.
 
 Before committing, inspect explicit staged paths and the staged diff:
 
@@ -57,10 +57,10 @@ Use branches/worktrees for **isolation**, not as a requirement to create one PR 
 
 Default multi-agent flow:
 
-1. Each sub-agent starts from current `origin/main`, works in its own `codex/<task>` branch/worktree, runs focused tests, commits, and pushes.
+1. Each sub-agent starts from current `origin/main`, works in its own `codex/<task>` branch/worktree, runs focused tests and commits.
 2. Sub-agents do not open PRs by default and do not write directly to `main`.
 3. One integration owner reviews all candidate commits, rebases/merges current `main` as needed, resolves conflicts, and runs combined acceptance.
-4. If the batch is small and low risk, the integration owner may fast-forward/merge/cherry-pick the validated work to `main` directly and then verify push CI.
+4. If the batch is small and low risk, the integration owner may fast-forward/merge/cherry-pick the validated work to `main` directly, push and verify the remote ref. Monitor CI only when specifically required or a failure is evident.
 5. Use a single integration PR before `main` for shared contract/schema changes, dependency/model changes, public-data/license boundary changes, major milestone batches, or whenever pre-main CI/review materially reduces risk.
 6. If integration or CI exposes a defect, fix the defect in the integration branch, rerun the relevant acceptance, and only then update `main`.
 

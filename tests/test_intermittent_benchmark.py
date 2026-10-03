@@ -13,6 +13,53 @@ import intermittent_benchmark as benchmark
 
 
 class IntermittentBenchmarkTests(unittest.TestCase):
+    def test_saved_choices_use_selection_and_compare_frozen_references(self):
+        """Independently audit every saved choice; never re-fit consumed holdouts."""
+        report = json.loads((ROOT / "docs/review/intermittent-benchmark.json").read_text())
+        order = report["configuration_order"]
+        baseline_methods = {"naive", "mean", "seasonal_naive", "zero"}
+
+        def eligible(metrics):
+            return all(metrics[key] is not None and Fraction(**metrics[key]) >= floor
+                       for key, floor in (("immediate_fill_rate", Fraction(9, 10)),
+                                          ("cycle_service", Fraction(4, 5))))
+
+        for row in report["scenarios"]:
+            choices = {}
+            for subset in ("overall", "baseline", "new_method"):
+                options = [key for key in order
+                           if (subset == "overall"
+                               or (report["configurations"][key]["method"] in baseline_methods)
+                               == (subset == "baseline"))
+                           and eligible(row["selection"][key]["metrics"])]
+                choices[subset] = min(options, key=lambda key: Fraction(**row["selection"][key]["metrics"]["total_cost"])) if options else None
+            self.assertEqual(row["selected"], choices)
+            for label, candidate_id, reference_id in (
+                    ("overall_vs_fixed_mean", choices["overall"], "mean:fixed0"),
+                    ("overall_vs_selected_baseline", choices["overall"], choices["baseline"]),
+                    ("new_vs_selected_baseline", choices["new_method"], choices["baseline"])):
+                passes = False
+                if candidate_id is not None and reference_id is not None:
+                    candidate = row["holdout"][candidate_id]["metrics"]
+                    reference = row["holdout"][reference_id]["metrics"]
+                    reference_cost = Fraction(**reference["total_cost"])
+                    passes = (reference_cost > 0 and eligible(candidate)
+                              and Fraction(**candidate["total_cost"]) <= reference_cost * Fraction(19, 20)
+                              and all(candidate[key] is not None and reference[key] is not None
+                                      and Fraction(**candidate[key]) >= Fraction(**reference[key])
+                                      for key in ("immediate_fill_rate", "cycle_service")))
+                self.assertEqual(row["comparisons"][label]["passed"], passes)
+                self.assertEqual(row["comparisons"][label]["reference"], reference_id)
+        self.assertEqual(report["summary"]["no_overall_selection"],
+                         sum(row["selected"]["overall"] is None for row in report["scenarios"]))
+        self.assertEqual(report["summary"]["both_reference_passes"], sum(
+            row["comparisons"]["overall_vs_fixed_mean"]["passed"]
+            and row["comparisons"]["overall_vs_selected_baseline"]["passed"]
+            for row in report["scenarios"]))
+        self.assertEqual(report["summary"]["new_vs_baseline_passes"], sum(
+            row["comparisons"]["new_vs_selected_baseline"]["passed"]
+            for row in report["scenarios"]))
+
     def test_exact_repricing_reuses_physical_outcomes_without_mutation(self):
         summary = dict(metrics=dict(scored_cost=99, immediate_fill_rate=Fraction(2, 3)),
                        exposures=dict(scored=dict(on_hand=3, backlog=2, orders=1),

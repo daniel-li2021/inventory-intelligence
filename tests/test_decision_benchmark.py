@@ -10,6 +10,37 @@ from scripts import decision_benchmark as benchmark
 
 
 class DecisionBenchmarkTests(unittest.TestCase):
+    def test_saved_selections_and_promotions_follow_declared_scores(self):
+        """Audit retained choices without the harness selection/promotion helpers."""
+        root = Path(__file__).resolve().parents[1]
+        report = json.loads((root / "docs/review/decision-benchmark.json").read_text())
+        order = ("naive", "mean", "seasonal_naive", "zero")
+
+        def eligible(metrics):
+            return all(metrics[key] is not None and Fraction(**metrics[key]) >= floor
+                       for key, floor in (("immediate_fill_rate", Fraction(9, 10)),
+                                          ("cycle_service", Fraction(4, 5))))
+
+        for row in report["scenarios"]:
+            options = [key for key in order if eligible(row["selection"][key]["metrics"])]
+            selected = min(options, key=lambda key: Fraction(**row["selection"][key]["metrics"]["total_cost"])) if options else None
+            self.assertEqual(row["selected_method"], selected)
+            passes = False
+            if selected is not None:
+                candidate = row["holdout"][selected]["metrics"]
+                reference = row["holdout"]["mean"]["metrics"]
+                reference_cost = Fraction(**reference["total_cost"])
+                passes = (reference_cost > 0 and eligible(candidate)
+                          and Fraction(**candidate["total_cost"]) <= reference_cost * Fraction(19, 20)
+                          and all(candidate[key] is not None and reference[key] is not None
+                                  and Fraction(**candidate[key]) >= Fraction(**reference[key])
+                                  for key in ("immediate_fill_rate", "cycle_service")))
+            self.assertEqual(row["promotion"]["passed"], passes)
+        self.assertEqual(report["summary"]["no_selection"],
+                         sum(row["selected_method"] is None for row in report["scenarios"]))
+        self.assertEqual(report["summary"]["proposed_promotions"],
+                         sum(row["promotion"]["passed"] for row in report["scenarios"]))
+
     def test_selection_floors_ties_and_holdout_cannot_reselect(self):
         scores = {method: dict(total_cost=100, immediate_fill_rate=Fraction(9, 10),
                                cycle_service=Fraction(4, 5))

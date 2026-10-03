@@ -1,5 +1,10 @@
 # Next investigation: forecast value and inventory decisions
 
+Current priority assessment: [READINESS_NEXT_STEPS.md](READINESS_NEXT_STEPS.md)
+reviews the completed Decision Lab and retained research on 2026-10-03. The
+sequence below records earlier proposals and subsequent assignments; it is
+historical context rather than the next implementation handoff.
+
 Investigated 2026-10-02 against fetched `origin/main` at `dcada27`. Three read-only
 agents investigated decision evaluation, models/lifecycle and public datasets.
 Publication refresh: main advanced to `ce8ab0d` with PR 8; existing

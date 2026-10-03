@@ -1,4 +1,10 @@
-# Independent milestone 1 validation
+# Independent validation
+
+Current review (2026-10-03): the complete Reliability → Planning → Copilot →
+research → Decision Lab path is assessed in [READINESS_REVIEW.md](READINESS_REVIEW.md),
+with fresh local acceptance recorded in
+[the integration receipt](review/readiness-acceptance.json). Earlier counts and
+remote runs below are historical evidence, not the current acceptance result.
 
 Latest stabilization (2026-10-02) starts from integrated main `43a952d`, including
 decision/intermittent research and the updated integration workflow. Fresh local
@@ -8,7 +14,7 @@ independent oracles. [Complete evidence](review/stabilization-acceptance.json) a
 [separate live routing/fidelity results](STAGE3_STABILIZATION.md). Earlier CI
 revisions/counts below are historical; they do not establish current push CI.
 
-Current combined status (2026-10-02): `main` at `ce8ab0d` integrates all three
+Historical combined status (2026-10-02): `main` at `ce8ab0d` integrates all three
 bounded stages. [Main CI run 37085401000](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
 passed `Repository hygiene` and `PostgreSQL acceptance`; the log records
 **79 tests / OK** (23 Stage 1, 24 Stage 2, 32 Stage 3), Python 3.12.12 and the
