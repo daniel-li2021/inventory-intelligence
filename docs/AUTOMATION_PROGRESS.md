@@ -1,9 +1,28 @@
 # Development checkpoint
 
-Updated 2026-10-02. This is the current resumable status; detailed historical
+Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — stabilization complete
+## Current checkpoint — Decision Lab accepted locally
+
+The user assigned the synthetic portfolio-facing Inventory Decision Lab. Its
+[compact plan and isolated handoffs](DECISION_LAB_PLAN.md) precede implementation.
+The integration owner combined focused backend, frontend and independent-test
+branches; no agent pushed to main or opened a separate PR. The optional local
+FastAPI app reuses all existing core modules unchanged, with bundled evidence
+generated through real reliability/forecast/planning runs.
+
+Combined acceptance passes **124/124** local tests (18 new lab/API tests) on fresh
+isolated PostgreSQL 17.6 / Python 3.12.14. Installed-wheel and real-browser checks
+pass; zero-demand and incomplete-evidence outputs stay fail closed. Scenario
+derivations cite calculation hashes separately from saved source UUIDs.
+[Operations, exact results and synthetic screenshot](DECISION_LAB.md).
+Publication uses one integration PR because this adds dependencies and a
+portfolio capability. Remote CI is not represented by these local results.
+The lab remains a historical synthetic replay, with no operational execution,
+new models, live data, scheduled jobs or cloud infrastructure.
+
+## Prior checkpoint — stabilization complete
 
 Started from fetched/pruned `origin/main` at `43a952d`, containing decision PR 10
 (`33ced64`), intermittent PR 11 (`429f0f9`) and updated integration-owner workflow.
