@@ -18,7 +18,9 @@ The explainer now checks eligible daily evidence against its declared batch/key,
 calendar interval, knowledge time, complete/available day record, exact selected
 order quantities and source clocks. Archive metadata must cover the interval;
 selected records require valid row/revision identities and exact membership in
-the retained visible raw evidence. It requires contiguous complete training,
+the retained visible raw evidence. Selected natural order identities must be
+nonempty and unique across included days, even if a duplicate's daily quantity,
+count and raw day evidence have been coherently rewritten. It requires contiguous complete training,
 checks the shared weekly selection origins and holdout timing, and compares fold
 actuals against the retained eligible truth. Replenishment training must agree
 with its forecast training and declared policy horizon. Invalid evidence raises
@@ -71,6 +73,10 @@ database supplied by the integration owner. All commands used `PYTHONPATH=src`.
   adjustments. Repeating the entire focused run in the same database hit the
   existing demo loader's intentional duplicate-namespace refusal; source data was
   preserved. Use a fresh database for combined acceptance.
+- A final duplicate-selection regression also failed before its uniqueness
+  guard: duplicating the same selected order while adjusting the retained count
+  and daily quantity was accepted. The final Copilot-only 7-test recheck passed
+  after this narrow follow-up.
 - `git diff --check` passed. Fresh combined integration acceptance is owned by
   the integration owner and is recorded separately after integration.
 

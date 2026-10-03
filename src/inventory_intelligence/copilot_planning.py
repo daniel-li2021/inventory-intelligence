@@ -46,7 +46,7 @@ def _eligible_series(series, context, *, start, end, known_at, minimum=1):
     raw_days = {r['row_id']: r for r in series['day_versions']}
     if len(raw_orders) != len(series['order_versions']) or len(raw_days) != len(series['day_versions']):
         raise ValueError
-    values = []
+    values, selected_identities = [], set()
     for i, day in enumerate(series['days']):
         business_day = start+timedelta(days=i)
         if (date.fromisoformat(day['day']) != business_day or day['reasons']
@@ -65,6 +65,10 @@ def _eligible_series(series, context, *, start, end, known_at, minimum=1):
                 or any(evidence[k] != context[k] for k in ('batch_id','sku_id','warehouse_id'))):
             raise ValueError
         for order in orders:
+            identity = tuple(order[k] for k in ('source_system','order_id','line_id'))
+            if not all(_text(k) for k in identity) or identity in selected_identities:
+                raise ValueError
+            selected_identities.add(identity)
             if (type(order['accepted_qty']) is not int or order['accepted_qty'] < 0
                     or not _text(order['row_id']) or type(order['revision']) is not int
                     or order['revision'] < 1 or raw_orders.get(order['row_id']) != order

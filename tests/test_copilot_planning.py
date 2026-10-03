@@ -106,7 +106,13 @@ class CopilotPlanning(unittest.TestCase):
         r=run_forecast(self.runner,**{k:args[k] for k in ('batch_id','sku_id','warehouse_id','start_day')},
                        origin_day=START+timedelta(days=28),method='mean',horizon=7)
         self.assertEqual(cp.answer_planning(r)['citations'][0]['data']['result']['predictions'],['4']*7)
+        def duplicate_selected(x):
+            series=x['result']['training']; day=series['days'][0]
+            day['order_records'].append(deepcopy(day['order_records'][0]))
+            day['quantity']=8; day['day_record']['expected_lines']=2
+            next(v for v in series['day_versions'] if v['row_id']==day['day_record']['row_id'])['expected_lines']=2
         for mutate in (
+                duplicate_selected,
                 lambda x:x['result']['training']['days'][0].update(quantity=None),
                 lambda x:x['result']['training']['days'][0].update(quantity=True),
                 lambda x:x['result']['training']['days'][0].update(reasons=['missing_day_evidence']),
@@ -127,6 +133,12 @@ class CopilotPlanning(unittest.TestCase):
                 lambda x:x['context'].update(origin='2026-01-26T08:00:00+00:00'),
                 lambda x:x['context'].update(method='unsupported')):
             corrupt=deepcopy(r); mutate(corrupt)
+            with self.assertRaises(ValueError):
+                cp.answer_planning(corrupt)
+        for field in ('source_system','order_id','line_id'):
+            corrupt=deepcopy(r); series=corrupt['result']['training']; order=series['days'][0]['order_records'][0]
+            order[field]=' '
+            next(v for v in series['order_versions'] if v['row_id']==order['row_id'])[field]=' '
             with self.assertRaises(ValueError):
                 cp.answer_planning(corrupt)
 
