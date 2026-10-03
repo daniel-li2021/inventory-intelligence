@@ -1,0 +1,612 @@
+{
+  "common_end_day": 36,
+  "controls": [
+    {
+      "accounting": {
+        "common_days": 36,
+        "common_runoff_cost": "148",
+        "common_total_cost": "387",
+        "extension_days": 3,
+        "extension_holding_cost": "60",
+        "original_days": 33,
+        "original_runoff_cost": "88",
+        "original_total_cost": "327",
+        "scored_cost": "239",
+        "scored_days": 28,
+        "terminal_on_hand": 20
+      },
+      "calculation_id": "lab:285969f92b466e8f519f7e808fd8e2663e7db98b0cc1d06993eeec03c94366b0",
+      "common_cost_delta_vs_baseline": "0",
+      "feasibility": {
+        "days": [
+          {
+            "backlog": 0,
+            "day": 0,
+            "new_missed_units": 0,
+            "on_hand": 3,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 0,
+            "day": 1,
+            "new_missed_units": 0,
+            "on_hand": 4,
+            "prior_missed_units": 0
+          }
+        ],
+        "earliest_possible_order_receipt_day": 2,
+        "immediate_fill_ceiling": "1",
+        "inevitable_new_missed_units": 0,
+        "inevitable_prior_missed_units": 0,
+        "new_demand_units": 112,
+        "startup_days": 2
+      },
+      "inputs": {
+        "commitments": [
+          {
+            "due_day": 0,
+            "id": "remaining-commitment",
+            "quantity": 3
+          }
+        ],
+        "demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "inbound": [
+          {
+            "arrival_day": 1,
+            "id": "confirmed",
+            "quantity": 5
+          }
+        ],
+        "lead_days": 2,
+        "on_hand": 10,
+        "review_days": 3,
+        "supplier_delays": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "name": "baseline",
+      "parameters": {
+        "demand_percent": 100,
+        "evidence_case": "clean",
+        "inbound_day": 1,
+        "lead_days": 2,
+        "moq": 10,
+        "pack_size": 6,
+        "reservation_qty": 3,
+        "review_days": 3,
+        "safety_qty": 2,
+        "service_target_percent": 90,
+        "supplier_delay_days": 0
+      },
+      "realized": {
+        "immediate_fill_rate": "1",
+        "later_new_demand_units": 104,
+        "later_new_missed_units": 0,
+        "proposed_prefix_order_qty": 12,
+        "shortage_days": 0,
+        "startup_new_demand_units": 8,
+        "startup_new_missed_units": 0,
+        "startup_prior_missed_units": 0
+      },
+      "reasons": [],
+      "status": "assessable"
+    },
+    {
+      "accounting": {
+        "common_days": 36,
+        "common_runoff_cost": "144",
+        "common_total_cost": "1171",
+        "extension_days": 0,
+        "extension_holding_cost": "0",
+        "original_days": 36,
+        "original_runoff_cost": "144",
+        "original_total_cost": "1171",
+        "scored_cost": "1027",
+        "scored_days": 28,
+        "terminal_on_hand": 20
+      },
+      "calculation_id": "lab:e0375384756c36d564b116c1b0ff281f98739615e27f496c3eccdf95a49b013e",
+      "common_cost_delta_vs_baseline": "784",
+      "feasibility": {
+        "days": [
+          {
+            "backlog": 0,
+            "day": 0,
+            "new_missed_units": 0,
+            "on_hand": 3,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 0,
+            "day": 1,
+            "new_missed_units": 0,
+            "on_hand": 4,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 0,
+            "day": 2,
+            "new_missed_units": 0,
+            "on_hand": 0,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 4,
+            "day": 3,
+            "new_missed_units": 4,
+            "on_hand": 0,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 8,
+            "day": 4,
+            "new_missed_units": 4,
+            "on_hand": 0,
+            "prior_missed_units": 0
+          }
+        ],
+        "earliest_possible_order_receipt_day": 5,
+        "immediate_fill_ceiling": "13/14",
+        "inevitable_new_missed_units": 8,
+        "inevitable_prior_missed_units": 0,
+        "new_demand_units": 112,
+        "startup_days": 5
+      },
+      "inputs": {
+        "commitments": [
+          {
+            "due_day": 0,
+            "id": "remaining-commitment",
+            "quantity": 3
+          }
+        ],
+        "demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "inbound": [
+          {
+            "arrival_day": 1,
+            "id": "confirmed",
+            "quantity": 5
+          }
+        ],
+        "lead_days": 2,
+        "on_hand": 10,
+        "review_days": 3,
+        "supplier_delays": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "name": "delay3",
+      "parameters": {
+        "demand_percent": 100,
+        "evidence_case": "clean",
+        "inbound_day": 1,
+        "lead_days": 2,
+        "moq": 10,
+        "pack_size": 6,
+        "reservation_qty": 3,
+        "review_days": 3,
+        "safety_qty": 2,
+        "service_target_percent": 90,
+        "supplier_delay_days": 3
+      },
+      "realized": {
+        "immediate_fill_rate": "11/28",
+        "later_new_demand_units": 92,
+        "later_new_missed_units": 60,
+        "proposed_prefix_order_qty": 12,
+        "shortage_days": 17,
+        "startup_new_demand_units": 20,
+        "startup_new_missed_units": 8,
+        "startup_prior_missed_units": 0
+      },
+      "reasons": [],
+      "status": "assessable"
+    },
+    {
+      "accounting": {
+        "common_days": 36,
+        "common_runoff_cost": "164",
+        "common_total_cost": "417",
+        "extension_days": 3,
+        "extension_holding_cost": "66",
+        "original_days": 33,
+        "original_runoff_cost": "98",
+        "original_total_cost": "351",
+        "scored_cost": "253",
+        "scored_days": 28,
+        "terminal_on_hand": 22
+      },
+      "calculation_id": "lab:2b099bbf87105fdd1ed497e5b43240b22d61117520bed172ecc536b9ff222fc9",
+      "common_cost_delta_vs_baseline": "30",
+      "feasibility": {
+        "days": [
+          {
+            "backlog": 0,
+            "day": 0,
+            "new_missed_units": 0,
+            "on_hand": 2,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 0,
+            "day": 1,
+            "new_missed_units": 0,
+            "on_hand": 2,
+            "prior_missed_units": 0
+          }
+        ],
+        "earliest_possible_order_receipt_day": 2,
+        "immediate_fill_ceiling": "1",
+        "inevitable_new_missed_units": 0,
+        "inevitable_prior_missed_units": 0,
+        "new_demand_units": 140,
+        "startup_days": 2
+      },
+      "inputs": {
+        "commitments": [
+          {
+            "due_day": 0,
+            "id": "remaining-commitment",
+            "quantity": 3
+          }
+        ],
+        "demand": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "inbound": [
+          {
+            "arrival_day": 1,
+            "id": "confirmed",
+            "quantity": 5
+          }
+        ],
+        "lead_days": 2,
+        "on_hand": 10,
+        "review_days": 3,
+        "supplier_delays": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "name": "demand125",
+      "parameters": {
+        "demand_percent": 125,
+        "evidence_case": "clean",
+        "inbound_day": 1,
+        "lead_days": 2,
+        "moq": 10,
+        "pack_size": 6,
+        "reservation_qty": 3,
+        "review_days": 3,
+        "safety_qty": 2,
+        "service_target_percent": 90,
+        "supplier_delay_days": 0
+      },
+      "realized": {
+        "immediate_fill_rate": "1",
+        "later_new_demand_units": 130,
+        "later_new_missed_units": 0,
+        "proposed_prefix_order_qty": 18,
+        "shortage_days": 0,
+        "startup_new_demand_units": 10,
+        "startup_new_missed_units": 0,
+        "startup_prior_missed_units": 0
+      },
+      "reasons": [],
+      "status": "assessable"
+    },
+    {
+      "accounting": {
+        "common_days": 36,
+        "common_runoff_cost": "96",
+        "common_total_cost": "427",
+        "extension_days": 3,
+        "extension_holding_cost": "36",
+        "original_days": 33,
+        "original_runoff_cost": "60",
+        "original_total_cost": "391",
+        "scored_cost": "331",
+        "scored_days": 28,
+        "terminal_on_hand": 12
+      },
+      "calculation_id": "lab:e322f46c01cb17ab94401b6bda3a428a52303107a027c7695989f8eebc419c4e",
+      "common_cost_delta_vs_baseline": "40",
+      "feasibility": {
+        "days": [
+          {
+            "backlog": 0,
+            "day": 0,
+            "new_missed_units": 0,
+            "on_hand": 7,
+            "prior_missed_units": 0
+          },
+          {
+            "backlog": 0,
+            "day": 1,
+            "new_missed_units": 0,
+            "on_hand": 12,
+            "prior_missed_units": 0
+          }
+        ],
+        "earliest_possible_order_receipt_day": 2,
+        "immediate_fill_ceiling": null,
+        "inevitable_new_missed_units": 0,
+        "inevitable_prior_missed_units": 0,
+        "new_demand_units": 0,
+        "startup_days": 2
+      },
+      "inputs": {
+        "commitments": [
+          {
+            "due_day": 0,
+            "id": "remaining-commitment",
+            "quantity": 3
+          }
+        ],
+        "demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "inbound": [
+          {
+            "arrival_day": 1,
+            "id": "confirmed",
+            "quantity": 5
+          }
+        ],
+        "lead_days": 2,
+        "on_hand": 10,
+        "review_days": 3,
+        "supplier_delays": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "name": "zero",
+      "parameters": {
+        "demand_percent": 0,
+        "evidence_case": "clean",
+        "inbound_day": 1,
+        "lead_days": 2,
+        "moq": 10,
+        "pack_size": 6,
+        "reservation_qty": 3,
+        "review_days": 3,
+        "safety_qty": 2,
+        "service_target_percent": 90,
+        "supplier_delay_days": 0
+      },
+      "realized": {
+        "immediate_fill_rate": null,
+        "later_new_demand_units": 0,
+        "later_new_missed_units": 0,
+        "proposed_prefix_order_qty": 0,
+        "shortage_days": 0,
+        "startup_new_demand_units": 0,
+        "startup_new_missed_units": 0,
+        "startup_prior_missed_units": 0
+      },
+      "reasons": [],
+      "status": "assessable"
+    },
+    {
+      "accounting": null,
+      "calculation_id": null,
+      "common_cost_delta_vs_baseline": null,
+      "feasibility": null,
+      "inputs": null,
+      "name": "incomplete_supply",
+      "parameters": {
+        "demand_percent": 100,
+        "evidence_case": "incomplete_supply",
+        "inbound_day": 1,
+        "lead_days": 2,
+        "moq": 10,
+        "pack_size": 6,
+        "reservation_qty": 3,
+        "review_days": 3,
+        "safety_qty": 2,
+        "service_target_percent": 90,
+        "supplier_delay_days": 0
+      },
+      "realized": null,
+      "reasons": [
+        "incomplete_or_mismatched_supply",
+        "ineligible_or_unavailable_forecast"
+      ],
+      "status": "not_assessable"
+    }
+  ],
+  "limits": [
+    "Existing single synthetic replay; consumed evidence, not fresh generalization.",
+    "Evaluation diagnostics never inform ordering or select a model.",
+    "Common window extends settled no-demand runoff; terminal stock has no salvage value.",
+    "Later missed fill is not exclusively forecast error; no business-savings claim."
+  ],
+  "protocol_version": "lab-feasibility-diagnostic-v1",
+  "source_metadata": {
+    "archive_digest": "651ca0e32d8e16d1b8b7c4642c84886051159adfd0e4d15ae40e92e92d2c7787",
+    "confirmed_inbound_qty": 5,
+    "cutoff": "2026-01-02T08:00:00+00:00",
+    "key": {
+      "sku_id": "planning-demo:tee-m",
+      "warehouse_id": "planning-demo:harbor"
+    },
+    "on_hand": 10,
+    "source_run_ids": {
+      "clean_plan": "b70f90de-3aae-45fe-8441-fc841ff0de8e",
+      "forecast": "2ecc2877-d9ef-4570-ae86-8f6bec86b1b2",
+      "incomplete_supply_plan": "779bf5aa-e100-46db-9c9d-ac2eec47f948",
+      "reliability": "d17df9a2-47ee-4160-b1c9-fe36d49113c4"
+    },
+    "synthetic": true,
+    "trusted_state": {
+      "cutoff": "2026-01-02T08:00:00+00:00",
+      "ledger_batch_id": "planning-demo:ledger",
+      "on_hand": 10,
+      "snapshot_batch_id": "planning-demo:snapshot",
+      "status": "pass"
+    },
+    "units": "whole pieces"
+  },
+  "source_sha256": {
+    "docs/FEASIBILITY_DIAGNOSTIC.md": "f674e54ea7cb8405056cb04c1bebacd22230771128a107de943113d8a5194fb9",
+    "scripts/feasibility_diagnostic.py": "1990dfe285b4793044ef09c80b8b4bccba11d9d38c04d8f21ed210ae786e44e8",
+    "src/inventory_intelligence/decision.py": "f68d13d43b74c1233d94e2c67cfc7a709298c14c8b5a4b5a349c65bc5d1e57db",
+    "src/inventory_intelligence/decision_diagnostics.py": "4e0e99294164f6884a5041b46eac9bebccfa914ef529758d5fa576b9be32131c",
+    "src/inventory_intelligence/forecasting.py": "5a0e6f1377e4327fdf0f61d7525eccdac4c434a10a95beff30adeaffbfd9aee7",
+    "src/inventory_intelligence/lab.py": "78358dd51751e3aa4ca171be920e6aab4928a4fa367c53aa03188c93aa20822e",
+    "src/inventory_intelligence/lab_evidence.json": "6b6fa00788bb09f0ecb2f9f5078b035c23987e051c73914f99c6f5a7f7e65002"
+  },
+  "synthetic": true
+}

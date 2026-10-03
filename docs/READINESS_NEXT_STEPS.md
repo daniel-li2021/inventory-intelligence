@@ -179,3 +179,12 @@ The first next deliverable should be the bounded feasibility/evaluation protocol
 not a larger application. It addresses demonstrated failures with existing
 components, stays inside synthetic policy, and establishes whether calibration,
 external data or additional modeling would answer the remaining question.
+
+## Automation continuation — bounded diagnostic delivered
+
+The [separately frozen Lab diagnostic](FEASIBILITY_DIAGNOSTIC.md) and
+[recorded results](FEASIBILITY_DIAGNOSTIC_RESULTS.md) now cover startup attribution
+and common-window sensitivity on the retained replay. Delay3 has eight inevitable
+startup misses and 60 later misses; its common-window cost disadvantage remains 784.
+This completes the smallest attribution slice, not the fresh-path/warmup study
+above. Keep that study first in priority and existing model grids frozen.
