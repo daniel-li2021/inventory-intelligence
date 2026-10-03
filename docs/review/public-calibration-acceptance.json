@@ -1,0 +1,38 @@
+{
+  "cache_hit": {
+    "report_byte_identical": true,
+    "simulation_disabled": true
+  },
+  "cached_audit": {
+    "arms": 768,
+    "command": "PYTHONPATH=src python -m scripts.public_calibration_benchmark audit",
+    "local_bytes": 58220312,
+    "model_refits": 0,
+    "overlap_items": 0,
+    "pairs": 512,
+    "public_bytes": 488745,
+    "simulation_replays": 0
+  },
+  "focused_tests": {
+    "command": "PYTHONPATH=src python -m unittest tests.test_public_calibration tests.test_sales_safety tests.test_public_sales_benchmark tests.test_intermittent -q",
+    "passed": 29,
+    "runtime": "Python 3.12.14 / Psycopg 3.3.6"
+  },
+  "freeze_commit": "6b76a2a4fad4b1e279582c69f2586df56ea7c6cb",
+  "freeze_sha256": "21b7a3ad6869da4a36f6a09a7cba2b69b35c5f98f2724aae77d9ddd3ad9d64d1",
+  "limitations": [
+    "Same source/calendar; products/dates correlated; no statistical independence.",
+    "No actual availability, unconstrained demand, supplier performance or retailer costs.",
+    "Consumed after scoring; no model/policy promotion, main integration, CI or deployment validation."
+  ],
+  "local_evidence_sha256": "af8e06dbbf3b30dd725184bd0a96c5ccf9defdcb5f6dc43c82cde97791917caa",
+  "parent_cached_audit": {
+    "arms": 768,
+    "command": "PYTHONPATH=src python -m scripts.public_safety_audit",
+    "model_refits": 0,
+    "pairs": 512,
+    "simulation_replays": 0
+  },
+  "report_sha256": "28e7845e569c9c10b6fd8cc80f9e1caa3501edce0b1bece6dd883c18ca566ade",
+  "verified_at_utc": "2026-10-03T21:03:00.618222+00:00"
+}

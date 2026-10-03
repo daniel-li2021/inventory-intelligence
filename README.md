@@ -12,6 +12,12 @@ The core system, offline decision research and local **Decision Lab** are comple
 within their synthetic scope. Real demand performance, calibrated service and
 business savings remain unmeasured. [Current independent assessment](docs/READINESS_REVIEW.md).
 
+Separate [public observed-sales research](docs/PUBLIC_SALES_RESULTS.md) now adapts
+official UCI Online Retail with immutable provenance and evaluates a training-only
+32-item subset. Raw/derived observations stay local and ignored; published metrics
+are aggregate. Fixed mean beats the selected method mix on the 28-day holdout.
+Observed sales do not establish unconstrained demand or historical stock availability.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]
@@ -61,6 +67,14 @@ cases, not commercial savings or service guarantees.
 [Lab semantics, API and operating instructions](docs/DECISION_LAB.md).
 
 ## What the evidence shows
+
+- **Public sales-proxy safety:** q95 demand calibration does not guarantee 95%
+  immediate fill or cycle service. A paid 56-day warmup and 768 synthetic inventory
+  arms over public observations expose different coverage/service/cost outcomes.
+  [Measured results and boundaries](docs/PUBLIC_SAFETY_RESULTS.md).
+  A [prospectively frozen disjoint 32-item replication](docs/PUBLIC_CALIBRATION_RESULTS.md)
+  retains another 768 arms: mean/q95 and SBA/q95 achieve 92.12% and 93.35% fill
+  in the lead-two/no-extra-delay case. Same retailer/calendar; no service guarantee.
 
 - **Engineering:** exact arithmetic, two knowledge clocks, append-only run
   history, restricted database roles, independent hand-calculated oracles, and

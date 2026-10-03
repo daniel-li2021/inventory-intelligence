@@ -75,11 +75,22 @@ segment checks. Aggregate results may justify a new aggregation or global-model
 handoff; ADIDA/IMAPA/LightGBM are not automatic additions. A failed or blocked
 benchmark leaves the existing approved methods untouched.
 
-## Implementation checkpoint
+## Current implementation checkpoint
 
-The current assignment permits this named public observed-sales boundary and
-official UCI acquisition, with real rows/series local and ignored and only
-aggregate metrics published. The official UCI source/license was rechecked on
-2026-10-03. Adapter acceptance must still precede acquisition. No real rows have
-yet been imported or evaluated in this package; the operational demo remains
-synthetic. Follow the roadmap checkpoint for subsequent progress.
+The [adapter](PUBLIC_ADAPTER_V1.md) and [forecast-only evaluation](PUBLIC_FORECAST_V1.md)
+are implemented and independently validated on the public-observed-sales task
+branch. [Measured results](PUBLIC_SALES_RESULTS.md) preserve raw/derived observations
+locally and publish aggregates only. Initial forecast comparison and train-only
+subset selection are complete. The dependent public-safety-service branch adds
+the [frozen sales-proxy safety study](PUBLIC_SAFETY_V1.md) and
+[achieved-service results](PUBLIC_SAFETY_RESULTS.md), with paid continuous warmup,
+q90/q95 coverage/pinball and synthetic supply timing. The original forecast report
+remains forecast-only. These exploratory reused observations authorize no advanced
+method or operational import. See the research roadmap in PR14 for remaining work.
+
+The subsequent [disjoint-item protocol](PUBLIC_CALIBRATION_V1.md) commits a
+training-only seed-1709 subset/grid before any new-item simulation, excludes all
+32 consumed identities and reuses attested source caches. Its
+[measured replication](PUBLIC_CALIBRATION_RESULTS.md) retains all 768 arms and
+null denominators, with no policy/model promotion. This is cross-item evidence
+in the same retailer/calendar, not independent-market or later-time validation.
