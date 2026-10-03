@@ -22,6 +22,33 @@ business inventory improvement remain unmeasured.
 
 ## Quickstart
 
+### Inventory Decision Lab
+
+Inspect the reliability → forecast → planning → simulation → evidence chain
+in a local browser. The bundled tee-m / Harbor replay contains real saved runs
+against synthetic inputs. It is trusted at its recorded cutoff, not live stock.
+
+With Python 3.12 and the build tools from the core quickstart below:
+
+```sh
+python -m pip install --no-build-isolation '.[lab]'
+python -m uvicorn inventory_intelligence.lab_api:app --host 127.0.0.1 --port 8000
+```
+
+Open [the local lab](http://127.0.0.1:8000). No PostgreSQL service or model API key
+is needed for the app. Change demand, lead time, hidden supplier delay, confirmed
+inbound timing, reservations, safety, packs or MOQ; compare the exact baseline and
+scenario evidence, trajectories, service and synthetic costs. Expand the Decision
+Trace or download the complete comparison JSON. The incomplete-supply control
+shows why unsupported recommendations are suppressed.
+
+The prefix planner's advisory proposal and the simulator's periodic
+inventory-position orders are separately labelled. The latter reevaluates orders;
+its outcomes do not claim to simulate execution of the prefix proposal. Service
+target is a comparison threshold, not a calibrated guarantee. All quantities and
+comparisons come from deterministic Python evidence. No orders are executed.
+[Architecture, UX, bounds and implementation handoff](docs/DECISION_LAB_PLAN.md).
+
 Requires Python 3.12 and Docker with Compose. From the repository root:
 
 ```sh
@@ -161,6 +188,6 @@ The [proposed public-sales protocol](docs/PUBLIC_SALES_PROTOCOL_V1.md) requires
 explicit authorization of its separate observed-sales boundary before acquiring
 real observations. Raw data and reconstructable series would stay local/ignored.
 
-All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
+All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. The Decision Lab adds bounded local scenario controls; source uploads, scheduled jobs, deployment and operational execution remain outside the delivered milestone.
 
 Original project material is available under the [MIT license](LICENSE). Dependencies retain their own licenses.

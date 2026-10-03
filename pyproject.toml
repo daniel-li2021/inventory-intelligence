@@ -9,8 +9,14 @@ description = "Read-only inventory reconciliation with persisted reliability evi
 requires-python = ">=3.12"
 dependencies = ["psycopg[binary]==3.3.6"]
 
+[project.optional-dependencies]
+lab = ["fastapi==0.135.1", "uvicorn==0.41.0", "httpx==0.28.1"]
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+inventory_intelligence = ["lab_evidence.json", "lab_static/*"]
 
 [tool.setuptools.data-files]
 "share/inventory_intelligence" = ["sql/views.sql", "sql/checks.sql"]
