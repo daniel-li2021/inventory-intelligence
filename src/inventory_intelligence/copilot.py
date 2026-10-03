@@ -343,13 +343,18 @@ def main(argv=None):
     parser.add_argument("--language-model", choices=("gpt-6-luna", "gpt-6-sol", "offline"),
                         default="gpt-6-luna", help="Question routing only; exact supported phrases stay offline")
     parser.add_argument("--env-file", default=".env", help="Ignored local API key file; never executed")
+    parser.add_argument("--measure-usage", action="store_true", help="Expose measured routing API latency and provider token counters")
     args = parser.parse_args(argv)
     try:
         routing = None
+        telemetry = {} if args.measure_usage else None
         intent = args.intent
         if args.question:
             from .copilot_language import route_question
-            routing = route_question(args.question, model=args.language_model, env_file=args.env_file)
+            options = dict(model=args.language_model, env_file=args.env_file)
+            if telemetry is not None:
+                options["telemetry"] = telemetry
+            routing = route_question(args.question, **options)
             intent = routing["intent"]
         # A refusal needs no source retrieval, credentials or evidence validation.
         supported = intent != "unsupported"
@@ -380,6 +385,8 @@ def main(argv=None):
                         max_age_hours=args.max_age_hours)
         if routing:
             result["routing"] = {k: routing[k] for k in ("source", "model")}
+            if telemetry is not None:
+                result["routing"]["telemetry"] = telemetry
             if routing["limitation"]:
                 result["limitations"].append(routing["limitation"])
         if args.report:

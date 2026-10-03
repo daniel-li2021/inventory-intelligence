@@ -115,6 +115,11 @@ Historical proposal quantities stay inside their citations; current readiness
 remains blocked until current inputs are assessed at a new planning cutoff.
 [Complete examples, inputs and exit codes](docs/examples/copilot.md).
 
+[Bounded Stage 3 end-to-end benchmark](docs/STAGE3_BENCHMARK.md): 45 synthetic
+cases covering routing, evidence, exact quantities, citations, readiness/refusal,
+latency and measured API usage. The reproducible harness reuses persisted inputs
+and makes at most 22 routing calls; no new forecasting models are added.
+
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
 
 Original project material is available under the [MIT license](LICENSE). Dependencies retain their own licenses.
