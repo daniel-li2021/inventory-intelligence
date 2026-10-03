@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Inventory Decision Lab</title>
+  <link rel="stylesheet" href="/static/lab.css">
+  <script src="/static/lab.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to results</a>
+  <header class="site-header">
+    <a href="#" class="brand"><span class="brand-mark" aria-hidden="true">I<span>↗</span></span><span>Inventory Intelligence<span class="brand-sub">Decision Lab</span></span></a>
+    <nav aria-label="Page sections"><a href="#overview">Overview</a><a href="#projection">Projection</a><a href="#evidence">Evidence</a></nav>
+    <span class="synthetic-pill"><span aria-hidden="true">●</span> Synthetic replay</span>
+  </header>
+  <div class="page-heading">
+    <div><p class="eyebrow">A SMALL LAB FOR BIG INVENTORY QUESTIONS</p><h1>See the decision.<br><span>Follow the evidence.</span></h1><p class="intro">Explore how demand, supply and policy change one inventory decision. Every quantity follows the same deterministic core.</p></div>
+    <div class="hero-note"><span class="hero-number" aria-hidden="true">01</span><p>One SKU. One warehouse.<br>A complete chain of evidence.</p></div>
+  </div>
+  <section class="trust-strip" aria-label="Replay identity and trusted cutoff" id="trust-strip"><span class="status-dot" aria-hidden="true"></span><strong>Loading synthetic evidence…</strong></section>
+  <div id="global-error" class="error-banner" role="alert" hidden></div>
+  <p id="live-status" class="sr-only" role="status" aria-live="polite"></p>
+  <div class="workspace">
+    <aside class="control-panel" aria-labelledby="scenario-title">
+      <div class="panel-heading"><div><p class="eyebrow">WHAT IF</p><h2 id="scenario-title">Shape a scenario</h2></div><span class="small-tag">Bounded inputs</span></div>
+      <p class="panel-intro">Change the assumptions. Compare with the saved clean baseline.</p>
+      <div class="presets" aria-label="Scenario presets"><button type="button" data-preset="demand" disabled>Demand +25%</button><button type="button" data-preset="delay" disabled>Supplier +3 days</button><button type="button" data-preset="blocked" disabled>Incomplete supply</button></div>
+      <form id="scenario-form">
+        <div id="controls"><p class="loading">Loading scenario controls…</p></div>
+        <div class="run-actions"><button class="button primary" id="run-button" type="submit" disabled>Run scenario <span aria-hidden="true">↗</span></button><button class="button secondary" id="reset-button" type="button" disabled>Reset</button></div>
+        <p id="scenario-status" class="scenario-status">Results use the default assumptions.</p>
+        <div id="form-errors" class="form-errors" role="alert" tabindex="-1" hidden></div>
+      </form>
+      <p class="control-footnote">Local, synthetic and read-only. Scenarios never change source evidence or place an order.</p>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section id="overview" class="result-section" aria-labelledby="overview-title">
+        <div class="section-heading"><div><p class="eyebrow">01 / DECISION AT A GLANCE</p><h2 id="overview-title">Baseline meets what-if</h2></div><button class="button export-button" id="export-button" type="button" disabled>Download evidence JSON <span aria-hidden="true">↓</span></button></div>
+        <div id="warnings" hidden></div>
+        <div id="assessment" class="assessment"><p class="loading">Evaluating the saved replay…</p></div>
+        <div id="metrics" class="metric-grid"></div>
+        <div class="policy-note"><strong>Two policies, two different questions.</strong> The <b>prefix-stock-v1</b> planner sizes a single proposal over its declared horizon. The <b>periodic inventory-position</b> simulator places its own orders at review intervals. The simulator does not execute the planner’s proposal.</div>
+        <div class="two-up"><article class="panel"><h3>Trusted inventory inputs</h3><p class="helper">Whole pieces at the recorded cutoff.</p><div id="inventory"></div></article><article class="panel"><h3>Deterministic risk</h3><p class="helper">Projected shortages and surplus, with no probability claims.</p><div id="risk"></div></article></div>
+        <article class="panel costs-panel"><div class="subheading"><div><h3>Synthetic cost comparison</h3><p class="helper">Declared finite-window penalties. Runoff is shown separately.</p></div><span class="small-tag">Cost units</span></div><div id="costs"></div></article>
+      </section>
+      <section id="projection" class="result-section" aria-labelledby="projection-title">
+        <div class="section-heading"><div><p class="eyebrow">02 / THROUGH TIME</p><h2 id="projection-title">From forecast to physical stock</h2></div></div>
+        <article class="panel"><div class="subheading"><div><h3>Forecast evidence</h3><p class="helper" id="forecast-caption">Fixed mean model; no automatic model selection.</p></div><span class="small-tag">Pieces per day</span></div><div id="forecast-chart"></div><details class="data-disclosure"><summary>Inspect exact forecast and demand evidence</summary><div id="forecast-table"></div><div id="forecast-source"></div></details></article>
+        <article class="panel"><div class="subheading"><div><h3>Planner’s inventory projection</h3><p class="helper" id="plan-caption">Prefix-stock-v1 • proposed receipt at the declared lead time</p></div><span class="small-tag">Projected pieces</span></div><div id="plan-chart"></div><p class="chart-note">The signed balance can fall below zero before a proposal arrives. It is a planning balance, not physical on-hand.</p><details class="data-disclosure"><summary>Inspect exact daily planning balances</summary><div id="plan-table"></div></details></article>
+        <article class="panel"><div class="subheading"><div><h3>Simulated physical stock &amp; backlog</h3><p class="helper" id="simulation-caption">Periodic inventory-position policy • scored demand window</p></div><span class="small-tag">Whole pieces</span></div><div id="simulation-chart"></div><details class="data-disclosure"><summary>Inspect scored daily outcomes</summary><div id="simulation-table"></div></details><details class="data-disclosure"><summary>Inspect runoff after the scored window</summary><p class="helper">No new demand is scored during runoff. Fulfillment and runoff costs remain separate from scored service metrics.</p><div id="runoff-chart"></div><div id="runoff-table"></div><div id="terminal"></div></details><details class="data-disclosure"><summary>Inspect simulator review decisions and assumptions</summary><div id="reviews"></div></details></article>
+      </section>
+      <section id="evidence" class="result-section" aria-labelledby="evidence-title">
+        <div class="section-heading"><div><p class="eyebrow">03 / DECISION TRACE</p><h2 id="evidence-title">Every number has a lineage</h2></div><label class="trace-selector">Inspect <select id="trace-side"><option value="scenario">Scenario</option><option value="baseline">Baseline</option></select></label></div>
+        <p class="section-intro">Follow the exact structured evidence from the reliability gate to the simulated outcome. Expand each step to inspect assumptions and source identities.</p>
+        <div id="trace" class="trace-list"></div>
+        <details class="panel archive-disclosure"><summary>Replay provenance and source run identities</summary><div id="provenance"></div><a href="/api/evidence" class="text-link" download="inventory-lab-source-evidence.json">Download immutable source archive ↗</a></details>
+      </section>
+    </main>
+  </div>
+  <footer><span>Inventory Intelligence / Decision Lab</span><span>Structured evidence → deterministic decision → inspectable outcome</span></footer>
+</body>
+</html>
