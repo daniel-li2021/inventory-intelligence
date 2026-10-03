@@ -75,6 +75,10 @@ cases, not commercial savings or service guarantees.
 - **Negative results matter:** stock can run out before any order can arrive,
   and historically calibrated safety stock can persist after demand collapses.
   Adding a more complex forecast does not necessarily solve either problem.
+- **Fulfillment semantics:** a separate [lost-sales research contract and results](docs/LOST_SALES_RESULTS.md)
+  compare 288 matched synthetic pairs with identical attempted-demand forecasts.
+  First orders match, but subsequent purchases differ in 199 pairs; permanent
+  losses, owed backlog and their different penalty units remain explicit.
 
 [Decision protocol/results](docs/DECISION_BENCHMARK.md),
 [intermittent protocol/results](docs/INTERMITTENT_BENCHMARK.md), and

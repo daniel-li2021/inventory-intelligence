@@ -3,7 +3,37 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — bounded startup attribution implemented
+## Current checkpoint — independent lost-sales research branch
+
+The continuing goal's separate lost-sales boundary is frozen in
+[CONTRACT_LOST_SALES_V1](CONTRACT_LOST_SALES_V1.md) at7550cc4; isolated kernel,
+generator/oracles/auditor commit54ded62 precedes fresh scoring. No accepted-order
+backlog contract or planner/Lab file changes. Both semantics use synthetic
+completed attempted-demand feedback, not inferred lost demand from sales.
+
+[Results](LOST_SALES_RESULTS.md) retain288 matched pairs/576 logical arms,
+480 exact-input computations/376 distinct native trajectories,12 distinct
+demand paths and19 supplier paths. First orders all match; later purchased
+quantities differ in199 pairs. Immediate fill improves89, regresses10, equals93
+and is undefined96. Lost penalties10/40 yield171/25 lower-cost pairs, respectively;
+different unit-day/once-per-unit business penalties are not interchangeable ROI.
+All warmup, purchases and common100-day settlement accounting are paid.
+
+24 focused tests and the separate480-arm saved-event audit pass; six rehashed
+faults are detected. Cache reuse with evaluation disabled preserves exact bytes.
+Full synthetic traces are compressed in Git alongside a readable exact summary.
+No database/model API, dependency, source import, CI monitoring or main merge.
+
+The independent public calibration replication is published in
+[PR20](https://github.com/daniel-li2021/inventory-intelligence/pull/20), with its
+disjoint32-item/frozen source evidence on that branch. The complete22-direction
+status/case study is preserved in
+[PR19](https://github.com/daniel-li2021/inventory-intelligence/pull/19).
+Main integration remains pending explicit owner approval after automatic review
+rejected PR14's merge. Next independent package: additive synthetic physical-count
+truth/provenance, then a concrete hosted read-only target/ownership proposal.
+
+## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
 Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes
