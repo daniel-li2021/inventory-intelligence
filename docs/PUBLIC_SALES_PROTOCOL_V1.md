@@ -1,7 +1,9 @@
 # Proposed public observed-sales research — v1
 
-Prepared 2026-10-02; **pending explicit public-data boundary authorization**.
-This is a concrete later handoff, not a relaxation of planning-v1 or AGENTS.md.
+Prepared 2026-10-02; **assigned by the user on 2026-10-03** under the long-term
+research request. This separate offline boundary authorizes official UCI
+acquisition and bounded public-sales research. Operational planning contracts
+and the synthetic demo retain their existing semantics.
 The operational portfolio stays synthetic. Public observations would live in a
 separate offline research adapter and ignored local outputs, never as accepted
 orders, verified inventory, warehouses or uncensored demand.
@@ -73,9 +75,12 @@ segment checks. Aggregate results may justify a new aggregation or global-model
 handoff; ADIDA/IMAPA/LightGBM are not automatic additions. A failed or blocked
 benchmark leaves the existing approved methods untouched.
 
-## Authorization requested
+## Current implementation checkpoint
 
-Approve this named public observed-sales boundary and official UCI acquisition,
-with real rows/series local and ignored and only aggregate metrics published,
-or retain synthetic-only research. Dataset acquisition and real evaluation must
-wait for this answer; elapsed time is not approval.
+The [adapter](PUBLIC_ADAPTER_V1.md) and [forecast-only evaluation](PUBLIC_FORECAST_V1.md)
+are implemented and independently validated on the public-observed-sales task
+branch. [Measured results](PUBLIC_SALES_RESULTS.md) preserve raw/derived observations
+locally and publish aggregates only. Initial forecast comparison and train-only
+subset selection are complete; synthetic-stock policy/safety-grid evaluation is
+a separate unfinished slice. No advanced method or operational import is authorized
+by these measured results. See the research roadmap in PR14 for remaining work.

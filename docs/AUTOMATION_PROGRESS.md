@@ -3,7 +3,25 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — bounded startup attribution implemented
+## Current checkpoint — public observed-sales task branch
+
+The user assigned the long-term research directions on2026-10-03. Fresh costed
+warmup, retention and supply-intervention work is published in PR14 and awaits
+merge approval after automatic review rejected default-branch integration.
+Remote main has not been advanced by that batch.
+
+The independent `codex/public-observed-sales` branch implements the official UCI
+adapter and first forecast-only benchmark. The541909-row extraction passes;
+32 train-stratified items show fixed mean outperforming selection-chosen methods
+on the28-day holdout.22 focused tests pass. Raw observations and item-level
+results stay ignored/local. [Full evidence](PUBLIC_SALES_RESULTS.md).
+
+Next ready work: explicit small policy comparison, sales-proxy safety evaluation,
+cross-layer provenance/QA and demo accessibility. Advanced models remain gated;
+public sales do not become accepted-order demand. The full22-direction roadmap
+is retained on the research-roadmap branch/PR14, not silently narrowed here.
+
+## Prior checkpoint — bounded startup attribution implemented
 
 Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
 Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes

@@ -12,6 +12,12 @@ The core system, offline decision research and local **Decision Lab** are comple
 within their synthetic scope. Real demand performance, calibrated service and
 business savings remain unmeasured. [Current independent assessment](docs/READINESS_REVIEW.md).
 
+Separate [public observed-sales research](docs/PUBLIC_SALES_RESULTS.md) now adapts
+official UCI Online Retail with immutable provenance and evaluates a training-only
+32-item subset. Raw/derived observations stay local and ignored; published metrics
+are aggregate. Fixed mean beats the selected method mix on the 28-day holdout.
+Observed sales do not establish unconstrained demand or historical stock availability.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]
