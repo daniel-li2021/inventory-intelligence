@@ -12,6 +12,13 @@ The core system, offline decision research and local **Decision Lab** are comple
 within their synthetic scope. Real demand performance, calibrated service and
 business savings remain unmeasured. [Current independent assessment](docs/READINESS_REVIEW.md).
 
+[Portfolio case study and resume wording](docs/PORTFOLIO_CASE_STUDY.md) connect
+the architecture to measured failures and negative results. The
+[22-direction delivery/continuation ledger](docs/RESEARCH_STATUS.md) distinguishes
+merged core evidence from published research and accessibility PRs. New public
+observed-sales studies remain separate exploratory research, with synthetic
+suppliers/costs and unknown stock availability.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]
