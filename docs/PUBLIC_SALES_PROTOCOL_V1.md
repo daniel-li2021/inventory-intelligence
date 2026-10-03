@@ -81,6 +81,9 @@ The [adapter](PUBLIC_ADAPTER_V1.md) and [forecast-only evaluation](PUBLIC_FORECA
 are implemented and independently validated on the public-observed-sales task
 branch. [Measured results](PUBLIC_SALES_RESULTS.md) preserve raw/derived observations
 locally and publish aggregates only. Initial forecast comparison and train-only
-subset selection are complete; synthetic-stock policy/safety-grid evaluation is
-a separate unfinished slice. No advanced method or operational import is authorized
-by these measured results. See the research roadmap in PR14 for remaining work.
+subset selection are complete. The dependent public-safety-service branch adds
+the [frozen sales-proxy safety study](PUBLIC_SAFETY_V1.md) and
+[achieved-service results](PUBLIC_SAFETY_RESULTS.md), with paid continuous warmup,
+q90/q95 coverage/pinball and synthetic supply timing. The original forecast report
+remains forecast-only. These exploratory reused observations authorize no advanced
+method or operational import. See the research roadmap in PR14 for remaining work.

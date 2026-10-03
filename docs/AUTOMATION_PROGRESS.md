@@ -3,7 +3,31 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — public observed-sales task branch
+## Current checkpoint — sales-proxy safety task branch
+
+The dependent `codex/public-safety-service` branch extends PR15's attested adapter
+without changing its archived forecast results. [Protocol](PUBLIC_SAFETY_V1.md)
+was committed before real-sales simulation; [results](PUBLIC_SAFETY_RESULTS.md)
+retain768 arms/512 contrasts over the same32 training-selected items. These are
+explicitly consumed public observations, not fresh holdout or actual stockouts.
+All56 warmup days, purchases and common15-day settlement are charged. q95 does
+not guarantee95% fill/cycle service.31 focused tests pass; a separate audit
+reconciles every cached arm and public aggregate with zero refits/replays.
+
+Published prior packages remain unmerged: [PR14](https://github.com/daniel-li2021/inventory-intelligence/pull/14)
+(all22 useful directions, fresh warmup, safety retention, supply interventions),
+[PR15](https://github.com/daniel-li2021/inventory-intelligence/pull/15) (public
+adapter/forecast), [PR16](https://github.com/daniel-li2021/inventory-intelligence/pull/16)
+(fixed-forecast policy comparison). PR14 integration was rejected by automatic
+approval review; the required explicit integration-owner approval is still pending.
+No main integration is retried, and independent ready work continues.
+
+Next: local accessibility/UX audit, missing provenance/invariant checks and a
+portfolio case study with the negative public/synthetic findings. Advanced models
+remain conditional; bigger lost-sales/physical-count/allocation/hosting work keeps
+its separate contract/target gates in PR14's complete roadmap.
+
+## Prior checkpoint — public observed-sales task branch
 
 The user assigned the long-term research directions on2026-10-03. Fresh costed
 warmup, retention and supply-intervention work is published in PR14 and awaits
