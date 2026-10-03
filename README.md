@@ -79,6 +79,9 @@ cases, not commercial savings or service guarantees.
 [Decision protocol/results](docs/DECISION_BENCHMARK.md),
 [intermittent protocol/results](docs/INTERMITTENT_BENCHMARK.md), and
 [ranked next investigations](docs/READINESS_NEXT_STEPS.md).
+The [startup/accounting diagnostic](docs/FEASIBILITY_DIAGNOSTIC_RESULTS.md)
+attributes eight of the delayed replay's 68 missed units to unavoidable startup;
+60 occur later. Its cost disadvantage persists over a common 36-day window.
 Existing holdouts are consumed; they are regression evidence, not fresh tuning
 sets. Optional live Copilot routing has a bounded synthetic evaluation, separate
 from deterministic evidence checks. [Routing evidence](docs/STAGE3_STABILIZATION.md).

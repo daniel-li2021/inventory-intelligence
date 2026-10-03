@@ -3,7 +3,27 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — independent readiness review complete
+## Current checkpoint — bounded startup attribution implemented
+
+Automation continuation began from fetched/pruned `origin/main` at `673dae8`.
+Frozen [diagnostic protocol](FEASIBILITY_DIAGNOSTIC.md) commit `5e2ec8e` precedes
+the five-control replay. New pure offline diagnostics attribute startup misses
+without informing orders and extend settled terminal stock to a common 36-day
+cost window. Existing simulator/Lab contracts and archived outcomes stay intact.
+
+Delay3 has eight unavoidable startup misses and 60 later misses of 112 new units.
+Common-window costs 387 versus 1171 preserve the delay disadvantage, with delta 784
+instead of the unequal-window 844. Zero demand remains null-service and incomplete
+supply remains blocked. [Results/reproduction](FEASIBILITY_DIAGNOSTIC_RESULTS.md),
+[exact artifact](review/feasibility-diagnostic.json).
+
+Focused acceptance passes **48/48**, including 15 new independent diagnostic/CLI
+tests, on Python 3.12.14 / Psycopg 3.3.6. No new database/model API, benchmark refit,
+external acquisition or deployment was needed. These controls reuse one consumed
+synthetic path; fresh demand/supplier traces and costed warmup remain the next
+evaluation milestone. Additional forecasts are still unjustified.
+
+## Prior checkpoint — independent readiness review complete
 
 Started from fetched `origin/main` at `429cc71`. Isolated engineering, Lab and
 research reviews found and fixed persisted demand-evidence contradictions and
