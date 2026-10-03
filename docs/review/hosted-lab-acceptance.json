@@ -1,0 +1,78 @@
+{
+  "caddy_binary_verification": {
+    "asset_url": "https://github.com/caddyserver/caddy/releases/download/v2.10.2/caddy_2.10.2_mac_arm64.tar.gz",
+    "checksum_source": "https://github.com/caddyserver/caddy/releases/download/v2.10.2/caddy_2.10.2_checksums.txt",
+    "published_sha512": "3b8a4b24054bddd96cae8da5c34e48c19105be29859d6f09e37344b7e188881cfd6b0a91af3f3e8f1d10987153e6bad70d1752c967e1360cc0041fc7736076ec",
+    "release_url": "https://github.com/caddyserver/caddy/releases/tag/v2.10.2",
+    "sha256": "cc9ad20742ea7bfee5dd1d435d42ab7fcf8592294f9ec43bf08fd21cbe448bc4"
+  },
+  "caddy_native_config_validation": {
+    "container": false,
+    "passed": true,
+    "site_override": "http://127.0.0.1:8080"
+  },
+  "compose_yaml_syntax": {
+    "compose_cli_validation": false,
+    "parser": "Ruby standard-library YAML",
+    "passed": true
+  },
+  "container_build_verified": false,
+  "container_runtime_available": false,
+  "host_domain_budget_selected": false,
+  "linux_resource_limits_verified": false,
+  "live_http": {
+    "path": "docs/review/hosted-lab-local-http.json",
+    "processes_stopped": 2,
+    "proxy": "Caddy 2.10.2",
+    "public_tls_verified": false,
+    "requests": 13,
+    "scheme": "HTTPS",
+    "sha256": "7f6600b2b21ff7369929ef2c96dbc9afb4ce99c5771d29cd29023e6fad7f9ff0",
+    "trust": "explicit localhost private CA; no system trust installation"
+  },
+  "operational_changed_paths": [
+    "src/inventory_intelligence/lab_hosted.py"
+  ],
+  "operational_writes": 0,
+  "planning_commit": "6030d9f",
+  "public_deployed": false,
+  "source_commit": "fa768a2fbd8dc89843ede7c6910198d3fcebe1b8",
+  "source_sha256": {
+    "deploy/lab/Caddyfile": "90f5f9bb54a1087ab1c93f62992e6dd0eb5ecf2872a4a37fd989d39ca86262ca",
+    "deploy/lab/Dockerfile": "46a0d2e171590b1e9380829d59d3eb111363864d4b9588a0d01943b81f4681db",
+    "deploy/lab/Dockerfile.dockerignore": "465709afdf0f14683b567857eb81d6230dbee48940a88c02e1998ea8674b64df",
+    "deploy/lab/compose.yaml": "2b973885e24ab1faf66392d2fb11e45b6d4e52649731cdf23f7986710d5cf58f",
+    "deploy/lab/requirements.txt": "b05f94c043ff70b1b0a3d395fe7680f200f615eef8e429952bd34742d6f59d3d",
+    "docs/HOSTED_LAB_PLAN.md": "5f42c45ec482153119a64735d23a5e238d61f42a25a61ebe4487d114e1a80f5d",
+    "pyproject.toml": "0856fda6415be9105314b57fc65aed5ea0660a467d10431747920c942c055460",
+    "scripts/check_hosted_lab.py": "5b459be4b657b6b6db894afa48b96ab460a612307c50ec9f803b7fb7003df7b6",
+    "src/inventory_intelligence/lab_api.py": "8a34cd9ab3ae1b5ad3ce26a070b7b3a98b07d13c290f74f29c38743e657b260c",
+    "src/inventory_intelligence/lab_evidence.json": "6b6fa00788bb09f0ecb2f9f5078b035c23987e051c73914f99c6f5a7f7e65002",
+    "src/inventory_intelligence/lab_hosted.py": "44345e04008c78f59b9c5909031c9a452d1e1895ee187172750c9defbf5ad86c",
+    "tests/test_lab_hosted.py": "38ccda39e1f908587a4318ccdd49bcd73b65f552050203dc744b2a6221e9956d"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src python -m unittest tests.test_lab_hosted tests.test_lab_api tests.test_lab",
+    "existing_lab_api_tests": 23,
+    "failures": 0,
+    "new_hosted_tests": 11,
+    "passed": 34
+  },
+  "unverified": [
+    "Docker/Compose runtime and image build",
+    "Linux non-root/read-only/CPU/RAM/PID enforcement",
+    "restart and rollback",
+    "public DNS/ACME TLS and HTTP redirect",
+    "external uptime",
+    "real browser CSP and mobile behavior",
+    "PR 18 accessibility integration"
+  ],
+  "verified_at": "2026-10-03T22:23:27.990391+00:00",
+  "wheel": {
+    "bytes": 99722,
+    "path": "inventory_intelligence-0.1.0-py3-none-any.whl",
+    "relevant_package_bytes_match_checkout": true,
+    "served_outside_checkout": true,
+    "sha256": "b882698bb1d48de23cfa7b30272e79e246bb4e72dd9c37becc3b50b4e2293de4"
+  }
+}

@@ -72,6 +72,9 @@ but reduces simulated immediate fill to `11/28`, with 17 shortage days and cost
 metrics; zero-demand fill remains undefined. These are deterministic synthetic
 cases, not commercial savings or service guarantees.
 [Lab semantics, API and operating instructions](docs/DECISION_LAB.md).
+[Hosted-demo readiness package](deploy/lab/README.md) prepares a bounded anonymous
+entry point, pinned container/proxy templates and release acceptance. No public
+service has been deployed; container and public-domain checks remain pending.
 
 Keyboard users can run the presets, inspect focusable evidence tables with arrow
 keys and use the skip link. [Local accessibility review and limits](docs/LAB_ACCESSIBILITY_REVIEW.md)

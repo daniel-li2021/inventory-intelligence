@@ -1,0 +1,115 @@
+{
+  "archive_digest": "651ca0e32d8e16d1b8b7c4642c84886051159adfd0e4d15ae40e92e92d2c7787",
+  "base_url": "https://localhost:51969",
+  "baseline_preserved": true,
+  "baseline_proposal": 12,
+  "blocked_outputs_null": true,
+  "caddy_version": "2.10.2",
+  "checks": [
+    {
+      "bytes": 7917,
+      "method": "GET",
+      "path": "/",
+      "sha256": "1efc5bf99f92490dfeccd545167b3605c8f9c64523b5f3d3e44b11a93bc76838",
+      "status": 200
+    },
+    {
+      "bytes": 15759,
+      "method": "GET",
+      "path": "/static/lab.css",
+      "sha256": "dbdb041fcf8a00781b85113fb36c97f3c7dca6e70a68778a0aca82be7506df77",
+      "status": 200
+    },
+    {
+      "bytes": 31622,
+      "method": "GET",
+      "path": "/static/lab.js",
+      "sha256": "f22b8287780b372ad6fc67e62eeed9eb199d88cc2389b7e69a0d3bae52bdb103",
+      "status": 200
+    },
+    {
+      "bytes": 336257,
+      "method": "GET",
+      "path": "/api/lab",
+      "sha256": "44c336aac508bccd1f803397f58f756f1030ace0761db560d920ab0d4217524f",
+      "status": 200
+    },
+    {
+      "bytes": 336257,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "44c336aac508bccd1f803397f58f756f1030ace0761db560d920ab0d4217524f",
+      "status": 200
+    },
+    {
+      "bytes": 336296,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "bc77641ffd56dd159b3e977467aeaf4eb349662db36897b5c94144e93e516828",
+      "status": 200
+    },
+    {
+      "bytes": 338392,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "c347ab9ec9df50e337aceaaaae95e2209dd32b9d7afcf5348916a8d718f098ba",
+      "status": 200
+    },
+    {
+      "bytes": 176206,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "8208447d1d0fd7534c522d5a8ed16db0af0c5b007500331b74a916480ed3b650",
+      "status": 200
+    },
+    {
+      "bytes": 333241,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "a6dc2976a3af36a4c99c6d2ddf2d7b5c8706025492392c321957478f5e870165",
+      "status": 200
+    },
+    {
+      "bytes": 469848,
+      "method": "GET",
+      "path": "/api/evidence",
+      "sha256": "8ffac224b952f9a4df7a47981a9f360dba6c7a7eea7d0fd07d9ecb7b0aecaf9f",
+      "status": 200
+    },
+    {
+      "bytes": 117,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "26f110e2fb218dd1b9549b80f47e7e8ee9ee07441d76522e9e678439ad267ea5",
+      "status": 422
+    },
+    {
+      "bytes": 0,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": 413
+    },
+    {
+      "bytes": 23,
+      "method": "GET",
+      "path": "/docs",
+      "sha256": "65bb2fbbc8d7138653aada01dad29233b373d61ad89451de6ab13b6a8beedcd1",
+      "status": 404
+    }
+  ],
+  "container_runtime_verified": false,
+  "delay_fill": "11/28",
+  "operational_writes": 0,
+  "private_ca": true,
+  "private_ca_sha256": "0547d1662a98e3244e76b3f02e878fa54a71d3b4921e5b0810618eea0a13f363",
+  "proxy_variant": "loopback-only upstream; localhost internal TLS; no trust-store install; auto redirect disabled",
+  "public_tls_verified": false,
+  "public_uptime_verified": false,
+  "requests": 13,
+  "serving_module": "/private/tmp/ii-hosted-wheel/inventory_intelligence/lab_hosted.py",
+  "spike_proposal": 18,
+  "tls_verified": true,
+  "verified_at": "2026-10-03T22:18:24.166821+00:00",
+  "zero_demand_fill_null": true
+}
