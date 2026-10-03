@@ -12,7 +12,7 @@ decision before import under the current synthetic-only project instructions.
 
 ## GitHub bootstrap
 
-The project has its own local Git repository, independent of its parent folder. The bootstrap commit goes on `main`; subsequent changes use short-lived `codex/<task>` branches and pull requests.
+The project has its own local Git repository, independent of its parent folder. The bootstrap commit goes on `main`. Subsequent parallel or nontrivial changes use short-lived `codex/<task>` branches or isolated worktrees. Task branches do **not** open pull requests by default; an integration owner combines validated work and decides whether the batch needs one integration PR or can be merged directly.
 
 Destination: [daniel-li2021/inventory-intelligence](https://github.com/daniel-li2021/inventory-intelligence), public. Its initial README history is preserved when integrating the research bootstrap.
 
@@ -21,8 +21,8 @@ Bootstrap and subsequent configuration:
 1. Verify the destination owner, repository, visibility, and existing history before adding `origin`.
 2. For an empty destination, push local `main` with upstream tracking. For an initialized destination, fetch and integrate its initial files/history deliberately; never force-push over it.
 3. Verify the remote commit. The repository CI workflow activates on GitHub after publication.
-4. Configure a `main` ruleset requiring pull requests and the `Repository hygiene` status check, blocking force pushes and branch deletion. For solo work, require zero external approvals so self-authored PRs are usable. Register the check after its first GitHub run.
-5. Prefer squash merging and automatic deletion of merged branches. Add the PostgreSQL integration check to required checks when milestone 1 introduces it.
+4. Protect `main` from force pushes and accidental deletion. Do not require a pull request for every solo-agent change; use CI and the integration-owner checks below as the default gate.
+5. Use one integration PR when a batch changes shared contracts/schema, adds a dependency or public-data boundary, introduces a milestone-sized feature, or benefits from a pre-main GitHub review surface. Small validated fixes and documentation changes may be integrated directly.
 
 The repository URL and connected GitHub access are verified. Branch protection/settings remain recommendations until explicitly verified on the remote; a workflow file alone does not configure them. Do not wait for CI after routine pushes.
 
@@ -35,7 +35,7 @@ git fetch origin
 git switch -c codex/<task> origin/main
 ```
 
-If the checkout has unrelated modifications or another task is using it, leave that work intact and use a clean worktree. Keep each PR to one reviewable behavior; do not mix generated report refreshes with unrelated refactors.
+If the checkout has unrelated modifications or another task is using it, leave that work intact and use a clean worktree. Keep each task commit focused. Sub-agents should commit and push their branch, but should not open a PR unless the integration owner explicitly asks for one. Do not mix generated report refreshes with unrelated refactors.
 
 Before committing, inspect explicit staged paths and the staged diff:
 
@@ -45,9 +45,24 @@ git diff --cached
 python3 -m json.tool docs/research/repositories.json > /dev/null
 ```
 
-Run checks appropriate to the change. Update README/operator instructions and the affected design documentation in the same PR. Document what changed, why, validation, and material limitations.
+Run checks appropriate to the change. Update README/operator instructions and the affected design documentation in the same task or integration batch. Document what changed, why, validation, and material limitations.
 
-Fetch again before pushing and compare the branch with current `origin/main`. Integrate new main commits if needed, rerun affected checks, then push. Verify the remote branch SHA; do not routinely wait for CI. Merging or publishing a deployment requires authorization covering that action. Before each task, fetch with pruning and inspect existing branches. After an authorized merge, verify the remote main commit and ancestry, remove merged task branches locally/remotely, and retire clean temporary worktrees. Preserve dirty/active work and needed environments. Keep commits focused without rewriting published history for cleanup.
+Fetch again before pushing and compare the branch with current `origin/main`. Integrate new main commits if needed, rerun affected checks, then push and verify the remote branch SHA. The integration owner reviews task commits/diffs, resolves straightforward conflicts, runs the relevant combined acceptance, and merges or cherry-picks coherent work into an integration branch or directly into `main` when safe. Do not let multiple sub-agents write `main` concurrently. Use one integration PR only when the change class above warrants it; otherwise direct integration is allowed under the owner's standing authorization. Before each task, fetch with pruning and inspect existing branches. After integration, verify remote `main`, then remove merged task branches/worktrees when safe. Preserve dirty/active work and needed environments. Keep commits focused without rewriting published history for cleanup.
+
+## Integration policy
+
+Use branches/worktrees for **isolation**, not as a requirement to create one PR per agent.
+
+Default multi-agent flow:
+
+1. Each sub-agent starts from current `origin/main`, works in its own `codex/<task>` branch/worktree, runs focused tests, commits, and pushes.
+2. Sub-agents do not open PRs by default and do not write directly to `main`.
+3. One integration owner reviews all candidate commits, rebases/merges current `main` as needed, resolves conflicts, and runs combined acceptance.
+4. If the batch is small and low risk, the integration owner may fast-forward/merge/cherry-pick the validated work to `main` directly and then verify push CI.
+5. Use a single integration PR before `main` for shared contract/schema changes, dependency/model changes, public-data/license boundary changes, major milestone batches, or whenever pre-main CI/review materially reduces risk.
+6. If integration or CI exposes a defect, fix the defect in the integration branch, rerun the relevant acceptance, and only then update `main`.
+
+Prefer a small number of meaningful integration boundaries over one PR per sub-agent. PR count is not a quality metric; reproducible acceptance evidence is.
 
 ## CI policy
 

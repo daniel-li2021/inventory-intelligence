@@ -25,12 +25,12 @@ Optimize for correctness and token efficiency.
 ## Git workflow
 
 - Verify `git rev-parse --show-toplevel`, status, branch, and remote before editing. Work only in this project's repository.
-- When `origin` exists, fetch it and start work on `codex/<task>` from current `origin/main`.
+- When `origin` exists, fetch it and start parallel or nontrivial work on `codex/<task>` from current `origin/main`. A small integration-owner fix may be committed directly only when no other agent is concurrently changing the same surface.
 - Preserve unrelated dirty work. Use a clean worktree when isolation is needed; do not create one by default.
 - Stage explicit project files, inspect the staged diff, run focused checks, and commit a clear problem-oriented change.
 - Before pushing, fetch again and compare against current `origin/main`; reconcile upstream changes without overwriting others' work.
-- Verify the pushed remote ref. Do not wait for or continuously monitor CI after a push unless CI/deployment validation is requested or a failure is evident.
+- Verify the pushed remote ref. Task branches do not open pull requests by default. The integration owner decides whether the batch needs one integration PR or validated direct integration.
 - Before work, prune stale remote refs and inspect existing branches. Keep commits focused; do not rewrite published history merely for tidiness.
-- After an authorized merge, verify that remote `main` contains the work, then remove merged task branches locally and remotely and retire clean temporary worktrees. Preserve active branches, dirty work, and required local environments; never force-delete unmerged work.
-- Do not force-push, delete work, or merge a PR without authorization covering that action.
+- Do not let multiple sub-agents push directly to `main`. The integration owner reviews candidate commits, resolves conflicts against current `main`, runs combined acceptance, then integrates validated work. After integration, verify that remote `main` contains the work, then remove merged task branches locally and remotely and retire clean temporary worktrees. Preserve active branches, dirty work, and required local environments; never force-delete unmerged work.
+- Do not force-push or discard work. The owner has standing authorization for validated integration into `main`; use an integration PR for shared contract/schema, dependency/model, public-data/license, or milestone-sized changes, and direct integration for small low-risk validated changes.
 - Keep these shared instructions in this file; avoid duplicating them in editor-specific always-on rules.
