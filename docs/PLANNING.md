@@ -1,10 +1,13 @@
 # Stage 2 operations and acceptance
 
 [Planning v1](CONTRACT_PLANNING_V1.md) is separate from frozen Stage 1. The
-implementation is in three dependent PR slices: demand eligibility, persisted
-forecast/backtest runs, and inventory projection/proposals. Stage 2 is **not yet
-complete on main**; integration/contract approval and remote acceptance determine
-completion, not branch tests or titles. Stage 3 work remains separate.
+implementation includes demand eligibility, persisted forecast/backtest runs,
+and inventory projection/proposals. All three slices and the Stage 3 planning
+explanation adapter are integrated on `main`; the combined review was merged through
+[PR 7](https://github.com/daniel-li2021/inventory-intelligence/pull/7).
+The bounded synthetic Stage 2 milestone is complete; this does not establish
+real demand accuracy or inventory cost/service performance. See
+[current acceptance](VALIDATION.md) and [next research](NEXT_ROUND_RESEARCH.md).
 
 ## Fresh-database demonstration
 
@@ -108,13 +111,14 @@ restricted roles, and rollback. A separate downstream demo check verifies the
 
 Local final acceptance uses Python 3.12.14 / Psycopg 3.3.6 / PostgreSQL 17.6;
 pinned CI uses Python 3.12.12 / PostgreSQL 17.9. Both environments are reported
-explicitly. Schema/report/contract review remains a merge prerequisite.
+explicitly. The schema/report/contract integration review is complete.
 
 Remote final-code evidence: [CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
 on PR 5 head `f01a2e7` passed both jobs; the PostgreSQL job log reports 45 tests,
 `OK`. Eligibility PR 3 and benchmark PR 4 also passed their pinned CI jobs.
-All three branches remain unmerged; this evidence does not approve their contract
-or establish Stage 2 completion on main.
+That 45-test result is historical slice evidence. PRs 3/4/5 are now merged;
+the later combined [main CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
+at `dcada27` passed all 76 tests and both jobs on the pinned environment.
 
 Selection truth is frozen no later than holdout start, including source recording
 and observation gates on revisions. Holdout truth alone uses the final evaluation

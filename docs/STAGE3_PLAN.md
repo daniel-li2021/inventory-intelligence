@@ -1,5 +1,13 @@
 # Stage 3: Inventory Copilot
 
+Current status (2026-10-02): copilot-1 and the additive copilot-2 planning adapter
+are integrated on `main` through PRs 6/7. PR 8 adds measured routing/evidence
+benchmarks; latest `main` at `ce8ab0d` passed all 79 combined tests,
+including 32 Stage 3 checks, in
+[main CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000).
+The sequence/checkpoints below record the original handoff and later integration.
+Historical proposal citations do not authorize a current order.
+
 Implementation handoff: the user assigned Stage 3 on 2026-10-02 while a separate
 agent reviews Stage 1 and completes Stage 2. This plan owns `copilot*.py`, `test_copilot*.py`,
 `CONTRACT_COPILOT_V1.md` and this document. The README receives only a new link
@@ -14,18 +22,17 @@ business fact has a reference to a selected run/finding or benchmark field.
 The assistant does not rerun reconciliation, forecast new demand, fix stock,
 create orders, invent missing inputs or interpret source text as instructions.
 
-Stage 1 supplies contract-v1 reports and persisted runs. Stage 2 currently
-supplies only the exact baseline benchmark on the shared baseline. The other
-agent is authoring a separate planning contract and full implementation in
-`codex/stage2-eligibility`; its evolving outputs have not been integrated here.
-Parallel implementation can
-therefore complete the evidence copilot now, with an explicit dependency gate
-for replenishment. It cannot honestly supply order recommendations yet.
+At the original handoff, Stage 2 supplied only the exact baseline benchmark;
+the full planning interface was a dependency. That gate is now resolved:
+Stage 1 supplies contract-v1 reports and persisted runs, and Stage 2 supplies
+versioned forecasts, benchmarks and advisory proposals under planning-v1.
+Copilot-2 explains those persisted records. Current readiness remains blocked
+until current inputs are assessed at a new planning cutoff.
 
 ## Design and sequence
 
 1. Freeze the separate [copilot contract](CONTRACT_COPILOT_V1.md). Do not amend
-   Stage 1 v1 or guess the unfinished planning interface.
+   Stage 1 v1; use the separate copilot-2 contract for planning evidence.
 2. Add a small stdlib module accepting existing JSON reports and benchmarks.
    Validate their shape, identities, status consistency and exact quantities.
    Reject malformed/contradictory evidence rather than normalize it to a pass.
@@ -86,11 +93,11 @@ verify its remote ref, and leave merge and Stage 1/2 review to their owners.
 
 ## Follow-on handoffs
 
-**Planning adapter:** after Stage 2 freezes and validates its planning contract,
-consume its immutable forecast/proposal records, retain all input/cutoff/model
-IDs, and explain its computed quantities without doing a second calculation.
-Acceptance must include eligible, blocked and stale decisions and exact pack
-rounding evidence. This is a dependency, not unfinished speculative scaffolding.
+**Planning adapter — delivered:** [copilot-2](CONTRACT_COPILOT_V2.md) consumes
+immutable forecast/benchmark/proposal records, retains input/cutoff/model IDs,
+and validates exact arithmetic before explaining historical evidence. Acceptance
+includes eligible, blocked and stale evidence and exact pack rounding. New
+models/metrics will require explicit version support, preserving old decoding.
 
 **Language routing — delivered:** the user authorized the existing ignored
 `.env` (lowercase key spelling supported), with `gpt-6-luna` as default and
@@ -108,8 +115,8 @@ timeouts, credentials, redirects and attempts to change policy.
 
 No vector store, multi-agent loop, web UI, cloud deployment or scheduler is
 needed for the current evidence set. Full product-setup permission does not
-create a need for these components. The pending Stage 2 adapter is the explicitly
-permitted temporary fallback, not a fabricated order recommendation.
+create a need for these components. The delivered planning adapter keeps
+historical proposal quantities within citations and current order quantity null.
 
 ## Verified checkpoint — 2026-10-02
 
@@ -136,7 +143,7 @@ PYTHONPATH=src python -m unittest tests.test_copilot_db tests.test_forecasting -
 
 ## Three-stage integration review — 2026-10-02
 
-The Stage 2 interface is now integrated on the review branch. The additive
+The Stage 2 interface was integrated on the review branch and is now on main. The additive
 [copilot-2 contract](CONTRACT_COPILOT_V2.md) reads explicit persisted forecasting,
 benchmark and proposal runs. It retains exact evidence and explains blocked
 plans without approving a current order. The legacy readiness route remains
