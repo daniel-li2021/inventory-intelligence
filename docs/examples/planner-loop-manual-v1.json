@@ -1,0 +1,303 @@
+{
+  "clean": {
+    "accepted": 27,
+    "closure_cost": 95,
+    "cost_components": {
+      "backlog": 0,
+      "holding": 194,
+      "purchase": 92,
+      "setup": 6
+    },
+    "eventual_fulfilled": 27,
+    "immediate_fulfilled": 27,
+    "proposals": [
+      12,
+      12,
+      12
+    ],
+    "score_cost": 197,
+    "score_end_backlog": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "score_end_stock": [
+      7,
+      4,
+      13,
+      10,
+      7,
+      16,
+      13,
+      10,
+      19
+    ],
+    "terminal_backlog": 0,
+    "terminal_stock": 19,
+    "total_cost": 292
+  },
+  "cold-shortage": {
+    "accepted": 27,
+    "closure_cost": 750,
+    "cost_components": {
+      "backlog": 1290,
+      "holding": 3,
+      "purchase": 24,
+      "setup": 2
+    },
+    "eventual_fulfilled": 12,
+    "immediate_fulfilled": 6,
+    "proposals": [
+      12,
+      null,
+      null
+    ],
+    "score_cost": 569,
+    "score_end_backlog": [
+      3,
+      6,
+      0,
+      0,
+      3,
+      6,
+      9,
+      12,
+      15
+    ],
+    "score_end_stock": [
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "terminal_backlog": 15,
+    "terminal_stock": 0,
+    "total_cost": 1319
+  },
+  "missing": {
+    "accepted": 27,
+    "closure_cost": 5,
+    "cost_components": {
+      "backlog": 70,
+      "holding": 39,
+      "purchase": 56,
+      "setup": 2
+    },
+    "eventual_fulfilled": 27,
+    "immediate_fulfilled": 22,
+    "proposals": [
+      null,
+      18,
+      null
+    ],
+    "score_cost": 162,
+    "score_end_backlog": [
+      0,
+      0,
+      0,
+      2,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "score_end_stock": [
+      7,
+      4,
+      1,
+      0,
+      0,
+      10,
+      7,
+      4,
+      1
+    ],
+    "terminal_backlog": 0,
+    "terminal_stock": 1,
+    "total_cost": 167
+  },
+  "notified-delay": {
+    "accepted": 27,
+    "closure_cost": 35,
+    "cost_components": {
+      "backlog": 70,
+      "holding": 93,
+      "purchase": 68,
+      "setup": 4
+    },
+    "eventual_fulfilled": 27,
+    "immediate_fulfilled": 22,
+    "proposals": [
+      12,
+      12,
+      null
+    ],
+    "score_cost": 200,
+    "score_end_backlog": [
+      0,
+      0,
+      0,
+      2,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "score_end_stock": [
+      7,
+      4,
+      1,
+      0,
+      0,
+      16,
+      13,
+      10,
+      7
+    ],
+    "terminal_backlog": 0,
+    "terminal_stock": 7,
+    "total_cost": 235
+  },
+  "spike": {
+    "accepted": 36,
+    "closure_cost": 700,
+    "cost_components": {
+      "backlog": 1170,
+      "holding": 5,
+      "purchase": 44,
+      "setup": 2
+    },
+    "eventual_fulfilled": 22,
+    "immediate_fulfilled": 17,
+    "proposals": [
+      12,
+      null,
+      null
+    ],
+    "score_cost": 521,
+    "score_end_backlog": [
+      2,
+      5,
+      0,
+      0,
+      2,
+      5,
+      8,
+      11,
+      14
+    ],
+    "score_end_stock": [
+      0,
+      0,
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "terminal_backlog": 14,
+    "terminal_stock": 0,
+    "total_cost": 1221
+  },
+  "unannounced-delay": {
+    "accepted": 27,
+    "closure_cost": 250,
+    "cost_components": {
+      "backlog": 390,
+      "holding": 17,
+      "purchase": 44,
+      "setup": 2
+    },
+    "eventual_fulfilled": 22,
+    "immediate_fulfilled": 17,
+    "proposals": [
+      12,
+      null,
+      null
+    ],
+    "score_cost": 203,
+    "score_end_backlog": [
+      0,
+      0,
+      0,
+      2,
+      5,
+      0,
+      0,
+      2,
+      5
+    ],
+    "score_end_stock": [
+      7,
+      4,
+      1,
+      0,
+      0,
+      4,
+      1,
+      0,
+      0
+    ],
+    "terminal_backlog": 5,
+    "terminal_stock": 0,
+    "total_cost": 453
+  },
+  "zero": {
+    "accepted": 0,
+    "closure_cost": 50,
+    "cost_components": {
+      "backlog": 0,
+      "holding": 140,
+      "purchase": 20,
+      "setup": 0
+    },
+    "eventual_fulfilled": 0,
+    "immediate_fulfilled": 0,
+    "proposals": [
+      0,
+      0,
+      0
+    ],
+    "score_cost": 110,
+    "score_end_backlog": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "score_end_stock": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "terminal_backlog": 0,
+    "terminal_stock": 10,
+    "total_cost": 160
+  }
+}
