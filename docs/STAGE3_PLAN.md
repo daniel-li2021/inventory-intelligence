@@ -113,6 +113,13 @@ phrases and explicit intents use no API. Stored source strings never enter the
 model context. Local mocks cover malformed output, extra fields, refusals,
 timeouts, credentials, redirects and attempts to change policy.
 
+The stabilization separates classification from selector validation: a finding
+question routes as `finding` even when it contains no ID. Deterministic code
+requires the separate `--finding-id`, checks membership in the validated report,
+and returns `not_assessable` for missing or absent IDs. IDs in question text are
+never extracted or inferred. [Frozen fresh evaluation](STAGE3_STABILIZATION.md)
+keeps the original failed benchmark intact.
+
 No vector store, multi-agent loop, web UI, cloud deployment or scheduler is
 needed for the current evidence set. Full product-setup permission does not
 create a need for these components. The delivered planning adapter keeps

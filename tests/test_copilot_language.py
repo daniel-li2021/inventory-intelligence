@@ -12,6 +12,7 @@ from urllib.error import HTTPError, URLError
 
 from inventory_intelligence import copilot_language as language
 from inventory_intelligence.copilot import main
+from tests.test_copilot import report
 
 
 def response(intent="reliability", **fields):
@@ -67,6 +68,31 @@ class Language(unittest.TestCase):
                 result = language.route_question("Arbitrary question")
             self.assertEqual(result["intent"], "unsupported")
             self.assertEqual(result["source"], "fallback")
+
+    def test_finding_classification_is_independent_of_deterministic_selector(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'report.json'
+            path.write_text(json.dumps(report(dirty=True)))
+            # Question text contains a real ID, but only the separate selector counts.
+            question = 'Discuss the exception manual-mismatch'
+            for selector, status, count, exit_code in (
+                ('manual-mismatch', 'answered', 2, 0),
+                ('unknown', 'not_assessable', 1, 1),
+                (None, 'not_assessable', 1, 1)):
+                with self.subTest(selector=selector), patch.object(language, '_key', return_value='fake-test-key'), patch.object(language, '_post', return_value='finding') as classify, redirect_stdout(io.StringIO()) as output:
+                    args = ['--question', question, '--report', str(path)]
+                    if selector is not None:
+                        args += ['--finding-id', selector]
+                    self.assertEqual(main(args), exit_code)
+                classify.assert_called_once_with(question, 'gpt-6-luna', 'fake-test-key')
+                answer = json.loads(output.getvalue())
+                self.assertEqual((answer['intent'], answer['status']), ('finding', status))
+                self.assertEqual(len(answer['citations']), count)
+                self.assertIsNone(answer['proposed_order_qty'])
+                if selector is None:
+                    self.assertIn('explicit finding ID is required', ' '.join(answer['limitations']))
+        self.assertIn('Never require an ID in the question', language.INSTRUCTIONS)
+        self.assertIn('validated by deterministic', language.INSTRUCTIONS)
 
     def test_timeout_and_service_errors_fail_closed_without_diagnostics_leaks(self):
         for error in (TimeoutError("fake-secret"), URLError("fake-secret"),

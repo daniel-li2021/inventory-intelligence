@@ -199,6 +199,19 @@ def expected_citations(case, inputs):
     return refs
 
 
+def heldout_cases(inputs):
+    """Resolve fixed selectors only; never derive expectations from model answers."""
+    frozen = json.loads((ROOT/'docs/review/copilot-routing-holdout-v1.json').read_text())
+    rows = frozen['cases']
+    assert frozen['protocol']=='copilot-routing-holdout-v1' and frozen['max_api_calls']==32
+    assert len(rows)==32 and len({r['id'] for r in rows})==32
+    for row in rows:
+        if row.get('rule'):
+            row['finding'] = next(f['finding_id'] for f in inputs[row['source']]['findings']
+                                  if f['rule_id']==row['rule'])
+    return rows
+
+
 def numbers(value, path=()):
     """Typed numeric leaves, including rational strings and explicit nulls."""
     if isinstance(value,dict):
@@ -290,12 +303,13 @@ def summary(results):
                      api=latency([t['api_latency_ms'] for t in attempted if t['api_latency_ms'] is not None])))
 
 
-def run(owner, inputs, *, live, model, env_file, output, reuse=None):
-    matrix = cases(inputs)
+def run(owner, inputs, *, live, model, env_file, output, reuse=None, holdout=False):
+    matrix = heldout_cases(inputs) if holdout else cases(inputs)
+    max_calls = 32 if holdout else 22
     possible_calls = sum(not r.get('explicit') and
         ' '.join(r['question'].lower().strip().rstrip('?.!').split()) not in QUESTIONS for r in matrix)
-    if possible_calls>22:
-        raise ValueError('Question matrix exceeds the 22-call budget')
+    if possible_calls>max_calls:
+        raise ValueError('Question matrix exceeds the fixed call budget')
     before = source_digest(owner)
     def history():
         return {s:owner.execute('SELECT count(*) AS n FROM '+s+'.runs').fetchone()['n'] for s in ('reliability','planning')}
@@ -383,7 +397,9 @@ def run(owner, inputs, *, live, model, env_file, output, reuse=None):
     history_after = history()
     return dict(completed=True,generated_at=datetime.now(timezone.utc).isoformat(),started_at=started.isoformat(),
         business_data='synthetic only',live_model=live,requested_model=model if live else 'offline',
-        bounds=dict(questions=45,max_api_calls=22,per_call_timeout_seconds=15,cli_timeout_seconds=25,
+        evaluation_set='copilot-routing-holdout-v1' if holdout else 'original-45',
+        case_matrix_sha256=digest(matrix),
+        bounds=dict(questions=len(matrix),max_api_calls=max_calls,per_call_timeout_seconds=15,cli_timeout_seconds=25,
                     max_output_tokens_per_call=128 if model=='gpt-6-luna' else 512,retries=0),
         evidence_manifest={k:dict(sha256=digest(v),run_id=v.get('run_id'),
                                  kind=v.get('kind','reliability' if 'checks' in v else 'baseline')) for k,v in inputs.items()},
@@ -396,12 +412,15 @@ def run(owner, inputs, *, live, model, env_file, output, reuse=None):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--live',action='store_true',help='Authorize up to 22 actual routing calls using the configured key')
+    p.add_argument('--live',action='store_true',help='Authorize actual routing calls within the selected fixed matrix budget')
+    p.add_argument('--routing-holdout',action='store_true',help='Evaluate the frozen fresh 32-question routing set once')
     p.add_argument('--model',choices=('gpt-6-luna','gpt-6-sol'),default='gpt-6-luna')
     p.add_argument('--env-file',default=str(ROOT/'.env'))
     p.add_argument('--output',required=True)
     p.add_argument('--reuse-results',help='Reuse unchanged measured cases and execute only new controls; output must differ')
     args = p.parse_args()
+    if args.routing_holdout and args.reuse_results:
+        p.error('The fresh routing holdout cannot reuse prior measurements')
     if args.reuse_results and Path(args.reuse_results).resolve()==Path(args.output).resolve():
         p.error('Use a different output path so interruption cannot erase cached measurements')
     reuse = json.loads(Path(args.reuse_results).read_text()) if args.reuse_results else None
@@ -409,14 +428,16 @@ def main():
         with owner.transaction():
             owner.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY')
             inputs = evidence(owner)
-        result = run(owner,inputs,live=args.live,model=args.model,env_file=args.env_file,output=args.output,reuse=reuse)
+        result = run(owner,inputs,live=args.live,model=args.model,env_file=args.env_file,output=args.output,reuse=reuse,holdout=args.routing_holdout)
     result['revision'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     result['implementation_sha256'] = {p:digest((ROOT/p).read_text()) for p in (
         'scripts/copilot_benchmark.py','src/inventory_intelligence/copilot.py','src/inventory_intelligence/copilot_language.py')}
+    if args.routing_holdout:
+        result['frozen_matrix_sha256'] = digest((ROOT/'docs/review/copilot-routing-holdout-v1.json').read_text())
     Path(args.output).write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
     print(json.dumps(result['summary'],indent=2))
-    return 0 if (result['summary']['passed']==45 and result['inputs_unchanged'] and result['history_unchanged']
-                 and result['summary']['attempted_api_calls']<=22 and not result['summary']['unknown_call_accounting_cases']) else 1
+    return 0 if (result['summary']['passed']==result['bounds']['questions'] and result['inputs_unchanged'] and result['history_unchanged']
+                 and result['summary']['attempted_api_calls']<=result['bounds']['max_api_calls'] and not result['summary']['unknown_call_accounting_cases']) else 1
 
 
 if __name__=='__main__':

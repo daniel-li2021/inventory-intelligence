@@ -232,6 +232,9 @@ def answer(*, intent, report=None, benchmark=None, finding_id=None, now=None, ma
         result.update(summary="A replenishment decision is not assessable; no order quantity is proposed.")
         result["next_steps"] = ["Supply an explicit persisted Stage 2 run for historical explanation; assess current inputs at a new planning cutoff before acting."]
         return result
+    if intent == "finding" and not _text(finding_id):
+        result["limitations"].append("An explicit finding ID is required; no finding is selected from question text.")
+        return result
     if report is None:
         return result
     if intent == "finding":

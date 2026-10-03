@@ -99,6 +99,9 @@ structured evidence. Natural-language routing defaults to GPT-6 Luna; recognized
 phrases and explicit intents work entirely offline. The ignored `.env` may use
 `OPENAI_API_KEY` or the existing `openai_api_key` spelling. No key is committed
 or rewritten. API errors fall back explicitly; Sol requires an explicit flag.
+Intent classification is independent of evidence and selector availability.
+Finding explanations require a separate `--finding-id`; missing or absent IDs
+remain `not_assessable`. [Routing stabilization](docs/STAGE3_STABILIZATION.md).
 
 ```sh
 PYTHONPATH=src python -m inventory_intelligence.copilot \

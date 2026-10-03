@@ -2,11 +2,24 @@
 from copy import deepcopy
 import unittest
 
-from scripts.copilot_benchmark import expected_citations, grade, summary
+from scripts.copilot_benchmark import expected_citations, grade, summary, heldout_cases
 from tests.test_copilot import report
 
 
 class BenchmarkGrader(unittest.TestCase):
+    def test_frozen_holdout_resolves_only_explicit_selectors(self):
+        source = report(dirty=True)
+        source['findings'] += [dict(source['findings'][0], rule_id=rule, finding_id=rule)
+                               for rule in ('R002', 'R004')]
+        rows = heldout_cases(dict(combined=source, large=source, hostile=source))
+        self.assertEqual(len(rows), 32)
+        self.assertEqual({r['expected_intent'] for r in rows},
+                         {'finding', 'reliability', 'benchmark', 'readiness', 'unsupported'})
+        self.assertEqual(sum(r['expected_intent']=='finding' for r in rows), 12)
+        self.assertEqual(sum(r.get('finding')=='heldout-absent' for r in rows), 2)
+        self.assertEqual(sum(r['expected_intent']=='finding' and not r.get('finding') for r in rows), 2)
+        self.assertEqual(rows[1]['finding'], 'R002')
+
     def test_exact_evidence_and_independent_negative_controls(self):
         inputs = {'combined':report(dirty=True)}
         case = dict(id='F01',source='combined',expected_intent='finding',
