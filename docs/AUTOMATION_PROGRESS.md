@@ -3,7 +3,7 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — combined candidate and historical source lineage validated
+## Current checkpoint — research PRs merged and historical source lineage validated
 
 `codex/research-integration` begins at main `f6d3d16` and retains PR 14–23 exact
 heads by ancestry. Shared documentation conflicts are resolved; original reports
@@ -20,9 +20,11 @@ simulation replay. A newly installed combined wheel outside the checkout passes
 smoke (spike18/cost351, baseline12/cost327; blocked320px/no overflow). Temporary
 DB/app/proxy/tab are retired. [Combined receipt and limits](RESEARCH_INTEGRATION.md).
 
-Main is unchanged; the earlier automatic merge approval rejection still requires
-explicit integration-owner approval. Docker/Linux enforcement/public hosting and
-CI are unverified. [All22 current statuses](RESEARCH_STATUS.md) supersede the
+The user explicitly authorized all PR merges. PR 14–24 are merged through PR 24
+at remote main `f132bf4`, which retains every delivery head and has an identical
+tree to the accepted candidate. GitHub reports no open PRs. The earlier approval
+gate is resolved; historical acceptance artifacts remain unchanged. Docker/Linux
+enforcement/public hosting and CI are unverified. [All22 current statuses](RESEARCH_STATUS.md) supersede the
 historical package snapshots below, which preserve previous continuation context.
 Next independent work: actual planner closed-loop execution boundary/protocol.
 

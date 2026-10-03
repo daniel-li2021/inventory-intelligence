@@ -147,7 +147,9 @@ do not establish unconstrained demand or historical inventory availability.
 
 The original Wave 1 package and later public-sales, prospective calibration,
 policy comparison, lost-sales, physical-count, accessibility and hosted-readiness
-packages are now retained in a combined integration candidate. Main is unchanged.
+packages are merged through PR 24 at main `f132bf4`, retaining all delivery heads
+and the exact locally validated candidate contents. Remote CI and public hosting
+remain unverified.
 Use [all 22 current statuses](RESEARCH_STATUS.md) and
 [combined acceptance/provenance](RESEARCH_INTEGRATION.md) instead of the initial
 package checkpoint. No original direction is dropped; conditional models/large

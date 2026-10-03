@@ -1,0 +1,43 @@
+{
+  "acceptance_receipt_sha256": "f9a03b48e07611c79f1301921100b526fad3851d9ae92553effb6ea32cc0f593",
+  "accepted_candidate": "f7d17e576286cb4cec819619c7566eb237f0a7e2",
+  "delivery_ancestry_verified": {
+    "14": "d2cb98ba1016f80bd2c2dd40159092f4f1b21395",
+    "15": "97d1f8a00a00cecdcd01368403bdfeab8b92d510",
+    "16": "39bf64d7e70b9221afbe1d697fe49fd348fcdc04",
+    "17": "706fa82c7520f5119ffd85b8c6a2a65f40fc2f10",
+    "18": "3d66b4309cc465d39ed830b4db59ef0860807c25",
+    "19": "758d5d317ff8470841cc376bba49b86909ebb69c",
+    "20": "e7473a595d4ef6deca33c283ea6b27e23ad83bc4",
+    "21": "d06badeb2a61b2f76da5ebb4afbd9ff6ffc38023",
+    "22": "c916c046b3af06503574aaea208a0197e0615a3e",
+    "23": "c337a5616dda27398b0f82e9b9e011aba9fe9c6f"
+  },
+  "github_pr_states_verified": true,
+  "historical_acceptance_unchanged": true,
+  "identical_merge_candidate_tree": true,
+  "implementation_changed": false,
+  "integration_pr": 24,
+  "merge_tree": "6b5ec6b22e6791715e881887b2f755f2bd5e7cf4",
+  "merged_prs": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "open_prs": [],
+  "prior_local_tests_reused": 240,
+  "public_deployed": false,
+  "remote_ci_verified": false,
+  "remote_main_merge_commit": "f132bf42f01a2167e3ab61ca8640930e7a4802d4",
+  "repository": "daniel-li2021/inventory-intelligence",
+  "user_authorization": "start merging all the PRs",
+  "verified_at": "2026-10-03T22:57:26.886799+00:00"
+}

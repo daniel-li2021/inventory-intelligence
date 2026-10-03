@@ -7,8 +7,9 @@ It also tests whether a plausible forecast and ordering rule actually deliver
 service when demand, starting state and supply timing change.
 
 The operational core and local Decision Lab are implemented on main with
-synthetic business data. Ten subsequent research/UX/readiness PRs are retained in a combined, locally
-validated **integration candidate** as of 2026-10-03; main is unchanged. Public
+synthetic business data. Ten subsequent research/UX/readiness PRs are merged
+through PR 24 at main `f132bf4` as of 2026-10-03, with a locally validated combined
+acceptance and verified remote ancestry. Remote CI remains unverified. Public
 transaction research is a separate observed-sales boundary. There is no hosted
 deployment, purchase execution, measured retailer saving or production claim.
 [Verified delivery status](RESEARCH_STATUS.md), [exact claim receipt](review/portfolio-claims.json).
@@ -120,17 +121,17 @@ Observed sales do not reveal unconstrained demand or inventory availability.
 One retailer, small correlated subsets and synthetic economic assumptions cannot
 establish population confidence, service guarantees or commercial savings.
 
-The next decisions are independent calibration evidence, a separately versioned
-lost-sales protocol and an additive synthetic physical-count layer. Complex
+Prospective disjoint-item calibration, a separate lost-sales protocol and an
+additive synthetic physical-count layer are implemented and merged. The next
+decision is actual planner execution in a separately bounded synthetic loop. Complex
 models, allocation/capacity optimization and hosting retain explicit evidence,
 contract or ownership gates. The [22-direction status and continuation plan](RESEARCH_STATUS.md)
 preserves all options and the condition for moving each forward.
 
 ## Resume wording
 
-The first bullet describes the merged core. The next two describe implemented
-research currently published on task branches; retain that status in a portfolio
-link or interview explanation until integration is complete.
+These bullets describe merged implementation and retained local research evidence.
+Main integration does not establish public hosting or production outcomes.
 
 - Built a Python/PostgreSQL inventory reliability and advisory replenishment
   system with exact arithmetic, separate business/ingestion clocks, append-only

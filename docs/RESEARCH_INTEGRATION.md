@@ -1,7 +1,10 @@
-# Combined research candidate acceptance
+# Combined research integration and retained acceptance
 
-Status: **locally validated integration candidate**, not merged main, remote CI,
-public deployment or production evidence. Main remains `f6d3d16`. Exact PR 14–23
+Status: **merged main with locally validated acceptance**. The user authorized
+all PR merges on 2026-10-03; PR 24 merged at `f132bf4`, and GitHub reports
+PR 14–24 merged with no open PRs. Remote main retains the exact candidate
+`f7d17e5` by ancestry with an identical tree. Remote CI, public deployment and
+production evidence remain unverified. Exact PR 14–23
 heads and all 22 directions are recorded in [the delivery ledger](RESEARCH_STATUS.md).
 The candidate preserves all ten heads by ancestry through eight explicit merges;
 stacked PR 15/17 are included through PR 20. Published histories are not rewritten.
@@ -92,14 +95,17 @@ report merely to pass a guard. Combined-code regression is a separate check.
 
 ## Remaining gates and next work
 
-Automatic approval review rejected an earlier main merge, requiring explicit
-integration-owner approval for default-branch mutation/downstream workflows.
-This candidate makes that approval concrete; no main merge is retried on an
-automatic goal continuation. Before an approved merge, fetch current main,
-reconcile any upstream change, verify candidate ancestry and rerun only checks
-justified by new changes. After integration, verify remote main contains the exact
-candidate and retire only proven-merged clean task branches. CI is not monitored
-or claimed by this local acceptance.
+Automatic approval review rejected an earlier main merge. The user's explicit
+instruction to merge all PRs resolved that gate. The stacked PR 17/20 targets were
+changed to main before PR 24 was merged with its exact expected head and merge
+method, preserving all published history. GitHub then marked every included PR
+merged. Remote main ancestry and unchanged candidate tree were verified; the
+existing 240-test acceptance was reused because no implementation changed.
+The lineage audit also passes on integrated main. Only proven-merged branches
+are retired; active closed-loop research and required environments are retained.
+The [separate delivery receipt](review/research-main-integration.json) records
+integration without changing historical acceptance/report bytes. CI is not
+monitored or claimed by this local acceptance.
 
 Docker/Compose runtime, Linux resource/read-only identity enforcement, crash
 recovery, public DNS/ACME TLS/redirect and actual uptime remain unverified. No host,

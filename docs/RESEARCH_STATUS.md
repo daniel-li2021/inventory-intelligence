@@ -6,12 +6,14 @@ the older roadmap checkpoint for delivery status. The original
 remain preserved. Finish reviewable packages, retain negative outcomes and
 consumed evidence, then move to the next independent task when a gate blocks one.
 
-## Combined candidate versus integrated main
+## Integrated main and retained acceptance
 
-Main remains `f6d3d16034af038eda4c8687ea4f1ed6d2445ef6`. The operational core,
-historical research and synthetic local Lab are merged. PR 14–23 are retained
-by ancestry in the `codex/research-integration` candidate; this is **not main
-integration**, remote CI or public hosting. All original saved reports/receipts
+The user explicitly authorized merging all PRs on 2026-10-03. PR 14–24 are merged
+through PR 24 at main `f132bf42f01a2167e3ab61ca8640930e7a4802d4`. Remote main
+contains all ten delivery heads and the exact validated integration candidate
+`f7d17e576286cb4cec819619c7566eb237f0a7e2`, with no tree difference. GitHub
+reports all eleven PRs merged and no open PRs. This is main integration with local
+acceptance; remote CI and public hosting remain unverified. All original saved reports/receipts
 retain their published bytes. The original
 [portfolio claim receipt](review/portfolio-claims.json) remains a historical
 snapshot; use the [combined acceptance](RESEARCH_INTEGRATION.md) for current status.
@@ -29,13 +31,13 @@ snapshot; use the [combined acceptance](RESEARCH_INTEGRATION.md) for current sta
 | 22 | Physical-count / adjustment evidence | `c916c046b3af06503574aaea208a0197e0615a3e` |
 | 23 | Bounded hosted serving / deployment readiness | `c337a5616dda27398b0f82e9b9e011aba9fe9c6f` |
 
-The candidate resolves shared documentation and preserves source semantics.
-Historical code drift is declared rather than rehashed away. The automatic
-approval review previously rejected the attempted PR 14 main merge, requiring
-explicit owner approval for default-branch mutation and downstream workflows.
-That gate remains pending; do not infer approval from automatic continuations.
-After approval, integrate the reviewable candidate, verify remote main ancestry,
-then retire only proven-merged clean branches. No published history is rewritten.
+The integration resolves shared documentation and preserves source semantics.
+Historical code drift is declared rather than rehashed away. Explicit user
+approval resolved the earlier automatic-review merge gate. The immutable local
+acceptance receipt predates integration and remains unchanged; the separate
+[merge receipt](review/research-main-integration.json) records remote delivery.
+Retire only proven-merged clean branches; preserve active research and environments.
+No published history is rewritten.
 
 ## All 22 directions
 
@@ -69,9 +71,9 @@ No direction is dropped merely because it is gated.
 
 ## Long-term sequence
 
-1. **Integration and provenance:** the combined candidate and saved-source audits
-   now make approval concrete. Preserve all original artifacts; approve/integrate
-   the candidate before claiming main delivery. Keep local versus CI evidence
+1. **Integration and provenance:** PR 14–24 are merged; exact remote ancestry and
+   candidate contents are verified. Preserve all original artifacts and saved-source
+   audits. Keep local versus CI evidence
    explicit and do not sum overlapping package test counts.
 2. **Closed-loop planning boundary:** next independent design work should define
    synthetic advisory-action/receipt identities and repeated as-known clocks,
