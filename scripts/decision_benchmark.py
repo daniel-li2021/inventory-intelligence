@@ -79,7 +79,7 @@ def promotion(method, holdout):
             failures.append(f"{key}_regression_or_unavailable")
     return dict(passed=not failures, failures=failures, reference="mean",
                 differences=differences,
-                relative_cost_reduction=(reference_cost - candidate["total_cost"]) / reference_cost
+                relative_cost_reduction=Fraction(reference_cost - candidate["total_cost"], reference_cost)
                 if reference_cost else None)
 
 

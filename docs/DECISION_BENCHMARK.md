@@ -68,5 +68,48 @@ eligibility and paired holdout differences, and every failed promotion condition
 Synthetic penalties omit acquisition, salvage and lost-sales value. They are
 finite-window costs, not profit or demonstrated business savings. Correlated
 cycles, repeated controls and three lumpy seeds support no population confidence
-or optimality claim. Results and concrete limitations will be appended after
-the frozen protocol is run.
+or optimality claim.
+
+## Recorded findings
+
+The frozen experiment completed 480 candidate/split simulations across 60 paired
+scenario/cost/delay cells. Every terminal backlog and outstanding quantity was
+zero. Selection found no eligible method in 22 cells. Six weekly fixed-delay
+cells and ten obsolescence cells passed the proposed-promotion rule; those 16
+passes include deliberately repeated controls and are not 16 independent wins.
+
+| Family | Selection methods across 12 cells | Proposed promotions |
+| --- | --- | --- |
+| Constant | naive 6; none 6 | 0 |
+| Weekly | seasonal naive 6; mean 6 | 6 |
+| Zero | none 12 | 0 |
+| Lumpy | naive 8; none 4 | 0 |
+| Obsolescence | naive 10; mean 2 | 10 |
+
+For seed 11, fixed delays and `(h,b,K)=(1,10,2)`, the paired held-out results
+are below. Cost includes scored days and runoff. Cumulative MAE measures complete
+nine-day targets only. Fill and cycle rates are scoring-day metrics.
+
+| Family/method | Total cost | Immediate fill | Cycle service | Cumulative MAE |
+| --- | ---: | ---: | ---: | ---: |
+| Weekly / mean | 834 | 1 | 1 | 5 |
+| Weekly / selected seasonal naive | 526 | 1 | 1 | 0 |
+| Obsolescence / mean | 1564 | 1 | 1 | 3564863/174097 |
+| Obsolescence / selected naive | 554 | 1 | 1 | 11/7 |
+| Lumpy / mean | 1122 | 77/83 | 1/2 | 76380277/9749432 |
+| Lumpy / selected naive | 8336 | 6/83 | 0 | 164/7 |
+
+All eight selected lumpy cells failed a held-out service floor. Seed 47 had no
+eligible selection in any lumpy cell. The example shows why selection-period
+eligibility does not establish holdout reliability; promotion remains rejected.
+Hidden delays changed weekly selections from seasonal naive to mean, which
+cannot demonstrate a reduction against itself. Constant baseline methods tied under
+fixed delays and produced no reduction; delayed constant cells had no eligible
+selection. The zero control has null unit fill, perfect shortage-free cycles,
+and holding penalties on the initial ten pieces (650 in the example regime),
+so it is neither a free inventory result nor a promotion.
+
+These are exact findings about the declared synthetic cases. There is no
+supported global champion, calibrated service guarantee, statistical confidence
+or business-savings claim. Full rational scores and rejection reasons are in
+[the reproducible artifact](review/decision-benchmark.json).
