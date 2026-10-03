@@ -4,6 +4,14 @@ Review date: 2026-10-02. Review branch: `codex/three-stage-review`.
 The user authorized merging the remaining fixes on 2026-10-02. The integration
 incorporates the original Stage 3 main merge and all three Stage 2 slices.
 
+Integration checkpoint: [PR 7](https://github.com/daniel-li2021/inventory-intelligence/pull/7)
+is merged; fetched remote `main` at `dcada27` contains the reviewed integration.
+[Main CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
+passed both jobs and all 76 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
+The executions and pre-merge limitations below are retained as historical evidence.
+[Next investigation](NEXT_ROUND_RESEARCH.md) reuses the stored scores without
+claiming new model or inventory-performance results.
+
 ## Evidence and live-data boundary
 
 These are actual executions on PostgreSQL 17.6, Python 3.12.14 and Psycopg 3.3.6,
@@ -28,7 +36,7 @@ proposal had been supplied. The mathematical benchmark showed seasonal naive
 MAE 0 on a repeating weekly pattern, versus mean 12/7 and naive 3.
 
 The limitation was integration: Stage 3 could not consume persisted Stage 2
-benchmarks or proposals. Main contained only Stage 2's forecast kernel; fuller
+benchmarks or proposals. At that checkpoint, main contained only Stage 2's forecast kernel; fuller
 Stage 2 demand, evaluation and replenishment were on separate task branches.
 The review branch combines their committed outputs with Stage 3 before testing.
 
