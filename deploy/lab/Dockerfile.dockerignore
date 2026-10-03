@@ -1,0 +1,18 @@
+# Dockerfile-specific allowlist, relative to the repository-root context.
+**
+!pyproject.toml
+!README.md
+!src/
+!src/inventory_intelligence/
+!src/inventory_intelligence/*.py
+!src/inventory_intelligence/lab_evidence.json
+!src/inventory_intelligence/lab_static/
+!src/inventory_intelligence/lab_static/index.html
+!src/inventory_intelligence/lab_static/lab.css
+!src/inventory_intelligence/lab_static/lab.js
+!sql/
+!sql/checks.sql
+!sql/views.sql
+!deploy/
+!deploy/lab/
+!deploy/lab/requirements.txt

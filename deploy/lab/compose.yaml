@@ -1,0 +1,51 @@
+name: inventory-lab-demo
+services:
+  lab:
+    image: ${LAB_IMAGE:-inventory-lab:local}
+    build:
+      context: ../..
+      dockerfile: deploy/lab/Dockerfile
+      args:
+        PYTHON_IMAGE: ${PYTHON_IMAGE:-python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e}
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    cpus: 0.5
+    mem_limit: 256m
+    memswap_limit: 256m
+    pids_limit: 64
+    restart: unless-stopped
+    stop_grace_period: 15s
+    networks: [demo]
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: "2"}
+  proxy:
+    image: ${CADDY_IMAGE:-caddy:2.10.2-alpine@sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d}
+    environment:
+      LAB_DOMAIN: ${LAB_DOMAIN:?Set a reviewed public demo domain before starting the proxy}
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: [no-new-privileges:true]
+    cpus: 0.25
+    mem_limit: 128m
+    memswap_limit: 128m
+    pids_limit: 64
+    restart: unless-stopped
+    depends_on:
+      lab: {condition: service_healthy}
+    networks: [demo]
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: "2"}
+networks:
+  demo:
+volumes:
+  caddy_data:
+  caddy_config:
