@@ -5,12 +5,11 @@ acceptance remains in the linked stage/review documents.
 
 ## Verified integration
 
-Fetched/pruned origin and verified local main matched remote `main` at
-`dcada27a2cb089dd6812b240a0bffe5d00225df9`. GitHub confirms PRs 1–7 are merged,
+Fetched/pruned origin and verified remote `main` at
+`ce8ab0dd23680a93ce2de4d2bda2b5c3e9f8fde7`. GitHub confirms PRs 1–8 are merged,
 including Stage 2 eligibility/benchmark/replenishment (3/4/5), original Stage 3
-(6) and the combined review fixes (7). Remaining local task branches are not
-evidence of unfinished implementation; this research did not delete branches
-or alter worktrees/environments.
+(6), the combined review fixes (7) and measured Copilot benchmark (8).
+Remaining local task branches are not evidence of unfinished implementation.
 
 - **Stage 1 complete within contract-v1:** exact read-only reconciliation,
   completeness/coverage gates and append-only evidence. The later uncovered-key
@@ -21,12 +20,12 @@ or alter worktrees/environments.
   prefix-aware advisory orders. 24 tests cover this bounded synthetic milestone.
 - **Stage 3 complete within copilot-1/2:** read-only evidence explanations and
   explicit persisted planning UUID retrieval. Historical proposals remain
-  citations, not current order approval. 29 tests; optional Luna routing is
+  citations, not current order approval. 32 tests; optional Luna routing is
   bounded and mocked tests are separate from older live smoke evidence.
 
-[Main CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
-on `dcada27` completed both jobs successfully. The PostgreSQL acceptance log
-records **76 tests / OK**, using Python 3.12.12 and pinned PostgreSQL 17.9.
+[Main CI run 37085401000](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
+on `ce8ab0d` completed both jobs successfully. The PostgreSQL acceptance log
+records **79 tests / OK**, using Python 3.12.12 and pinned PostgreSQL 17.9.
 Prior local combined acceptance used Python 3.12.14 / Psycopg 3.3.6 / PostgreSQL
 17.6 and passed twice, plus a final merge round. [Validation](VALIDATION.md).
 No new database suite or model API calls were needed for this documentation pass.
@@ -44,6 +43,24 @@ The irregular holdout already illustrates an objective mismatch: naive has
 daily MAE 3 versus mean 827/266, but mean has smaller absolute cumulative 28-day
 error (278/19 versus 36), derived from stored bias without rerunning forecasts.
 No inventory-cost/service improvement has yet been measured.
+
+The later [Copilot benchmark](STAGE3_BENCHMARK.md) is merged and retains
+observed live routing failures: five finding questions were classified as
+unsupported. This is separate from deterministic evidence/test acceptance.
+A focused routing follow-up should use fresh held-out paraphrases and keep
+selector validation deterministic; this research made no new API calls.
+
+## Authorized publication cleanup
+
+The user authorized commit/push and branch cleanup. Deleted the remaining remote
+`codex/stage2-eligibility` stack branch after preserving its exact tip `b0163bf`
+in local tag `archive/stage2-stack-2026-10-02`. Deleted the ancestry-merged local
+eligibility branch and removed the clean temporary `/private/tmp/ii-stage2-work`
+checkout, which held only tracked files and disposable Python caches. Preserved
+the local benchmark/replenishment branches: their original commit histories are
+not ancestors of current main, although the reviewed implementations are integrated.
+The separate Stage 3 worktree/environment was retained. No force deletion or
+published-history rewrite occurred.
 
 ## Next action — proposed, not an implementation handoff
 

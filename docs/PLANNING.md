@@ -3,7 +3,7 @@
 [Planning v1](CONTRACT_PLANNING_V1.md) is separate from frozen Stage 1. The
 implementation includes demand eligibility, persisted forecast/backtest runs,
 and inventory projection/proposals. All three slices and the Stage 3 planning
-explanation adapter are integrated on `main` at `dcada27` through
+explanation adapter are integrated on `main`; the combined review was merged through
 [PR 7](https://github.com/daniel-li2021/inventory-intelligence/pull/7).
 The bounded synthetic Stage 2 milestone is complete; this does not establish
 real demand accuracy or inventory cost/service performance. See

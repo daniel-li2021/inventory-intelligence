@@ -1,9 +1,9 @@
 # Independent milestone 1 validation
 
-Current combined status (2026-10-02): `main` at `dcada27` integrates all three
-bounded stages. [Main CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
+Current combined status (2026-10-02): `main` at `ce8ab0d` integrates all three
+bounded stages. [Main CI run 37085401000](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
 passed `Repository hygiene` and `PostgreSQL acceptance`; the log records
-**76 tests / OK** (23 Stage 1, 24 Stage 2, 29 Stage 3), Python 3.12.12 and the
+**79 tests / OK** (23 Stage 1, 24 Stage 2, 32 Stage 3), Python 3.12.12 and the
 pinned PostgreSQL 17.9 service. Earlier counts below are historical checkpoints.
 This documentation investigation reused those results; it did not rerun the
 database suite, generate new benchmarks or make model API calls.

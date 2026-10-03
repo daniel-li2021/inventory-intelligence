@@ -2,7 +2,7 @@
 
 This records the earlier kernel-only `dacdc8f` checkpoint, not current status.
 All Stage 2 slices and the Stage 3 adapter are now integrated on `main` at
-`dcada27`; [current status](AUTOMATION_PROGRESS.md) and
+`ce8ab0d`; [current status](AUTOMATION_PROGRESS.md) and
 [combined acceptance](VALIDATION.md) supersede the completion statements below.
 
 Reviewed fetched `origin/main` at `dacdc8f`, independently of PR titles and delivery

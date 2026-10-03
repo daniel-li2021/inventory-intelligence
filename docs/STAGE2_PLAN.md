@@ -1,8 +1,8 @@
 # Stage 2: Forecasting & Planning
 
-Status: the bounded synthetic milestone is complete on `main` at `dcada27`
+Status: the bounded synthetic milestone is complete on `main` (latest `ce8ab0d`)
 through [PR 7](https://github.com/daniel-li2021/inventory-intelligence/pull/7),
-with 76-test combined main acceptance. Started 2026-10-02 after Stage 1
+with 79-test combined main acceptance after PR 8. Started 2026-10-02 after Stage 1
 contract-v1 integration. This plan records the delivered sequence;
 [next-round research](NEXT_ROUND_RESEARCH.md) proposes later evaluation work.
 V1 remains frozen; new database/report interfaces require a separate planning

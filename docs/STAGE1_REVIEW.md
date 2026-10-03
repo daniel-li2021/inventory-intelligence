@@ -5,8 +5,8 @@ Reviewed 2026-10-02. Acceptance means the bounded reconciliation milestone in
 
 Current status: the later [three-stage review](THREE_STAGE_REVIEW.md) adds the
 known-but-uncovered movement regression (23 Stage 1 tests), preserving v1
-interfaces. It is merged on `main` at `dcada27`; all 76 combined tests passed
-in the [pinned main CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872).
+interfaces. Latest `main` at `ce8ab0d` passed all 79 combined tests
+in the [pinned main CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000).
 The original 21/22-test results below remain historical acceptance evidence.
 
 ## Delivered

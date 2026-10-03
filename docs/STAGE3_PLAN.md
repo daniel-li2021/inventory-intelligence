@@ -1,9 +1,10 @@
 # Stage 3: Inventory Copilot
 
 Current status (2026-10-02): copilot-1 and the additive copilot-2 planning adapter
-are integrated on `main` at `dcada27` through PRs 6/7. All 76 combined tests,
-including 29 Stage 3 checks, passed in
-[main CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872).
+are integrated on `main` through PRs 6/7. PR 8 adds measured routing/evidence
+benchmarks; latest `main` at `ce8ab0d` passed all 79 combined tests,
+including 32 Stage 3 checks, in
+[main CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000).
 The sequence/checkpoints below record the original handoff and later integration.
 Historical proposal citations do not authorize a current order.
 

@@ -2,6 +2,10 @@
 
 Investigated 2026-10-02 against fetched `origin/main` at `dcada27`. Three read-only
 agents investigated decision evaluation, models/lifecycle and public datasets.
+Publication refresh: main advanced to `ce8ab0d` with PR 8; existing
+[latest CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
+passed 79 tests. Its [Copilot benchmark](STAGE3_BENCHMARK.md) documents observed
+routing failures as a separate follow-up.
 This is a proposed next handoff, not permission to implement or change frozen
 contracts. Existing benchmark JSON and acceptance evidence were reused; no data
 download, new forecast fit, database pipeline or model API request occurred.
