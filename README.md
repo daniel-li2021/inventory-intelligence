@@ -92,6 +92,10 @@ directions. Its first [fresh warmup study](docs/FRESH_WARMUP_RESULTS.md) evaluat
 pairs, regresses it in 35/360, and lowers complete intervention cost in only two.
 Empirical 90%/95% forecast targets still do not guarantee achieved inventory
 service. Repeated controls and origins are not independent replications.
+The [fresh retention study](docs/SAFETY_RETENTION_RESULTS.md) compares expanding,
+recent and decay-weighted safety with identical point forecasts. Both challengers
+can shrink safety to zero while leaving large owned inventory; neither passes
+the cost-and-service gate across its 21 path labels.
 
 ## Run the PostgreSQL core
 

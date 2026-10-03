@@ -44,12 +44,16 @@ do not establish unconstrained demand or historical inventory availability.
    cycle service, cumulative target coverage and pinball loss. Report all sample
    counts; adjacent quantiles may select the same empirical rank. Targets are
    forecast uncertainty inputs, never asserted service guarantees.
-4. **Safety retention under demand decline — next ready after Wave 1.** Freeze
+4. **Safety retention under demand decline — implemented and measured.** Freeze
    expanding, recent-window and one decay-weighted residual policy; keep forecast
    identical. Test temporary pause/recovery, seasonal lows, gradual decline and
    permanent cessation. Acceptance: completed calibration labels only, minimum
    samples, current safety, owned stock, recovery-period service and full cost.
    No automatic retirement or free stock liquidation.
+   [Fresh retention result](SAFETY_RETENTION_RESULTS.md): 105 simulations,
+   17 distinct demand paths, recent0/21 and decay0/21 descriptive dual-reference
+   passes. Final safety shrinks to zero on permanent cessation, but owned stock
+   remains and pause-recovery service can regress. Eight new oracles pass.
 5. **Lead-time and supplier-reliability study — next ready.** Lead 2/5/10 days,
    low/medium/high hidden variability; use absolute calendar supplier traces and
    a common settlement end. Hold forecast/policy fixed while changing supply,
@@ -137,7 +141,8 @@ do not establish unconstrained demand or historical inventory availability.
 
 The initial package implements Wave 1 item 1 plus the first measured part of
 items 3/6/11. Evidence is local until the reviewed task branch is published.
-Next: retention challengers and lead/supplier interventions; adapter validation
+Retention challengers are now independently measured with a negative promotion
+gate. Next: lead/supplier interventions and attribution; adapter validation
 can proceed independently if simulation becomes blocked. No listed direction is
 discarded merely because it is outside the current package. Large expansions
 remain concrete gated options, not promised production capabilities.
