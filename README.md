@@ -18,6 +18,13 @@ official UCI Online Retail with immutable provenance and evaluates a training-on
 are aggregate. Fixed mean beats the selected method mix on the 28-day holdout.
 Observed sales do not establish unconstrained demand or historical stock availability.
 
+[Portfolio case study and resume wording](docs/PORTFOLIO_CASE_STUDY.md) connect
+the architecture to measured failures and negative results. The
+[22-direction delivery/continuation ledger](docs/RESEARCH_STATUS.md) distinguishes
+merged core evidence from published research and accessibility PRs. New public
+observed-sales studies remain separate exploratory research, with synthetic
+suppliers/costs and unknown stock availability.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]
