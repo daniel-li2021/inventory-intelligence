@@ -87,3 +87,10 @@ the [frozen sales-proxy safety study](PUBLIC_SAFETY_V1.md) and
 q90/q95 coverage/pinball and synthetic supply timing. The original forecast report
 remains forecast-only. These exploratory reused observations authorize no advanced
 method or operational import. See the research roadmap in PR14 for remaining work.
+
+The subsequent [disjoint-item protocol](PUBLIC_CALIBRATION_V1.md) commits a
+training-only seed-1709 subset/grid before any new-item simulation, excludes all
+32 consumed identities and reuses attested source caches. Its
+[measured replication](PUBLIC_CALIBRATION_RESULTS.md) retains all 768 arms and
+null denominators, with no policy/model promotion. This is cross-item evidence
+in the same retailer/calendar, not independent-market or later-time validation.

@@ -72,6 +72,9 @@ cases, not commercial savings or service guarantees.
   immediate fill or cycle service. A paid 56-day warmup and 768 synthetic inventory
   arms over public observations expose different coverage/service/cost outcomes.
   [Measured results and boundaries](docs/PUBLIC_SAFETY_RESULTS.md).
+  A [prospectively frozen disjoint 32-item replication](docs/PUBLIC_CALIBRATION_RESULTS.md)
+  retains another 768 arms: mean/q95 and SBA/q95 achieve 92.12% and 93.35% fill
+  in the lead-two/no-extra-delay case. Same retailer/calendar; no service guarantee.
 
 - **Engineering:** exact arithmetic, two knowledge clocks, append-only run
   history, restricted database roles, independent hand-calculated oracles, and
