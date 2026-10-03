@@ -4,14 +4,16 @@ A public portfolio project that reconciles synthetic apparel inventory in Postgr
 
 Inventory is finished garments in whole pieces at `(sku_id, warehouse_id)` grain. Missing or ambiguous inputs suppress unsupported quantity conclusions. The checker writes only to the `reliability` schema; it never repairs operational inventory.
 
-Current status (2026-10-02): all three bounded stages are integrated on `main`
-at `ce8ab0d` after PRs 7/8.
-The [main acceptance run](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
-passed both jobs and all 79 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
-This establishes synthetic reconciliation, baseline planning and evidence
-explanation; real demand performance and inventory service/cost improvement
-remain unmeasured. [Current checkpoint](docs/AUTOMATION_PROGRESS.md) and
-[next investigation and proposed handoff](docs/NEXT_ROUND_RESEARCH.md).
+All three bounded synthetic stages are integrated through PRs 7/8; PR 9
+refreshes their research and documentation. The
+[prior main acceptance run](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
+passed all 79 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
+The next research milestone evaluates forecast-plus-policy cost and service in a
+separate offline backlog simulator. [Decision contract](docs/CONTRACT_DECISION_V1.md),
+[benchmark and results](docs/DECISION_BENCHMARK.md),
+[research handoff](docs/NEXT_ROUND_RESEARCH.md), and
+[current checkpoint](docs/AUTOMATION_PROGRESS.md). Real demand performance and
+business inventory improvement remain unmeasured.
 
 ## Quickstart
 
@@ -119,6 +121,23 @@ remains blocked until current inputs are assessed at a new planning cutoff.
 cases covering routing, evidence, exact quantities, citations, readiness/refusal,
 latency and measured API usage. The reproducible harness reuses persisted inputs
 and makes at most 22 routing calls; no new forecasting models are added.
+
+## Offline inventory decision benchmark
+
+```sh
+PYTHONPATH=src python scripts/decision_benchmark.py --output /tmp/decision-benchmark.json
+PYTHONPATH=src python -m unittest tests.test_decision tests.test_decision_benchmark tests.test_forecasting -v
+```
+
+No database or model API is required. The benchmark compares the existing naive,
+mean and seasonal naive forecasts plus a zero diagnostic under paired synthetic
+demand, lead delays, initial stock and exact holding/backlog/setup penalties.
+It reports immediate fill, cycle service, prior-commitment timing, cumulative
+forecast error and terminal obligations. Its inventory-position policy is
+separate from the existing planning-v1 prefix projection. Method selection uses
+selection data; held-out comparisons can propose research promotion but never
+change an approved model or place an order. The [protocol and retained evidence](docs/DECISION_BENCHMARK.md)
+state the bounded conclusions and deferred work.
 
 All business examples are synthetic. Never include company code, data, screenshots, credentials, or confidential schemas. Uploads/forms, scheduled jobs, deployment, and dashboards are outside the delivered milestone.
 

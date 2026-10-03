@@ -3,7 +3,33 @@
 Updated 2026-10-02. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Verified integration
+## Current milestone — offline decision-benchmark-v1 implemented
+
+The user assigned the next milestone from
+[NEXT_ROUND_RESEARCH.md](NEXT_ROUND_RESEARCH.md). Work began on
+`codex/decision-benchmark-v1` from fetched remote main `ce8ab0d`; the previous
+research branch is preserved. The separate
+[decision contract](CONTRACT_DECISION_V1.md) fixes backlog semantics, local-day
+event timing, inventory-position policy, exact costs, service denominators,
+paired synthetic scenarios, selection/holdout boundaries and fixed runoff.
+Simulator, independent oracle and evaluation authoring used isolated worktrees.
+Integrated offline validation passed 19 focused tests on Python 3.12.14 and
+completed 480 candidate/split simulations across 60 paired cells. All terminal
+obligations settled; 22 cells lacked eligible selection and all eight selected
+lumpy cells failed held-out service. Six weekly and ten obsolescence cells passed
+the declared promotion rule, including repeated controls; no champion is changed.
+Results, exact provenance and validation are recorded in
+[DECISION_BENCHMARK.md](DECISION_BENCHMARK.md). Implementation is published through [PR 10](https://github.com/daniel-li2021/inventory-intelligence/pull/10).
+The user authorized conflict resolution and integration on 2026-10-02; the
+upstream PR 9 documentation is preserved alongside these results.
+
+Main already contains all three bounded synthetic stages through PRs 7/8.
+The prior baseline and investigation below retain their original chronology
+and are not current blockers. This milestone adds no public data, model dependency, database
+schema, runtime order execution or change to planning-v1/Copilot contracts.
+SBA/TSB, uncertainty calibration and public-sales evidence remain later steps.
+
+## Prior verified integration — PRs 1–8
 
 Fetched/pruned origin and verified remote `main` at
 `ce8ab0dd23680a93ce2de4d2bda2b5c3e9f8fde7`. GitHub confirms PRs 1–8 are merged,
@@ -42,7 +68,7 @@ not independent statistical evidence or real-world forecasting performance.
 The irregular holdout already illustrates an objective mismatch: naive has
 daily MAE 3 versus mean 827/266, but mean has smaller absolute cumulative 28-day
 error (278/19 versus 36), derived from stored bias without rerunning forecasts.
-No inventory-cost/service improvement has yet been measured.
+At that earlier checkpoint, inventory-cost/service outcomes had not yet been measured.
 
 The later [Copilot benchmark](STAGE3_BENCHMARK.md) is merged and retains
 observed live routing failures: five finding questions were classified as
@@ -62,7 +88,7 @@ not ancestors of current main, although the reviewed implementations are integra
 The separate Stage 3 worktree/environment was retained. No force deletion or
 published-history rewrite occurred.
 
-## Next action — proposed, not an implementation handoff
+## Original investigation sequence — superseded by assigned milestones
 
 Read [next-round investigation](NEXT_ROUND_RESEARCH.md). Recommended order:
 
@@ -78,7 +104,7 @@ Read [next-round investigation](NEXT_ROUND_RESEARCH.md). Recommended order:
 4. Evaluate aggregation and a bounded LightGBM challenger only when justified;
    defer registry/drift/scheduling infrastructure until decision value is shown.
 
-Current research is documentation-only. No new runtime contract, source import,
+The original investigation was documentation-only. No new runtime contract, source import,
 model dependency, simulator, scheduler or automatic model promotion was added.
 Existing planning-v1 and historical copilot decoding remain unchanged. Public
 real-data import is gated by the current synthetic-only instructions and a

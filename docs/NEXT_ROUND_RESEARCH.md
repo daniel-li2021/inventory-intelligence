@@ -6,8 +6,12 @@ Publication refresh: main advanced to `ce8ab0d` with PR 8; existing
 [latest CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
 passed 79 tests. Its [Copilot benchmark](STAGE3_BENCHMARK.md) documents observed
 routing failures as a separate follow-up.
-This is a proposed next handoff, not permission to implement or change frozen
-contracts. Existing benchmark JSON and acceptance evidence were reused; no data
+The user subsequently assigned the smallest next milestone on 2026-10-02.
+Its separate [frozen decision contract](CONTRACT_DECISION_V1.md) and
+[implementation/evaluation](DECISION_BENCHMARK.md) supersede the proposed
+synthetic simulator handoff below. Public-data acquisition, advanced models and
+changes to existing frozen contracts remain outside that assignment.
+For the original research, existing benchmark JSON and acceptance evidence were reused; no data
 download, new forecast fit, database pipeline or model API request occurred.
 
 Recommendation: **prove inventory decision quality with existing models first;
