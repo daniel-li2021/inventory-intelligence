@@ -65,9 +65,23 @@ def simulate(history, demand, *, method, on_hand, lead_days, review_days,
     Forecast scores and all service/exposure metrics cover scored days only;
     eventually_filled_units also counts fulfillment during the fixed runoff.
     """
+    return _simulate(history, demand, method=method, on_hand=on_hand,
+                     lead_days=lead_days, review_days=review_days,
+                     safety_qty=safety_qty, pack_size=pack_size, moq=moq,
+                     review_phase=review_phase, commitments=commitments,
+                     inbound=inbound, supplier_delays=supplier_delays,
+                     holding_cost=holding_cost, backlog_cost=backlog_cost,
+                     order_cost=order_cost)
+
+
+def _simulate(history, demand, *, method, on_hand, lead_days, review_days,
+              safety_qty=0, pack_size=1, moq=1, review_phase=0,
+              commitments=(), inbound=(), supplier_delays=(), holding_cost=1,
+              backlog_cost=10, order_cost=0, _review_provider=None):
+    """Shared event kernel; the private provider sees completed observations only."""
     history = _observations("history", history)
     demand = _observations("demand", demand)
-    if method not in (*METHODS, "zero"):
+    if _review_provider is None and method not in (*METHODS, "zero"):
         raise ValueError(f"unknown decision method: {method}")
     if method == "seasonal_naive" and len(history) < 7:
         raise ValueError("seasonal_naive needs seven history days")
@@ -144,11 +158,23 @@ def simulate(history, demand, *, method, on_hand, lead_days, review_days,
         backlog = sum(row["quantity"] for row in queue)
         order_qty = 0
         if day >= review_phase and (day - review_phase) % review_days == 0:
-            predictions = ([Fraction(0)] * horizon if method == "zero" else
-                           forecast(completed, method=method, horizon=horizon)) if scored else []
+            evidence = {}
+            review_safety = safety_qty
+            if scored and _review_provider is not None:
+                evidence = _review_provider(tuple(completed), horizon)
+                if not isinstance(evidence, dict):
+                    raise ValueError("review provider must return forecast/safety evidence")
+                predictions = evidence.get("forecast")
+                review_safety = _integer("provider safety_qty", evidence.get("safety_qty"))
+                if (not isinstance(predictions, (list, tuple)) or len(predictions) != horizon
+                        or any(type(value) is not Fraction or value < 0 for value in predictions)):
+                    raise ValueError("provider forecasts must be H nonnegative Fractions")
+            else:
+                predictions = ([Fraction(0)] * horizon if method == "zero" else
+                               forecast(completed, method=method, horizon=horizon)) if scored else []
             future_prior = sum(row["quantity"] for row in commitments
                                if day < row["due_day"] < day + horizon)
-            target = sum(predictions, Fraction(0)) + safety_qty + future_prior if scored else Fraction(0)
+            target = sum(predictions, Fraction(0)) + review_safety + future_prior if scored else Fraction(0)
             position = stock + outstanding - backlog
             need = max(Fraction(0), target - position)
             if need:
@@ -158,7 +184,8 @@ def simulate(history, demand, *, method, on_hand, lead_days, review_days,
                                     arrival_day=day + lead_days + delays[day // review_days]))
                 outstanding += order_qty
             reviews.append(dict(day=day, runoff=not scored, forecast=predictions,
-                                target=target, inventory_position=position, order_qty=order_qty))
+                                target=target, inventory_position=position, order_qty=order_qty, **{
+                                    key: value for key, value in evidence.items() if key != "forecast"}))
         new_demand = demand[day] if scored else 0
         immediate = min(stock, new_demand)
         if new_demand:
