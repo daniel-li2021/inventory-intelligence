@@ -65,6 +65,14 @@ and source hashes, complete scenario inputs and their SHA-256, selection and
 holdout metrics/review forecasts/terminal state for every method, explicit
 eligibility and paired holdout differences, and every failed promotion condition.
 
+Historical source attestation is retained after the private ordering extension:
+[original kernel bytes](review/decision-v1-source.py.txt), from main commit
+`f6d3d16034af038eda4c8687ea4f1ed6d2445ef6`, match this report's recorded kernel
+SHA-256. Other recorded sources are unchanged. The archive is source evidence,
+not the runtime implementation. A regression oracle compares complete default
+outputs against that original kernel, including hidden-delay/FIFO cases. Old
+results were not regenerated to make their hashes match a newer implementation.
+
 Synthetic penalties omit acquisition, salvage and lost-sales value. They are
 finite-window costs, not profit or demonstrated business savings. Correlated
 cycles, repeated controls and three lumpy seeds support no population confidence
