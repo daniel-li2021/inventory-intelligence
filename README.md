@@ -4,6 +4,15 @@ A public portfolio project that reconciles synthetic apparel inventory in Postgr
 
 Inventory is finished garments in whole pieces at `(sku_id, warehouse_id)` grain. Missing or ambiguous inputs suppress unsupported quantity conclusions. The checker writes only to the `reliability` schema; it never repairs operational inventory.
 
+Current status (2026-10-02): all three bounded stages are integrated on `main`
+at `ce8ab0d` after PRs 7/8.
+The [main acceptance run](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
+passed both jobs and all 79 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
+This establishes synthetic reconciliation, baseline planning and evidence
+explanation; real demand performance and inventory service/cost improvement
+remain unmeasured. [Current checkpoint](docs/AUTOMATION_PROGRESS.md) and
+[next investigation and proposed handoff](docs/NEXT_ROUND_RESEARCH.md).
+
 ## Quickstart
 
 Requires Python 3.12 and Docker with Compose. From the repository root:

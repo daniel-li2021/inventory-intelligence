@@ -1,88 +1,85 @@
 # Development checkpoint
 
-Updated 2026-10-02.
+Updated 2026-10-02. This is the current resumable status; detailed historical
+acceptance remains in the linked stage/review documents.
 
-## Stage 1
+## Verified integration
 
-All three implementation handoffs are integrated. Completion review reused the
-validated baseline, reran its 21 acceptance tests and checked the earlier remote
-CI result. A newly reproduced empty-coverage false pass was corrected without
-changing contract v1 interfaces. Final fresh PostgreSQL 17.9 acceptance: 22 tests
-passed with Python 3.12.12, zero failures/errors/skips.
+Fetched/pruned origin and verified remote `main` at
+`ce8ab0dd23680a93ce2de4d2bda2b5c3e9f8fde7`. GitHub confirms PRs 1–8 are merged,
+including Stage 2 eligibility/benchmark/replenishment (3/4/5), original Stage 3
+(6), the combined review fixes (7) and measured Copilot benchmark (8).
+Remaining local task branches are not evidence of unfinished implementation.
 
-Merged all three handoffs and the review correction through
-[PR 1](https://github.com/daniel-li2021/inventory-intelligence/pull/1), main
-`83e84578013bce2e5b82cbdc689ae2e5357938ab`, verified locally and remotely. Deleted
-the four merged Stage 1 task refs locally/remotely and the two older merged
-documentation branch refs locally. Preserved the `contract-v1` tag. Temporary
-implementation worktrees are retired after final checks. Cleanup policy now
-lives in AGENTS.md. The final Stage 1 correction also passed
-[remote CI run 36994543696](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36994543696)
-on PR head `a83e730a08484a13a3004662e402c62b884ab2d4`.
+- **Stage 1 complete within contract-v1:** exact read-only reconciliation,
+  completeness/coverage gates and append-only evidence. The later uncovered-key
+  fix brings its independent acceptance to 23 tests; frozen interfaces remain.
+- **Stage 2 complete within planning-v1:** origin-known demand/revision replay,
+  nullable gaps versus eligible zero, exact baseline forecasts, shared
+  7/14/28-day selection with separate holdout, inventory revalidation and
+  prefix-aware advisory orders. 24 tests cover this bounded synthetic milestone.
+- **Stage 3 complete within copilot-1/2:** read-only evidence explanations and
+  explicit persisted planning UUID retrieval. Historical proposals remain
+  citations, not current order approval. 32 tests; optional Luna routing is
+  bounded and mocked tests are separate from older live smoke evidence.
 
-## Next work
+[Main CI run 37085401000](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37085401000)
+on `ce8ab0d` completed both jobs successfully. The PostgreSQL acceptance log
+records **79 tests / OK**, using Python 3.12.12 and pinned PostgreSQL 17.9.
+Prior local combined acceptance used Python 3.12.14 / Psycopg 3.3.6 / PostgreSQL
+17.6 and passed twice, plus a final merge round. [Validation](VALIDATION.md).
+No new database suite or model API calls were needed for this documentation pass.
 
-Stage 2 means Forecasting & Planning; [STAGE2_PLAN.md](STAGE2_PLAN.md) now defines
-the sequence and acceptance boundaries separately from v1. Initial kernel:
-naive, historical mean, seasonal naive and fair rolling-origin evaluation with
-exact rational arithmetic. Five independent model tests pass; the installed
-package's synthetic demo also matches the manually expected scores. No new
-dependency or external model call. This is a benchmark, not the complete
-forecasting stage.
+## Existing results to reuse
 
-Independent checkpoint of current main: all 27 original tests passed on fresh
-PostgreSQL 17.6 (Python 3.12.14), with no Stage 1 change or material defect; see
-[STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md). Planning contract and deterministic
-demand replay/eligibility now have their own slice and manual database checks.
-[Eligibility PR 3](https://github.com/daniel-li2021/inventory-intelligence/pull/3)
-passed both jobs in [CI run 36997926902](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36997926902).
-Origin-aware forecasts/benchmarks now append versioned PostgreSQL evidence with
-independent knowledge-time/holdout oracles.
-[Benchmark PR 4](https://github.com/daniel-li2021/inventory-intelligence/pull/4)
-passed [CI run 36998446346](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36998446346).
-The final slice adds inventory revalidation, complete supply gates, exact daily
-projection, prefix-aware replenishment and a deterministic PostgreSQL demo.
-Fresh local full acceptance: 45 tests, no failures/errors/skips. See
-[PLANNING.md](PLANNING.md) and [verified demo](examples/stage2.md). This stack
-requires contract/integration review, CI and an authorized merge; Stage 2 is not
-complete on main. Stage 3's working checkout remains untouched.
-[Replenishment PR 5](https://github.com/daniel-li2021/inventory-intelligence/pull/5)
-passed both jobs in [CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
-on code head `f01a2e7`; the PostgreSQL job log explicitly confirms **45 tests / OK**.
-All three PRs remain unmerged. No Stage 1 code/schema/acceptance oracle changed;
-main remains `dacdc8f`.
+[Three-stage review](THREE_STAGE_REVIEW.md) and immutable
+[final round A](review/final-round1.json) / [B](review/final-round2.json)
+retain seven 180-day synthetic groups and exact scores/proposals. Complete supply
+proposes 12 pieces; incomplete supply stays `not_assessable` with null order.
+Source hashes are unchanged across repetitions. Repetition proves reproducibility,
+not independent statistical evidence or real-world forecasting performance.
 
-## Three-stage review — 2026-10-02
+The irregular holdout already illustrates an objective mismatch: naive has
+daily MAE 3 versus mean 827/266, but mean has smaller absolute cumulative 28-day
+error (278/19 versus 36), derived from stored bias without rerunning forecasts.
+No inventory-cost/service improvement has yet been measured.
 
-Review branch `codex/three-stage-review` combines the committed Stage 2 demand,
-benchmark and replenishment slices with Stage 3. Main is unchanged pending an
-authorized integration. [Full review and final data](THREE_STAGE_REVIEW.md).
+The later [Copilot benchmark](STAGE3_BENCHMARK.md) is merged and retains
+observed live routing failures: five finding questions were classified as
+unsupported. This is separate from deterministic evidence/test acceptance.
+A focused routing follow-up should use fresh held-out paraphrases and keep
+selector validation deterministic; this research made no new API calls.
 
-Corrected known uncovered movements escaping reconciliation, selection truth
-using revisions learned during holdout, and contradictory future-cutoff passes.
-Added the separately versioned read-only persisted-planning copilot adapter.
-Final fresh PostgreSQL 17.6 acceptance: 76/76 twice, plus four adapter followup
-checks. Each final benchmark repeated seven demand groups three times; exact
-scores/proposals were identical and source digests stayed unchanged. The clean
-historical proposal remains 12 pieces; incomplete supply stays null. Drift and
-irregular controls make the forecast comparison less dependent on ideal seasons.
-Live model testing remains pending explicit approval to reuse the configured key;
-no API requests were made in this review. Business data remains synthetic only.
+## Authorized publication cleanup
 
-### Publication followup — 2026-10-02
+The user authorized commit/push and branch cleanup. Deleted the remaining remote
+`codex/stage2-eligibility` stack branch after preserving its exact tip `b0163bf`
+in local tag `archive/stage2-stack-2026-10-02`. Deleted the ancestry-merged local
+eligibility branch and removed the clean temporary `/private/tmp/ii-stage2-work`
+checkout, which held only tracked files and disposable Python caches. Preserved
+the local benchmark/replenishment branches: their original commit histories are
+not ancestors of current main, although the reviewed implementations are integrated.
+The separate Stage 3 worktree/environment was retained. No force deletion or
+published-history rewrite occurred.
 
-Verified the existing Stage 2 eligibility, benchmark and replenishment branches
-on origin. Pushed the original Stage 3 `codex/stage3-copilot` and the combined
-validated `codex/three-stage-review` branch using the configured credentials
-outside the sandbox. Stage 3 remote head matches local `d7feed5`; no main merge
-or branch deletion. The review branch contains all three stages and the review
-fixes. No new test/CI run was needed for branch publication.
+## Next action — proposed, not an implementation handoff
 
-## Remaining-fixes authorized integration — 2026-10-02
+Read [next-round investigation](NEXT_ROUND_RESEARCH.md). Recommended order:
 
-The user authorized merging the remaining three-stage review fixes. The combined
-branch incorporates main's original Stage 3 merge and the complete Stage 2
-benchmark/planner. Reviewed source and tests are retained; documentation records
-the superseded partial checkpoints. Fresh PostgreSQL acceptance passed all
-76 tests with zero failures/errors/skips; comparative benchmark outputs are
-reused unchanged. No model API calls or production-data imports were made.
+1. Freeze a separate offline decision-evaluation contract, including backlog
+   versus lost sales, event timing, exact cost units, service denominators and
+   terminal conditions. Then evaluate existing forecasts/policies on synthetic
+   demand with independent manual outcomes.
+2. Add unpredictable intermittent/lumpy and obsolescence controls, then bounded
+   SBA/TSB challengers if the baseline decision weaknesses are reproducible.
+3. Authorize a separate public observed-sales benchmark boundary and verify
+   dataset rights before acquiring M5 or an alternative. Do not import public
+   sales as accepted orders or fabricate availability/knowledge clocks.
+4. Evaluate aggregation and a bounded LightGBM challenger only when justified;
+   defer registry/drift/scheduling infrastructure until decision value is shown.
+
+Current research is documentation-only. No new runtime contract, source import,
+model dependency, simulator, scheduler or automatic model promotion was added.
+Existing planning-v1 and historical copilot decoding remain unchanged. Public
+real-data import is gated by the current synthetic-only instructions and a
+separate approved research protocol. M5 redistribution rights remain unverified.
