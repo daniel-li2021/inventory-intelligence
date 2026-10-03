@@ -3,6 +3,12 @@
 Reviewed 2026-10-02. Acceptance means the bounded reconciliation milestone in
 [contract v1](CONTRACT_V1.md), not certification of physical stock.
 
+Current status: the later [three-stage review](THREE_STAGE_REVIEW.md) adds the
+known-but-uncovered movement regression (23 Stage 1 tests), preserving v1
+interfaces. It is merged on `main` at `dcada27`; all 76 combined tests passed
+in the [pinned main CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872).
+The original 21/22-test results below remain historical acceptance evidence.
+
 ## Delivered
 
 - Data foundation `f611554`: synthetic source/storage schemas, restricted runner

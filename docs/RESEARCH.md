@@ -2,6 +2,13 @@
 
 Checked 2026-10-02. This investigation uses maintainers' repositories, source files, license files, and official documentation. GitHub searches covered inventory/stock systems and SQL/data-quality tooling beyond the supplied references. Small tutorial repositories were not used as design authorities.
 
+This is the original reliability/tooling investigation. All three bounded
+synthetic stages are now integrated on main; [current status](AUTOMATION_PROGRESS.md).
+The [next-round investigation](NEXT_ROUND_RESEARCH.md) covers decision metrics,
+backlog/lost-sales costs, lead-time risk, SBA/TSB/aggregation/LightGBM, M5 provenance
+and minimal lifecycle. It proposes evaluation work; no new dependency or public
+real-data import was performed.
+
 [Repository metadata](research/repositories.json) records exact star counts, archived status, last push, licenses reported by GitHub, and source revision snapshots. Stars are adoption proxies, not a guarantee of correctness or production suitability. All shortlisted active repositories showed recent pushes around September 30–October 2, 2026; pushes can include bots and non-release branches. This was a reference investigation, not a deployment, security audit, or performance benchmark of those systems.
 
 ## Highest-value design references
@@ -50,7 +57,7 @@ Read [audits](https://sqlmesh.readthedocs.io/en/stable/concepts/audits/) and [ov
 
 - **Soda Core — approximately 2.4k stars, active, but current `main` uses [Elastic License 2.0](https://github.com/sodadata/soda-core/blob/8f652f4832d5534d5e0d8584cdb76d45fa087a7e/LICENSE).** Its declarative quality/contracts approach is relevant, but do not classify the current code as an unrestricted Apache-licensed OSS dependency from older recommendations. Exclude it from this project's initial dependency set.
 - **Datafold data-diff — approximately 3.0k stars, [archived since May 2024](https://github.com/datafold/data-diff).** Dataset diffing is relevant to reconciliation, but this is not a maintained dependency choice. An ordinary keyed SQL join meets the first milestone's comparison need.
-- **StatsForecast — approximately 4.9k stars; Apache-2.0; Stage 2 only.** [The project](https://github.com/Nixtla/statsforecast) supplies statistical baselines and intermittent-demand methods. There is no reason to install it before reliable stock and a separate demand series exist.
+- **StatsForecast — approximately 4.9k stars; Apache-2.0; future challenger option.** [The project](https://github.com/Nixtla/statsforecast) supplies statistical baselines and intermittent-demand methods. Stage 2 now has a separate synthetic demand series and stdlib baselines. Dependency adoption is still deferred until the decision benchmark demonstrates a need; see [model investigation](NEXT_ROUND_RESEARCH.md#models-test-the-weakness-before-increasing-complexity).
 - Home inventory, cloud-asset inventory, scanner tools, and narrow material trackers appeared in searches but have different business grains and workflows. Small reconciliation demos were not promoted over mature systems just because their names matched.
 
 ## Direct-use decision

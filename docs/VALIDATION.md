@@ -1,5 +1,13 @@
 # Independent milestone 1 validation
 
+Current combined status (2026-10-02): `main` at `dcada27` integrates all three
+bounded stages. [Main CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
+passed `Repository hygiene` and `PostgreSQL acceptance`; the log records
+**76 tests / OK** (23 Stage 1, 24 Stage 2, 29 Stage 3), Python 3.12.12 and the
+pinned PostgreSQL 17.9 service. Earlier counts below are historical checkpoints.
+This documentation investigation reused those results; it did not rerun the
+database suite, generate new benchmarks or make model API calls.
+
 The standard-library `unittest` suite uses real PostgreSQL 17 and the frozen [contract](CONTRACT_V1.md). Neither SQLite nor SQL mocks provide milestone evidence. `TEST_DATABASE_URL` must select a disposable fixture-owner connection, and `DATABASE_URL` must select `ii_runner` in the same database. Missing modules, URLs, schema, or database are errors; tests are never skipped to manufacture a pass.
 
 ## Independent arithmetic and evidence
@@ -83,13 +91,14 @@ The expanded planning suite is discovered by the SAME CI command and bootstrap;
 Stage 1 oracles were not weakened. Its fresh database now adds separate planning
 schemas. The final local suite passed 45 tests with no failures/errors/skips,
 including the persisted 180-day downstream demo. [Planning validation and
-manual oracles](PLANNING.md). Pinned remote CI and integration review are required
-before Stage 2 can be considered complete on main.
+manual oracles](PLANNING.md). Pinned remote CI and integration review were
+subsequently satisfied by the combined main merge noted above.
 
 [Final Stage 2 code CI run 36999887817](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/36999887817)
 on `f01a2e7` independently completed both jobs successfully. The PostgreSQL job's
 full log records **45 tests / OK**, including the unchanged Stage 1 oracles and
-Stage 2 downstream demo. All three Stage 2 PRs are unmerged.
+Stage 2 downstream demo. This is historical evidence; all three Stage 2 PRs
+are now merged and the combined main suite contains 76 tests.
 
 ## Repeated three-stage review
 

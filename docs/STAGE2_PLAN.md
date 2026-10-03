@@ -1,8 +1,10 @@
 # Stage 2: Forecasting & Planning
 
-Status: started 2026-10-02 after Stage 1 contract-v1 acceptance and main integration
-([PR 1](https://github.com/daniel-li2021/inventory-intelligence/pull/1), main
-`83e84578013bce2e5b82cbdc689ae2e5357938ab`). This is a staged implementation plan.
+Status: the bounded synthetic milestone is complete on `main` at `dcada27`
+through [PR 7](https://github.com/daniel-li2021/inventory-intelligence/pull/7),
+with 76-test combined main acceptance. Started 2026-10-02 after Stage 1
+contract-v1 integration. This plan records the delivered sequence;
+[next-round research](NEXT_ROUND_RESEARCH.md) proposes later evaluation work.
 V1 remains frozen; new database/report interfaces require a separate planning
 contract before their implementation. The mathematical baseline kernel below
 has no database interface and does not change v1.
@@ -53,7 +55,7 @@ multiple future seasons, quantities above float precision, leakage controls,
 zero/intermittent observations, and invalid/insufficient history. This kernel
 accepts **already validated daily demand values**. It does not validate dates,
 source coverage, availability, stockouts or reliability runs; it cannot be used
-as a complete operational forecasting workflow yet.
+as a complete operational forecasting workflow by itself.
 
 ### 2. Synthetic demand and eligibility contract — implemented slice
 
@@ -143,7 +145,7 @@ against manual arithmetic, including zero demand, stockout gaps, late correction
 pending/delayed inbound, duplicate orders, unit/pack boundaries and immutable history.
 The existing CI command includes the full downstream demo; JSON/Markdown output
 and a verified concise summary are available. Compatible contracts remain a
-prerequisite for authorized integration.
+prerequisite for integration, now satisfied by the combined review and merge.
 
 No scheduler, ERP, web UI, LLM, cloud service or business-data import is needed
 for this stage. Its completion requires the demand/eligibility adapter, persisted
@@ -159,3 +161,9 @@ all three with the existing main and corrects holdout selection truth timing.
 the remaining fixes on 2026-10-02; this integration preserves the frozen Stage 1
 interfaces and adds the separately versioned planning explanation contract.
 No web UI, scheduler, cloud service or advanced forecasting model was added.
+
+Verified integration: PRs 3/4/5 and PR 7 are merged. Remote `main` at `dcada27`
+contains all slices; [CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
+passed both jobs and all 76 combined tests. The earlier 45-test slice results
+above are retained as historical evidence. No new model or policy is selected
+by the next-round investigation.
