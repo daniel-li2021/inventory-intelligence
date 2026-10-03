@@ -94,6 +94,12 @@ same-origin application and API boundary checks.
 
 ## Validation
 
+The later [accessibility/UX review](LAB_ACCESSIBILITY_REVIEW.md) fixes keyboard
+focus restoration, short control names, evidence-table scrolling, blocked-state
+narrow reflow and contrast/line patterns. Actual1280px/320px browser paths and
+23 Lab/API regressions pass. It is a targeted local review, not full screen-reader
+or WCAG conformance acceptance.
+
 Original acceptance: 18 independent lab/API tests passed. Combined acceptance passed **124/124**
 tests against fresh isolated local PostgreSQL **17.6** / Python **3.12.14**.
 The final calculation-reference correction was revalidated with the 18 lab/API

@@ -66,6 +66,10 @@ metrics; zero-demand fill remains undefined. These are deterministic synthetic
 cases, not commercial savings or service guarantees.
 [Lab semantics, API and operating instructions](docs/DECISION_LAB.md).
 
+Keyboard users can run the presets, inspect focusable evidence tables with arrow
+keys and use the skip link. [Local accessibility review and limits](docs/LAB_ACCESSIBILITY_REVIEW.md)
+records focus, contrast and narrow-screen validation.
+
 ## What the evidence shows
 
 - **Public sales-proxy safety:** q95 demand calibration does not guarantee 95%

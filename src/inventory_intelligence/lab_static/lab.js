@@ -4,13 +4,14 @@
 // are supplied by the Python adapter; arithmetic below is display geometry only.
 (() => {
   const $ = (id) => document.getElementById(id);
-  const colors = { baseline: "#8c9e93", scenario: "#245f51", baselineBacklog: "#c8a992", backlog: "#b65329", demand: "#366b8f" };
+  const colors = { baseline: "#61776b", scenario: "#245f51", baselineBacklog: "#947154", backlog: "#b65329", demand: "#366b8f" };
   let result = null;
   let defaults = null;
   let schema = null;
   let busy = false;
   let requestId = 0;
   let controller = null;
+  let returnFocus = null;
   const form = $("scenario-form");
 
   function el(tag, text, className) {
@@ -46,6 +47,9 @@
   }
   function table(target, caption, headers, rows, rowLabels = false) {
     const wrapper = el("div", null, "table-scroll");
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute("role", "region");
+    wrapper.setAttribute("aria-label", caption || "Scrollable evidence table");
     const node = el("table");
     if (caption) node.append(el("caption", caption));
     const head = el("thead");
@@ -109,12 +113,12 @@
         path += `${joined ? "L" : "M"}${x(index).toFixed(2)},${y(number).toFixed(2)} `;
         joined = true;
       });
-      svgEl("path", { d: path, fill: "none", stroke: entry.color, "stroke-width": 2.4, "stroke-linejoin": "round", "stroke-linecap": "round", ...(entry.dashed ? { "stroke-dasharray": "5 4" } : {}) });
+      svgEl("path", { d: path, fill: "none", stroke: entry.color, "stroke-width": 2.4, "stroke-linejoin": "round", "stroke-linecap": "round", ...(entry.longDashed ? { "stroke-dasharray": "12 5" } : entry.dotted ? { "stroke-dasharray": "1 5" } : entry.dashed ? { "stroke-dasharray": "5 4" } : {}) });
       if (entry.values.length === 1) svgEl("circle", { cx: x(0), cy: y(numeric(entry.values[0])), r: 3, fill: entry.color });
     });
     root.append(svg);
     const legend = el("div", null, "chart-legend");
-    valid.forEach((entry) => { const item = el("span", entry.label, "legend-item" + (entry.dashed ? " dashed" : "")); item.style.setProperty("--series-color", entry.color); legend.append(item); });
+    valid.forEach((entry) => { const item = el("span", entry.label, "legend-item" + (entry.longDashed ? " long-dashed" : entry.dotted ? " dotted" : entry.dashed ? " dashed" : "")); item.style.setProperty("--series-color", entry.color); legend.append(item); });
     root.append(legend);
   }
 
@@ -136,7 +140,9 @@
         const input = el("input"); input.type = "number"; input.name = key; input.id = `control-${key}`;
         input.min = rule.min; input.max = rule.max; input.step = "1"; input.required = true; input.value = defaults[key] ?? rule.default;
         input.setAttribute("aria-describedby", `hint-${key}`);
-        wrapper.append(el("span", label), input);
+        const name = el("span", label); name.id = `label-${key}`;
+        input.setAttribute("aria-labelledby", name.id);
+        wrapper.append(name, input);
         const hint = el("small", `${unit} · ${rule.min}–${rule.max}`); hint.id = `hint-${key}`; wrapper.append(hint); grid.append(wrapper);
       });
       fieldset.append(grid); root.append(fieldset);
@@ -161,6 +167,7 @@
   }
   function sameInputs(left, right) { return Object.keys(schema).every((key) => left[key] === right[key]); }
   function markStale() {
+    form.querySelectorAll("input").forEach((input) => { if (input.validity.valid) input.removeAttribute("aria-invalid"); });
     if (!result || !schema) return;
     const stale = !sameInputs(payload(), result.scenario.parameters);
     const status = $("scenario-status"); status.classList.toggle("stale", stale);
@@ -169,11 +176,16 @@
     $("form-errors").hidden = true;
   }
   function setBusy(value) {
+    if (value) returnFocus = form.contains(document.activeElement) ? document.activeElement : null;
     busy = value;
     form.querySelectorAll("input, select, button").forEach((node) => { node.disabled = value || !schema; });
     document.querySelectorAll("[data-preset]").forEach((node) => { node.disabled = value || !schema; });
     $("run-button").textContent = value ? "Evaluating…" : "Run scenario ↗";
     $("assessment").setAttribute("aria-busy", String(value));
+    if (!value) {
+      if (returnFocus && document.activeElement === document.body) returnFocus.focus();
+      returnFocus = null;
+    }
   }
 
   function renderTrust(data) {
@@ -188,7 +200,8 @@
     const root = clear("assessment"); root.classList.toggle("blocked", blocked);
     root.append(el("span", blocked ? "NOT ASSESSABLE" : "ASSESSABLE", "status-label"));
     const text = el("div"); text.append(el("b", blocked ? "The evidence gate blocks this scenario." : "The scenario is backed by structured evidence."));
-    text.append(el("p", blocked ? `Reasons: ${data.scenario.reasons.join("; ")}. The clean baseline remains available below.` : "Compare a deterministic proposal and simulated outcomes with the default clean replay."));
+    const reasonLabels = { incomplete_or_mismatched_supply: "Supply evidence is incomplete or inconsistent.", ineligible_or_unavailable_forecast: "A forecast cannot be assessed from the available evidence." };
+    text.append(el("p", blocked ? `${data.scenario.reasons.map((reason) => reasonLabels[reason] || "Inspect the decision trace for the blocking evidence.").join(" ")} The clean baseline remains available below.` : "Compare a deterministic proposal and simulated outcomes with the default clean replay."));
     root.append(text);
     const warnings = clear("warnings"); warnings.hidden = !data.warnings?.length;
     if (data.warnings?.length) { const box = el("div", null, "warnings"); const list = el("ul"); data.warnings.forEach((warning) => list.append(el("li", typeof warning === "string" ? warning : JSON.stringify(warning)))); box.append(list); warnings.append(box); }
@@ -274,7 +287,7 @@
     $("forecast-caption").textContent = `${forecast.method} model · ${forecast.horizon}-day forecast · counterfactual demand is supplied as whole-piece structured evidence`;
     const labels = forecast.predictions.map((_, index) => `Day ${index}`);
     chart("forecast-chart", "Baseline and scenario daily forecast", labels, [
-      { label: "Baseline forecast", values: baseline?.predictions || [], color: colors.baseline, dashed: true },
+      { label: "Baseline forecast", values: baseline?.predictions || [], color: colors.baseline, dotted: true },
       { label: "Scenario forecast", values: scenario?.predictions || [], color: colors.scenario },
       { label: "Scenario declared demand", values: scenario?.demand || [], color: colors.demand, dashed: true },
     ]);
@@ -291,7 +304,7 @@
     const labels = rows.map((row) => row.day);
     $("plan-caption").textContent = `Prefix-stock-v1 · baseline ${baselineRows.length} days / scenario ${scenarioRows.length || "not assessable"} · scenario proposal arrival ${scenario?.order_arrival_day || "not assessable"}`;
     chart("plan-chart", "Prefix planning balance with and without the proposed order", labels, [
-      { label: "Baseline with proposal", values: baselineRows.map((row) => row.balance_with_order), color: colors.baseline },
+      { label: "Baseline with proposal", values: baselineRows.map((row) => row.balance_with_order), color: colors.baseline, dotted: true },
       { label: "Scenario with proposal", values: scenarioRows.map((row) => row.balance_with_order), color: colors.scenario },
       { label: "Scenario without proposal", values: scenarioRows.map((row) => row.balance_without_order), color: colors.backlog, dashed: true },
     ]);
@@ -311,9 +324,9 @@
     const days = [...new Set([...baseline, ...scenario].map((row) => row.day))].sort((a, b) => a - b);
     const values = (rows, field) => { const byDay = new Map(rows.map((row) => [row.day, row[field]])); return days.map((day) => byDay.get(day) ?? null); };
     chart(id, scored ? "Scored physical stock and backlog" : "Runoff physical stock and backlog", days.map((day) => `Day ${day}`), [
-      { label: "Baseline stock", values: values(baseline, "on_hand"), color: colors.baseline },
+      { label: "Baseline stock", values: values(baseline, "on_hand"), color: colors.baseline, longDashed: true },
       { label: "Scenario stock", values: values(scenario, "on_hand"), color: colors.scenario },
-      { label: "Baseline backlog", values: values(baseline, "backlog"), color: colors.baselineBacklog, dashed: true },
+      { label: "Baseline backlog", values: values(baseline, "backlog"), color: colors.baselineBacklog, dotted: true },
       { label: "Scenario backlog", values: values(scenario, "backlog"), color: colors.backlog, dashed: true },
     ]);
   }
@@ -340,7 +353,8 @@
       const disclosure = el("details", null, "trace-node"); const summary = el("summary");
       summary.append(el("span", String(index + 1).padStart(2, "0"), "trace-step"));
       const label = el("span", node.label, "trace-label"); label.append(el("small", node.stage));
-      summary.append(label, el("span", "+", "trace-arrow")); disclosure.append(summary);
+      const arrow = el("span", "+", "trace-arrow"); arrow.setAttribute("aria-hidden", "true");
+      summary.append(label, arrow); disclosure.append(summary);
       const body = el("div", null, "trace-body"); body.append(el("p", node.explanation));
       const references = el("div", null, "references"); (node.references || []).forEach((reference) => references.append(el("span", `${reference.source}: ${reference.id}`, "reference"))); body.append(references, codeBlock(node.data));
       disclosure.append(body); root.append(disclosure);
@@ -390,6 +404,7 @@
     } finally { setBusy(false); }
   }
   form.addEventListener("input", markStale); form.addEventListener("change", markStale);
+  form.addEventListener("invalid", (event) => { event.target.setAttribute("aria-invalid", "true"); }, true);
   form.addEventListener("submit", async (event) => {
     event.preventDefault(); if (busy || !schema || !form.reportValidity()) return;
     const submitted = payload(); setBusy(true); $("form-errors").hidden = true; $("live-status").textContent = "Evaluating scenario.";
