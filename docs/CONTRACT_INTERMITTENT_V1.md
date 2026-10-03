@@ -50,8 +50,9 @@ or recalibrates, and retains the same obligation-clearance rule.
 Research metrics retain all decision-v1 outcomes plus protection_target_origins,
 protection_target_covered and nullable protection_target_coverage, scored only
 for complete H-day new-demand targets. For empirical policies add nullable
-mean pinball loss against the integer policy target sum(forecast)+safety;
-loss=max(q*(actual-target),(q-1)*(actual-target)). This evaluates the actual
+mean pinball loss against the integer policy target ceil(sum(forecast)+safety),
+before pack/MOQ; the existing rational decision target remains unchanged;
+loss=max(q*(actual-target),(q-1)*(actual-target)). This evaluates the rounded
 rounded policy target, not an unrounded distribution claim. Report target
 coverage separately from achieved inventory service. Supplier delay uncertainty
 stays paired/hidden; H remains nominal L+R and is not claimed delay-adjusted.
