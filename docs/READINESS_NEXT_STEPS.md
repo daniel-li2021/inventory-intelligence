@@ -100,6 +100,15 @@ support these boundaries; random K-fold splitting is inappropriate here.
 
 Retain the old holdouts as regression data: their outcomes already influenced
 these proposals. New tuning cannot produce a fresh generalization claim on them.
+
+Include a predeclared **common accounting-window sensitivity** across changed
+lead/delay/review arms. The Lab currently discloses per-arm runoff (28+5 days for
+baseline versus 28+8 for delay3); combined costs therefore cover different
+durations. Keep those frozen results, but in the new protocol choose a common
+end date sufficient for the declared maximum settlement delay, report scored
+and runoff costs separately, and retain terminal stock. This tests whether cost
+rankings survive equal exposure duration without altering the existing contract.
+
 The simulator and Lab also use a periodic inventory-position policy, while the
 operational recommendation uses prefix-stock-v1. Continue stating that distinction;
 any future execution comparison needs an explicit policy/action adapter.

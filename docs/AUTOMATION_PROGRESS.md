@@ -3,7 +3,33 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — Decision Lab integrated
+## Current checkpoint — independent readiness review complete
+
+Started from fetched `origin/main` at `429cc71`. Isolated engineering, Lab and
+research reviews found and fixed persisted demand-evidence contradictions and
+rehashed Lab archive inconsistencies. The Lab now distinguishes prefix shortages
+from periodic backlog and discloses unequal runoff accounting windows. README
+leads with the completed architecture and standalone Lab rather than Stage 1.
+[Project assessment](READINESS_REVIEW.md), [core review](READINESS_CORE_REVIEW.md),
+[Lab review](READINESS_LAB_REVIEW.md) and [ranked next steps](READINESS_NEXT_STEPS.md).
+
+Fresh local acceptance passes **134/134**, with no failures/errors/skips, on
+Python 3.12.14 / Psycopg 3.3.6 / fresh isolated PostgreSQL 17.6. Installed-wheel
+HTTP and real-browser fail-closed/delay/zero-demand checks pass. Independent
+audits of retained selections/promotions pass; all four prior benchmark/replay
+artifacts are byte-for-byte unchanged. [Receipt](review/readiness-acceptance.json).
+No new model/API evaluation, external data, benchmark generation, schema,
+dependency or frozen contract change was introduced. Remote CI was not monitored.
+
+Ready for a synthetic portfolio demo; production performance and source
+attestation remain unmeasured. Freeze core contracts and current model/Lab scope.
+Next useful deliverable is a separate feasibility/evaluation protocol with fresh
+demand/supply paths and costed startup/warmup counterfactuals. Safety retention
+under decline follows only if unexplained weaknesses remain. Public observed
+sales and hosted access still need separate boundary decisions. No new direction
+has been implemented by this review.
+
+## Prior checkpoint — Decision Lab integrated
 
 The user assigned the synthetic portfolio-facing Inventory Decision Lab. Its
 [compact plan and isolated handoffs](DECISION_LAB_PLAN.md) precede implementation.

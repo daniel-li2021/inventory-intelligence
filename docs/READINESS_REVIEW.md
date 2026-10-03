@@ -16,7 +16,8 @@ calibrated service, population forecast performance or business savings.
    Null/gapped training, constrained or late day records, wrong keys/origins and
    scores inconsistent with cited truth could be explained as valid historical
    evidence. Validation now checks contiguous whole-piece eligible evidence,
-   context/source clocks, shared fold schedule and truth/actual agreement, plus
+   context/source clocks, unique selected order lines, shared fold schedule and
+   truth/actual agreement, plus
    forecast/planner training and policy horizon consistency. Invalid evidence
    errors instead of becoming a number. Blocked historical runs remain explainable.
    Null WAPE now explicitly covers absent scoring evidence as well as zero volume.
@@ -58,10 +59,15 @@ not call the harness selectors or refit consumed holdouts. All recorded choices
 and summary totals agree. The 480 decision and 5,544 intermittent results and
 bundled replay are reused; no benchmark generation or model API call is needed.
 
-Fresh combined acceptance and browser results are recorded in the integration
-receipt at `docs/review/readiness-acceptance.json` after the focused changes.
-They are local synthetic checks; remote CI, cloud operations and live business
-inputs are separate claims.
+Fresh combined acceptance passes **134/134 tests**, zero failures/errors/skips,
+on Python 3.12.14 / Psycopg 3.3.6 / isolated PostgreSQL 17.6. An installed wheel
+served outside the checkout passes root, CSS, JavaScript, Lab and evidence routes.
+Real-browser checks verify delay3 outputs and accounting-window disclosure,
+incomplete-supply suppression, zero-demand null fill and initial HTTP 503
+unavailable/retry state. JavaScript syntax and documentation links also pass.
+The [integration receipt](review/readiness-acceptance.json) retains source/artifact
+hashes and exact versions. These are local synthetic checks; remote CI, cloud
+operations and live business inputs are separate claims.
 
 ## What is strong enough to freeze
 

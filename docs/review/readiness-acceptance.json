@@ -1,0 +1,114 @@
+{
+  "acceptance": {
+    "database": "fresh disposable ii_readiness_final; fixture owner plus restricted ii_runner",
+    "elapsed_seconds": 7.657,
+    "errors": 0,
+    "failures": 0,
+    "log_sha256": "1975236780fee53a1e81a8f0d029b94fa86ce5b8ff0abf8e94ed545f9f1b3acd",
+    "result": "OK",
+    "skips": 0,
+    "tests": 134
+  },
+  "assessed_date": "2026-10-03",
+  "base_revision": "429cc71",
+  "browser_checks": [
+    "Default installed replay: proposal12 and baseline total synthetic cost327.",
+    "Hidden delay3: unchanged proposal12, immediate fill11/28, 17 scored shortage days, total cost1171.",
+    "Risk distinguishes no prefix projection shortage from 17 periodic backlog days.",
+    "Cost note states baseline28+5 days versus scenario28+8 days; totals cover unequal duration.",
+    "Incomplete supply: scenario outputs not assessable; clean baseline12/cost327 retained.",
+    "Zero demand: proposal0, immediate fill Undefined, baseline retained.",
+    "Injected invalid archive HTTP503: unavailable trust, not-assessable result, disabled scenario action and retry."
+  ],
+  "browser_validation_revision": "3b924ce",
+  "business_data": "synthetic only",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -v",
+  "environment": {
+    "fastapi": "0.135.1",
+    "httpx": "0.28.1",
+    "postgresql": "17.6",
+    "psycopg": "3.3.6",
+    "python": "3.12.14",
+    "uvicorn": "0.41.0"
+  },
+  "generated_at": "2026-10-03T01:36:42.923625-07:00",
+  "limitations": [
+    "Local synthetic acceptance, not remote PostgreSQL17.9 CI or production evidence.",
+    "No model API calls, public-data acquisition, benchmark regeneration or new model/dependency/schema.",
+    "Copilot retains frozen no-replay boundary; evidence consistency is not source attestation.",
+    "Final acceptance ran on committed source/test contents at validated_code_revision. Browser checked the same UI/Lab archive changes before the final selected-order uniqueness guard; final wheel smoke and all134 tests revalidated that guard. Only documentation commits follow."
+  ],
+  "package": {
+    "build": "wheel built without dependencies or network acquisition",
+    "execution": "installed into a separate temporary target and served outside checkout",
+    "final_smoke": "Fresh rebuilt/installed final wheel outside checkout: five routes200, baseline12/cost327, invalid archive503.",
+    "routes": {
+      "/": 200,
+      "/api/evidence": 200,
+      "/api/lab": 200,
+      "/static/lab.css": 200,
+      "/static/lab.js": 200
+    },
+    "wheel_sha256": "6858ba92fe421f6bd352bfc22f6b444021732977144c5815fe9ec741bc0c0c8a"
+  },
+  "preserved_artifact_sha256": {
+    "docs/review/copilot-benchmark.json": "4fd0ba6d2905e825f6e667ee1e67d1cddb5091e745214d9a80c0bdd0853c47b9",
+    "docs/review/decision-benchmark.json": "2958c37b9a00fe3e98bc99a10515d68ad009472d882a9c6a7be1f7e07e5c4556",
+    "docs/review/intermittent-benchmark.json": "a022cd9af2542f7a3d4612275169511ebdd626d7a3859907a0bcdc6a04dec8cc",
+    "src/inventory_intelligence/lab_evidence.json": "6b6fa00788bb09f0ecb2f9f5078b035c23987e051c73914f99c6f5a7f7e65002"
+  },
+  "reused_results": {
+    "decision_candidate_splits": 480,
+    "intermittent_candidate_splits": 5544
+  },
+  "source_sha256": {
+    "sql/checks.sql": "a60fd73374308f32a53b727eefe8cc7d823cb4d1cd59cbe94fc891c77dbeb301",
+    "sql/planning_schema.sql": "09dbfb71dfe557dbe75bb67431f5a35e175a36894f2363439f799e9e3fdbc7b8",
+    "sql/schema.sql": "1bd4a6ae01a8dfa766742c2c690b6b096ab5aed391f21a845fd2db3de43b831c",
+    "sql/views.sql": "1fc4a143d660aff8573556fbf6562c2290e4777126e90ed1ab7fd4d9d3bbaf6f",
+    "src/inventory_intelligence/__init__.py": "84f8634c408d0bed87106b557cab4ca4072f306689d3c0f436b744d40b74fe30",
+    "src/inventory_intelligence/__main__.py": "45cef68b8d15007929370ec2f8ab5a8a707ebebad151753e20598a5da7e773aa",
+    "src/inventory_intelligence/copilot.py": "7d777b10dead6acb2f006f7b9ce632ac7d5afbb6b41513943b50114b08fc4b1c",
+    "src/inventory_intelligence/copilot_language.py": "4307bc714523f2fcc88af7da5e5d7b89d604be01c36e56a68569e7b43350f01a",
+    "src/inventory_intelligence/copilot_planning.py": "865ae9de5b72520a9466a322195db6a63d7f4f9a8b97a0bc59032368a73f9134",
+    "src/inventory_intelligence/decision.py": "f68d13d43b74c1233d94e2c67cfc7a709298c14c8b5a4b5a349c65bc5d1e57db",
+    "src/inventory_intelligence/demand.py": "2a4b6c0320731317a7401f17f355091444a37e8602085af2a6f86057f2c38f72",
+    "src/inventory_intelligence/forecasting.py": "5a0e6f1377e4327fdf0f61d7525eccdac4c434a10a95beff30adeaffbfd9aee7",
+    "src/inventory_intelligence/intermittent.py": "f6570334af2e8270857b191aac399f810e7c70a0ddf800c4311635185a06b67b",
+    "src/inventory_intelligence/lab.py": "78358dd51751e3aa4ca171be920e6aab4928a4fa367c53aa03188c93aa20822e",
+    "src/inventory_intelligence/lab_api.py": "8a34cd9ab3ae1b5ad3ce26a070b7b3a98b07d13c290f74f29c38743e657b260c",
+    "src/inventory_intelligence/lab_static/lab.js": "f22b8287780b372ad6fc67e62eeed9eb199d88cc2389b7e69a0d3bae52bdb103",
+    "src/inventory_intelligence/planning_runs.py": "bf26dc7eeff59cb9956d47e916daae46a9c5823b89a9fcdf8afa574ab3197d04",
+    "src/inventory_intelligence/reliability.py": "4cd0d0998b2f199d3abf95bed78c5fe72edf0478b5408a99513d9f999a28e3db",
+    "src/inventory_intelligence/replenishment.py": "a0c4b38cbba79296ac1787fb44a23dd2e69e2c63916a109fcdd4664c14bf3bda",
+    "src/inventory_intelligence/selfcheck.py": "fbd5093c0de201ca553fc0eaf4736c250fcca6ef50ab23e7c17ac0daa9a88db6",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/bootstrap.py": "248f35f1e30c29719fb3ecc77665701ce1a7ee14daf3f9aeb18dd25f8e1a3d76",
+    "tests/golden.py": "abcbe4f4589581418b63c1a30dbba5db73a483f6c06f14193b6f661be3a81246",
+    "tests/planning_oracle.py": "a1c337c581439ddc1f4945a6ab87423f550340271cbe50d7f289da3c5014c570",
+    "tests/test_acceptance.py": "171e2da701fe05de3cc89482073abe166f259b8c4249f948b5075df65db2f2ed",
+    "tests/test_copilot.py": "4ad9b1c835c35b4366e751e619c029fba8befbe50cbaccb51b14c92139a85822",
+    "tests/test_copilot_benchmark.py": "cbe28bd65d9806145ee9cce439bbc7b98d593e093e6c5c6dcb624d83c737d681",
+    "tests/test_copilot_db.py": "8a029342888668296c80df6eb32116abd1dc43b80d3046726504e2782b518a54",
+    "tests/test_copilot_language.py": "7fd6ece4600ad5f386a1485c4956e0661062f15ac7b4e3df7ba6a2e0197e48e3",
+    "tests/test_copilot_planning.py": "599d1797edaefd2eab18053d944e8cc50617eda0476a092891d845c4c08fa1b0",
+    "tests/test_decision.py": "773bc2bb6d2d1f09904531ec761365da6f9977966f5118ce71fde7835e8c6285",
+    "tests/test_decision_benchmark.py": "76117cdd673ce3201b2784e6b7b6c1e67e5c509e2bbaef3bfe949d483b0f31a8",
+    "tests/test_demand.py": "540be6a8d915811d10474f9945a4352e8b47b9847f010c662cc9be693339cc52",
+    "tests/test_forecasting.py": "6275f60a6f833aa921e4cdb7670b2c1ff2f81ecb03a52cb7e789a09ea7cd4bf2",
+    "tests/test_intermittent.py": "c7bf2c6417331c28b98b976f724cb11eac723be52820614912016d7f81098621",
+    "tests/test_intermittent_benchmark.py": "f722ca47a48d2af7aee4a435bc631f8cd6f86de2342d629fdda8b6d2c8c84e44",
+    "tests/test_lab.py": "e363e7abdc0e0972dff6383b681d53e89638b2b33fdc40f65b9d6e779eed22e2",
+    "tests/test_lab_api.py": "0cdc2352d232ddd6bb669b398bc3aef2989634979b9e2942b76b91edfc1a9a96",
+    "tests/test_planning_runs.py": "7d488a17c09b31d792ea93ba844725fddc7a566bbf7d13539d6579b14bb469f8",
+    "tests/test_replenishment.py": "cc6f20793568dbcd298475d767cda34d7b1f163aabfdb4cc5bc436ce423636ee"
+  },
+  "timezone": "America/Los_Angeles",
+  "validated_code_revision": "add85788b05ea015ad0184c35dcd111746d708d6",
+  "validations": [
+    "134-test fresh full PostgreSQL suite",
+    "8-test independent retained-research selection audits",
+    "JavaScript syntax",
+    "git diff --check"
+  ]
+}
