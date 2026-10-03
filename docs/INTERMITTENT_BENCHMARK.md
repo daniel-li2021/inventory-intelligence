@@ -82,4 +82,88 @@ physical simulations and cache hits.
 Synthetic finite-window penalties omit acquisition, salvage and lost-sales value
 and cannot establish profit or business savings. Three random seeds, repeated
 controls and correlated cycles support no population confidence or calibrated
-service claim. Results will be recorded after the frozen experiment runs.
+service claim.
+
+## Recorded findings
+
+The recorded run used local Python 3.11.6; the repository's declared supported
+runtime is Python >=3.12. This interpreter difference is recorded explicitly;
+the artifact's full integer paths and exact arithmetic remain reproducible.
+The frozen run produced all 5,544 candidate/split results in 84 cells. Cost
+repricing and identical-input caching required 2,376 physical simulations,
+reusing 3,168 results. All terminal backlog and outstanding quantities settled
+to zero. Eighteen cells had no eligible overall selection: all twelve zero
+controls and six constant/hidden-delay cells.
+
+| Family (12 cells each) | Overall passes both references | Selected new method passes chosen baseline |
+| --- | ---: | ---: |
+| Constant | 0 | 0 |
+| Weekly | 0 | 0 |
+| Zero | 0 | 0 |
+| Intermittent | 0 | 2 |
+| Lumpy | 0 | 0 |
+| Declining occurrence | 4 | 8 |
+| Obsolescence | 0 | 0 |
+
+The four dual-reference passes are **one demand path**, declining/seed101,
+repeated across two cost regimes and two delay regimes. Its selection-chosen
+TSB alpha=beta=1/5 with fixed zero safety passed against fixed mean and the
+selection-chosen baseline. These paired cells are not four independent wins.
+The ten new-versus-baseline passes also include declining/seed307 SBA alpha1/2
+with q19/20 (four cells) and intermittent/seed101 hidden-delay SBA alpha1/5 with
+q19/20 (two cells). Those latter configurations were chosen within the new-method
+subset during selection; holdout never replaces the overall selection.
+
+Examples below use `(h,b,K)=(1,10,2)`. Costs include runoff; coverage is the
+fraction of seven complete nine-day targets covered by the rounded policy
+target, distinct from scored-day service.
+
+| Case / selection-chosen configuration | Holdout cost | Immediate fill | Cycle service | Target coverage |
+| --- | ---: | ---: | ---: | ---: |
+| Declining101, fixed / TSB a1/5,b1/5,fixed0 | 793 | 1 | 1 | 6/7 |
+| Declining101, fixed / baseline mean,fixed0 | 1341 | 1 | 1 | 1 |
+| Intermittent101, hidden / new SBA a1/5,q19/20 | 461 | 1 | 1 | 1 |
+| Intermittent101, hidden / baseline seasonal naive,q9/10 | 489 | 1 | 1 | 1 |
+| Lumpy101, fixed / new SBA a1/5,q9/10 | 3307 | 75/116 | 3/4 | 6/7 |
+| Lumpy101, fixed / baseline naive,q9/10 | 5501 | 75/116 | 3/4 | 6/7 |
+| Declining211, fixed / TSB a1/5,b1/2,q9/10 | 2302 | 29/39 | 7/8 | 1 |
+| Obsolescence307, fixed / TSB a1/5,b1/5,q9/10 | 3464 | 1 | 1 | 1 |
+| Obsolescence307, fixed / baseline seasonal naive,q9/10 | 3340 | 1 | 1 | 1 |
+
+SBA's lower lumpy example cost does not meet the service floors, so its
+comparison fails. Six selected-new lumpy cells failed a holdout service floor;
+eight failed the cost threshold, with overlap between reasons. No lumpy new
+method passed against the selection-chosen baseline.
+
+Declining/seed211 illustrates a structural failure under the frozen stock/timing:
+holdout demand on day1 is 20, initial stock is 10 and the earliest new-order
+receipt is day2. Ten units miss immediate fill before any replenishment can
+arrive, limiting fill to at most 29/39 regardless of the forecast. Full target
+coverage and a pinball loss of 102/35 for the selected TSB policy cannot repair
+that service failure. Fixed stock and no warmup are part of this counterfactual,
+not evidence that a forecast alone caused every shortage.
+
+On obsolescence/seed307, empirical TSB safety across holdout reviews was
+23,40,40,40,40,40,23,23 despite only eight held-out demand units and permanent
+zero demand after absolute day181. It ended with 54 pieces; its cost exceeded
+both the chosen baseline's 3340 and fixed mean's 1870. Decaying point forecasts
+do not necessarily remove historically calibrated safety inventory. All twelve
+selected-new obsolescence comparisons failed the cost-reduction requirement.
+
+Weekly seasonal naive passed fixed mean in six fixed-delay cells but matched
+the selected-baseline reference and therefore failed the dual-reference rule.
+Constant methods tied under fixed delays; empirical demand calibration produced
+no safety for deterministic constant demand and could not cover hidden delays.
+Zero controls have null unit fill and cannot pass eligibility even with complete
+shortage-free cycles. Initial-stock holding penalties remain present.
+
+There is no consistent overall/new-method advantage across these families or
+regimes. Empirical safety sometimes restores service at additional holding cost,
+but is neither a calibrated service guarantee nor a general promotion basis.
+No runtime champion changes follow these findings. ADIDA or LightGBM would not
+remove a shortage before any receipt can occur. This run supports examining
+initial-stock/lead-time feasibility and safety retention under demand decline
+before expanding the model grid. Such changes need a new frozen counterfactual;
+this holdout must not become a tuning set. Complete exact metrics, pinball loss,
+failures and selected/reference calibration evidence are in
+[the artifact](review/intermittent-benchmark.json).
