@@ -1,6 +1,7 @@
 """Pure, exact offline decision-benchmark-v1 simulation; no purchase execution."""
 
 from fractions import Fraction
+from math import ceil
 
 from .forecasting import METHODS, forecast
 
@@ -51,10 +52,6 @@ def _rate(name, value):
     if type(value) not in (int, Fraction) or value < 0:
         raise ValueError(f"{name} must be a nonnegative int or Fraction")
     return Fraction(value)
-
-
-def _ceil(value):
-    return -(-value.numerator // value.denominator)
 
 
 def simulate(history, demand, *, method, on_hand, lead_days, review_days,
@@ -155,7 +152,7 @@ def simulate(history, demand, *, method, on_hand, lead_days, review_days,
             position = stock + outstanding - backlog
             need = max(Fraction(0), target - position)
             if need:
-                whole_need = max(_ceil(need), moq)
+                whole_need = max(ceil(need), moq)
                 order_qty = pack_size * ((whole_need + pack_size - 1) // pack_size)
                 pending.append(dict(id=f"order:{day}", kind="order", quantity=order_qty,
                                     arrival_day=day + lead_days + delays[day // review_days]))
