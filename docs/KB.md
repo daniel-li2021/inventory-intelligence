@@ -67,21 +67,24 @@ and [retention](RESULTS.md#safety-retention) results rather than old task plans.
 
 ## Engineering gaps and hypotheses
 
-The assessment inspected main `9d7c55f` and reused saved results; no capacity
-benchmark was performed. [Baseline receipt](review/engineering-readiness-baseline.json).
+The initial assessment inspected main `9d7c55f` and reused saved results. The
+subsequent authorized [native pilot](RESULTS.md#local-engineering-pilot) measured
+exploratory synthetic behavior; reference/production capacity remains unconfirmed.
+[Baseline receipt](review/engineering-readiness-baseline.json).
 Correctness CI, research arm counts, suite elapsed time and the UCI 541,909-row
 extraction are not measured throughput or service capacity.
 
 | Gap | Finding / hypothesis | Evidence needed |
 |---|---|---|
-| Scale and repeated work | Primary keys exist; dedicated batch/grain indexes were not established. Demand scanning, identities and backtests may repeat whole-batch work. `run_plan` revalidates a whole batch per key. These are inspection hypotheses, not profiled bottlenecks. | B1/B2 scale/history measurements in [PLAN](PLAN.md), including actual per-key calls. Preserve cross-key duplicate and clock checks in any optimization. |
-| Report growth | Reliability readers cap 1,000 findings / 2 MiB; planning readers cap 16 MiB. Producer behavior at these bounds is unmeasured. | B3 failure-envelope measurements. Never truncate findings or raise limits merely to improve a chart. |
-| Contention and cancellation | Runtime DB statement/lock timeouts were not established. Rollback tests do not prove multi-session contention, interruption or backup/restore recovery. | B4 network/admission load and V2 fault/restart/restore checks. |
+| Scale and repeated work | Primary keys exist; dedicated batch/grain indexes were not established. Demand scanning, identities and backtests may repeat whole-batch work. `run_plan` revalidates a whole batch per key. The local EXPLAIN now shows 1,000 eligible scans ×99,900 filtered rows at 1k/100k; no optimization is confirmed. | B1/B2 scale/history measurements in [PLAN](PLAN.md), including actual per-key calls. Preserve cross-key duplicate and clock checks in any optimization. |
+| Report growth | Reliability readers cap 1,000 findings / 2 MiB; planning readers cap 16 MiB. Local producer growth and both reader accounting boundaries are now measured; larger defect cells hit the SQL deadline. | B3 failure-envelope measurements. Never truncate findings or raise limits merely to improve a chart. |
+| Contention and cancellation | Only benchmark connections have 55s/5s deadlines. A two-key native fault DB now verifies interruption, coherent concurrent reads and crash/restore; larger/app/Linux recovery remains unmeasured. | B4 network/admission load and V2 fault/restart/restore checks. |
 | Runtime | Hosted configuration admits four active requests at 2 requests/s; proposed app caps are 0.5 CPU / 256 MiB. Configuration is not capacity. | V1 clean Linux/container enforcement with image/resource evidence. |
 | Release and human use | Private-CA HTTPS and bounded keyboard/mobile paths passed. Public uptime, speech/zoom/forced colors and cold-start acceptance remain unmeasured. Branch protection was not verified by green CI. | V3 human checks plus reviewed host/domain/cost/public release. |
 
 Workloads, SLOs, cache/timing definitions, environment and budget remain in PLAN.
-Program review precedes implementation. Measure one gap, make at most one justified
+The approved existing-Mac pilot is complete; Linux reference/confirmation scope
+review precedes further measurements. Measure one confirmed gap, make at most one justified
 change and confirm exact outcomes; otherwise freeze the baseline. Speculative queues,
 Redis, Kubernetes, sharding, ORMs, indexes or advanced models do not follow from this.
 

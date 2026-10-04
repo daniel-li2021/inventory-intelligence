@@ -135,3 +135,58 @@ was weakened. Original public/physical auditors deliberately guard their complet
 sources; documentation relocation makes current-source reuse reject, so audit
 those historical caches at the recorded source snapshot. Current kernel tests
 remain separate from historical provenance, including independent mutation controls.
+
+## Local engineering pilot
+
+[Measured outcomes](RESULTS.md#local-engineering-pilot) and [pending confirmation](PLAN.md)
+refer to the explicitly approved existing-Mac exploratory pilot. The frozen source
+snapshot is `970ab16` (full commit in [source binding](review/engineering-pilot-v1/source-binding.json));
+its core source/SQL/fixture/protocol bytes reproduce the recorded combined hash.
+Base at launch was `886e893`. Concurrent documentation consolidation through
+`650ae05`/`4b112ad` is preserved and did not change measured engine/SQL inputs.
+Completed protocol narratives were extracted into PLAN/OPERATIONS and removed
+from the maintained surface; original bytes stay in that frozen Git source view.
+
+- [Environment](review/engineering-pilot-v1/batch-environment.json),
+  [binary/installed metadata diagnostics](review/engineering-pilot-v1/runtime-diagnostics.json),
+  [raw batch calls](review/engineering-pilot-v1/batch-samples.jsonl),
+  [raw summary](review/engineering-pilot-v1/batch-summary.json),
+  [derived corrected summary](review/engineering-pilot-v1/batch-derived-summary.json),
+  [read-only SQL plan](review/engineering-pilot-v1/batch-selected-sql-plan.json).
+- [Actual producer reads/accounting diagnostic](review/engineering-pilot-v1/batch-reader-diagnostics.json),
+  [exact validation-byte controls](review/engineering-pilot-v1/batch-reader-json-boundaries.json),
+  [supplemental control source](review/engineering-pilot-v1/batch-reader-boundary-controls.py).
+  Diagnostic wrappers call the original validator; they do not bypass it. Primary
+  capacity timing is separate from that instrumentation.
+- [HTTP summary](review/engineering-pilot-v1/network-summary.json) and raw per-campaign
+  JSONL/resource files in the same directory; [5/s allowance control](review/engineering-pilot-v1/allowance-summary.json)
+  has a separate offered-load denominator and recovery receipt.
+- [Backtest control](review/engineering-pilot-v1/backtest-summary.json),
+  [repaired native recovery](review/engineering-pilot-v1/recovery-summary.json),
+  [initial failed harness attempt](review/engineering-pilot-v1/initial-recovery-initial-failure.json).
+  Original failed source/logs and `engineering_recovery_initial` DB remain retained;
+  the corrected attempt used a fresh fixture, not an overwritten failed result.
+- [Final runner natural/fault smoke](review/engineering-pilot-v1/runner-smoke-samples.jsonl)
+  records three valid calls and a deliberately failed oracle after a complete
+  append, retained as committed_unverified. The [final two-key quantity probe](review/engineering-pilot-v1/runner-probe-verified.json)
+  validates corrected expected-finding metadata without retired protocol files. Twenty-four focused tests plus the added worker CI smoke passed;
+  this does not replace the separate retained full correctness/remote-CI baseline.
+
+Two reporting defects in the historical summary are corrected only in the derived
+view/current runner: the all-key quantity probe expects 1,000 findings (its frozen
+manifest was correct, raw summary label was 0); serial completed counts were API
+calls, including blocked calls, rather than completed eligible plans. The derived
+view explicitly separates both denominators and retains supervisor overhead.
+The current runner also removes its retired Markdown-protocol dependency and
+honestly classifies missing post-commit receipts. No baseline measurements were
+replayed for these reporting changes; no production engine/SQL was optimized.
+
+[Artifact manifest](review/engineering-pilot-v1/artifact-manifest.json) retains exact
+original sizes/hashes. Large synthetic producer reports and fixture manifests
+remain ignored under `artifacts/engineering-*-v1`; the disposable cluster is
+retained stopped at `/private/tmp/ii-engineering-pilot-pg`. The original JSONL and
+receipts are not reformatted/rehashed in place. Published-file integrity is in
+[published hashes](review/engineering-pilot-v1/published-hashes.json).
+No public/customer operational data, model calls, paid provisioning or deployment
+is part of this receipt. Wheel/image hashes, enforced Linux resources, long/stable
+campaigns, broader recovery and independent human checks remain unverified.

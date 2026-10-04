@@ -1,0 +1,8 @@
+{
+  "status": "harness_error",
+  "boundary": "connect after immediate stop/start",
+  "cause": "pg_ctl start omitted explicit loopback/port options and started this disposable cluster on localhost:5432 instead of 55483",
+  "preceding_assertions": "writer interruption/rollback and coherent repeatable-read assertions passed before reaching failing restart reconnect",
+  "complete_recovery_receipt": false,
+  "original_db_preserved_as": "engineering_recovery_initial"
+}

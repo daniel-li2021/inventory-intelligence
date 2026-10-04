@@ -1,5 +1,8 @@
 """Hand arithmetic, source containment and frozen fixture/runner smoke."""
 import os
+import json
+from pathlib import Path
+import tempfile
 import unittest
 from uuid import uuid4
 
@@ -11,6 +14,7 @@ from scripts.engineering_fixtures import (CUTOFF, ORIGIN, ORIGIN_DAY, START,
 from inventory_intelligence.reliability import run_checks
 from inventory_intelligence.planning_runs import run_forecast
 from inventory_intelligence.replenishment import run_plan
+from scripts.engineering_benchmark import worker
 
 
 class EngineeringPilot(unittest.TestCase):
@@ -64,6 +68,24 @@ class EngineeringPilot(unittest.TestCase):
         other=inventory_manifest(p+"-other",2,200,defect_rows=4)
         load_inventory(self.owner,other,natural_prefix=p)
         self.assertEqual(self.check(p,m)["findings"],report["findings"])
+
+    def test_measured_worker_smoke_persists_complete_independent_control(self):
+        p,m=self.fixture()
+        before=source_digest(self.owner)
+        with tempfile.TemporaryDirectory() as directory:
+            spec=Path(directory)/"smoke.json"
+            spec.write_text(json.dumps(dict(operation="run_checks",oracle=m,args=dict(
+                ledger_batch_id=p+":ledger",snapshot_batch_id=p+":snapshot",
+                as_of=CUTOFF.isoformat(),evaluated_at=CUTOFF.isoformat(),code_version="ci-pilot-smoke"))))
+            worker(spec)
+            result=json.loads(spec.with_suffix(".result.json").read_text())
+            report=json.loads(spec.with_suffix(".report.json").read_text())
+        self.assertEqual((result["status"],result["oracle"],result["findings"]),("completed","pass",0))
+        self.assertTrue(result["transaction_idle"])
+        self.assertEqual([c["status"] for c in report["checks"]],["pass"]*5)
+        self.assertEqual(self.owner.execute("SELECT count(*) FROM reliability.check_results WHERE run_id=%s",
+                         (result["run_id"],)).fetchone()[0],5)
+        self.assertEqual(source_digest(self.owner),before)
 
     def test_demand_clocks_mean_and_independent_daily_plan(self):
         p="pilot-demand-"+str(uuid4())

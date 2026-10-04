@@ -1,0 +1,166 @@
+{
+  "records": [
+    {
+      "case": "b1-1000:ledger",
+      "run_id": "35fea186-322f-4b3e-896d-7d139aeb3cff",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 2292833,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b1-100:ledger",
+      "run_id": "5a01ee35-4ba8-4028-9f84-bee150a161bd",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 571584,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b1-10:ledger",
+      "run_id": "668e420c-be4d-4852-8407-9c9bcd7f6700",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 671500,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b1-exclusions-1:ledger",
+      "run_id": "58a90dea-f8cd-4e27-9ee4-1754d851770c",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 501875,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b1-skew-1:ledger",
+      "run_id": "10ed567c-1698-4030-9cbd-4520b7ca718c",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 470375,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b1-transfer-10:ledger",
+      "run_id": "3b13539c-c131-4599-8e80-ce2409b7081f",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 858500,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b1-uniform-10:ledger",
+      "run_id": "78cb2c12-02ee-4f11-93a6-7fd106218c8f",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 478042,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b2-10-stockout:ledger",
+      "run_id": "c7b27ae2-b139-43a5-8762-e43e4ea2b48f",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 491500,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b2-10-supply:ledger",
+      "run_id": "d602a926-9e7a-4234-8d35-678826e59528",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 476042,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b2-1000:ledger",
+      "run_id": "34a752b5-0865-4190-8e4b-69b6a7b6c97e",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 566209,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b2-100:ledger",
+      "run_id": "c95ebecb-324b-47ab-8727-415add43773c",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 486250,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b2-10:ledger",
+      "run_id": "c658211d-8c96-4637-a57b-c01c03dacca0",
+      "findings": 0,
+      "db_finding_bytes": 0,
+      "status": "completed",
+      "loader_ns": 468250,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b3-duplicate-1000:ledger",
+      "run_id": "5a2c21f2-c708-447e-bdee-ae455051df82",
+      "findings": 500,
+      "db_finding_bytes": 1269450,
+      "status": "completed",
+      "loader_ns": 18110834,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "b3-duplicate-100:ledger",
+      "run_id": "a2101abf-c31e-4993-b422-4bb3dfc7888d",
+      "findings": 50,
+      "db_finding_bytes": 125600,
+      "status": "completed",
+      "loader_ns": 2756709,
+      "producer": "actual run_checks"
+    },
+    {
+      "case": "reliability-accounting-diagnostic",
+      "db_bytes": 2097151,
+      "validation": [
+        {
+          "actual_validation_json_bytes": 2097646,
+          "limit": 2097152
+        }
+      ],
+      "validation_preserved": true,
+      "timing": "not included in primary measurement"
+    },
+    {
+      "case": "planning-accounting-diagnostic",
+      "db_bytes": 16777215,
+      "validation": [
+        {
+          "actual_validation_json_bytes": 16777234,
+          "limit": 16777216
+        }
+      ],
+      "validation_preserved": true,
+      "timing": "not included in primary measurement"
+    }
+  ],
+  "history_before": {
+    "reliability_runs": 44,
+    "checks": 220,
+    "findings": 4653,
+    "planning_runs": 83
+  },
+  "history_after": {
+    "reliability_runs": 44,
+    "checks": 220,
+    "findings": 4653,
+    "planning_runs": 83
+  }
+}

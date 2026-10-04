@@ -1,0 +1,875 @@
+{
+  "added_disk_bytes": 1707087560,
+  "cases": [
+    {
+      "analyze_seconds": 0.04502241709269583,
+      "blocked_keys": 0,
+      "case": "b1-10",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "4d4c3b148057705d4807c769f28d0f6262a8b722328961405137df6d2c906797",
+      "expected_findings": 0,
+      "load_seconds": 0.007753957994282246,
+      "manifest_sha256": "782d13652709589fa9410ccde76c30aae89dadd70955de1d4f85c2be8273c02d",
+      "requested": 3,
+      "source_after": "cb8edce0712b1ad4f4560bd6396bf9abbd216573d0ad3df369e4c83f2f95b502",
+      "source_before": "cb8edce0712b1ad4f4560bd6396bf9abbd216573d0ad3df369e4c83f2f95b502",
+      "workload": {
+        "eligible_movements": 1000,
+        "exclusions": {},
+        "keys": 10,
+        "movements": 1000,
+        "shape": "uniform",
+        "skus": 10,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 18925917,
+        "min": 16781958,
+        "max": 19069666,
+        "iqr": 1143854.0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.05355941713787615,
+      "blocked_keys": 0,
+      "case": "b1-100",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "9c72fe931416e6a8cb9a5214eb52cb5496169d02e31d4a3b6ab0fc5cbea43a8b",
+      "expected_findings": 0,
+      "load_seconds": 0.041155749931931496,
+      "manifest_sha256": "0b228df9844641cb11a624ec4e4dce778d5821fca4c2a602ddedbc0a34ae2a08",
+      "requested": 3,
+      "source_after": "0184f62bc34f8325a99dd26d2eeb7423250ea165c1e3984d66ea8da6320e4bd4",
+      "source_before": "0184f62bc34f8325a99dd26d2eeb7423250ea165c1e3984d66ea8da6320e4bd4",
+      "workload": {
+        "eligible_movements": 10000,
+        "exclusions": {},
+        "keys": 100,
+        "movements": 10000,
+        "shape": "uniform",
+        "skus": 100,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 140962292,
+        "min": 135818250,
+        "max": 147417958,
+        "iqr": 5799854.0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.15312708308920264,
+      "blocked_keys": 0,
+      "case": "b1-1000",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "b98c2fd4e71575fb29226b014ca65410ff23b45f12f284ffc73a13e49ac13789",
+      "expected_findings": 0,
+      "load_seconds": 0.5453843749128282,
+      "manifest_sha256": "ccf33de4f9da828cfecc1181548f6113998fd13e51db028d79448f20260bdb28",
+      "requested": 3,
+      "source_after": "ecc1c6f5cbbbf9d9df8214a920d5cd05b86864b395df6939daf43f94e9125aa9",
+      "source_before": "ecc1c6f5cbbbf9d9df8214a920d5cd05b86864b395df6939daf43f94e9125aa9",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "uniform",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 9927927292,
+        "min": 9872599542,
+        "max": 10183909292,
+        "iqr": 155654875.0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "case": "b1-readonly-sql-diagnostic",
+      "plan_file": "selected-sql-plan.json",
+      "seconds": 10.107259915908799,
+      "status": "completed"
+    },
+    {
+      "additional_same_size_batches": 1,
+      "case": "b1-history-1",
+      "load_analyze_seconds": 0.6302168339025229,
+      "selected_keys": 1000,
+      "selected_movements": 100000,
+      "source_after": "41ae1bf17ba29035c1ca37a41dfba504eacab8b7d7f3a0448b22bd68c8ea8025",
+      "source_before": "41ae1bf17ba29035c1ca37a41dfba504eacab8b7d7f3a0448b22bd68c8ea8025",
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 10690644791,
+        "min": 10432964833,
+        "max": 10743983542,
+        "iqr": 155509354.5,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "additional_same_size_batches": 9,
+      "case": "b1-history-9",
+      "load_analyze_seconds": 5.7565520838834345,
+      "selected_keys": 1000,
+      "selected_movements": 100000,
+      "source_after": "0bfbe1226dac08000c313736ee754feb2727b24ee062b57517c84620764b30f6",
+      "source_before": "0bfbe1226dac08000c313736ee754feb2727b24ee062b57517c84620764b30f6",
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 10265195667,
+        "min": 10186720791,
+        "max": 10568912250,
+        "iqr": 191095729.5,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.25111933308653533,
+      "blocked_keys": 0,
+      "case": "b1-skew-1",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "a7eb73d5330939cf11e84dc9a4151b0f97fc65343d6a4f18f6cb3cbd080da2bf",
+      "expected_findings": 0,
+      "load_seconds": 0.5367574170231819,
+      "manifest_sha256": "61216cf983e9cb6caf607855c47975d141ebda7e760b9bfe3a3eda59fb542b2c",
+      "requested": 3,
+      "source_after": "d024a8256a27e13c55fe8b8320b95d95c05171eca447116d5044b35fe5e3dcec",
+      "source_before": "d024a8256a27e13c55fe8b8320b95d95c05171eca447116d5044b35fe5e3dcec",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "skew",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 9987398625,
+        "min": 9936400625,
+        "max": 10115078375,
+        "iqr": 89338875.0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.2268396660219878,
+      "blocked_keys": 0,
+      "case": "b1-uniform-10",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "9d2e7c957d2e247abd72b9d7d942e1dee2c28f522c168ec4c064ac1f1f3d8287",
+      "expected_findings": 0,
+      "load_seconds": 0.4700198338832706,
+      "manifest_sha256": "91fd43b757298ab25dbc3a380983ce01cc52617b4773af825ab25910b0521035",
+      "requested": 3,
+      "source_after": "ff65f2b94387711b750663eba73cd3954665502d861ea914502f747364bc627a",
+      "source_before": "ff65f2b94387711b750663eba73cd3954665502d861ea914502f747364bc627a",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "uniform",
+        "skus": 100,
+        "warehouses": 10
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 10469663375,
+        "min": 10292047625,
+        "max": 10552965916,
+        "iqr": 130459145.5,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.22762995888479054,
+      "blocked_keys": 0,
+      "case": "b1-transfer-10",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "5f7e7d5133eb047aac1baa99cf4bc2ca9329d313fd5b652e2ef4ec53bbdd57eb",
+      "expected_findings": 0,
+      "load_seconds": 0.394389082910493,
+      "manifest_sha256": "3ea99f3fe902b66e9e2791aeb5a52a47b48996306e0760448bb3325be9335578",
+      "requested": 3,
+      "source_after": "9bbacb233b2eec46de208540634583bbac3a9bebeec096f302a2271b8ae5d5df",
+      "source_before": "9bbacb233b2eec46de208540634583bbac3a9bebeec096f302a2271b8ae5d5df",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "transfer",
+        "skus": 100,
+        "warehouses": 10
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 10642556708,
+        "min": 10607354417,
+        "max": 11059992333,
+        "iqr": 226318958.0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.22412045812234282,
+      "blocked_keys": 0,
+      "case": "b1-exclusions-1",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "e234eaa327eaac7c31e4672d93120f0ce3bee99a7c7b7e93ae5e70164ed2223b",
+      "expected_findings": 0,
+      "load_seconds": 0.5159118331503123,
+      "manifest_sha256": "1ef7d44316c5efebe5b1be2a9ce0f05efbb362d778a9ac46fe3018273a7107d9",
+      "requested": 3,
+      "source_after": "c321c03504fe4ce702af7edd9f34f2faf6f0281944204dc9f2df6e39190293cb",
+      "source_before": "c321c03504fe4ce702af7edd9f34f2faf6f0281944204dc9f2df6e39190293cb",
+      "workload": {
+        "eligible_movements": 85000,
+        "exclusions": {
+          "above_watermark": 5000,
+          "future_effective": 5000,
+          "pending": 5000
+        },
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "exclusions",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 9466292209,
+        "min": 9274800083,
+        "max": 12040675500,
+        "iqr": 1382937708.5,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.4085804589558393,
+      "blocked_keys": 1,
+      "case": "b3-duplicate-100",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "2351b4fb79cb61ea8d251be4e19220e13ad78a165c6499162895014a9a7e97c9",
+      "expected_findings": 50,
+      "load_seconds": 0.7025697499047965,
+      "manifest_sha256": "d92bc93017466bc65cdb0a9737c1318d589b76029963db28e94835e9847c8121",
+      "requested": 3,
+      "source_after": "e55ff16e9d8b2f20e4ae0fb0a8f2e2392c097320cbce4a3ccb8b4f23c9b6e9b7",
+      "source_before": "e55ff16e9d8b2f20e4ae0fb0a8f2e2392c097320cbce4a3ccb8b4f23c9b6e9b7",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "uniform",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 12509637125,
+        "min": 12153271458,
+        "max": 12807189875,
+        "iqr": 326959208.5,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 1.3287430419586599,
+      "blocked_keys": 10,
+      "case": "b3-duplicate-1000",
+      "completed": 3,
+      "exact_expected_quantities_sha256": "9e86277e0f1ee4a698d453fcfe4d3988dcaf14fdc0c0fd1f9ef2633223465e7d",
+      "expected_findings": 500,
+      "load_seconds": 0.8295323338825256,
+      "manifest_sha256": "46e9511a374b8ea9ba4c3fea7e152e0ef34b26e996df81267b69dec9bbe712ee",
+      "requested": 3,
+      "source_after": "e6a9c2c789dd8fd535a15c0ee0d4e21342e024443fd68acae5300e8004b8a360",
+      "source_before": "e6a9c2c789dd8fd535a15c0ee0d4e21342e024443fd68acae5300e8004b8a360",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "uniform",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 3,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 3,
+        "median": 26982770917,
+        "min": 24572943166,
+        "max": 27860706292,
+        "iqr": 1643881563.0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "analyze_seconds": 0.2703829579986632,
+      "blocked_keys": 100,
+      "case": "b3-duplicate-10000",
+      "completed": 0,
+      "exact_expected_quantities_sha256": "1cfc2bf32476eac176bf334c56596f9f50150fbd5efc0228d25e0e4972aa6e94",
+      "expected_findings": 5000,
+      "load_seconds": 0.9462764160707593,
+      "manifest_sha256": "c01bd9fcdb0f3acfbf3ca42dd539508499d2666e5ac8ff964b32c14dfb663fd9",
+      "requested": 3,
+      "source_after": "7ea12eb8e7c4f55a07b248639000aba9b54f1463302ee0256212f5a2c02ca384",
+      "source_before": "7ea12eb8e7c4f55a07b248639000aba9b54f1463302ee0256212f5a2c02ca384",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "uniform",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 0,
+        "sql_cancelled": 3,
+        "reader_rejected": 0
+      }
+    },
+    {
+      "analyze_seconds": 0.311916375067085,
+      "blocked_keys": 0,
+      "case": "b3-quantities",
+      "completed": 0,
+      "exact_expected_quantities_sha256": "03f8e361bc5216211d46362f14414dcdfdd355ee4aef3a11e1c1693a8d49ac13",
+      "expected_findings": 1000,
+      "load_seconds": 0.7108970419503748,
+      "manifest_sha256": "fce59cb58095e1b60a6f9e39901f2c1156be51da461ccafea27e1063f57473f5",
+      "requested": 1,
+      "source_after": "457fdf2c8c4f0f37dfd8e0e283756f386a8aab06092336499e58dc50fee01502",
+      "source_before": "457fdf2c8c4f0f37dfd8e0e283756f386a8aab06092336499e58dc50fee01502",
+      "workload": {
+        "eligible_movements": 100000,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 100000,
+        "shape": "uniform",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 1,
+        "reader_rejected": 0
+      }
+    },
+    {
+      "accounting": "PostgreSQL row_to_json octet_length",
+      "bound": 2097152,
+      "case": "reader-bytes-load_run--1",
+      "db_bytes": 2097151,
+      "reader_only_synthetic": true,
+      "saved_run_id": "35d7b6ea-e9ea-4ae0-a631-94429f3798fc",
+      "status": "rejected",
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 0,
+        "reader_rejected": 1
+      }
+    },
+    {
+      "accounting": "PostgreSQL row_to_json octet_length",
+      "bound": 2097152,
+      "case": "reader-bytes-load_run-0",
+      "db_bytes": 2097152,
+      "reader_only_synthetic": true,
+      "saved_run_id": "3e1813bd-92fe-4810-a279-7a772cd00021",
+      "status": "rejected",
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 0,
+        "reader_rejected": 1
+      }
+    },
+    {
+      "accounting": "PostgreSQL row_to_json octet_length",
+      "bound": 2097152,
+      "case": "reader-bytes-load_run-1",
+      "db_bytes": 2097153,
+      "reader_only_synthetic": true,
+      "saved_run_id": "9c828c4d-24d5-4548-8370-05de2ff43743",
+      "status": "rejected",
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 0,
+        "reader_rejected": 1
+      }
+    },
+    {
+      "accounting": "PostgreSQL row_to_json octet_length",
+      "bound": 16777216,
+      "case": "reader-bytes-load_planning_run--1",
+      "db_bytes": 16777215,
+      "reader_only_synthetic": true,
+      "saved_run_id": "93dee095-f916-44da-a66e-3c770ed546a0",
+      "status": "rejected",
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 0,
+        "reader_rejected": 1
+      }
+    },
+    {
+      "accounting": "PostgreSQL row_to_json octet_length",
+      "bound": 16777216,
+      "case": "reader-bytes-load_planning_run-0",
+      "db_bytes": 16777216,
+      "reader_only_synthetic": true,
+      "saved_run_id": "15d225fc-3bf8-4887-a754-250ef9ad87ac",
+      "status": "rejected",
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 0,
+        "reader_rejected": 1
+      }
+    },
+    {
+      "accounting": "PostgreSQL row_to_json octet_length",
+      "bound": 16777216,
+      "case": "reader-bytes-load_planning_run-1",
+      "db_bytes": 16777217,
+      "reader_only_synthetic": true,
+      "saved_run_id": "bde7bb6a-32a3-4a1d-8935-de9e232ef800",
+      "status": "rejected",
+      "call_denominators": {
+        "requested": 1,
+        "completed": 0,
+        "sql_cancelled": 0,
+        "reader_rejected": 1
+      }
+    },
+    {
+      "analyze_seconds": 0.27682933304458857,
+      "blocked_keys": 0,
+      "case": "b2-10",
+      "completed": 1,
+      "exact_expected_quantities_sha256": "deb1286493d1124af875e3a591005fcd03fda970bc263f37dbd99140b4e71361",
+      "expected_findings": 0,
+      "load_seconds": 0.005725499941036105,
+      "manifest_sha256": "017f38f54d3c19d654e723815ab515b46194c06ab57494b4a2eebeed9aed3d21",
+      "requested": 1,
+      "source_after": "b19928edcfacbf51ddb5d0676708d45600866a5852ded21d590e005b13a9928a",
+      "source_before": "b19928edcfacbf51ddb5d0676708d45600866a5852ded21d590e005b13a9928a",
+      "workload": {
+        "eligible_movements": 0,
+        "exclusions": {},
+        "keys": 10,
+        "movements": 0,
+        "shape": "uniform",
+        "skus": 10,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 1,
+        "completed": 1,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 1,
+        "median": 153787875,
+        "min": 153787875,
+        "max": 153787875,
+        "iqr": 0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "case": "b2-10-archive",
+      "day_rows": 1800,
+      "keys": 10,
+      "known_additional_revisions": 63,
+      "late_revisions": 12,
+      "ledger_keys": 10,
+      "ledger_movements": 0,
+      "load_analyze_seconds": 0.24902920820750296,
+      "raw_order_revision_rows": 1335,
+      "serial_blocked": 0,
+      "serial_driver_seconds": 5.030630375025794,
+      "serial_eligible": 10,
+      "serial_requested": 10,
+      "source_after": "3d8a1d3cb0b35d7bdeb1c618b4ccfc8a561ded257e0a1956d21f8e7f5375244f",
+      "source_before": "3d8a1d3cb0b35d7bdeb1c618b4ccfc8a561ded257e0a1956d21f8e7f5375244f",
+      "serial_completed_calls": 10,
+      "serial_completed_eligible_keys": 10,
+      "completed_eligible_keys_per_second": 1.9878224505708644,
+      "completed_calls_per_second": 1.9878224505708644,
+      "serial_timing_includes": "worker startup, guards, oracle checks and artifact writes"
+    },
+    {
+      "analyze_seconds": 0.258925125002861,
+      "blocked_keys": 0,
+      "case": "b2-100",
+      "completed": 1,
+      "exact_expected_quantities_sha256": "9ae4baee3cd73644f9a735196b230e76d0aa047ebaec60037255e5958f8d3d13",
+      "expected_findings": 0,
+      "load_seconds": 0.004978083074092865,
+      "manifest_sha256": "22ef366ab671d1e7cd1fcb4a60537b321c66380a84502ab85fa112febc5d9666",
+      "requested": 1,
+      "source_after": "88801577d378d6e91b4405a6ba2e430479b8b2e56efc2fe6b00116d62bad9b85",
+      "source_before": "88801577d378d6e91b4405a6ba2e430479b8b2e56efc2fe6b00116d62bad9b85",
+      "workload": {
+        "eligible_movements": 0,
+        "exclusions": {},
+        "keys": 100,
+        "movements": 0,
+        "shape": "uniform",
+        "skus": 100,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 1,
+        "completed": 1,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 1,
+        "median": 153600917,
+        "min": 153600917,
+        "max": 153600917,
+        "iqr": 0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "case": "b2-100-archive",
+      "day_rows": 18000,
+      "keys": 100,
+      "known_additional_revisions": 630,
+      "late_revisions": 126,
+      "ledger_keys": 100,
+      "ledger_movements": 0,
+      "load_analyze_seconds": 0.6723121658433229,
+      "raw_order_revision_rows": 13356,
+      "serial_blocked": 0,
+      "serial_driver_seconds": 4.992415125016123,
+      "serial_eligible": 10,
+      "serial_requested": 10,
+      "source_after": "9f87f57e33eb200b3ccc18f61914e801a42c7b73a9ac7e47cc059189be1970d4",
+      "source_before": "9f87f57e33eb200b3ccc18f61914e801a42c7b73a9ac7e47cc059189be1970d4",
+      "serial_completed_calls": 10,
+      "serial_completed_eligible_keys": 10,
+      "completed_eligible_keys_per_second": 2.003038559412205,
+      "completed_calls_per_second": 2.003038559412205,
+      "serial_timing_includes": "worker startup, guards, oracle checks and artifact writes"
+    },
+    {
+      "analyze_seconds": 0.30806674994528294,
+      "blocked_keys": 0,
+      "case": "b2-1000",
+      "completed": 1,
+      "exact_expected_quantities_sha256": "69294884e1b037e9617b488826aeb6a3b64a3a037f56ab92e629f428b430c09b",
+      "expected_findings": 0,
+      "load_seconds": 0.015280833002179861,
+      "manifest_sha256": "abc7924c179bdfeaf203a96c4b5b47a98cc6cd8522022d92a27fa5e190abfd06",
+      "requested": 1,
+      "source_after": "7d7a506871f465d9f2b11470ad821b84289f5799fff77777206df46e79402584",
+      "source_before": "7d7a506871f465d9f2b11470ad821b84289f5799fff77777206df46e79402584",
+      "workload": {
+        "eligible_movements": 0,
+        "exclusions": {},
+        "keys": 1000,
+        "movements": 0,
+        "shape": "uniform",
+        "skus": 1000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 1,
+        "completed": 1,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 1,
+        "median": 173562000,
+        "min": 173562000,
+        "max": 173562000,
+        "iqr": 0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "case": "b2-1000-archive",
+      "day_rows": 180000,
+      "keys": 1000,
+      "known_additional_revisions": 6300,
+      "late_revisions": 1260,
+      "ledger_keys": 1000,
+      "ledger_movements": 0,
+      "load_analyze_seconds": 2.9184910838957876,
+      "raw_order_revision_rows": 133560,
+      "serial_blocked": 0,
+      "serial_driver_seconds": 10.469058125047013,
+      "serial_eligible": 10,
+      "serial_requested": 10,
+      "source_after": "65f53561ece08e7628f8a1c07e1cd2755406023ec6a54ae2049be3e05143261e",
+      "source_before": "65f53561ece08e7628f8a1c07e1cd2755406023ec6a54ae2049be3e05143261e",
+      "serial_completed_calls": 10,
+      "serial_completed_eligible_keys": 10,
+      "completed_eligible_keys_per_second": 0.9551957664725539,
+      "completed_calls_per_second": 0.9551957664725539,
+      "serial_timing_includes": "worker startup, guards, oracle checks and artifact writes"
+    },
+    {
+      "analyze_seconds": 0.4009372089058161,
+      "blocked_keys": 0,
+      "case": "b2-10-stockout",
+      "completed": 1,
+      "exact_expected_quantities_sha256": "c23f3a4a97d18cf559b8bdc81a2076f992afa9c90ed96395c6b657d3dd8ef4f2",
+      "expected_findings": 0,
+      "load_seconds": 0.0026802909560501575,
+      "manifest_sha256": "2f2781b9418a681aacf09e25a757f3bd7ef3786b0b26cbd074ddcd16d1ad6881",
+      "requested": 1,
+      "source_after": "dcb04ceb6bdf933ac488859e72de5de110b61189bbb62e25017ea9335821ee0c",
+      "source_before": "dcb04ceb6bdf933ac488859e72de5de110b61189bbb62e25017ea9335821ee0c",
+      "workload": {
+        "eligible_movements": 0,
+        "exclusions": {},
+        "keys": 10,
+        "movements": 0,
+        "shape": "uniform",
+        "skus": 10,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 1,
+        "completed": 1,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 1,
+        "median": 154443833,
+        "min": 154443833,
+        "max": 154443833,
+        "iqr": 0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "case": "b2-10-stockout-archive",
+      "day_rows": 1800,
+      "keys": 10,
+      "known_additional_revisions": 63,
+      "late_revisions": 12,
+      "ledger_keys": 10,
+      "ledger_movements": 0,
+      "load_analyze_seconds": 0.44155466719530523,
+      "raw_order_revision_rows": 1335,
+      "serial_blocked": 10,
+      "serial_driver_seconds": 5.309782166965306,
+      "serial_eligible": 0,
+      "serial_requested": 10,
+      "source_after": "c1b50c71b3192dd77e5114ccf14a37a7a5cc2edf81a6bc6d03ab0d57ef783e98",
+      "source_before": "c1b50c71b3192dd77e5114ccf14a37a7a5cc2edf81a6bc6d03ab0d57ef783e98",
+      "serial_completed_calls": 10,
+      "serial_completed_eligible_keys": 0,
+      "completed_eligible_keys_per_second": 0.0,
+      "completed_calls_per_second": 1.883316430985584,
+      "serial_timing_includes": "worker startup, guards, oracle checks and artifact writes"
+    },
+    {
+      "analyze_seconds": 0.38629983295686543,
+      "blocked_keys": 0,
+      "case": "b2-10-supply",
+      "completed": 1,
+      "exact_expected_quantities_sha256": "d4333b5e78050ef0053e0c9fda39db6968041b523d8adae52fc616408015f472",
+      "expected_findings": 0,
+      "load_seconds": 0.00376083399169147,
+      "manifest_sha256": "80da3cdf6abc812199bafd9c8103ab5dfa4e41f38ea299d70bf3f0437472f7b0",
+      "requested": 1,
+      "source_after": "ca51c542085148513d4787a5a8a1be70f3442312c03424f69150509d688c7ed3",
+      "source_before": "ca51c542085148513d4787a5a8a1be70f3442312c03424f69150509d688c7ed3",
+      "workload": {
+        "eligible_movements": 0,
+        "exclusions": {},
+        "keys": 10,
+        "movements": 0,
+        "shape": "uniform",
+        "skus": 10,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 1,
+        "completed": 1,
+        "sql_cancelled": 0,
+        "reader_rejected": 0
+      },
+      "completed_latency_ns": {
+        "n": 1,
+        "median": 152472750,
+        "min": 152472750,
+        "max": 152472750,
+        "iqr": 0,
+        "quartile_method": "inclusive, descriptive only"
+      }
+    },
+    {
+      "case": "b2-10-supply-archive",
+      "day_rows": 1800,
+      "keys": 10,
+      "known_additional_revisions": 63,
+      "late_revisions": 12,
+      "ledger_keys": 10,
+      "ledger_movements": 0,
+      "load_analyze_seconds": 0.4310949160717428,
+      "raw_order_revision_rows": 1335,
+      "serial_blocked": 10,
+      "serial_driver_seconds": 5.187984333140776,
+      "serial_eligible": 0,
+      "serial_requested": 10,
+      "source_after": "1d99b2305395a9b4a31bfcffb7e4adb6e433b475203fd7bc9429df59475c9b7c",
+      "source_before": "1d99b2305395a9b4a31bfcffb7e4adb6e433b475203fd7bc9429df59475c9b7c",
+      "serial_completed_calls": 10,
+      "serial_completed_eligible_keys": 0,
+      "completed_eligible_keys_per_second": 0.0,
+      "completed_calls_per_second": 1.9275308786343344,
+      "serial_timing_includes": "worker startup, guards, oracle checks and artifact writes"
+    },
+    {
+      "analyze_seconds": 1.314060457982123,
+      "blocked_keys": 0,
+      "case": "b1-10000",
+      "completed": 0,
+      "exact_expected_quantities_sha256": "ee83a6d93bdaecab3b191ab3ea92122c422906940041221357ae9019a3cb0142",
+      "expected_findings": 0,
+      "load_seconds": 7.921583625022322,
+      "manifest_sha256": "d2afb23a8ece94f67be01eb08006de7745abbb17668b0bc1f8434555f0a5d28f",
+      "requested": 3,
+      "source_after": "0522ba1e0631e677160b85cbff98dfae99bd261ae9f769ac2f2de26e524a28b7",
+      "source_before": "0522ba1e0631e677160b85cbff98dfae99bd261ae9f769ac2f2de26e524a28b7",
+      "workload": {
+        "eligible_movements": 1000000,
+        "exclusions": {},
+        "keys": 10000,
+        "movements": 1000000,
+        "shape": "uniform",
+        "skus": 10000,
+        "warehouses": 1
+      },
+      "call_denominators": {
+        "requested": 3,
+        "completed": 0,
+        "sql_cancelled": 3,
+        "reader_rejected": 0
+      }
+    }
+  ],
+  "conservative_rss_upper_bound_bytes": 582713344,
+  "deferred": [
+    "reference Linux/Docker enforcement",
+    "multi-date independent confirmation",
+    "B3 other defect types",
+    "B2 backtest growth and larger serial grids",
+    "B4 network",
+    "V2 fault/restore",
+    "V3 human checks"
+  ],
+  "exploratory": true,
+  "reference_confirmation": false,
+  "sampled_cpu_seconds": 1115.75,
+  "samples": 134,
+  "source_sha256": "20ef0a8880189499f30f62c2dd38da79a4dd67cc1c5386fb546db6f7de31e706",
+  "statuses": {
+    "completed": 120,
+    "error": 7,
+    "rejected": 7
+  },
+  "version": "engineering-pilot-v1",
+  "wall_seconds": 1098.8799663749523,
+  "derived_reporting_corrections": [
+    "quantity probe expects 1000 findings, not raw summary label 0",
+    "serial completed field counts completed API calls; blocked calls are excluded from eligible-key throughput"
+  ]
+}

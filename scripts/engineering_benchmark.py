@@ -170,7 +170,7 @@ class Pilot:
         self.code=digest({str(p.relative_to(ROOT)):sha256(p.read_bytes()).hexdigest()
             for p in [*sorted((ROOT/"src/inventory_intelligence").glob("*.py")),
                       *sorted((ROOT/"sql").glob("*.sql")),ROOT/"scripts/engineering_benchmark.py",
-                      ROOT/"scripts/engineering_fixtures.py",ROOT/"docs/ENGINEERING_PILOT_V1.md"]})
+                      ROOT/"scripts/engineering_fixtures.py"]})
         self.environment()
 
     def environment(self):
@@ -233,7 +233,14 @@ class Pilot:
             if operation=="run_checks": expected.update(reliability_runs=1,checks=5,findings=result["findings"])
             elif operation in ("run_forecast","run_plan"): expected.update(planning_runs=1)
         if delta!=expected:
-            result.update(status="transaction_incomplete",history_expected=expected)
+            # A killed/failed worker can lose its receipt after DB commit. Do not
+            # call a complete append a partial transaction or a successful oracle.
+            complete_append=(operation=="run_checks" and delta["reliability_runs"]==1
+                and delta["checks"]==5 and delta["planning_runs"]==0 and delta["findings"]>=0) or (
+                operation in ("run_forecast","run_plan") and delta["planning_runs"]==1
+                and all(delta[k]==0 for k in ("reliability_runs","checks","findings")))
+            result.update(status="committed_unverified" if complete_append else "history_inconsistent",
+                history_expected=expected,oracle="not_evaluated")
         result.update(case=case,operation=operation,history_delta=delta,
             database_bytes_before=db_before[0],database_bytes_after=db_after[0],
             wal_bytes=int(self.owner.execute("SELECT pg_wal_lsn_diff(%s,%s)",(db_after[1],db_before[1])).fetchone()[0]),
@@ -262,7 +269,8 @@ class Pilot:
         case=dict(case=p,workload={k:manifest[k] for k in ("keys","movements","skus","warehouses",
                 "shape","eligible_movements","exclusions")},manifest_sha256=digest(manifest),
             exact_expected_quantities_sha256=digest(manifest["expected_quantities"]),
-            expected_findings=len(manifest["duplicate_groups"]),blocked_keys=len(manifest["blocked_keys"]),
+            expected_findings=manifest["keys"] if manifest["quantity_probe"] else len(manifest["duplicate_groups"]),
+            blocked_keys=len(manifest["blocked_keys"]),
             source_before=before,source_after=after,load_seconds=load_seconds,analyze_seconds=analyze_seconds,
             completed=len(successful),requested=repeats)
         self.cases.append(case)
@@ -378,10 +386,13 @@ class Pilot:
             raw_order_revision_rows=keys*126+keys*126//20+keys*126//100,
             known_additional_revisions=keys*126//20,late_revisions=keys*126//100,
             ledger_movements=0,ledger_keys=keys,load_analyze_seconds=load_seconds,
-            source_before=before,source_after=after,serial_requested=len(serial),serial_completed=completed,
+            source_before=before,source_after=after,serial_requested=len(serial),serial_completed_calls=completed,
+            serial_completed_eligible_keys=completed if expected=="assessable" else 0,
             serial_eligible=completed if expected=="assessable" else 0,
             serial_blocked=completed if expected=="not_assessable" else 0,
-            serial_driver_seconds=elapsed,completed_keys_per_second=completed/elapsed))
+            serial_driver_seconds=elapsed,completed_eligible_keys_per_second=completed/elapsed if expected=="assessable" else 0,
+            completed_calls_per_second=completed/elapsed,
+            serial_timing_includes="worker startup, guards, oracle checks and artifact writes"))
 
     def run(self,tiny=False):
         def objective(name,fn,*args,**kwargs):

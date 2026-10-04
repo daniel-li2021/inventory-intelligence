@@ -12,6 +12,7 @@
 | [CONTRACTS](CONTRACTS.md) | Current interfaces/version identifiers; inventory, planning, Copilot and research kernels. |
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
 | [Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
+| [Engineering pilot](RESULTS.md#local-engineering-pilot) / [reproduction](EVIDENCE.md#local-engineering-pilot) | Local exploratory measurements, limits and pending confirmation. |
 | [VALIDATION](VALIDATION.md) | Independent checks and disposable-database acceptance. |
 | [CONTRIBUTING](../CONTRIBUTING.md) | Concise delivery workflow and AUTO/REVIEW. |
 
@@ -19,7 +20,7 @@
 
 | Active plan | Scope / status | Next action |
 |---|---|---|
-| [Engineering readiness](PLAN.md) | Pending execution; P0 complete, P1 awaits program review | Review workload/SLO, environment and pilot budget. |
+| [Engineering readiness](PLAN.md) | Local pilot complete; reference/P2 confirmation pending | Review Linux host/runtime and confirmation scope/budget. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.

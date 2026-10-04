@@ -950,3 +950,100 @@ questions. This holdout remains consumed and cannot become a tuning set.
 Complete exact metrics, pinball loss,
 failures and selected/reference calibration evidence are in
 [the artifact](review/intermittent-benchmark.json).
+
+## Local engineering pilot
+
+Assigned 2026-10-03; native execution/validation completed across October 3–4.
+These are exploratory synthetic observations on Apple M3 / 8 logical CPUs /
+16 GiB, macOS 15.6.1, Python 3.12.14, Psycopg 3.3.6 and PostgreSQL 17.6.
+The Linux reference host, allocated CPU/container envelope and confirmation
+protocol were not exercised. [Raw evidence and exact source](EVIDENCE.md#local-engineering-pilot),
+[pending work](PLAN.md), [commands](OPERATIONS.md#engineering-pilot).
+
+The main run requested 134 calls: 120 completed matching declared controls, seven
+SQL-deadline cancellations and seven expected reader-capacity rejections. Every
+cancelled producer appended zero runs/checks/findings; sources were unchanged
+before/after each recorded cell. The three batch observations are one first-access
+and two repeat-access calls from new processes, not confirmed warm or DB/OS-cold
+samples. Medians below describe those three observations only.
+
+| Selected workload | Completed / requested | Median full-path seconds | Exact control / limitation |
+|---|---:|---:|---|
+| 10 grains / 1k movements | 3/3 | 0.019 | Clean, no findings. |
+| 100 / 10k | 3/3 | 0.141 | Clean, no findings. |
+| 1k / 100k | 3/3 | 9.928 | Clean; largest passing uniform tier tested. |
+| Same selected 1k/100k +1 / +9 same-size archives | 3/3 each | 10.691 / 10.265 | Identical selected semantics; fixed 11k smaller-tier background rows already existed. |
+| 80% on 1% of grains / ten warehouses | 3/3 each | 9.987 / 10.470 | Skew and constant-K warehouse controls. |
+| 20% transfer legs / 15% disjoint exclusions | 3/3 each | 10.643 / 9.466 | Correct paired transfers and raw-versus-eligible counts. |
+| 0.1% / 1% bad duplicate rows at 100k | 3/3 each | 12.510 / 26.983 | Exactly 50/500 groups, 1/10 blocked grains and R001 not_assessable. |
+| 10% duplicates, 100k | 0/3 | not completed | Each query cancelled at ~55s; 5k expected groups remain unassessed. |
+| All 1k snapshots +1, 100k | 0/1 | not completed | Expected 1k exact quantity findings; SQL deadline prevented this scale oracle. Small every-key hand probes passed. |
+| 10k grains / 1M movements | 0/3 | not completed | Each SQL call cancelled at ~55s; no supported upper-tier claim. |
+
+The separate read-only EXPLAIN diagnostic took 10.096s execution plus 2.456ms
+planning. Its eligible CTE scan ran 1,000 times, returning 100 rows and filtering
+99,900 on each loop. This is concrete repeated-scan evidence on this workload;
+no index/query/engine change or paired improvement claim was made.
+
+B2 archived 10/100/1k keys ×180 days with 30% exact zero days, known and late
+revisions. Selected forecasts were exactly 7/day; horizons 7/28/90 produced
+independently checked orders 30/180/612 and every daily projected balance.
+At the 1k-key archive, selected plans took 0.641–0.849s (one observation/horizon).
+Each plan revalidated a K-key **zero-movement** inventory ledger: these timings
+do not establish performance with a 100k-movement planning ledger. Ten eligible
+serial plans completed at each archive size; the 1k archive's supervised driver
+took 10.469s, including process startup, guards, oracle checks and file writes.
+Ten stockout and ten incomplete-supply calls completed as blocked, with null
+proposals/projections; they count as zero completed eligible plans.
+
+Supplemental constant-4/day backtests selected one key from 1/10-key archives.
+All six 180/365/730-day producers completed, with exact constant predictions,
+zero errors, frozen origin identities and naive tie selection. Full calls ranged
+0.199–8.418s; 180-day reports were ~3.35/3.39 MB and loaded successfully, while
+365-day ~18.86/19.08 MB and 730-day ~83.86/84.85 MB reports persisted intact but
+were rejected by the 16 MiB reader. These controls are neither the canonical
+30%-zero backtest grid nor a ten-key serial backtest measurement.
+
+Reader controls accepted 999 and 1,000 compact synthetic findings, rejecting
+1,001. PostgreSQL row_to_json accounting and subsequent JSON validation are
+separate limits: at DB bound minus one, reliability's validation representation
+was 2,097,646 bytes and planning's 16,777,234, already above their respective
+2 MiB/16 MiB caps. Fresh synthetic fixtures at the **actual validation** cap
+minus one / exactly / plus one accepted / accepted / rejected for both readers.
+All 14 sampled actual engine-produced reports loaded; synthetic padding fixtures
+are reported separately. Reader controls preserve saved identity/history, without
+truncation or raised caps.
+
+Nine hosted and three unwrapped 20-second campaigns at offered 1.5/s issued and
+correctly completed 360/360 requests. Every campaign met the ≤100ms client-lag
+rule; no retry, backlog, timeout or unexpected response occurred. Hosted samples
+were only 144 POST /18 Lab GET /108 evidence GET across all three campaigns.
+A separate single 20s, offered-5/s mixed control issued 100, completed 59 and
+received 41 actual HTTP429 rejections, then recovered. Its initial token burst
+is included; 59/20s is not steady-state capacity. Bursts20/40 completed 4/2 and
+rejected 16/38 with HTTP503; both recovered. Slow partial body408, oversized413,
+valid chunked200 and disconnect/recovery controls passed. No 30-minute stability,
+route sample floor, p95/p99 envelope, full rate/client grid or Linux/proxy result
+is claimed.
+
+Four repaired native V2 checks passed on a separate **two-key** synthetic DB:
+writer kill at blocked child insertion left no partial history; an independent
+source-owner commit preserved the writer's old delta1 while the next-time run
+saw delta2; immediate DB stop/restart preserved exact committed source/results;
+custom backup/second-DB restore preserved three runs, 15 checks and six findings.
+Observed restart/restore durations were 0.439/0.384s, not RTO/RPO guarantees.
+The initial harness restart omitted explicit port options and failed reconnect;
+its source/logs/database were retained before the repaired fresh-fixture check.
+
+Recorded principal stages took ~23.2 minutes including their fixture setup,
+hashing and diagnostics; the complete local work stayed under the approved
+2-hour cap. Sampled CPU total was ~1,185s; the largest conservative sampled RSS
+sum was ~1.90 GiB, and the main batch stage added ~1.71 GB disk. Process RSS sums
+double-count shared pages and sampling misses peaks; these are guard observations,
+not verified combined memory or Linux resource enforcement. Binary/installed
+metadata fingerprints are retained; exact wheel/container builds are unmeasured.
+Twenty-four focused regression tests plus the added worker CI smoke passed; a supervised tiny runner check also
+verified that a failed oracle after commit is labelled committed_unverified.
+Reference confirmation, other defect/load/serial grids, full-scale/application
+recovery and independent human accessibility remain in PLAN. Features and public
+release remain paused.

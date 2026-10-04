@@ -278,3 +278,50 @@ SQL revalidation must still pass. V1 source owners retain their preservation dut
 the planner also stores the evidence actually read. Missing/incomplete inputs
 append `not_assessable` with no proposal. Invalid API arguments and database errors
 raise and roll back, rather than becoming missing-data results.
+
+## Engineering pilot
+
+Current scope/results: [PLAN](PLAN.md), [RESULTS](RESULTS.md#local-engineering-pilot).
+Historical measured source and frozen recipes are in Git `970ab16`; use that
+complete source view to reproduce the original receipts. Current reporting fixes
+are declared in [EVIDENCE](EVIDENCE.md#local-engineering-pilot), without replaying
+large successful cells or rewriting their raw bytes.
+
+Use only a dedicated disposable PostgreSQL cluster and a new database. Initialize
+with `python -m tests.bootstrap`, setting owner `TEST_DATABASE_URL`; restricted
+`DATABASE_URL` must use ii_runner in the same DB. Supply its explicit `--pgdata`
+for the process/disk guards. The batch runner refuses existing source/result data
+and an existing output directory. Run from the repository with `PYTHONPATH=src`:
+
+```sh
+python -m scripts.engineering_benchmark --output artifacts/new-pilot --pgdata /path/to/disposable/pgdata
+# A three-call runner/fixture smoke instead of the full grid:
+python -m scripts.engineering_benchmark --tiny --output artifacts/new-smoke --pgdata /path/to/disposable/pgdata
+```
+
+`--wall-seconds` is capped at 7,200. The parent supervises fresh processes at a
+60s total-worker deadline; each benchmark connection has 55s statement and 5s
+lock deadlines. Source hashing, exact oracle comparison, output files and EXPLAIN
+are outside operation intervals. Cooperative sampled guards are not OS resource
+limits. Complete commits whose worker receipts fail remain committed_unverified;
+never replace them with empty results or successful measurements.
+
+After batch calls, allocate remaining approved wall time to separate native HTTP
+or backtest controls; never run intensive measurements concurrently. HTTP uses
+an external open-arrival client and fresh unchanged Uvicorn server per cell.
+Backtests require another fresh bootstrapped database. Preserve raw per-call/request
+files and large reports under ignored `artifacts/`, publishing only attributed
+synthetic measurements, recipes, receipts and hashes.
+
+```sh
+python -m scripts.engineering_network --output artifacts/new-http --pgdata /path/to/disposable/pgdata --wall-seconds 600
+python -m scripts.engineering_backtest --output artifacts/new-backtests --pgdata /path/to/disposable/pgdata --wall-seconds 600
+```
+
+Recovery requires a fresh `engineering_recovery` DB in the explicitly selected
+**disposable** cluster, plus `--pg-bin`/`--pgdata`. It deliberately kills a writer,
+mutates only its separate source-owner fault fixture, immediately stops/restarts
+that cluster on its explicit loopback port, and restores to `engineering_restore`.
+Never use a demo, shared cluster or operational input. Preserve failed attempts
+and resumable checkpoints; rerun only a small repaired control when justified.
+New confirmation programs, paid hosts and public deployment require scope review.

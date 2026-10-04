@@ -67,3 +67,18 @@ CI separates hygiene from real PostgreSQL acceptance, with pinned Python 3.12.12
 PostgreSQL 17.9, Psycopg 3.3.6 and full Git history for lineage. No business secrets,
 external operational data or deployment is involved. Green CI does not prove branch
 protection, current deployment or service capacity.
+
+## Engineering runner controls
+
+Against a separately bootstrapped disposable DB, run:
+
+```sh
+PYTHONPATH=src python -m unittest tests.test_engineering_benchmark tests.test_copilot_db tests.test_planning_runs tests.test_lab_hosted -v
+```
+
+The focused checks cover independent integer/daily-plan quantities, every-key
+small mutations, skew/transfer/exclusion allocation, raw late revisions, exact
+cross-batch duplicate identities, source immutability, reader/persistence and
+hosted bounds. The five added fixture/worker controls enter the existing discovery gate;
+large benchmarks do not run in CI. [Real supervised smoke and measurements](EVIDENCE.md#local-engineering-pilot)
+remain separate from unit-test counts and full reference confirmation.

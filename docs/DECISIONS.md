@@ -26,6 +26,8 @@ an implementation handoff from a tentative idea or a historical plan.
 
 | D17 / 2026-10-03 | Active knowledge architecture | Keep only plans needed for pending execution. Extract useful facts from completed/superseded plans, reviews, investigations and duplicate narratives, then delete them including compatibility stubs. Consolidate current interfaces/operations and study outcomes into canonical docs; historical exact protocols/source bytes live in Git. | Latest user instruction supersedes D16’s reproducibility exception for completed documents. [Index](README.md), [evidence policy](EVIDENCE.md#documentation-lifecycle). Original reports and accepted semantics stay intact. |
 
+| D18 / 2026-10-03–04 | Active bounded engineering scope | User explicitly approved runner implementation and the two-hour exploratory pilot on the existing Mac. Keep reference SLOs unchanged; retain failures, independently verify quantities and distinguish byte representations. Linux/multi-date confirmation, eight-hour program, human checks, feature resumption and paid/public release remain separate gates. | [Local results](RESULTS.md#local-engineering-pilot), [exact evidence](EVIDENCE.md#local-engineering-pilot), [pending work](PLAN.md). Supersedes only the unapproved-local-runner gate; D12/D13 and paused planner scope remain. |
+
 When a decision changes, append its replacement with date, reason and evidence;
 mark the old entry superseded **by that ID** without erasing its reasoning.
 Routine progress updates STATE and the affected plan; mode switches update STATE only. A new contract version

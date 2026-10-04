@@ -1,0 +1,1 @@
+{"campaigns":1,"case":"hosted-offered-5-per-second","confirmation":false,"duration_seconds":20,"mix":"60% POST / 20% Lab GET / 20% evidence GET","offered_rate":5,"planned":100,"purpose":"actual network token-exhaustion 429 and recovery control"}

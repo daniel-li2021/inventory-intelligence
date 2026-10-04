@@ -1,0 +1,146 @@
+[
+  {
+    "case": "reliability-json--1",
+    "run_id": "2bcac642-c083-4ace-a9a6-7c754d65fd02",
+    "accounting": "actual loader JSON validation representation",
+    "validation_json_bytes": 2097151,
+    "db_bytes": 2096656,
+    "limit": 2097152,
+    "expected_status": "completed",
+    "synthetic_reader_only": true,
+    "status": "completed",
+    "loader_ns": 13615250,
+    "history_before": {
+      "reliability_runs": 45,
+      "checks": 225,
+      "findings": 4654,
+      "planning_runs": 83
+    },
+    "history_after": {
+      "reliability_runs": 45,
+      "checks": 225,
+      "findings": 4654,
+      "planning_runs": 83
+    }
+  },
+  {
+    "case": "reliability-json-0",
+    "run_id": "1308f891-1b09-4e97-b8a4-2d754df506ab",
+    "accounting": "actual loader JSON validation representation",
+    "validation_json_bytes": 2097152,
+    "db_bytes": 2096657,
+    "limit": 2097152,
+    "expected_status": "completed",
+    "synthetic_reader_only": true,
+    "status": "completed",
+    "loader_ns": 12286167,
+    "history_before": {
+      "reliability_runs": 46,
+      "checks": 230,
+      "findings": 4655,
+      "planning_runs": 83
+    },
+    "history_after": {
+      "reliability_runs": 46,
+      "checks": 230,
+      "findings": 4655,
+      "planning_runs": 83
+    }
+  },
+  {
+    "case": "reliability-json-1",
+    "run_id": "99a2d825-7f48-4600-ab7c-3d63aa1305cd",
+    "accounting": "actual loader JSON validation representation",
+    "validation_json_bytes": 2097153,
+    "db_bytes": 2096658,
+    "limit": 2097152,
+    "expected_status": "rejected",
+    "synthetic_reader_only": true,
+    "status": "rejected",
+    "loader_ns": 12164875,
+    "history_before": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 83
+    },
+    "history_after": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 83
+    }
+  },
+  {
+    "case": "planning-json--1",
+    "run_id": "4e2b6960-bbe1-45ca-91b9-605cfb3076d9",
+    "accounting": "actual loader JSON validation representation",
+    "validation_json_bytes": 16777215,
+    "db_bytes": 16777196,
+    "limit": 16777216,
+    "expected_status": "completed",
+    "synthetic_reader_only": true,
+    "status": "completed",
+    "loader_ns": 113801375,
+    "history_before": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 84
+    },
+    "history_after": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 84
+    }
+  },
+  {
+    "case": "planning-json-0",
+    "run_id": "1b7012bd-5800-48c1-9c0d-0dedd5557483",
+    "accounting": "actual loader JSON validation representation",
+    "validation_json_bytes": 16777216,
+    "db_bytes": 16777197,
+    "limit": 16777216,
+    "expected_status": "completed",
+    "synthetic_reader_only": true,
+    "status": "completed",
+    "loader_ns": 89201084,
+    "history_before": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 85
+    },
+    "history_after": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 85
+    }
+  },
+  {
+    "case": "planning-json-1",
+    "run_id": "6ed1cc07-3856-44e9-a351-ed1059936369",
+    "accounting": "actual loader JSON validation representation",
+    "validation_json_bytes": 16777217,
+    "db_bytes": 16777198,
+    "limit": 16777216,
+    "expected_status": "rejected",
+    "synthetic_reader_only": true,
+    "status": "rejected",
+    "loader_ns": 90637250,
+    "history_before": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 86
+    },
+    "history_after": {
+      "reliability_runs": 47,
+      "checks": 235,
+      "findings": 4656,
+      "planning_runs": 86
+    }
+  }
+]

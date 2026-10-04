@@ -1,13 +1,14 @@
 # Current project state
 
-Updated: 2026-10-03 (America/Los_Angeles). Replace stale facts after each phase or
+Updated: 2026-10-04 (America/Los_Angeles). Replace stale facts after each phase or
 material checkpoint; link evidence instead of appending a progress diary.
 
 Integration mode: AUTO
 
-Phase: engineering readiness design; P0 complete, P1 awaiting program review.
-Features are paused. Documentation cleanup is authorized; benchmark execution,
-planner feature resumption and paid deployment require their own scope decision.
+Phase: engineering readiness; local exploratory pilot complete; reference confirmation deferred.
+Features remain paused. The user approved runner implementation and the two-hour
+existing-Mac pilot. Reference confirmation, paid deployment and planner feature
+resumption require their own scope decision.
 
 ## Integrated and measured
 
@@ -16,17 +17,20 @@ planner feature resumption and paid deployment require their own scope decision.
 - Retained remote correctness acceptance: 240 tests / OK plus hygiene at `9d7c55f`.
   [CI/source receipt](review/engineering-readiness-baseline.json),
   [separate local combined acceptance](EVIDENCE.md#acceptance-history).
-- No controlled capacity or production/business benefit is measured. Public hosting,
-  Linux enforcement and recovery remain unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
+- [Local engineering pilot](RESULTS.md#local-engineering-pilot): scoped batch/reader,
+  planning/backtest, short native HTTP and small recovery evidence recorded.
+  Reference capacity, Linux enforcement, public hosting and production benefit
+  remain unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
 - Current knowledge, choices, results and evidence are consolidated; completed
   plans/protocol narratives and compatibility stubs are removed. Historical source
   bytes remain in Git, and original result/receipt bytes remain unchanged.
 
 ## Active work and next action
 
-- [Engineering plan](PLAN.md): review workload/SLO, environment and pilot budget
-  before P1 runner implementation. Other [research possibilities](KB.md#retained-research-questions-and-tentative-extensions)
-  remain conditional knowledge, not active plans. [Registry](README.md#plans-and-work-status).
+- [Engineering plan](PLAN.md): local authorized scope complete. Review a Linux
+  reference host/runtime and confirmation budget before more measurements.
+  Other research possibilities remain conditional knowledge, not active plans.
+  [Registry](README.md#plans-and-work-status).
 - Preserve unmerged planner protocol commits `55f4170` / `538d29d` and unfinished
   scripts/adapter/fixture/tests in `/private/tmp/ii-planner-closed-loop` on
   `codex/planner-closed-loop`. They are excluded from accepted main evidence.

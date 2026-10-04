@@ -1,0 +1,62 @@
+{
+  "binaries": {
+    "/Users/daniel/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12": {
+      "bytes": 18041888,
+      "sha256": "ac60cfe0268614638d0ffa35f3b0284fc7b3a11482723793455e17eeb278509e"
+    },
+    "/private/tmp/ii-pg17/bin/postgres": {
+      "bytes": 9169592,
+      "sha256": "849232e157027efa6d931ca0eb3e851212db0596c06a1670cf7cfedc3020a836"
+    }
+  },
+  "installed_records": {
+    "psycopg": {
+      "version": "3.3.6",
+      "installed_record_sha256": "733b271a6132486e86c1d296c98cb26c355a574e2358694ea5bc1cbc4c18b14a"
+    },
+    "psycopg-binary": {
+      "version": "3.3.6",
+      "installed_record_sha256": "fb76b62bafe3f8e895d1cc7f43d69318a465cecabe7ffbcf8552c510642fb561"
+    },
+    "fastapi": {
+      "version": "0.135.1",
+      "installed_record_sha256": "7f9217a6ce60deecd52ff643db17bf6ac5fd4d6058c57884bc7bf1cd211a99db"
+    },
+    "starlette": {
+      "version": "1.7.0",
+      "installed_record_sha256": "a16dd8abf0cf941129317a2f5aed069da0bf51414b21447fab57f9478f15cca4"
+    },
+    "uvicorn": {
+      "version": "0.41.0",
+      "installed_record_sha256": "972fb415e365714e657277d1b64065427d9dfdf9ee15b0c845bc50ac13f761d9"
+    },
+    "httpx": {
+      "version": "0.28.1",
+      "installed_record_sha256": "3958eccbb5b68998b69778f1402b7c77c54d7770e0e8ed33c8bf24c710546354"
+    },
+    "pydantic": {
+      "version": "2.13.5",
+      "installed_record_sha256": "33724f6f5112f6e362460d7d57ebde3437aa22cf7dcb6bc60d7c132ffb208e1d"
+    },
+    "pydantic_core": {
+      "version": "2.46.5",
+      "installed_record_sha256": "9a01a79bc0c69c4e71d222a6de30e0f9f710f0d99425852475eaf7172be1d1af"
+    }
+  },
+  "kernel": {
+    "system": "Darwin",
+    "node": "mac.lan",
+    "release": "24.6.0",
+    "version": "Darwin Kernel Version 24.6.0: Mon Jul 14 11:29:54 PDT 2025; root:xnu-11417.140.69~1/RELEASE_ARM64_T8122",
+    "machine": "arm64",
+    "processor": "arm"
+  },
+  "wheel_and_container_hashes": "not established; no Linux/container build",
+  "clock_pair_ns": {
+    "n": 10000,
+    "median": 41.0,
+    "max": 167
+  },
+  "sampling_overhead": "Full supervisor overhead not independently isolated; serial driver includes it.",
+  "timing": "post-pilot diagnostic, not subtracted from measured operations"
+}

@@ -1,36 +1,49 @@
 # Engineering readiness plan
 
-Status: **proposal awaiting program review**. Current phase/mode and scope gates
-live in [STATE](STATE.md). Design review P0 is complete; implementation is pending.
-The pending workload/SLO/budget specification below remains unchanged.
-AUTO permits integration of authorized work; it does not approve this program.
+Status: **local exploratory pilot authorized; execution complete**. Current phase/mode
+and scope gates live in [STATE](STATE.md). The user approved implementation and a
+pilot on the existing Mac on 2026-10-03. Proposed reference workload/SLOs below
+remain unchanged; Linux/reference confirmation and the separate eight-hour program
+are deferred. No feature resumption, paid host or public deployment is authorized.
 
 ## Phase handoff and checkpoints
 
 - [x] P0: inspect green correctness baseline, preserve paused planner work and
   publish [engineering readiness evidence](KB.md#engineering-gaps-and-hypotheses).
-- [ ] Decision gate: review workload/SLO, actual host/runtime and pilot budget.
-  Do not create a benchmark runner or launch measurements until approved.
-- [ ] P1 after approval: freeze fixture/oracle/measurement boundaries; implement
-  the minimal runner; execute B1/B3 and selected small-to-medium B2 cells.
-- [ ] P2 after P1 evidence: B2 growth/B4 network, V1 runtime/V2 recovery/V3 manual
-  checks. Missing Docker/reference-host checks stay explicitly unmeasured.
-- [ ] P3 only for a measured gap: one targeted change plus paired confirmation;
-  otherwise freeze the baseline and stop optimizing.
+- [x] Local decision gate: retain proposed workload/SLOs; actual Mac runtime and
+  two-hour exploratory pilot approved. Frozen recipes and outcomes: [results](RESULTS.md#local-engineering-pilot),
+  [source/evidence](EVIDENCE.md#local-engineering-pilot), [commands](OPERATIONS.md#engineering-pilot).
+- [x] P1 local implementation: minimal deterministic runner and independent controls;
+  B1/B3 and small-to-medium B2 executed. Limited cells are retained, not retried as successes.
+- [ ] P1 reference confirmation: reviewed Linux host/runtime and five campaigns over
+  two dates. Local samples do not satisfy this gate.
+- [x] P2 local subset: preliminary native HTTP, supplemental backtest growth and
+  interrupted-writer/snapshot/crash/restore controls completed. Initial restart
+  harness failure is retained alongside the repaired check.
+- [ ] P2 remaining: Linux/container enforcement, other defect/serial/load grids,
+  full HTTP confirmation and independent human checks. These remain unmeasured.
+- [ ] P3: only after confirmed evidence, one targeted change plus paired confirmation;
+  otherwise preserve the baseline. No engine optimization made during this pilot.
 
 Record resumable task status, blockers and the next action here; update STATE at
-material checkpoints. Preserve completed protocols/results as durable evidence.
-This is the near-term engineering plan, linked alongside other plans in the
-[index](README.md#plans-and-work-status). At completion, record outcomes, validation
-and remaining gaps (linked follow-up or
-explicit deferral), extract durable material into knowledge/results/evidence and
-delete this task file. Keep it only while pending execution needs it.
-Later areas/phases may have their own indexed plan; this does not authorize parallel
-execution.
+material checkpoints. This near-term plan owns pending engineering execution;
+other research possibilities remain conditional knowledge in KB. At completion,
+extract durable knowledge, results and evidence, then retire this task file.
 
-Completed: P0 readiness investigation and benchmark proposal.
-Remaining gaps: program review; runner/measurements; runtime/recovery/manual checks.
-Next action: review workload/SLO, environment and pilot budget before P1.
+Completed locally: B1 tiers/shapes/history; B3 duplicates and both reader boundaries;
+B2 forecasts/plans/blocked controls and constant-demand backtest growth; preliminary
+B4 network/admission/body recovery; four small native V2 fault/recovery checks.
+[Exact results and limitations](RESULTS.md#local-engineering-pilot) replace a progress diary.
+
+Remaining: Linux reference host/container controls; multi-date confirmation and
+HTTP sample/duration floors; other B3 defect classes, full B2 serial/30%-zero
+backtest grids and B4 rates/client counts; full-scale/app recovery; independent
+human accessibility/cold start. The measured SQL deadlines and consumer-size
+limits remain explicit gaps. No public deployment or engine optimization occurred.
+
+Next action: review a disposable Linux reference host/runtime and confirmation
+scope/budget, then confirm the reference batch and limited evidence paths. Retain
+this plan for those pending decisions/execution; broader features remain paused.
 
 ## Questions and supported claims
 
@@ -303,3 +316,62 @@ P3 targets one demonstrated bottleneck, or stops with the baseline frozen.
 Unmet host/Docker/budget gates are explicit not-measured results, not permission
 to resume models or closed-loop feature work. Full-grid execution is not a CI
 requirement; a tiny runner correctness smoke belongs in CI after implementation.
+
+## Frozen local workload recipes for follow-up
+
+Original pilot source/protocol bytes are in Git `970ab16`; current executable
+recipes are in `scripts/engineering_fixtures.py`. This records current reusable
+measurement boundaries; historical receipts remain unchanged in EVIDENCE.
+
+- B1 uniform receipts are +1, opening 1,000, 100 raw rows/key. Skew assigns 80k
+  rows to the first 10/1,000 keys and 20k to the remaining 990; divide exactly and
+  allocate remainders to ascending key indices. Ten warehouses keep K fixed,
+  SKU=floor(key/10), warehouse=key modulo 10. Transfer controls replace the first
+  20 rows/key with paired -3/+3 legs on adjacent warehouses: balances 1,020/1,140.
+  Separate first 5 pending/next 5 future-effective/next 5 above-watermark rows
+  leave 85 eligible rows/key and balance 1,085. Raw manifests keep every row.
+- History appends 1 then 9 total same-size unrelated archives, repeating upstream
+  natural identities with distinct row IDs. Selected semantics must remain equal.
+- B3 labels first 100/1k/10k rows of 100k bad, pairs consecutive duplicate identities:
+  50/500/5k exact groups, 1/10/100 blocked grains, R002 fail and R001 not_assessable.
+  A separate all-key +1 snapshot probe requires exact expected/observed/delta.
+  Other defect cells in the program remain pending.
+- B2's 180-day pattern repeats three zero days then seven quantity-10 days:
+  54 zeros/126 positive lines per key. Every twentieth one-based global positive
+  line gets a same-quantity known revision; every hundredth gets a quantity-1,000
+  late revision, both clocks origin +1 day. Counts use floor(total/20,/100).
+  Origin is 2026-01-02 08:00 UTC; mean is exactly 7. The separate inventory ledger
+  has K grains/zero movements/opening 20; reservation 3 day0, inbound 5 day1,
+  L=2, R=H-2, safety2/pack6/MOQ10. H=7/28/90 needs 29/176/610, orders 30/180/612.
+- Supplemental backtests are constant 4/day, histories 180/365/730 and archive
+  keys 1/10, one selected key. All predictions/actuals are 4, errors zero, tie chooses
+  naive. Freeze origins 28,35,... through days-56 and the days-28 holdout. These
+  controls do not substitute for the 30%-zero grid or serial multi-key backtests.
+- Readers have separate PostgreSQL row_to_json byte and JSON-validation accounting.
+  Compact synthetic reports isolate 999/1k/1,001 findings and exact -1/0/+1 byte
+  points for both layers. Padding is inert; no engine-produced evidence is truncated.
+  Synthetic reader-only fixtures and actual producer reads are distinguished.
+- Native HTTP uses unchanged hosted admission, one Uvicorn worker/limit16/backlog32,
+  independent external schedules at 1.5/s for 20s, three hosted campaigns and one
+  unwrapped local campaign, each mixed/POST/evidence. Mixed order is three POSTs,
+  Lab GET, evidence GET; POSTs rotate clean/spike/delay/incomplete truth. Lag >100ms
+  invalidates offered-load claims; no retries. Bursts20/40 use up to40 client threads;
+  10.2s refill precedes recovery. Slow/oversized/chunked/disconnected bodies are
+  separate faults. A separate offered-5/s, 20s mixed control freezes 100 arrivals
+  and verifies token-exhaustion HTTP429 plus recovery. No p95/p99 confirmation
+  follows from these short campaigns.
+- Native V2 uses a separate two-key fault DB: block findings insertion, kill writer,
+  require no partial history; repeat with an owner +1/observation-clock +1s commit,
+  require old snapshot delta1 and next-time delta2. Immediate DB stop/restart and
+  small custom backup/second-DB restore preserve exact committed source/results.
+
+The local budget is two hours including fixture setup, eight observed CPU-hours,
+30 GiB added disk and a conservative sampled 6 GiB RSS guard; native shared-memory
+sums are not true combined memory or OS enforcement. Fresh worker calls have a
+60s supervisor and 55s SQL/5s lock limit. Report missing receipts after complete
+commits as unverified, not partial/zero/success. Calls include production commit;
+fixture loads, hashes, oracle checks, file writes and EXPLAIN are outside timing.
+Three exploratory process-restarted batch calls are first/repeat access, not
+confirmed warm or DB/OS-cold. Serial driver timing includes supervision and
+verification; blocked calls never count as completed eligible plans. The reference
+confirmation protocol above remains unchanged.

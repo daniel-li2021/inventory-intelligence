@@ -163,3 +163,8 @@ monthly total and shutdown steps. If the approved envelope cannot be met, retain
 the local demo until a different budget is approved. AUTO merge mode does not
 approve paid deployment. One shared admission bucket is a portfolio tradeoff;
 TLS/bandwidth abuse requires host/provider controls beyond calculation admission.
+
+The subsequent [native engineering pilot](../../docs/RESULTS.md#local-engineering-pilot)
+adds short open-arrival HTTP/admission/body recovery and separate small PostgreSQL
+fault/restore evidence. It does not verify container/Linux enforcement, hosted
+application crash recovery, public release or the confirmation sample/duration floor.
