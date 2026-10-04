@@ -1,96 +1,90 @@
 # Development workflow
 
-## Current phase
+Start with [STATE](docs/STATE.md) for the current phase, gates and integration
+mode, then [PLAN](docs/PLAN.md). [The knowledge index](docs/README.md) routes to
+contracts and evidence; [DECISIONS](docs/DECISIONS.md) records durable choices and
+supersession. Read only the surfaces needed for the assigned task.
 
-All three bounded synthetic stages, decision/intermittent research and the local
-Decision Lab are integrated on `main`. See the
-[current independent review and fresh acceptance](docs/READINESS_REVIEW.md).
-Earlier 79/106/124-test results remain historical checkpoints. The
-[frozen milestone 1 contract](docs/CONTRACT_V1.md) remains separate from planning
-and copilot contracts. See [current status](docs/AUTOMATION_PROGRESS.md) and
-[current next-step investigation](docs/READINESS_NEXT_STEPS.md). Research proposals are not
-implementation handoffs; public real data requires an explicit separate boundary
-decision before import under the current synthetic-only project instructions.
+## Integration modes
 
-## GitHub bootstrap
+The single persisted setting is `Integration mode: AUTO` or
+`Integration mode: REVIEW` in STATE. A simple “Switch to AUTO/REVIEW” instruction
+changes that line; it applies to later tasks until switched again. An explicit
+instruction to merge a particular change can authorize that merge without changing
+the persistent mode. Neither mode expands implementation scope or clears a
+contract, data-license, benchmark-program or paid-deployment approval gate.
 
-The project has its own local Git repository, independent of its parent folder. The bootstrap commit goes on `main`. Subsequent parallel or nontrivial changes use short-lived `codex/<task>` branches or isolated worktrees. Task branches do **not** open pull requests by default; an integration owner combines validated work and decides whether the batch needs one integration PR or can be merged directly.
+| Mode | After scoped validation and diff review |
+|---|---|
+| AUTO | The integration owner integrates authorized work into current main, pushes and verifies the remote ref without another merge confirmation. |
+| REVIEW | Prepare a clean validated commit and reviewable diff/task branch (PR if useful), report checks and limitations, and stop before merging into main. |
 
-Destination: [daniel-li2021/inventory-intelligence](https://github.com/daniel-li2021/inventory-intelligence), public. Its initial README history is preserved when integrating the research bootstrap.
-
-Bootstrap and subsequent configuration:
-
-1. Verify the destination owner, repository, visibility, and existing history before adding `origin`.
-2. For an empty destination, push local `main` with upstream tracking. For an initialized destination, fetch and integrate its initial files/history deliberately; never force-push over it.
-3. Verify the remote commit. The repository CI workflow activates on GitHub after publication.
-4. Protect `main` from force pushes and accidental deletion. Do not require a pull request for every solo-agent change; use CI and the integration-owner checks below as the default gate.
-5. Use one integration PR when a batch changes shared contracts/schema, adds a dependency or public-data boundary, introduces a milestone-sized feature, or benefits from a pre-main GitHub review surface. Small validated fixes and documentation changes may be integrated directly.
-
-The repository URL and connected GitHub access are verified. Branch protection/settings remain recommendations until explicitly verified on the remote; a workflow file alone does not configure them. Do not wait for CI after routine pushes.
+Branches/worktrees provide isolation. PRs provide an optional review surface;
+change size/type does not create a third merge mode. One integration owner controls
+main if multiple agents were explicitly assigned; sub-agents do not merge or push
+main. Old handoffs never launch or authorize additional agents.
 
 ## Each change
 
-Confirm the repository root and inspect status. When a remote exists:
+1. Verify `git rev-parse --show-toplevel`, status, branch and remote. Fetch with
+   pruning and inspect branches before nontrivial work. Start `codex/<task>` from
+   current `origin/main`; use a clean worktree if active or dirty work needs isolation.
+2. Trace the relevant contract/callers. Prepare a compact proposal before a new
+   capability and implement only an assigned handoff. Preserve frozen semantics,
+   source permissions, original evidence, active branches and required environments.
+3. Run focused checks and a meaningful operator/published-path check when behavior
+   changes. For PostgreSQL acceptance use a fresh disposable database; never reset
+   a populated demo or another task's database. Existing README/VALIDATION commands
+   are authoritative; do not regenerate consumed studies to make an audit pass.
+4. Update STATE and the relevant PLAN item/gate after material progress. Update
+   affected durable guides; add a decision only for an enduring choice. Stage explicit
+   files, inspect `git diff --cached`, and run `git diff --cached --check`.
+5. Fetch again before publication; compare with current `origin/main`, reconcile
+   upstream work without overwriting it, and rerun checks affected by that reconciliation.
+   Re-read the mode in current main and the candidate STATE before merging. If another
+   task changed the mode/gate, honor the latest user instruction rather than silently
+   restoring a stale value. A discrepancy without a clear instruction requires review.
+6. In AUTO, integrate coherently and push without rewriting published history;
+   a direct fast-forward is sufficient for small validated changes. Use an integration
+   PR when a shared review surface is useful. In REVIEW, stop with the validated
+   result before main integration. Verify any pushed ref with `git ls-remote`.
+7. After integration, verify remote main contains the work. Retire only proven-merged
+   clean task branches and disposable worktrees; preserve active/dirty/unmerged work
+   and environments. Do not monitor CI after routine pushes unless CI/deployment
+   verification was requested or there is evidence of failure.
+
+Documentation-only validation uses the standard library and needs no service:
 
 ```sh
-git fetch origin
-git switch -c codex/<task> origin/main
-```
-
-If the checkout has unrelated modifications or another task is using it, leave that work intact and use a clean worktree. Keep each task commit focused. Sub-agents commit their isolated changes; the integration owner controls publication and PR creation. Do not mix generated report refreshes with unrelated refactors.
-
-Before committing, inspect explicit staged paths and the staged diff:
-
-```sh
-git diff --cached --check
-git diff --cached
+python3 scripts/check_docs.py
 python3 -m json.tool docs/research/repositories.json > /dev/null
+git diff --check
 ```
 
-Run checks appropriate to the change. Update README/operator instructions and the affected design documentation in the same task or integration batch. Document what changed, why, validation, and material limitations.
+CI hygiene runs the doc check and JSON parsing. PostgreSQL CI runs real independent
+oracles with full Git history; mocks, local acceptance and exact remote CI runs are
+separate evidence. Do not sum overlapping package test counts or imply the suite's
+elapsed time is measured service capacity. [Validation guide](docs/VALIDATION.md).
 
-Fetch again before pushing and compare the branch with current `origin/main`. Integrate new main commits if needed, rerun affected checks, then push and verify the remote branch SHA. The integration owner reviews task commits/diffs, resolves straightforward conflicts, runs the relevant combined acceptance, and merges or cherry-picks coherent work into an integration branch or directly into `main` when safe. Do not let multiple sub-agents write `main` concurrently. Use one integration PR only when the change class above warrants it; otherwise direct integration is allowed under the owner's standing authorization. Before each task, fetch with pruning and inspect existing branches. After integration, verify remote `main`, then remove merged task branches/worktrees when safe. Preserve dirty/active work and needed environments. Keep commits focused without rewriting published history for cleanup.
+## Evidence, data and dependencies
 
-## Integration policy
+Keep small deterministic synthetic inputs versioned, independent of the checker.
+Keep local environments, raw public observations and reconstructable item series
+ignored. Preserve consumed report/receipt bytes, source snapshots and Git history.
+Documentation navigation edits may change current source fingerprints; declare
+that drift rather than rehashing an old artifact or calling it a new experiment.
+A historical audit uses its complete original source view; current regression is
+separate. See [reproducibility boundaries](docs/README.md#evidence-and-reproducibility).
 
-Use branches/worktrees for **isolation**, not as a requirement to create one PR per agent.
+Add dependencies only for a demonstrated need; record version, license and purpose.
+Original MIT licensing does not override upstream licenses. Never copy GPL/AGPL ERP
+code as original MIT material. Credentials stay in ignored config/secrets.
 
-Default multi-agent flow:
+## Scheduled work
 
-1. Each sub-agent starts from current `origin/main`, works in its own `codex/<task>` branch/worktree, runs focused tests and commits.
-2. Sub-agents do not open PRs by default and do not write directly to `main`.
-3. One integration owner reviews all candidate commits, rebases/merges current `main` as needed, resolves conflicts, and runs combined acceptance.
-4. If the batch is small and low risk, the integration owner may fast-forward/merge/cherry-pick the validated work to `main` directly, push and verify the remote ref. Monitor CI only when specifically required or a failure is evident.
-5. Use a single integration PR before `main` for shared contract/schema changes, dependency/model changes, public-data/license boundary changes, major milestone batches, or whenever pre-main CI/review materially reduces risk.
-6. If integration or CI exposes a defect, fix the defect in the integration branch, rerun the relevant acceptance, and only then update `main`.
-
-Prefer a small number of meaningful integration boundaries over one PR per sub-agent. PR count is not a quality metric; reproducible acceptance evidence is.
-
-## CI policy
-
-The initial `Repository hygiene` job validates whitespace across the submitted change and parses the research JSON. It needs no secrets or package installation. Actions are pinned to commit SHAs and the workflow token has read-only repository access, following [GitHub's secure-use guidance](https://docs.github.com/en/actions/reference/security/secure-use).
-
-The **first implementation PR** must introduce a PostgreSQL service, install reviewed/pinned Python dependencies, and run the same inventory tests locally and in CI. Use standard-library `unittest` initially. Tests must fail on missed faults, unexpected clean-data findings, wrong record IDs, and wrong quantity deltas. Intentionally dirty demo data is a successful test when the expected findings match; running the checker normally against dirty data should return a nonzero findings status.
-
-No scheduled data pipeline, deployment pipeline, external business database, or paid/cloud service is needed for Stage 1. Do not add placeholders that pass without executing inventory tests.
-
-## Scheduled development
-
-Two daily Codex app schedules return to the project coordination chat, using Pacific time (`America/Los_Angeles`):
-
-| Time | Automation | Work |
-| --- | --- | --- |
-| 3:30 AM | Inventory overnight build | Resume unfinished work, fix failures, integrate validated changes, and continue the next ready milestone with a durable goal. |
-| 9:20 AM | Inventory morning review | Check overnight progress and publication, review correctness, finish remaining work, and investigate unresolved risks. |
-
-The owner authorizes this coordination agent to commit, push, and merge validated project work into `main` without another approval. Preserve other agents' unfinished work and use isolated worktrees when paths overlap. This authorization does not permit force pushes, discarding work, or merging unrelated changes. Follow the existing Git and validation checks above.
-
-Record resumable checkpoints in `docs/AUTOMATION_PROGRESS.md` as work proceeds: completed work, commit references, validation, blockers, and the next action. Continue an existing goal before creating another. Finish Stage 1 acceptance before starting Forecasting & Planning; preserve `contract-v1` and document subsequent contracts separately.
-
-The requested five-hour work window is a preference for sustained useful work, not a supported goal timer or guaranteed runtime. Goals continue according to completion, usage limits, and tool availability. Local scheduled work requires the computer awake, the app running, and the repository available. Manage schedules in the app; they are not GitHub Actions or repository-hosted cron jobs.
-
-## Data and dependencies
-
-Keep synthetic fixtures small, deterministic, and versioned. Keep generated reports and local environments out of Git unless a small curated sample is intentionally added with its generation command. Fixtures must remain independent of checker output.
-
-Add a dependency only for a demonstrated need; record its version, license, and purpose. Original MIT licensing does not change upstream licensing. Do not copy GPL/AGPL ERP implementations into the project as if they were original MIT code. Credentials belong in ignored local configuration or GitHub secrets, never fixtures or reports.
+Manage Codex schedules in the app, not repository cron. Earlier overnight/morning
+schedule descriptions are historical configuration snapshots, not verified current
+schedules. A continuation reads STATE's current mode and PLAN's authorization
+gates; AUTO permits merging assigned work, not resuming paused features. Keep
+resumable work in STATE/PLAN instead of another automation progress file. Local
+schedules require an awake computer, running app and available repository.

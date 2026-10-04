@@ -1,5 +1,8 @@
 # Stage 3 bounded end-to-end benchmark
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 On 2026-10-02, **40 of 45 cases passed**. Five finding paraphrases were
 classified as `unsupported` instead of `finding`. The separate explicit finding
 controls passed, localizing the observed failures to natural-language routing.

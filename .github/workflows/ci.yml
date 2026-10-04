@@ -28,6 +28,8 @@ jobs:
           else
             git show --format= --check HEAD
           fi
+      - name: Check documentation navigation and integration mode
+        run: python3 scripts/check_docs.py
       - name: Validate research metadata JSON
         run: python3 -m json.tool docs/research/repositories.json > /dev/null
 

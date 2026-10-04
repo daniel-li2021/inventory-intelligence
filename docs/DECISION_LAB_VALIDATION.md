@@ -1,5 +1,8 @@
 # Decision Lab validation
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Independent validation, 2026-10-03. Tests use the immutable synthetic replay
 exported from the real persisted reliability/forecast/planning path. Expected
 quantities below were calculated independently of the adapter output.

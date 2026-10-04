@@ -1,5 +1,8 @@
 # Stage 3 routing stabilization
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 ## Frozen evaluation protocol
 
 Frozen before changing routing, from integrated main `43a952d` (2026-10-02).

@@ -1,5 +1,8 @@
 # Engineering readiness investigation — 2026-10-03
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Reviewed integrated main **9d7c55f8e30c9b885e14c450632de18efe413693**, after
 PR 14–24 integration and PR 25's CI-history correction. This is an evidence
 review and proposed execution plan. **No new feature, performance experiment,
@@ -107,7 +110,7 @@ Any change must preserve exact outcomes, clocks, duplicate handling and history.
 
 ## 2. Validation needed before stronger engineering readiness claims
 
-Priorities reference the proposed [benchmark program](ENGINEERING_BENCHMARK_PLAN.md).
+Priorities reference the proposed [benchmark program](PLAN.md).
 
 - **B1/B2 — scale and retained-history behavior:** how do real reconciliation and
   gated planning paths behave as selected rows, keys and unrelated archived batches

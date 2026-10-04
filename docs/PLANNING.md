@@ -7,7 +7,7 @@ explanation adapter are integrated on `main`; the combined review was merged thr
 [PR 7](https://github.com/daniel-li2021/inventory-intelligence/pull/7).
 The bounded synthetic Stage 2 milestone is complete; this does not establish
 real demand accuracy or inventory cost/service performance. See
-[current acceptance](VALIDATION.md) and [next research](NEXT_ROUND_RESEARCH.md).
+[current state](STATE.md), [validation guide](VALIDATION.md) and [active plan](PLAN.md).
 
 ## Fresh-database demonstration
 

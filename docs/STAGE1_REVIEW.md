@@ -1,5 +1,8 @@
 # Stage 1 completion review
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Reviewed 2026-10-02. Acceptance means the bounded reconciliation milestone in
 [contract v1](CONTRACT_V1.md), not certification of physical stock.
 

@@ -1,5 +1,8 @@
 # Three-stage review and comparative benchmarks
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Review date: 2026-10-02. Review branch: `codex/three-stage-review`.
 The user authorized merging the remaining fixes on 2026-10-02. The integration
 incorporates the original Stage 3 main merge and all three Stage 2 slices.
@@ -9,7 +12,7 @@ is merged; fetched remote `main` at `dcada27` contains the reviewed integration.
 [Main CI run 37044676872](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37044676872)
 passed both jobs and all 76 tests on pinned PostgreSQL 17.9 / Python 3.12.12.
 The executions and pre-merge limitations below are retained as historical evidence.
-[Next investigation](NEXT_ROUND_RESEARCH.md) reuses the stored scores without
+[Next investigation](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/NEXT_ROUND_RESEARCH.md) reuses the stored scores without
 claiming new model or inventory-performance results.
 
 ## Evidence and live-data boundary

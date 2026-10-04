@@ -1,6 +1,6 @@
 # Combined synthetic fault report
 
-Curated JSON excerpt from the CLI command in the [quickstart](../../README.md#quickstart), executed on PostgreSQL 17.9. Exit code: **1**, as expected for intentional dirty data. Run/finding identifiers and verbose source/manifests evidence are omitted here; the CLI returns the complete persisted report.
+Curated JSON excerpt from the CLI command in the [quickstart](../../README.md#run-the-postgresql-core), executed on PostgreSQL 17.9. Exit code: **1**, as expected for intentional dirty data. Run/finding identifiers and verbose source/manifests evidence are omitted here; the CLI returns the complete persisted report.
 
 The jacket count is independently expected to be `30 - 5 = 25`; the supplied physical snapshot is 26, so delta is +1. Duplicate hoodie receipts and invalid tee transfer legs suppress quantity conclusions for their affected buckets. Other complete controls remain assessable.
 

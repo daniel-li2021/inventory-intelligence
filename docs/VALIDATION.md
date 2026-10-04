@@ -1,14 +1,10 @@
 # Independent validation
 
-Current review (2026-10-03): [engineering readiness](ENGINEERING_READINESS.md)
-assesses integrated main `9d7c55f` after PR 14–24 and PR 25.
-[Remote CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160)
-passes PostgreSQL acceptance (240 tests / OK / 19.495s) and repository hygiene.
-The [inspection receipt](review/engineering-readiness-baseline.json) binds this
-observation separately from historical local receipts. Feature development is
-paused for [benchmark design](ENGINEERING_BENCHMARK_PLAN.md); no scale experiment
-was performed. Earlier counts, local timings and remote runs below remain
-historical evidence, not an engineering capacity claim.
+Use [STATE](STATE.md) for current phase and acceptance references. Commands and
+independent-oracle expectations live here; captured runs below are historical
+records, not current push CI or engineering capacity claims. [The engineering
+inspection](review/engineering-readiness-baseline.json) retains the exact remote
+240-test observation; it is separate from local receipts.
 
 Historical stabilization (2026-10-02) starts from integrated main `43a952d`, including
 decision/intermittent research and the updated integration workflow. Fresh local
@@ -104,7 +100,7 @@ protection configuration remains separate from code/test acceptance.
 
 An independent review at `dacdc8f` verified the unchanged frozen Stage 1 tests
 and implementation, then ran the complete original 27-test suite on a fresh
-PostgreSQL 17.6 database. See [STAGE2_CHECKPOINT.md](STAGE2_CHECKPOINT.md).
+PostgreSQL 17.6 database. See [STAGE2_CHECKPOINT.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/STAGE2_CHECKPOINT.md).
 The expanded planning suite is discovered by the SAME CI command and bootstrap;
 Stage 1 oracles were not weakened. Its fresh database now adds separate planning
 schemas. The final local suite passed 45 tests with no failures/errors/skips,

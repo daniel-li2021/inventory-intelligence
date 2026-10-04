@@ -1,5 +1,8 @@
 # Combined research integration and retained acceptance
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Status: **PR 14–24 merged; subsequent main CI verified green after PR 25**.
 The user authorized all PR merges on 2026-10-03; PR 24 merged at `f132bf4`.
 That integration retains the exact candidate `f7d17e5` by ancestry with an
@@ -8,7 +11,7 @@ identical tree. Current main `9d7c55f` has
 Public deployment, engineering capacity and production evidence remain unmeasured.
 Feature development is paused for the [engineering investigation](ENGINEERING_READINESS.md).
 Exact PR 14–23
-heads and all 22 directions are recorded in [the delivery ledger](RESEARCH_STATUS.md).
+heads and all 22 directions are recorded in [the delivery ledger](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/RESEARCH_STATUS.md).
 The candidate preserves all ten heads by ancestry through eight explicit merges;
 stacked PR 15/17 are included through PR 20. Published histories are not rewritten.
 
@@ -81,7 +84,7 @@ cache verification. Internal Lab UUID/calculation validation and physical-count
 DAG semantics remain owned by their existing validators. This is stronger
 repository reproducibility, not universal cryptographic or business attestation.
 
-From the repository root in the existing environment:
+From the complete original source view (the saved manifest is snapshot-bound):
 
 ```sh
 PYTHONPATH=src python -m scripts.research_lineage --audit
@@ -104,7 +107,8 @@ changed to main before PR 24 was merged with its exact expected head and merge
 method, preserving all published history. GitHub then marked every included PR
 merged. Remote main ancestry and unchanged candidate tree were verified; the
 existing 240-test acceptance was reused because no implementation changed.
-The lineage audit also passes on integrated main. Only proven-merged branches
+The lineage audit passed at that integration checkpoint; later validator/docs
+edits require the original source view for this exact saved-manifest audit. Only proven-merged branches
 are retired; active closed-loop research and required environments are retained.
 The [separate delivery receipt](review/research-main-integration.json) records
 integration without changing historical acceptance/report bytes. That local
@@ -119,7 +123,7 @@ domain, paid subscription or public service has been created. The
 remain the release gates. Local private-CA HTTPS is not public trusted TLS.
 
 Current priority: [engineering readiness and capacity investigation](ENGINEERING_READINESS.md),
-with a [reproducible proposed program](ENGINEERING_BENCHMARK_PLAN.md) reviewed
+with a [reproducible proposed program](PLAN.md) reviewed
 before implementation. The unfinished planner-loop branch is paused and preserved;
 main's prefix arithmetic comparison is not operational planner execution. Advanced
 models, allocation/capacity/calendar and hosting remain gated. No direction is

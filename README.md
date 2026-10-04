@@ -2,28 +2,13 @@
 
 **Can this stock be trusted—and what should we replenish if it can?**
 
-Inventory Intelligence is a Python/PostgreSQL portfolio project for finished
-apparel measured in whole pieces. It reconciles source inventory before allowing
-an advisory replenishment calculation, then explains the evidence behind it.
-Missing, stale or contradictory inputs produce `not_assessable` and null
-quantities. Operational inputs are never repaired and no orders are executed.
+A Python/PostgreSQL portfolio system for finished apparel measured in whole
+pieces: reconcile inventory, compute evidence-gated advisory replenishment, and
+explain saved results. Missing, stale or contradictory evidence yields
+`not_assessable` and null quantities. Inputs are never repaired and no orders execute.
 
-The core system, offline decision research and local **Decision Lab** are complete
-within their synthetic scope. Real demand performance, calibrated service and
-business savings remain unmeasured. [Current engineering assessment](docs/ENGINEERING_READINESS.md).
-
-Separate [public observed-sales research](docs/PUBLIC_SALES_RESULTS.md) now adapts
-official UCI Online Retail with immutable provenance and evaluates a training-only
-32-item subset. Raw/derived observations stay local and ignored; published metrics
-are aggregate. Fixed mean beats the selected method mix on the 28-day holdout.
-Observed sales do not establish unconstrained demand or historical stock availability.
-
-[Portfolio case study and resume wording](docs/PORTFOLIO_CASE_STUDY.md) connect
-the architecture to measured failures and negative results. The
-[22-direction delivery/continuation ledger](docs/RESEARCH_STATUS.md) distinguishes
-merged core evidence from published research and accessibility PRs. New public
-observed-sales studies remain separate exploratory research, with synthetic
-suppliers/costs and unknown stock availability.
+[Current project state](docs/STATE.md) · [Active plan](docs/PLAN.md) ·
+[Knowledge and evidence](docs/README.md) · [Development workflow](CONTRIBUTING.md)
 
 ```mermaid
 flowchart LR
@@ -37,24 +22,18 @@ flowchart LR
   B[Separate offline decision simulator] --> L
 ```
 
-Reliability checks exact ledger/snapshot balances at a shared business cutoff
-and watermark. Planning requires eligible demand, trusted stock and complete
-reservations/inbound. The Copilot explains saved results with exact quantities
-and citations; its optional language model routes intent only. The offline
-simulator evaluates a separate periodic ordering policy and does not simulate
-execution of the planner's proposal.
+Reliability compares ledger/snapshot quantities at aligned cutoffs and watermarks.
+Planning requires trusted stock, eligible demand and complete reservations/inbound.
+Copilot reports exact saved evidence; optional language routing chooses intent only.
+The separate periodic simulator reevaluates orders rather than executing the
+planner's prefix proposal. [Durable design decisions](docs/DECISIONS.md).
 
-The [merged research integration](docs/RESEARCH_INTEGRATION.md) retains PRs 14–23
-and all original report bytes. One fresh PostgreSQL 17.6 acceptance run passes
-240 tests; a 24-artifact / 119-node lineage manifest keeps historical source drift
-explicit. PRs 14–24 are merged into main at `f132bf4`; remote ancestry and exact
-candidate contents are verified. After PR 25 corrected full-history checkout,
-main `9d7c55f` has [green remote CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160):
-240 tests pass and repository hygiene passes. Public hosting and engineering
-capacity remain unmeasured. Feature development is paused for the
-[readiness investigation](docs/ENGINEERING_READINESS.md) and
-[proposed scale benchmark](docs/ENGINEERING_BENCHMARK_PLAN.md).
-[All 22 directions and next gates](docs/RESEARCH_STATUS.md).
+The operational demo is synthetic. Separate approved [UCI observed-sales research](docs/PUBLIC_SALES_RESULTS.md)
+keeps raw/reconstructable observations local and publishes aggregates. Sales do not
+establish unconstrained demand, historical availability or real business benefit.
+[Case study and scoped resume wording](docs/PORTFOLIO_CASE_STUDY.md) connect the
+architecture to measured failures and negative results. Exact research protocols,
+results and deferred questions are in the knowledge index; phase/status live in STATE.
 
 ## Try the Decision Lab
 
@@ -91,69 +70,6 @@ service has been deployed; container and public-domain checks remain pending.
 Keyboard users can run the presets, inspect focusable evidence tables with arrow
 keys and use the skip link. [Local accessibility review and limits](docs/LAB_ACCESSIBILITY_REVIEW.md)
 records focus, contrast and narrow-screen validation.
-
-## What the evidence shows
-
-- **Public sales-proxy safety:** q95 demand calibration does not guarantee 95%
-  immediate fill or cycle service. A paid 56-day warmup and 768 synthetic inventory
-  arms over public observations expose different coverage/service/cost outcomes.
-  [Measured results and boundaries](docs/PUBLIC_SAFETY_RESULTS.md).
-  A [prospectively frozen disjoint 32-item replication](docs/PUBLIC_CALIBRATION_RESULTS.md)
-  retains another 768 arms: mean/q95 and SBA/q95 achieve 92.12% and 93.35% fill
-  in the lead-two/no-extra-delay case. Same retailer/calendar; no service guarantee.
-
-- **Policy comparison:** with identical forecasts, prefix arithmetic improves
-  service and paid cost only in a known-late-inbound control. A periodic threshold
-  rule regresses fill in 34/40 cells. [Exact experiment and limitations](docs/POLICY_COMPARISON_RESULTS.md).
-
-
-- **Physical-count research:** frozen synthetic count/recount evidence can
-  distinguish system stock 100 from corroborated physical stock 96 and bind a
-  separate advisory adjustment review. Forty independent controls and 86 lineage
-  nodes are audited; no source inventory is changed.
-  [Protocol, outcomes and limits](docs/PHYSICAL_COUNT_RESULTS.md).
-- **Engineering:** exact arithmetic, two knowledge clocks, append-only run
-  history, restricted database roles, independent hand-calculated oracles, and
-  fail-closed API/evidence boundaries. See [fresh review and acceptance](docs/READINESS_REVIEW.md).
-- **Decision research:** 480 forecast/policy/split simulations across 60 cells.
-  All eight selected lumpy-demand cells fail held-out service floors. Forecast
-  accuracy alone does not establish inventory decision quality.
-- **Intermittent research:** 5,544 candidate/split results across 84 cells,
-  from 2,376 unique simulations. Four dual-reference passes represent one
-  declining-demand path repeated across cost/delay regimes. There is no global
-  winning model; 18 cells have no eligible selection.
-- **Negative results matter:** stock can run out before any order can arrive,
-  and historically calibrated safety stock can persist after demand collapses.
-  Adding a more complex forecast does not necessarily solve either problem.
-- **Fulfillment semantics:** a separate [lost-sales research contract and results](docs/LOST_SALES_RESULTS.md)
-  compare 288 matched synthetic pairs with identical attempted-demand forecasts.
-  First orders match, but subsequent purchases differ in 199 pairs; permanent
-  losses, owed backlog and their different penalty units remain explicit.
-
-[Decision protocol/results](docs/DECISION_BENCHMARK.md),
-[intermittent protocol/results](docs/INTERMITTENT_BENCHMARK.md), and
-[ranked next investigations](docs/READINESS_NEXT_STEPS.md).
-The [startup/accounting diagnostic](docs/FEASIBILITY_DIAGNOSTIC_RESULTS.md)
-attributes eight of the delayed replay's 68 missed units to unavoidable startup;
-60 occur later. Its cost disadvantage persists over a common 36-day window.
-Existing holdouts are consumed; they are regression evidence, not fresh tuning
-sets. Optional live Copilot routing has a bounded synthetic evaluation, separate
-from deterministic evidence checks. [Routing evidence](docs/STAGE3_STABILIZATION.md).
-
-The [long-term roadmap](docs/RESEARCH_ROADMAP.md) records 22 assigned or gated
-directions. Its first [fresh warmup study](docs/FRESH_WARMUP_RESULTS.md) evaluates
-720 arms with fully costed inventory carryover: warmup improves fill in 70/360
-pairs, regresses it in 35/360, and lowers complete intervention cost in only two.
-Empirical 90%/95% forecast targets still do not guarantee achieved inventory
-service. Repeated controls and origins are not independent replications.
-The [fresh retention study](docs/SAFETY_RETENTION_RESULTS.md) compares expanding,
-recent and decay-weighted safety with identical point forecasts. Both challengers
-can shrink safety to zero while leaving large owned inventory; neither passes
-the cost-and-service gate across its 21 path labels.
-The [supply and intervention study](docs/SUPPLY_SENSITIVITY_RESULTS.md) pairs
-lead2/5/10 and supplier variability with stock/review/pack controls over equal
-settlement windows. Signed effects explain startup versus later failures while
-retaining interactions; faster reviews and more stock are not universal fixes.
 
 ## Run the PostgreSQL core
 
@@ -212,22 +128,10 @@ PYTHONPATH=src python -m unittest tests.test_decision tests.test_decision_benchm
 The full synthetic benchmark rerun commands are in their protocol documents;
 retained valid outputs can be reused without regenerating experiments.
 
-## Reading guide and boundaries
+## Boundaries
 
-Start with [the current assessment](docs/ENGINEERING_READINESS.md),
-[proposed engineering benchmarks](docs/ENGINEERING_BENCHMARK_PLAN.md) and
-[the Lab](docs/DECISION_LAB.md). For implementation details:
-
-- Reliability: [frozen contract](docs/CONTRACT_V1.md), [data](docs/DATA.md), [engine](docs/ENGINE.md).
-- Forecast/planning: [contract](docs/CONTRACT_PLANNING_V1.md), [operations and oracles](docs/PLANNING.md).
-- Copilot: [reliability interface](docs/CONTRACT_COPILOT_V1.md), [saved planning explanations](docs/CONTRACT_COPILOT_V2.md).
-- Research: [decision contract](docs/CONTRACT_DECISION_V1.md), [intermittent contract](docs/CONTRACT_INTERMITTENT_V1.md), [public-sales proposal](docs/PUBLIC_SALES_PROTOCOL_V1.md).
-- Development: [workflow](CONTRIBUTING.md), [checkpoint](docs/AUTOMATION_PROGRESS.md), [original stage handoffs](docs/PARALLEL_WORK.md).
-
-All business examples are synthetic. Accepted orders, observed sales and
-unconstrained demand are distinct targets. Public-data acquisition needs a
-separate boundary decision; no real observations have been imported. Source
-uploads, cloud deployment, scheduled operational jobs and order execution remain
-outside this project. Never include company code, data, screenshots, credentials
-or confidential schemas. Original material is [MIT licensed](LICENSE);
-dependencies retain their own licenses.
+Frozen operational contracts remain separate from offline research. Source uploads,
+real inventory imports, source repair and order execution are outside the demo.
+Public hosting has separate runtime/release/cost gates. Never include company code,
+data, screenshots, credentials or confidential schemas. Original material is
+[MIT licensed](LICENSE); dependencies and approved public data retain their licenses.

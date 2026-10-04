@@ -1,36 +1,50 @@
 # Project instructions
 
-Optimize for correctness and token efficiency.
+## Start here
 
-- Start with the smallest relevant surface. Inspect the responsible file/function before exploring broadly.
-- Read each file once when practical; use targeted searches and narrow ranges afterward.
-- Trace actual callers and data flow before changing shared behavior. Fix root causes.
-- Keep scope tight. Do not inspect or modify unrelated pipelines, workflows, tests, configuration, or architecture.
-- Reuse valid outputs, caches, scores, and prior results. Avoid unnecessary recomputation.
-- Avoid expensive crawlers, full pipelines, full test suites, builds, and external API/LLM calls unless necessary for correctness.
-- Prefer focused edits and targeted validation. Use existing helpers, SQL, the standard library, and native database features before new dependencies or abstractions.
-- Once behavior is implemented and sufficiently validated, stop. Do not add unrelated refactors or cleanup.
-- Keep narration minimal and final summaries concise.
-- Update relevant documentation after completing a task.
+Read [current state and integration mode](docs/STATE.md), then the relevant part
+of [the active plan](docs/PLAN.md). Use [the knowledge index](docs/README.md) to
+find the responsible contract, operator guide or saved evidence. Historical
+reviews and retired handoffs are evidence, not active instructions. A proposal
+or AUTO mode does not authorize work outside the user's assigned scope.
+
+## Work narrowly and correctly
+
+- Inspect the responsible file/function first; trace callers before shared changes.
+- Read files once when practical; use targeted searches/ranges afterward.
+- Preserve unrelated dirty work. Use isolation when needed, not by default.
+- Reuse valid caches, outputs and saved scores. Avoid full pipelines, suites,
+  builds or external API/model calls unless correctness requires them.
+- Prefer focused edits and validation, SQL/stdlib/native features over abstractions.
+- Independently check quantities, identities and clean controls; counts alone fail.
+- Once the requested work is sufficiently validated, stop; keep narration concise.
 
 ## Project boundaries
 
-- Milestone 1 follows `docs/CONTRACT_V1.md`. Use the path ownership and interfaces in `docs/PARALLEL_WORK.md`; do not change shared contracts independently. Begin implementation only when assigned an implementation handoff.
-- Public portfolio: synthetic business data only. Never import company code, data, screenshots, credentials, or confidential schema.
-- Read operational inputs; write reliability results separately. Do not silently repair source inventory.
-- Preserve source identity, evidence, business timestamps, and ingestion timestamps. Missing or incomplete data must not become zero or a pass.
-- Test reconciliation against independent expected outcomes, including clean controls. A count-only assertion is insufficient.
-- Keep inventory quantities exact. Stage 1 starts with finished garments measured in whole pieces.
+- Preserve frozen/versioned contracts and historical decoding. Stage 1 follows
+  [CONTRACT_V1](docs/CONTRACT_V1.md); change shared interfaces through an explicit
+  new contract/handoff, never by silently rewriting an accepted version.
+- Operational portfolio inputs are synthetic. The approved UCI research exception
+  follows [PUBLIC_SALES_PROTOCOL_V1](docs/PUBLIC_SALES_PROTOCOL_V1.md), stays offline,
+  keeps raw/reconstructable data ignored and publishes aggregates with attribution.
+  Never import company code/data/screenshots/credentials/confidential schema.
+- Read source inputs; write results separately. Never silently repair inventory.
+- Preserve source identity, business/knowledge clocks and append-only evidence.
+  Missing/incomplete data must not become zero or pass; physical pieces are exact.
+- Keep planner projection and periodic simulation distinct. Copilot explains saved
+  evidence; language routing must not invent evidence or business arithmetic.
 
-## Git workflow
+## Delivery and knowledge
 
-- Verify `git rev-parse --show-toplevel`, status, branch, and remote before editing. Work only in this project's repository.
-- When `origin` exists, fetch it and start parallel or nontrivial work on `codex/<task>` from current `origin/main`. A small integration-owner fix may be committed directly only when no other agent is concurrently changing the same surface.
-- Preserve unrelated dirty work. Use a clean worktree when isolation is needed; do not create one by default.
-- Stage explicit project files, inspect the staged diff, run focused checks, and commit a clear problem-oriented change.
-- Before pushing, fetch again and compare against current `origin/main`; reconcile upstream changes without overwriting others' work.
-- Verify the pushed remote ref. Task branches do not open pull requests by default. The integration owner decides whether the batch needs one integration PR or validated direct integration.
-- Before work, prune stale remote refs and inspect existing branches. Keep commits focused; do not rewrite published history merely for tidiness.
-- Do not let multiple sub-agents push directly to `main`. The integration owner reviews candidate commits, resolves conflicts against current `main`, runs combined acceptance, then integrates validated work. After integration, verify that remote `main` contains the work, then remove merged task branches locally and remotely and retire clean temporary worktrees. Preserve active branches, dirty work, and required local environments; never force-delete unmerged work.
-- Do not force-push or discard work. The owner has standing authorization for validated integration into `main`; use an integration PR for shared contract/schema, dependency/model, public-data/license, or milestone-sized changes, and direct integration for small low-risk validated changes.
-- Keep these shared instructions in this file; avoid duplicating them in editor-specific always-on rules.
+Follow [CONTRIBUTING](CONTRIBUTING.md) for Git, validation and integration. The
+persistent mode lives only in `docs/STATE.md`: AUTO integrates validated authorized
+work; REVIEW stops before merge for the user's review. Re-read it before merging.
+An explicit mode-switch instruction updates that line and persists across tasks.
+Never force-push, discard work or retire unmerged/dirty/active branches.
+
+After each material checkpoint or phase, update STATE in place and the active
+PLAN's relevant task/gate. Update affected operator/contract docs with the change.
+Record a new enduring decision or supersession in DECISIONS; leave old reasoning
+and saved reports intact. Retire completed plans through the knowledge index and
+Git history before replacing PLAN. Do not create new progress/status diaries,
+per-agent documentation or duplicate instructions. See the [maintenance rules](docs/README.md).

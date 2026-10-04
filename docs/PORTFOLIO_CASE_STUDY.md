@@ -10,10 +10,10 @@ The operational core and local Decision Lab are implemented on main with
 synthetic business data. Ten subsequent research/UX/readiness PRs are merged
 through PR 24 at main `f132bf4` as of 2026-10-03, with a locally validated combined
 acceptance and verified remote ancestry. PR 25 fixes full-history checkout;
-main `9d7c55f` has [240 passing remote tests and green hygiene](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160). Public
+the recorded `9d7c55f` CI run has [240 passing remote tests and green hygiene](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160). Public
 transaction research is a separate observed-sales boundary. There is no hosted
 deployment, purchase execution, measured retailer saving or production claim.
-[Verified delivery status](RESEARCH_STATUS.md), [exact claim receipt](review/portfolio-claims.json).
+[Current state and recorded acceptance](STATE.md), [exact claim receipt](review/portfolio-claims.json).
 
 ## Problem and architecture
 
@@ -126,11 +126,11 @@ establish population confidence, service guarantees or commercial savings.
 
 Prospective disjoint-item calibration, a separate lost-sales protocol and an
 additive synthetic physical-count layer are implemented and merged. The next
-decision is review of the [engineering benchmark proposal](ENGINEERING_BENCHMARK_PLAN.md)
+decision is review of the [engineering benchmark proposal](PLAN.md)
 and [remaining readiness gaps](ENGINEERING_READINESS.md). Feature development,
 including unfinished planner-loop execution, is paused. Complex models,
 allocation/capacity optimization and hosting retain explicit evidence,
-contract or ownership gates. The [22-direction status and continuation plan](RESEARCH_STATUS.md)
+contract or ownership gates. The [22 retained research questions](README.md#retained-research-questions-and-tentative-extensions)
 preserves all options and the condition for moving each forward.
 
 ## Resume wording

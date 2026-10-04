@@ -1,8 +1,8 @@
 # Inventory Decision Lab
 
-Local synthetic replay UI over the existing reliability, forecast, replenishment,
-simulation and evidence-explanation components. The
-[architecture and implementation handoff](DECISION_LAB_PLAN.md) bounds this slice.
+Local synthetic replay UI over reliability, forecasts, advisory replenishment,
+a separate periodic simulator and saved evidence. This guide owns the delivered
+architecture/API/UX; original handoffs are [retired snapshots](README.md#retired-plans-and-checkpoints).
 
 ## Run locally
 
@@ -61,6 +61,44 @@ cite their lab calculation hash. Saved planning UUIDs are labelled as input-run
 references so scenario values cannot appear to be stored baseline outputs.
 The incomplete-supply control suppresses the scenario proposal, projection,
 simulation, risk and costs; it retains the clean baseline for comparison.
+
+## Adapter and API boundary
+
+`lab.evaluate(overrides=None, evidence=None)` returns `contract_version`,
+`metadata`, `defaults`, `controls`, `baseline`, `scenario`, `comparison`, and
+`warnings`. Metadata retains synthetic key, cutoff, input UUIDs and archive digest;
+trace/calculation hashes identify derived values separately. Each side retains
+status/reasons, parameters, forecast, plan, simulation, costs, risk and trace.
+`load_evidence()` validates the packaged archive. No runtime DB, LLM or source write
+is used. The exporter alone loads a fresh synthetic database and saved real runs.
+
+POST `/api/scenarios` accepts strict bounded integers with these defaults:
+
+| Field | Default | Inclusive bounds |
+|---|---:|---|
+| demand_percent | 100 | 0–200 |
+| lead_days | 2 | 1–14 |
+| review_days | 3 | 1–7 |
+| supplier_delay_days | 0 | 0–14 |
+| inbound_day | 1 | 0–27 |
+| reservation_qty | 3 | 0–100 |
+| safety_qty | 2 | 0–100 |
+| pack_size | 6 | 1–24 |
+| moq | 10 | 1–100 |
+| service_target_percent | 90 | 0–100 |
+
+`evidence_case` is `clean` (default) or `incomplete_supply`. Unknown fields,
+booleans, strings, floats, nulls and out-of-range values yield 422. Invalid/missing
+archive evidence yields HTTP 503; direct adapter evaluation suppresses both sides.
+`/api/lab/evidence` aliases `/api/evidence`. Injected archive/override inputs are
+copied; the clean baseline stays immutable when a scenario is blocked.
+
+The packaged frontend renders backend business values and exact rational tables;
+number conversion is for chart/display coordinates only. Input edits mark results
+stale; failed requests retain the last successful response and expose a focusable
+error/retry. Server evidence is rendered as text. No external font/CDN/chart library,
+frontend build or client-side business calculation is needed. Independent timing,
+cost, conservation and rounding controls remain in the [validation evidence](DECISION_LAB_VALIDATION.md).
 
 ## Regenerate the bundled evidence
 

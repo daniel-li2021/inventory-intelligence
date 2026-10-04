@@ -1,5 +1,8 @@
 # Decision Lab adversarial readiness review
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Reviewed 2026-10-03 from `429cc71`, using the existing packaged synthetic
 archive and Python 3.12.14. No database, model API, external data or benchmark
 recomputation was required for this slice.

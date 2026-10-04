@@ -1,5 +1,8 @@
 # Decision Lab accessibility and UX review
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 2026-10-03, local synthetic replay on `codex/lab-accessibility`, starting from
 main `f6d3d1`. This is a targeted browser/code review, not a full WCAG certificate
 or a screen-reader speech test. No backend arithmetic, source archive, API schema

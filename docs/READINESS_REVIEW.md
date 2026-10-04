@@ -1,5 +1,8 @@
 # Independent readiness review — 2026-10-03
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 **Historical checkpoint at `429cc71`, retained below.** The current
 [engineering readiness review](ENGINEERING_READINESS.md) supersedes its status
 and priorities after PR 14–24 and PR 25. Public observed-sales research is now
@@ -130,5 +133,5 @@ A public observed-sales benchmark can add external evidence, but requires a
 separate dataset/license/target boundary and cannot validate latent demand or
 historical stockouts. Hosting adds accessibility rather than model evidence;
 additional model complexity is not yet justified. The
-[ranked investigation](READINESS_NEXT_STEPS.md) records scope, sources, risks and
+[ranked investigation](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/READINESS_NEXT_STEPS.md) records scope, sources, risks and
 stop/advance criteria. Continued implementation is conditional, not the default.

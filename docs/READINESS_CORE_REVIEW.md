@@ -1,5 +1,8 @@
 # Core engineering review — 2026-10-03
 
+> Historical assessment for the recorded source/environment. Use [STATE](STATE.md)
+> for current phase, scope, integration mode and acceptance references.
+
 Review baseline: `429cc71` (current `main` at review start). Scope was the
 Reliability → Demand/Forecast → Replenishment → persisted Copilot explanation
 path. This is local synthetic evidence, not production validation.

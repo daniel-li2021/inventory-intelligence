@@ -1,7 +1,7 @@
-# Proposed public observed-sales research — v1
+# Assigned public observed-sales research — v1
 
 Prepared 2026-10-02; **assigned by the user on 2026-10-03** as part of the
-[long-term roadmap](RESEARCH_ROADMAP.md). This authorizes official UCI acquisition
+[long-term roadmap](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/RESEARCH_ROADMAP.md). This authorizes official UCI acquisition
 and the bounded separate research described here. It is not a relaxation of the
 operational planning contract or permission to import confidential inputs.
 The operational portfolio stays synthetic. Public observations would live in a
@@ -75,7 +75,7 @@ segment checks. Aggregate results may justify a new aggregation or global-model
 handoff; ADIDA/IMAPA/LightGBM are not automatic additions. A failed or blocked
 benchmark leaves the existing approved methods untouched.
 
-## Current implementation checkpoint
+## Historical implementation checkpoint
 
 The [adapter](PUBLIC_ADAPTER_V1.md) and [forecast-only evaluation](PUBLIC_FORECAST_V1.md)
 are implemented and independently validated on the public-observed-sales task
