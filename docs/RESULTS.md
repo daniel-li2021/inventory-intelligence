@@ -194,6 +194,8 @@ calls stay unknown, excluded from measured totals. Exit 1 retains expectation fa
 
 ## Research results
 
+[Decision benchmark](#decision-benchmark) | [Intermittent benchmark](#intermittent-benchmark) | [Startup feasibility](#startup-feasibility) | [Paid warmup](#paid-warmup) | [Safety retention](#safety-retention) | [Supply sensitivity](#supply-sensitivity) | [Ordering policies](#ordering-policies) | [Public observed sales](#public-observed-sales) | [Public sales safety](#public-sales-safety) | [Disjoint item calibration](#disjoint-item-calibration) | [Matched lost sales](#matched-lost-sales) | [Physical count controls](#physical-count-controls)
+
 All studies below are completed, bounded evidence. Their evaluated paths/holdouts
 are consumed; they do not assign future work or promote an operational policy.
 The [evidence catalog](EVIDENCE.md#study-artifacts-and-original-sources) binds full
@@ -943,9 +945,8 @@ There is no consistent overall/new-method advantage across these families or
 regimes. Empirical safety sometimes restores service at additional holding cost,
 but is neither a calibrated service guarantee nor a general promotion basis.
 No runtime champion changes follow these findings. ADIDA or LightGBM would not
-remove a shortage before any receipt can occur. This run supports examining
-initial-stock/lead-time feasibility and safety retention under demand decline
-before expanding the model grid. Such changes need a new frozen counterfactual;
-this holdout must not become a tuning set. Complete exact metrics, pinball loss,
+remove a shortage before any receipt can occur. The subsequent feasibility, warmup and retention studies above address those
+questions. This holdout remains consumed and cannot become a tuning set.
+Complete exact metrics, pinball loss,
 failures and selected/reference calibration evidence are in
 [the artifact](review/intermittent-benchmark.json).
