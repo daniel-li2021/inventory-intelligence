@@ -33,3 +33,27 @@ is not a performance benchmark or proof of repeated CI reliability. The older
 236-test/error run and local candidate receipts remain unchanged historical
 evidence. See [current engineering readiness](ENGINEERING_READINESS.md) and the
 [separate baseline inspection receipt](review/engineering-readiness-baseline.json).
+
+## PR 26: documentation drift exposed a fixed-count oracle
+
+[PR 26 run 37166377305](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37166377305)
+executed 240 tests with one failure: the lineage test expected exactly 13 current
+source-drift bindings, but correctly observed 14. Repository hygiene passed.
+The new binding is `docs/HOSTED_LAB_PLAN.md` referenced by the immutable original
+hosted acceptance receipt. Updating current status legitimately changes that
+document's hash; it does not invalidate the report's original source snapshot.
+This differs from PR 25's shallow-history setup error. No merge conflict or
+inventory arithmetic failure caused this run to fail.
+
+The test now independently enumerates exact drift rows from saved source maps
+and current file bytes, checking artifact/source identity, both hashes, missing
+files and the summary denominator. Existing historical-kernel, artifact-byte,
+ancestry and graph corruption checks remain. A regression exercises the document
+at its original bytes and updated bytes; omitting its real drift row, even with a
+matching reduced count, must fail. Do not replace the old 13 with another fixed
+total, suppress documentation drift or rewrite saved reports to pass CI.
+
+Documentation changes to source-bound files must run the focused lineage tests
+before pushing. Green CI is required on the exact PR head before automatic merge;
+then verify the resulting main run separately. Feature and benchmark development
+remain paused during this CI repair.
