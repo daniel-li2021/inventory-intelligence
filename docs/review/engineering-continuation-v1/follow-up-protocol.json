@@ -1,0 +1,7 @@
+{
+  "start_utc": "2026-10-04T07:54:43.943716+00:00",
+  "deadline_utc": "2026-10-04T10:54:43.943716+00:00",
+  "purpose": "timed Linux JIT diagnosis, verified crash, one full-window HTTP replacement",
+  "priority": "complete three qualifying 1800-second campaigns before optional serial1000",
+  "observed_tail_shortfall_seconds": 0.584759167
+}

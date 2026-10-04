@@ -167,18 +167,21 @@ comparable AS (
     AND NOT EXISTS (SELECT 1 FROM blocked_keys b
                     WHERE (b.sku_id, b.warehouse_id) = (k.sku_id, k.warehouse_id))
 ),
+movement_totals AS (
+    SELECT sku_id, warehouse_id, sum(quantity::numeric) AS quantity,
+           array_agg(row_id) AS row_ids
+    FROM eligible GROUP BY sku_id, warehouse_id
+),
 quantities AS (
     SELECT k.sku_id, k.warehouse_id,
-           (o.quantity::numeric + COALESCE((SELECT sum(m.quantity::numeric) FROM eligible m
-               WHERE (m.sku_id, m.warehouse_id) = (k.sku_id, k.warehouse_id)), 0))::bigint AS expected_qty,
+           (o.quantity::numeric + COALESCE(m.quantity, 0))::bigint AS expected_qty,
            s.on_hand_qty AS observed_qty,
-           ARRAY(SELECT r.row_id FROM (
-               SELECT o.row_id UNION ALL SELECT s.row_id UNION ALL
-               SELECT m.row_id FROM eligible m
-               WHERE (m.sku_id, m.warehouse_id) = (k.sku_id, k.warehouse_id)
-           ) r ORDER BY r.row_id) AS row_ids
+           ARRAY(SELECT row_id FROM unnest(
+               ARRAY[o.row_id, s.row_id] || COALESCE(m.row_ids, ARRAY[]::text[])
+           ) r(row_id) ORDER BY row_id) AS row_ids
     FROM comparable k JOIN openings o USING (sku_id, warehouse_id)
     JOIN snapshots s USING (sku_id, warehouse_id)
+    LEFT JOIN movement_totals m USING (sku_id, warehouse_id)
 ),
 findings AS (
     SELECT rule_id, reason, sku_id, warehouse_id, row_ids AS source_row_ids,

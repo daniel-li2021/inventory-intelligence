@@ -1,0 +1,1 @@
+{"cases":[{"case":"effective-controls","network":"internal bridge, proxy alone bound to loopback","probe":"effective-controls.txt","proxy_uid":"root as configured; lab UID10001","status":"pass"}],"confirmation":"only qualifying sustained cells; ARM64 one-date local VM, not x86 reference","proxy":"loopback HTTP; public TLS unmeasured","wall_seconds":51.60854120901786}

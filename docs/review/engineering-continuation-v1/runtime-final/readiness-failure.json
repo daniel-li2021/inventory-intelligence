@@ -1,0 +1,1 @@
+{"bytes":0,"http_status":502,"issued_ns":1244428665500833,"issued_to_complete_ns":12529750,"oracle":"not_admitted","outcome":"unexpected","payload":{},"planned_ns":1244428665496000,"response_sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","route":"lab","scheduled_to_complete_ns":12534583,"scheduler_lag_ns":4833}

@@ -1,0 +1,9 @@
+services:
+  proxy:
+    ports: !override
+      - '127.0.0.1:62590:8080'
+    networks: [demo, edge]
+networks:
+  demo:
+    internal: true
+  edge: {}

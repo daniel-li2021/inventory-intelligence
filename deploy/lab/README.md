@@ -168,3 +168,12 @@ The subsequent [native engineering pilot](../../docs/RESULTS.md#local-engineerin
 adds short open-arrival HTTP/admission/body recovery and separate small PostgreSQL
 fault/restore evidence. It does not verify container/Linux enforcement, hosted
 application crash recovery, public release or the confirmation sample/duration floor.
+
+The [October 4 continuation](../../docs/RESULTS.md#engineering-continuation) builds
+this maintained pinned image and measures its actual ARM64 Linux Lab controls:
+UID10001, read-only filesystem, capability/no-new-privileges restrictions,
+0.5 CPU/256 MiB/64 PID enforcement, internal app network and missing/corrupt
+archive HTTP503. Its proxy is root as configured and bound only to loopback HTTP,
+with an additional bridge for local ingress. Runtime/load/fault receipts are
+separate from x86/two-date reference confirmation, public TLS and independent
+human release acceptance; the slow-body proxy outcome remains a release gap.

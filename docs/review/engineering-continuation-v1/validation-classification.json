@@ -1,0 +1,6 @@
+{
+  "focused_regressions": 63,
+  "focused_status": "passed",
+  "lineage_status": "precommit setup blocked: EVIDENCE bytes must be committed; separate postcommit validation required",
+  "precommit_log": "final-validation.log.gz"
+}

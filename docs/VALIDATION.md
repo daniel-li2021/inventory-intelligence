@@ -82,3 +82,19 @@ cross-batch duplicate identities, source immutability, reader/persistence and
 hosted bounds. The five added fixture/worker controls enter the existing discovery gate;
 large benchmarks do not run in CI. [Real supervised smoke and measurements](EVIDENCE.md#local-engineering-pilot)
 remain separate from unit-test counts and full reference confirmation.
+
+The continuation adds independent hand controls for every first-fold prediction,
+fractional zero-quota allocation, holdout exclusion, changed frozen SQL, protected
+measurement labels and observing the complete HTTP offer window.
+Two further controls preserve a completed request when clocks diverge and reject
+a wall-budget overrun that the active clock omits. They make no network calls.
+
+```sh
+PYTHONPATH=src python -m unittest tests.test_engineering_confirmation -v
+```
+
+The SQL change also requires the existing acceptance and replenishment controls
+against a fresh disposable DB, including invalid inputs and exact source evidence.
+Actual paired, Linux, scale and fault measurements remain separate from test counts
+in [continuation evidence](EVIDENCE.md#engineering-continuation). Reference hardware,
+multi-date confirmation and independent human acceptance are still pending.

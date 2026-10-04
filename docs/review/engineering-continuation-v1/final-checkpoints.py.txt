@@ -1,0 +1,38 @@
+"""Sequential follow-ups after load ends; no concurrent intensive measurements."""
+from datetime import datetime,timezone
+from pathlib import Path
+import json,subprocess,time,sys,os
+ROOT=Path.cwd()
+BASE=ROOT/'artifacts/engineering-continuation-v1'
+PYTHON=Path('/private/tmp/ii-lab-venv/bin/python')
+DOCKER=Path('/Applications/Docker.app/Contents/Resources/bin/docker')
+# Three-hour ceiling measured from the disposable cluster's actual creation.
+start=os.stat('/private/tmp/ii-confirmation-pg').st_birthtime
+deadline=start+10800
+protocol=dict(start_utc=datetime.fromtimestamp(start,timezone.utc).isoformat(),
+ deadline_utc=datetime.fromtimestamp(deadline,timezone.utc).isoformat(),
+ purpose='timed Linux JIT diagnosis, verified crash, one full-window HTTP replacement',
+ priority='complete three qualifying 1800-second campaigns before optional serial1000',
+ observed_tail_shortfall_seconds=.584759167)
+(BASE/'follow-up-protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
+while not (BASE/'runtime-crash-corrected/summary.json').exists():
+ if time.time()>deadline:raise RuntimeError('continuation wall ceiling exhausted while waiting')
+ time.sleep(1)
+summary=json.loads((BASE/'runtime-crash-corrected/summary.json').read_text())
+assert len([r for r in summary['cases'] if r['case'].startswith('sustained-') and 'issued' in r])==3
+# The original controller has finished all intensive work and scoped cleanup.
+commands=[
+ ('linux-jit',[str(PYTHON),'-m','scripts.engineering_linux','--docker',str(DOCKER),'--output',str(BASE/'linux-jit'),'--campaigns','1','--diagnostic-only'],180),
+ ('runtime-confirmation',[str(PYTHON),'-m','scripts.engineering_runtime','--docker',str(DOCKER),'--output',str(BASE/'runtime-confirmation'),'--duration','1800','--campaigns','1','--sustained-only','--wall-seconds','1900'],1950),
+]
+for label,command,cap in commands:
+ remaining=deadline-time.time()
+ if remaining<cap:
+  (BASE/(label+'-not-measured.json')).write_text(json.dumps(dict(status='not_measured',reason='three-hour ceiling',remaining_seconds=remaining))+'\n')
+  continue
+ print(json.dumps(dict(stage=label,status='starting',remaining_seconds=remaining)),flush=True)
+ with (BASE/(label+'-controller.log')).open('w') as log:
+  result=subprocess.run(command,cwd=ROOT,stdout=log,stderr=log,timeout=min(cap,remaining))
+ print(json.dumps(dict(stage=label,exit_code=result.returncode)),flush=True)
+ if result.returncode: break
+(BASE/'follow-up-complete.json').write_text(json.dumps(dict(completed_at_utc=datetime.now(timezone.utc).isoformat(),elapsed_seconds=time.time()-start))+'\n')

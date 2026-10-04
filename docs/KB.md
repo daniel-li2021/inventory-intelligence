@@ -76,16 +76,17 @@ extraction are not measured throughput or service capacity.
 
 | Gap | Finding / hypothesis | Evidence needed |
 |---|---|---|
-| Scale and repeated work | Primary keys exist; dedicated batch/grain indexes were not established. Demand scanning, identities and backtests may repeat whole-batch work. `run_plan` revalidates a whole batch per key. The local EXPLAIN now shows 1,000 eligible scans ×99,900 filtered rows at 1k/100k; no optimization is confirmed. | B1/B2 scale/history measurements in [PLAN](PLAN.md), including actual per-key calls. Preserve cross-key duplicate and clock checks in any optimization. |
+| Scale and repeated work | Grouping eligible movements once removes the confirmed 1,000 scans ×99,900 filtered rows. The local paired median fell 10.251→0.856s; the 1M-movement cell now completes. `run_plan` still revalidates its whole batch per key. ARM64 Linux selected planning takes ~3s; a separate zero-ledger profile spent 2.134/2.166s compiling 583 JIT functions. | Keep native/Linux distributions separate; complete x86/two-date confirmation. Any JIT tuning needs a separate comparison; the assigned single optimization is complete. |
 | Report growth | Reliability readers cap 1,000 findings / 2 MiB; planning readers cap 16 MiB. Local producer growth and both reader accounting boundaries are now measured; larger defect cells hit the SQL deadline. | B3 failure-envelope measurements. Never truncate findings or raise limits merely to improve a chart. |
-| Contention and cancellation | Only benchmark connections have 55s/5s deadlines. A two-key native fault DB now verifies interruption, coherent concurrent reads and crash/restore; larger/app/Linux recovery remains unmeasured. | B4 network/admission load and V2 fault/restart/restore checks. |
-| Runtime | Hosted configuration admits four active requests at 2 requests/s; proposed app caps are 0.5 CPU / 256 MiB. Configuration is not capacity. | V1 clean Linux/container enforcement with image/resource evidence. |
+| Contention and cancellation | Only benchmark connections have 55s/5s deadlines. Native interruption/snapshot/crash/restore covers a 1k-grain/100k-movement archive with two discrepant probe grains. A verified Lab process crash recovered in 1.652s, with one fault-window 502. Dense duplicate and all-grain discrepancy calls still cancel with no appended history. | Remaining sustained B4/grid cells; do not generalize these faults into RTO/RPO guarantees. |
+| Runtime | Actual ARM64 Linux Lab controls verify UID10001, read-only/no-new-privileges/capability restrictions and 0.5 CPU /256 MiB /64 PID limits. One continuous 30-minute campaign completed 2700/2700; short/discontinuous/interrupted windows are excluded. Active clocks missed a wall-budget overrun; delivered guards and journals address that integrity gap. The proxy slow-body path closes or returns 504 rather than 408. | Three-campaign stability/sample gates, proxy timeout semantics and x86/two-date reference remain open. Harness repairs have correctness controls, not new performance confirmation. |
 | Release and human use | Private-CA HTTPS and bounded keyboard/mobile paths passed. Public uptime, speech/zoom/forced colors and cold-start acceptance remain unmeasured. Branch protection was not verified by green CI. | V3 human checks plus reviewed host/domain/cost/public release. |
 
 Workloads, SLOs, cache/timing definitions, environment and budget remain in PLAN.
-The approved existing-Mac pilot is complete; Linux reference/confirmation scope
-review precedes further measurements. Measure one confirmed gap, make at most one justified
-change and confirm exact outcomes; otherwise freeze the baseline. Speculative queues,
+The original existing-Mac pilot is complete. The October 4 assignment authorizes
+remaining checks on available local runtimes and one focused optimization; that
+optimization is now measured. Keep further engine changes separate from diagnosis.
+Speculative queues,
 Redis, Kubernetes, sharding, ORMs, indexes or advanced models do not follow from this.
 
 ## Source and tool lessons

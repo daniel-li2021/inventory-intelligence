@@ -1,0 +1,1 @@
+{"checks":[{"rule_id":"R001","status":"not_assessable"},{"rule_id":"R002","status":"pass"},{"rule_id":"R003","status":"pass"},{"rule_id":"R004","status":"fail"},{"rule_id":"R005","status":"pass"}],"findings":[["R004","invalid_transfer",null,null,["defect-transfer-1:m:0","defect-transfer-1:m:100"],null,null,null]],"overall_status":"fail"}

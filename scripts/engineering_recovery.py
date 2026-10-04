@@ -35,7 +35,7 @@ def result_digest(conn):
     return h.hexdigest()
 
 
-def blocked_writer(owner,args,output,*,kill):
+def blocked_writer(owner,args,output,*,kill,probe_skus=None):
     before=history(owner)
     blocker=connect("TEST_DATABASE_URL")
     blocker.execute("BEGIN")
@@ -70,7 +70,7 @@ with psycopg.connect(os.environ['DATABASE_URL'],autocommit=True,application_name
                 # Deliberate source-owner transaction in this separate fault fixture.
                 # Retained writer must persist its already acquired repeatable-read snapshot.
                 with owner.transaction():
-                    owner.execute("UPDATE operational_fixture.snapshots SET on_hand_qty=on_hand_qty+1, observed_at=%s WHERE batch_id=%s",(CUTOFF+timedelta(seconds=1),args["snapshot_batch_id"]))
+                    owner.execute("UPDATE operational_fixture.snapshots SET on_hand_qty=on_hand_qty+1, observed_at=%s WHERE batch_id=%s AND (%s::text[] IS NULL OR sku_id=ANY(%s))",(CUTOFF+timedelta(seconds=1),args["snapshot_batch_id"],probe_skus,probe_skus))
                     owner.execute("UPDATE operational_fixture.batches SET observed_at=%s WHERE batch_id=%s",(CUTOFF+timedelta(seconds=1),args["snapshot_batch_id"]))
             blocker.execute("ROLLBACK")
             if not kill:
@@ -94,7 +94,12 @@ def main():
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--pg-bin",type=Path,required=True)
     parser.add_argument("--pgdata",type=Path,required=True)
+    parser.add_argument("--keys",type=int,default=2)
+    parser.add_argument("--movements",type=int,default=0)
+    parser.add_argument("--probe-keys",type=int,default=2)
     args=parser.parse_args()
+    if not 2<=args.keys<=1000 or not 0<=args.movements<=100000 or args.movements%args.keys or not 1<=args.probe_keys<=args.keys:
+        parser.error("2..1000 grains, integral 0..100k movements, valid probe-key subset")
     args.output.mkdir(parents=True,exist_ok=False)
     pgdata=args.pgdata.resolve()
     owner=connect("TEST_DATABASE_URL")
@@ -110,26 +115,31 @@ def main():
         (args.output/"checkpoint.json").write_bytes(encoded(dict(cases=cases,
             wall_seconds=time.monotonic()-begin,complete=False))+b"\n")
     protocol=dict(version="engineering-recovery-v1",source_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
-        scope="fresh two-key synthetic fault DB on explicit disposable native cluster",
+        scope="fresh synthetic fault DB on explicit disposable native cluster",
+        keys=args.keys,movements=args.movements,probe_keys=args.probe_keys,
         faults=["kill writer while findings insert blocked","owner commit during repeatable-read writer",
             "immediate PostgreSQL stop/restart","pg_dump custom restore to second database"],
         reference_host=False,guaranteed_rto_rpo=False)
     (args.output/"protocol.json").write_bytes(encoded(protocol)+b"\n")
-    m=inventory_manifest("v2",2,0,quantity_probe=True)
+    m=inventory_manifest("v2",args.keys,args.movements)
     load_inventory(owner,m)
+    probe_skus=[f"v2:sku:{i}" for i in range(args.probe_keys)]
+    owner.execute("UPDATE operational_fixture.snapshots SET on_hand_qty=on_hand_qty+1 WHERE batch_id='v2:snapshot' AND sku_id=ANY(%s)",(probe_skus,))
     context=dict(ledger_batch_id="v2:ledger",snapshot_batch_id="v2:snapshot",as_of=CUTOFF,evaluated_at=CUTOFF,code_version=protocol["source_sha256"])
     with connect("DATABASE_URL") as runner: committed=run_checks(runner,**context)
+    assert [(f["sku_id"],f["expected_qty"],f["delta_qty"]) for f in committed["findings"]]==[
+        (q[0],q[2],1) for q in sorted(m["expected_quantities"]) if q[0] in probe_skus]
     before_source=source_digest(owner); before_result=result_digest(owner)
-    cases.append(blocked_writer(owner,{**context,"as_of":CUTOFF.isoformat(),"evaluated_at":CUTOFF.isoformat()},args.output,kill=True))
+    cases.append(blocked_writer(owner,{**context,"as_of":CUTOFF.isoformat(),"evaluated_at":CUTOFF.isoformat()},args.output,kill=True,probe_skus=probe_skus))
     assert before_source==source_digest(owner) and before_result==result_digest(owner)
     checkpoint()
-    cases.append(blocked_writer(owner,{**context,"as_of":CUTOFF.isoformat(),"evaluated_at":CUTOFF.isoformat()},args.output,kill=False))
+    cases.append(blocked_writer(owner,{**context,"as_of":CUTOFF.isoformat(),"evaluated_at":CUTOFF.isoformat()},args.output,kill=False,probe_skus=probe_skus))
     old_deltas=owner.execute("SELECT delta_qty FROM reliability.findings WHERE run_id<>%s ORDER BY finding_id",(committed["run_id"],)).fetchall()
-    assert old_deltas==[(1,),(1,)]
+    assert old_deltas==[(1,)]*args.probe_keys
     with connect("DATABASE_URL") as runner:
         new=run_checks(runner,**(context|dict(evaluated_at=CUTOFF+timedelta(seconds=1))))
-    assert [f["delta_qty"] for f in new["findings"]]==[2,2]
-    cases[-1].update(saved_old_deltas=[1,1],next_run_deltas=[2,2],coherent_repeatable_read=True,
+    assert [f["delta_qty"] for f in new["findings"]]==[2]*args.probe_keys
+    cases[-1].update(saved_old_deltas=[1]*args.probe_keys,next_run_deltas=[2]*args.probe_keys,coherent_repeatable_read=True,
         source_owner_observed_at=(CUTOFF+timedelta(seconds=1)).isoformat(),
         subsequent_evaluated_at=(CUTOFF+timedelta(seconds=1)).isoformat())
     checkpoint()

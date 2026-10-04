@@ -190,3 +190,62 @@ receipts are not reformatted/rehashed in place. Published-file integrity is in
 No public/customer operational data, model calls, paid provisioning or deployment
 is part of this receipt. Wheel/image hashes, enforced Linux resources, long/stable
 campaigns, broader recovery and independent human checks remain unverified.
+
+## Engineering continuation
+
+The October 4 [results](RESULTS.md#engineering-continuation) and
+[commands](OPERATIONS.md#engineering-continuation) cover the user-assigned remaining
+checks on available local runtimes and exactly one production SQL change. The
+native PostgreSQL 17.6/Mac before/after observations are separate from five fresh
+PostgreSQL 17.9/ARM64 Linux campaigns and the constrained Compose HTTP runtime.
+None completes the proposed x86-64/Python3.12.12/two-date reference gate.
+
+- [Paired calls](review/engineering-continuation-v1/paired/samples.jsonl),
+  [original summary](review/engineering-continuation-v1/paired/summary.json),
+  [before plan](review/engineering-continuation-v1/paired/before-plan.json) and
+  [after plan](review/engineering-continuation-v1/paired/after-plan.json).
+- [Five Linux campaigns](review/engineering-continuation-v1/linux/summary.json),
+  [native serial planning](review/engineering-continuation-v1/planning/summary.json),
+  [zero-demand grid](review/engineering-continuation-v1/backtests/summary.json),
+  [defect producers](review/engineering-continuation-v1/defects/summary.json) and
+  [saved-reader identities](review/engineering-continuation-v1/defects/saved-readers/identity.json).
+- [Scaled DB recovery](review/engineering-continuation-v1/recovery/summary.json) and
+  [derived profiles/capacity/fault classifications](review/engineering-continuation-v1/derived-summary.json).
+- [Source binding](review/engineering-continuation-v1/source-binding.json),
+  [original artifact manifest](review/engineering-continuation-v1/artifact-manifest.json),
+  [frozen publisher/derivation](review/engineering-continuation-v1/publish-evidence.py.txt)
+  / [final classifications](review/engineering-continuation-v1/finalize-evidence.py.txt)
+  and [published-file hashes](review/engineering-continuation-v1/published-hashes.json).
+
+The continuation receipt preserves original samples and failures, frozen query
+bytes, exact launch-controller/worker versions where recovered and verified,
+immutable source hashes, independent oracle bindings, image/runtime controls and
+separate SQL profiles. Later harness repairs are declared in a derived view;
+original observations are never rewritten to turn a failure into a success.
+The first HTTP window is short, the third has ~907s wall/active divergence and
+the replacement is interrupted with another ~1798s divergence. Only one window
+qualifies; raw successes do not complete stability/sample gates. Clock evidence
+uses original filesystem creation times and the recorded active-clock duration.
+Delivered real-wall guards and partial-request journals are tested repairs whose
+performance was not remeasured. The 180-minute target overran to 192.8 minutes;
+that limitation remains part of the receipt. Sixty-three focused checks passed;
+the precommit lineage setup rejection is retained because that validator requires
+committed EVIDENCE bytes. Its separate postcommit checks belong to integration.
+
+Crash success requires a changed PID and increased restart count before explicit
+cell restarts; a later state snapshot is inconclusive. The corrected helper targets
+only the verified Lab cgroup from an ancestor PID namespace. The
+[Linux PID namespace reference](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
+explains init signal restrictions; [Docker restart policy](https://docs.docker.com/engine/containers/start-containers-automatically/)
+explains why the earlier manual-stop trigger was unsuitable.
+Large synthetic reports, fixture manifests, database backup and the stopped
+disposable cluster remain local under ignored `artifacts/engineering-continuation-v1`
+and `/private/tmp/ii-confirmation-pg`. Curated raw calls/requests and reproducible
+derivations are retained under `docs/review/engineering-continuation-v1`.
+Logs use gzip containers; decompression reproduces their original bytes and
+hashes, including Docker progress whitespace.
+
+Operational/public customer data, model calls, paid provisioning and public
+deployment are absent. Linux ARM64, one date, fixed batch order, uncontrolled OS
+cache, smaller defect denominators, remaining HTTP/grid cells and unmeasured serial1000 remain explicit
+limits. Historical pilot bytes/source bindings remain unchanged.

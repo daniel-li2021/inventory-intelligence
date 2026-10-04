@@ -1,0 +1,9 @@
+{
+  "reason": "prioritize replacement and verified crash within three-hour ceiling",
+  "at_utc": "2026-10-04T10:18:59.469395+00:00",
+  "target_pid": 70358,
+  "command": "/private/tmp/ii-lab-venv/bin/python -m scripts.engineering_runtime --docker /Applications/Docker.app/Contents/Resources/bin/docker --output artifacts/engineering-continuation-v1/runtime-crash-corrected --duration 1800 --campaigns 3 --wall-seconds 5900",
+  "completed_sustained": 3,
+  "continuity": "third summary wall gap from prior summary is about45m while active clock reports30m; requires continuity exclusion",
+  "short_grids": "completed rows retained; unfinished rows not measured after scoped controller SIGINT"
+}

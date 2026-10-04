@@ -1,0 +1,32 @@
+"""Final derived classifications; original measured samples remain unchanged."""
+import argparse
+import gzip
+from hashlib import sha256
+import json
+from pathlib import Path
+
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output',type=Path,default=Path('docs/review/engineering-continuation-v1'))
+b=parser.parse_args().output
+p=b/'derived-summary.json';r=json.loads(p.read_text())
+expected=[f'rate-{rate}-{i}' for i in range(3) for rate in (.5,2,3,5)]
+expected += [f'diagnostic-{mode}-{i}' for i in range(3) for mode in ('post','evidence')]
+expected += [f'burst-{n}-clients-{clients}' for n in (20,40) for clients in (1,4,8,16)]
+done={c['case'] for c in r['http']['exploratory_grids']}
+r['http']['unfinished_short_cells']=[dict(case=name,status='interrupted_or_not_measured',reason='optional grids stopped for replacement priority') for name in expected if name not in done]
+r['http']['replacement_load']=dict(status='interrupted',planned=2700,issued=None,completed=None,reason='real wall ceiling overrun/clock discontinuity; no final raw load receipt')
+observed=json.loads((b/'follow-up-complete.json').read_text())
+r['budget']=dict(target_wall_seconds=10800,observed_seconds=observed['elapsed_seconds'],wall_budget_compliant=False,
+    stopped_at_utc=observed['completed_at_utc'],performance_not_remeasured_after_clock_journal_repairs=True)
+r['unmeasured']=sorted(set(r['unmeasured'])|{'two further continuous HTTP campaigns','remaining rate/homogeneous/client grid','dense source-record scan diagnostic'})
+p.write_text(json.dumps(r,sort_keys=True,indent=2)+'\n')
+for log in b.rglob('*.log'):
+    log.with_suffix('.log.gz').write_bytes(gzip.compress(log.read_bytes(),mtime=0))
+    log.unlink()
+classification=dict(focused_regressions=63,focused_status='passed',precommit_log='final-validation.log.gz',lineage_status='precommit setup blocked: EVIDENCE bytes must be committed; separate postcommit validation required')
+(b/'validation-classification.json').write_text(json.dumps(classification,sort_keys=True,indent=2)+'\n')
+h={str(p.relative_to(b)):dict(bytes=p.stat().st_size,sha256=sha256(p.read_bytes()).hexdigest()) for p in sorted(b.rglob('*')) if p.is_file() and p.name!='published-hashes.json'}
+(b/'published-hashes.json').write_text(json.dumps(h,sort_keys=True,indent=2)+'\n')
+for name,meta in h.items():
+    p=b/name;assert len(p.read_bytes())==meta['bytes'] and sha256(p.read_bytes()).hexdigest()==meta['sha256']
+print(json.dumps(dict(verified_files=len(h),unfinished_short_cells=len(r['http']['unfinished_short_cells']))))

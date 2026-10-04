@@ -5,10 +5,15 @@ material checkpoint; link evidence instead of appending a progress diary.
 
 Integration mode: AUTO
 
-Phase: engineering readiness; local exploratory pilot complete; reference confirmation deferred.
-Features remain paused. The user approved runner implementation and the two-hour
-existing-Mac pilot. Reference confirmation, paid deployment and planner feature
-resumption require their own scope decision.
+Phase: engineering readiness; local continuation complete as practical; reference/stability/release gates pending.
+Features remain paused. The user assigned the remaining benchmark checks and one
+evidence-led optimization on October 4, selecting available local runtimes only.
+Native batch/scale checks, five fresh ARM64 Linux campaigns and timed JIT diagnosis
+are complete. One full continuous HTTP window and verified app crash passed;
+short/discontinuous/interrupted attempts remain excluded from stability confirmation.
+Wall-clock discontinuities caused the three-hour target to overrun; measurements
+stopped and clock guards/journaling were repaired. Paid deployment and planner
+feature resumption require their own scope decision.
 
 ## Integrated and measured
 
@@ -19,16 +24,21 @@ resumption require their own scope decision.
   [separate local combined acceptance](EVIDENCE.md#acceptance-history).
 - [Local engineering pilot](RESULTS.md#local-engineering-pilot): scoped batch/reader,
   planning/backtest, short native HTTP and small recovery evidence recorded.
-  Reference capacity, Linux enforcement, public hosting and production benefit
-  remain unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
+  [Continuation](RESULTS.md#engineering-continuation): one identical-workload SQL
+  optimization (~12x), 1M upper tier, serial100/backtest/defect grids, ARM64 Linux
+  enforcement and scaled recovery. Sixty-three focused regressions passed.
+  Reference/stable capacity, public hosting and production benefit remain
+  unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
 - Current knowledge, choices, results and evidence are consolidated; completed
   plans/protocol narratives and compatibility stubs are removed. Historical source
   bytes remain in Git, and original result/receipt bytes remain unchanged.
 
 ## Active work and next action
 
-- [Engineering plan](PLAN.md): local authorized scope complete. Review a Linux
-  reference host/runtime and confirmation budget before more measurements.
+- [Engineering plan](PLAN.md): remaining continuity-verified HTTP/rate/client,
+  x86/two-date, dense-evidence, serial1000 and independent human checks.
+  ARM64 one-date results do not complete the reference gate; Linux JIT tuning
+  needs a separate comparison after the assigned single optimization.
   Other research possibilities remain conditional knowledge, not active plans.
   [Registry](README.md#plans-and-work-status).
 - Preserve unmerged planner protocol commits `55f4170` / `538d29d` and unfinished

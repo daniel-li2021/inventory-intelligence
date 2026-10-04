@@ -1,0 +1,210 @@
+"""One-shot receipt derivation; run after all intensive measurements finish.
+
+Copies original bytes. Derived corrections never rewrite the original receipt.
+No DB/HTTP/model calls. Python stdlib only; rerun against a saved artifact tree.
+"""
+from collections import Counter
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+import shutil
+import statistics
+import subprocess
+
+ROOT=Path.cwd()
+BASE=ROOT/'artifacts/engineering-continuation-v1'
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output',type=Path,default=ROOT/'docs/review/engineering-continuation-v1')
+OUT=parser.parse_args().output.resolve()
+
+def read(path): return json.loads(path.read_text())
+def write(path,value): path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
+def digest(path):
+    h=sha256()
+    with path.open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''): h.update(block)
+    return h.hexdigest()
+def copied(path):
+    target=OUT/path.relative_to(BASE)
+    if target.suffix=='.py': target=target.with_suffix('.py.txt')
+    target.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copyfile(path,target)
+    return str(target.relative_to(OUT))
+def describe(values):
+    if not values:return dict(n=0)
+    quartiles=statistics.quantiles(values,n=4,method='inclusive') if len(values)>1 else [values[0]]*3
+    return dict(n=len(values),median=statistics.median(values),min=min(values),max=max(values),
+        q1=quartiles[0],q3=quartiles[2],iqr=quartiles[2]-quartiles[0],quartile_method='inclusive')
+def nearest(values,p):return sorted(values)[math.ceil(len(values)*p)-1] if values else None
+
+assert (BASE/'follow-up-complete.json').exists(), 'do not derive while workloads are running'
+OUT.mkdir(parents=True,exist_ok=False)
+baseline=subprocess.check_output(['git','rev-parse','1cbda39'],cwd=ROOT,text=True).strip()
+assert (BASE/'paired/before.sql').read_bytes()==b''.join(subprocess.check_output(
+    ['git','show',baseline+':'+p],cwd=ROOT) for p in ('sql/views.sql','sql/checks.sql'))
+assert (BASE/'paired/after.sql').read_bytes()==b''.join((ROOT/p).read_bytes() for p in ('sql/views.sql','sql/checks.sql'))
+bindings={}; phases={}
+for phase in ('paired','planning','backtests','defects','all-key-probe'):
+    folder=BASE/phase; environment=read(folder/'environment.json'); source_map=read(folder/'verified-source-map.json')
+    encoded=json.dumps(source_map,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+    assert sha256(encoded).hexdigest()==environment['source_sha256']
+    for source,expected in source_map.items():
+        candidates=[ROOT/source,BASE/'executed-worker-after.py',BASE/'paired/executed-worker.py'] if source.endswith('engineering_benchmark.py') else [ROOT/source]
+        matched=any(p.is_file() and digest(p)==expected for p in candidates)
+        if not matched:
+            assert sha256(subprocess.check_output(['git','show',baseline+':'+source],cwd=ROOT)).hexdigest()==expected
+    phase_file=folder/'phase.json'
+    if phase_file.exists():
+        assert digest(folder/'executed-controller.py')==read(phase_file)['script_sha256']
+    bindings[phase]=dict(source_sha256=environment['source_sha256'],source_map=phase+'/verified-source-map.json',
+        launch_controller=phase+'/executed-controller.py.txt' if phase_file.exists() else None)
+    phases[phase]=read(folder/'summary.json')
+    for path in folder.iterdir():
+        if not path.is_file() or path.name.endswith('.report.json'):continue
+        if path.name.startswith('call-'):continue
+        if path.name.endswith(('.json','.jsonl','.sql','.py')):copied(path)
+        elif path.suffix=='.log' and path.stat().st_size:copied(path)
+for path in (BASE/'defects/saved-readers').iterdir():
+    if path.is_file() and not path.name.endswith('.report.json') and path.suffix=='.json':copied(path)
+for folder_name in ('linux','linux-jit','dense-profile','recovery','runtime','runtime-repaired','runtime-final',
+        'runtime-crash-corrected','runtime-confirmation'):
+    folder=BASE/folder_name
+    if not folder.exists():continue
+    if folder_name.startswith('runtime'):
+        assert digest(folder/'executed-controller.py')==read(folder/'protocol.json')['code_sha256']
+        if 'network_sha256' in read(folder/'protocol.json'):
+            assert digest(folder/'executed-network.py')==read(folder/'protocol.json')['network_sha256']
+    if folder_name=='linux-jit':
+        assert digest(folder/'executed-controller.py')==read(folder/'protocol.json')['code_sha256']
+    for path in folder.iterdir():
+        if path.is_file() and path.suffix in ('.json','.jsonl','.txt','.yaml','.log','.py'):
+            copied(path)
+for path in BASE.iterdir():
+    if path.name in ('current-confirmation-controller.py','dense-diagnostic.py'):continue
+    if path.is_file() and path.suffix in ('.log','.json','.py'):copied(path)
+
+# Include exact current delivery files separately from recorded launch snapshots.
+paths=sorted({*ROOT.glob('src/inventory_intelligence/**/*.py'),*ROOT.glob('sql/*.sql'),
+    *ROOT.glob('src/inventory_intelligence/lab_static/*'),ROOT/'src/inventory_intelligence/lab_evidence.json',
+    *ROOT.glob('scripts/engineering_*.py'),*ROOT.glob('tests/test_engineering*.py'),ROOT/'deploy/lab/Dockerfile',ROOT/'deploy/lab/compose.yaml',
+    ROOT/'deploy/lab/Caddyfile',ROOT/'deploy/lab/requirements.txt',ROOT/'pyproject.toml'})
+current={str(p.relative_to(ROOT)):digest(p) for p in paths if p.is_file()}
+write(OUT/'source-binding.json',dict(baseline_commit=baseline,current_source_sha256=current,phases=bindings,
+    production_change='sql/checks.sql grouped eligible movement totals only',
+    runtime_image_ids=sorted({read(p)[0]['Image'] for p in BASE.glob('runtime*/lab-inspect.json')}),
+    paired_query_note='views+checks bytes; production loader inserts an additional separator newline',
+    launch_reconstruction='native launch controller/worker captures checked against recorded hashes',
+    linux_launch_limit='controller instrumentation evolved between campaigns; exact per-launch controller bytes not fully retained; image SQL/dependency hashes fixed',
+    runtime_launch_limit='older controller/first driver and later full-window driver captures retained; older drivers lack a recorded per-launch self-hash; replacement driver is independently hash-bound without request-clock/oracle change'))
+
+paired={label:describe([s['elapsed_ns']/1e9 for s in phases['paired']['samples']
+    if s.get('variant')==label and s.get('phase')=='measured' and s['status']=='completed']) for label in ('before','after')}
+paired['median_speedup']=paired['before']['median']/paired['after']['median']
+linux=read(BASE/'linux/summary.json')
+production_query_sha256=sha256('\n'.join((ROOT/'sql'/name).read_text() for name in ('views.sql','checks.sql')).encode()).hexdigest()
+assert all(read(p)['query_sha256']==production_query_sha256 for p in (BASE/'linux').glob('campaign-*-environment.json'))
+linux_stats={op:dict(pooled=describe([s['elapsed_ns']/1e9 for c in linux['campaigns'] for s in c['samples']
+    if s['operation']==op and s['phase']=='measured']),campaigns=[dict(campaign=i+1,
+    **describe([s['elapsed_ns']/1e9 for s in c['samples'] if s['operation']==op and s['phase']=='measured']))
+    for i,c in enumerate(linux['campaigns'])]) for op in ('run_checks','run_plan')}
+jit={}
+for path in (BASE/'linux-jit').glob('*-plan.json'):
+    plan=read(path)[0]; jit[path.name]=dict(execution_ms=plan['Execution Time'],planning_ms=plan['Planning Time'],jit=plan.get('JIT'))
+dense={}
+if (BASE/'dense-profile/plan.json').exists():
+    profile=read(BASE/'dense-profile/plan.json')[0]
+    def walk(node):
+        yield node
+        for child in node.get('Plans',[]):yield from walk(child)
+    scans=[{k:n[k] for k in ('Node Type','CTE Name','Actual Rows','Actual Loops','Rows Removed by Filter','Temp Read Blocks','Temp Written Blocks') if k in n}
+        for n in walk(profile['Plan']) if n.get('CTE Name')=='source_rows']
+    dense=dict(execution_ms=profile['Execution Time'],source_row_scans=scans,receipt=read(BASE/'dense-profile/receipt.json'))
+
+campaigns=[]; qualifying=[]; grids=[]; controls=[]; continuity=[]
+for name in ('runtime-crash-corrected','runtime-confirmation'):
+    folder=BASE/name
+    if not (folder/'summary.json').exists():continue
+    summary=read(folder/'summary.json')
+    actual_wall=(folder/'summary.json').stat().st_birthtime-(folder/'protocol.json').stat().st_birthtime
+    active_seconds=summary.get('active_seconds',summary['wall_seconds'])
+    continuity.append(dict(attempt=name,filesystem_wall_seconds=actual_wall,controller_active_seconds=active_seconds,
+        wall_minus_active_seconds=actual_wall-active_seconds,
+        method='original host filesystem creation timestamps minus controller monotonic duration; startup/write skew is small; large differences invalidate continuous stability'))
+    for case in summary['cases']:
+        if 'issued' not in case:
+            derived=dict(case)
+            if name=='runtime-crash-corrected' and case['case']=='app-crash-auto-restart':
+                derived.update(status='unverified',reason='same-namespace PID1 trigger lacks required PID/restart-change verification; later state snapshot follows explicit restarts and cannot prove the earlier fault')
+            controls.append(dict(attempt=name,**derived));continue
+        rows=[json.loads(line) for line in (folder/case['raw_file']).read_text().splitlines()]
+        assert len(rows)==case['issued']
+        r=dict(attempt=name,case=case['case'],issued=len(rows),outcomes=dict(Counter(x['outcome'] for x in rows)),
+            valid_offered_load=case['valid_offered_load'],backlogged=case['backlogged'],
+            elapsed_seconds=case['elapsed_seconds'],declared_duration_seconds=case.get('duration_seconds',1800 if case['case'].startswith('sustained') else None),
+            lag_ns=describe([x['scheduler_lag_ns'] for x in rows]),
+            full_duration=case['elapsed_seconds']>=1800 if case['case'].startswith('sustained') else False,
+            route_counts=dict(Counter(x['route'] for x in rows)),
+            post_payload_counts=dict(Counter(json.dumps(x['payload'],sort_keys=True) for x in rows if x['route']=='post')))
+        r['routes']={}
+        for route in ('post','lab','evidence'):
+            selected=[x for x in rows if x['route']==route]
+            good=[x for x in selected if x['outcome']=='succeeded']
+            r['routes'][route]=dict(issued=len(selected),completed=len(good),
+                response_body_bytes=sum(x.get('bytes',0) for x in selected),
+                outcomes=dict(Counter(x['outcome'] for x in selected)),
+                http_statuses=dict(Counter(x.get('http_status','none') for x in selected)),
+                descriptive_p95_scheduled_ms=nearest([x['scheduled_to_complete_ns']/1e6 for x in good],.95),
+                descriptive_p95_issued_ms=nearest([x['issued_to_complete_ns']/1e6 for x in good],.95),
+                rejected_latency_ms=describe([x['issued_to_complete_ns']/1e6 for x in selected if x['outcome']=='rejected']))
+        if case['case'].startswith('sustained'):
+            r['continuous_observation_verified']=not(name=='runtime-crash-corrected' and case['case']=='sustained-2')
+            if not r['continuous_observation_verified']:
+                r['continuity_limit']='909.81s extra wall time between second/third summary creation; phase wall-active divergence907.25s; host pause/clock discontinuity inferred, not a verified continuous campaign'
+            if name=='runtime-confirmation' and abs(actual_wall-active_seconds)>2:
+                r['continuous_observation_verified']=False
+                r['continuity_limit']='replacement phase wall/active clocks diverged by more than predeclared2s allowance'
+            resources=read(folder/case['resources_file']); r['resources']={}
+            for service in ('lab','proxy'):
+                points=[(x['elapsed_seconds'],x[service]['memory_current_bytes']) for x in resources]
+                mt=statistics.mean(t for t,m in points); mm=statistics.mean(m for t,m in points)
+                slope=sum((t-mt)*(m-mm) for t,m in points)/sum((t-mt)**2 for t,m in points)
+                first,last=resources[0][service],resources[-1][service]
+                r['resources'][service]=dict(samples=len(points),current_bytes=describe([m for t,m in points]),
+                    first_bytes=first['memory_current_bytes'],last_bytes=last['memory_current_bytes'],
+                    linear_slope_bytes_per_second=slope,cgroup_peak_bytes=max(x[service]['memory_peak_bytes'] for x in resources),
+                    cpu_usage_seconds_delta=(last['counters']['usage_usec']-first['counters']['usage_usec'])/1e6,
+                    throttled_periods_delta=last['counters']['nr_throttled']-first['counters']['nr_throttled'],
+                    oom_kill_delta=last['counters']['oom_kill']-first['counters']['oom_kill'],
+                    note='cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples')
+            campaigns.append(r)
+            if r['full_duration'] and r['valid_offered_load'] and r['continuous_observation_verified']:qualifying.append((r,rows))
+        else:grids.append(r)
+pooled={}
+for route in ('post','lab','evidence'):
+    rows=[x for c,data in qualifying for x in data if x['route']==route]
+    good=[x for x in rows if x['outcome']=='succeeded']
+    pooled[route]=dict(issued=len(rows),completed=len(good),outcomes=dict(Counter(x['outcome'] for x in rows)),
+        response_body_bytes=sum(x.get('bytes',0) for x in rows),
+        descriptive_p95_scheduled_ms=nearest([x['scheduled_to_complete_ns']/1e6 for x in good],.95),
+        descriptive_p95_issued_ms=nearest([x['issued_to_complete_ns']/1e6 for x in good],.95),
+        p95_scheduled_ms=nearest([x['scheduled_to_complete_ns']/1e6 for x in good],.95) if len(good)>=1000 and len(qualifying)>=3 else 'insufficient_confirmation_floor',
+        p95_issued_ms=nearest([x['issued_to_complete_ns']/1e6 for x in good],.95) if len(good)>=1000 and len(qualifying)>=3 else 'insufficient_confirmation_floor',
+        p99='insufficient_samples' if len(good)<10000 else nearest([x['scheduled_to_complete_ns']/1e6 for x in good],.99))
+write(OUT/'derived-summary.json',dict(paired_seconds=paired,linux_seconds=linux_stats,jit_diagnostic=jit,dense_evidence_diagnostic=dense,
+    http=dict(sustained_campaigns=campaigns,continuity_receipts=continuity,qualifying_campaigns=len(qualifying),qualifying_routes=pooled,exploratory_grids=grids,controls=controls,
+        interpretation='nearest rank descriptive local percentiles; dependent requests, one ARM64 date; no universal inference',
+        first_window_exclusion='sustained-0 in runtime-crash-corrected ended 0.584759167s before 1800s; retained but excluded'),
+    reference_confirmation=False,unmeasured=['x86-64','Python3.12.12','two dates','controlled OS cache','serial1000','independent human accessibility','public TLS'],
+    production_optimization_count=1))
+
+# Preserve original large-file identities without copying them into the repo.
+manifest={str(p.relative_to(BASE)):dict(bytes=p.stat().st_size,sha256=digest(p)) for p in sorted(BASE.rglob('*'))
+    if p.is_file() and '__pycache__' not in str(p)}
+write(OUT/'artifact-manifest.json',dict(artifacts=manifest,large_files='ignored originals retained locally; no reports truncated',
+    generated_at_utc=datetime.now(timezone.utc).isoformat()))
+write(OUT/'published-hashes.json',{str(p.relative_to(OUT)):dict(bytes=p.stat().st_size,sha256=digest(p))
+    for p in sorted(OUT.rglob('*')) if p.is_file() and p.name!='published-hashes.json'})
+print(json.dumps(dict(files=len(list(OUT.rglob('*'))),qualifying_campaigns=len(qualifying),paired_speedup=paired['median_speedup'],pooled=pooled)))

@@ -1,0 +1,470 @@
+"""Bounded exploratory PostgreSQL pilot; production APIs remain unchanged.
+
+Run with owner TEST_DATABASE_URL, restricted DATABASE_URL, --output and --pgdata.
+The database must already have fresh schemas and no source/result rows. Artifacts
+are append-only in a new output directory. No credentials are written to receipts.
+"""
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.metadata
+import json
+import os
+from pathlib import Path
+import platform
+import resource
+import subprocess
+import sys
+import time
+from uuid import uuid4
+
+import psycopg
+from psycopg import sql
+from psycopg.types.json import Jsonb
+
+from scripts.engineering_fixtures import (CUTOFF, ORIGIN, ORIGIN_DAY, START,
+    copy_rows, digest, encoded, grain, inventory_manifest, load_demand,
+    load_inventory, load_supply, source_digest, verify_inventory)
+from inventory_intelligence.reliability import run_checks, _sql
+from inventory_intelligence.planning_runs import run_forecast
+from inventory_intelligence.replenishment import run_plan
+from inventory_intelligence.copilot import load_run
+from inventory_intelligence.copilot_planning import load_planning_run
+
+ROOT=Path(__file__).resolve().parents[1]
+
+
+def write(path, value):
+    path.write_bytes(encoded(value)+b"\n")
+
+
+def connect(variable):
+    conn=psycopg.connect(os.environ[variable],autocommit=True)
+    conn.execute("SET statement_timeout='55s'")
+    conn.execute("SET lock_timeout='5s'")
+    conn.execute("SET TIME ZONE 'UTC'")
+    return conn
+
+
+def history(conn):
+    return dict(reliability_runs=conn.execute("SELECT count(*) FROM reliability.runs").fetchone()[0],
+        checks=conn.execute("SELECT count(*) FROM reliability.check_results").fetchone()[0],
+        findings=conn.execute("SELECT count(*) FROM reliability.findings").fetchone()[0],
+        planning_runs=conn.execute("SELECT count(*) FROM planning.runs").fetchone()[0])
+
+
+def worker(spec_path):
+    spec=json.loads(spec_path.read_text())
+    if "query_path" in spec:
+        # Process-local frozen SQL for paired engineering measurements only.
+        import inventory_intelligence.reliability as reliability
+        raw=Path(spec["query_path"]).read_bytes()
+        if sha256(raw).hexdigest()!=spec["query_sha256"]:
+            raise ValueError("frozen comparison SQL changed")
+        reliability._sql=lambda: raw.decode("utf-8")
+    args=spec.get("args",{})
+    for key in ("as_of","evaluated_at"):
+        if key in args: args[key]=datetime.fromisoformat(args[key])
+    for key in ("start_day","origin_day"):
+        if key in args: args[key]=datetime.fromisoformat(args[key]).date()
+    with connect("DATABASE_URL") as conn:
+        if conn.execute("SELECT current_user").fetchone()[0]!="ii_runner":
+            raise ValueError("measured operations require ii_runner")
+        operation=spec["operation"]
+        fn={"run_checks":run_checks,"run_forecast":run_forecast,"run_plan":run_plan,
+            "load_run":load_run,"load_planning_run":load_planning_run}[operation]
+        wall=time.perf_counter_ns(); cpu=time.process_time_ns()
+        try:
+            report=fn(conn,**args)
+            status="completed"
+        except (ValueError,psycopg.Error) as error:
+            report=None
+            status="rejected" if isinstance(error,ValueError) and operation.startswith("load_") else "error"
+            detail=dict(type=type(error).__name__,message=str(error))
+        elapsed=time.perf_counter_ns()-wall; cpu=time.process_time_ns()-cpu
+        result=dict(status=status,elapsed_ns=elapsed,cpu_ns=cpu,
+            process_high_water_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss *
+                (1 if sys.platform=="darwin" else 1024),pid=os.getpid(),
+            transaction_idle=conn.info.transaction_status==psycopg.pq.TransactionStatus.IDLE)
+        if report is not None:
+            # All comparisons and artifact serialization are outside the interval.
+            oracle=spec.get("oracle")
+            if oracle and operation=="run_checks":
+                verify_inventory(report,oracle)
+            if "finding_oracle" in spec:
+                expected=spec["finding_oracle"]
+                if report["overall_status"]!=expected["overall_status"] or report["checks"]!=expected["checks"]:
+                    raise AssertionError("frozen defect statuses differ")
+                signature=lambda f:[f[k] for k in ("rule_id","reason","sku_id","warehouse_id",
+                    "source_row_ids","expected_qty","observed_qty","delta_qty")]
+                actual=sorted((signature(f) for f in report["findings"]),key=encoded)
+                if actual!=sorted(expected["findings"],key=encoded):
+                    raise AssertionError("exact defect/source/quantity identities differ")
+            if "expected_status" in spec:
+                if report["status"]!=spec["expected_status"]:
+                    raise AssertionError("planning eligibility differs from frozen oracle")
+                r=report["result"]
+                if operation=="run_forecast":
+                    expected=["7"]*spec["horizon"] if spec["expected_status"]=="assessable" else None
+                    if r["predictions"]!=expected: raise AssertionError("exact mean forecast differs")
+                elif operation=="run_plan":
+                    expected=spec.get("expected_order") if spec["expected_status"]=="assessable" else None
+                    if r["proposed_order_qty"]!=expected: raise AssertionError("exact advisory order differs")
+                    if expected is None and r["projection"] is not None: raise AssertionError("blocked projection")
+                    if expected is not None:
+                        h=spec["horizon"]
+                        if r["unrounded_need"]!=str(7*h-20): raise AssertionError("independent raw need")
+                        balances=[10,8]+[22-7*(i+1) for i in range(2,h)]
+                        if [d["balance_without_order"] for d in r["projection"]]!=list(map(str,balances)):
+                            raise AssertionError("independent daily balances")
+            if operation.startswith("load_") and report["run_id"]!=args["run_id"]:
+                raise AssertionError("reader changed saved identity")
+            semantic={k:v for k,v in report.items() if k not in ("run_id","created_at")}
+            result.update(run_id=report["run_id"],oracle="pass",semantic_sha256=digest(semantic),
+                report_bytes=len(encoded(report)),findings=len(report.get("findings",[])))
+            write(spec_path.with_suffix(".report.json"),report)
+        else:
+            result.update(error=detail,oracle="not_evaluated")
+        write(spec_path.with_suffix(".result.json"),result)
+
+
+def cpu_seconds(text):
+    days,sep,text=text.rpartition("-")
+    values=list(map(float,text.split(":")))
+    seconds=sum(v*60**i for i,v in enumerate(reversed(values)))
+    return seconds+(float(days)*86400 if sep else 0)
+
+
+class Budget:
+    def __init__(self,output,pgdata,wall_seconds):
+        self.output,self.pgdata=output,pgdata
+        self.start=time.monotonic(); self.wall_seconds=wall_seconds
+        self.peak_upper_rss=0; self.cpu=0; self.seen_cpu={}
+        self.db_pid=int((pgdata/"postmaster.pid").read_text().splitlines()[0])
+        self.initial_disk=self.disk()
+
+    def disk(self):
+        return sum(p.stat().st_size for root in (self.pgdata,self.output)
+                   for p in root.rglob("*") if p.is_file())
+
+    def sample(self,child_pid=None):
+        raw=subprocess.check_output(["ps","-axo","pid=,ppid=,rss=,time="],text=True)
+        rows={}
+        for line in raw.splitlines():
+            pid,ppid,rss,cpu=line.split()
+            rows[int(pid)]=(int(ppid),int(rss)*1024,cpu_seconds(cpu))
+        selected={self.db_pid,os.getpid()}
+        if child_pid: selected.add(child_pid)
+        while True:
+            expanded=selected|{pid for pid,(ppid,_,_) in rows.items() if ppid in selected}
+            if expanded==selected: break
+            selected=expanded
+        rss=sum(rows[pid][1] for pid in selected if pid in rows)
+        self.peak_upper_rss=max(self.peak_upper_rss,rss)
+        for pid in selected:
+            if pid in rows: self.seen_cpu[pid]=max(self.seen_cpu.get(pid,0),rows[pid][2])
+        self.cpu=sum(self.seen_cpu.values())
+        self.guard()
+        return dict(sampled_rss_upper_bound_bytes=rss,sampled_cpu_seconds=self.cpu)
+
+    def guard(self):
+        if time.monotonic()-self.start>self.wall_seconds: raise RuntimeError("global wall budget exhausted")
+        if self.cpu>8*3600: raise RuntimeError("observed CPU guard exhausted")
+        if self.peak_upper_rss>6*1024**3: raise RuntimeError("conservative RSS guard exhausted")
+        if self.disk()-self.initial_disk>30*1024**3: raise RuntimeError("added disk guard exhausted")
+
+
+class Pilot:
+    def __init__(self,output,pgdata,wall_seconds):
+        output.mkdir(parents=True,exist_ok=False)
+        self.output=output; self.samples=[]; self.cases=[]
+        self.budget=Budget(output,pgdata,wall_seconds)
+        self.owner=connect("TEST_DATABASE_URL")
+        if any(history(self.owner).values()) or self.owner.execute(
+                "SELECT EXISTS(SELECT FROM operational_fixture.batches) OR EXISTS(SELECT FROM planning_input.demand_batches)").fetchone()[0]:
+            raise ValueError("pilot requires a fresh disposable database; never reuse demo inputs")
+        self.code=digest({str(p.relative_to(ROOT)):sha256(p.read_bytes()).hexdigest()
+            for p in [*sorted((ROOT/"src/inventory_intelligence").glob("*.py")),
+                      *sorted((ROOT/"sql").glob("*.sql")),ROOT/"scripts/engineering_benchmark.py",
+                      ROOT/"scripts/engineering_fixtures.py"]})
+        self.environment()
+
+    def environment(self):
+        settings={name:self.owner.execute(sql.SQL("SHOW {}").format(sql.Identifier(name))).fetchone()[0]
+            for name in ("server_version","shared_buffers","work_mem","synchronous_commit",
+                "checkpoint_timeout","max_wal_size","max_connections","block_size","statement_timeout","lock_timeout")}
+        schema=self.owner.execute("SELECT table_schema,table_name,column_name,data_type FROM information_schema.columns WHERE table_schema IN ('operational_fixture','reliability','planning_input','planning') ORDER BY 1,2,ordinal_position").fetchall()
+        indexes=self.owner.execute("SELECT schemaname,tablename,indexdef FROM pg_indexes WHERE schemaname IN ('operational_fixture','reliability','planning_input','planning') ORDER BY 1,2,3").fetchall()
+        dependencies={d.metadata["Name"]:d.version for d in importlib.metadata.distributions()}
+        host={}
+        if sys.platform=="darwin":
+            for name in ("hw.model","hw.memsize","hw.ncpu","machdep.cpu.brand_string"):
+                r=subprocess.run(["sysctl","-n",name],capture_output=True,text=True)
+                host[name]=r.stdout.strip() if r.returncode==0 else "unavailable"
+        write(self.output/"environment.json",dict(verified_at=datetime.now(timezone.utc).isoformat(),
+            platform=platform.platform(),python=platform.python_version(),host=host,db_settings=settings,
+            schema=schema,indexes=indexes,dependencies=dependencies,source_sha256=self.code,
+            git_base=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),
+            storage=subprocess.check_output(["df","-k",str(self.budget.pgdata)],text=True),
+            memory_method="sampled process RSS sum is a conservative abort upper bound; shared pages double counted",
+            reference_host=False,confirmation=False,network_topology="loopback PostgreSQL, isolated native cluster",
+            limits=dict(wall_seconds=self.budget.wall_seconds,cpu_seconds=28800,disk_bytes=30*1024**3,
+                conservative_rss_bytes=6*1024**3,call_seconds=60,sql_seconds=55,lock_seconds=5)))
+
+    def measure(self,case,operation,args,**oracle):
+        self.budget.sample()
+        before=history(self.owner)
+        db_before=self.owner.execute("SELECT pg_database_size(current_database()),pg_current_wal_lsn()").fetchone()
+        index=len(self.samples)
+        spec_path=self.output/f"call-{index:04d}.json"
+        write(spec_path,dict(operation=operation,args=args,**oracle))
+        begin=time.monotonic()
+        with (spec_path.with_suffix(".log")).open("w") as log:
+            process=subprocess.Popen([sys.executable,"-m","scripts.engineering_benchmark","--worker",str(spec_path)],
+                cwd=ROOT,stdout=log,stderr=log)
+            status=None
+            try:
+                while process.poll() is None:
+                    self.budget.sample(process.pid)
+                    if time.monotonic()-begin>=60:
+                        status="timeout"; break
+                    time.sleep(.2)
+            finally:
+                if process.poll() is None:
+                    process.kill(); process.wait()
+        # Connection death rolls back in-flight transactions; wait boundedly for backend exit.
+        for _ in range(25):
+            if not self.owner.execute("SELECT EXISTS(SELECT FROM pg_stat_activity WHERE usename='ii_runner' AND datname=current_database())").fetchone()[0]: break
+            time.sleep(.2)
+        result_path=spec_path.with_suffix(".result.json")
+        result=json.loads(result_path.read_text()) if result_path.exists() and process.returncode==0 else dict(
+            status=status or "worker_error",oracle="not_evaluated",process_returncode=process.returncode,
+            subprocess_seconds=time.monotonic()-begin,subprocess_ns_lower_bound=60_000_000_000 if status else None,
+            error_log=spec_path.with_suffix(".log").name)
+        after=history(self.owner)
+        db_after=self.owner.execute("SELECT pg_database_size(current_database()),pg_current_wal_lsn()").fetchone()
+        delta={k:after[k]-before[k] for k in before}
+        expected=dict.fromkeys(delta,0)
+        if result["status"]=="completed":
+            if operation=="run_checks": expected.update(reliability_runs=1,checks=5,findings=result["findings"])
+            elif operation in ("run_forecast","run_plan"): expected.update(planning_runs=1)
+        if delta!=expected:
+            # A killed/failed worker can lose its receipt after DB commit. Do not
+            # call a complete append a partial transaction or a successful oracle.
+            complete_append=(operation=="run_checks" and delta["reliability_runs"]==1
+                and delta["checks"]==5 and delta["planning_runs"]==0 and delta["findings"]>=0) or (
+                operation in ("run_forecast","run_plan") and delta["planning_runs"]==1
+                and all(delta[k]==0 for k in ("reliability_runs","checks","findings")))
+            result.update(status="committed_unverified" if complete_append else "history_inconsistent",
+                history_expected=expected,oracle="not_evaluated")
+        result.update(case=case,operation=operation,history_delta=delta,
+            database_bytes_before=db_before[0],database_bytes_after=db_after[0],
+            wal_bytes=int(self.owner.execute("SELECT pg_wal_lsn_diff(%s,%s)",(db_after[1],db_before[1])).fetchone()[0]),
+            measurement="exploratory_process_restart",campaign=1,sample=index,
+            subprocess_seconds=time.monotonic()-begin)
+        result.update(oracle.get("measurement_context",{}))
+        self.samples.append(result)
+        with (self.output/"samples.jsonl").open("ab") as stream: stream.write(encoded(result)+b"\n")
+        return result
+
+    def inventory(self,manifest,repeats=3):
+        p=manifest["prefix"]
+        write(self.output/(p+".manifest.json"),manifest)
+        begin=time.monotonic(); load_inventory(self.owner,manifest)
+        load_seconds=time.monotonic()-begin
+        begin=time.monotonic()
+        self.owner.execute("ANALYZE")
+        analyze_seconds=time.monotonic()-begin
+        before=source_digest(self.owner)
+        args=dict(ledger_batch_id=p+":ledger",snapshot_batch_id=p+":snapshot",
+            as_of=manifest["cutoff"],evaluated_at=manifest["cutoff"],code_version=self.code)
+        samples=[self.measure(p,"run_checks",args,oracle=manifest) for _ in range(repeats)]
+        after=source_digest(self.owner)
+        if before!=after: raise AssertionError("engine mutated source rows")
+        successful=[r for r in samples if r["status"]=="completed"]
+        if len({r["semantic_sha256"] for r in successful})>1: raise AssertionError("repeated semantics drift")
+        case=dict(case=p,workload={k:manifest[k] for k in ("keys","movements","skus","warehouses",
+                "shape","eligible_movements","exclusions")},manifest_sha256=digest(manifest),
+            exact_expected_quantities_sha256=digest(manifest["expected_quantities"]),
+            expected_findings=manifest["keys"] if manifest["quantity_probe"] else len(manifest["duplicate_groups"]),
+            blocked_keys=len(manifest["blocked_keys"]),
+            source_before=before,source_after=after,load_seconds=load_seconds,analyze_seconds=analyze_seconds,
+            completed=len(successful),requested=repeats)
+        self.cases.append(case)
+        print(json.dumps(dict(case=p,completed=len(successful),statuses=[r["status"] for r in samples])),flush=True)
+        return args,samples
+
+    def historical_growth(self,args,baseline):
+        manifest=inventory_manifest("b1-1000",1000,100000)
+        for added in (1,9):
+            start=time.monotonic()
+            for j in range(0 if added==1 else 1,added):
+                unrelated=inventory_manifest(f"history-{j}",1000,100000)
+                write(self.output/f"history-{j}.manifest.json",unrelated)
+                load_inventory(self.owner,unrelated,natural_prefix="b1-1000")
+            self.owner.execute("ANALYZE")
+            setup=time.monotonic()-start
+            before=source_digest(self.owner)
+            measured=[self.measure(f"b1-history-{added}","run_checks",args,oracle=manifest) for _ in range(3)]
+            if any(s["semantic_sha256"]!=baseline[0]["semantic_sha256"] for s in measured if s["status"]=="completed"):
+                raise AssertionError("unrelated batches changed selected result")
+            after=source_digest(self.owner)
+            if before!=after: raise AssertionError("history check mutated inputs")
+            self.cases.append(dict(case=f"b1-history-{added}",selected_keys=1000,selected_movements=100000,
+                additional_same_size_batches=added,source_before=before,source_after=after,load_analyze_seconds=setup))
+
+    def diagnostic(self,args):
+        params={**args,"as_of":datetime.fromisoformat(args["as_of"]),
+            "evaluated_at":datetime.fromisoformat(args["evaluated_at"]),"max_snapshot_age_hours":24}
+        begin=time.monotonic()
+        try:
+            value=self.owner.execute("EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON, TIMING OFF) "+_sql(),params).fetchone()[0]
+            write(self.output/"selected-sql-plan.json",value)
+            result=dict(status="completed",seconds=time.monotonic()-begin,plan_file="selected-sql-plan.json")
+        except psycopg.Error as error:
+            result=dict(status="error",seconds=time.monotonic()-begin,error=str(error))
+        self.cases.append(dict(case="b1-readonly-sql-diagnostic",**result))
+
+    def readers(self):
+        # Compact independent synthetic producer; not an engine-performance claim.
+        def reliability(n,padding):
+            run=str(uuid4())
+            with self.owner.transaction():
+                self.owner.execute("INSERT INTO reliability.runs VALUES (%s,'1','synthetic-reader-v1','reader-ledger','reader-snapshot',%s,%s,'fail')",(run,CUTOFF,CUTOFF))
+                with self.owner.cursor() as cur:
+                    cur.executemany("INSERT INTO reliability.check_results VALUES (%s,%s,%s)",
+                        [(run,f"R00{i}","fail" if i==1 else "pass") for i in range(1,6)])
+                    cur.executemany("INSERT INTO reliability.findings VALUES (%s,%s,'R001','error','quantity_mismatch',%s,'reader-wh',%s,0,1,1,%s)",
+                        [(run,str(i),str(i),Jsonb([str(i)]),Jsonb(dict(padding=padding if i==0 else ""))) for i in range(n)])
+            return run
+        for n in (999,1000,1001):
+            run=reliability(n,"")
+            r=self.measure(f"reader-count-{n}","load_run",dict(run_id=run))
+            expected="completed" if n<=1000 else "rejected"
+            if r["status"]!=expected: raise AssertionError("finding-limit control disagrees")
+        for bound,loader in ((2*1024**2,"load_run"),(16*1024**2,"load_planning_run")):
+            for offset in (-1,0,1):
+                if loader=="load_run":
+                    run=reliability(1,"")
+                    size_sql="SELECT sum(octet_length(row_to_json(f)::text)) FROM reliability.findings f WHERE run_id=%s"
+                    size=self.owner.execute(size_sql,(run,)).fetchone()[0]
+                    self.owner.execute("UPDATE reliability.findings SET evidence=%s WHERE run_id=%s",
+                        (Jsonb(dict(padding="x"*(bound+offset-size))),run))
+                else:
+                    with connect("DATABASE_URL") as conn:
+                        report=run_forecast(conn,batch_id="reader-missing",sku_id="reader-sku",
+                            warehouse_id="reader-wh",start_day=START,origin_day=ORIGIN_DAY,
+                            method="mean",horizon=7,code_version="synthetic-reader-v1")
+                    run=report["run_id"]
+                    size_sql="SELECT octet_length(row_to_json(r)::text) FROM planning.runs r WHERE run_id=%s"
+                    size=self.owner.execute(size_sql,(run,)).fetchone()[0]
+                    # Add inert padding without changing business quantities or required reasons.
+                    self.owner.execute("UPDATE planning.runs SET result=result || %s WHERE run_id=%s",
+                        (Jsonb(dict(padding="")),run))
+                    size=self.owner.execute(size_sql,(run,)).fetchone()[0]
+                    self.owner.execute("UPDATE planning.runs SET result=result || %s WHERE run_id=%s",
+                        (Jsonb(dict(padding="x"*(bound+offset-size))),run))
+                exact=self.owner.execute(size_sql,(run,)).fetchone()[0]
+                if exact!=bound+offset: raise AssertionError("loader accounting not exactly frozen threshold")
+                r=self.measure(f"reader-bytes-{loader}-{offset}",loader,dict(run_id=run))
+                if offset==1 and r["status"]!="rejected": raise AssertionError("above DB-byte limit accepted")
+                if r["status"] not in ("completed","rejected"): raise AssertionError("reader capacity fault")
+                self.cases.append(dict(case=r["case"],saved_run_id=run,reader_only_synthetic=True,
+                    accounting="PostgreSQL row_to_json octet_length",db_bytes=exact,bound=bound,status=r["status"]))
+
+    def planning(self,keys,*,blocked=False,incomplete=False):
+        p=f"b2-{keys}"+("-stockout" if blocked else "-supply" if incomplete else "")
+        manifest=inventory_manifest(p,keys,0,opening=20,cutoff=ORIGIN)
+        args,samples=self.inventory(manifest,repeats=1)
+        if samples[0]["status"]!="completed": return
+        start=time.monotonic(); load_demand(self.owner,p,keys,blocked=blocked)
+        for h in (7,28,90): load_supply(self.owner,p,keys,h,incomplete=incomplete)
+        self.owner.execute("ANALYZE")
+        load_seconds=time.monotonic()-start
+        before=source_digest(self.owner)
+        expected="not_assessable" if blocked or incomplete else "assessable"
+        common=dict(batch_id=p+":demand",sku_id=p+":sku:0",warehouse_id=p+":wh:0",
+            start_day=START.isoformat(),origin_day=ORIGIN_DAY.isoformat(),method="mean",code_version=self.code)
+        for h,order in ((7,30),(28,180),(90,612)):
+            self.measure(p+f"-forecast-{h}","run_forecast",common|dict(horizon=h),
+                expected_status="not_assessable" if blocked else "assessable",horizon=h)
+            self.measure(p+f"-plan-{h}","run_plan",common|dict(reliability_run_id=samples[0]["run_id"],
+                supply_batch_id=f"{p}:supply:{h}:0"),expected_status=expected,horizon=h,expected_order=order)
+        serial_start=time.monotonic(); serial=[]
+        for k in range(min(keys,10)):
+            serial.append(self.measure(p+"-serial-plan-7","run_plan",common|dict(sku_id=f"{p}:sku:{k}",
+                reliability_run_id=samples[0]["run_id"],supply_batch_id=f"{p}:supply:7:{k}"),
+                expected_status=expected,horizon=7,expected_order=30))
+        elapsed=time.monotonic()-serial_start
+        completed=sum(s["status"]=="completed" for s in serial)
+        after=source_digest(self.owner)
+        if before!=after: raise AssertionError("planning mutated sources")
+        self.cases.append(dict(case=p+"-archive",keys=keys,day_rows=keys*180,
+            raw_order_revision_rows=keys*126+keys*126//20+keys*126//100,
+            known_additional_revisions=keys*126//20,late_revisions=keys*126//100,
+            ledger_movements=0,ledger_keys=keys,load_analyze_seconds=load_seconds,
+            source_before=before,source_after=after,serial_requested=len(serial),serial_completed_calls=completed,
+            serial_completed_eligible_keys=completed if expected=="assessable" else 0,
+            serial_eligible=completed if expected=="assessable" else 0,
+            serial_blocked=completed if expected=="not_assessable" else 0,
+            serial_driver_seconds=elapsed,completed_eligible_keys_per_second=completed/elapsed if expected=="assessable" else 0,
+            completed_calls_per_second=completed/elapsed,
+            serial_timing_includes="worker startup, guards, oracle checks and artifact writes"))
+
+    def run(self,tiny=False):
+        def objective(name,fn,*args,**kwargs):
+            try: return fn(*args,**kwargs)
+            except (AssertionError,ValueError,KeyError,psycopg.Error) as error:
+                self.cases.append(dict(case=name,status="blocked",error_type=type(error).__name__,error=str(error)))
+                print(json.dumps(dict(case=name,status="blocked",error=str(error))),flush=True)
+                return None
+        try:
+            ladder=[(10,1000)] if tiny else [(10,1000),(100,10000),(1000,100000)]
+            reference=None
+            for k,m in ladder:
+                result=objective(f"b1-{k}",self.inventory,inventory_manifest(f"b1-{k}",k,m))
+                if k==1000: reference=result
+            if not tiny:
+                if reference:
+                    objective("b1-diagnostic",self.diagnostic,reference[0])
+                    objective("b1-history",self.historical_growth,*reference)
+                # Freeze all case manifests before executing the corresponding engine.
+                for shape,wh in (("skew",1),("uniform",10),("transfer",10),("exclusions",1)):
+                    objective("b1-"+shape,self.inventory,inventory_manifest("b1-"+shape+f"-{wh}",1000,100000,shape=shape,warehouses=wh))
+                for d in (100,1000,10000):
+                    objective("b3-duplicate-"+str(d),self.inventory,inventory_manifest("b3-duplicate-"+str(d),1000,100000,defect_rows=d))
+                objective("b3-quantities",self.inventory,inventory_manifest("b3-quantities",1000,100000,quantity_probe=True),repeats=1)
+                objective("b3-readers",self.readers)
+                for k in (10,100,1000): objective(f"b2-{k}",self.planning,k)
+                objective("b2-stockout",self.planning,10,blocked=True)
+                objective("b2-supply",self.planning,10,incomplete=True)
+                # Upper tier is last so a limited large cell never blocks smaller controls.
+                objective("b1-10000",self.inventory,inventory_manifest("b1-10000",10000,1000000))
+        finally:
+            write(self.output/"summary.json",dict(version="engineering-pilot-v1",exploratory=True,
+                reference_confirmation=False,source_sha256=self.code,cases=self.cases,samples=len(self.samples),
+                statuses={s:sum(r["status"]==s for r in self.samples) for s in sorted({r["status"] for r in self.samples})},
+                wall_seconds=time.monotonic()-self.budget.start,sampled_cpu_seconds=self.budget.cpu,
+                conservative_rss_upper_bound_bytes=self.budget.peak_upper_rss,
+                added_disk_bytes=self.budget.disk()-self.budget.initial_disk,
+                deferred=["reference Linux/Docker enforcement","multi-date independent confirmation",
+                    "B3 other defect types",
+                    "B2 backtest growth and larger serial grids","B4 network","V2 fault/restore","V3 human checks"]))
+            self.owner.close()
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--worker",type=Path)
+    parser.add_argument("--output",type=Path)
+    parser.add_argument("--pgdata",type=Path)
+    parser.add_argument("--wall-seconds",type=int,default=7200)
+    parser.add_argument("--tiny",action="store_true")
+    args=parser.parse_args()
+    if args.worker: worker(args.worker); return
+    if not args.output or not args.pgdata or not 1<=args.wall_seconds<=7200:
+        parser.error("provide new --output, isolated --pgdata, wall cap 1..7200")
+    Pilot(args.output,args.pgdata,args.wall_seconds).run(args.tiny)
+
+
+if __name__=="__main__": main()

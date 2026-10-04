@@ -1,0 +1,269 @@
+"""Bounded local continuation; never labels one-date Mac evidence reference-confirmed.
+
+Each phase needs a fresh dedicated bootstrapped DB and a new output directory.
+The paired phase freezes both queries before calls; only its worker process uses
+the selected SQL. No source input, reader cap or production timeout is changed.
+"""
+import argparse
+from datetime import datetime, timedelta
+from fractions import Fraction
+from hashlib import sha256
+import json
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+from scripts.engineering_benchmark import Pilot, connect, history, write, ROOT
+from scripts.engineering_fixtures import (START, ORIGIN_DAY, encoded, digest,
+    inventory_manifest, load_inventory, load_demand, load_supply, source_digest,
+    copy_rows, grain)
+from scripts.engineering_backtest import midnight
+from inventory_intelligence.planning_runs import run_benchmark
+from inventory_intelligence.copilot_planning import load_planning_run
+
+
+def grouped_query(query):
+    start=query.index("quantities AS (")
+    end=query.index("findings AS (",start)
+    return query[:start]+"""movement_totals AS (
+    SELECT sku_id, warehouse_id, sum(quantity::numeric) AS quantity,
+           array_agg(row_id) AS row_ids
+    FROM eligible GROUP BY sku_id, warehouse_id
+),
+quantities AS (
+    SELECT k.sku_id, k.warehouse_id,
+           (o.quantity::numeric + COALESCE(m.quantity, 0))::bigint AS expected_qty,
+           s.on_hand_qty AS observed_qty,
+           ARRAY(SELECT row_id FROM unnest(
+               ARRAY[o.row_id, s.row_id] || COALESCE(m.row_ids, ARRAY[]::text[])
+           ) r(row_id) ORDER BY row_id) AS row_ids
+    FROM comparable k JOIN openings o USING (sku_id, warehouse_id)
+    JOIN snapshots s USING (sku_id, warehouse_id)
+    LEFT JOIN movement_totals m USING (sku_id, warehouse_id)
+),
+"""+query[end:]
+
+
+def paired(pilot,baseline):
+    queries={"before":baseline.read_text()}
+    queries["after"]=grouped_query(queries["before"])
+    paths={}
+    for label,query in queries.items():
+        path=pilot.output/(label+".sql"); path.write_text(query); paths[label]=path.resolve()
+    manifest=inventory_manifest("paired-reference",1000,100000)
+    # Upper tier is separately predeclared, not selected after seeing the gain.
+    upper=inventory_manifest("paired-upper",10000,1000000)
+    write(pilot.output/"protocol.json",dict(version="engineering-continuation-v1",
+        confirmation=False,reference_host=False,dates=1,order=[["before","after"],["after","before"]],
+        warmups=2,measured_per_campaign=6,campaigns=2,
+        campaign_boundary="new worker calls, same DB; not independently restarted reference campaigns",
+        queries={k:sha256(v.encode()).hexdigest() for k,v in queries.items()},
+        workloads=[manifest,upper],limits="existing local two-hour/8 CPU-hour/30 GiB/6 GiB sampled guard"))
+    setup=time.monotonic()
+    for m in (manifest,upper):
+        write(pilot.output/(m["prefix"]+".manifest.json"),m); load_inventory(pilot.owner,m)
+    pilot.owner.execute("ANALYZE")
+    write(pilot.output/"setup.json",dict(seconds=time.monotonic()-setup,
+        source_sha256=source_digest(pilot.owner)))
+    before=source_digest(pilot.owner)
+    hashes=set()
+    def call(m,label,campaign,phase):
+        path=paths[label]
+        r=pilot.measure(m["prefix"],"run_checks",dict(ledger_batch_id=m["prefix"]+":ledger",
+            snapshot_batch_id=m["prefix"]+":snapshot",as_of=m["cutoff"],evaluated_at=m["cutoff"],
+            code_version="paired-identical-semantics-v1"),oracle=m,
+            query_path=str(path),query_sha256=sha256(path.read_bytes()).hexdigest(),
+            measurement_context=dict(variant=label,campaign=campaign,phase=phase,
+                measurement="local_counterbalanced_same_fixture"))
+        if r["status"]=="completed" and m==manifest: hashes.add(r["semantic_sha256"])
+        print(json.dumps(dict(case=m["prefix"],variant=label,phase=phase,status=r["status"],
+            seconds=r.get("elapsed_ns",0)/1e9)),flush=True)
+        return r
+    for campaign,order in enumerate((("before","after"),("after","before")),1):
+        for label in order:
+            for phase,n in (("warmup",2),("measured",6)):
+                for _ in range(n): call(manifest,label,campaign,phase)
+    if len(hashes)!=1: raise AssertionError("paired reference semantics changed")
+    for label in ("before","after"):
+        for _ in range(1 if label=="before" else 3): call(upper,label,0,"exploratory_upper")
+        params=dict(ledger_batch_id=manifest["prefix"]+":ledger",snapshot_batch_id=manifest["prefix"]+":snapshot",
+            as_of=datetime.fromisoformat(manifest["cutoff"]),evaluated_at=datetime.fromisoformat(manifest["cutoff"]),
+            max_snapshot_age_hours=24)
+        plan=pilot.owner.execute("EXPLAIN (ANALYZE,BUFFERS,FORMAT JSON,TIMING OFF) "+queries[label],params).fetchone()[0]
+        write(pilot.output/(label+"-plan.json"),plan)
+    after=source_digest(pilot.owner)
+    if before!=after: raise AssertionError("paired sources changed")
+    pilot.cases.append(dict(case="paired",source_before=before,source_after=after,
+        identical_reference_semantics=True,setup_file="setup.json"))
+
+
+def planning(pilot):
+    pilot.planning(1000)
+    # Reuse the loaded shared archive and saved reliability run; actual run_plan
+    # still rechecks all 1,000 inventory grains on each call.
+    prefix="b2-1000"
+    checked=next(s["run_id"] for s in pilot.samples if s["case"]==prefix)
+    before=source_digest(pilot.owner); serial=[]; begin=time.monotonic()
+    for k in range(100):
+        serial.append(pilot.measure("b2-1000-serial100","run_plan",dict(batch_id=prefix+":demand",
+            sku_id=f"{prefix}:sku:{k}",warehouse_id=prefix+":wh:0",start_day=START.isoformat(),
+            origin_day=ORIGIN_DAY.isoformat(),method="mean",reliability_run_id=checked,
+            supply_batch_id=f"{prefix}:supply:7:{k}",code_version=pilot.code),
+            expected_status="assessable",horizon=7,expected_order=30))
+    elapsed=time.monotonic()-begin
+    if source_digest(pilot.owner)!=before: raise AssertionError("serial plans mutated sources")
+    completed=sum(s["status"]=="completed" for s in serial)
+    pilot.cases.append(dict(case="serial100",requested=100,eligible=100,blocked=0,completed=completed,
+        driver_seconds=elapsed,completed_keys_per_second=completed/elapsed,
+        ledger_keys=1000,ledger_movements=0,source_before=before,source_after=before))
+
+
+def backtest_worker(path):
+    spec=json.loads(path.read_text()); p=spec["prefix"]; days=spec["days"]; k=spec["key"]
+    with connect("DATABASE_URL") as conn:
+        if conn.execute("SELECT current_user").fetchone()[0]!="ii_runner": raise ValueError("restricted runner required")
+        begin=time.perf_counter_ns(); cpu=time.process_time_ns()
+        r=run_benchmark(conn,batch_id=p+":demand",sku_id=f"{p}:sku:{k}",warehouse_id=p+":wh:0",
+            group="exact-30-percent-zero",start_day=START,end_day=START+timedelta(days=days),
+            evaluated_at=midnight(START+timedelta(days=days)),code_version=spec["code"])
+        elapsed=time.perf_counter_ns()-begin; cpu=time.process_time_ns()-cpu
+        result=r["result"]
+        expected=spec["expected"]
+        for f,e in zip(result["candidates"]+[result["holdout"]],expected["folds"],strict=True):
+            assert f["origin_day"]==e["origin_day"] and f["status"]=="assessable"
+            assert f["actual"]==e["actual"] and f["predictions"]==e["predictions"]
+            assert [d["quantity"] for d in f["training"]["days"]]==e["training"]
+        assert result["selection"]==expected["selection"]
+        assert result["holdout_scores"]==expected["holdout_scores"]
+        assert result["chosen_method"]==expected["chosen_method"] and r["status"]=="assessable"
+        raw=encoded(r); path.with_suffix(".report.json").write_bytes(raw+b"\n")
+        begin=time.perf_counter_ns()
+        try:
+            assert load_planning_run(conn,r["run_id"])==r; reader="completed"
+        except ValueError: reader="rejected"
+        write(path.with_suffix(".result.json"),dict(status="completed",oracle="pass",run_id=r["run_id"],
+            elapsed_ns=elapsed,cpu_ns=cpu,report_bytes=len(raw),report_sha256=sha256(raw).hexdigest(),
+            reader_status=reader,reader_ns=time.perf_counter_ns()-begin,chosen_method=result["chosen_method"]))
+
+
+def expected_backtest(days,keys=1,key=0):
+    # Independent arithmetic, no engine forecast/score/selector calls.
+    quota,remainder=divmod(keys*days*3//10,keys)
+    zeros=set([i for i in range(days) if i%10<3][:quota+int(key<remainder)])
+    values=[0 if i in zeros else 10 for i in range(days)]
+    folds=[]
+    for origin in list(range(28,days-56+1,7))+[days-28]:
+        training=values[:origin]
+        predictions=dict(naive=[str(training[-1])]*28,
+            mean=[str(Fraction(sum(training),origin))]*28,
+            seasonal_naive=[str(training[-7:][i%7]) for i in range(28)])
+        folds.append(dict(origin_day=(START+timedelta(days=origin)).isoformat(),training=training,
+            actual=values[origin:origin+28],predictions=predictions))
+    def score(selected,h):
+        total=sum(sum(f["actual"][:h]) for f in selected); n=len(selected)*h
+        scores={}
+        for method in ("naive","mean","seasonal_naive"):
+            errors=[Fraction(p)-a for f in selected for p,a in zip(f["predictions"][method][:h],f["actual"][:h])]
+            absolute=sum(map(abs,errors))
+            scores[method]=dict(mae=str(absolute/n),bias=str(sum(errors)/n),wape=str(absolute/total))
+        return dict(scored_points=n,scores=scores)
+    selection={str(h):score(folds[:-1],h) for h in (7,14,28)}
+    chosen=min(("naive","mean","seasonal_naive"),key=lambda m:Fraction(selection["28"]["scores"][m]["mae"]))
+    return dict(folds=folds,selection=selection,chosen_method=chosen,
+        holdout_scores={str(h):score(folds[-1:],h) for h in (7,14,28)})
+
+
+def backtests(pilot):
+    for keys in (1,10):
+        for days in (180,365,730):
+            p=f"zero-{keys}-{days}"; end=START+timedelta(days=days)
+            zero_total=keys*days*3//10
+            positive=keys*days-zero_total
+            quota,remainder=divmod(zero_total,keys)
+            def zero(k,i):
+                return i%10<3 and (i//10*3+i%10)<quota+int(k<remainder)
+            setup=time.monotonic()
+            load_inventory(pilot.owner,inventory_manifest(p,keys,0))
+            with pilot.owner.transaction():
+                copy_rows(pilot.owner,"planning_input","demand_batches",[(p+":demand","zero-control-v1",
+                    "America/Los_Angeles",START,end,midnight(end),"complete",positive+positive//20+positive//100,keys*days)])
+                copy_rows(pilot.owner,"planning_input","day_observations",(
+                    (f"{p}:day:{k}:{i}",p+":demand",*grain(p,k,1),START+timedelta(days=i),1,
+                    midnight(START+timedelta(days=i+1)),midnight(START+timedelta(days=i+1)),"complete","available",int(not zero(k,i)))
+                    for k in range(keys) for i in range(days)))
+                def orders():
+                    index=0
+                    for k in range(keys):
+                        for i in range(days):
+                            if zero(k,i): continue
+                            index+=1; accepted=midnight(START+timedelta(days=i))+timedelta(hours=12)
+                            for rev in (1,2,3):
+                                if rev==2 and index%20 or rev==3 and index%100: continue
+                                observed=midnight(end)+timedelta(days=1) if rev==3 else accepted+timedelta(hours=rev-1)
+                                yield (f"{p}:order:{k}:{i}:{rev}",p+":demand","control",f"{p}:{k}:{i}","1",rev,
+                                    *grain(p,k,1),accepted,observed,observed,1000 if rev==3 else 10,"accepted")
+                copy_rows(pilot.owner,"planning_input","order_versions",orders())
+            pilot.owner.execute("ANALYZE"); setup=time.monotonic()-setup
+            before=source_digest(pilot.owner); serial_start=time.monotonic()
+            expectations=[expected_backtest(days,keys,k) for k in range(keys)]
+            write(pilot.output/(p+".oracle.json"),expectations)
+            for k in range(keys):
+                path=pilot.output/f"{p}-key{k}.json"
+                write(path,dict(prefix=p,days=days,key=k,code=pilot.code,expected=expectations[k]))
+                previous=history(pilot.owner); begin=time.monotonic()
+                with path.with_suffix(".log").open("w") as log:
+                    child=subprocess.Popen([sys.executable,"-m","scripts.engineering_confirmation","--backtest-worker",str(path)],cwd=ROOT,stdout=log,stderr=log)
+                    try:
+                        while child.poll() is None:
+                            pilot.budget.sample(child.pid)
+                            if time.monotonic()-begin>=60: child.kill(); child.wait(); break
+                            time.sleep(.2)
+                    finally:
+                        if child.poll() is None: child.kill(); child.wait()
+                value=json.loads(path.with_suffix(".result.json").read_text()) if child.returncode==0 else dict(status="worker_error",returncode=child.returncode,oracle="not_evaluated")
+                current=history(pilot.owner)
+                delta={name:current[name]-previous[name] for name in current}
+                if value["status"]=="completed" and delta!=dict(reliability_runs=0,checks=0,findings=0,planning_runs=1):
+                    raise AssertionError("backtest transaction incomplete")
+                if value["status"]!="completed" and any(delta.values()): value["status"]="committed_unverified"
+                case=dict(case=p,key=k,archive_keys=keys,history_days=days,day_rows=keys*days,
+                    positive_rows=positive,zero_days_per_key=quota+int(k<remainder),
+                    zero_days_total=zero_total,zero_allocation="floor(30% global days), remainder to ascending keys; first periodic-zero positions",
+                    raw_order_revision_rows=positive+positive//20+positive//100,setup_seconds=setup,
+                    history_delta=delta,**value)
+                pilot.cases.append(case); write(pilot.output/"checkpoint.json",pilot.cases)
+                print(json.dumps({name:case[name] for name in ("case","key","status")}),flush=True)
+            after=source_digest(pilot.owner)
+            if before!=after: raise AssertionError("backtest mutated sources")
+            pilot.cases.append(dict(case=p+"-serial",requested=keys,driver_seconds=time.monotonic()-serial_start,
+                source_before=before,source_after=after))
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase",choices=("paired","planning","backtests"))
+    parser.add_argument("--output",type=Path); parser.add_argument("--pgdata",type=Path)
+    parser.add_argument("--baseline",type=Path); parser.add_argument("--wall-seconds",type=int,default=1800)
+    parser.add_argument("--backtest-worker",type=Path)
+    args=parser.parse_args()
+    if args.backtest_worker: backtest_worker(args.backtest_worker); return
+    if not args.phase or not args.output or not args.pgdata or not 1<=args.wall_seconds<=7200:
+        parser.error("provide phase/new output/explicit disposable pgdata and wall cap 1..7200")
+    if args.phase=="paired" and not args.baseline: parser.error("paired phase requires frozen baseline SQL")
+    pilot=Pilot(args.output,args.pgdata,args.wall_seconds)
+    try:
+        write(pilot.output/"phase.json",dict(phase=args.phase,confirmation=False,reference_host=False,
+            wall_cap=args.wall_seconds,source=pilot.code,script_sha256=sha256(Path(__file__).read_bytes()).hexdigest()))
+        if args.phase=="paired": paired(pilot,args.baseline)
+        elif args.phase=="planning": planning(pilot)
+        else: backtests(pilot)
+    finally:
+        write(pilot.output/"summary.json",dict(phase=args.phase,cases=pilot.cases,samples=pilot.samples,
+            wall_seconds=time.monotonic()-pilot.budget.start,cpu_seconds=pilot.budget.cpu,
+            sampled_rss_upper_bytes=pilot.budget.peak_upper_rss,added_disk_bytes=pilot.budget.disk()-pilot.budget.initial_disk,
+            reference_confirmation=False))
+        pilot.owner.close()
+
+
+if __name__=="__main__": main()

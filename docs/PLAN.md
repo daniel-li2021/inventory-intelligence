@@ -1,10 +1,16 @@
 # Engineering readiness plan
 
-Status: **local exploratory pilot authorized; execution complete**. Current phase/mode
+Status: **local continuation measured and validated; reference/stability/release gates pending**. Current phase/mode
 and scope gates live in [STATE](STATE.md). The user approved implementation and a
-pilot on the existing Mac on 2026-10-03. Proposed reference workload/SLOs below
-remain unchanged; Linux/reference confirmation and the separate eight-hour program
-are deferred. No feature resumption, paid host or public deployment is authorized.
+pilot on the existing Mac on 2026-10-03. On October 4 the user explicitly assigned
+the remaining engineering checks and one evidence-led optimization, then selected
+available local runtimes only. The continuation uses the existing native cluster
+and Docker Desktop ARM64 Linux VM; no x86 host is available. Its ceiling is three
+hours including retained harness repairs and full sustained HTTP windows, with
+the existing resource guards/caps. This replaces the continuation's initially
+chosen two-hour ceiling, not the completed original pilot's receipt.
+Reference workload/SLOs remain unchanged. The separate eight-hour program,
+feature resumption, paid host and public deployment remain outside this assignment.
 
 ## Phase handoff and checkpoints
 
@@ -15,35 +21,46 @@ are deferred. No feature resumption, paid host or public deployment is authorize
   [source/evidence](EVIDENCE.md#local-engineering-pilot), [commands](OPERATIONS.md#engineering-pilot).
 - [x] P1 local implementation: minimal deterministic runner and independent controls;
   B1/B3 and small-to-medium B2 executed. Limited cells are retained, not retried as successes.
-- [ ] P1 reference confirmation: reviewed Linux host/runtime and five campaigns over
-  two dates. Local samples do not satisfy this gate.
+- [ ] P1 reference confirmation: five fresh ARM64 Linux campaigns completed with
+  two warmups and six measured calls per operation/campaign. All 30 reconciliation
+  and 30 selected-plan outcomes passed; planning missed its one-second threshold.
+  x86-64/Python3.12.12/two-date confirmation remains pending.
 - [x] P2 local subset: preliminary native HTTP, supplemental backtest growth and
   interrupted-writer/snapshot/crash/restore controls completed. Initial restart
   harness failure is retained alongside the repaired check.
-- [ ] P2 remaining: Linux/container enforcement, other defect/serial/load grids,
-  full HTTP confirmation and independent human checks. These remain unmeasured.
-- [ ] P3: only after confirmed evidence, one targeted change plus paired confirmation;
-  otherwise preserve the baseline. No engine optimization made during this pilot.
+- [ ] P2 remaining: container enforcement, defect classes, serial100, full backtest
+  grids and 100k-movement recovery have new evidence. One continuous 30-minute
+  HTTP campaign and a verified process crash passed; short/discontinuous and
+  interrupted windows cannot complete the three-campaign stability gate.
+  Independent human checks and the remaining declared limits still gate completion.
+- [x] P3 local: one grouped-movement SQL optimization, counterbalanced before/after
+  calls on identical immutable fixtures; full x86/two-date confirmation is pending.
 
 Record resumable task status, blockers and the next action here; update STATE at
 material checkpoints. This near-term plan owns pending engineering execution;
 other research possibilities remain conditional knowledge in KB. At completion,
 extract durable knowledge, results and evidence, then retire this task file.
 
-Completed locally: B1 tiers/shapes/history; B3 duplicates and both reader boundaries;
-B2 forecasts/plans/blocked controls and constant-demand backtest growth; preliminary
-B4 network/admission/body recovery; four small native V2 fault/recovery checks.
-[Exact results and limitations](RESULTS.md#local-engineering-pilot) replace a progress diary.
+Completed locally: original B1 tiers/shapes/history and both reader boundaries;
+the identical-workload SQL comparison and 1M upper-tier completions; five fresh
+ARM64 Linux batch campaigns and effective container controls; serial100 and the
+1/10-key 30%-zero backtest grid; four further defect classes and 100k-movement DB
+recovery. [Exact outcomes](RESULTS.md#engineering-continuation) preserve both the
+original pilot and new continuation, with their distinct denominators.
 
-Remaining: Linux reference host/container controls; multi-date confirmation and
-HTTP sample/duration floors; other B3 defect classes, full B2 serial/30%-zero
-backtest grids and B4 rates/client counts; full-scale/app recovery; independent
-human accessibility/cold start. The measured SQL deadlines and consumer-size
-limits remain explicit gaps. No public deployment or engine optimization occurred.
+Remaining: two further continuity-verified HTTP campaigns and sparse rate/client
+controls; x86 reference/Python3.12.12/two-date confirmation; serial1000 and remaining
+archive-growth/defect cells; independent human accessibility/cold start and public
+TLS. Planning latency, dense-evidence SQL deadlines, reader size limits and proxy
+slow-body timeout behavior remain explicit gaps. Features remain paused.
 
-Next action: review a disposable Linux reference host/runtime and confirmation
-scope/budget, then confirm the reference batch and limited evidence paths. Retain
-this plan for those pending decisions/execution; broader features remain paused.
+Next action: repeat only the missing continuous HTTP/rate/client cells on a runtime
+with verified clock continuity, then obtain the x86/two-date reference evidence
+when an available local host supports it. The 180-minute target was exceeded by
+clock discontinuities (192.8 minutes); measurements stopped and guards/journaling
+were repaired. Keep the x86/two-date,
+planning SLO, dense-evidence, proxy timeout and human checks explicit. Broader
+features remain paused; this plan remains necessary for pending confirmation.
 
 ## Questions and supported claims
 

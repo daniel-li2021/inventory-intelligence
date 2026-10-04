@@ -1,0 +1,8 @@
+{
+  "reason": "wall clock ceiling exceeded with second wall/active discontinuity",
+  "at_utc": "2026-10-04T11:07:28.395013+00:00",
+  "deadline_utc": "2026-10-04T10:54:43.943716+00:00",
+  "target_pid": 78488,
+  "command": "/private/tmp/ii-lab-venv/bin/python -m scripts.engineering_runtime --docker /Applications/Docker.app/Contents/Resources/bin/docker --output /Users/daniel/Desktop/Job/Inventory_Intelligence/artifacts/engineering-continuation-v1/runtime-confirmation --duration 1800 --campaigns 1 --sustained-only --wall-seconds 1900",
+  "load": "interrupted; driver full raw receipt unavailable; never count as successful or zero"
+}

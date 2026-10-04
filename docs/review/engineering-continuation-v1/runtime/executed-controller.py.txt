@@ -1,0 +1,174 @@
+"""Local Linux Compose acceptance/load; loopback HTTP only, no public deployment.
+
+Uses an explicitly named new Compose project and the existing pinned runtime.
+Cleanup removes only this project's synthetic containers/network/volumes.
+"""
+import argparse
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import socket
+import subprocess
+import sys
+import time
+import urllib.request
+
+from scripts.engineering_benchmark import ROOT, write
+from scripts.engineering_network import request, validate, faults
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--docker",required=True,type=Path)
+    parser.add_argument("--output",required=True,type=Path)
+    parser.add_argument("--duration",type=int,default=1800)
+    parser.add_argument("--campaigns",type=int,default=3)
+    parser.add_argument("--wall-seconds",type=int,default=6000)
+    args=parser.parse_args()
+    if not 1<=args.duration<=1800 or not 1<=args.campaigns<=3 or not 1<=args.wall_seconds<=7200:
+        parser.error("duration 1..1800, campaigns 1..3, wall 1..7200")
+    args.output.mkdir(parents=True,exist_ok=False); output=args.output.resolve()
+    begin=time.monotonic(); cases=[]; health_probes={}
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1",0)); port=sock.getsockname()[1]
+    project="ii-engineering-"+str(os.getpid())
+    override=output/"override.yaml"
+    # Only local port/network overrides; CPU/memory/read-only/security settings
+    # come from the real maintained Compose file.
+    override.write_text(f"services:\n  proxy:\n    ports: !override\n      - '127.0.0.1:{port}:8080'\nnetworks:\n  demo:\n    internal: true\n")
+    env=dict(os.environ,LAB_DOMAIN="http://:8080",LAB_IMAGE="inventory-lab:engineering-v1",
+        PATH=str(args.docker.parent)+os.pathsep+os.environ.get("PATH",""))
+    def docker(*parts,timeout=60):
+        return subprocess.check_output([str(args.docker),*parts],env=env,cwd=ROOT,text=True,stderr=subprocess.STDOUT,timeout=timeout)
+    def compose(*parts,timeout=60):
+        return docker("compose","-p",project,"-f",str(ROOT/"deploy/lab/compose.yaml"),"-f",str(override),*parts,timeout=timeout)
+    def resources(lab,proxy):
+        out={}
+        for name,cid in (("lab",lab),("proxy",proxy)):
+            text=docker("exec",cid,"sh","-c","cat /sys/fs/cgroup/memory.current /sys/fs/cgroup/memory.peak /sys/fs/cgroup/pids.current /sys/fs/cgroup/memory.events /sys/fs/cgroup/cpu.stat")
+            lines=text.splitlines()
+            out[name]=dict(memory_current_bytes=int(lines[0]),memory_peak_bytes=int(lines[1]),
+                cgroup_processes_and_threads=int(lines[2]),
+                counters={line.split()[0]:int(line.split()[1]) for line in lines[3:]})
+        health=json.loads(docker("inspect","--format","{{json .State.Health}}",lab))
+        for probe in health.get("Log",[]): health_probes[probe["Start"]]=probe
+        return dict(elapsed_seconds=time.monotonic()-begin,**out)
+    base=f"http://127.0.0.1:{port}"
+    def healthy():
+        for _ in range(120):
+            try:
+                r=request(base,"lab",{},time.perf_counter_ns())
+                if r["outcome"]=="succeeded" and r["oracle"]=="pass": return r
+            except OSError: pass
+            time.sleep(.25)
+        raise RuntimeError("runtime recovery/readiness deadline")
+    write(output/"protocol.json",dict(project=project,architecture="recorded after startup",
+        public_deployment=False,loopback_only=True,offered_rate=1.5,duration=args.duration,campaigns=args.campaigns,
+        rate_grid=[.5,1.5,2,3,5],client_grid=[1,4,8,16],counterbalance="fresh lab restart per cell",
+        resource_sampling_seconds=10,wall_cap=args.wall_seconds,
+        code_sha256=sha256(Path(__file__).read_bytes()).hexdigest()))
+    try:
+        compose("config", "--format", "json")
+        write(output/"compose.json",json.loads(compose("config","--format","json")))
+        log=compose("up","-d","--no-build","--wait",timeout=180)
+        (output/"startup.log").write_text(log)
+        lab=compose("ps","-q","lab").strip(); proxy=compose("ps","-q","proxy").strip()
+        info=json.loads(docker("info","--format","{{json .}}"))
+        write(output/"environment.json",{k:info[k] for k in ("OSType","Architecture","NCPU","MemTotal","KernelVersion","ServerVersion","CgroupVersion")})
+        for name,cid in (("lab",lab),("proxy",proxy)):
+            write(output/(name+"-inspect.json"),json.loads(docker("inspect",cid)))
+        # Effective cgroups and process identity, not merely Compose intentions.
+        probe=docker("exec",lab,"python","-c", "import os,json,socket,pathlib; p=pathlib.Path('/sys/fs/cgroup'); s=pathlib.Path('/proc/self/status').read_text(); print(json.dumps({'uid':os.getuid(),'cpu':(p/'cpu.max').read_text().strip(),'memory':(p/'memory.max').read_text().strip(),'pids':(p/'pids.max').read_text().strip(),'status':s}));\ntry: pathlib.Path('/tmp/ii-write-probe').write_text('x'); print('WRITABLE')\nexcept OSError as e: print('READ_ONLY',e.errno)\nsock=socket.socket(); sock.settimeout(1); print('EXTERNAL_CONNECT',sock.connect_ex(('1.1.1.1',443)))")
+        (output/"effective-controls.txt").write_text(probe)
+        control=json.loads(probe.splitlines()[0])
+        assert control["uid"]==10001 and control["cpu"]=="50000 100000"
+        assert control["memory"]=="268435456" and control["pids"]=="64"
+        assert "CapEff:\t0000000000000000" in control["status"] and "NoNewPrivs:\t1" in control["status"]
+        assert "READ_ONLY 30" in probe and "EXTERNAL_CONNECT 0" not in probe
+        cases.append(dict(case="effective-controls",status="pass",probe="effective-controls.txt",
+            network="internal bridge, proxy alone bound to loopback",proxy_uid="root as configured; lab UID10001"))
+        healthy()
+        # Missing/corrupt archive tests use explicit read-only overlays on separate
+        # copies of the packaged image, preserving the good image/container.
+        package=docker("exec",lab,"python","-c","import inventory_intelligence,pathlib; print(pathlib.Path(inventory_intelligence.__file__).parent)").strip()
+        archive=output/"corrupt.json"; archive.write_text("{}")
+        docker("cp",lab+":"+package,str(output/"missing-package"))
+        missing=output/"missing-package"
+        (missing/"lab_evidence.json").unlink()
+        for label,source,target in (("corrupt",archive,package+"/lab_evidence.json"),("missing",missing,package)):
+            code="import json,urllib.request,urllib.error,subprocess,time; p=subprocess.Popen(['python','-m','uvicorn','inventory_intelligence.lab_hosted:app','--host','127.0.0.1','--port','8000']); time.sleep(1);\ntry: urllib.request.urlopen('http://127.0.0.1:8000/api/lab'); raise AssertionError('invalid archive admitted')\nexcept urllib.error.HTTPError as e: assert e.code==503; print('EXPECTED_503')\nfinally: p.terminate(); p.wait(timeout=10)"
+            log=docker("run","--rm","--network","none","--read-only","--user","10001:10001",
+                "--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus",".5","--memory","256m",
+                "--mount",f"type=bind,src={source},dst={target},readonly",
+                "inventory-lab:engineering-v1","python","-c",code,timeout=30)
+            assert "EXPECTED_503" in log
+            cases.append(dict(case=label+"-archive",status="pass",http_status=503))
+        # Body faults and crash/restart are distinct from the timed load samples.
+        try: cases.append(dict(case="proxy-body-faults",**faults(base,port)))
+        except (AssertionError,OSError,ValueError) as error:
+            cases.append(dict(case="proxy-body-faults",status="failed",error=repr(error)))
+            healthy()
+        fault_path=output/"app-crash-load.jsonl"
+        fault_client=subprocess.Popen([sys.executable,"-m","scripts.engineering_network","--driver",base,
+            "--output",str(fault_path),"--rate","1.5","--duration","10","--mode","mixed"],cwd=ROOT)
+        time.sleep(2)
+        start=time.monotonic(); docker("kill",lab); recovered=healthy()
+        fault_client.wait(timeout=20)
+        if fault_client.returncode: raise RuntimeError("crash load client failed")
+        cases.append(dict(case="app-crash-auto-restart",status="pass",seconds=time.monotonic()-start,
+            recovery=recovered,active_during_crash="separate 10-second open-arrival mixed fault campaign",
+            fault_load=json.loads(fault_path.with_suffix('.summary.json').read_text())))
+        compose("restart","lab"); healthy()
+        # Download identity on aliases is an exact byte comparison.
+        with urllib.request.urlopen(base+"/api/evidence") as r: raw=r.read()
+        with urllib.request.urlopen(base+"/api/lab/evidence") as r: alias=r.read()
+        assert raw==alias; validate("evidence",{},json.loads(raw))
+        cases.append(dict(case="download-bytes",status="pass",bytes=len(raw),sha256=sha256(raw).hexdigest()))
+        # The full sustained mixed cell runs first. Remaining sparse rates and
+        # homogeneous/client grids are explicitly exploratory short controls.
+        grid=[(f"sustained-{i}",1.5,args.duration,"mixed",16,0) for i in range(args.campaigns)]
+        grid += [(f"rate-{rate}-{i}",rate,20,"mixed",16,0) for i in range(3) for rate in (.5,2,3,5)]
+        grid += [(f"diagnostic-{mode}-{i}",1.5,20,mode,16,0) for i in range(3) for mode in ("post","evidence")]
+        grid += [(f"burst-{n}-clients-{clients}",1,1,"post",clients,n) for n in (20,40) for clients in (1,4,8,16)]
+        for grid_index,(name,rate,duration,mode,clients,burst) in enumerate(grid):
+            if time.monotonic()-begin+duration+20>args.wall_seconds:
+                cases.extend(dict(case=row[0],status="not_measured",reason="wall budget") for row in grid[grid_index:]); break
+            compose("restart","lab"); healthy()
+            # Readiness consumes one token; refill before every timed cell.
+            time.sleep(.6)
+            path=output/(name+".jsonl")
+            command=[sys.executable,"-m","scripts.engineering_network","--driver",base,"--output",str(path),
+                "--rate",str(rate),"--duration",str(duration),"--mode",mode,"--clients",str(clients),"--burst",str(burst)]
+            child=subprocess.Popen(command,cwd=ROOT); samples=[]; started=time.monotonic(); next_sample=started
+            next_progress=started+60
+            try:
+                while child.poll() is None:
+                    if time.monotonic()>=next_sample:
+                        samples.append(resources(lab,proxy)); next_sample=time.monotonic()+10
+                    if time.monotonic()>=next_progress:
+                        print(json.dumps(dict(case=name,progress_seconds=int(time.monotonic()-started),
+                            last_resources=samples[-1])),flush=True)
+                        next_progress=time.monotonic()+60
+                    if time.monotonic()-started>duration+30: raise RuntimeError("load client deadline")
+                    time.sleep(.2)
+            finally:
+                if child.poll() is None: child.kill(); child.wait()
+            if child.returncode: raise RuntimeError("driver failed")
+            write(output/(name+".resources.json"),samples)
+            summary=json.loads(path.with_suffix(".summary.json").read_text())
+            cases.append(dict(case=name,resources_file=name+".resources.json",**summary))
+            write(output/"checkpoint.json",cases)
+            print(json.dumps(dict(case=name,outcomes=summary["outcomes"],valid_offered_load=summary["valid_offered_load"])),flush=True)
+            if burst:
+                time.sleep(10.2); recovered=healthy()
+                cases[-1]["recovery"]=recovered
+    finally:
+        write(output/"background-health-probes.json",list(health_probes.values()))
+        try: (output/"shutdown.log").write_text(compose("down","--volumes",timeout=90))
+        finally: write(output/"summary.json",dict(cases=cases,wall_seconds=time.monotonic()-begin,
+            confirmation="only qualifying sustained cells; ARM64 one-date local VM, not x86 reference",
+            proxy="loopback HTTP; public TLS unmeasured"))
+
+
+if __name__=="__main__": main()

@@ -74,23 +74,43 @@ def request(base,route,payload,planned,start_gate=None):
     return record
 
 
-def driver(base,output,rate,duration,mode,burst):
+def driver(base,output,rate,duration,mode,burst,clients=None):
     records=[]; futures=[]
-    begin=time.perf_counter_ns(); cpu=time.process_time_ns()
+    begin=time.perf_counter_ns(); wall_begin=time.time(); cpu=time.process_time_ns()
+    partial=output.with_suffix('.partial.jsonl'); partial.touch(exist_ok=False)
+    journal_lock=threading.Lock()
+    def journal(future):
+        try: row=future.result()
+        except Exception as error: row=dict(driver_exception=repr(error))
+        with journal_lock, partial.open('ab') as stream: stream.write(encoded(row)+b'\n')
+    def check_clock():
+        if abs((time.time()-wall_begin)-(time.perf_counter_ns()-begin)/1e9)>2:
+            raise RuntimeError("HTTP wall/active clock discontinuity; observation interrupted")
     planned_count=burst if burst else math.ceil(rate*duration)
     # No retry; arrivals depend on the frozen schedule, never the preceding response.
     gate=threading.Event() if burst else None
-    with ThreadPoolExecutor(max_workers=40 if burst else 16) as pool:
+    with ThreadPoolExecutor(max_workers=clients or (40 if burst else 16)) as pool:
         for i in range(planned_count):
+            check_clock()
             route=ROUTES[i%5] if mode=="mixed" else mode
             payload=PAYLOADS[(i//5*3+i%5)%4] if route=="post" else {}
             planned=begin+(0 if burst else int(i/rate*1e9))
             if not burst:
                 remaining=(planned-time.perf_counter_ns())/1e9
                 if remaining>0: time.sleep(remaining)
-            futures.append(pool.submit(request,base,route,payload,planned,gate))
+            future=pool.submit(request,base,route,payload,planned,gate)
+            future.add_done_callback(journal); futures.append(future)
         if gate: gate.set()
         records=[f.result() for f in as_completed(futures)]
+    check_clock()
+    if not burst:
+        # Observe the entire declared offer window, including the final interval
+        # after the last scheduled arrival. Request latency clocks are unchanged.
+        while True:
+            check_clock()
+            remaining=(begin+int(duration*1e9)-time.perf_counter_ns())/1e9
+            if remaining<=0: break
+            time.sleep(min(1,remaining))
     elapsed=(time.perf_counter_ns()-begin)/1e9
     records.sort(key=lambda r:r["planned_ns"])
     output.write_bytes(b"".join(encoded(r)+b"\n" for r in records))
@@ -102,8 +122,14 @@ def driver(base,output,rate,duration,mode,burst):
         success_per_second=counts.get("succeeded",0)/(duration if not burst else elapsed),
         client_cpu_seconds=(time.process_time_ns()-cpu)/1e9,
         client_process_high_water_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*(1 if sys.platform=="darwin" else 1024),
-        valid_offered_load=burst>0 or all(r["scheduler_lag_ns"]<=100_000_000 for r in records),
+        valid_offered_load=all(r["scheduler_lag_ns"]<=100_000_000 for r in records),
         mode=mode,burst=burst,retries=0,raw_file=output.name)
+    summary["client_max_inflight"]=clients or (40 if burst else 16)
+    summary["duration_seconds"]=duration
+    summary["observation_window_closed"]=None if burst else elapsed>=duration
+    summary["wall_elapsed_seconds"]=time.time()-wall_begin
+    summary["clock_discontinuity_allowance_seconds"]=2
+    summary["partial_journal_file"]=partial.name
     for route in ("post","lab","evidence"):
         rows=[r for r in records if r["route"]==route]
         if not rows: continue
@@ -148,6 +174,8 @@ def faults(base,port):
             if wait: time.sleep(wait)
             sock.settimeout(10)
             response=sock.recv(16384)
+        if not response.startswith(b"HTTP/"):
+            raise ValueError("peer closed without HTTP status: "+repr(response[:100]))
         return int(response.split(b" ",2)[1])
     started=time.monotonic()
     slow=raw(b"POST /api/scenarios HTTP/1.1\r\nHost: localhost\r\nContent-Type: application/json\r\nContent-Length: 10\r\n\r\n{",5.2)
@@ -157,7 +185,7 @@ def faults(base,port):
         sock.sendall(b"POST /api/scenarios HTTP/1.1\r\nHost: localhost\r\nContent-Length: 100\r\n\r\n{")
     time.sleep(.2)
     recovered=request(base,"evidence",{},time.perf_counter_ns())
-    assert (slow,huge,chunked)==(408,413,200)
+    assert (slow,huge,chunked)==(408,413,200),dict(slow=slow,oversized=huge,chunked=chunked)
     assert recovered["outcome"]=="succeeded" and recovered["oracle"]=="pass"
     return dict(slow_partial_body=slow,oversized=huge,valid_chunked=chunked,
         disconnected_partial_body="connection closed by client; subsequent evidence passed",
@@ -229,12 +257,13 @@ def main():
     parser.add_argument("--duration",type=int,default=20)
     parser.add_argument("--mode",choices=("mixed","post","evidence"),default="mixed")
     parser.add_argument("--burst",type=int,default=0)
+    parser.add_argument("--clients",type=int,choices=(1,4,8,16,40))
     parser.add_argument("--pgdata",type=Path)
     parser.add_argument("--wall-seconds",type=int,default=7200)
     args=parser.parse_args()
-    if not 0<args.rate<=5 or not 1<=args.duration<=20 or args.burst not in (0,20,40):
-        parser.error("pilot permits rate (0,5], duration 1..20 and bursts 20/40")
-    if args.driver: driver(args.driver,args.output,args.rate,args.duration,args.mode,args.burst)
+    if not 0<args.rate<=5 or not 1<=args.duration<=1800 or args.burst not in (0,20,40):
+        parser.error("bounded driver permits rate (0,5], duration 1..1800 and bursts 20/40")
+    if args.driver: driver(args.driver,args.output,args.rate,args.duration,args.mode,args.burst,args.clients)
     else:
         if not args.pgdata or not 1<=args.wall_seconds<=7200: parser.error("provide isolated --pgdata and remaining wall cap")
         controller(args.output,args.pgdata,args.wall_seconds)

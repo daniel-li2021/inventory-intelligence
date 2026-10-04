@@ -1,0 +1,16 @@
+821604352
+usage_usec 64775520
+user_usec 62331047
+system_usec 2444473
+nice_usec 0
+nr_periods 652
+nr_throttled 22
+throttled_usec 2074394
+nr_bursts 0
+burst_usec 0
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0

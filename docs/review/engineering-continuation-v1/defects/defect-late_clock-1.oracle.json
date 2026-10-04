@@ -1,0 +1,1 @@
+{"checks":[{"rule_id":"R001","status":"not_assessable"},{"rule_id":"R002","status":"pass"},{"rule_id":"R003","status":"pass"},{"rule_id":"R004","status":"pass"},{"rule_id":"R005","status":"fail"}],"findings":[["R005","metadata_mismatch",null,null,["defect-late_clock-1:s:0"],null,null,null]],"overall_status":"fail"}

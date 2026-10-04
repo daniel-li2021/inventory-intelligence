@@ -325,3 +325,63 @@ that cluster on its explicit loopback port, and restores to `engineering_restore
 Never use a demo, shared cluster or operational input. Preserve failed attempts
 and resumable checkpoints; rerun only a small repaired control when justified.
 New confirmation programs, paid hosts and public deployment require scope review.
+
+## Engineering continuation
+
+The October 4 assignment covers remaining checks on available local runtimes and
+one measured SQL optimization. [Results](RESULTS.md#engineering-continuation) and
+[receipts](EVIDENCE.md#engineering-continuation) distinguish native Mac, ARM64 Linux
+and the pending x86/two-date reference gate. Reuse saved evidence before repeating
+large cells. Run intensive phases sequentially, with a fresh bootstrapped DB and
+new output directory per native phase; retain the existing restricted runner and
+explicit disposable-cluster guards. From the repository, with `PYTHONPATH=src`:
+
+```sh
+python -m scripts.engineering_confirmation --phase paired --baseline docs/review/engineering-continuation-v1/paired/before.sql --output artifacts/new-paired --pgdata /path/to/disposable/pgdata --wall-seconds 600
+python -m scripts.engineering_confirmation --phase planning --serial-keys 100 --output artifacts/new-planning --pgdata /path/to/disposable/pgdata --wall-seconds 600
+python -m scripts.engineering_confirmation --phase backtests --output artifacts/new-zero-backtests --pgdata /path/to/disposable/pgdata --wall-seconds 600
+python -m scripts.engineering_confirmation --phase defects --output artifacts/new-defects --pgdata /path/to/disposable/pgdata --wall-seconds 600
+python -m scripts.engineering_recovery --keys 1000 --movements 100000 --probe-keys 2 --output artifacts/new-recovery --pg-bin /path/to/pg/bin --pgdata /path/to/disposable/pgdata
+```
+
+`--serial-keys 1000` is available but remains unmeasured in this continuation.
+Backtest oracles use exact integer/Fraction arithmetic, a global floor(30% of day
+rows) zero quota, ascending-key remainder allocation, known revisions and separately
+late revisions. Reader rejection is retained alongside complete producer history.
+The paired baseline contains the original views plus checks; its generated after
+query implements the single grouped-movement change. Frozen launch sources in the
+receipt distinguish later harness repairs from measured engine changes.
+
+After building the maintained [Lab image](../deploy/lab/README.md) with the local
+tag `inventory-lab:engineering-v1`, the Docker controllers use explicit new names,
+pinned PostgreSQL, isolated synthetic containers and scoped cleanup. The batch
+controller exposes no database port; the HTTP controller binds the proxy only to
+an ephemeral loopback port. Its proxy has an additional bridge for local ingress;
+the Lab remains on the internal network with the maintained resource controls.
+Use an absolute Docker CLI path:
+
+```sh
+python -m scripts.engineering_linux --docker /path/to/docker --output artifacts/new-linux --campaigns 5
+# Separate timed SQL/JIT diagnostic, outside the primary distributions:
+python -m scripts.engineering_linux --docker /path/to/docker --output artifacts/new-jit --campaigns 1 --diagnostic-only
+python -m scripts.engineering_runtime --docker /path/to/docker --output artifacts/new-runtime --campaigns 3 --duration 1800 --wall-seconds 6000
+# Only faults/controls, or one sustained replacement plus those controls:
+python -m scripts.engineering_runtime --docker /path/to/docker --output artifacts/new-faults --fault-only --wall-seconds 120
+python -m scripts.engineering_runtime --docker /path/to/docker --output artifacts/new-sustained --sustained-only --campaigns 1 --duration 1800 --wall-seconds 1900
+```
+
+The crash helper verifies the selected Lab container's cgroup before signalling
+its process from the ancestor PID namespace, then requires a changed PID and
+increased restart counter. Readiness alone is insufficient proof of a crash.
+Preserve failed triggers and short observation windows as separate evidence;
+do not relabel them as qualifying campaigns. These commands authorize no paid
+host, public TLS release, feature resumption or additional engine optimization.
+
+Current guards compare real wall time and active clocks; the HTTP driver aborts
+on a discrepancy above two seconds. Completed requests are immediately saved in
+`.partial.jsonl` even when the window cannot produce its final sorted receipt.
+An interrupted window has unknown final denominators and is not a successful
+capacity point. Historical `wall_seconds` fields used active clocks; the published
+derived view explicitly records the original wall/active discrepancies and target
+overrun. The corrected runtime reports both clocks. Clock/journal repairs have
+hand controls and were not given new performance claims.

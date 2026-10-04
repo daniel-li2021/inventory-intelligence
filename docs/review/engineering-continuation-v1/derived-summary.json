@@ -1,0 +1,1300 @@
+{
+  "budget": {
+    "observed_seconds": 11565.643311977386,
+    "performance_not_remeasured_after_clock_journal_repairs": true,
+    "stopped_at_utc": "2026-10-04T11:07:29.586966+00:00",
+    "target_wall_seconds": 10800,
+    "wall_budget_compliant": false
+  },
+  "dense_evidence_diagnostic": {},
+  "http": {
+    "continuity_receipts": [
+      {
+        "attempt": "runtime-crash-corrected",
+        "controller_active_seconds": 5521.326835416956,
+        "filesystem_wall_seconds": 6428.578716278076,
+        "method": "original host filesystem creation timestamps minus controller monotonic duration; startup/write skew is small; large differences invalidate continuous stability",
+        "wall_minus_active_seconds": 907.2518808611203
+      },
+      {
+        "attempt": "runtime-confirmation",
+        "controller_active_seconds": 1094.9515234159771,
+        "filesystem_wall_seconds": 2892.502036333084,
+        "method": "original host filesystem creation timestamps minus controller monotonic duration; startup/write skew is small; large differences invalidate continuous stability",
+        "wall_minus_active_seconds": 1797.550512917107
+      }
+    ],
+    "controls": [
+      {
+        "attempt": "runtime-crash-corrected",
+        "case": "effective-controls",
+        "network": "internal bridge, proxy alone bound to loopback",
+        "probe": "effective-controls.txt",
+        "proxy_uid": "root as configured; lab UID10001",
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "case": "corrupt-archive",
+        "http_status": 503,
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "case": "missing-archive",
+        "http_status": 503,
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "case": "proxy-body-faults",
+        "error": "AssertionError({'slow': 504, 'oversized': 413, 'chunked': 200})",
+        "status": "failed"
+      },
+      {
+        "active_during_crash": "separate 10-second open-arrival mixed fault campaign",
+        "attempt": "runtime-crash-corrected",
+        "case": "app-crash-auto-restart",
+        "fault_load": {
+          "admission_unknown": 0,
+          "admitted_completed": 15,
+          "backlogged": 0,
+          "burst": 0,
+          "client_cpu_seconds": 0.094312,
+          "client_max_inflight": 16,
+          "client_process_high_water_rss_bytes": 42319872,
+          "dropped": 0,
+          "duration_seconds": 10,
+          "elapsed_seconds": 9.396844,
+          "evidence": {
+            "completed": 3,
+            "issued": 3,
+            "max_issued_latency_ns": 108329333,
+            "min_issued_latency_ns": 55536917,
+            "p95": "insufficient_confirmation_samples",
+            "p99": "insufficient_samples",
+            "rejected": 0
+          },
+          "issued": 15,
+          "lab": {
+            "completed": 3,
+            "issued": 3,
+            "max_issued_latency_ns": 139839167,
+            "min_issued_latency_ns": 82065750,
+            "p95": "insufficient_confirmation_samples",
+            "p99": "insufficient_samples",
+            "rejected": 0
+          },
+          "mode": "mixed",
+          "offered_per_second": 1.5,
+          "outcomes": {
+            "succeeded": 15
+          },
+          "planned": 15,
+          "post": {
+            "completed": 9,
+            "issued": 9,
+            "max_issued_latency_ns": 196578125,
+            "min_issued_latency_ns": 79639250,
+            "p95": "insufficient_confirmation_samples",
+            "p99": "insufficient_samples",
+            "rejected": 0
+          },
+          "raw_file": "app-crash-load.jsonl",
+          "retries": 0,
+          "success_per_second": 1.5,
+          "valid_offered_load": true
+        },
+        "reason": "same-namespace PID1 trigger lacks required PID/restart-change verification; later state snapshot follows explicit restarts and cannot prove the earlier fault",
+        "recovery": {
+          "bytes": 336257,
+          "http_status": 200,
+          "issued_ns": 1244540067269041,
+          "issued_to_complete_ns": 220802500,
+          "oracle": "pass",
+          "outcome": "succeeded",
+          "payload": {},
+          "planned_ns": 1244540067265125,
+          "response_sha256": "44c336aac508bccd1f803397f58f756f1030ace0761db560d920ab0d4217524f",
+          "route": "lab",
+          "scheduled_to_complete_ns": 220806416,
+          "scheduler_lag_ns": 3916
+        },
+        "seconds": 0.3569525829516351,
+        "status": "unverified"
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "bytes": 469848,
+        "case": "download-bytes",
+        "sha256": "8ffac224b952f9a4df7a47981a9f360dba6c7a7eea7d0fd07d9ecb7b0aecaf9f",
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-confirmation",
+        "case": "effective-controls",
+        "network": "internal bridge, proxy alone bound to loopback",
+        "probe": "effective-controls.txt",
+        "proxy_uid": "root as configured; lab UID10001",
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-confirmation",
+        "case": "corrupt-archive",
+        "http_status": 503,
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-confirmation",
+        "case": "missing-archive",
+        "http_status": 503,
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-confirmation",
+        "case": "proxy-body-faults",
+        "error": "AssertionError({'slow': 504, 'oversized': 413, 'chunked': 200})",
+        "status": "failed"
+      },
+      {
+        "active_during_crash": "separate 10-second open-arrival mixed fault campaign",
+        "attempt": "runtime-confirmation",
+        "case": "app-crash-auto-restart",
+        "fault_load": {
+          "admission_unknown": 1,
+          "admitted_completed": 14,
+          "backlogged": 0,
+          "burst": 0,
+          "client_cpu_seconds": 0.087636,
+          "client_max_inflight": 16,
+          "client_process_high_water_rss_bytes": 47857664,
+          "dropped": 0,
+          "duration_seconds": 10,
+          "elapsed_seconds": 10.005771792,
+          "evidence": {
+            "completed": 2,
+            "issued": 3,
+            "max_issued_latency_ns": 119220166,
+            "min_issued_latency_ns": 85024250,
+            "p95": "insufficient_confirmation_samples",
+            "p99": "insufficient_samples",
+            "rejected": 0
+          },
+          "issued": 15,
+          "lab": {
+            "completed": 3,
+            "issued": 3,
+            "max_issued_latency_ns": 105153583,
+            "min_issued_latency_ns": 71590083,
+            "p95": "insufficient_confirmation_samples",
+            "p99": "insufficient_samples",
+            "rejected": 0
+          },
+          "mode": "mixed",
+          "observation_window_closed": true,
+          "offered_per_second": 1.5,
+          "outcomes": {
+            "succeeded": 14,
+            "unexpected": 1
+          },
+          "planned": 15,
+          "post": {
+            "completed": 9,
+            "issued": 9,
+            "max_issued_latency_ns": 193200375,
+            "min_issued_latency_ns": 76973958,
+            "p95": "insufficient_confirmation_samples",
+            "p99": "insufficient_samples",
+            "rejected": 0
+          },
+          "raw_file": "app-crash-load.jsonl",
+          "retries": 0,
+          "success_per_second": 1.4,
+          "valid_offered_load": true
+        },
+        "new_host_pid": 29306,
+        "old_host_pid": 28897,
+        "recovery": {
+          "bytes": 336257,
+          "http_status": 200,
+          "issued_ns": 1250079115398833,
+          "issued_to_complete_ns": 200239417,
+          "oracle": "pass",
+          "outcome": "succeeded",
+          "payload": {},
+          "planned_ns": 1250079115395666,
+          "response_sha256": "44c336aac508bccd1f803397f58f756f1030ace0761db560d920ab0d4217524f",
+          "route": "lab",
+          "scheduled_to_complete_ns": 200242584,
+          "scheduler_lag_ns": 3167
+        },
+        "restart_count": 1,
+        "seconds": 1.6524672091472894,
+        "status": "pass"
+      },
+      {
+        "attempt": "runtime-confirmation",
+        "bytes": 469848,
+        "case": "download-bytes",
+        "sha256": "8ffac224b952f9a4df7a47981a9f360dba6c7a7eea7d0fd07d9ecb7b0aecaf9f",
+        "status": "pass"
+      }
+    ],
+    "exploratory_grids": [
+      {
+        "attempt": "runtime-crash-corrected",
+        "backlogged": 0,
+        "case": "rate-0.5-0",
+        "declared_duration_seconds": 20,
+        "elapsed_seconds": 20.001432708,
+        "full_duration": false,
+        "issued": 10,
+        "lag_ns": {
+          "iqr": 3304937.75,
+          "max": 10246083,
+          "median": 7739666.5,
+          "min": 93792,
+          "n": 10,
+          "q1": 5422895.75,
+          "q3": 8727833.5,
+          "quartile_method": "inclusive"
+        },
+        "outcomes": {
+          "succeeded": 10
+        },
+        "post_payload_counts": {
+          "{\"demand_percent\": 125}": 2,
+          "{\"evidence_case\": \"incomplete_supply\"}": 1,
+          "{\"supplier_delay_days\": 3}": 1,
+          "{}": 2
+        },
+        "route_counts": {
+          "evidence": 2,
+          "lab": 2,
+          "post": 6
+        },
+        "routes": {
+          "evidence": {
+            "completed": 2,
+            "descriptive_p95_issued_ms": 62.193583,
+            "descriptive_p95_scheduled_ms": 69.817875,
+            "http_statuses": {
+              "200": 2
+            },
+            "issued": 2,
+            "outcomes": {
+              "succeeded": 2
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 939696
+          },
+          "lab": {
+            "completed": 2,
+            "descriptive_p95_issued_ms": 88.907666,
+            "descriptive_p95_scheduled_ms": 92.034958,
+            "http_statuses": {
+              "200": 2
+            },
+            "issued": 2,
+            "outcomes": {
+              "succeeded": 2
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 672514
+          },
+          "post": {
+            "completed": 6,
+            "descriptive_p95_issued_ms": 85.261167,
+            "descriptive_p95_scheduled_ms": 95.50725,
+            "http_statuses": {
+              "200": 6
+            },
+            "issued": 6,
+            "outcomes": {
+              "succeeded": 6
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 1859704
+          }
+        },
+        "valid_offered_load": true
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "backlogged": 0,
+        "case": "rate-2-0",
+        "declared_duration_seconds": 20,
+        "elapsed_seconds": 20.0062335,
+        "full_duration": false,
+        "issued": 40,
+        "lag_ns": {
+          "iqr": 4636083.25,
+          "max": 10266709,
+          "median": 7402146.5,
+          "min": 82375,
+          "n": 40,
+          "q1": 4154479.25,
+          "q3": 8790562.5,
+          "quartile_method": "inclusive"
+        },
+        "outcomes": {
+          "succeeded": 40
+        },
+        "post_payload_counts": {
+          "{\"demand_percent\": 125}": 6,
+          "{\"evidence_case\": \"incomplete_supply\"}": 6,
+          "{\"supplier_delay_days\": 3}": 6,
+          "{}": 6
+        },
+        "route_counts": {
+          "evidence": 8,
+          "lab": 8,
+          "post": 24
+        },
+        "routes": {
+          "evidence": {
+            "completed": 8,
+            "descriptive_p95_issued_ms": 101.600834,
+            "descriptive_p95_scheduled_ms": 103.526917,
+            "http_statuses": {
+              "200": 8
+            },
+            "issued": 8,
+            "outcomes": {
+              "succeeded": 8
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 3758784
+          },
+          "lab": {
+            "completed": 8,
+            "descriptive_p95_issued_ms": 126.312834,
+            "descriptive_p95_scheduled_ms": 131.190834,
+            "http_statuses": {
+              "200": 8
+            },
+            "issued": 8,
+            "outcomes": {
+              "succeeded": 8
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 2690056
+          },
+          "post": {
+            "completed": 24,
+            "descriptive_p95_issued_ms": 128.444208,
+            "descriptive_p95_scheduled_ms": 130.426709,
+            "http_statuses": {
+              "200": 24
+            },
+            "issued": 24,
+            "outcomes": {
+              "succeeded": 24
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 7122906
+          }
+        },
+        "valid_offered_load": true
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "backlogged": 0,
+        "case": "rate-3-0",
+        "declared_duration_seconds": 20,
+        "elapsed_seconds": 20.009932458,
+        "full_duration": false,
+        "issued": 60,
+        "lag_ns": {
+          "iqr": 5081250.25,
+          "max": 10242583,
+          "median": 5661874.5,
+          "min": 163500,
+          "n": 60,
+          "q1": 4466239.5,
+          "q3": 9547489.75,
+          "quartile_method": "inclusive"
+        },
+        "outcomes": {
+          "rejected": 2,
+          "succeeded": 58
+        },
+        "post_payload_counts": {
+          "{\"demand_percent\": 125}": 9,
+          "{\"evidence_case\": \"incomplete_supply\"}": 9,
+          "{\"supplier_delay_days\": 3}": 9,
+          "{}": 9
+        },
+        "route_counts": {
+          "evidence": 12,
+          "lab": 12,
+          "post": 36
+        },
+        "routes": {
+          "evidence": {
+            "completed": 11,
+            "descriptive_p95_issued_ms": 113.302542,
+            "descriptive_p95_scheduled_ms": 123.545125,
+            "http_statuses": {
+              "200": 11,
+              "429": 1
+            },
+            "issued": 12,
+            "outcomes": {
+              "rejected": 1,
+              "succeeded": 11
+            },
+            "rejected_latency_ms": {
+              "iqr": 0.0,
+              "max": 2.502541,
+              "median": 2.502541,
+              "min": 2.502541,
+              "n": 1,
+              "q1": 2.502541,
+              "q3": 2.502541,
+              "quartile_method": "inclusive"
+            },
+            "response_body_bytes": 5168389
+          },
+          "lab": {
+            "completed": 11,
+            "descriptive_p95_issued_ms": 144.964833,
+            "descriptive_p95_scheduled_ms": 152.464625,
+            "http_statuses": {
+              "200": 11,
+              "429": 1
+            },
+            "issued": 12,
+            "outcomes": {
+              "rejected": 1,
+              "succeeded": 11
+            },
+            "rejected_latency_ms": {
+              "iqr": 0.0,
+              "max": 4.944291,
+              "median": 4.944291,
+              "min": 4.944291,
+              "n": 1,
+              "q1": 4.944291,
+              "q3": 4.944291,
+              "quartile_method": "inclusive"
+            },
+            "response_body_bytes": 3698888
+          },
+          "post": {
+            "completed": 36,
+            "descriptive_p95_issued_ms": 148.744792,
+            "descriptive_p95_scheduled_ms": 155.414875,
+            "http_statuses": {
+              "200": 36
+            },
+            "issued": 36,
+            "outcomes": {
+              "succeeded": 36
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 10684359
+          }
+        },
+        "valid_offered_load": true
+      }
+    ],
+    "first_window_exclusion": "sustained-0 in runtime-crash-corrected ended 0.584759167s before 1800s; retained but excluded",
+    "interpretation": "nearest rank descriptive local percentiles; dependent requests, one ARM64 date; no universal inference",
+    "qualifying_campaigns": 1,
+    "qualifying_routes": {
+      "evidence": {
+        "completed": 540,
+        "descriptive_p95_issued_ms": 121.3155,
+        "descriptive_p95_scheduled_ms": 130.319334,
+        "issued": 540,
+        "outcomes": {
+          "succeeded": 540
+        },
+        "p95_issued_ms": "insufficient_confirmation_floor",
+        "p95_scheduled_ms": "insufficient_confirmation_floor",
+        "p99": "insufficient_samples",
+        "response_body_bytes": 253717920
+      },
+      "lab": {
+        "completed": 540,
+        "descriptive_p95_issued_ms": 151.861292,
+        "descriptive_p95_scheduled_ms": 160.368042,
+        "issued": 540,
+        "outcomes": {
+          "succeeded": 540
+        },
+        "p95_issued_ms": "insufficient_confirmation_floor",
+        "p95_scheduled_ms": "insufficient_confirmation_floor",
+        "p99": "insufficient_samples",
+        "response_body_bytes": 181578780
+      },
+      "post": {
+        "completed": 1620,
+        "descriptive_p95_issued_ms": 148.92625,
+        "descriptive_p95_scheduled_ms": 154.212792,
+        "issued": 1620,
+        "outcomes": {
+          "succeeded": 1620
+        },
+        "p95_issued_ms": "insufficient_confirmation_floor",
+        "p95_scheduled_ms": "insufficient_confirmation_floor",
+        "p99": "insufficient_samples",
+        "response_body_bytes": 480796155
+      }
+    },
+    "replacement_load": {
+      "completed": null,
+      "issued": null,
+      "planned": 2700,
+      "reason": "real wall ceiling overrun/clock discontinuity; no final raw load receipt",
+      "status": "interrupted"
+    },
+    "sustained_campaigns": [
+      {
+        "attempt": "runtime-crash-corrected",
+        "backlogged": 0,
+        "case": "sustained-0",
+        "continuous_observation_verified": true,
+        "declared_duration_seconds": 1800,
+        "elapsed_seconds": 1799.415240833,
+        "full_duration": false,
+        "issued": 2700,
+        "lag_ns": {
+          "iqr": 5836635.25,
+          "max": 23474709,
+          "median": 4208395.5,
+          "min": 112208,
+          "n": 2700,
+          "q1": 2724354.25,
+          "q3": 8560989.5,
+          "quartile_method": "inclusive"
+        },
+        "outcomes": {
+          "succeeded": 2700
+        },
+        "post_payload_counts": {
+          "{\"demand_percent\": 125}": 405,
+          "{\"evidence_case\": \"incomplete_supply\"}": 405,
+          "{\"supplier_delay_days\": 3}": 405,
+          "{}": 405
+        },
+        "resources": {
+          "lab": {
+            "cgroup_peak_bytes": 70365184,
+            "cpu_usage_seconds_delta": 221.637769,
+            "current_bytes": {
+              "iqr": 1589248.0,
+              "max": 67723264,
+              "median": 53796864,
+              "min": 48001024,
+              "n": 175,
+              "q1": 52875264.0,
+              "q3": 54464512.0,
+              "quartile_method": "inclusive"
+            },
+            "first_bytes": 48001024,
+            "last_bytes": 55488512,
+            "linear_slope_bytes_per_second": 2055.831381520316,
+            "note": "cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples",
+            "oom_kill_delta": 0,
+            "samples": 175,
+            "throttled_periods_delta": 1942
+          },
+          "proxy": {
+            "cgroup_peak_bytes": 19046400,
+            "cpu_usage_seconds_delta": 4.605471,
+            "current_bytes": {
+              "iqr": 284672.0,
+              "max": 18067456,
+              "median": 17395712,
+              "min": 15712256,
+              "n": 175,
+              "q1": 17268736.0,
+              "q3": 17553408.0,
+              "quartile_method": "inclusive"
+            },
+            "first_bytes": 15712256,
+            "last_bytes": 17301504,
+            "linear_slope_bytes_per_second": 66.98945733947664,
+            "note": "cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples",
+            "oom_kill_delta": 0,
+            "samples": 175,
+            "throttled_periods_delta": 0
+          }
+        },
+        "route_counts": {
+          "evidence": 540,
+          "lab": 540,
+          "post": 1620
+        },
+        "routes": {
+          "evidence": {
+            "completed": 540,
+            "descriptive_p95_issued_ms": 120.592958,
+            "descriptive_p95_scheduled_ms": 128.106876,
+            "http_statuses": {
+              "200": 540
+            },
+            "issued": 540,
+            "outcomes": {
+              "succeeded": 540
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 253717920
+          },
+          "lab": {
+            "completed": 540,
+            "descriptive_p95_issued_ms": 148.566541,
+            "descriptive_p95_scheduled_ms": 156.933792,
+            "http_statuses": {
+              "200": 540
+            },
+            "issued": 540,
+            "outcomes": {
+              "succeeded": 540
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 181578780
+          },
+          "post": {
+            "completed": 1620,
+            "descriptive_p95_issued_ms": 149.02825,
+            "descriptive_p95_scheduled_ms": 156.828167,
+            "http_statuses": {
+              "200": 1620
+            },
+            "issued": 1620,
+            "outcomes": {
+              "succeeded": 1620
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 480796155
+          }
+        },
+        "valid_offered_load": true
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "backlogged": 0,
+        "case": "sustained-1",
+        "continuous_observation_verified": true,
+        "declared_duration_seconds": 1800,
+        "elapsed_seconds": 1800.004555292,
+        "full_duration": true,
+        "issued": 2700,
+        "lag_ns": {
+          "iqr": 3837437.25,
+          "max": 18386875,
+          "median": 5254437.5,
+          "min": 143750,
+          "n": 2700,
+          "q1": 4003531.75,
+          "q3": 7840969.0,
+          "quartile_method": "inclusive"
+        },
+        "outcomes": {
+          "succeeded": 2700
+        },
+        "post_payload_counts": {
+          "{\"demand_percent\": 125}": 405,
+          "{\"evidence_case\": \"incomplete_supply\"}": 405,
+          "{\"supplier_delay_days\": 3}": 405,
+          "{}": 405
+        },
+        "resources": {
+          "lab": {
+            "cgroup_peak_bytes": 70365184,
+            "cpu_usage_seconds_delta": 220.945187,
+            "current_bytes": {
+              "iqr": 1443840.0,
+              "max": 65761280,
+              "median": 53567488,
+              "min": 47505408,
+              "n": 175,
+              "q1": 52842496.0,
+              "q3": 54286336.0,
+              "quartile_method": "inclusive"
+            },
+            "first_bytes": 47505408,
+            "last_bytes": 55382016,
+            "linear_slope_bytes_per_second": 639.365286941504,
+            "note": "cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples",
+            "oom_kill_delta": 0,
+            "samples": 175,
+            "throttled_periods_delta": 1884
+          },
+          "proxy": {
+            "cgroup_peak_bytes": 19046400,
+            "cpu_usage_seconds_delta": 4.603362,
+            "current_bytes": {
+              "iqr": 266240.0,
+              "max": 18202624,
+              "median": 17420288,
+              "min": 16666624,
+              "n": 175,
+              "q1": 17301504.0,
+              "q3": 17567744.0,
+              "quartile_method": "inclusive"
+            },
+            "first_bytes": 17543168,
+            "last_bytes": 17580032,
+            "linear_slope_bytes_per_second": 8.741422749369965,
+            "note": "cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples",
+            "oom_kill_delta": 0,
+            "samples": 175,
+            "throttled_periods_delta": 0
+          }
+        },
+        "route_counts": {
+          "evidence": 540,
+          "lab": 540,
+          "post": 1620
+        },
+        "routes": {
+          "evidence": {
+            "completed": 540,
+            "descriptive_p95_issued_ms": 121.3155,
+            "descriptive_p95_scheduled_ms": 130.319334,
+            "http_statuses": {
+              "200": 540
+            },
+            "issued": 540,
+            "outcomes": {
+              "succeeded": 540
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 253717920
+          },
+          "lab": {
+            "completed": 540,
+            "descriptive_p95_issued_ms": 151.861292,
+            "descriptive_p95_scheduled_ms": 160.368042,
+            "http_statuses": {
+              "200": 540
+            },
+            "issued": 540,
+            "outcomes": {
+              "succeeded": 540
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 181578780
+          },
+          "post": {
+            "completed": 1620,
+            "descriptive_p95_issued_ms": 148.92625,
+            "descriptive_p95_scheduled_ms": 154.212792,
+            "http_statuses": {
+              "200": 1620
+            },
+            "issued": 1620,
+            "outcomes": {
+              "succeeded": 1620
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 480796155
+          }
+        },
+        "valid_offered_load": true
+      },
+      {
+        "attempt": "runtime-crash-corrected",
+        "backlogged": 0,
+        "case": "sustained-2",
+        "continuity_limit": "909.81s extra wall time between second/third summary creation; phase wall-active divergence907.25s; host pause/clock discontinuity inferred, not a verified continuous campaign",
+        "continuous_observation_verified": false,
+        "declared_duration_seconds": 1800,
+        "elapsed_seconds": 1800.003251083,
+        "full_duration": true,
+        "issued": 2700,
+        "lag_ns": {
+          "iqr": 2506500.0,
+          "max": 21461250,
+          "median": 4300583.5,
+          "min": 91208,
+          "n": 2700,
+          "q1": 2758468.5,
+          "q3": 5264968.5,
+          "quartile_method": "inclusive"
+        },
+        "outcomes": {
+          "succeeded": 2700
+        },
+        "post_payload_counts": {
+          "{\"demand_percent\": 125}": 405,
+          "{\"evidence_case\": \"incomplete_supply\"}": 405,
+          "{\"supplier_delay_days\": 3}": 405,
+          "{}": 405
+        },
+        "resources": {
+          "lab": {
+            "cgroup_peak_bytes": 70262784,
+            "cpu_usage_seconds_delta": 223.63466,
+            "current_bytes": {
+              "iqr": 694272.0,
+              "max": 67964928,
+              "median": 53551104,
+              "min": 48300032,
+              "n": 175,
+              "q1": 53258240.0,
+              "q3": 53952512.0,
+              "quartile_method": "inclusive"
+            },
+            "first_bytes": 48300032,
+            "last_bytes": 53415936,
+            "linear_slope_bytes_per_second": 1570.5243912586689,
+            "note": "cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples",
+            "oom_kill_delta": 0,
+            "samples": 175,
+            "throttled_periods_delta": 2012
+          },
+          "proxy": {
+            "cgroup_peak_bytes": 19197952,
+            "cpu_usage_seconds_delta": 5.292575,
+            "current_bytes": {
+              "iqr": 272384.0,
+              "max": 18087936,
+              "median": 17432576,
+              "min": 16572416,
+              "n": 175,
+              "q1": 17309696.0,
+              "q3": 17582080.0,
+              "quartile_method": "inclusive"
+            },
+            "first_bytes": 17317888,
+            "last_bytes": 17305600,
+            "linear_slope_bytes_per_second": 33.071784534148634,
+            "note": "cgroup samples include exec/health probes; sampled CPU delta excludes endpoints outside samples",
+            "oom_kill_delta": 0,
+            "samples": 175,
+            "throttled_periods_delta": 1
+          }
+        },
+        "route_counts": {
+          "evidence": 540,
+          "lab": 540,
+          "post": 1620
+        },
+        "routes": {
+          "evidence": {
+            "completed": 540,
+            "descriptive_p95_issued_ms": 123.146708,
+            "descriptive_p95_scheduled_ms": 128.924416,
+            "http_statuses": {
+              "200": 540
+            },
+            "issued": 540,
+            "outcomes": {
+              "succeeded": 540
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 253717920
+          },
+          "lab": {
+            "completed": 540,
+            "descriptive_p95_issued_ms": 153.080875,
+            "descriptive_p95_scheduled_ms": 158.686916,
+            "http_statuses": {
+              "200": 540
+            },
+            "issued": 540,
+            "outcomes": {
+              "succeeded": 540
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 181578780
+          },
+          "post": {
+            "completed": 1620,
+            "descriptive_p95_issued_ms": 152.85575,
+            "descriptive_p95_scheduled_ms": 158.186625,
+            "http_statuses": {
+              "200": 1620
+            },
+            "issued": 1620,
+            "outcomes": {
+              "succeeded": 1620
+            },
+            "rejected_latency_ms": {
+              "n": 0
+            },
+            "response_body_bytes": 480796155
+          }
+        },
+        "valid_offered_load": true
+      }
+    ],
+    "unfinished_short_cells": [
+      {
+        "case": "rate-5-0",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-0.5-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-2-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-3-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-5-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-0.5-2",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-2-2",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-3-2",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "rate-5-2",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "diagnostic-post-0",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "diagnostic-evidence-0",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "diagnostic-post-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "diagnostic-evidence-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "diagnostic-post-2",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "diagnostic-evidence-2",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-20-clients-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-20-clients-4",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-20-clients-8",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-20-clients-16",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-40-clients-1",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-40-clients-4",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-40-clients-8",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      },
+      {
+        "case": "burst-40-clients-16",
+        "reason": "optional grids stopped for replacement priority",
+        "status": "interrupted_or_not_measured"
+      }
+    ]
+  },
+  "jit_diagnostic": {
+    "planning-ledger-plan.json": {
+      "execution_ms": 2165.844,
+      "jit": {
+        "Functions": 583,
+        "Options": {
+          "Deforming": true,
+          "Expressions": true,
+          "Inlining": true,
+          "Optimization": true
+        },
+        "Timing": {
+          "Emission": 955.411,
+          "Generation": {
+            "Deform": 4.066,
+            "Total": 8.544
+          },
+          "Inlining": 13.95,
+          "Optimization": 1156.187,
+          "Total": 2134.092
+        }
+      },
+      "planning_ms": 2.031
+    },
+    "reference-plan.json": {
+      "execution_ms": 2997.162,
+      "jit": {
+        "Functions": 583,
+        "Options": {
+          "Deforming": true,
+          "Expressions": true,
+          "Inlining": true,
+          "Optimization": true
+        },
+        "Timing": {
+          "Emission": 910.897,
+          "Generation": {
+            "Deform": 10.166,
+            "Total": 19.959
+          },
+          "Inlining": 47.63,
+          "Optimization": 1036.332,
+          "Total": 2014.818
+        }
+      },
+      "planning_ms": 1.953
+    }
+  },
+  "linux_seconds": {
+    "run_checks": {
+      "campaigns": [
+        {
+          "campaign": 1,
+          "iqr": 0.09114977075000041,
+          "max": 3.573469085,
+          "median": 3.2162987935,
+          "min": 3.159872002,
+          "n": 6,
+          "q1": 3.1705362824999996,
+          "q3": 3.26168605325,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 2,
+          "iqr": 0.2399433542499998,
+          "max": 3.786388876,
+          "median": 3.311132689,
+          "min": 3.171143585,
+          "n": 6,
+          "q1": 3.2735984495000006,
+          "q3": 3.5135418037500004,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 3,
+          "iqr": 0.019151635499999653,
+          "max": 3.24922746,
+          "median": 3.129949522,
+          "min": 3.113623001,
+          "n": 6,
+          "q1": 3.12175072,
+          "q3": 3.1409023554999997,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 4,
+          "iqr": 0.8221293550000004,
+          "max": 4.248359627,
+          "median": 3.1636868555,
+          "min": 2.942048126,
+          "n": 6,
+          "q1": 3.0579347722499994,
+          "q3": 3.88006412725,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 5,
+          "iqr": 0.08281891599999991,
+          "max": 3.564459168,
+          "median": 3.142902939,
+          "min": 2.98230475,
+          "n": 6,
+          "q1": 3.1282866685,
+          "q3": 3.2111055845,
+          "quartile_method": "inclusive"
+        }
+      ],
+      "pooled": {
+        "iqr": 0.16132388499999983,
+        "max": 4.248359627,
+        "median": 3.174681856,
+        "min": 2.942048126,
+        "n": 30,
+        "q1": 3.1274890435,
+        "q3": 3.2888129284999996,
+        "quartile_method": "inclusive"
+      }
+    },
+    "run_plan": {
+      "campaigns": [
+        {
+          "campaign": 1,
+          "iqr": 0.19630368674999987,
+          "max": 3.766315335,
+          "median": 3.437631085,
+          "min": 3.321978501,
+          "n": 6,
+          "q1": 3.3776577415,
+          "q3": 3.57396142825,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 2,
+          "iqr": 0.08727220849999995,
+          "max": 3.19727671,
+          "median": 3.077476564,
+          "min": 2.970537793,
+          "n": 6,
+          "q1": 3.0306105847500002,
+          "q3": 3.11788279325,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 3,
+          "iqr": 0.17551386550000014,
+          "max": 3.561449585,
+          "median": 3.0747650225000003,
+          "min": 2.9053285,
+          "n": 6,
+          "q1": 3.00422782425,
+          "q3": 3.17974168975,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 4,
+          "iqr": 0.1166559269999996,
+          "max": 3.042637834,
+          "median": 2.927023126,
+          "min": 2.861393251,
+          "n": 6,
+          "q1": 2.88915817825,
+          "q3": 3.00581410525,
+          "quartile_method": "inclusive"
+        },
+        {
+          "campaign": 5,
+          "iqr": 0.05196139575000025,
+          "max": 3.081614627,
+          "median": 3.0077095015,
+          "min": 2.884591251,
+          "n": 6,
+          "q1": 2.9826416785,
+          "q3": 3.03460307425,
+          "quartile_method": "inclusive"
+        }
+      ],
+      "pooled": {
+        "iqr": 0.23276973000000023,
+        "max": 3.766315335,
+        "median": 3.055376147,
+        "min": 2.861393251,
+        "n": 30,
+        "q1": 2.976872668,
+        "q3": 3.209642398,
+        "quartile_method": "inclusive"
+      }
+    }
+  },
+  "paired_seconds": {
+    "after": {
+      "iqr": 0.06414448974999998,
+      "max": 0.925614708,
+      "median": 0.8562568335,
+      "min": 0.780708708,
+      "n": 12,
+      "q1": 0.82327576025,
+      "q3": 0.88742025,
+      "quartile_method": "inclusive"
+    },
+    "before": {
+      "iqr": 0.710289271249998,
+      "max": 11.35744225,
+      "median": 10.2510425,
+      "min": 9.707496125,
+      "n": 12,
+      "q1": 9.9624422915,
+      "q3": 10.672731562749998,
+      "quartile_method": "inclusive"
+    },
+    "median_speedup": 11.971924893256926
+  },
+  "production_optimization_count": 1,
+  "reference_confirmation": false,
+  "unmeasured": [
+    "Python3.12.12",
+    "controlled OS cache",
+    "dense source-record scan diagnostic",
+    "independent human accessibility",
+    "public TLS",
+    "remaining rate/homogeneous/client grid",
+    "serial1000",
+    "two dates",
+    "two further continuous HTTP campaigns",
+    "x86-64"
+  ]
+}

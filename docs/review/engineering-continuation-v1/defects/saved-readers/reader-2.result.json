@@ -1,0 +1,1 @@
+{"cpu_ns":356000,"elapsed_ns":23085709,"error":{"message":"selected run exceeds evidence limits","type":"ValueError"},"oracle":"not_evaluated","pid":69781,"process_high_water_rss_bytes":36257792,"status":"rejected","transaction_idle":true}

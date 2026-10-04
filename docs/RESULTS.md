@@ -1047,3 +1047,130 @@ verified that a failed oracle after commit is labelled committed_unverified.
 Reference confirmation, other defect/load/serial grids, full-scale/application
 recovery and independent human accessibility remain in PLAN. Features and public
 release remain paused.
+
+## Engineering continuation
+
+Assigned October 4 on available local runtimes. The native before/after workloads
+were frozen before execution; engine inputs, SQL variants and independent oracles
+are separately hash-bound. These are current local observations, separate from
+the original pilot and from the still-pending x86-64/two-date reference gate.
+
+The one optimization groups eligible movements once by SKU/warehouse, retaining
+numeric sums, every eligible row identity, exact blocked-key behavior and sorted
+finding evidence. No index, reader cap, model or interface was changed.
+Two counterbalanced rounds used the same DB/source state, two warmups and six
+measured calls per variant/round: 12 measured samples per variant, eight warmups
+retained separately. These were not independently restored reference campaigns.
+
+| Native workload | Before | After | Correctness / limit |
+|---|---|---|---|
+| 1k grains /100k movements | Median 10.251s; min/max 9.707/11.357s, n=12 | Median 0.856s; min/max 0.781/0.926s, n=12 | Identical report semantics and source hashes; ~11.97x median improvement. |
+| Predeclared 10k /1M upper tier | One 55s SQL cancellation, zero appended history | Three completions, 6.727–7.146s | Exact clean outcome; exploratory upper tier, not a confirmed universal envelope. |
+| 10% duplicate rows at 100k | Original pilot limited | New 55s cancellation | 5k expected groups remain unassessed; no partial history. |
+| All 1k snapshots +1 at 100k | Original pilot limited | New 55s cancellation | All-grain discrepancy evidence remains unassessed. |
+
+The separate reference EXPLAIN decreased 9.922→0.793s. The former eligible CTE
+scan looped 1,000 times, filtering 99,900 rows each; its replacement reads 100k
+eligible rows once for grouped totals. EXPLAIN includes profiling overhead and
+does not replace the full-path distributions. The paired stage's conservative
+sampled RSS sum peaked at ~472 MiB; client median high-water RSS was ~34 MiB for
+both variants. Process sums double-count shared pages; this is not combined
+physical memory. Array aggregation adds transient DB state, without new indexes
+or durable input storage; raw plan/temp-buffer measurements remain authoritative.
+
+Five fresh native ARM64 Linux Docker campaigns used PostgreSQL 17.9, packaged
+Python 3.12.14/Psycopg 3.3.6 and separate 2-CPU/4-GiB caps for DB and Python.
+The VM itself has eight CPUs/~7.75 GiB usable memory, so summed container limits
+are not a dedicated 8-GiB host guarantee. Every campaign rebuilt identical fixtures,
+ANALYZEd them and retained two warmups plus six measured calls per operation.
+All 30 reconciliation calls passed: median 3.175s, range 2.942–4.248s. All 30
+selected plans passed arithmetic/eligibility but missed the proposed one-second
+threshold: median 3.055s, range 2.861–3.766s. Those plans recheck a separate 1k-grain,
+zero-movement ledger. A separate fresh timed profile generated 583 JIT functions:
+compilation took 2.134s of the zero-ledger query's 2.166s, and 2.015s of the
+reference query's 2.997s. This identifies a second bottleneck; JIT settings were
+not changed. TIMING ON adds diagnostic overhead and these two calls are outside
+the primary distributions. OS cache remains
+uncontrolled, the order was fixed and all campaigns used one date. Do not pool
+these observations with Mac timings or label them the proposed reference host.
+
+Native serial 100 at the 1k-key/180-day archive completed 100/100 eligible keys,
+zero blocked keys, in 77.958s (1.283 completed keys/s including supervision,
+guards/oracles and artifacts), below the proposed 120s threshold. Selected
+forecasts/orders remained exactly 7/day and 30/180/612 at horizons 7/28/90.
+The new 30%-zero backtest grid completed 33/33 calls over 1/10 selected keys and
+180/365/730 days, with every training/actual/prediction, score and chosen mean
+independently checked. Global zero allocation is floor(30% of day rows), with
+remainders assigned to ascending keys: 365 days on one key has 109 zeros; ten
+keys have 1095. This fractional-count limitation is explicit. All 22 reports at
+180/365 days loaded; all 11 at 730 days persisted correctly but exceeded 16 MiB.
+Report sizes were about 2.58–2.61/14.42–14.60/63.84–64.62 MB respectively. These
+are a different evidence-density control from the original constant-demand grid,
+not an optimization of its report size.
+
+Twelve new defect producers passed exact statuses, identities and quantities at
+1/10/100 affected source units. Snapshot and late-clock percentages use 1000
+snapshot rows; missing coverage uses 1000 grains; invalid transfers use 10000
+paired groups (2/20/200 bad movement legs). These denominators do not substitute
+for the entire proposed bad-movement grid. All sources stayed unchanged during
+engine calls. Ten saved reports loaded; the 100-snapshot (~6.94 MB) and 100-missing-
+coverage (~8.39 MB) reports were rejected by the unchanged 2 MiB reader. The
+persisted identities/history were retained, without truncation or empty success.
+
+Four native V2 checks now use a 1k-grain/100k-movement archive with two discrepant
+probe grains. Interrupted child persistence appended nothing; a separately timed
+owner commit preserved old delta 1 and next-time delta 2; immediate DB restart and
+backup/second-DB restore preserved exact sources and three runs / 15 checks / six
+findings. Observed restart/restore times were 1.665/1.054s. These are observed
+small fault counts, not RTO/RPO guarantees or recovery of the 1M upper tier.
+
+The maintained pinned Lab image was built and exercised behind the actual Caddy
+proxy, bound only to loopback HTTP. Effective UID10001/read-only/capability and
+0.5 CPU/256 MiB/64 PID controls passed, as did missing/corrupt archive HTTP503
+and identical 469,848-byte evidence downloads. The proxy is root as configured.
+A verified process crash changed host PID 28897→29306 and restart counter 0→1;
+service recovered in 1.652s. Its separate 10-second fault load had 14/15 correct
+responses and one HTTP502. This is an observed fault, not an RTO/RPO guarantee.
+
+Only **one** sustained campaign meets both the full 1800-second observation and
+continuity requirements: 2700/2700 correct responses at offered 1.5/s, zero
+rejections/unexpected errors/timeouts/backlog, maximum scheduler lag 18.4ms.
+It contains POST1620 / Lab GET540 / evidence GET540, with exactly 405 requests
+for each POST scenario. Descriptive scheduled-to-complete p95 values are
+154.2/160.4/130.3ms respectively; these do **not** satisfy the three-campaign
+confirmation gate or GET sample floor. Every route lacks the p99 floor.
+Response bodies total ~916 MB (~0.509 MB/s), excluding headers/wire overhead.
+
+That campaign's sampled Lab memory median was ~51.1 MiB, cgroup peak ~67.1 MiB,
+and fitted slope +639 bytes/s; proxy median/peak were ~16.6/18.2 MiB. Sampled
+CPU deltas were 220.95s/4.60s with 1884/0 throttled periods and zero observed
+OOM kills. Exec/health probes contribute to these counters, and sampled endpoints
+omit small intervals. These observations do not establish long-term leak freedom.
+
+All three completed mixed runs returned 8100/8100 correct responses, but the first
+ended 0.585s short and the third had ~907s wall/active clock divergence; both are
+excluded from stable confirmation. The fresh replacement was interrupted after
+another ~1798s divergence. Its unfinished load has no complete raw request receipt:
+issued/completed counts are unknown, not zero or a successful sample. One 20s
+control each at 0.5/2/3 per second returned 10/10, 40/40 and 58/60 successes;
+the last rejected two requests. Those initial-burst controls do not establish
+sustained capacity. Remaining rate/homogeneous/client cells are interrupted or
+unmeasured; optional grids were stopped to prioritize the replacement.
+
+Original startup/body/crash-trigger failures and the unverified same-namespace
+trigger are retained. A later state snapshot taken after explicit restarts cannot
+prove the earlier crash. The slow-body proxy returned EOF/504 rather than required
+408; oversized413/chunked200 were observed in the completed fault control. Release
+acceptance remains blocked by that boundary and the other declared gates.
+
+Aggregate elapsed time was 192.8 minutes against a 180-minute target: the historical
+guards used active clocks and missed wall-clock discontinuities. This receipt does
+not establish wall-budget compliance. Measurements stopped when the overrun was
+identified. Delivered harness repairs now check real wall budgets and a two-second
+wall/active discrepancy, and journal completed requests before an interrupted
+window can lose its final receipt. Those repairs have focused hand controls, not
+new performance measurements. Sixty-three focused regression checks passed;
+historical-lineage checks additionally require committed documentation bytes.
+Source, raw failures and derivations are in [continuation evidence](EVIDENCE.md#engineering-continuation).
+Reference/two-date, remaining stability/grid, dense-evidence, serial1000 and
+independent human/public-TLS gates remain pending; features remain paused.

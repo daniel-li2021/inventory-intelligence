@@ -13,6 +13,7 @@
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
 | [Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
 | [Engineering pilot](RESULTS.md#local-engineering-pilot) / [reproduction](EVIDENCE.md#local-engineering-pilot) | Local exploratory measurements, limits and pending confirmation. |
+| [Engineering continuation](RESULTS.md#engineering-continuation) / [receipts](EVIDENCE.md#engineering-continuation) | Paired SQL improvement, scale/ARM64/runtime/recovery evidence and explicit remaining gates. |
 | [VALIDATION](VALIDATION.md) | Independent checks and disposable-database acceptance. |
 | [CONTRIBUTING](../CONTRIBUTING.md) | Concise delivery workflow and AUTO/REVIEW. |
 
@@ -20,7 +21,7 @@
 
 | Active plan | Scope / status | Next action |
 |---|---|---|
-| [Engineering readiness](PLAN.md) | Local pilot complete; reference/P2 confirmation pending | Review Linux host/runtime and confirmation scope/budget. |
+| [Engineering readiness](PLAN.md) | Local continuation complete as practical; one continuous HTTP campaign | Remaining continuous/rate/client cells, x86/two-date, dense-evidence, serial1000 and human gates. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.

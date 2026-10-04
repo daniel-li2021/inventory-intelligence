@@ -1,0 +1,4 @@
+{
+  "observed_state": "post-cell-restart-state.json",
+  "limitation": "Snapshot follows explicit cell restarts; it cannot verify the earlier crash trigger. Use controller before/after PID and restart counter captured before those explicit restarts."
+}

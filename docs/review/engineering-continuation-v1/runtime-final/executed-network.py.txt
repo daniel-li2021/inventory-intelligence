@@ -1,0 +1,248 @@
+"""Short open-arrival native HTTP pilot; never a confirmation/uptime claim."""
+import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from hashlib import sha256
+import json
+import math
+import os
+from pathlib import Path
+import platform
+import resource
+import socket
+import subprocess
+import sys
+import threading
+import time
+import urllib.error
+import urllib.request
+
+from scripts.engineering_fixtures import encoded
+from scripts.engineering_benchmark import Budget
+
+ROOT=Path(__file__).resolve().parents[1]
+ROUTES=("post","post","post","lab","evidence")
+PAYLOADS=({},dict(demand_percent=125),dict(supplier_delay_days=3),dict(evidence_case="incomplete_supply"))
+
+
+def validate(route,payload,value):
+    if route=="evidence":
+        assert value["synthetic"] is True and value["business_data"]=="synthetic only"
+        assert len(value["digest"])==64
+        return
+    assert value["metadata"]["synthetic"] is True
+    assert value["baseline"]["plan"]["proposed_order_qty"]==12
+    assert value["baseline"]["costs"]["total"]=="327"
+    scenario=value["scenario"]
+    if payload.get("evidence_case")=="incomplete_supply":
+        assert scenario["status"]=="not_assessable"
+        assert all(scenario[k] is None for k in ("plan","simulation","risk","costs"))
+    elif payload.get("demand_percent")==125:
+        assert scenario["plan"]["proposed_order_qty"]==18 and scenario["costs"]["total"]=="351"
+    elif payload.get("supplier_delay_days")==3:
+        assert scenario["plan"]["proposed_order_qty"]==12
+        assert scenario["simulation"]["metrics"]["immediate_fill_rate"]=="11/28"
+        assert scenario["simulation"]["metrics"]["shortage_days"]==17
+        assert scenario["costs"]["total"]=="1171"
+    else:
+        assert scenario["plan"]["proposed_order_qty"]==12
+        assert scenario["costs"]["total"]=="327"
+
+
+def request(base,route,payload,planned,start_gate=None):
+    if start_gate: start_gate.wait()
+    issued=time.perf_counter_ns()
+    path={"post":"/api/scenarios","lab":"/api/lab","evidence":"/api/evidence"}[route]
+    req=urllib.request.Request(base+path,data=encoded(payload) if route=="post" else None,
+        headers={"Content-Type":"application/json"} if route=="post" else {})
+    record=dict(route=route,payload=payload,planned_ns=planned,issued_ns=issued,scheduler_lag_ns=issued-planned)
+    try:
+        try: response=urllib.request.urlopen(req,timeout=10)
+        except urllib.error.HTTPError as error: response=error
+        with response:
+            raw=response.read(); completed=time.perf_counter_ns()
+            record.update(http_status=response.status,bytes=len(raw),response_sha256=sha256(raw).hexdigest(),
+                issued_to_complete_ns=completed-issued,scheduled_to_complete_ns=completed-planned,
+                outcome="succeeded" if response.status==200 else "rejected" if response.status in (429,503) else "unexpected")
+            if response.status==200:
+                try:
+                    validate(route,payload,json.loads(raw)); record["oracle"]="pass"
+                except (AssertionError,KeyError,TypeError,ValueError): record.update(outcome="incorrect",oracle="fail")
+            else: record["oracle"]="not_admitted"
+    except (TimeoutError,urllib.error.URLError,OSError) as error:
+        record.update(outcome="timed_out" if isinstance(error,TimeoutError) else "client_error",error=str(error),
+            issued_to_complete_ns=time.perf_counter_ns()-issued,scheduled_to_complete_ns=time.perf_counter_ns()-planned)
+    return record
+
+
+def driver(base,output,rate,duration,mode,burst,clients=None):
+    records=[]; futures=[]
+    begin=time.perf_counter_ns(); cpu=time.process_time_ns()
+    planned_count=burst if burst else math.ceil(rate*duration)
+    # No retry; arrivals depend on the frozen schedule, never the preceding response.
+    gate=threading.Event() if burst else None
+    with ThreadPoolExecutor(max_workers=clients or (40 if burst else 16)) as pool:
+        for i in range(planned_count):
+            route=ROUTES[i%5] if mode=="mixed" else mode
+            payload=PAYLOADS[(i//5*3+i%5)%4] if route=="post" else {}
+            planned=begin+(0 if burst else int(i/rate*1e9))
+            if not burst:
+                remaining=(planned-time.perf_counter_ns())/1e9
+                if remaining>0: time.sleep(remaining)
+            futures.append(pool.submit(request,base,route,payload,planned,gate))
+        if gate: gate.set()
+        records=[f.result() for f in as_completed(futures)]
+    elapsed=(time.perf_counter_ns()-begin)/1e9
+    records.sort(key=lambda r:r["planned_ns"])
+    output.write_bytes(b"".join(encoded(r)+b"\n" for r in records))
+    counts={s:sum(r["outcome"]==s for r in records) for s in sorted({r["outcome"] for r in records})}
+    summary=dict(planned=planned_count,issued=len(records),dropped=0,backlogged=sum(r["scheduler_lag_ns"]>100_000_000 for r in records),
+        admitted_completed=sum(r.get("http_status")==200 for r in records),
+        admission_unknown=sum(r["outcome"] in ("timed_out","client_error","unexpected") for r in records),
+        outcomes=counts,elapsed_seconds=elapsed,offered_per_second=rate if not burst else None,
+        success_per_second=counts.get("succeeded",0)/(duration if not burst else elapsed),
+        client_cpu_seconds=(time.process_time_ns()-cpu)/1e9,
+        client_process_high_water_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*(1 if sys.platform=="darwin" else 1024),
+        valid_offered_load=all(r["scheduler_lag_ns"]<=100_000_000 for r in records),
+        mode=mode,burst=burst,retries=0,raw_file=output.name)
+    summary["client_max_inflight"]=clients or (40 if burst else 16)
+    summary["duration_seconds"]=duration
+    for route in ("post","lab","evidence"):
+        rows=[r for r in records if r["route"]==route]
+        if not rows: continue
+        success=[r for r in rows if r["outcome"]=="succeeded"]
+        summary[route]=dict(issued=len(rows),completed=len(success),rejected=sum(r["outcome"]=="rejected" for r in rows),
+            min_issued_latency_ns=min((r["issued_to_complete_ns"] for r in success),default=None),
+            max_issued_latency_ns=max((r["issued_to_complete_ns"] for r in success),default=None),
+            p95="insufficient_confirmation_samples",p99="insufficient_samples")
+    output.with_suffix(".summary.json").write_bytes(encoded(summary)+b"\n")
+
+
+def start_server(module,output):
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1",0)); port=sock.getsockname()[1]
+    log=(output/(module+".server.log")).open("ab")
+    process=subprocess.Popen([sys.executable,"-m","uvicorn","inventory_intelligence."+module+":app",
+        "--host","127.0.0.1","--port",str(port),"--workers","1","--limit-concurrency","16",
+        "--backlog","32","--timeout-keep-alive","5","--no-access-log","--no-proxy-headers"],cwd=ROOT,stdout=log,stderr=log)
+    base=f"http://127.0.0.1:{port}"
+    for _ in range(100):
+        if process.poll() is not None: raise RuntimeError("server failed; inspect scoped server log")
+        try:
+            # Static readiness does not consume admission tokens.
+            with urllib.request.urlopen(base+"/",timeout=.2) as response:
+                if response.status==200: return process,log,base,port
+        except (urllib.error.URLError,OSError): time.sleep(.1)
+    process.terminate(); process.wait(timeout=10); log.close()
+    raise RuntimeError("server readiness deadline")
+
+
+def stop_server(process,log):
+    process.terminate()
+    try: process.wait(timeout=10)
+    except subprocess.TimeoutExpired: process.kill(); process.wait()
+    log.close()
+
+
+def faults(base,port):
+    def raw(data,wait=0):
+        with socket.create_connection(("127.0.0.1",port),timeout=10) as sock:
+            sock.sendall(data)
+            if wait: time.sleep(wait)
+            sock.settimeout(10)
+            response=sock.recv(16384)
+        if not response.startswith(b"HTTP/"):
+            raise ValueError("peer closed without HTTP status: "+repr(response[:100]))
+        return int(response.split(b" ",2)[1])
+    started=time.monotonic()
+    slow=raw(b"POST /api/scenarios HTTP/1.1\r\nHost: localhost\r\nContent-Type: application/json\r\nContent-Length: 10\r\n\r\n{",5.2)
+    huge=raw(b"POST /api/scenarios HTTP/1.1\r\nHost: localhost\r\nContent-Length: 4097\r\n\r\n")
+    chunked=raw(b"POST /api/scenarios HTTP/1.1\r\nHost: localhost\r\nContent-Type: application/json\r\nTransfer-Encoding: chunked\r\n\r\n2\r\n{}\r\n0\r\n\r\n")
+    with socket.create_connection(("127.0.0.1",port),timeout=10) as sock:
+        sock.sendall(b"POST /api/scenarios HTTP/1.1\r\nHost: localhost\r\nContent-Length: 100\r\n\r\n{")
+    time.sleep(.2)
+    recovered=request(base,"evidence",{},time.perf_counter_ns())
+    assert (slow,huge,chunked)==(408,413,200),dict(slow=slow,oversized=huge,chunked=chunked)
+    assert recovered["outcome"]=="succeeded" and recovered["oracle"]=="pass"
+    return dict(slow_partial_body=slow,oversized=huge,valid_chunked=chunked,
+        disconnected_partial_body="connection closed by client; subsequent evidence passed",
+        recovery=recovered,seconds=time.monotonic()-started)
+
+
+def controller(output,pgdata,wall_seconds):
+    output.mkdir(parents=True,exist_ok=False)
+    cases=[]; begin=time.monotonic()
+    budget=Budget(output,pgdata,wall_seconds)
+    protocol=dict(version="engineering-network-pilot-v1",exploratory=True,platform=platform.platform(),
+        campaigns=3,duration_seconds=20,offered_rate=1.5,scenario_percent=60,lab_percent=20,evidence_percent=20,
+        scenarios=["clean","spike","hidden delay","incomplete supply"],
+        homogeneous_diagnostics=["post","evidence"],client_max_inflight=16,lag_limit_ms=100,
+        burst_clients=40,bursts=[20,40],admission="unchanged 2/s burst20 active4",
+        server="one Uvicorn worker, limit16 backlog32, no proxy, loopback native Mac",
+        source_sha256=sha256((ROOT/"scripts/engineering_network.py").read_bytes()).hexdigest(),
+        confirmation=False,reference_host=False)
+    (output/"protocol.json").write_bytes(encoded(protocol)+b"\n")
+    for module in ("lab_hosted","lab_api"):
+        for campaign in range(3 if module=="lab_hosted" else 1):
+            for mode in ("mixed","post","evidence"):
+                name=f"{module}-{campaign}-{mode}"
+                process,log,base,port=start_server(module,output)
+                try:
+                    driver_process=subprocess.Popen([sys.executable,"-m","scripts.engineering_network","--driver",base,
+                        "--output",str(output/(name+".jsonl")),"--rate","1.5","--duration","20","--mode",mode],
+                        cwd=ROOT)
+                    campaign_start=time.monotonic(); resources=[]
+                    try:
+                        while driver_process.poll() is None:
+                            resources.append(dict(elapsed_seconds=time.monotonic()-campaign_start,**budget.sample(driver_process.pid)))
+                            if time.monotonic()-campaign_start>45: raise RuntimeError("network driver deadline")
+                            time.sleep(.25)
+                    finally:
+                        if driver_process.poll() is None: driver_process.kill(); driver_process.wait()
+                    if driver_process.returncode: raise RuntimeError("network driver failed")
+                    (output/(name+".resources.json")).write_bytes(encoded(resources)+b"\n")
+                    cases.append(dict(case=name,server_pid=process.pid,**json.loads((output/(name+".summary.json")).read_text())))
+                    print(json.dumps(dict(case=name,outcomes=cases[-1]["outcomes"])),flush=True)
+                finally: stop_server(process,log)
+    for n in (20,40):
+        process,log,base,port=start_server("lab_hosted",output)
+        try:
+            path=output/f"burst-{n}.jsonl"
+            subprocess.run([sys.executable,"-m","scripts.engineering_network","--driver",base,
+                "--output",str(path),"--burst",str(n),"--mode","post"],cwd=ROOT,check=True,timeout=30)
+            case=dict(case=f"burst-{n}",**json.loads(path.with_suffix(".summary.json").read_text()))
+            time.sleep(10.2)
+            recovery=request(base,"evidence",{},time.perf_counter_ns())
+            assert recovery["outcome"]=="succeeded" and recovery["oracle"]=="pass"
+            cases.append(case|dict(recovery=recovery))
+        finally: stop_server(process,log)
+    process,log,base,port=start_server("lab_hosted",output)
+    try: cases.append(dict(case="body-disconnect-faults",**faults(base,port)))
+    finally: stop_server(process,log)
+    summary=dict(protocol=protocol,cases=cases,wall_seconds=time.monotonic()-begin,
+        conservative_rss_upper_bound_bytes=budget.peak_upper_rss,sampled_cpu_seconds=budget.cpu,
+        deferred=["30-minute campaigns and route sample floors","other offered rates/client counts",
+            "Linux Compose/proxy resource enforcement","public uptime"])
+    (output/"summary.json").write_bytes(encoded(summary)+b"\n")
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--driver")
+    parser.add_argument("--output",required=True,type=Path)
+    parser.add_argument("--rate",type=float,default=1.5)
+    parser.add_argument("--duration",type=int,default=20)
+    parser.add_argument("--mode",choices=("mixed","post","evidence"),default="mixed")
+    parser.add_argument("--burst",type=int,default=0)
+    parser.add_argument("--clients",type=int,choices=(1,4,8,16,40))
+    parser.add_argument("--pgdata",type=Path)
+    parser.add_argument("--wall-seconds",type=int,default=7200)
+    args=parser.parse_args()
+    if not 0<args.rate<=5 or not 1<=args.duration<=1800 or args.burst not in (0,20,40):
+        parser.error("bounded driver permits rate (0,5], duration 1..1800 and bursts 20/40")
+    if args.driver: driver(args.driver,args.output,args.rate,args.duration,args.mode,args.burst,args.clients)
+    else:
+        if not args.pgdata or not 1<=args.wall_seconds<=7200: parser.error("provide isolated --pgdata and remaining wall cap")
+        controller(args.output,args.pgdata,args.wall_seconds)
+
+
+if __name__=="__main__": main()

@@ -1,0 +1,7 @@
+{
+  "command": "/usr/bin/caffeinate -i -w 78488",
+  "target": "verified runtime-confirmation controller",
+  "at_utc": "2026-10-04T10:27:42.615198+00:00",
+  "persistent_setting_change": false,
+  "ends_with_controller": true
+}

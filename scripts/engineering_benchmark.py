@@ -55,6 +55,13 @@ def history(conn):
 
 def worker(spec_path):
     spec=json.loads(spec_path.read_text())
+    if "query_path" in spec:
+        # Process-local frozen SQL for paired engineering measurements only.
+        import inventory_intelligence.reliability as reliability
+        raw=Path(spec["query_path"]).read_bytes()
+        if sha256(raw).hexdigest()!=spec["query_sha256"]:
+            raise ValueError("frozen comparison SQL changed")
+        reliability._sql=lambda: raw.decode("utf-8")
     args=spec.get("args",{})
     for key in ("as_of","evaluated_at"):
         if key in args: args[key]=datetime.fromisoformat(args[key])
@@ -84,6 +91,15 @@ def worker(spec_path):
             oracle=spec.get("oracle")
             if oracle and operation=="run_checks":
                 verify_inventory(report,oracle)
+            if "finding_oracle" in spec:
+                expected=spec["finding_oracle"]
+                if report["overall_status"]!=expected["overall_status"] or report["checks"]!=expected["checks"]:
+                    raise AssertionError("frozen defect statuses differ")
+                signature=lambda f:[f[k] for k in ("rule_id","reason","sku_id","warehouse_id",
+                    "source_row_ids","expected_qty","observed_qty","delta_qty")]
+                actual=sorted((signature(f) for f in report["findings"]),key=encoded)
+                if actual!=sorted(expected["findings"],key=encoded):
+                    raise AssertionError("exact defect/source/quantity identities differ")
             if "expected_status" in spec:
                 if report["status"]!=spec["expected_status"]:
                     raise AssertionError("planning eligibility differs from frozen oracle")
@@ -122,7 +138,7 @@ def cpu_seconds(text):
 class Budget:
     def __init__(self,output,pgdata,wall_seconds):
         self.output,self.pgdata=output,pgdata
-        self.start=time.monotonic(); self.wall_seconds=wall_seconds
+        self.start=time.monotonic(); self.wall_start=time.time(); self.wall_seconds=wall_seconds
         self.peak_upper_rss=0; self.cpu=0; self.seen_cpu={}
         self.db_pid=int((pgdata/"postmaster.pid").read_text().splitlines()[0])
         self.initial_disk=self.disk()
@@ -152,7 +168,8 @@ class Budget:
         return dict(sampled_rss_upper_bound_bytes=rss,sampled_cpu_seconds=self.cpu)
 
     def guard(self):
-        if time.monotonic()-self.start>self.wall_seconds: raise RuntimeError("global wall budget exhausted")
+        if max(time.monotonic()-self.start,time.time()-self.wall_start)>self.wall_seconds:
+            raise RuntimeError("global wall budget exhausted")
         if self.cpu>8*3600: raise RuntimeError("observed CPU guard exhausted")
         if self.peak_upper_rss>6*1024**3: raise RuntimeError("conservative RSS guard exhausted")
         if self.disk()-self.initial_disk>30*1024**3: raise RuntimeError("added disk guard exhausted")
@@ -196,6 +213,9 @@ class Pilot:
                 conservative_rss_bytes=6*1024**3,call_seconds=60,sql_seconds=55,lock_seconds=5)))
 
     def measure(self,case,operation,args,**oracle):
+        context=oracle.get("measurement_context",{})
+        if not isinstance(context,dict) or set(context)-{"variant","campaign","phase","measurement"}:
+            raise ValueError("measurement labels cannot override observed outcomes")
         self.budget.sample()
         before=history(self.owner)
         db_before=self.owner.execute("SELECT pg_database_size(current_database()),pg_current_wal_lsn()").fetchone()
@@ -246,6 +266,7 @@ class Pilot:
             wal_bytes=int(self.owner.execute("SELECT pg_wal_lsn_diff(%s,%s)",(db_after[1],db_before[1])).fetchone()[0]),
             measurement="exploratory_process_restart",campaign=1,sample=index,
             subprocess_seconds=time.monotonic()-begin)
+        result.update(context)
         self.samples.append(result)
         with (self.output/"samples.jsonl").open("ab") as stream: stream.write(encoded(result)+b"\n")
         return result
