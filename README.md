@@ -10,7 +10,7 @@ quantities. Operational inputs are never repaired and no orders are executed.
 
 The core system, offline decision research and local **Decision Lab** are complete
 within their synthetic scope. Real demand performance, calibrated service and
-business savings remain unmeasured. [Current independent assessment](docs/READINESS_REVIEW.md).
+business savings remain unmeasured. [Current engineering assessment](docs/ENGINEERING_READINESS.md).
 
 Separate [public observed-sales research](docs/PUBLIC_SALES_RESULTS.md) now adapts
 official UCI Online Retail with immutable provenance and evaluates a training-only
@@ -48,8 +48,13 @@ The [merged research integration](docs/RESEARCH_INTEGRATION.md) retains PRs 14â€
 and all original report bytes. One fresh PostgreSQL 17.6 acceptance run passes
 240 tests; a 24-artifact / 119-node lineage manifest keeps historical source drift
 explicit. PRs 14â€“24 are merged into main at `f132bf4`; remote ancestry and exact
-candidate contents are verified. Acceptance is local; remote CI and public hosting
-remain unverified. [All 22 directions and next gates](docs/RESEARCH_STATUS.md).
+candidate contents are verified. After PR 25 corrected full-history checkout,
+main `9d7c55f` has [green remote CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160):
+240 tests pass and repository hygiene passes. Public hosting and engineering
+capacity remain unmeasured. Feature development is paused for the
+[readiness investigation](docs/ENGINEERING_READINESS.md) and
+[proposed scale benchmark](docs/ENGINEERING_BENCHMARK_PLAN.md).
+[All 22 directions and next gates](docs/RESEARCH_STATUS.md).
 
 ## Try the Decision Lab
 
@@ -193,7 +198,9 @@ python -m unittest discover -s tests -v
 
 CI runs the same suite with pinned PostgreSQL 17.9 / Python 3.12.12. Local
 acceptance versions and actual results are recorded separately in the
-[review](docs/READINESS_REVIEW.md); a local pass is not remote CI evidence.
+[historical review](docs/READINESS_REVIEW.md). The separate
+[main CI acceptance](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160)
+passes 240 tests at `9d7c55f`; test-suite duration is not a scale benchmark.
 [Detailed validation and historical checkpoints](docs/VALIDATION.md).
 
 Offline regression checks need neither database nor model API:
@@ -207,7 +214,8 @@ retained valid outputs can be reused without regenerating experiments.
 
 ## Reading guide and boundaries
 
-Start with [the current assessment](docs/READINESS_REVIEW.md) and
+Start with [the current assessment](docs/ENGINEERING_READINESS.md),
+[proposed engineering benchmarks](docs/ENGINEERING_BENCHMARK_PLAN.md) and
 [the Lab](docs/DECISION_LAB.md). For implementation details:
 
 - Reliability: [frozen contract](docs/CONTRACT_V1.md), [data](docs/DATA.md), [engine](docs/ENGINE.md).

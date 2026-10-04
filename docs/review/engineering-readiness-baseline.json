@@ -1,0 +1,149 @@
+{
+  "kind": "engineering_readiness_inspection_not_performance_benchmark",
+  "inspected_at_utc": "2026-10-04T00:47:33.008163+00:00",
+  "baseline_commit": "9d7c55f8e30c9b885e14c450632de18efe413693",
+  "remote_main_verified": true,
+  "remote_ci": {
+    "run_id": 37164884160,
+    "head_sha": "9d7c55f8e30c9b885e14c450632de18efe413693",
+    "url": "https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160",
+    "conclusion": "success",
+    "updated_at": "2026-10-04T00:26:10Z",
+    "jobs": [
+      {
+        "id": 111325671795,
+        "name": "PostgreSQL acceptance",
+        "conclusion": "success",
+        "html_url": "https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160/job/111325671795"
+      },
+      {
+        "id": 111325672048,
+        "name": "Repository hygiene",
+        "conclusion": "success",
+        "html_url": "https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160/job/111325672048"
+      }
+    ],
+    "acceptance_log_observation": {
+      "tests": 240,
+      "result": "OK",
+      "elapsed_seconds": 19.495,
+      "python": "3.12.12",
+      "postgresql": "17.9",
+      "psycopg": "3.3.6",
+      "log_url": "https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160/job/111325671795",
+      "elapsed_is_test_suite_duration_not_latency_or_throughput": true
+    }
+  },
+  "reviewed_source_and_retained_artifact_bindings": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 2491,
+      "sha256": "f3c19c0de5b537bcea45467c5beb554611e3a8141eb359e9fd9eaf1e2fd10b81"
+    },
+    {
+      "path": "sql/schema.sql",
+      "bytes": 4190,
+      "sha256": "1bd4a6ae01a8dfa766742c2c690b6b096ab5aed391f21a845fd2db3de43b831c"
+    },
+    {
+      "path": "sql/views.sql",
+      "bytes": 5309,
+      "sha256": "1fc4a143d660aff8573556fbf6562c2290e4777126e90ed1ab7fd4d9d3bbaf6f"
+    },
+    {
+      "path": "sql/checks.sql",
+      "bytes": 12678,
+      "sha256": "a60fd73374308f32a53b727eefe8cc7d823cb4d1cd59cbe94fc891c77dbeb301"
+    },
+    {
+      "path": "src/inventory_intelligence/demand.py",
+      "bytes": 6959,
+      "sha256": "2a4b6c0320731317a7401f17f355091444a37e8602085af2a6f86057f2c38f72"
+    },
+    {
+      "path": "src/inventory_intelligence/replenishment.py",
+      "bytes": 10049,
+      "sha256": "a0c4b38cbba79296ac1787fb44a23dd2e69e2c63916a109fcdd4664c14bf3bda"
+    },
+    {
+      "path": "src/inventory_intelligence/copilot.py",
+      "bytes": 21331,
+      "sha256": "7d777b10dead6acb2f006f7b9ce632ac7d5afbb6b41513943b50114b08fc4b1c"
+    },
+    {
+      "path": "src/inventory_intelligence/lab.py",
+      "bytes": 30306,
+      "sha256": "78358dd51751e3aa4ca171be920e6aab4928a4fa367c53aa03188c93aa20822e"
+    },
+    {
+      "path": "src/inventory_intelligence/lab_api.py",
+      "bytes": 2617,
+      "sha256": "8a34cd9ab3ae1b5ad3ce26a070b7b3a98b07d13c290f74f29c38743e657b260c"
+    },
+    {
+      "path": "src/inventory_intelligence/lab_hosted.py",
+      "bytes": 5452,
+      "sha256": "44345e04008c78f59b9c5909031c9a452d1e1895ee187172750c9defbf5ad86c"
+    },
+    {
+      "path": "scripts/review_benchmark.py",
+      "bytes": 10659,
+      "sha256": "a3fed00585fbdc8b8573ee79aec9e68a98862084b1bc72d9c6c7da83ea7ee140"
+    },
+    {
+      "path": "deploy/lab/compose.yaml",
+      "bytes": 1451,
+      "sha256": "2b973885e24ab1faf66392d2fb11e45b6d4e52649731cdf23f7986710d5cf58f"
+    },
+    {
+      "path": "docs/review/final-round1.json",
+      "bytes": 116755,
+      "sha256": "90d286404f37805f8e1c4bd9dc3155d1c34067c4eb9ab95bcd56727d948dc745"
+    },
+    {
+      "path": "docs/review/final-round2.json",
+      "bytes": 116753,
+      "sha256": "7d28f3455586eb479611adaf3de1ac9a48295977b42bc564eafbca8ca6ec52b2"
+    },
+    {
+      "path": "docs/review/copilot-benchmark.json",
+      "bytes": 2093391,
+      "sha256": "4fd0ba6d2905e825f6e667ee1e67d1cddb5091e745214d9a80c0bdd0853c47b9"
+    },
+    {
+      "path": "docs/review/validation.json",
+      "bytes": 3042,
+      "sha256": "e84a3ef858425ce769be0848e36bd61af2e06e5e99299e718360eb0365c39bd6"
+    },
+    {
+      "path": "docs/review/readiness-acceptance.json",
+      "bytes": 7750,
+      "sha256": "5b706ad3ce9a5fb4b817b451eeaac1f193e322918d549dceb7b750d5eb295112"
+    },
+    {
+      "path": "docs/review/research-integration-acceptance.json",
+      "bytes": 3554,
+      "sha256": "f9a03b48e07611c79f1301921100b526fad3851d9ae92553effb6ea32cc0f593"
+    },
+    {
+      "path": "docs/review/research-main-integration.json",
+      "bytes": 1447,
+      "sha256": "d1b66e3443473c8f2dd7dee13b43d19632fa1b69c5ad2e31570447cd3c98c3a3"
+    },
+    {
+      "path": "docs/review/portfolio-claims.json",
+      "bytes": 14404,
+      "sha256": "11d12f2e9b1bbc43f711160572438757c5330c814849e157db74c77b2360c2b2"
+    }
+  ],
+  "performance_benchmark_performed": false,
+  "new_feature_implemented": false,
+  "feature_development_paused": true,
+  "paused_unmerged_planner_loop_excluded_from_baseline": true,
+  "engineering_capacity": null,
+  "capacity_status": "not_measured",
+  "deployment_status": "local_https_and_browser_checks_only_not_public_hosted",
+  "linux_container_enforcement_status": "not_measured",
+  "historical_receipts_modified": false,
+  "proposed_program": "docs/ENGINEERING_BENCHMARK_PLAN.md"
+}

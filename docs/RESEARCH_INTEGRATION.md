@@ -1,10 +1,13 @@
 # Combined research integration and retained acceptance
 
-Status: **merged main with locally validated acceptance**. The user authorized
-all PR merges on 2026-10-03; PR 24 merged at `f132bf4`, and GitHub reports
-PR 14–24 merged with no open PRs. Remote main retains the exact candidate
-`f7d17e5` by ancestry with an identical tree. Remote CI, public deployment and
-production evidence remain unverified. Exact PR 14–23
+Status: **PR 14–24 merged; subsequent main CI verified green after PR 25**.
+The user authorized all PR merges on 2026-10-03; PR 24 merged at `f132bf4`.
+That integration retains the exact candidate `f7d17e5` by ancestry with an
+identical tree. Current main `9d7c55f` has
+[240 passing tests and green hygiene](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160).
+Public deployment, engineering capacity and production evidence remain unmeasured.
+Feature development is paused for the [engineering investigation](ENGINEERING_READINESS.md).
+Exact PR 14–23
 heads and all 22 directions are recorded in [the delivery ledger](RESEARCH_STATUS.md).
 The candidate preserves all ten heads by ancestry through eight explicit merges;
 stacked PR 15/17 are included through PR 20. Published histories are not rewritten.
@@ -104,8 +107,10 @@ existing 240-test acceptance was reused because no implementation changed.
 The lineage audit also passes on integrated main. Only proven-merged branches
 are retired; active closed-loop research and required environments are retained.
 The [separate delivery receipt](review/research-main-integration.json) records
-integration without changing historical acceptance/report bytes. CI is not
-monitored or claimed by this local acceptance.
+integration without changing historical acceptance/report bytes. That local
+receipt does not claim remote CI. Subsequent PR 25 and the
+[separate inspection receipt](review/engineering-readiness-baseline.json) record
+the green main run (240 tests / OK / 19.495s), not a retroactive receipt edit.
 
 Docker/Compose runtime, Linux resource/read-only identity enforcement, crash
 recovery, public DNS/ACME TLS/redirect and actual uptime remain unverified. No host,
@@ -113,10 +118,10 @@ domain, paid subscription or public service has been created. The
 [hosted plan](HOSTED_LAB_PLAN.md) and [readiness operations](../deploy/lab/README.md)
 remain the release gates. Local private-CA HTTPS is not public trusted TLS.
 
-Next independent design work: a planner execution adapter with synthetic action/
-receipt identities, actual reliability/planner gates, repeated knowledge clocks,
-paid carryover/settlement and independent conservation oracles. The existing
-prefix arithmetic comparison is not that closed loop. Advanced-model, multi-
-location, capacity/calendar and scale expansions keep their evidence/contract
-budgets in the all-direction ledger; no direction was discarded to declare this
-candidate complete.
+Current priority: [engineering readiness and capacity investigation](ENGINEERING_READINESS.md),
+with a [reproducible proposed program](ENGINEERING_BENCHMARK_PLAN.md) reviewed
+before implementation. The unfinished planner-loop branch is paused and preserved;
+main's prefix arithmetic comparison is not operational planner execution. Advanced
+models, allocation/capacity/calendar and hosting remain gated. No direction is
+discarded to declare the combined candidate complete, and no feature resumes
+automatically when an engineering host/runtime gate blocks.

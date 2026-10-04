@@ -1,12 +1,16 @@
 # Independent validation
 
-Current review (2026-10-03): the complete Reliability → Planning → Copilot →
-research → Decision Lab path is assessed in [READINESS_REVIEW.md](READINESS_REVIEW.md),
-with fresh local acceptance recorded in
-[the integration receipt](review/readiness-acceptance.json). Earlier counts and
-remote runs below are historical evidence, not the current acceptance result.
+Current review (2026-10-03): [engineering readiness](ENGINEERING_READINESS.md)
+assesses integrated main `9d7c55f` after PR 14–24 and PR 25.
+[Remote CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160)
+passes PostgreSQL acceptance (240 tests / OK / 19.495s) and repository hygiene.
+The [inspection receipt](review/engineering-readiness-baseline.json) binds this
+observation separately from historical local receipts. Feature development is
+paused for [benchmark design](ENGINEERING_BENCHMARK_PLAN.md); no scale experiment
+was performed. Earlier counts, local timings and remote runs below remain
+historical evidence, not an engineering capacity claim.
 
-Latest stabilization (2026-10-02) starts from integrated main `43a952d`, including
+Historical stabilization (2026-10-02) starts from integrated main `43a952d`, including
 decision/intermittent research and the updated integration workflow. Fresh local
 PostgreSQL 17.6 / Python 3.12.14 acceptance passed 104 tests there and 106 on
 locally integrated main at `4f3d7c8`, with zero failures/errors/skips and unchanged

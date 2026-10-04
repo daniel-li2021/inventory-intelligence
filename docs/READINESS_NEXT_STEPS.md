@@ -1,5 +1,12 @@
 # Readiness and the next useful investigation
 
+**Historical prioritization, superseded after research integration.** The user
+now pauses feature development for [engineering readiness](ENGINEERING_READINESS.md)
+and [performance/scale design before implementation](ENGINEERING_BENCHMARK_PLAN.md).
+All 22 directions remain in [the delivery ledger](RESEARCH_STATUS.md). The
+earlier work authorization and highest-priority research statements below
+reflect earlier decisions, not permission to resume features during this pause.
+
 The user assigned the useful follow-ups on 2026-10-03. Current execution is
 tracked in [the long-term roadmap](RESEARCH_ROADMAP.md); the first
 [fresh costed warmup results](FRESH_WARMUP_RESULTS.md) are now measured.

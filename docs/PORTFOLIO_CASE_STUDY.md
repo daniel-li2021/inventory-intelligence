@@ -9,7 +9,8 @@ service when demand, starting state and supply timing change.
 The operational core and local Decision Lab are implemented on main with
 synthetic business data. Ten subsequent research/UX/readiness PRs are merged
 through PR 24 at main `f132bf4` as of 2026-10-03, with a locally validated combined
-acceptance and verified remote ancestry. Remote CI remains unverified. Public
+acceptance and verified remote ancestry. PR 25 fixes full-history checkout;
+main `9d7c55f` has [240 passing remote tests and green hygiene](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160). Public
 transaction research is a separate observed-sales boundary. There is no hosted
 deployment, purchase execution, measured retailer saving or production claim.
 [Verified delivery status](RESEARCH_STATUS.md), [exact claim receipt](review/portfolio-claims.json).
@@ -107,8 +108,10 @@ but downloaded bytes were not independently rechecked in that round.
 
 The merged readiness checkpoint records **134/134** local tests plus published-
 path and browser checks. This is historical acceptance of the core, not a current
-combined-suite result for the unmerged packages. Each new package has its own
-focused validation. The case-study receipt reconciles seven retained reports
+combined-suite result. PR 14–24 are now integrated; the separate main CI run
+passes 240 tests. Neither test duration nor the retained small-fixture microtimings
+is a controlled performance/scale benchmark. The case-study receipt is historical
+and reconciles seven retained reports
 against 50 pinned source-file hashes and selected exact denominators without
 refitting models or rerunning simulations.
 [Readiness evidence](READINESS_REVIEW.md), [claim receipt](review/portfolio-claims.json).
@@ -123,8 +126,10 @@ establish population confidence, service guarantees or commercial savings.
 
 Prospective disjoint-item calibration, a separate lost-sales protocol and an
 additive synthetic physical-count layer are implemented and merged. The next
-decision is actual planner execution in a separately bounded synthetic loop. Complex
-models, allocation/capacity optimization and hosting retain explicit evidence,
+decision is review of the [engineering benchmark proposal](ENGINEERING_BENCHMARK_PLAN.md)
+and [remaining readiness gaps](ENGINEERING_READINESS.md). Feature development,
+including unfinished planner-loop execution, is paused. Complex models,
+allocation/capacity optimization and hosting retain explicit evidence,
 contract or ownership gates. The [22-direction status and continuation plan](RESEARCH_STATUS.md)
 preserves all options and the condition for moving each forward.
 
