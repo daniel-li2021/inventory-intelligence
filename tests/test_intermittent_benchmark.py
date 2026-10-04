@@ -3,6 +3,7 @@
 from fractions import Fraction
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import sys
 import unittest
@@ -94,11 +95,14 @@ class IntermittentBenchmarkTests(unittest.TestCase):
         self.assertEqual(report["protocol_version"], "intermittent-research-v1")
         self.assertEqual((len(report["scenarios"]), len(report["configurations"])), (84, 33))
         self.assertEqual(report["summary"]["candidate_split_results"], 5544)
-        for path, expected in report["source_sha256"].items():
-            # Consumed outcomes remain bound to the original kernel, as in decision-v1.
-            source = (ROOT / "docs/review/decision-v1-source.py.txt" if
-                      path == "src/inventory_intelligence/decision.py" else ROOT / path)
-            self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), expected)
+        # Consumed evidence binds one complete original source, including deleted docs.
+        snapshot = "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6"
+        artifact = "docs/review/intermittent-benchmark.json"
+        self.assertEqual((ROOT / artifact).read_bytes(),
+                         subprocess.check_output(["git", "show", f"{snapshot}:{artifact}"], cwd=ROOT))
+        for name, expected in report["source_sha256"].items():
+            raw = subprocess.check_output(["git", "show", f"{snapshot}:{name}"], cwd=ROOT)
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), expected)
         for row in report["scenarios"]:
             inputs = row["inputs"]
             encoded = json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode()

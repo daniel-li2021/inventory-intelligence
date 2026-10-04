@@ -83,7 +83,7 @@ def prepare(raw_dir, *, allow_acquisition=False):
     manifest = acquire(raw_dir)
     root = Path(__file__).resolve().parents[1]
     dependencies = ("src/inventory_intelligence/public_sales.py", "scripts/public_sales_adapter.py",
-                    "docs/PUBLIC_ADAPTER_V1.md")
+                    "docs/CONTRACTS.md")
     hashes = {name: sales.sha256_file(root / name) for name in dependencies}
     transform_hash = hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()
     derived = raw_dir / f"adapted-{transform_hash[:12]}.json"

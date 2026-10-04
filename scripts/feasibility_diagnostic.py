@@ -69,7 +69,7 @@ def build_report(evidence=None):
                 if records else Fraction(0))
         records.append(record)
     root = Path(__file__).resolve().parents[1]
-    files = ("docs/FEASIBILITY_DIAGNOSTIC.md", "scripts/feasibility_diagnostic.py",
+    files = ("docs/EVIDENCE.md", "scripts/feasibility_diagnostic.py",
              "src/inventory_intelligence/decision_diagnostics.py", "src/inventory_intelligence/decision.py",
              "src/inventory_intelligence/lab.py", "src/inventory_intelligence/forecasting.py",
              "src/inventory_intelligence/lab_evidence.json")

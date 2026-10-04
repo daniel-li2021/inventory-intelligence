@@ -4,6 +4,7 @@ from pathlib import Path
 import types
 import hashlib
 import json
+import subprocess
 
 from inventory_intelligence.decision import _simulate, simulate
 from inventory_intelligence.policy_comparison import simulate_policy
@@ -135,8 +136,14 @@ class PolicyComparisonTests(unittest.TestCase):
             return Fraction(**value) if isinstance(value, dict) else Fraction(value)
         self.assertEqual(len(report["scenarios"]), 40)
         self.assertEqual(len(report["pairs"]), 80)
+        # Consumed evidence binds one complete original source, including deleted docs.
+        snapshot = "39bf64d7e70b9221afbe1d697fe49fd348fcdc04"
+        artifact = "docs/review/policy-comparison-v1.json"
+        self.assertEqual((root / artifact).read_bytes(),
+                         subprocess.check_output(["git", "show", f"{snapshot}:{artifact}"], cwd=root))
         for name, expected in report["source_sha256"].items():
-            self.assertEqual(hashlib.sha256((root / name).read_bytes()).hexdigest(), expected)
+            raw = subprocess.check_output(["git", "show", f"{snapshot}:{name}"], cwd=root)
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), expected)
         for cell in report["scenarios"]:
             self.assertEqual(hashlib.sha256(encoded(cell["inputs"])).hexdigest(), cell["input_sha256"])
             forecasts = None

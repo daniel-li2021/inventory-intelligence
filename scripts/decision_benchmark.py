@@ -115,7 +115,7 @@ def run():
 
     root = Path(__file__).resolve().parents[1]
     sources = ("scripts/decision_benchmark.py", "src/inventory_intelligence/decision.py",
-               "src/inventory_intelligence/forecasting.py", "docs/CONTRACT_DECISION_V1.md")
+               "src/inventory_intelligence/forecasting.py", "docs/CONTRACTS.md")
     report = dict(protocol_version=VERSION,
                   source_sha256={name: hashlib.sha256((root / name).read_bytes()).hexdigest()
                                  for name in sources},

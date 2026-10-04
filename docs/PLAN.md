@@ -2,8 +2,7 @@
 
 Status: **proposal awaiting program review**. Current phase/mode and scope gates
 live in [STATE](STATE.md). Design review P0 is complete; implementation is pending.
-This cleanup retains the proposed workload/SLO/budget unchanged from the
-[original program](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/ENGINEERING_BENCHMARK_PLAN.md).
+The pending workload/SLO/budget specification below remains unchanged.
 AUTO permits integration of authorized work; it does not approve this program.
 
 ## Phase handoff and checkpoints
@@ -25,7 +24,7 @@ This is the near-term engineering plan, linked alongside other plans in the
 [index](README.md#plans-and-work-status). At completion, record outcomes, validation
 and remaining gaps (linked follow-up or
 explicit deferral), extract durable material into knowledge/results/evidence and
-retire this task file unless still required for active work or reproducibility.
+delete this task file. Keep it only while pending execution needs it.
 Later areas/phases may have their own indexed plan; this does not authorize parallel
 execution.
 

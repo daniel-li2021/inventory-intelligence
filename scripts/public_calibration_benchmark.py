@@ -18,7 +18,7 @@ SEED = 1709
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "docs/review/public-calibration-freeze-v1.json"
 REPORT = ROOT / "docs/review/public-calibration-v1.json"
-SOURCES = ("docs/PUBLIC_CALIBRATION_V1.md", "scripts/public_calibration_benchmark.py",
+SOURCES = ("docs/EVIDENCE.md", "scripts/public_calibration_benchmark.py",
            "scripts/public_sales_benchmark.py", "scripts/public_safety_benchmark.py",
            "scripts/public_safety_audit.py", "src/inventory_intelligence/sales_safety.py",
            "src/inventory_intelligence/intermittent.py", "src/inventory_intelligence/decision.py",

@@ -61,7 +61,7 @@ def supplier_trace(family, seed, block):
 
 def run():
     root = Path(__file__).resolve().parents[1]
-    sources = ("docs/RESEARCH_WARMUP_V1.md", "scripts/warmup_benchmark.py",
+    sources = ("docs/EVIDENCE.md", "scripts/warmup_benchmark.py",
                "src/inventory_intelligence/research_warmup.py", "src/inventory_intelligence/decision.py",
                "src/inventory_intelligence/decision_diagnostics.py", "src/inventory_intelligence/intermittent.py",
                "src/inventory_intelligence/forecasting.py", "scripts/decision_benchmark.py")

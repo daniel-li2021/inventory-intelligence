@@ -50,7 +50,7 @@ def gate(candidate, references):
 
 def run():
     root = Path(__file__).resolve().parents[1]
-    sources = ("docs/SAFETY_RETENTION_V1.md", "scripts/safety_retention_benchmark.py",
+    sources = ("docs/EVIDENCE.md", "scripts/safety_retention_benchmark.py",
         "src/inventory_intelligence/safety_retention.py", "src/inventory_intelligence/research_warmup.py",
         "scripts/warmup_benchmark.py", "scripts/decision_benchmark.py",
         "src/inventory_intelligence/decision.py", "src/inventory_intelligence/decision_diagnostics.py",

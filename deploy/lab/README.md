@@ -1,6 +1,6 @@
 # Hosted Lab readiness package
 
-Start with the [architecture, cost boundary and release gates](../../docs/HOSTED_LAB_PLAN.md).
+Start with the [architecture, cost boundary and release gates](README.md#serving-architecture-and-limits).
 This package prepares a public synthetic demo; **nothing is deployed**. The local
 `lab_api:app` remains available. Hosted serving uses `lab_hosted:app`, one process,
 4 KiB scenario bodies / five-second read deadline, a global burst-20 / 2-per-second
@@ -110,3 +110,56 @@ wheel's browser check under actual CSP passed Enter-to-run/focus/chart rendering
 and 320px blocked reflow ([receipt](../../docs/review/research-integration-browser.json)).
 See [remaining engineering checks](../../docs/KB.md#engineering-gaps-and-hypotheses)
 and [manual accessibility limits](../../docs/RESULTS.md#browser-and-accessibility-results).
+
+## Serving architecture and limits
+
+Use the existing packaged Lab UI, synthetic archive and same-origin FastAPI API.
+A separate hosted ASGI entry point adds bounded anonymous API admission and body
+reading, restricts exposed paths, and attaches browser security headers. The
+local entry point and all inventory/planner/simulator contracts remain unchanged.
+No database, model API, upload, source correction or order execution is added.
+
+A single Linux host runs two containers with Compose: Caddy serves HTTPS and
+proxies to one Uvicorn process on a private Docker network. Only ports 80/443 are
+published. This keeps one instance's admission state explicit and avoids a new
+cloud SDK, orchestrator, database or autoscaling architecture.
+
+| Boundary | Initial configuration / rationale |
+|---|---|
+| Scenario payload | 4,096 bytes, including chunked reads; 5-second total body deadline |
+| Expensive API admission | One process-wide token bucket, 2 requests/second, burst 20; no stored IP identities |
+| Active API requests | At most 4; excess returns 503 immediately |
+| Uvicorn | One worker, concurrency limit 16, backlog 32, keep-alive 5 seconds |
+| App container | Non-root; read-only filesystem; 0.5 CPU, 256 MiB RAM, 64 PIDs; no secrets/host mounts |
+| Proxy | 0.25 CPU, 128 MiB RAM; persistent certificate storage; bounded log rotation |
+| Restart | `unless-stopped`; readiness checks identify invalid evidence, but Docker health alone does not restart unhealthy processes |
+| Access | Same-origin public synthetic GET/POST only; no API docs, source upload, arbitrary files or external evidence import |
+
+Limits are initial operating choices, not demonstrated production capacity.
+Global rate limiting can let one abusive visitor consume the shared allowance;
+it bounds admitted calculation work, not bandwidth/TLS attack traffic. Host or
+provider controls are still required for sustained abuse. One process is a
+portfolio availability tradeoff, not high availability. CPU/RAM enforcement and
+restart behavior must be tested on the actual container runtime.
+
+Caddy's [automatic HTTPS](https://caddyserver.com/docs/automatic-https) needs a
+real domain pointing at the host, reachable ports 80/443 and persistent writable
+certificate storage. [Body limits](https://caddyserver.com/docs/caddyfile/directives/request_body)
+are also applied at the proxy. Uvicorn's
+[concurrency settings](https://www.uvicorn.org/settings/) reject excess connections
+with 503; they do not impose a hard deadline on synchronous calculation.
+[Compose service controls](https://docs.docker.com/reference/compose-file/services/)
+configure the containers. The
+[Docker build context allowlist](https://docs.docker.com/build/concepts/context/)
+keeps raw public-sales caches, credentials, Git history and local environments out
+of the build context.
+
+## Release ownership and cost
+
+The recorded proposed infrastructure ceiling is USD 10/month, excluding an already
+owned domain. It is neither a current quote nor spending authorization. Before
+provisioning, review provider/region, current tax/egress/storage/log/domain costs,
+monthly total and shutdown steps. If the approved envelope cannot be met, retain
+the local demo until a different budget is approved. AUTO merge mode does not
+approve paid deployment. One shared admission bucket is a portfolio tradeoff;
+TLS/bandwidth abuse requires host/provider controls beyond calculation admission.

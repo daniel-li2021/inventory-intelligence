@@ -7,13 +7,13 @@ relevant plan or guide in the [index](docs/README.md).
   Read once when practical; preserve unrelated work and reuse valid saved outputs.
 - Prefer focused validation and SQL/stdlib/native features. Avoid full pipelines,
   suites, builds and external/model calls unless needed for correctness.
-- Preserve versioned contracts, source identities, business/knowledge clocks and
+- Preserve versioned interface semantics, source identities, business/knowledge clocks and
   original evidence. Missing data is not zero/pass; quantities are exact pieces.
   Read operational inputs and write results separately; never silently repair them.
 - Keep planner projection separate from simulation. Copilot explains saved evidence;
   language routing cannot invent evidence or business arithmetic. Check independent
   expected quantities and clean controls, not just counts.
-- Operational inputs are synthetic. The [approved UCI exception](docs/PUBLIC_SALES_PROTOCOL_V1.md)
+- Operational inputs are synthetic. The [approved UCI exception](docs/KB.md#public-data-boundary)
   is offline research with ignored raw/reconstructable data and attributed aggregates.
   Never import company code, data, screenshots, credentials or confidential schema.
 - Follow [CONTRIBUTING](CONTRIBUTING.md). AUTO merges validated authorized work;
@@ -25,5 +25,6 @@ relevant plan or guide in the [index](docs/README.md).
 - Update STATE and the affected indexed plan after material progress. Plans may
   cover different areas/horizons; record outcomes, gaps and next action. Extract
   durable knowledge/results before deleting completed or superseded task documents;
-  retain only active plans and originals required for reproducibility.
+  retain only plans needed for pending execution. Historical originals live in Git;
+  do not retain completed plans, compatibility stubs or duplicate narratives.
 - Stop when the scoped work is validated. Keep progress and final summaries concise.

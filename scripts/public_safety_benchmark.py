@@ -160,7 +160,7 @@ def main():
     args = parser.parse_args()
     receipt, adapted_path = prepare(args.raw_dir)
     root = Path(__file__).resolve().parents[1]
-    sources = ("docs/PUBLIC_SAFETY_V1.md", "scripts/public_safety_benchmark.py",
+    sources = ("docs/EVIDENCE.md", "scripts/public_safety_benchmark.py",
                "src/inventory_intelligence/sales_safety.py", "src/inventory_intelligence/intermittent.py",
                "src/inventory_intelligence/decision.py", "src/inventory_intelligence/decision_diagnostics.py",
                "src/inventory_intelligence/forecasting.py", "scripts/public_sales_benchmark.py")

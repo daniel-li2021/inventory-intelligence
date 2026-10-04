@@ -30,7 +30,7 @@ temporal/count/source validation and fail-closed archive handling. See [KB](KB.m
 
 ## Historical provenance and independent audits
 
-[Lineage protocol](RESEARCH_LINEAGE_V1.md) and
+[Lineage protocol](EVIDENCE.md#historical-provenance-and-independent-audits) and
 [original manifest](review/research-integration-lineage-v1.json) bind 24 artifacts,
 119 nodes, 17 complete historical source maps and five parent/freeze bindings.
 All ten delivery heads must be ancestors; stacked PR 15/17 enter via PR 20. The
@@ -40,8 +40,9 @@ regression, not written into the old manifest. This is byte/metadata reproducibi
 not signed authenticity or universal business validation.
 
 The original decision kernel is retained in [decision-v1-source.py.txt](review/decision-v1-source.py.txt).
-Decision/intermittent artifact guards use it instead of the extended current kernel;
-separate current-code oracles compare default behavior to that original. Independent
+Historical artifact guards verify the complete pinned original Git source, including
+protocols and scripts, rather than requiring retired documents in the working tree.
+Separate current-code policy oracles compare default behavior to the archived kernel. Independent
 readiness audit derived all 480 decision and 5,544 intermittent selection/promotion
 outcomes from saved scores, tie rules, floors, nulls and zero-cost cases without
 calling the harness selector or refitting; all agreed. Count evidence has 40 controls
@@ -96,30 +97,41 @@ Do not rehash artifacts, suppress drift or rerun consumed studies to clear guard
   fixed count or rewrite evidence. Earlier PR 16's kernel guard was corrected using
   the retained original source, as described above.
 
-## Retired plans and checkpoints
+## Documentation lifecycle
 
-Extraction replaces maintenance of completed task narratives. The following files
-are deleted after their durable information moves to these homes:
+Completed plans, reviews, investigations and compatibility stubs are removed from
+current documentation. Current interfaces are consolidated in CONTRACTS, operator
+commands in OPERATIONS, outcomes in RESULTS, lessons/constraints in KB and enduring
+choices in DECISIONS. Only PLAN has pending execution. Prior narrative bytes remain
+in Git; `git show 886e893:<path>` recovers the previous documentation surface.
+Original historical protocols are evidence inputs in their pinned Git views, not
+maintained files or separate planning authority. Missing current documents are
+explicit drift with `current_sha256: null`; immutable historical hashes stay exact.
 
-| Retired document(s) | Long-term home |
+## Study artifacts and original sources
+
+Every original source map is retained in its immutable report and checked against
+one complete Git snapshot by the lineage audit. Use `git show <snapshot>:<path>`
+for protocol/code bytes or a detached worktree for executing the original auditor.
+Do not run a consumed study merely because its old runner exists. Future studies
+need newly assigned scope and a fresh protocol/output; no report hash is updated.
+
+| Evidence | Immutable report / source view |
 |---|---|
-| `STAGE1_REVIEW`, `THREE_STAGE_REVIEW` | Golden controls in VALIDATION; acceptance above; forecasts, planner oracle and timings in RESULTS; clock/coverage lessons in KB. |
-| `READINESS_CORE_REVIEW`, `READINESS_LAB_REVIEW`, `READINESS_REVIEW` | Trust/semantic boundaries in KB; numerical/service outcomes in RESULTS; source/environment, adversarial and combined acceptance above. |
-| `STAGE3_BENCHMARK`, `STAGE3_STABILIZATION` | RESULTS retains failures, exact denominators, consumed matrix, usage/latency and reproduction; original reports/matrix remain in review. |
-| `DECISION_LAB_VALIDATION`, `LAB_ACCESSIBILITY_REVIEW` | Independent arithmetic, browser measurements/limitations in RESULTS; operational/API behavior in DECISION_LAB; immutable receipts/screenshots retained. |
-| `RESEARCH_INTEGRATION`, `CI_RESEARCH_HISTORY` | This catalog retains merge identity, combined acceptance, source views, audit counts/commands and CI incidents; original receipts unchanged. |
-| `ENGINEERING_READINESS`, `RESEARCH` | KB retains engineering hypotheses/gaps and pinned-source/tool lessons; PLAN retains the active complete benchmark specification. |
+| Decision / intermittent | [Decision](review/decision-benchmark.json), [intermittent](review/intermittent-benchmark.json); original complete source `f6d3d16034af038eda4c8687ea4f1ed6d2445ef6`. |
+| Feasibility | [Five exact controls](review/feasibility-diagnostic.json); its complete source map is in the saved lineage manifest. |
+| Warmup / retention / supply | [Warmup](review/fresh-warmup-v1.json), [retention](review/safety-retention-v1.json), [supply](review/supply-sensitivity-v1.json); PR 14 head `d2cb98ba1016f80bd2c2dd40159092f4f1b21395`. |
+| Policies | [Paired policies](review/policy-comparison-v1.json); PR 16 head `39bf64d7e70b9221afbe1d697fe49fd348fcdc04`. |
+| Public forecast / safety | [Forecast](review/public-sales-forecast-v1.json), [safety](review/public-sales-safety-v1.json); complete source maps and parent bindings are in the lineage manifest. |
+| Disjoint calibration | [Frozen subset](review/public-calibration-freeze-v1.json), [outcomes](review/public-calibration-v1.json), [acceptance](review/public-calibration-acceptance.json); `e7473a595d4ef6deca33c283ea6b27e23ad83bc4`. |
+| Lost sales | [Trajectory archive](review/lost-sales-v1.json.gz), [summary](review/lost-sales-v1-summary.json), [acceptance](review/lost-sales-acceptance.json); `d06badeb2a61b2f76da5ebb4afbd9ff6ffc38023`. |
+| Physical counts | [40 controls / 86 nodes](review/physical-count-v1.json), [acceptance](review/physical-count-acceptance.json); `c916c046b3af06503574aaea208a0197e0615a3e`. |
+| Hosted / portfolio | [Image pins](review/hosted-lab-image-manifests.json), [hosted acceptance](review/hosted-lab-acceptance.json), [claim audit](review/portfolio-claims.json); source views in the lineage manifest. |
 
-Earlier stage/handoff/automation progress files were already retired: current status
-is STATE, ongoing work is in indexed plans, interfaces/operations in contracts/guides,
-and enduring choices in DECISIONS. All 22 investigation questions are extracted to
-KB. Original narratives remain recoverable via `git show f3dc4a9:<path>`; earlier
-retirements via `git show 208d5b3:<path>`. Git history is recovery, not the only home
-for useful knowledge.
-
-Four legacy links are symlinks only: `NEXT_ROUND_RESEARCH` and `READINESS_NEXT_STEPS`
-point to KB, `ENGINEERING_READINESS` to KB, `ENGINEERING_BENCHMARK_PLAN` to PLAN.
-These preserve links embedded in source-hashed protocols/design without retaining
-old narratives or another status file. Frozen contracts, HOSTED_LAB_PLAN, original
-reports and source-bound study protocols keep their bytes. Hosted release gaps
-evolve in PLAN, KB and the deploy guide rather than the frozen design document.
+The public adapter's exact cross-item rational sums use signed hexadecimal
+numerator/denominator strings; decode with the original study's `decode` helper.
+A 5,000-digit round-trip oracle checks this format. No process conversion limit
+was weakened. Original public/physical auditors deliberately guard their complete
+sources; documentation relocation makes current-source reuse reject, so audit
+those historical caches at the recorded source snapshot. Current kernel tests
+remain separate from historical provenance, including independent mutation controls.

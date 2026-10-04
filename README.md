@@ -28,12 +28,13 @@ Copilot reports exact saved evidence; optional language routing chooses intent o
 The separate periodic simulator reevaluates orders rather than executing the
 planner's prefix proposal. [Durable design decisions](docs/DECISIONS.md).
 
-The operational demo is synthetic. Separate approved [UCI observed-sales research](docs/PUBLIC_SALES_RESULTS.md)
+The operational demo is synthetic. Separate approved [UCI observed-sales research](docs/RESULTS.md#public-observed-sales)
 keeps raw/reconstructable observations local and publishes aggregates. Sales do not
 establish unconstrained demand, historical availability or real business benefit.
-[Case study and scoped resume wording](docs/PORTFOLIO_CASE_STUDY.md) connect the
-architecture to measured failures and negative results. Exact research protocols,
-results and deferred questions are in the knowledge index; phase/status live in STATE.
+[Measured results](docs/RESULTS.md) include routing failures, negative safety-policy
+outcomes and service/cost tradeoffs. [Evidence](docs/EVIDENCE.md) binds their original
+source views; [knowledge](docs/KB.md) retains lessons and conditional questions.
+The documentation index routes current interfaces and operations; STATE owns status.
 
 ## Try the Decision Lab
 
@@ -96,7 +97,7 @@ Load `clean` and substitute `clean:ledger` / `clean:snapshot` for exit 0.
 Exit 2 means configuration/execution failed. Fixture loaders refuse overwrite;
 each check preserves prior history. Credentials above are fictional local setup.
 [Verified core example](docs/examples/combined.md),
-[planning demo](docs/PLANNING.md), [Copilot examples](docs/examples/copilot.md).
+[planning demo](docs/OPERATIONS.md#planning), [Copilot examples](docs/examples/copilot.md).
 
 ## Independent acceptance
 
@@ -125,8 +126,8 @@ Offline regression checks need neither database nor model API:
 PYTHONPATH=src python -m unittest tests.test_decision tests.test_decision_benchmark tests.test_forecasting tests.test_intermittent tests.test_intermittent_benchmark -v
 ```
 
-The full synthetic benchmark rerun commands are in their protocol documents;
-retained valid outputs can be reused without regenerating experiments.
+Reuse retained results. Historical reproduction uses complete original Git snapshots
+in [EVIDENCE](docs/EVIDENCE.md); new experiments require a fresh assigned protocol/output.
 
 ## Boundaries
 

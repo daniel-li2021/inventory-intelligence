@@ -19,7 +19,7 @@ WARMUP = 56
 N = 84
 COMMON_END = 100
 PARAMETERS = dict(on_hand=10,review_days=7,pack_size=2,moq=4,holding_cost=1,order_cost=2)
-SOURCES = ("docs/CONTRACT_LOST_SALES_V1.md", "scripts/lost_sales_benchmark.py",
+SOURCES = ("docs/CONTRACTS.md", "scripts/lost_sales_benchmark.py",
            "scripts/lost_sales_audit.py",
            "src/inventory_intelligence/lost_sales.py", "src/inventory_intelligence/decision.py",
            "src/inventory_intelligence/forecasting.py", "scripts/decision_benchmark.py")

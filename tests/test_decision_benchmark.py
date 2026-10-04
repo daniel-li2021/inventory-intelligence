@@ -3,6 +3,7 @@
 from fractions import Fraction
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import unittest
 
@@ -87,11 +88,14 @@ class DecisionBenchmarkTests(unittest.TestCase):
         self.assertEqual(report["protocol_version"], "decision-benchmark-v1")
         self.assertEqual(len(report["scenarios"]), 60)
         self.assertEqual(report["summary"]["candidate_split_runs"], 480)
+        # Consumed evidence binds one complete original source, including deleted docs.
+        snapshot = "f6d3d16034af038eda4c8687ea4f1ed6d2445ef6"
+        artifact = "docs/review/decision-benchmark.json"
+        self.assertEqual((root / artifact).read_bytes(),
+                         subprocess.check_output(["git", "show", f"{snapshot}:{artifact}"], cwd=root))
         for name, expected in report["source_sha256"].items():
-            # Historical outcomes attest their original kernel, not every later extension.
-            source = (root / "docs/review/decision-v1-source.py.txt" if
-                      name == "src/inventory_intelligence/decision.py" else root / name)
-            self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), expected)
+            raw = subprocess.check_output(["git", "show", f"{snapshot}:{name}"], cwd=root)
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), expected)
         for row in report["scenarios"]:
             inputs = row["inputs"]
             encoded = json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode()

@@ -2,7 +2,7 @@
 
 Local synthetic replay UI over reliability, forecasts, advisory replenishment,
 a separate periodic simulator and saved evidence. This guide owns the delivered
-architecture/API/UX; original handoffs are [retired snapshots](README.md#retired-plans-and-checkpoints).
+architecture/API/UX. [EVIDENCE](EVIDENCE.md) binds original acceptance and source views.
 
 ## Run locally
 

@@ -138,7 +138,7 @@ def run(simulator=None):
     root = Path(__file__).resolve().parents[1]
     sources = ("scripts/intermittent_benchmark.py", "scripts/decision_benchmark.py",
                "src/inventory_intelligence/decision.py", "src/inventory_intelligence/intermittent.py",
-               "src/inventory_intelligence/forecasting.py", "docs/CONTRACT_INTERMITTENT_V1.md")
+               "src/inventory_intelligence/forecasting.py", "docs/CONTRACTS.md")
     configs = config_grid()
     baseline_configs = [key for key, value in configs.items() if value["method"] in BASELINES]
     new_configs = [key for key, value in configs.items() if value["method"] not in BASELINES]

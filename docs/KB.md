@@ -34,9 +34,9 @@ Use [STATE](STATE.md) for scope, [DECISIONS](DECISIONS.md) for choices and
 - SQL permissions prevent runtime source writes, not upstream-owner rewrites.
   Atomic rollback of known errors does not establish crash recovery.
 
-Accepted interfaces remain in [inventory](CONTRACT_V1.md),
-[planning](CONTRACT_PLANNING_V1.md), [Copilot](CONTRACT_COPILOT_V2.md) and
-[simulation](CONTRACT_DECISION_V1.md) contracts. Independent oracles are in
+Accepted interfaces remain in [inventory](CONTRACTS.md#inventory-v1),
+[planning](CONTRACTS.md#planning-v1), [Copilot](CONTRACTS.md#copilot-v2) and
+[simulation](CONTRACTS.md#decision-simulation-v1) contracts. Independent oracles are in
 [VALIDATION](VALIDATION.md) and [RESULTS](RESULTS.md#lab-arithmetic-and-service).
 
 ## Decision-evaluation lessons
@@ -62,8 +62,8 @@ policy's paid stock/backlog/pipeline into scoring, with costs and starting state
 reported. Fresh demand and supplier paths across selection/holdout answer a stronger
 question than reusing one hidden delay trace. A short zero run is not retirement;
 lower safety targets cannot liquidate already owned stock. These lessons now have
-[feasibility](FEASIBILITY_DIAGNOSTIC_RESULTS.md), [warmup](FRESH_WARMUP_RESULTS.md)
-and [retention](SAFETY_RETENTION_RESULTS.md) results rather than old task plans.
+[feasibility](RESULTS.md#startup-feasibility), [warmup](RESULTS.md#paid-warmup)
+and [retention](RESULTS.md#safety-retention) results rather than old task plans.
 
 ## Engineering gaps and hypotheses
 
@@ -110,32 +110,73 @@ adoption; popularity is not correctness.
 PostgreSQL, SQL, Psycopg, the standard library and Compose meet the present need.
 Vocabulary can be adopted without importing upstream implementations.
 
+## Public data boundary
+
+Use the investigation's UCI fallback, **Online Retail**, Chen (2015), DOI
+[10.24432/C5BW33](https://doi.org/10.24432/C5BW33). The
+[official dataset page](https://archive.ics.uci.edu/dataset/352/online%2Bretail)
+was checked 2026-10-02 and explicitly identifies CC BY 4.0. Its linked archive
+contains `Online Retail.xlsx` (approximately 22.6 MB); metadata records 541,909
+transactions from 2010-12-01 through 2011-12-09. Retain attribution, the
+[license](https://creativecommons.org/licenses/by/4.0/) and retrieval provenance.
+M5's [rules](https://www.kaggle.com/competitions/m5-forecasting-accuracy/rules)
+and [data page](https://www.kaggle.com/competitions/m5-forecasting-accuracy/data)
+returned no readable terms in this check. M5 acquisition/publication remains
+unapproved; do not substitute an unofficial mirror or infer rights from MIT.
+
+Acquire only the official UCI archive into ignored `data/raw/uci-online-retail/`.
+Record real UTC retrieval time, exact URLs, license/version, archive/file SHA-256,
+file sizes, workbook sheet names, schema and row counts. Preserve source row
+identity `(dataset, archive_sha256, sheet, row_number)`; invoice/product pairs
+are not proven unique line identities. Raw rows and reconstructable derived
+series, customer identifiers and descriptions stay outside Git. Publish only
+code, synthetic adapter tests, protocol and aggregate research metrics with
+dataset attribution. No public-data screenshots or operational import.
+
+### Target and completeness
+
+Target is **gross positive non-cancelled invoiced unit sales per StockCode and
+source date**, across the dataset's retailer. Customer Country is not a store
+or fulfillment warehouse. Use recorded InvoiceDate calendar labels; no invented
+timezone, acceptance time, recording time or historical ingestion clock.
+Acquisition time is separate from a modeled end-of-day release assumption.
+
+Cancellation-coded invoices and nonpositive quantities are excluded from gross
+positive sales, with exact exclusion counts/reasons retained. Do not subtract
+returns as negative demand, reconstruct hidden demand, silently drop duplicates
+or infer product availability from first positive sale. Invalid required
+quantity/date/identity rows block adaptation and are reported. Preserve original
+row evidence outside Git, including excluded rows. Dates missing for a selected
+item have observed sales zero only within a verified complete extraction of the
+declared archive range; this never proves zero unconstrained demand or availability.
+No prices, promotions or customer attributes enter forecasting features.
+
 ## Retained research questions and tentative extensions
 
 All 22 earlier directions remain here with evidence/gates. These are future questions;
-the [strategic plan](RESEARCH_ROADMAP.md) owns prioritization and progress.
+STATE and the active plan own prioritization and progress; these are not assignments.
 
 | # / question | Durable evidence or rationale | Condition for further work |
 |---|---|---|
-| 1 Fresh demand/supply and paid warmup | [Protocol](RESEARCH_WARMUP_V1.md), [results](FRESH_WARMUP_RESULTS.md) | New frozen traces; paid owned carryover and common settlement. |
-| 2 Feasibility versus policy misses | [Diagnostic](FEASIBILITY_DIAGNOSTIC.md), [results](FEASIBILITY_DIAGNOSTIC_RESULTS.md) | Signed interventions with explicit interactions; no invented additive attribution. |
-| 3 Safety target versus achieved service | [Safety results](PUBLIC_SAFETY_RESULTS.md), [disjoint calibration](PUBLIC_CALIBRATION_RESULTS.md) | Fresh evidence beyond consumed same-retailer/calendar paths; no nominal guarantee. |
-| 4 Retention during decline/recovery | [Protocol](SAFETY_RETENTION_V1.md), [negative results](SAFETY_RETENTION_RESULTS.md) | Justified revision tested on fresh recovery paths with owned stock/cost. |
-| 5 Lead-time/supplier reliability | [Protocol](SUPPLY_SENSITIVITY_V1.md), [results](SUPPLY_SENSITIVITY_RESULTS.md) | Specific unmet supply question; actual supplier truth remains unavailable. |
-| 6 Probabilistic protection demand | [Safety protocol](PUBLIC_SAFETY_V1.md), [calibration protocol](PUBLIC_CALIBRATION_V1.md) | Completed origin-known calibration labels, target coverage/pinball and achieved service. |
-| 7 Policy comparison | [Protocol](POLICY_COMPARISON_V1.md), [negative/conditional results](POLICY_COMPARISON_RESULTS.md) | Fresh paid warm states and hidden-delay-compatible inputs. |
-| 8 Public adapter/provenance | [Assigned protocol](PUBLIC_SALES_PROTOCOL_V1.md), [adapter](PUBLIC_ADAPTER_V1.md) | Preserve identity, source rights and immutable caches; no operational imports. |
-| 9 Observed-sales realism | [Forecast protocol](PUBLIC_FORECAST_V1.md), [results](PUBLIC_SALES_RESULTS.md) | Broader/later frozen evidence; sales remain a proxy rather than unconstrained demand. |
-| 10 Advanced models | [Intermittent protocol](CONTRACT_INTERMITTENT_V1.md), [results](INTERMITTENT_BENCHMARK.md) | Repeated sealed baseline weakness before ADIDA/IMAPA; feature/license/dependency protocol before global ML. |
-| 11 Source provenance | [Lineage protocol](RESEARCH_LINEAGE_V1.md), [integration evidence](EVIDENCE.md#historical-provenance-and-independent-audits) | Demonstrated missing semantic link; hashes are not signed authenticity. |
+| 1 Fresh demand/supply and paid warmup | [Protocol](EVIDENCE.md#study-artifacts-and-original-sources), [results](RESULTS.md#paid-warmup) | New frozen traces; paid owned carryover and common settlement. |
+| 2 Feasibility versus policy misses | [Diagnostic](EVIDENCE.md#study-artifacts-and-original-sources), [results](RESULTS.md#startup-feasibility) | Signed interventions with explicit interactions; no invented additive attribution. |
+| 3 Safety target versus achieved service | [Safety results](RESULTS.md#public-sales-safety), [disjoint calibration](RESULTS.md#disjoint-item-calibration) | Fresh evidence beyond consumed same-retailer/calendar paths; no nominal guarantee. |
+| 4 Retention during decline/recovery | [Protocol](EVIDENCE.md#study-artifacts-and-original-sources), [negative results](RESULTS.md#safety-retention) | Justified revision tested on fresh recovery paths with owned stock/cost. |
+| 5 Lead-time/supplier reliability | [Protocol](EVIDENCE.md#study-artifacts-and-original-sources), [results](RESULTS.md#supply-sensitivity) | Specific unmet supply question; actual supplier truth remains unavailable. |
+| 6 Probabilistic protection demand | [Safety protocol](EVIDENCE.md#study-artifacts-and-original-sources), [calibration protocol](EVIDENCE.md#study-artifacts-and-original-sources) | Completed origin-known calibration labels, target coverage/pinball and achieved service. |
+| 7 Policy comparison | [Protocol](EVIDENCE.md#study-artifacts-and-original-sources), [negative/conditional results](RESULTS.md#ordering-policies) | Fresh paid warm states and hidden-delay-compatible inputs. |
+| 8 Public adapter/provenance | [Assigned protocol](KB.md#public-data-boundary), [adapter](CONTRACTS.md#observed-sales-adapter) | Preserve identity, source rights and immutable caches; no operational imports. |
+| 9 Observed-sales realism | [Forecast protocol](EVIDENCE.md#study-artifacts-and-original-sources), [results](RESULTS.md#public-observed-sales) | Broader/later frozen evidence; sales remain a proxy rather than unconstrained demand. |
+| 10 Advanced models | [Intermittent protocol](CONTRACTS.md#intermittent-methods-v1), [results](RESULTS.md#intermittent-benchmark) | Repeated sealed baseline weakness before ADIDA/IMAPA; feature/license/dependency protocol before global ML. |
+| 11 Source provenance | [Lineage protocol](EVIDENCE.md#historical-provenance-and-independent-audits), [integration evidence](EVIDENCE.md#historical-provenance-and-independent-audits) | Demonstrated missing semantic link; hashes are not signed authenticity. |
 | 12 Property/mutation QA | Existing independent controls in `tests/`, [readiness evidence](EVIDENCE.md#acceptance-history) | A concrete uncovered invariant; test counts are not a quality target. |
-| 13 Backlog versus lost sales | [Contract](CONTRACT_LOST_SALES_V1.md), [paired results](LOST_SALES_RESULTS.md) | Keep permanent losses and owed backlog plus different cost units explicit. |
+| 13 Backlog versus lost sales | [Contract](CONTRACTS.md#lost-sales-v1), [paired results](RESULTS.md#matched-lost-sales) | Keep permanent losses and owed backlog plus different cost units explicit. |
 | 14 Actual planner closed loop | Paused `codex/planner-closed-loop` protocol/unfinished work; see STATE | Preserve action/receipt identity, repeated clocks and actual reliability/supply gates; resume only after scope approval. |
-| 15 Physical inventory truth | [Contract](CONTRACT_PHYSICAL_COUNT_V1.md), [results](PHYSICAL_COUNT_RESULTS.md) | Authenticated count/business evidence needed for real truth; no automatic inventory write. |
+| 15 Physical inventory truth | [Contract](CONTRACTS.md#physical-count-v1), [results](RESULTS.md#physical-count-controls) | Authenticated count/business evidence needed for real truth; no automatic inventory write. |
 | 16 Performance/scale | [Engineering investigation](KB.md#engineering-gaps-and-hypotheses), [PLAN](PLAN.md) | Program/host/budget review before a runner; report measured envelope and failures. |
 | 17 Multi-location allocation | SKU/warehouse grain and paired transfer legs do not define transit availability, transport costs or optimal allocation. | Demonstrated transfer benefit, then a transit/cost/capacity contract and independent service oracle. |
 | 18 Supplier capacity/calendar | MOQ/pack rounding is not supplier capacity or a working-day calendar. ERP reordering features do not establish optimization of this project's objective. | A binding use case and receipt/approval/timing contract before extending constraints. |
-| 19 Guided demo | [Lab](DECISION_LAB.md), [three-minute case study](PORTFOLIO_CASE_STUDY.md) | Reuse clean/spike/delay/blocked walkthrough; add structure only for a demonstrated UX gap. |
+| 19 Guided demo | [Lab](DECISION_LAB.md), [three-minute case study](../README.md) | Reuse clean/spike/delay/blocked walkthrough; add structure only for a demonstrated UX gap. |
 | 20 Accessibility/cold start | [Targeted local review](RESULTS.md#browser-and-accessibility-results) | Speech/zoom/forced colors/download bytes and human cold start remain scoped manual checks. |
-| 21 Hosted read-only Lab | [Design evidence](HOSTED_LAB_PLAN.md), [operations](../deploy/lab/README.md) | Actual Linux/runtime/recovery plus reviewed host/domain/cost before public TLS/uptime claims. |
-| 22 Portfolio wording | [Case study](PORTFOLIO_CASE_STUDY.md), [historical claim receipt](review/portfolio-claims.json) | Refresh from exact merged/deployed/measured evidence only. |
+| 21 Hosted read-only Lab | [Design evidence](../deploy/lab/README.md#serving-architecture-and-limits), [operations](../deploy/lab/README.md) | Actual Linux/runtime/recovery plus reviewed host/domain/cost before public TLS/uptime claims. |
+| 22 Portfolio wording | [Case study](../README.md), [historical claim receipt](review/portfolio-claims.json) | Refresh from exact merged/deployed/measured evidence only. |

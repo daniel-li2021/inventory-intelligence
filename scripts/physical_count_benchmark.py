@@ -11,7 +11,7 @@ from inventory_intelligence.physical_count import VERSION,canonical,digest,evalu
 
 ROOT=Path(__file__).resolve().parents[1]
 FIXTURE='docs/examples/physical-count-inputs-v1.json'
-SOURCES=('docs/CONTRACT_PHYSICAL_COUNT_V1.md',FIXTURE,'src/inventory_intelligence/physical_count.py',
+SOURCES=('docs/CONTRACTS.md',FIXTURE,'src/inventory_intelligence/physical_count.py',
          'scripts/physical_count_benchmark.py','tests/test_physical_count.py')
 CONFIG=dict(observer_minimum=2,all_counts_agree=True,blind_counts_required=True,uom='each',
             review_policy='one independent bound review',operational_write=False)
@@ -37,7 +37,7 @@ def lineage(rows,source_hashes):
     nodes={f'file:{name}':dict(kind='file',path=name,sha256=value,depends_on=[])
            for name,value in source_hashes.items()}
     nodes['policy:physical-count-v1']=dict(kind='policy',sha256=digest(CONFIG),config=CONFIG,
-        depends_on=['file:docs/CONTRACT_PHYSICAL_COUNT_V1.md'])
+        depends_on=['file:docs/CONTRACTS.md'])
     for record in rows:
         identity=record['id'];source=f'input:{identity}';result=f'assessment:{identity}'
         nodes[source]=dict(kind='input',case_id=identity,sha256=record['input_sha256'],depends_on=[f'file:{FIXTURE}'])

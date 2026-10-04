@@ -55,7 +55,7 @@ fresh database; individual golden tests use unique namespaces. Never reset a dem
 python3 scripts/check_docs.py
 python3 -m json.tool docs/research/repositories.json > /dev/null
 git diff --check
-PYTHONPATH=src python -m unittest tests.test_research_lineage tests.test_decision_benchmark.DecisionBenchmarkTests.test_retained_artifact_inputs_hashes_and_settled_obligations -v
+PYTHONPATH=src python -m unittest tests.test_research_lineage tests.test_decision_benchmark tests.test_intermittent_benchmark tests.test_policy_comparison -v
 ```
 
 The last command checks current lineage/corruption controls and retained exact-input,

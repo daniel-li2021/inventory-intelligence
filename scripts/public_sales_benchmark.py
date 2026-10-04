@@ -151,7 +151,7 @@ def main():
     receipt, adapted_path = prepare(args.raw_dir)
     public, local = evaluate(json.loads(adapted_path.read_text()))
     root = Path(__file__).resolve().parents[1]
-    sources = ("docs/PUBLIC_FORECAST_V1.md", "scripts/public_sales_benchmark.py",
+    sources = ("docs/EVIDENCE.md", "scripts/public_sales_benchmark.py",
                "src/inventory_intelligence/intermittent.py", "src/inventory_intelligence/decision.py",
                "src/inventory_intelligence/forecasting.py")
     public.update(attribution=sales.ATTRIBUTION, source_url=sales.SOURCE_URL, license_url=sales.LICENSE_URL,

@@ -80,7 +80,7 @@ def run():
     root = Path(__file__).resolve().parents[1]
     sources = ("scripts/policy_benchmark.py", "src/inventory_intelligence/policy_comparison.py",
                "src/inventory_intelligence/decision.py", "src/inventory_intelligence/replenishment.py",
-               "src/inventory_intelligence/forecasting.py", "docs/POLICY_COMPARISON_V1.md")
+               "src/inventory_intelligence/forecasting.py", "docs/EVIDENCE.md")
     report = dict(protocol_version=VERSION,
                   source_sha256={name: hashlib.sha256((root / name).read_bytes()).hexdigest()
                                  for name in sources}, scenarios=[], pairs=[])

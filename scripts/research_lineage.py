@@ -107,7 +107,7 @@ def build(candidate=None):
         nodes[identity]['depends_on'].append(artifacts[parent])
     validator='git:'+candidate
     nodes.setdefault(validator,dict(kind='git_snapshot',commit=candidate,depends_on=[]))
-    for source in ('docs/RESEARCH_LINEAGE_V1.md','scripts/research_lineage.py','tests/test_research_lineage.py'):
+    for source in ('docs/EVIDENCE.md','scripts/research_lineage.py','tests/test_research_lineage.py'):
         raw=(ROOT/source).read_bytes()
         require(raw==blob(candidate,source),'commit lineage validator/protocol/oracles before archiving')
         key='validator:'+source

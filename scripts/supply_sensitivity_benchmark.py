@@ -76,7 +76,7 @@ def difference(candidate, reference):
 
 def run():
     root = Path(__file__).resolve().parents[1]
-    sources = ("docs/SUPPLY_SENSITIVITY_V1.md", "scripts/supply_sensitivity_benchmark.py",
+    sources = ("docs/EVIDENCE.md", "scripts/supply_sensitivity_benchmark.py",
                "scripts/warmup_benchmark.py", "scripts/decision_benchmark.py",
                "src/inventory_intelligence/research_warmup.py", "src/inventory_intelligence/decision.py",
                "src/inventory_intelligence/decision_diagnostics.py", "src/inventory_intelligence/intermittent.py",

@@ -42,7 +42,8 @@ python3 -m json.tool docs/research/repositories.json > /dev/null
 git diff --check
 ```
 
-Preserve frozen contracts, source snapshots and reports; declare drift instead of
+Preserve accepted interface semantics, original Git source views and report bytes.
+Delete completed documents after extraction; declare drift instead of
 rehashing historical evidence. [EVIDENCE](docs/EVIDENCE.md) explains source-view audits.
 Keep raw public/item data, environments and credentials ignored. Add dependencies
 only for a demonstrated need, with version/license/purpose; project MIT licensing

@@ -18,14 +18,15 @@ planner feature resumption and paid deployment require their own scope decision.
   [separate local combined acceptance](EVIDENCE.md#acceptance-history).
 - No controlled capacity or production/business benefit is measured. Public hosting,
   Linux enforcement and recovery remain unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
-- Completed review/investigation knowledge is consolidated into KB, RESULTS and
-  EVIDENCE. Active plans are linked in the index; frozen evidence remains unchanged.
+- Current knowledge, choices, results and evidence are consolidated; completed
+  plans/protocol narratives and compatibility stubs are removed. Historical source
+  bytes remain in Git, and original result/receipt bytes remain unchanged.
 
 ## Active work and next action
 
 - [Engineering plan](PLAN.md): review workload/SLO, environment and pilot budget
-  before P1 runner implementation. [Long-term plan](RESEARCH_ROADMAP.md) stays paused
-  at this gate; [registry](README.md#plans-and-work-status) identifies ongoing work.
+  before P1 runner implementation. Other [research possibilities](KB.md#retained-research-questions-and-tentative-extensions)
+  remain conditional knowledge, not active plans. [Registry](README.md#plans-and-work-status).
 - Preserve unmerged planner protocol commits `55f4170` / `538d29d` and unfinished
   scripts/adapter/fixture/tests in `/private/tmp/ii-planner-closed-loop` on
   `codex/planner-closed-loop`. They are excluded from accepted main evidence.

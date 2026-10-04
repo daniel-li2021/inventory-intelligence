@@ -48,17 +48,20 @@ class ResearchLineageTests(unittest.TestCase):
         target=study.ROOT/source
         historical=study.git('show',f"{self.manifest['source_snapshots'][artifact]}:{source}")
         read_bytes=Path.read_bytes
-        for raw in (historical,historical+b'\nDocumentation status updated.\n'):
+        is_file=Path.is_file
+        for raw in (historical,historical+b'\nDocumentation status updated.\n',None):
             with self.subTest(changed=raw!=historical):
                 def read(path):
                     return raw if path==target else read_bytes(path)
-                with patch.object(Path,'read_bytes',read):
+                def exists(path):
+                    return raw is not None if path==target else is_file(path)
+                with patch.object(Path,'read_bytes',read), patch.object(Path,'is_file',exists):
                     m=study.build()
                     rows=[r for r in m['historical_current_drift']
                           if r['artifact']==artifact and r['source']==source]
                     expected=[] if raw==historical else [dict(artifact=artifact,source=source,
                         historical_sha256=hashlib.sha256(historical).hexdigest(),
-                        current_sha256=hashlib.sha256(raw).hexdigest())]
+                        current_sha256=hashlib.sha256(raw).hexdigest() if raw is not None else None)]
                     self.assertEqual(rows,expected)
                     self.assertEqual(study.audit(m),m['summary'])
                     if rows:
