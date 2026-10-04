@@ -3,7 +3,7 @@
 Updated 2026-10-03. This is the current resumable status; detailed historical
 acceptance remains in the linked stage/review documents.
 
-## Current checkpoint — research PRs merged and historical source lineage validated
+## Current checkpoint — green main; engineering investigation; features paused
 
 `codex/research-integration` begins at main `f6d3d16` and retains PR 14–23 exact
 heads by ancestry. Shared documentation conflicts are resolved; original reports
@@ -22,11 +22,21 @@ DB/app/proxy/tab are retired. [Combined receipt and limits](RESEARCH_INTEGRATION
 
 The user explicitly authorized all PR merges. PR 14–24 are merged through PR 24
 at remote main `f132bf4`, which retains every delivery head and has an identical
-tree to the accepted candidate. GitHub reports no open PRs. The earlier approval
-gate is resolved; historical acceptance artifacts remain unchanged. Docker/Linux
-enforcement/public hosting and CI are unverified. [All22 current statuses](RESEARCH_STATUS.md) supersede the
-historical package snapshots below, which preserve previous continuation context.
-Next independent work: actual planner closed-loop execution boundary/protocol.
+tree to the accepted candidate. The earlier approval gate is resolved; historical
+acceptance artifacts remain unchanged. PR 25 fixes full-history checkout; current
+main `9d7c55f8e30c9b885e14c450632de18efe413693` has
+[green remote CI](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160):
+240 tests / OK / 19.495s and repository hygiene success.
+
+The user now pauses feature development for [engineering readiness](ENGINEERING_READINESS.md)
+and [benchmark design before implementation](ENGINEERING_BENCHMARK_PLAN.md).
+The unmerged planner-loop protocol and unfinished files are preserved and paused;
+they are excluded from the green baseline. No new timing, feature or deployment
+was performed in this investigation. Docker/Linux enforcement, recovery, public
+hosting and scale capacity remain unmeasured.
+[All 22 current statuses](RESEARCH_STATUS.md) supersede the historical package
+snapshots below. Next decision: review the proposed engineering program; do not
+automatically resume feature implementation or launch benchmark runs.
 
 ## Historical package checkpoint — prospective disjoint calibration task branch
 

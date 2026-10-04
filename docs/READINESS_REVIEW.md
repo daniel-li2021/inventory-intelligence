@@ -1,5 +1,13 @@
 # Independent readiness review — 2026-10-03
 
+**Historical checkpoint at `429cc71`, retained below.** The current
+[engineering readiness review](ENGINEERING_READINESS.md) supersedes its status
+and priorities after PR 14–24 and PR 25. Public observed-sales research is now
+separately merged; targeted accessibility and local hosted-CSP checks exist; main
+`9d7c55f` has green remote CI with 240 passing tests. Original 134-test results,
+external-data/CI statements and receipts below describe their capture time.
+Engineering scale, Linux container enforcement and public hosting remain unmeasured.
+
 Started from fetched/pruned `origin/main` at `429cc71`, including the complete
 Decision Lab. Three isolated reviews covered the operational chain, Lab/API/UI
 and next-step evidence. The integration owner reviewed their diffs, audited the

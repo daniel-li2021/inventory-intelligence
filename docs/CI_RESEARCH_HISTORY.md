@@ -21,3 +21,15 @@ The fix changes only acceptance-job checkout depth to zero. Keep verifier logic,
 source bindings, tests, Python/PostgreSQL pins and published reports unchanged.
 A local shallow/full checkout reproduction and the new GitHub Actions result are
 recorded separately from the earlier local 240-test candidate acceptance.
+
+## Verified corrected main baseline
+
+PR 25 is merged at main `9d7c55f8e30c9b885e14c450632de18efe413693`.
+[Main run 37164884160](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160)
+passes both PostgreSQL acceptance and repository hygiene. The acceptance log
+records 240 tests / OK / 19.495 seconds with full history, Python 3.12.12,
+PostgreSQL 17.9 and Psycopg 3.3.6. This resolves the CI-history incident; it
+is not a performance benchmark or proof of repeated CI reliability. The older
+236-test/error run and local candidate receipts remain unchanged historical
+evidence. See [current engineering readiness](ENGINEERING_READINESS.md) and the
+[separate baseline inspection receipt](review/engineering-readiness-baseline.json).

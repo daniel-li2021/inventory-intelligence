@@ -3,17 +3,24 @@
 Snapshot: 2026-10-03. This consolidates the user's 22 directions and supersedes
 the older roadmap checkpoint for delivery status. The original
 [full rationale and execution rules](https://github.com/daniel-li2021/inventory-intelligence/blob/d2cb98ba1016f80bd2c2dd40159092f4f1b21395/docs/RESEARCH_ROADMAP.md)
-remain preserved. Finish reviewable packages, retain negative outcomes and
-consumed evidence, then move to the next independent task when a gate blocks one.
+remain preserved. **The subsequent user instruction pauses feature development**
+for a dedicated [engineering readiness investigation](ENGINEERING_READINESS.md).
+The [benchmark program](ENGINEERING_BENCHMARK_PLAN.md) is proposed before
+implementation. Retain negative outcomes and consumed evidence; a blocked runtime
+check permits other engineering investigation, not automatic feature resumption.
 
 ## Integrated main and retained acceptance
 
 The user explicitly authorized merging all PRs on 2026-10-03. PR 14–24 are merged
-through PR 24 at main `f132bf42f01a2167e3ab61ca8640930e7a4802d4`. Remote main
-contains all ten delivery heads and the exact validated integration candidate
-`f7d17e576286cb4cec819619c7566eb237f0a7e2`, with no tree difference. GitHub
-reports all eleven PRs merged and no open PRs. This is main integration with local
-acceptance; remote CI and public hosting remain unverified. All original saved reports/receipts
+through PR 24 at main `f132bf42f01a2167e3ab61ca8640930e7a4802d4`. That
+integration contains all ten delivery heads and the exact validated candidate
+`f7d17e576286cb4cec819619c7566eb237f0a7e2`, with no tree difference at that
+checkpoint. Subsequent main includes the CI checkout correction. GitHub
+reports all eleven PRs merged. Subsequent PR 25 corrects full-history CI checkout.
+Main `9d7c55f8e30c9b885e14c450632de18efe413693` has
+[green remote acceptance and hygiene](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160),
+including 240 tests / OK / 19.495s. This is correctness evidence, not engineering
+capacity. Public hosting remains unverified. All original saved reports/receipts
 retain their published bytes. The original
 [portfolio claim receipt](review/portfolio-claims.json) remains a historical
 snapshot; use the [combined acceptance](RESEARCH_INTEGRATION.md) for current status.
@@ -59,9 +66,9 @@ No direction is dropped merely because it is gated.
 | 11 | Stronger source provenance | Combined 24-artifact / 119-node manifest binds 17 source maps to complete historical snapshots and five parent/freeze links; #22 retains its internal DAG. | Declared external fingerprints and source assertions are not signed authenticity. Global semantic coverage remains bounded by individual validators. |
 | 12 | Property/mutation QA | Package conservation/clock/FIFO oracles; #17 six rehashed mutations detected. | Combined source/parent/drift/candidate/graph controls added; continue only for a demonstrated invariant gap. |
 | 13 | Backlog versus lost sales | #21 separate contract and 288 fresh matched pairs; 480 saved-arm audits, paid warmup and common closure. | Unit-day backlog versus once-per-unit lost penalties are distinct economics; accepted orders keep backlog semantics. |
-| 14 | Operational planner closed loop | #16 runs projection arithmetic only; complete operational source gates not executed. | Define advisory-action/receipt identity and repeated knowledge clocks; synthetic execution adapter protocol first. |
+| 14 | Operational planner closed loop | #16 runs projection arithmetic only; unpublished protocol/implementation work is preserved, unmerged and paused. | Resume only after the engineering investigation and an explicit feature decision; no accepted execution result. |
 | 15 | Physical inventory truth | #22 additive count/recount/variance/review contract; 40 controls; stock 100/count 96 yields advisory −4. | Source-declared freeze/blind/observer IDs are not real authenticated warehouse truth; zero inventory writes. |
-| 16 | Performance/scale | Optional; no demonstrated current latency failure or published scale result. | Workload/environment budget before 10k SKU or 100k/1M movements. |
+| 16 | Performance/scale | Current assigned priority: readiness investigation and proposed B1–B4 program; historical microtimings exist, controlled scale/capacity results do not. | Review frozen workloads, independent oracles, environment, repetitions, SLOs and budgets before implementation. |
 | 17 | Multi-location allocation | Deferred evidence/scope gate; existing grain is SKU/warehouse. | Demonstrate a single-location decision improved by transfers, then specify transit/cost constraints. |
 | 18 | Supplier capacity/calendar | MOQ/pack exists; capacity/blackouts/calendar extension not implemented. | Document a binding use case and timing contract before adding constraints. |
 | 19 | Guided demo | Existing clean/reset plus demand/delay/incomplete presets suffice; #18 keyboard paths checked. | Reuse the three-minute case-study walkthrough; no extra preset framework. |
@@ -71,11 +78,16 @@ No direction is dropped merely because it is gated.
 
 ## Long-term sequence
 
+0. **Current priority override:** complete the engineering evidence inventory and
+   benchmark design (P0), then review before implementing P1 batch/report/pilot
+   measurement, P2 history/HTTP/runtime/recovery/manual evidence and P3 only a
+   measured targeted improvement. No new benchmark was run in this review.
+   Feature development stays paused.
 1. **Integration and provenance:** PR 14–24 are merged; exact remote ancestry and
    candidate contents are verified. Preserve all original artifacts and saved-source
    audits. Keep local versus CI evidence
    explicit and do not sum overlapping package test counts.
-2. **Closed-loop planning boundary:** next independent design work should define
+2. **Closed-loop planning boundary, deferred:** after explicit resumption, define
    synthetic advisory-action/receipt identities and repeated as-known clocks,
    then run the actual planner with its reliability/supply gates. The prefix
    arithmetic comparison alone does not execute an operational planning workflow.
@@ -87,13 +99,13 @@ No direction is dropped merely because it is gated.
    Any safety-retention or calibration revision needs newly frozen evidence and
    paid owned-state/recovery-service gates. Retain the negative findings and
    do not call repeated scenarios or a second item block independent markets.
-5. **Conditional extensions:** larger allocation/capacity/scale/model work stays
+5. **Conditional extensions:** larger allocation/capacity/model work stays
    recorded. Specify a binding use case and workload/contract before adding it.
    Advanced models still lack independent promotion evidence. A negative gate
    decision is a completed bounded research outcome, not a reason to delete
    the direction or claim a production result.
 
-If integration or hosting is blocked, continue the next independent design or
-evidence gap. Do not silently redefine the long-term objective around the work
+During the current pause, if a host/runtime gate blocks validation, investigate
+the next independent engineering evidence gap within the approved program. Do not silently redefine the long-term objective around the work
 already completed. Protocol/source authenticity, current physical stock and
 production economics remain outside the measured synthetic/sales-proxy evidence.

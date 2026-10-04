@@ -1,10 +1,12 @@
 # Hosted synthetic Decision Lab plan
 
-Status: executable readiness work; no cloud resource, domain, deployment, paid
-subscription or public availability has been created. Implementation starts from
-`origin/main` at `f6d3d16`; the accessibility changes in PR 18 remain an unmerged
-prerequisite for the eventual public release. This is a portfolio demo, not an
-operational inventory service.
+Status: readiness implementation and PR 18 accessibility are merged through
+PR 24; main `9d7c55f` has green remote correctness CI after PR 25. No cloud
+resource, domain, deployment, paid subscription or public availability has been
+created. The original implementation baseline was `f6d3d16`. Current feature
+development is paused for [engineering readiness](ENGINEERING_READINESS.md) and
+[proposed load/runtime validation](ENGINEERING_BENCHMARK_PLAN.md). This is a
+portfolio demo, not an operational inventory service.
 
 ## Architecture and reusable boundaries
 
@@ -60,8 +62,9 @@ If a suitable host is unavailable within that ceiling, retain the local demo and
 publish the case study/video or select a separately approved budget.
 
 No deployment is needed to finish the local readiness package. A concrete host,
-domain and reviewed cost must be selected before provisioning; automatic merge
-approval is currently a separate unresolved gate. The project owner should
+domain and reviewed cost must be selected before provisioning. The earlier
+automatic merge gate was resolved by explicit user authorization and integration;
+that does not authorize paid deployment. The project owner should
 approve the prepared host/cost/deployment result as the final external action.
 
 ## Implementation and acceptance sequence
@@ -112,8 +115,10 @@ Linux resource enforcement and restart tests remain **unverified** until a
 runtime is available. Native Caddy configuration validation and localhost private-CA HTTPS checks can
 be completed without Docker; they do not establish public TLS. No host, domain or
 paid budget has been selected. Public
-TLS, public uptime, release integration and production-scale capacity remain
-unverified. Those gates do not block the other independent research packages.
+TLS, public uptime and operating capacity remain unverified. Source integration
+and combined local accessibility/CSP acceptance are complete. Missing Docker
+blocks the Linux portion of the proposed engineering program; other independent
+engineering investigation can proceed, with feature development still paused.
 
 Readiness implementation and current evidence are described in the
 [deployment package](../deploy/lab/README.md). The original planning commit is

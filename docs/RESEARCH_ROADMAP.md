@@ -7,7 +7,13 @@ It does not change the operational contracts, execute purchases, or authorize
 importing confidential business data. The public-sales assignment below is a
 separate offline boundary; the operational demo stays synthetic.
 
-## Execution rules
+**Current override, 2026-10-03:** after PR 14–24 and the PR 25 CI fix, feature
+development is paused. First review [engineering readiness](ENGINEERING_READINESS.md)
+and the [proposed benchmark program](ENGINEERING_BENCHMARK_PLAN.md), then decide
+implementation. The earlier automatic feature-continuation rules below are
+historical; all 22 directions remain recorded.
+
+## Original execution rules (feature continuation paused)
 
 Finish a small reviewable work package, save exact reproducible results, update
 this ledger and relevant docs, then proceed to the next ready package. A block
@@ -115,10 +121,12 @@ do not establish unconstrained demand or historical inventory availability.
     ledger consistency from physical truth. Preserve count timestamp, observer,
     confidence, recount and adjustment evidence; uncertainty cannot become a
     pass or an automatic source repair. Stage 1 contract changes need review.
-16. **Performance/scale benchmark — optional, evidence-triggered.** Predeclare
-    10k SKU and 100k/1M movement workloads only if latency or job target warrants
-    it. Record environment, sizes, DB plans and query/batch/API timing; no
-    production-scale claim from toy results or unnecessary large regeneration.
+16. **Performance/scale benchmark — current investigation priority.** The
+    proposed B1–B4 program freezes key/movement/history/defect/HTTP workloads,
+    exact independent outcomes, resource budgets and repeated campaigns before
+    implementation. Publish capacity limits and raw negative results. Historical
+    small-fixture timings do not establish a scale envelope; see
+    [program and supported claims](ENGINEERING_BENCHMARK_PLAN.md).
 17. **Multi-location allocation — deferred scope gate.** First define transfer
     availability, transit and opportunity costs. Add only after single-location
     evidence identifies a decision that transfers could improve.
@@ -148,8 +156,11 @@ do not establish unconstrained demand or historical inventory availability.
 The original Wave 1 package and later public-sales, prospective calibration,
 policy comparison, lost-sales, physical-count, accessibility and hosted-readiness
 packages are merged through PR 24 at main `f132bf4`, retaining all delivery heads
-and the exact locally validated candidate contents. Remote CI and public hosting
-remain unverified.
+and the exact locally validated candidate contents. After PR 25 fixes shallow
+checkout, main `9d7c55f` passes both remote CI jobs, including 240 tests
+([run](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160)).
+Public hosting and engineering capacity remain unmeasured. Current work is the
+readiness/benchmark proposal; feature implementation stays paused.
 Use [all 22 current statuses](RESEARCH_STATUS.md) and
 [combined acceptance/provenance](RESEARCH_INTEGRATION.md) instead of the initial
 package checkpoint. No original direction is dropped; conditional models/large
