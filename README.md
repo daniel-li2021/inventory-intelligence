@@ -7,7 +7,7 @@ pieces: reconcile inventory, compute evidence-gated advisory replenishment, and
 explain saved results. Missing, stale or contradictory evidence yields
 `not_assessable` and null quantities. Inputs are never repaired and no orders execute.
 
-[Current project state](docs/STATE.md) · [Active plan](docs/PLAN.md) ·
+[Current project state](docs/STATE.md) · [Engineering plan](docs/PLAN.md) ·
 [Knowledge and evidence](docs/README.md) · [Development workflow](CONTRIBUTING.md)
 
 ```mermaid

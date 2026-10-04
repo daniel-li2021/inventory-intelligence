@@ -2,7 +2,7 @@
 
 This ledger retains enduring choices and their reasoning. Dates reflect recorded
 assignments/decisions, not proof of present deployment. Use [STATE](STATE.md) for
-current scope/mode and [PLAN](PLAN.md) for the only active sequence. Never infer
+current focus/mode and [the plan registry](README.md#plans-and-work-status) for relevant work. Never infer
 an implementation handoff from a tentative idea or a historical plan.
 
 | ID / date | Status | Decision and reason | Evidence / supersession |
@@ -20,9 +20,11 @@ an implementation handoff from a tentative idea or a historical plan.
 | D11 / 2026-10-03 | Active scope gate | Pause features, including unfinished planner execution; investigate engineering readiness before implementation. Review benchmark workload/SLO/environment/budget before P1. Correctness CI and configuration limits are not capacity evidence. | [Readiness assessment](ENGINEERING_READINESS.md), [active PLAN](PLAN.md). Supersedes D10's automatic feature continuation. Documentation cleanup leaves this gate in force. |
 | D12 / 2026-10-03 | Active release gate | Local/private-CA HTTPS is not public deployment. Linux runtime/recovery, host/domain, actual cost and external release approval precede provisioning; AUTO does not authorize paid resources. | [Hosted design evidence](HOSTED_LAB_PLAN.md), [deployment operations](../deploy/lab/README.md). |
 | D13 / 2026-10-03 | Active workflow, supersedes prior integration rules | Use only persistent AUTO and REVIEW modes. AUTO integrates validated authorized work; REVIEW prepares it and stops before merge. Branches isolate work; PRs are optional review surfaces. STATE holds the one current setting. | [CONTRIBUTING](../CONTRIBUTING.md), [STATE](STATE.md). Replaces task-type-specific mandatory PR/merge exceptions and separate automation merge policy. |
-| D14 / 2026-10-03 | Active knowledge architecture | STATE is the short mutable status, PLAN is the only ongoing plan, this ledger preserves supersession, and the index routes to durable knowledge/evidence and Git-retired plans. No new progress diaries or per-agent handoff docs. | [Maintenance rules](README.md#maintenance-rules). Supersedes duplicated stage/automation/research status maintenance. |
+| D14 / 2026-10-03 | Superseded by D15 | STATE is the short mutable status, PLAN is the only ongoing plan, this ledger preserves supersession, and the index routes to durable knowledge/evidence and Git-retired plans. No new progress diaries or per-agent handoff docs. | [Maintenance rules](README.md#maintenance-rules). Supersedes duplicated stage/automation/research status maintenance. |
+
+| D15 / 2026-10-03 | Active knowledge architecture | Keep STATE short for current focus/mode, and allow multiple short-term, long-term and area plans linked in the index with scope/status. Work one assigned task at a time. On completion update the plan with outcomes, evidence and remaining gaps; retain useful completed plans and archive only obsolete/duplicate ones. | User clarification supersedes D14's single-plan/replacement rule. [Plan registry and lifecycle](README.md#plans-and-work-status); other evidence and workflow boundaries remain. |
 
 When a decision changes, append its replacement with date, reason and evidence;
 mark the old entry superseded **by that ID** without erasing its reasoning.
-Routine progress and mode switches update STATE/PLAN only. A new contract version
+Routine progress updates STATE and the affected plan; mode switches update STATE only. A new contract version
 must state which old interface it supersedes or extends and preserve old decoding.

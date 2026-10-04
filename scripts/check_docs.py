@@ -50,7 +50,7 @@ def check():
             errors.append('docs/STATE.md: require exactly one Integration mode: AUTO or REVIEW line')
         if len(content.splitlines()) > 80:
             errors.append('docs/STATE.md: exceeds the 80-line current-state budget')
-    for name in ('PLAN.md', 'DECISIONS.md', 'README.md'):
+    for name in ('DECISIONS.md', 'README.md'):
         if not (ROOT / 'docs' / name).is_file():
             errors.append(f'docs/{name}: missing knowledge entry point')
     return errors, len(files), local_links

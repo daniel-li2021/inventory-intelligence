@@ -1,4 +1,4 @@
-# Active plan: engineering readiness
+# Engineering readiness plan
 
 Status: **proposal awaiting program review**. Current phase/mode and scope gates
 live in [STATE](STATE.md). Design review P0 is complete; implementation is pending.
@@ -21,9 +21,15 @@ AUTO permits integration of authorized work; it does not approve this program.
 
 Record resumable task status, blockers and the next action here; update STATE at
 material checkpoints. Preserve completed protocols/results as durable evidence.
-At phase completion, record outcomes in STATE/DECISIONS, add a pinned link to the
-completed PLAN in the knowledge index, then replace this file with the next
-assigned plan. Deferred questions in the index are not parallel active plans.
+This is the near-term engineering plan, linked alongside other plans in the
+[index](README.md#plans-and-work-status). At completion, mark its status completed,
+retain achieved outcomes and validation links, and list remaining gaps with their
+follow-up plan or explicit deferral. Keep it linked while useful; a later area or
+phase can have its own plan. Multiple plans do not authorize parallel execution.
+
+Completed: P0 readiness investigation and benchmark proposal.
+Remaining gaps: program review; runner/measurements; runtime/recovery/manual checks.
+Next action: review workload/SLO, environment and pilot budget before P1.
 
 ## Questions and supported claims
 

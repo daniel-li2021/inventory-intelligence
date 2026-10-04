@@ -2,9 +2,9 @@
 
 ## Start here
 
-Read [current state and integration mode](docs/STATE.md), then the relevant part
-of [the active plan](docs/PLAN.md). Use [the knowledge index](docs/README.md) to
-find the responsible contract, operator guide or saved evidence. Historical
+Read [current state and integration mode](docs/STATE.md), then use the
+[plan registry](docs/README.md#plans-and-work-status) to find the relevant plan.
+The [knowledge index](docs/README.md) also routes to contracts, guides and evidence. Historical
 reviews and retired handoffs are evidence, not active instructions. A proposal
 or AUTO mode does not authorize work outside the user's assigned scope.
 
@@ -42,9 +42,11 @@ work; REVIEW stops before merge for the user's review. Re-read it before merging
 An explicit mode-switch instruction updates that line and persists across tasks.
 Never force-push, discard work or retire unmerged/dirty/active branches.
 
-After each material checkpoint or phase, update STATE in place and the active
-PLAN's relevant task/gate. Update affected operator/contract docs with the change.
-Record a new enduring decision or supersession in DECISIONS; leave old reasoning
-and saved reports intact. Retire completed plans through the knowledge index and
-Git history before replacing PLAN. Do not create new progress/status diaries,
-per-agent documentation or duplicate instructions. See the [maintenance rules](docs/README.md).
+After each material checkpoint or phase, update STATE and the affected plan's
+completed work, remaining gaps and next action. Multiple short-term, long-term
+or area plans are allowed; link each from the index with scope and status. Work
+one assigned task at a time; multiple plans do not authorize parallel execution.
+Keep useful completed plans linked with outcomes/gaps; archive only obsolete or
+duplicated plans, and link replacements when superseded. Update affected guides
+and enduring decisions; preserve original evidence. Avoid duplicate progress
+files/instructions. See the [maintenance rules](docs/README.md).

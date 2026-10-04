@@ -1,9 +1,28 @@
 # Knowledge and evidence index
 
-Read [STATE](STATE.md) first, then [PLAN](PLAN.md) for the assigned work.
+Read [STATE](STATE.md) first, then select the relevant plan from the registry below.
 [DECISIONS](DECISIONS.md) records why boundaries exist and when they are superseded;
 [CONTRIBUTING](../CONTRIBUTING.md) owns the delivery workflow. This index is a
 routing map, not another current-state ledger.
+
+## Plans and work status
+
+Multiple plans may cover different horizons or areas. This registry lists their
+scope and status; each plan owns detailed progress, completed outcomes, remaining
+gaps and next action. STATE identifies the immediate focus and mode. Work one
+assigned task at a time; ongoing/proposed plans do not authorize execution.
+
+| Plan | Horizon / scope | Status | Next action / remaining gap |
+|---|---|---|---|
+| [Engineering readiness](PLAN.md) | Near-term correctness, capacity and runtime evidence | Ongoing design; P0 completed, P1 awaiting review | Review workload/SLO, host/runtime and pilot budget before implementation. |
+| [Research roadmap](RESEARCH_ROADMAP.md) | Long-term evidence and decision quality | Ongoing strategic plan; feature execution paused | Resolve engineering gate before choosing one justified follow-up. |
+| [Hosted Lab](HOSTED_LAB_PLAN.md) | Serving architecture and release | Readiness package completed; release gaps remain | Linux/container/recovery evidence, then reviewed host/domain/cost and public release checks. Source-bound design stays unchanged. |
+
+At completion, update the plan with completed work and evidence plus remaining
+gaps (linked follow-up or explicit deferral), then update its registry status.
+Completed does not mean all future extensions are done. Keep useful completed
+plans accessible; mark obsolete plans superseded and link the replacement.
+Archive only duplicates or obsolete detail with a pinned historical link.
 
 ## Durable implementation and operations
 
@@ -13,7 +32,7 @@ routing map, not another current-state ledger.
 | Demand, forecasts and advisory planning | [CONTRACT_PLANNING_V1](CONTRACT_PLANNING_V1.md) | [PLANNING](PLANNING.md), [example](examples/stage2.md) |
 | Read-only evidence Copilot | [Copilot-1](CONTRACT_COPILOT_V1.md), [additive Copilot-2](CONTRACT_COPILOT_V2.md) | [Examples](examples/copilot.md), [routing evaluation](STAGE3_BENCHMARK.md), [stabilization](STAGE3_STABILIZATION.md) |
 | Local synthetic Lab | [Architecture/API/UX](DECISION_LAB.md) | [Independent oracles](DECISION_LAB_VALIDATION.md), [accessibility review](LAB_ACCESSIBILITY_REVIEW.md) |
-| Hosted serving design | [HOSTED_LAB_PLAN](HOSTED_LAB_PLAN.md) is retained design/source-binding evidence, not a second active plan | [Deploy/rollback operations](../deploy/lab/README.md); remaining work is gated in PLAN |
+| Hosted serving design | [HOSTED_LAB_PLAN](HOSTED_LAB_PLAN.md) retains source-bound design and completed readiness work | [Deploy/rollback operations](../deploy/lab/README.md); remaining work is gated in PLAN |
 | Engineering readiness | [Recorded investigation](ENGINEERING_READINESS.md) | [Active proposal](PLAN.md); no benchmark result exists |
 | Source/tool research and portfolio | [Original reference investigation](RESEARCH.md), [pinned metadata](research/repositories.json) | [Case study and scoped claims](PORTFOLIO_CASE_STUDY.md) |
 
@@ -40,10 +59,11 @@ old kernel into current code. Current `tests.test_research_lineage` builds/audit
 current bindings separately; a new manifest, if needed, uses a new path and
 committed validator sources. Never overwrite the original manifest to clear drift.
 
-Source-hashed protocols keep their exact pre-cleanup bytes. Four tiny static
-redirects (`NEXT_ROUND_RESEARCH`, `RESEARCH_ROADMAP`, `READINESS_NEXT_STEPS`,
-`ENGINEERING_BENCHMARK_PLAN`) preserve their existing inbound links and point to
-pinned originals plus STATE/PLAN. They carry no tasks or status to maintain.
+Source-hashed protocols keep their exact pre-cleanup bytes. Three static redirects
+(`NEXT_ROUND_RESEARCH`, `READINESS_NEXT_STEPS`, `ENGINEERING_BENCHMARK_PLAN`)
+preserve inbound links to pinned originals. RESEARCH_ROADMAP now hosts the linked
+long-term plan and retains a link to its original snapshot. New planning status
+does not rewrite frozen protocols or authorize their historical assignments.
 Original reports, source maps and the historical hosted-design drift stay intact;
 no artifact hashes are rewritten and no studies are rerun. Negative outcomes,
 consumed holdouts, undefined denominators, source-versus-authenticity and
@@ -55,7 +75,7 @@ do not publish or delete them.
 All 22 earlier directions remain discoverable below. Evidence columns refer to
 bounded historical studies; the condition column is a future question, **not an
 active assignment**. Feature expansion stays paused under D11. Progress belongs
-only in STATE/PLAN; do not maintain a second delivery checklist here.
+in the relevant indexed plan; do not duplicate its detailed delivery checklist here.
 
 | # / question | Durable evidence or rationale | Condition for further work |
 |---|---|---|
@@ -85,8 +105,8 @@ only in STATE/PLAN; do not maintain a second delivery checklist here.
 ## Retired plans and checkpoints
 
 The following original documents are retired instead of moving to a maintained
-archive folder. Four compatibility paths contain only the static redirects noted
-above; all other old paths leave the working tree. Each link is pinned to main
+archive folder. Three compatibility paths contain static redirects; RESEARCH_ROADMAP
+holds the current linked strategic plan. Other retired paths leave the working tree. Each link is pinned to main
 `208d5b3e1a9f2beb78ea94258800dfe4407150c8`; all original bytes, decisions, rationale, commands, handoffs and
 checkpoint evidence remain recoverable with `git show <commit>:<path>`.
 Existing inbound links use pinned versions or the static redirects. These snapshots
@@ -96,7 +116,7 @@ have no current authority. Original frozen contracts/reports are kept in-tree.
 |---|---|
 | [docs/AUTOMATION_PROGRESS.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/AUTOMATION_PROGRESS.md) | Replaced by STATE; historical checkpoints retained in Git. |
 | [docs/RESEARCH_STATUS.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/RESEARCH_STATUS.md) | Delivery snapshots retained in Git; evidence and all 22 questions indexed here. |
-| [docs/RESEARCH_ROADMAP.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/RESEARCH_ROADMAP.md) | Prior execution priorities superseded by the engineering pause and PLAN. |
+| [docs/RESEARCH_ROADMAP.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/RESEARCH_ROADMAP.md) | Original execution priorities retired; current long-term plan is linked in the registry. |
 | [docs/READINESS_NEXT_STEPS.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/READINESS_NEXT_STEPS.md) | Earlier priority assessment; decisions retained in DECISIONS. |
 | [docs/NEXT_ROUND_RESEARCH.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/NEXT_ROUND_RESEARCH.md) | Earlier investigation; rationale and tentative extensions retained in Git. |
 | [docs/STAGE1_PLAN.md](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/STAGE1_PLAN.md) | Delivered design; contract, data, engine and validation guides retained. |
@@ -118,18 +138,21 @@ have no current authority. Original frozen contracts/reports are kept in-tree.
   material checkpoint. Include phase, integrated/measured boundary, preserved active
   work, blockers/next action and the single integration-mode setting. Link evidence
   rather than repeat long test/package histories. No self-referential commit SHA.
-- **PLAN:** one ongoing plan with status, scope/approval gates, tasks, checks and
-  next action. On completion, pin its last committed version here and replace it;
-  do not retain another live stage/automation plan. HOSTED_LAB_PLAN is a retained
-  source-bound design exception with no independent progress updates.
+- **Plans:** allow distinct short-term, long-term and area files; use descriptive
+  names rather than forcing everything into PLAN.md. Link each in the registry
+  with scope/status. Each records completed work/evidence, remaining gaps, gates
+  and next action. Keep useful completed plans; archive only obsolete/duplicates.
+  Superseded plans link replacements. Preserve source-hashed design bytes; record
+  evolving follow-up work in a separate linked plan rather than changing evidence.
 - **DECISIONS:** add only durable choices and explicit supersession. Tentative
   ideas stay labelled as questions until assigned; old reasoning stays recoverable.
 - **Guides/contracts/evidence:** update a guide when behavior changes; version a
   contract when its interface changes. Curate reproducible evidence rather than
   adding routine transcripts/screenshots or generated logs. Immutable artifacts
   never become a mutable progress record.
-- **Index:** change it only when knowledge/evidence is added, consolidated or retired.
-  Do not mirror current metrics/mode/phase across README, workflow and reports.
+- **Index:** update plan links and lifecycle status when work starts, pauses,
+  completes or is superseded; also track knowledge/evidence additions and retirement.
+  Keep detailed progress in its plan; current focus/mode remain only in STATE.
 - **Validation:** run `python3 scripts/check_docs.py` and whitespace/metadata checks;
   use focused behavior/provenance checks only when affected. CI hygiene checks local
   Markdown targets, heading fragments and the canonical mode/state size.

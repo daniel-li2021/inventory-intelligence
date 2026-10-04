@@ -29,11 +29,10 @@ it does not approve benchmark execution, resume planner features or deploy a hos
 - Preserve paused `codex/planner-closed-loop` protocol commits `55f4170` / `538d29d`
   and its unfinished scripts, adapter, fixture and tests. They are unmerged and
   excluded from accepted main evidence; never delete or absorb them during cleanup.
-- Documentation cleanup validated: 17 snapshots retired to pinned Git links;
-  local navigation/mode controls, 6 lineage regressions and retained-report hash
-  checks pass. All 13 source-hashed protocols and 116 tracked
-  reports/receipts/metadata/core/fixtures/oracles remain byte-identical. No database
-  suite, model call or study replay was needed.
+- Documentation cleanup is integrated at `ac60534`; the follow-up permits multiple
+  linked plans. The [plan registry](README.md#plans-and-work-status) shows scope,
+  status and next action. Each plan retains completed outcomes and remaining gaps.
+  Work one assigned task at a time; frozen evidence and paused work stay preserved.
 
 ## Boundaries and navigation
 
@@ -43,6 +42,6 @@ it is not accepted-order demand, verified stock or operational-import permission
 No source repair, order execution or paid deployment is authorized by AUTO.
 
 Read [workflow](../CONTRIBUTING.md), [decisions](DECISIONS.md), and
-[knowledge/evidence index](README.md) only as needed after this file and PLAN.
+[knowledge/evidence index](README.md) and relevant plans as needed after this file.
 To switch persistently, say **“Switch to REVIEW”** or **“Switch to AUTO”**; change
 only the mode line here. REVIEW prepares validated work and stops before merge.

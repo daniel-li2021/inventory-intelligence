@@ -1,7 +1,8 @@
 # Development workflow
 
 Start with [STATE](docs/STATE.md) for the current phase, gates and integration
-mode, then [PLAN](docs/PLAN.md). [The knowledge index](docs/README.md) routes to
+mode, then the relevant plan in [the registry](docs/README.md#plans-and-work-status).
+[The knowledge index](docs/README.md) routes to
 contracts and evidence; [DECISIONS](docs/DECISIONS.md) records durable choices and
 supersession. Read only the surfaces needed for the assigned task.
 
@@ -36,7 +37,11 @@ main. Old handoffs never launch or authorize additional agents.
    changes. For PostgreSQL acceptance use a fresh disposable database; never reset
    a populated demo or another task's database. Existing README/VALIDATION commands
    are authoritative; do not regenerate consumed studies to make an audit pass.
-4. Update STATE and the relevant PLAN item/gate after material progress. Update
+4. Update STATE and the affected plan after material progress; record completed
+   work, remaining gaps and next action. Keep each short-term, long-term or area
+   plan linked in the index with scope/status. Complete one assigned task at a time.
+   On completion retain useful plans with results and open gaps; superseded plans
+   link their replacements. Archive only obsolete/duplicate material. Update
    affected durable guides; add a decision only for an enduring choice. Stage explicit
    files, inspect `git diff --cached`, and run `git diff --cached --check`.
 5. Fetch again before publication; compare with current `origin/main`, reconcile
@@ -84,7 +89,8 @@ code as original MIT material. Credentials stay in ignored config/secrets.
 
 Manage Codex schedules in the app, not repository cron. Earlier overnight/morning
 schedule descriptions are historical configuration snapshots, not verified current
-schedules. A continuation reads STATE's current mode and PLAN's authorization
-gates; AUTO permits merging assigned work, not resuming paused features. Keep
-resumable work in STATE/PLAN instead of another automation progress file. Local
+schedules. A continuation reads STATE's current focus/mode, then the relevant
+indexed plan's authorization gates; AUTO permits merging assigned work, not
+resuming paused features. Keep resumable work in that plan and STATE instead of
+another automation progress file. Local
 schedules require an awake computer, running app and available repository.
