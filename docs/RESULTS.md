@@ -1169,8 +1169,10 @@ not establish wall-budget compliance. Measurements stopped when the overrun was
 identified. Delivered harness repairs now check real wall budgets and a two-second
 wall/active discrepancy, and journal completed requests before an interrupted
 window can lose its final receipt. Those repairs have focused hand controls, not
-new performance measurements. Sixty-three focused regression checks passed;
-historical-lineage checks additionally require committed documentation bytes.
+new performance measurements. Sixty-three focused regression checks and six
+postcommit historical-lineage checks passed ([validation receipt](review/engineering-continuation-v1/postcommit-validation.json));
+the latter require committed EVIDENCE bytes, so their precommit setup rejection
+and separate passing run remain retained.
 Source, raw failures and derivations are in [continuation evidence](EVIDENCE.md#engineering-continuation).
 Reference/two-date, remaining stability/grid, dense-evidence, serial1000 and
 independent human/public-TLS gates remain pending; features remain paused.

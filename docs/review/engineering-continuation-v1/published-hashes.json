@@ -335,6 +335,10 @@
     "bytes": 1568992,
     "sha256": "dd9d0dddc687dce39204295e9f7e96023858617f65c46c460f83e63f556eb581"
   },
+  "cleanup.json": {
+    "bytes": 297,
+    "sha256": "0621b5cc2c42605b66a797cd8157c4546052642d6046eb9a1f53316f224cb619"
+  },
   "container-build.log.gz": {
     "bytes": 3415,
     "sha256": "2af353a86268fc46e6da54dec214d5b017b28efee49bd016a4a46f5ca9598ac7"
@@ -842,6 +846,14 @@
   "planning/verified-source-map.json": {
     "bytes": 3344,
     "sha256": "d50e801f38def874783e32dde98f5b8d7bafba9676db3ea6b2b82c921c79dfe8"
+  },
+  "postcommit-lineage.log.gz": {
+    "bytes": 311,
+    "sha256": "5171de5bbef8c059c27427cd6ff3f7877e31155c7da0de7a8f20c1da114a8dbd"
+  },
+  "postcommit-validation.json": {
+    "bytes": 385,
+    "sha256": "f41eca10c9cbf839cb1a703701906246f91dfc776ba8ab8a2e929b7f8800b73f"
   },
   "publish-evidence.py.txt": {
     "bytes": 15898,

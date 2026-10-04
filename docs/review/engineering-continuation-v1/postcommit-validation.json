@@ -1,0 +1,10 @@
+{
+  "at_utc": "2026-10-04T11:31:30.417027+00:00",
+  "focused_regressions": 63,
+  "lineage_log": "postcommit-lineage.log.gz",
+  "lineage_tests": 6,
+  "note": "source/EVIDENCE bytes unchanged since verified commit; subsequent changes are receipt metadata only",
+  "status": "passed",
+  "total_distinct_tests": 69,
+  "verified_source_commit": "803121020edc752b37c2d218ef14dbeb154120db"
+}

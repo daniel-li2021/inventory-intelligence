@@ -26,7 +26,8 @@ feature resumption require their own scope decision.
   planning/backtest, short native HTTP and small recovery evidence recorded.
   [Continuation](RESULTS.md#engineering-continuation): one identical-workload SQL
   optimization (~12x), 1M upper tier, serial100/backtest/defect grids, ARM64 Linux
-  enforcement and scaled recovery. Sixty-three focused regressions passed.
+  enforcement and scaled recovery. Sixty-three focused regressions plus six
+  postcommit lineage checks passed ([receipt](review/engineering-continuation-v1/postcommit-validation.json)).
   Reference/stable capacity, public hosting and production benefit remain
   unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
 - Current knowledge, choices, results and evidence are consolidated; completed

@@ -1,0 +1,8 @@
+{
+  "benchmark_containers_remaining": 0,
+  "data_and_original_artifacts_preserved": true,
+  "disposable_pgdata": "/private/tmp/ii-confirmation-pg",
+  "paused_planner_worktree_tip": "538d29db0328ab5197074649a937b3f583531fd6",
+  "postgres_stopped": true,
+  "temporary_idle_assertion_exit_code": 0
+}
