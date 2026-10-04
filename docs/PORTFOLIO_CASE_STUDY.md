@@ -104,7 +104,7 @@ exercise validation, incomplete evidence, request failure and retry. It records
 23 passing Lab/API tests and a JavaScript syntax check; no full WCAG or screen-
 reader speech certification is claimed. Export reached its download announcement,
 but downloaded bytes were not independently rechecked in that round.
-[Targeted browser acceptance](https://github.com/daniel-li2021/inventory-intelligence/blob/3d66b4309cc465d39ed830b4db59ef0860807c25/docs/LAB_ACCESSIBILITY_REVIEW.md).
+[Targeted browser measurements and limits](RESULTS.md#browser-and-accessibility-results).
 
 The merged readiness checkpoint records **134/134** local tests plus published-
 path and browser checks. This is historical acceptance of the core, not a current
@@ -114,7 +114,7 @@ is a controlled performance/scale benchmark. The case-study receipt is historica
 and reconciles seven retained reports
 against 50 pinned source-file hashes and selected exact denominators without
 refitting models or rerunning simulations.
-[Readiness evidence](READINESS_REVIEW.md), [claim receipt](review/portfolio-claims.json).
+[Readiness evidence](EVIDENCE.md#acceptance-history), [claim receipt](review/portfolio-claims.json).
 
 ## Limits and the next evidence
 
@@ -127,11 +127,11 @@ establish population confidence, service guarantees or commercial savings.
 Prospective disjoint-item calibration, a separate lost-sales protocol and an
 additive synthetic physical-count layer are implemented and merged. The next
 decision is review of the [engineering benchmark proposal](PLAN.md)
-and [remaining readiness gaps](ENGINEERING_READINESS.md). Feature development,
+and [remaining readiness gaps](KB.md#engineering-gaps-and-hypotheses). Feature development,
 including unfinished planner-loop execution, is paused. Complex models,
 allocation/capacity optimization and hosting retain explicit evidence,
-contract or ownership gates. The [22 retained research questions](README.md#retained-research-questions-and-tentative-extensions)
-preserves all options and the condition for moving each forward.
+contract or ownership gates. The [22 retained research questions](KB.md#retained-research-questions-and-tentative-extensions)
+preserve all options and the condition for moving each forward.
 
 ## Resume wording
 

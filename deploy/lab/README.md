@@ -102,9 +102,11 @@ uses loopback binding/upstream, internal TLS and disables automatic redirects.
 The original Caddyfile also passes native validation with a loopback HTTP site.
 See [receipt](../../docs/review/hosted-lab-acceptance.json).
 
-Docker CLI/runtime is unavailable here. Container build/Compose runtime, Linux
-caps/read-only identity, crash recovery, public DNS/ACME TLS, HTTP redirect,
-external uptime and real browser CSP/mobile behavior are **unverified**. Local
-private-CA HTTPS does not prove public trusted TLS. PR 18 accessibility remains
-an unmerged prerequisite for public release; this branch does not silently
-include or replace its browser acceptance.
+The retained receipt did not verify Docker/Compose or Linux enforcement. Container
+caps/read-only identity, crash recovery, public DNS/ACME TLS, HTTP redirect and
+external uptime remain release gaps. Private-CA HTTPS does not establish public
+trusted TLS. Accessibility and hosted serving are integrated; the combined installed
+wheel's browser check under actual CSP passed Enter-to-run/focus/chart rendering
+and 320px blocked reflow ([receipt](../../docs/review/research-integration-browser.json)).
+See [remaining engineering checks](../../docs/KB.md#engineering-gaps-and-hypotheses)
+and [manual accessibility limits](../../docs/RESULTS.md#browser-and-accessibility-results).

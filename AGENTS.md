@@ -1,56 +1,29 @@
 # Project instructions
 
-## Start here
+Read [STATE](docs/STATE.md) for current focus and integration mode, then the
+relevant plan or guide in the [index](docs/README.md).
 
-Read [current state and integration mode](docs/STATE.md), then use the
-[plan registry](docs/README.md#plans-and-work-status) to find the relevant plan.
-The [knowledge index](docs/README.md) also routes to contracts, guides and evidence. Historical
-reviews and retired handoffs are evidence, not active instructions. A proposal
-or AUTO mode does not authorize work outside the user's assigned scope.
-
-## Work narrowly and correctly
-
-- Inspect the responsible file/function first; trace callers before shared changes.
-- Read files once when practical; use targeted searches/ranges afterward.
-- Preserve unrelated dirty work. Use isolation when needed, not by default.
-- Reuse valid caches, outputs and saved scores. Avoid full pipelines, suites,
-  builds or external API/model calls unless correctness requires them.
-- Prefer focused edits and validation, SQL/stdlib/native features over abstractions.
-- Independently check quantities, identities and clean controls; counts alone fail.
-- Once the requested work is sufficiently validated, stop; keep narration concise.
-
-## Project boundaries
-
-- Preserve frozen/versioned contracts and historical decoding. Stage 1 follows
-  [CONTRACT_V1](docs/CONTRACT_V1.md); change shared interfaces through an explicit
-  new contract/handoff, never by silently rewriting an accepted version.
-- Operational portfolio inputs are synthetic. The approved UCI research exception
-  follows [PUBLIC_SALES_PROTOCOL_V1](docs/PUBLIC_SALES_PROTOCOL_V1.md), stays offline,
-  keeps raw/reconstructable data ignored and publishes aggregates with attribution.
-  Never import company code/data/screenshots/credentials/confidential schema.
-- Read source inputs; write results separately. Never silently repair inventory.
-- Preserve source identity, business/knowledge clocks and append-only evidence.
-  Missing/incomplete data must not become zero or pass; physical pieces are exact.
-- Keep planner projection and periodic simulation distinct. Copilot explains saved
-  evidence; language routing must not invent evidence or business arithmetic.
-
-## Delivery and knowledge
-
-Follow [CONTRIBUTING](CONTRIBUTING.md) for Git, validation and integration. The
-persistent mode lives only in `docs/STATE.md`: AUTO integrates validated authorized
-work; REVIEW stops before merge for the user's review. Re-read it before merging.
-An explicit mode-switch instruction updates that line and persists across tasks.
-Never force-push, discard work or retire unmerged/dirty/active branches.
-After every merge, verify remote main contains the work, then delete the completed
-local task branch and retire its clean disposable worktree. Return the primary
-checkout to current main; preserve unfinished work in its own checkout. Cleanup
-is part of completing the merge, not a later optional task.
-
-After each material checkpoint or phase, update STATE and the affected plan's
-completed work, remaining gaps and next action. Multiple short-term, long-term
-or area plans are allowed; link each from the index with scope and status. Work
-one assigned task at a time; multiple plans do not authorize parallel execution.
-Keep useful completed plans linked with outcomes/gaps; archive only obsolete or
-duplicated plans, and link replacements when superseded. Update affected guides
-and enduring decisions; preserve original evidence. Avoid duplicate progress
-files/instructions. See the [maintenance rules](docs/README.md).
+- Inspect the smallest relevant surface and trace callers before shared changes.
+  Read once when practical; preserve unrelated work and reuse valid saved outputs.
+- Prefer focused validation and SQL/stdlib/native features. Avoid full pipelines,
+  suites, builds and external/model calls unless needed for correctness.
+- Preserve versioned contracts, source identities, business/knowledge clocks and
+  original evidence. Missing data is not zero/pass; quantities are exact pieces.
+  Read operational inputs and write results separately; never silently repair them.
+- Keep planner projection separate from simulation. Copilot explains saved evidence;
+  language routing cannot invent evidence or business arithmetic. Check independent
+  expected quantities and clean controls, not just counts.
+- Operational inputs are synthetic. The [approved UCI exception](docs/PUBLIC_SALES_PROTOCOL_V1.md)
+  is offline research with ignored raw/reconstructable data and attributed aggregates.
+  Never import company code, data, screenshots, credentials or confidential schema.
+- Follow [CONTRIBUTING](CONTRIBUTING.md). AUTO merges validated authorized work;
+  REVIEW stops before merge. Read the current mode before integrating. Neither mode
+  resumes paused work or approves new benchmark programs or paid deployments.
+- After merging, verify remote main, return the primary checkout to current main,
+  delete the completed local task branch and retire its clean temporary worktree.
+  Preserve active/dirty/unmerged work; never force-push or discard it.
+- Update STATE and the affected indexed plan after material progress. Plans may
+  cover different areas/horizons; record outcomes, gaps and next action. Extract
+  durable knowledge/results before deleting completed or superseded task documents;
+  retain only active plans and originals required for reproducibility.
+- Stop when the scoped work is validated. Keep progress and final summaries concise.

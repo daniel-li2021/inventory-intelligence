@@ -1,52 +1,43 @@
 # Current project state
 
-Updated: 2026-10-03 (America/Los_Angeles). Update this file after each phase or
-material checkpoint; replace stale facts rather than append a progress diary.
+Updated: 2026-10-03 (America/Los_Angeles). Replace stale facts after each phase or
+material checkpoint; link evidence instead of appending a progress diary.
 
 Integration mode: AUTO
 
-Phase: engineering readiness design (P0 complete; P1 awaiting program review).
-Feature development is paused. Documentation/workflow cleanup is authorized;
-it does not approve benchmark execution, resume planner features or deploy a host.
+Phase: engineering readiness design; P0 complete, P1 awaiting program review.
+Features are paused. Documentation cleanup is authorized; benchmark execution,
+planner feature resumption and paid deployment require their own scope decision.
 
 ## Integrated and measured
 
-- Baseline: main `208d5b3` (PRs 14–26 integrated before this documentation change).
-  Core reliability, advisory planning, read-only Copilot, local synthetic Lab,
-  separate decision/public-sales/lost-sales/physical-count research are integrated.
-- Recorded remote correctness acceptance: **240 tests / OK**, hygiene success on
-  `9d7c55f`; [exact CI observation](review/engineering-readiness-baseline.json).
-  This is retained evidence for that commit, not a fresh run on this change.
-  [Local combined acceptance](RESEARCH_INTEGRATION.md) remains separate.
-- Engineering assessment and proposed workload/budget are complete; no controlled
-  capacity benchmark or production/business benefit is measured. Public hosting,
-  Linux container enforcement and recovery remain unverified.
+- Core reliability, advisory planning, read-only Copilot, synthetic Lab and separate
+  research packages are integrated (PRs 14–26; pre-cleanup baseline `208d5b3`).
+- Retained remote correctness acceptance: 240 tests / OK plus hygiene at `9d7c55f`.
+  [CI/source receipt](review/engineering-readiness-baseline.json),
+  [separate local combined acceptance](EVIDENCE.md#acceptance-history).
+- No controlled capacity or production/business benefit is measured. Public hosting,
+  Linux enforcement and recovery remain unverified; [gaps](KB.md#engineering-gaps-and-hypotheses).
+- Completed review/investigation knowledge is consolidated into KB, RESULTS and
+  EVIDENCE. Active plans are linked in the index; frozen evidence remains unchanged.
 
 ## Active work and next action
 
-- [PLAN](PLAN.md): review workload, SLO, environment and pilot budget before P1
-  implementation. Missing runtime gates stay explicit; no automatic feature resume.
-- Preserve paused `codex/planner-closed-loop` protocol commits `55f4170` / `538d29d`
-  and its unfinished scripts, adapter, fixture and tests. They are unmerged and
-  excluded from accepted main evidence; never delete or absorb them during cleanup.
-  Its checkout and unfinished files are preserved at
-  `/private/tmp/ii-planner-closed-loop`; the primary project checkout is on main.
-- Documentation cleanup is integrated at `ac60534`; the follow-up permits multiple
-  linked plans. The [plan registry](README.md#plans-and-work-status) shows scope,
-  status and next action. Each plan retains completed outcomes and remaining gaps.
-  Work one assigned task at a time; frozen evidence and paused work stay preserved.
-- Local branch cleanup removed 11 integrated branches and two obsolete worktrees.
-  Cherry-picked original tips remain as local `archive/integrated/*` tags.
-  Every completed merge now includes local task-branch cleanup in the workflow.
+- [Engineering plan](PLAN.md): review workload/SLO, environment and pilot budget
+  before P1 runner implementation. [Long-term plan](RESEARCH_ROADMAP.md) stays paused
+  at this gate; [registry](README.md#plans-and-work-status) identifies ongoing work.
+- Preserve unmerged planner protocol commits `55f4170` / `538d29d` and unfinished
+  scripts/adapter/fixture/tests in `/private/tmp/ii-planner-closed-loop` on
+  `codex/planner-closed-loop`. They are excluded from accepted main evidence.
+- After each merge, verify remote main, return the primary checkout to current main
+  and retire the completed local task branch/clean worktree. Integrated original tips
+  from earlier branch cleanup remain in local `archive/integrated/*` tags.
 
 ## Boundaries and navigation
 
-Operational demo inputs are synthetic. Approved UCI observed-sales research is a
-separate offline boundary with ignored raw/derived data and aggregate publication;
-it is not accepted-order demand, verified stock or operational-import permission.
-No source repair, order execution or paid deployment is authorized by AUTO.
+Operational inputs are synthetic. The UCI exception is offline observed-sales
+research with ignored raw/reconstructable data and aggregate attribution, not
+accepted-order demand, verified stock or operational-import permission.
 
-Read [workflow](../CONTRIBUTING.md), [decisions](DECISIONS.md), and
-[knowledge/evidence index](README.md) and relevant plans as needed after this file.
-To switch persistently, say **“Switch to REVIEW”** or **“Switch to AUTO”**; change
-only the mode line here. REVIEW prepares validated work and stops before merge.
+Read [workflow](../CONTRIBUTING.md), [index](README.md), [decisions](DECISIONS.md).
+Say “Switch to REVIEW” or “Switch to AUTO” to persistently update the mode line.

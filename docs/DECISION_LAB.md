@@ -98,7 +98,7 @@ number conversion is for chart/display coordinates only. Input edits mark result
 stale; failed requests retain the last successful response and expose a focusable
 error/retry. Server evidence is rendered as text. No external font/CDN/chart library,
 frontend build or client-side business calculation is needed. Independent timing,
-cost, conservation and rounding controls remain in the [validation evidence](DECISION_LAB_VALIDATION.md).
+cost, conservation and rounding controls remain in the [validation evidence](RESULTS.md#lab-arithmetic-and-service).
 
 ## Regenerate the bundled evidence
 
@@ -132,36 +132,9 @@ same-origin application and API boundary checks.
 
 ## Validation
 
-The later [accessibility/UX review](LAB_ACCESSIBILITY_REVIEW.md) fixes keyboard
-focus restoration, short control names, evidence-table scrolling, blocked-state
-narrow reflow and contrast/line patterns. Actual1280px/320px browser paths and
-23 Lab/API regressions pass. It is a targeted local review, not full screen-reader
-or WCAG conformance acceptance.
-
-Original acceptance: 18 independent lab/API tests passed. Combined acceptance passed **124/124**
-tests against fresh isolated local PostgreSQL **17.6** / Python **3.12.14**.
-The final calculation-reference correction was revalidated with the 18 lab/API
-tests. Existing reliability, forecasting, replenishment, simulation and Copilot
-source modules have no changes.
-
-The later [adversarial readiness review](READINESS_LAB_REVIEW.md) passes 23
-Lab/API tests, including independently rehashed malformed evidence and HTTP
-fail-closed checks. Its combined database/browser acceptance is recorded by the
-integration owner separately.
-
-The built wheel was installed and served from outside the checkout. Its archive,
-HTML, CSS and JavaScript assets are present and all five root/asset/evidence API
-smoke routes return 200. `pip check` and JavaScript syntax checks pass. A real
-in-app browser verified demand 125% (proposal 18 vs 12, costs 351 vs 327), hidden
-delay 3 (immediate fill 11/28, shortages 17, cost 1171), incomplete-supply blocking,
-zero-demand undefined fill, stale-input indication and expanded rounding lineage.
-The browser-downloaded comparison JSON was parsed and checked for preserved
-baseline and null blocked outputs. No runtime database or model API was used.
-
-![Synthetic baseline versus demand scenario](review/decision-lab.jpg)
-
-These are local synthetic results, not PostgreSQL 17.9 remote CI evidence,
-production inventory performance, calibrated service/risk, or measured savings.
-See [independent oracles and API boundaries](DECISION_LAB_VALIDATION.md).
-Integrated through [PR 12](https://github.com/daniel-li2021/inventory-intelligence/pull/12)
-at `089d28f`, verified on remote main. Remote CI was not monitored for this task.
+Independent prefix/periodic quantities, conservation, malformed-input boundaries,
+installed-wheel outcomes and targeted accessibility measurements are consolidated
+in [RESULTS](RESULTS.md#lab-arithmetic-and-service). Source/environment and combined
+acceptance remain in [EVIDENCE](EVIDENCE.md#acceptance-history), with original
+receipts/screenshots unchanged. These are bounded synthetic/local observations;
+public service, full accessibility and production/business outcomes remain unverified.

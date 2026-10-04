@@ -10,13 +10,13 @@ resume paused features. Work one assigned task at a time.
 ## Completed work and evidence
 
 - The synthetic reliability/planning/Copilot core and local Lab are integrated.
-  [Core readiness evidence](READINESS_REVIEW.md) records bounded acceptance.
+  [Core readiness evidence](EVIDENCE.md#acceptance-history) records bounded acceptance.
 - Research packages for paid warmup, retention, supply/policy comparisons,
   observed sales/calibration, lost sales, physical counts and hosted readiness
-  are integrated. [Combined acceptance](RESEARCH_INTEGRATION.md) retains outcomes,
+  are integrated. [Combined acceptance](EVIDENCE.md#acceptance-history) retains outcomes,
   negative findings and original evidence; these do not establish production benefit.
 - Engineering readiness investigation and a benchmark proposal are complete.
-  [Assessment](ENGINEERING_READINESS.md); implementation remains gated in PLAN.
+  [Assessment](KB.md#engineering-gaps-and-hypotheses); implementation remains gated in PLAN.
 
 ## Remaining gaps and sequence
 
@@ -33,7 +33,7 @@ resume paused features. Work one assigned task at a time.
    completed readiness design and release gaps. Real runtime/recovery evidence and
    reviewed host/domain/cost precede deployment. Refresh claims from exact evidence.
 
-All [22 retained questions and their evidence gates](README.md#retained-research-questions-and-tentative-extensions)
+All [22 retained questions and their evidence gates](KB.md#retained-research-questions-and-tentative-extensions)
 remain available; this plan does not duplicate their study details or invent new
 assignments. Next action: review the near-term engineering program. When a phase
 finishes, update completed outcomes and remaining gaps here, link its area plan
@@ -42,4 +42,5 @@ replacing it merely because one package is finished.
 
 [Original assigned roadmap and rationale](https://github.com/daniel-li2021/inventory-intelligence/blob/208d5b3e1a9f2beb78ea94258800dfe4407150c8/docs/RESEARCH_ROADMAP.md)
 remain preserved. Its automatic feature-continuation priority is superseded by
-D11; the earlier single-plan rule is superseded by D15 in [DECISIONS](DECISIONS.md).
+D11; D15 supersedes the single-plan rule, and D16 defines completed-document
+extraction in [DECISIONS](DECISIONS.md).

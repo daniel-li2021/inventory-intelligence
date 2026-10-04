@@ -68,7 +68,7 @@ entry point, pinned container/proxy templates and release acceptance. No public
 service has been deployed; container and public-domain checks remain pending.
 
 Keyboard users can run the presets, inspect focusable evidence tables with arrow
-keys and use the skip link. [Local accessibility review and limits](docs/LAB_ACCESSIBILITY_REVIEW.md)
+keys and use the skip link. [Local accessibility review and limits](docs/RESULTS.md#browser-and-accessibility-results)
 records focus, contrast and narrow-screen validation.
 
 ## Run the PostgreSQL core
@@ -114,10 +114,10 @@ python -m unittest discover -s tests -v
 
 CI runs the same suite with pinned PostgreSQL 17.9 / Python 3.12.12. Local
 acceptance versions and actual results are recorded separately in the
-[historical review](docs/READINESS_REVIEW.md). The separate
+[acceptance catalog](docs/EVIDENCE.md#acceptance-history). The separate
 [main CI acceptance](https://github.com/daniel-li2021/inventory-intelligence/actions/runs/37164884160)
 passes 240 tests at `9d7c55f`; test-suite duration is not a scale benchmark.
-[Detailed validation and historical checkpoints](docs/VALIDATION.md).
+[Validation commands and independent oracles](docs/VALIDATION.md).
 
 Offline regression checks need neither database nor model API:
 

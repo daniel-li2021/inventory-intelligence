@@ -9,7 +9,7 @@ AUTO permits integration of authorized work; it does not approve this program.
 ## Phase handoff and checkpoints
 
 - [x] P0: inspect green correctness baseline, preserve paused planner work and
-  publish [engineering readiness evidence](ENGINEERING_READINESS.md).
+  publish [engineering readiness evidence](KB.md#engineering-gaps-and-hypotheses).
 - [ ] Decision gate: review workload/SLO, actual host/runtime and pilot budget.
   Do not create a benchmark runner or launch measurements until approved.
 - [ ] P1 after approval: freeze fixture/oracle/measurement boundaries; implement
@@ -22,10 +22,12 @@ AUTO permits integration of authorized work; it does not approve this program.
 Record resumable task status, blockers and the next action here; update STATE at
 material checkpoints. Preserve completed protocols/results as durable evidence.
 This is the near-term engineering plan, linked alongside other plans in the
-[index](README.md#plans-and-work-status). At completion, mark its status completed,
-retain achieved outcomes and validation links, and list remaining gaps with their
-follow-up plan or explicit deferral. Keep it linked while useful; a later area or
-phase can have its own plan. Multiple plans do not authorize parallel execution.
+[index](README.md#plans-and-work-status). At completion, record outcomes, validation
+and remaining gaps (linked follow-up or
+explicit deferral), extract durable material into knowledge/results/evidence and
+retire this task file unless still required for active work or reproducibility.
+Later areas/phases may have their own indexed plan; this does not authorize parallel
+execution.
 
 Completed: P0 readiness investigation and benchmark proposal.
 Remaining gaps: program review; runner/measurements; runtime/recovery/manual checks.

@@ -124,4 +124,4 @@ Selection truth is frozen no later than holdout start, including source recordin
 and observation gates on revisions. Holdout truth alone uses the final evaluation
 cutoff. This prevents a correction learned during holdout from changing model
 selection even when its business day belongs to a selection fold. The repeated
-[three-stage review](THREE_STAGE_REVIEW.md) includes this independent oracle.
+[three-stage review](RESULTS.md#forecast-selection-and-advisory-planning) includes this independent oracle.

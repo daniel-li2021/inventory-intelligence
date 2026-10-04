@@ -1,0 +1,141 @@
+# Project knowledge
+
+Durable findings and tentative questions extracted from completed investigations.
+Use [STATE](STATE.md) for scope, [DECISIONS](DECISIONS.md) for choices and
+[RESULTS](RESULTS.md) for outcomes. Hypotheses below are not assignments.
+
+## Correctness and trust boundaries
+
+- Reconciliation requires the same SKU/warehouse grain, cutoff, watermark and
+  complete manifests. Empty coverage and known movements outside declared coverage
+  are R005 `coverage_mismatch`, blocking R001; unknown references retain local R003
+  handling. Internally consistent records are not proof of physical stock.
+- Demand training is contiguous, complete integer data for the selected batch/key,
+  with eligible business and knowledge clocks. Natural order identities must be
+  unique across selected days. Null/stockout/unknown demand is not eligible zero.
+- Freeze model selection at the earlier of evaluation and holdout start; replay
+  eligibility at each origin. Day-41 quantity 7 revised to 700 but learned on day 60
+  must not alter the earlier selector or quantity 7. Fold truth, selected revisions,
+  scores and planner training/horizon must agree.
+- Copilot validates saved evidence/context; it neither reforecasts nor queries latest
+  raw sources to authenticate them. Historical blocked runs may be explained;
+  contradictory evidence cannot produce replacement quantities or approved orders.
+  Hashes identify bytes/lineage, not trustworthy upstream ownership.
+- The Lab's packaged zero-movement fixture validator checks all retained inventory
+  keys, counts/coverage/clocks, unique identities, supply receipts and report links.
+  Rehashed contradictions, null receipt dates and malformed demand fail closed
+  (offline suppression; HTTP 503). It is not a general SQL reliability checker.
+- Reversal checks cover arithmetic and referenced rows, not every business reversal.
+  Running-negative stock, richer transit/reservation semantics and stronger source
+  authentication require separately defined contracts.
+- Prefix planning protects the largest pre-arrival safety deficit. Periodic backlog
+  simulation owns orders, receipts, costs and runoff separately. Hidden delays must
+  not leak into planning; different runoff lengths are different cost exposures.
+- SQL permissions prevent runtime source writes, not upstream-owner rewrites.
+  Atomic rollback of known errors does not establish crash recovery.
+
+Accepted interfaces remain in [inventory](CONTRACT_V1.md),
+[planning](CONTRACT_PLANNING_V1.md), [Copilot](CONTRACT_COPILOT_V2.md) and
+[simulation](CONTRACT_DECISION_V1.md) contracts. Independent oracles are in
+[VALIDATION](VALIDATION.md) and [RESULTS](RESULTS.md#lab-arithmetic-and-service).
+
+## Decision-evaluation lessons
+
+On the same scored observations, MAE and WAPE rank methods identically: the error
+numerator is shared and the denominators do not depend on the method. Neither
+expresses asymmetric shortage/holding costs. MAE targets a median; frequent zero
+demand can favor zero forecasts despite positive expected demand. Preserve daily
+error/bias alongside cumulative protection-period error for `H = lead + review`,
+paid inventory outcomes and paired cost/service comparisons. An accurate final
+total can still conceal an early shortage. [Concrete oracles](RESULTS.md#decision-metric-counterexamples).
+
+Squared/scaled metrics need a nonzero training-only scale or remain null. If using
+probabilistic forecasts, assess pinball loss and coverage for the actual cumulative
+target; summing daily quantiles does not produce a cumulative quantile. Calibration
+labels must be completed and origin-known. Collapse repriced costs/repeated controls
+when counting independent paths; four passes on one seed are not four successes.
+
+Keep startup infeasibility in the denominator. Compute unfillable units before the
+first possible receipt independently, preserving prior-commitment priority; the
+policy must not see future demand used by this diagnostic. Warmup carries each
+policy's paid stock/backlog/pipeline into scoring, with costs and starting state
+reported. Fresh demand and supplier paths across selection/holdout answer a stronger
+question than reusing one hidden delay trace. A short zero run is not retirement;
+lower safety targets cannot liquidate already owned stock. These lessons now have
+[feasibility](FEASIBILITY_DIAGNOSTIC_RESULTS.md), [warmup](FRESH_WARMUP_RESULTS.md)
+and [retention](SAFETY_RETENTION_RESULTS.md) results rather than old task plans.
+
+## Engineering gaps and hypotheses
+
+The assessment inspected main `9d7c55f` and reused saved results; no capacity
+benchmark was performed. [Baseline receipt](review/engineering-readiness-baseline.json).
+Correctness CI, research arm counts, suite elapsed time and the UCI 541,909-row
+extraction are not measured throughput or service capacity.
+
+| Gap | Finding / hypothesis | Evidence needed |
+|---|---|---|
+| Scale and repeated work | Primary keys exist; dedicated batch/grain indexes were not established. Demand scanning, identities and backtests may repeat whole-batch work. `run_plan` revalidates a whole batch per key. These are inspection hypotheses, not profiled bottlenecks. | B1/B2 scale/history measurements in [PLAN](PLAN.md), including actual per-key calls. Preserve cross-key duplicate and clock checks in any optimization. |
+| Report growth | Reliability readers cap 1,000 findings / 2 MiB; planning readers cap 16 MiB. Producer behavior at these bounds is unmeasured. | B3 failure-envelope measurements. Never truncate findings or raise limits merely to improve a chart. |
+| Contention and cancellation | Runtime DB statement/lock timeouts were not established. Rollback tests do not prove multi-session contention, interruption or backup/restore recovery. | B4 network/admission load and V2 fault/restart/restore checks. |
+| Runtime | Hosted configuration admits four active requests at 2 requests/s; proposed app caps are 0.5 CPU / 256 MiB. Configuration is not capacity. | V1 clean Linux/container enforcement with image/resource evidence. |
+| Release and human use | Private-CA HTTPS and bounded keyboard/mobile paths passed. Public uptime, speech/zoom/forced colors and cold-start acceptance remain unmeasured. Branch protection was not verified by green CI. | V3 human checks plus reviewed host/domain/cost/public release. |
+
+Workloads, SLOs, cache/timing definitions, environment and budget remain in PLAN.
+Program review precedes implementation. Measure one gap, make at most one justified
+change and confirm exact outcomes; otherwise freeze the baseline. Speculative queues,
+Redis, Kubernetes, sharding, ORMs, indexes or advanced models do not follow from this.
+
+## Source and tool lessons
+
+This consolidates the **2026-10-02 inspection**, not current upstream advice.
+[Pinned metadata](research/repositories.json) retain inspected revisions, hashes,
+license metadata and capture dates. Verify component licenses/versions before
+adoption; popularity is not correctness.
+
+| Reference | Useful lesson | Adoption boundary |
+|---|---|---|
+| ERPNext | Stock Ledger versus Bin separates events from balances; retain event/line identity, signed quantities, clocks and reversals. Backdating can use controlled reposting. | Do not copy GPL-3 ERP valuation/FIFO/accounting code or assume all backdating is forbidden. |
+| Odoo 19 | `stock.move` versus `stock.quant`; variants, locations and units; on-hand/reserved/available differ. Counts create events rather than overwrite history. | Review component LGPL licensing and business semantics. |
+| InvenTree | Actor/delta tracking; deleting stock can retain nullable history links, but deleting a part can erase history. | Not strict immutability; no Django/admin dependency is needed here. |
+| SQLMesh | Versioned SQL audits, restatements and environments can help many derived models. | Downstream blocking audits may follow model writes, not roll them back. Incremental audits cover processed intervals. |
+| Great Expectations | Named expectations and complete unexpected-row retrieval can help multiple backends. | Samples are not full coverage; setup does not supply inventory semantics. |
+| Elementary | Monitoring through dbt artifacts. | Distinguish OSS and hosted capabilities; adding dbt just for this is unjustified. |
+| dlt | Cursor choice matters for late/backdated records: update/ingestion knowledge clocks may be needed. | Event-time cursors can miss updates; the framework cannot align ledger/snapshot clocks or prove completeness. |
+| dbt | Version/adapter/distribution matters, including inspected Python-v1 and Rust-v2 differences. | Verify licenses and Elementary compatibility; do not add both dbt and SQLMesh without need. |
+| OpenLineage | Job/run/dataset vocabulary. | Dataset graphs do not identify the record causing a finding. Add a backend only for a demonstrated cross-system need. |
+| Bruin / Carbon | README-level orchestration/manufacturing awareness. | No implementation audit. Carbon's inspected AGPL/enterprise exceptions and `NOASSERTION` do not establish permissive reuse. |
+| Soda Core / data-diff | Ordinary SQL meets current validation needs. | Inspected Soda Core used Elastic License 2.0, not the older Apache assumption. Datafold data-diff was archived May 2024. |
+| StatsForecast | Potential statistical/intermittent challengers. | Demonstrate a sealed baseline weakness; freeze method/version/license/evaluation before adding it. |
+
+PostgreSQL, SQL, Psycopg, the standard library and Compose meet the present need.
+Vocabulary can be adopted without importing upstream implementations.
+
+## Retained research questions and tentative extensions
+
+All 22 earlier directions remain here with evidence/gates. These are future questions;
+the [strategic plan](RESEARCH_ROADMAP.md) owns prioritization and progress.
+
+| # / question | Durable evidence or rationale | Condition for further work |
+|---|---|---|
+| 1 Fresh demand/supply and paid warmup | [Protocol](RESEARCH_WARMUP_V1.md), [results](FRESH_WARMUP_RESULTS.md) | New frozen traces; paid owned carryover and common settlement. |
+| 2 Feasibility versus policy misses | [Diagnostic](FEASIBILITY_DIAGNOSTIC.md), [results](FEASIBILITY_DIAGNOSTIC_RESULTS.md) | Signed interventions with explicit interactions; no invented additive attribution. |
+| 3 Safety target versus achieved service | [Safety results](PUBLIC_SAFETY_RESULTS.md), [disjoint calibration](PUBLIC_CALIBRATION_RESULTS.md) | Fresh evidence beyond consumed same-retailer/calendar paths; no nominal guarantee. |
+| 4 Retention during decline/recovery | [Protocol](SAFETY_RETENTION_V1.md), [negative results](SAFETY_RETENTION_RESULTS.md) | Justified revision tested on fresh recovery paths with owned stock/cost. |
+| 5 Lead-time/supplier reliability | [Protocol](SUPPLY_SENSITIVITY_V1.md), [results](SUPPLY_SENSITIVITY_RESULTS.md) | Specific unmet supply question; actual supplier truth remains unavailable. |
+| 6 Probabilistic protection demand | [Safety protocol](PUBLIC_SAFETY_V1.md), [calibration protocol](PUBLIC_CALIBRATION_V1.md) | Completed origin-known calibration labels, target coverage/pinball and achieved service. |
+| 7 Policy comparison | [Protocol](POLICY_COMPARISON_V1.md), [negative/conditional results](POLICY_COMPARISON_RESULTS.md) | Fresh paid warm states and hidden-delay-compatible inputs. |
+| 8 Public adapter/provenance | [Assigned protocol](PUBLIC_SALES_PROTOCOL_V1.md), [adapter](PUBLIC_ADAPTER_V1.md) | Preserve identity, source rights and immutable caches; no operational imports. |
+| 9 Observed-sales realism | [Forecast protocol](PUBLIC_FORECAST_V1.md), [results](PUBLIC_SALES_RESULTS.md) | Broader/later frozen evidence; sales remain a proxy rather than unconstrained demand. |
+| 10 Advanced models | [Intermittent protocol](CONTRACT_INTERMITTENT_V1.md), [results](INTERMITTENT_BENCHMARK.md) | Repeated sealed baseline weakness before ADIDA/IMAPA; feature/license/dependency protocol before global ML. |
+| 11 Source provenance | [Lineage protocol](RESEARCH_LINEAGE_V1.md), [integration evidence](EVIDENCE.md#historical-provenance-and-independent-audits) | Demonstrated missing semantic link; hashes are not signed authenticity. |
+| 12 Property/mutation QA | Existing independent controls in `tests/`, [readiness evidence](EVIDENCE.md#acceptance-history) | A concrete uncovered invariant; test counts are not a quality target. |
+| 13 Backlog versus lost sales | [Contract](CONTRACT_LOST_SALES_V1.md), [paired results](LOST_SALES_RESULTS.md) | Keep permanent losses and owed backlog plus different cost units explicit. |
+| 14 Actual planner closed loop | Paused `codex/planner-closed-loop` protocol/unfinished work; see STATE | Preserve action/receipt identity, repeated clocks and actual reliability/supply gates; resume only after scope approval. |
+| 15 Physical inventory truth | [Contract](CONTRACT_PHYSICAL_COUNT_V1.md), [results](PHYSICAL_COUNT_RESULTS.md) | Authenticated count/business evidence needed for real truth; no automatic inventory write. |
+| 16 Performance/scale | [Engineering investigation](KB.md#engineering-gaps-and-hypotheses), [PLAN](PLAN.md) | Program/host/budget review before a runner; report measured envelope and failures. |
+| 17 Multi-location allocation | SKU/warehouse grain and paired transfer legs do not define transit availability, transport costs or optimal allocation. | Demonstrated transfer benefit, then a transit/cost/capacity contract and independent service oracle. |
+| 18 Supplier capacity/calendar | MOQ/pack rounding is not supplier capacity or a working-day calendar. ERP reordering features do not establish optimization of this project's objective. | A binding use case and receipt/approval/timing contract before extending constraints. |
+| 19 Guided demo | [Lab](DECISION_LAB.md), [three-minute case study](PORTFOLIO_CASE_STUDY.md) | Reuse clean/spike/delay/blocked walkthrough; add structure only for a demonstrated UX gap. |
+| 20 Accessibility/cold start | [Targeted local review](RESULTS.md#browser-and-accessibility-results) | Speech/zoom/forced colors/download bytes and human cold start remain scoped manual checks. |
+| 21 Hosted read-only Lab | [Design evidence](HOSTED_LAB_PLAN.md), [operations](../deploy/lab/README.md) | Actual Linux/runtime/recovery plus reviewed host/domain/cost before public TLS/uptime claims. |
+| 22 Portfolio wording | [Case study](PORTFOLIO_CASE_STUDY.md), [historical claim receipt](review/portfolio-claims.json) | Refresh from exact merged/deployed/measured evidence only. |
