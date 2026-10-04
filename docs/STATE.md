@@ -29,10 +29,15 @@ it does not approve benchmark execution, resume planner features or deploy a hos
 - Preserve paused `codex/planner-closed-loop` protocol commits `55f4170` / `538d29d`
   and its unfinished scripts, adapter, fixture and tests. They are unmerged and
   excluded from accepted main evidence; never delete or absorb them during cleanup.
+  Its checkout and unfinished files are preserved at
+  `/private/tmp/ii-planner-closed-loop`; the primary project checkout is on main.
 - Documentation cleanup is integrated at `ac60534`; the follow-up permits multiple
   linked plans. The [plan registry](README.md#plans-and-work-status) shows scope,
   status and next action. Each plan retains completed outcomes and remaining gaps.
   Work one assigned task at a time; frozen evidence and paused work stay preserved.
+- Local branch cleanup removed 11 integrated branches and two obsolete worktrees.
+  Cherry-picked original tips remain as local `archive/integrated/*` tags.
+  Every completed merge now includes local task-branch cleanup in the workflow.
 
 ## Boundaries and navigation
 

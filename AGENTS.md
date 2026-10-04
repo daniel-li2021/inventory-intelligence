@@ -41,6 +41,10 @@ persistent mode lives only in `docs/STATE.md`: AUTO integrates validated authori
 work; REVIEW stops before merge for the user's review. Re-read it before merging.
 An explicit mode-switch instruction updates that line and persists across tasks.
 Never force-push, discard work or retire unmerged/dirty/active branches.
+After every merge, verify remote main contains the work, then delete the completed
+local task branch and retire its clean disposable worktree. Return the primary
+checkout to current main; preserve unfinished work in its own checkout. Cleanup
+is part of completing the merge, not a later optional task.
 
 After each material checkpoint or phase, update STATE and the affected plan's
 completed work, remaining gaps and next action. Multiple short-term, long-term

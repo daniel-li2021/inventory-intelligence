@@ -53,10 +53,14 @@ main. Old handoffs never launch or authorize additional agents.
    a direct fast-forward is sufficient for small validated changes. Use an integration
    PR when a shared review surface is useful. In REVIEW, stop with the validated
    result before main integration. Verify any pushed ref with `git ls-remote`.
-7. After integration, verify remote main contains the work. Retire only proven-merged
-   clean task branches and disposable worktrees; preserve active/dirty/unmerged work
-   and environments. Do not monitor CI after routine pushes unless CI/deployment
-   verification was requested or there is evidence of failure.
+7. After every merge, verify remote main contains the work, then switch the primary
+   checkout to current main, remove the completed clean disposable worktree, and
+   delete the completed local task branch with `git branch -d`. Finish this cleanup
+   in the same task. Preserve active/dirty/unmerged work and required environments
+   in their own checkout. For cherry-picked integrations, verify every unique patch
+   exists in main and preserve the original tip with a local archive tag before
+   retiring the branch; never discard unique commits. Do not monitor CI after routine
+   pushes unless CI/deployment verification was requested or there is evidence of failure.
 
 Documentation-only validation uses the standard library and needs no service:
 
