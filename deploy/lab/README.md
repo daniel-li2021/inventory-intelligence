@@ -50,9 +50,10 @@ LAB_DOMAIN=demo.example.com docker compose -f deploy/lab/compose.yaml run --rm -
 public deployment. Python 3.12.14 and Caddy 2.10.2 manifest digests are pinned and
 [registry bytes were independently hashed](../../docs/review/hosted-lab-image-manifests.json).
 All 18 runtime dependency versions are frozen to the accepted local environment
-in `requirements.txt`; Linux availability/build remains to be checked. The built
-app image digest is still unknown until a container build succeeds. Record it,
-the release commit and synthetic evidence digest in a release manifest. Rebuilds
+in `requirements.txt`. The October 4 continuation built and exercised the pinned
+image on ARM64 Linux; that is separate from x86 and public-host acceptance. Record
+the chosen release's built image digest, release commit and synthetic evidence
+digest in a release manifest. Rebuilds
 should update the recorded result rather than claim byte-identical wheels/images.
 
 After the reviewed host/domain/cost decision and actual container acceptance:
@@ -94,7 +95,7 @@ docker compose -f deploy/lab/compose.yaml down
 Do not pass `--volumes` if preserving certificate material. Stop/terminate the
 selected host separately to stop hosting cost; no host has been selected here.
 
-Local acceptance: **34 focused tests** (11 new hosted-boundary tests + existing
+Original local acceptance: **34 focused tests** (11 new hosted-boundary tests + existing
 23 Lab/API tests), an installed wheel served outside the checkout, and **13 live
 HTTPS responses through Caddy 2.10.2** with an explicitly trusted localhost
 private CA. No trust-store certificate was installed. The local proxy variant
@@ -102,10 +103,12 @@ uses loopback binding/upstream, internal TLS and disables automatic redirects.
 The original Caddyfile also passes native validation with a loopback HTTP site.
 See [receipt](../../docs/review/hosted-lab-acceptance.json).
 
-The retained receipt did not verify Docker/Compose or Linux enforcement. Container
-caps/read-only identity, crash recovery, public DNS/ACME TLS, HTTP redirect and
-external uptime remain release gaps. Private-CA HTTPS does not establish public
-trusted TLS. Accessibility and hosted serving are integrated; the combined installed
+That original receipt did not verify Docker/Compose or Linux enforcement. The
+October 4 [continuation](../../docs/RESULTS.md#engineering-continuation) separately
+verified ARM64 container caps/read-only identity and a process crash/restart.
+Remaining stability/reference checks, proxy slow-body behavior, public DNS/ACME
+TLS, HTTP redirect and external uptime remain release gaps. Private-CA HTTPS does
+not establish public trusted TLS. Accessibility and hosted serving are integrated; the combined installed
 wheel's browser check under actual CSP passed Enter-to-run/focus/chart rendering
 and 320px blocked reflow ([receipt](../../docs/review/research-integration-browser.json)).
 See [remaining engineering checks](../../docs/KB.md#engineering-gaps-and-hypotheses)
@@ -164,7 +167,7 @@ the local demo until a different budget is approved. AUTO merge mode does not
 approve paid deployment. One shared admission bucket is a portfolio tradeoff;
 TLS/bandwidth abuse requires host/provider controls beyond calculation admission.
 
-The subsequent [native engineering pilot](../../docs/RESULTS.md#local-engineering-pilot)
+The earlier [native engineering pilot](../../docs/RESULTS.md#local-engineering-pilot)
 adds short open-arrival HTTP/admission/body recovery and separate small PostgreSQL
 fault/restore evidence. It does not verify container/Linux enforcement, hosted
 application crash recovery, public release or the confirmation sample/duration floor.

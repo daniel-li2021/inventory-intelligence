@@ -5,6 +5,19 @@ This catalog consolidates acceptance/provenance from retired reviews. Reports in
 mutable current status. [STATE](STATE.md) owns present scope; [RESULTS](RESULTS.md)
 owns measured core outcomes; [KB](KB.md) owns constraints and unresolved questions.
 
+## Next-phase investigation
+
+[October 12 receipt](review/next-phase-investigation.json) binds main `b5b8d5a`,
+23 inspected code/config hashes, remote/unfinished-branch observations, 34 focused
+Lab/API/hosted checks, six fresh API controls and bounded desktop UI observations.
+The archive digest was unchanged. This is not fresh PostgreSQL/full-suite, load,
+efficacy, mobile/human or deployment acceptance. Prior benchmark bytes were reused.
+[Reference metadata](research/repositories.json) keeps the October 2 inspection
+and a separate `next_phase_ui_review` API snapshot with eight repositories/SHAs.
+[KB findings](KB.md#next-phase-investigation) and the [proposed roadmap](ROADMAP.md)
+separate observed gaps from conditional product choices; no implementation follows
+from the investigation. Earlier source/receipt hashes below remain unchanged.
+
 ## Acceptance history
 
 Counts below are separate runs, never additive. Local results do not imply CI

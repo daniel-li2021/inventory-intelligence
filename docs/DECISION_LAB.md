@@ -138,3 +138,12 @@ in [RESULTS](RESULTS.md#lab-arithmetic-and-service). Source/environment and comb
 acceptance remain in [EVIDENCE](EVIDENCE.md#acceptance-history), with original
 receipts/screenshots unchanged. These are bounded synthetic/local observations;
 public service, full accessibility and production/business outcomes remain unverified.
+
+## Proposed next interface
+
+The October 12 [roadmap](ROADMAP.md#ui-direction-and-reference-comparison) compares
+Linear/Shopify/InvenTree workflow patterns and popular component/table/chart
+repositories, with checked links and adoption boundaries. It recommends incremental
+Lab hierarchy and terminology first, followed by a read-only multi-item workbench;
+a React/Vite redesign is conditional on that multi-route scope. These are plans,
+not delivered UI changes. Current API/validator/kernel semantics above stay authoritative.

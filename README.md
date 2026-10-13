@@ -10,6 +10,10 @@ explain saved results. Missing, stale or contradictory evidence yields
 [Current project state](docs/STATE.md) · [Engineering plan](docs/PLAN.md) ·
 [Knowledge and evidence](docs/README.md) · [Development workflow](CONTRIBUTING.md)
 
+[Proposed next phases](docs/ROADMAP.md): reliable read-only workbench, bounded
+evidence access and later actual-planner/supplier workflows. Investigation only;
+features remain paused until separately assigned.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]
@@ -66,7 +70,9 @@ cases, not commercial savings or service guarantees.
 [Lab semantics, API and operating instructions](docs/DECISION_LAB.md).
 [Hosted-demo readiness package](deploy/lab/README.md) prepares a bounded anonymous
 entry point, pinned container/proxy templates and release acceptance. No public
-service has been deployed; container and public-domain checks remain pending.
+service has been deployed. ARM64 container controls and one continuous HTTP campaign
+have local evidence; remaining stability, reference, human and public-domain gates
+are pending. [Current measured limits](docs/RESULTS.md#engineering-continuation).
 
 Keyboard users can run the presets, inspect focusable evidence tables with arrow
 keys and use the skip link. [Local accessibility review and limits](docs/RESULTS.md#browser-and-accessibility-results)

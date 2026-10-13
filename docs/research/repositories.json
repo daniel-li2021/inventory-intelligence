@@ -217,5 +217,112 @@
       "ref": "main",
       "commit": "8f652f4832d5534d5e0d8584cdb76d45fa087a7e"
     }
-  ]
+  ],
+  "next_phase_ui_review": {
+    "checked_on": "2026-10-12",
+    "retrieved_at_utc": "2026-10-13T05:11:32.073729+00:00",
+    "method": "Unauthenticated GitHub REST metadata and default-branch commit; stars are time-specific adoption signals, not quality scores",
+    "repositories": [
+      {
+        "full_name": "shadcn-ui/ui",
+        "html_url": "https://github.com/shadcn-ui/ui",
+        "metadata_url": "https://api.github.com/repos/shadcn-ui/ui",
+        "stargazers_count": 125458,
+        "archived": false,
+        "default_branch": "main",
+        "pushed_at": "2026-10-12T17:45:44Z",
+        "license_spdx": "MIT",
+        "inspected_head_sha": "30a58d4498f270af1c1e981a7d78a15cf5740841",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      },
+      {
+        "full_name": "satnaing/shadcn-admin",
+        "html_url": "https://github.com/satnaing/shadcn-admin",
+        "metadata_url": "https://api.github.com/repos/satnaing/shadcn-admin",
+        "stargazers_count": 15716,
+        "archived": false,
+        "default_branch": "main",
+        "pushed_at": "2026-09-10T22:30:37Z",
+        "license_spdx": "MIT",
+        "inspected_head_sha": "e16c87f213a5ba5e45964e9b67c792105ec74d26",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      },
+      {
+        "full_name": "TanStack/table",
+        "html_url": "https://github.com/TanStack/table",
+        "metadata_url": "https://api.github.com/repos/TanStack/table",
+        "stargazers_count": 28485,
+        "archived": false,
+        "default_branch": "main",
+        "pushed_at": "2026-10-12T16:50:28Z",
+        "license_spdx": "MIT",
+        "inspected_head_sha": "95c4768496c07b45b1e65d8e33c3291ac66eae9b",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      },
+      {
+        "full_name": "radix-ui/primitives",
+        "html_url": "https://github.com/radix-ui/primitives",
+        "metadata_url": "https://api.github.com/repos/radix-ui/primitives",
+        "stargazers_count": 19388,
+        "archived": false,
+        "default_branch": "main",
+        "pushed_at": "2026-10-12T23:24:07Z",
+        "license_spdx": "MIT",
+        "inspected_head_sha": "a2324b5d8e663d648dc1b66d86197c4af1c68b7e",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      },
+      {
+        "full_name": "apache/echarts",
+        "html_url": "https://github.com/apache/echarts",
+        "metadata_url": "https://api.github.com/repos/apache/echarts",
+        "stargazers_count": 67488,
+        "archived": false,
+        "default_branch": "master",
+        "pushed_at": "2026-10-12T01:12:04Z",
+        "license_spdx": "Apache-2.0",
+        "inspected_head_sha": "34f4d927eafe251f26f63afd3aeefa30f2feba30",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      },
+      {
+        "full_name": "inventree/InvenTree",
+        "html_url": "https://github.com/inventree/InvenTree",
+        "metadata_url": "https://api.github.com/repos/inventree/InvenTree",
+        "stargazers_count": 7703,
+        "archived": false,
+        "default_branch": "master",
+        "pushed_at": "2026-10-13T03:33:33Z",
+        "license_spdx": "MIT",
+        "inspected_head_sha": "e0f3d293d32984731b4e6cbdfc2af72f1f49dd6b",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      },
+      {
+        "full_name": "metabase/metabase",
+        "html_url": "https://github.com/metabase/metabase",
+        "metadata_url": "https://api.github.com/repos/metabase/metabase",
+        "stargazers_count": 49635,
+        "archived": false,
+        "default_branch": "master",
+        "pushed_at": "2026-10-13T04:45:46Z",
+        "license_spdx": "NOASSERTION",
+        "inspected_head_sha": "421a100e3337c364bbf36291db6103c9917c0878",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit",
+        "license_review": {
+          "source": "https://www.metabase.com/license",
+          "conclusion": "Official site distinguishes AGPL Open Source Edition and embedding/commercial licenses; API NOASSERTION is not permissive reuse approval"
+        }
+      },
+      {
+        "full_name": "Nixtla/statsforecast",
+        "html_url": "https://github.com/Nixtla/statsforecast",
+        "metadata_url": "https://api.github.com/repos/Nixtla/statsforecast",
+        "stargazers_count": 4929,
+        "archived": false,
+        "default_branch": "main",
+        "pushed_at": "2026-10-13T01:01:06Z",
+        "license_spdx": "Apache-2.0",
+        "inspected_head_sha": "acb038e34c38876102a10a6fcefccc1bbaadaa1a",
+        "inspection_scope": "Repository metadata and primary documentation; no complete upstream code audit"
+      }
+    ]
+  }
 }

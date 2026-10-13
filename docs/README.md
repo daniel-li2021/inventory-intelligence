@@ -22,10 +22,13 @@
 | Active plan | Scope / status | Next action |
 |---|---|---|
 | [Engineering readiness](PLAN.md) | Local continuation complete as practical; one continuous HTTP campaign | Remaining continuous/rate/client cells, x86/two-date, dense-evidence, serial1000 and human gates. |
+| [Next implementation phases](ROADMAP.md) | Proposed; October 12 investigation complete, implementation unassigned | Scope reliable read-only workbench; serving boundaries/JIT/Lab clarity first, bounded evidence and multi-item views next. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.
-The paused unmerged planner checkout is identified in STATE, not an accepted plan.
+The paused unmerged planner commits and unavailable checkout are identified in STATE,
+not an accepted implementation. ROADMAP owns proposed future execution; its presence
+does not resume features or approve new studies/deployment.
 
 ## Maintenance rules
 

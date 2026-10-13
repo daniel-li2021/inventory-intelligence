@@ -1,11 +1,12 @@
 # Current project state
 
-Updated: 2026-10-04 (America/Los_Angeles). Replace stale facts after each phase or
+Updated: 2026-10-12 (America/Los_Angeles). Replace stale facts after each phase or
 material checkpoint; link evidence instead of appending a progress diary.
 
 Integration mode: AUTO
 
-Phase: engineering readiness; local continuation complete as practical; reference/stability/release gates pending.
+Phase: next-phase investigation complete; proposed roadmap awaits implementation scope.
+Engineering reference/stability/release gates remain pending.
 Features remain paused. The user assigned the remaining benchmark checks and one
 evidence-led optimization on October 4, selecting available local runtimes only.
 Native batch/scale checks, five fresh ARM64 Linux campaigns and timed JIT diagnosis
@@ -13,7 +14,8 @@ are complete. One full continuous HTTP window and verified app crash passed;
 short/discontinuous/interrupted attempts remain excluded from stability confirmation.
 Wall-clock discontinuities caused the three-hour target to overrun; measurements
 stopped and clock guards/journaling were repaired. Paid deployment and planner
-feature resumption require their own scope decision.
+feature resumption require their own scope decision. The October 12 assignment
+authorized investigation and planning only; no product code was changed.
 
 ## Integrated and measured
 
@@ -36,15 +38,23 @@ feature resumption require their own scope decision.
 
 ## Active work and next action
 
+- [Next phases](ROADMAP.md): 22 actionable opportunities and researched UI choices.
+  Recommendation: reliable read-only workbench, beginning with serving boundaries,
+  one isolated planning-JIT comparison and incremental Lab clarity; then bounded
+  evidence access/multi-item views. Implementation remains unassigned/paused.
+  [Fresh focused review receipt](review/next-phase-investigation.json): 34 Lab/API/
+  hosted checks and six API controls; no new DB/load/model/deployment evidence.
 - [Engineering plan](PLAN.md): remaining continuity-verified HTTP/rate/client,
   x86/two-date, dense-evidence, serial1000 and independent human checks.
   ARM64 one-date results do not complete the reference gate; Linux JIT tuning
   needs a separate comparison after the assigned single optimization.
   Other research possibilities remain conditional knowledge, not active plans.
   [Registry](README.md#plans-and-work-status).
-- Preserve unmerged planner protocol commits `55f4170` / `538d29d` and unfinished
-  scripts/adapter/fixture/tests in `/private/tmp/ii-planner-closed-loop` on
-  `codex/planner-closed-loop`. They are excluded from accepted main evidence.
+- Preserve unmerged planner protocol/control commits `55f4170` / `538d29d` on
+  `codex/planner-closed-loop`. October 12 inspection found only empty directories
+  at `/private/tmp/ii-planner-closed-loop`, no `.git`/files, and a prunable registration.
+  Previously noted uncommitted implementation is unavailable there; reconstruct
+  from committed controls only when assigned. Branch work is not accepted main evidence.
 - After each merge, verify remote main, return the primary checkout to current main
   and retire the completed local task branch/clean worktree. Integrated original tips
   from earlier branch cleanup remain in local `archive/integrated/*` tags.

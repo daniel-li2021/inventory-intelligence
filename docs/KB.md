@@ -89,6 +89,44 @@ optimization is now measured. Keep further engine changes separate from diagnosi
 Speculative queues,
 Redis, Kubernetes, sharding, ORMs, indexes or advanced models do not follow from this.
 
+## Next-phase investigation
+
+October 12 inspection of main `b5b8d5a` and fresh bounded Lab checks is recorded in
+[this receipt](review/next-phase-investigation.json). The actionable follow-up is
+the [proposed roadmap](ROADMAP.md), not automatic feature resumption.
+
+- The architecture already supports warehouse-grained reliability and has extensive
+  decision research. Its largest capability gap is the operational journey: one
+  browser replay cannot browse inventory, triage findings, review commitments,
+  follow receipts or demonstrate execution of actual planner proposals.
+- Whole-batch revalidation and archive-wide demand reads are visible in the code;
+  only the saved JIT profile establishes a measured second bottleneck. Scoped JIT
+  comparison precedes batch reuse/index/cache changes. Valid-but-unreadable large
+  reports need a versioned complete-evidence representation, not larger caps or
+  frontend virtualization alone.
+- The Lab multiplier transforms training and future together; it is a coherent
+  counterfactual rather than a forecast-surprise experiment. Service threshold
+  compares a result and does not set safety. Total cost comparisons can cover
+  unequal runoff lengths. These distinctions should shape controls/navigation.
+- Fresh 34 focused tests and six API controls passed without changing the archive
+  digest. Assessable responses were 333,120–338,392 bytes. Desktop review showed
+  first metric cards at approximately y=671px in a 1280×720 viewport. A 320px
+  override did not take effect, so fresh mobile/speech/zoom acceptance is absent.
+- `codex/planner-closed-loop` retains only two unmerged committed protocol/control
+  files relative to main. Its registered temporary checkout now contains no files
+  or `.git`; previously noted uncommitted implementation cannot be presumed saved.
+  Preserve the branch; recreate from committed controls only when assigned.
+- Runtime core SQL deadlines, application metrics, persistent product workflows,
+  migrations and private-user isolation need explicit designs. Their absence is
+  not proof of a current anonymous synthetic-demo security incident. Branch
+  protection was inaccessible (401); public ruleset listing was empty.
+- Recommended UI is a compact attention queue, item/decision detail and guided Lab
+  with linked exact evidence. [Reference comparison](ROADMAP.md#ui-direction-and-reference-comparison)
+  distinguishes borrowed patterns from code adoption. Current metadata/SHAs are
+  appended separately in [research metadata](research/repositories.json), preserving
+  the earlier inspection. Incremental vanilla improvements precede conditional
+  React/Vite/TanStack adoption for a genuinely multi-route scope.
+
 ## Source and tool lessons
 
 This consolidates the **2026-10-02 inspection**, not current upstream advice.

@@ -12,6 +12,13 @@ chosen two-hour ceiling, not the completed original pilot's receipt.
 Reference workload/SLOs remain unchanged. The separate eight-hour program,
 feature resumption, paid host and public deployment remain outside this assignment.
 
+The October 12 [next-phase investigation](ROADMAP.md) reuses these outcomes and
+proposes a smaller reliable-workbench phase. It does not complete or rewrite this
+confirmation protocol, authorize new measurements, or resume features. Serving
+timeout/deadline and planning-JIT changes need separately assigned scope; all
+unmeasured reference/stability cells below remain open. A future local synthetic
+release envelope must be stated separately from the full reference claim.
+
 ## Phase handoff and checkpoints
 
 - [x] P0: inspect green correctness baseline, preserve paused planner work and

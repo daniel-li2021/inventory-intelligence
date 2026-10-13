@@ -1,0 +1,176 @@
+{
+  "checked_on": "2026-10-12",
+  "source_commit": "b5b8d5aa856d03a27b5fdb3a105aca600e2595e9",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "runtime": "macOS ARM64; source checkout and pinned Lab dependencies installed in disposable /private/tmp/ii-next-phase-deps",
+  "archive_digest_before": "651ca0e32d8e16d1b8b7c4642c84886051159adfd0e4d15ae40e92e92d2c7787",
+  "archive_digest_after": "651ca0e32d8e16d1b8b7c4642c84886051159adfd0e4d15ae40e92e92d2c7787",
+  "focused_tests": {
+    "modules": [
+      "tests.test_lab",
+      "tests.test_lab_api",
+      "tests.test_lab_hosted"
+    ],
+    "count": 34,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 4.62,
+    "warning": "Starlette TestClient warns that httpx integration is deprecated; no dependencies changed in repository"
+  },
+  "api_controls": [
+    {
+      "case": "clean",
+      "payload": {},
+      "http_status": 200,
+      "response_bytes": 336257,
+      "status": "assessable",
+      "proposed_order_qty": 12,
+      "total_cost": "327",
+      "immediate_fill_rate": "1"
+    },
+    {
+      "case": "spike",
+      "payload": {
+        "demand_percent": 125
+      },
+      "http_status": 200,
+      "response_bytes": 336296,
+      "status": "assessable",
+      "proposed_order_qty": 18,
+      "total_cost": "351",
+      "immediate_fill_rate": "1"
+    },
+    {
+      "case": "delay",
+      "payload": {
+        "supplier_delay_days": 3
+      },
+      "http_status": 200,
+      "response_bytes": 338392,
+      "status": "assessable",
+      "proposed_order_qty": 12,
+      "total_cost": "1171",
+      "immediate_fill_rate": "11/28"
+    },
+    {
+      "case": "blocked",
+      "payload": {
+        "evidence_case": "incomplete_supply"
+      },
+      "http_status": 200,
+      "response_bytes": 176206,
+      "status": "not_assessable",
+      "proposed_order_qty": null,
+      "total_cost": null,
+      "immediate_fill_rate": null
+    },
+    {
+      "case": "zero",
+      "payload": {
+        "demand_percent": 0,
+        "reservation_qty": 0
+      },
+      "http_status": 200,
+      "response_bytes": 333120,
+      "status": "assessable",
+      "proposed_order_qty": 0,
+      "total_cost": "490",
+      "immediate_fill_rate": null
+    },
+    {
+      "case": "strict_integer",
+      "payload": {
+        "demand_percent": true
+      },
+      "http_status": 422,
+      "response_bytes": 117
+    }
+  ],
+  "scope": "Fresh bounded local correctness observations; no database, full suite, efficacy study, model calls, scale/stability claim or deployment",
+  "inspected_code_sha256": {
+    "src/inventory_intelligence/reliability.py": "4cd0d0998b2f199d3abf95bed78c5fe72edf0478b5408a99513d9f999a28e3db",
+    "src/inventory_intelligence/demand.py": "2a4b6c0320731317a7401f17f355091444a37e8602085af2a6f86057f2c38f72",
+    "src/inventory_intelligence/forecasting.py": "5a0e6f1377e4327fdf0f61d7525eccdac4c434a10a95beff30adeaffbfd9aee7",
+    "src/inventory_intelligence/planning_runs.py": "bf26dc7eeff59cb9956d47e916daae46a9c5823b89a9fcdf8afa574ab3197d04",
+    "src/inventory_intelligence/replenishment.py": "a0c4b38cbba79296ac1787fb44a23dd2e69e2c63916a109fcdd4664c14bf3bda",
+    "src/inventory_intelligence/lab.py": "78358dd51751e3aa4ca171be920e6aab4928a4fa367c53aa03188c93aa20822e",
+    "src/inventory_intelligence/lab_api.py": "8a34cd9ab3ae1b5ad3ce26a070b7b3a98b07d13c290f74f29c38743e657b260c",
+    "src/inventory_intelligence/lab_hosted.py": "44345e04008c78f59b9c5909031c9a452d1e1895ee187172750c9defbf5ad86c",
+    "src/inventory_intelligence/lab_static/index.html": "1efc5bf99f92490dfeccd545167b3605c8f9c64523b5f3d3e44b11a93bc76838",
+    "src/inventory_intelligence/lab_static/lab.js": "6308f371748d38a90709af2c7784643e9adf79475dcce52cb09865209957377d",
+    "src/inventory_intelligence/lab_static/lab.css": "52597242a70aa75a7a6399c5eed26af56fab1facf6959ec4f815b9db3ffc75b6",
+    "src/inventory_intelligence/copilot.py": "7d777b10dead6acb2f006f7b9ce632ac7d5afbb6b41513943b50114b08fc4b1c",
+    "src/inventory_intelligence/copilot_planning.py": "865ae9de5b72520a9466a322195db6a63d7f4f9a8b97a0bc59032368a73f9134",
+    "src/inventory_intelligence/copilot_language.py": "4307bc714523f2fcc88af7da5e5d7b89d604be01c36e56a68569e7b43350f01a",
+    "src/inventory_intelligence/decision.py": "715d9282e97fa7a303ac411da46ac762da045648a52aa0d5da952a01102adc87",
+    "src/inventory_intelligence/physical_count.py": "a171b3653841bc9953445aba746ce266eef80ae6667d42bb560d238f69f028b3",
+    "sql/schema.sql": "1bd4a6ae01a8dfa766742c2c690b6b096ab5aed391f21a845fd2db3de43b831c",
+    "sql/planning_schema.sql": "09dbfb71dfe557dbe75bb67431f5a35e175a36894f2363439f799e9e3fdbc7b8",
+    "sql/views.sql": "1fc4a143d660aff8573556fbf6562c2290e4777126e90ed1ab7fd4d9d3bbaf6f",
+    "sql/checks.sql": "ebfac998aca62ef4d1a5d07c7e52af507aeed8b4c82534be983e97843a2619f3",
+    "pyproject.toml": "08ac5c3a000d16fc4f294154aa310cc1989758308a2d392cb983985dadc716f3",
+    ".github/workflows/ci.yml": "2b8097a881f04b29ad8a16a803b1cc2797c68d85fd6b21669537e5fad3d31494",
+    "deploy/lab/requirements.txt": "b05f94c043ff70b1b0a3d395fe7680f200f615eef8e429952bd34742d6f59d3d"
+  },
+  "git": {
+    "local_main": "b5b8d5aa856d03a27b5fdb3a105aca600e2595e9",
+    "verified_remote_main": "b5b8d5aa856d03a27b5fdb3a105aca600e2595e9",
+    "remote_heads": [
+      "main"
+    ],
+    "unfinished_local_branch": "codex/planner-closed-loop",
+    "unfinished_tip": "538d29db0328ab5197074649a937b3f583531fd6",
+    "unmerged_commits": [
+      "55f4170",
+      "538d29d"
+    ],
+    "committed_difference_paths": [
+      "docs/CONTRACT_PLANNER_LOOP_V1.md",
+      "docs/examples/planner-loop-manual-v1.json"
+    ],
+    "registered_worktree": "/private/tmp/ii-planner-closed-loop",
+    "worktree_observation": "Directory skeleton exists; rg --files --hidden found no files; .git absent; git status fails not a git repository; worktree registration marked prunable. Registration and branch preserved.",
+    "protection_read_http_status": 401,
+    "public_rulesets": [],
+    "protection_claim": "Legacy branch protection and enforcement unverified"
+  },
+  "browser": {
+    "entrypoint": "inventory_intelligence.lab_hosted:app",
+    "base_url": "http://127.0.0.1:8765/",
+    "effective_viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "metric_cards_document_top_px": 671.1328125,
+    "observed": [
+      "Baseline renders with 12-piece proposal and 327 cost units",
+      "Demand +25% preset marks previous results stale and focuses Run",
+      "Run yields 18-piece proposal, 351 cost units and 100% immediate fill",
+      "Current desktop visual hierarchy and shadcn-admin dashboard/tasks page reviewed"
+    ],
+    "responsive_attempt": "Requested width 320; readback remained width 1280. Override reset. No new mobile acceptance.",
+    "not_checked": [
+      "screen-reader speech",
+      "zoom",
+      "forced colors",
+      "independent human comprehension",
+      "cross-browser matrix"
+    ]
+  },
+  "research_metadata_path": "docs/research/repositories.json#next_phase_ui_review",
+  "boundary": "Documentation-only investigation; 34 focused tests and six local API controls are current, retained large benchmarks were not replayed. No public-data acquisition, model calls, production deployment or source writes.",
+  "zero_cost_oracle": {
+    "scored_days": 28,
+    "runoff_days": 5,
+    "day_zero_on_hand": 10,
+    "day_one_confirmed_receipt": 5,
+    "later_ending_on_hand": 15,
+    "new_demand": 0,
+    "reservations": 0,
+    "orders": 0,
+    "holding_rate": 1,
+    "independent_expression": "10 + 32 * 15",
+    "expected_full_cost": 490,
+    "observed_full_cost": "490"
+  }
+}
