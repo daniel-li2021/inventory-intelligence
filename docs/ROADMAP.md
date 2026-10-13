@@ -912,18 +912,40 @@ hidden-information boundaries, full paid costs and fresh paired decision outcome
 are independently validated. No-winner/blocked outcomes remain valid findings.
 Real imports/users/orders still require their own scope and O19 protections.
 
-### Increment 4 — feasible supply/network actions and deeper apparel intelligence
+### Increment 4 — durable synthetic commitments and receipt feedback
 
-**User outcome:** where supported, compare feasible earlier receipts, supplier
-constraints and stock transfers; explore size curves, lifecycle and aged inventory.
-**Product track:** add the O24 options unlocked by O11–O14 and richer O18 evidence,
-not placeholder actions. **Engineering track:** supplier calendars/capacity, transit
-conservation/donor service, partial receipts, count/quality and economic/history
-contracts. Choose the binding use case, baseline and fresh O16 evaluation first;
-O15 challengers follow measured weaknesses. **Exit:** supported actions have exact
-availability/timing, complete costs and verified service/stock effects; insufficient
-data or infeasible supply is explicit. Broader supply-chain features remain valid
-long-term directions, not exclusions to avoid similarity with external products.
+**Scope selected from Increment 3:** six original controls agree, one original cold
+oracle needs the retained arithmetic erratum; 12 fresh paired stress traces have
+36 independently audited cells. Stockout/overdue gates block recovery, and quiet
+future demand makes Do Nothing cheaper than actual proposals. No universal winner.
+The highest-value next slice is O11/O21 durable source-bound decisions, commitments,
+truthful supplier ETA updates and partial receipts, rather than new forecasting or
+unsupported transfers/lifecycle calculations.
+
+**User outcome:** inspect actual execution and paid outcomes, compare paired policies,
+then exercise a clearly labeled local synthetic journal with persistent identities,
+partial receipts and remaining inbound. **Engineering:** SQLite transaction journal
+separate from operational source archives, immutable events, idempotent admission,
+non-backdated knowledge, exact receipt conservation, origin-visible supply projection,
+and reopen/rollback controls. No real purchase, company input or stock-table writes.
+The packaged default remains read-only; journal writes require an explicit local
+sandbox configuration. A replayed research journal is not production exactly-once.
+
+**Frozen acceptance before implementation:** admit clean day-0 proposal 12 once;
+repeating it after reopen adds no order. At promised date March 9, receive 5 pieces,
+leaving 7; notify March 10 ETA March 11; receive remaining 7 on March 11. March 8
+snapshot has 12 pending and zero received; March 9 has 7 pending/5 received;
+March 11 has zero pending/12 received. Repeating identical events is harmless;
+conflicting IDs, unknown decision, blocked/zero order, 8-piece overreceipt after 5,
+receipt before March 9, backdated notice/receipt, invalid/negative/fractional quantity,
+and failed transaction leave last-good state unchanged. Supplier update does not
+repair training coverage or create demand. A new immutable supply batch can be
+published by the synthetic owner and revalidated by the real planner.
+
+**Exit:** exact durable identities/conservation/history, actual saved execution browser
+journey, offline wheel and local demo pass. Public runtime, PostgreSQL17 reference,
+authenticated multi-user operational executor, real supplier adapters, deployment,
+transfers, aged-stock/size-curve economics and new models remain separate future work.
 
 ### Gate ownership and next assignment
 
