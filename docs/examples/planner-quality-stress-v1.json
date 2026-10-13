@@ -1,0 +1,256 @@
+{
+  "claims": "New frozen paired stress controls; not random efficacy, production or universal policy ranking. No tuning on results.",
+  "closure_days": 5,
+  "economics": {
+    "backlog": 10,
+    "holding": 1,
+    "purchase": 2,
+    "setup": 2
+  },
+  "history": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "initial_stock": 10,
+  "policies": [
+    "actual",
+    "do-nothing",
+    "fixed-18"
+  ],
+  "score_days": 9,
+  "start": "2026-03-07",
+  "synthetic_only": true,
+  "traces": [
+    {
+      "demand": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "first_order_delay": 0,
+      "id": "steady-2",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "first_order_delay": 0,
+      "id": "steady-4",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        1,
+        5,
+        1,
+        5,
+        1,
+        5,
+        1,
+        5,
+        1
+      ],
+      "first_order_delay": 0,
+      "id": "alternating",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5
+      ],
+      "first_order_delay": 0,
+      "id": "rising",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        5,
+        4,
+        4,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ],
+      "first_order_delay": 0,
+      "id": "falling",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        8,
+        2,
+        2,
+        2
+      ],
+      "first_order_delay": 0,
+      "id": "late-spike",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        0,
+        0,
+        6,
+        0,
+        0,
+        6,
+        0,
+        0,
+        6
+      ],
+      "first_order_delay": 0,
+      "id": "intermittent",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "first_order_delay": 1,
+      "id": "notification-1",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "first_order_delay": 3,
+      "id": "notification-3",
+      "missing_day_zero": false,
+      "notification": true
+    },
+    {
+      "demand": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "first_order_delay": 3,
+      "id": "silent-3",
+      "missing_day_zero": false,
+      "notification": false
+    },
+    {
+      "demand": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "first_order_delay": 0,
+      "id": "missing-then-recover",
+      "missing_day_zero": true,
+      "notification": true
+    },
+    {
+      "demand": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_order_delay": 0,
+      "id": "quiet",
+      "missing_day_zero": false,
+      "notification": true
+    }
+  ],
+  "version": "planner-quality-stress-v1"
+}
