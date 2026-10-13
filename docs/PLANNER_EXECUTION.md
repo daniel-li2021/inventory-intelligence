@@ -34,3 +34,16 @@ hashes bind committed source. Export refuses existing output files.
 
 Implementation/results and next capability scope will be recorded here after the
 frozen controls pass. Real intake, orders, deployment and public runtime remain gated.
+
+## Original control erratum
+
+The first actual-run check rejected one of the seven original controls. For cold
+shortage, zero opening stock and five forecasts of 3 yield balances
+−3/−6/−9/−12/−15. Prefix safety 2 therefore needs 17 pieces, rounded to pack 6: 18,
+not the original 12. No production kernel or frozen original was altered.
+[Explicit erratum](examples/planner-loop-errata-v1.json) records the independently
+recalculated outcome: stock 0/0/9/6/3/0/0/0/0, backlog 3/6/0/0/0/0/3/6/9;
+12 immediate and 18 eventual pieces of 27; total cost 36 purchase + 18 holding +
+720 backlog + 2 setup = 776. The original expectation must continue to reject.
+The corrected control is a diagnostic arithmetic repair after first execution,
+not fresh held-out decision-quality evidence. The 12 new stress traces remain frozen.

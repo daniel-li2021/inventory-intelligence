@@ -1,0 +1,45 @@
+{
+  "cold-shortage": {
+    "accepted": 27,
+    "closure_cost": 450,
+    "cost_components": {
+      "backlog": 720,
+      "holding": 18,
+      "purchase": 36,
+      "setup": 2
+    },
+    "eventual_fulfilled": 18,
+    "immediate_fulfilled": 12,
+    "proposals": [
+      18,
+      null,
+      null
+    ],
+    "score_cost": 326,
+    "score_end_backlog": [
+      3,
+      6,
+      0,
+      0,
+      0,
+      0,
+      3,
+      6,
+      9
+    ],
+    "score_end_stock": [
+      0,
+      0,
+      9,
+      6,
+      3,
+      0,
+      0,
+      0,
+      0
+    ],
+    "terminal_backlog": 9,
+    "terminal_stock": 0,
+    "total_cost": 776
+  }
+}
