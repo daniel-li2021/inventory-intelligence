@@ -19,5 +19,5 @@ USER 10001:10001
 WORKDIR /tmp
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD python -c "import json,urllib.request; d=json.load(urllib.request.urlopen('http://127.0.0.1:8000/api/evidence',timeout=3)); assert d['synthetic'] is True and d['business_data']=='synthetic only'"
+    CMD python -c "import json,urllib.request; d=json.load(urllib.request.urlopen('http://127.0.0.1:8000/health/ready',timeout=5)); assert d['synthetic'] is True and d['status']=='ready'"
 CMD ["python", "-m", "uvicorn", "inventory_intelligence.lab_hosted:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1", "--limit-concurrency", "16", "--backlog", "32", "--timeout-keep-alive", "5", "--no-access-log", "--no-proxy-headers"]

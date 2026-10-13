@@ -10,11 +10,12 @@ explain saved results. Missing, stale or contradictory evidence yields
 [Current project state](docs/STATE.md) · [Engineering plan](docs/PLAN.md) ·
 [Knowledge and evidence](docs/README.md) · [Development workflow](CONTRIBUTING.md)
 
-[Proposed next phases](docs/ROADMAP.md): an Inventory Decision Journey with proactive
-insights, style/color/size/location exploration, evidence explanations and supported
-what-if comparisons. Engineering and product improvements share each increment;
-actual-planner/supplier workflows follow. Planning only; features remain paused
-until separately assigned.
+The Inventory Decision Workbench connects **Overview → Explore → Investigate →
+Compare → Decide**, with saved views and three-cutoff history. It surfaces risk,
+surplus opportunities and evidence problems across 50 apparel SKUs at two locations.
+The bundled synthetic catalog contains actual saved checker, forecast and planner
+outputs. [Product guide](docs/DECISION_LAB.md#product-capability-and-experience-boundary)
+· [Remaining roadmap](docs/ROADMAP.md#delivery-sequence-and-acceptance-gates).
 
 ```mermaid
 flowchart LR
@@ -42,7 +43,7 @@ outcomes and service/cost tradeoffs. [Evidence](docs/EVIDENCE.md) binds their or
 source views; [knowledge](docs/KB.md) retains lessons and conditional questions.
 The documentation index routes current interfaces and operations; STATE owns status.
 
-## Try the Decision Lab
+## Try the Decision Workbench
 
 The browser demo needs Python 3.12, with no database or model API key. From the
 repository root:
@@ -55,11 +56,31 @@ python -m pip install --no-build-isolation '.[lab]'
 python -m uvicorn inventory_intelligence.lab_api:app --host 127.0.0.1 --port 8000
 ```
 
-Open [the local Lab](http://127.0.0.1:8000). Start with demand +25%, hidden supplier
-delay, or incomplete supply. Compare the clean baseline, exact scenario outputs,
-stock/backlog trajectories and Decision Trace; download the comparison JSON.
-The bundled evidence comes from actual persisted runs against synthetic inputs
-at a recorded historical cutoff.
+Open [the local workbench](http://127.0.0.1:8000). Node is needed only for frontend
+changes; the Python package includes built React assets, licenses and evidence.
+No source upload, purchase execution or model call is available.
+
+Three-minute walkthrough:
+
+1. Select **2026-01-05**, open **At-risk stock**, and investigate **II-00 / Harbor**.
+   Recorded stock is 10 pieces; its advisory prefix proposal is 12. Inspect the
+   origin-known accepted orders, confirmed supply, pack rounding and exact source
+   references.
+2. Open **Compare**, change demand to 125%, and run the comparison: the proposal
+   becomes 18. A three-day hidden supplier delay alone keeps the proposal at 12;
+   service/cost describe a separate periodic policy. No-order versus proposal
+   balances are projections. Shared scored costs and unequal runoff remain separate.
+3. Open **History** for the same key: stock 10 → 4 → 22 and proposal 12 → 18 → 0;
+   its risk worsens, then improves. Revisit **2026-01-19 / II-02 / Upland** to see
+   incomplete reservations block a decision while retaining recorded stock.
+4. Explore **Excess stock** for a passing-reliability opportunity; switch to the
+   apparel matrix, save a local view, share its archive-bound URL or export exact
+   evidence. Missing/blocked quantities remain distinct from recorded zero.
+
+![Synthetic Inventory Decision Workbench](docs/review/product-overview.png)
+
+The original [single-item Scenario Lab](http://127.0.0.1:8000/lab) and its v1 APIs
+remain available:
 
 ![Synthetic Decision Lab baseline versus demand scenario](docs/review/decision-lab.jpg)
 

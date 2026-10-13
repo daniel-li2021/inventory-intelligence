@@ -6,6 +6,50 @@ synthetic/local studies, not commercial savings, production readiness or fresh
 results from documentation cleanup. Research studies have separate indexed
 [research results below](#research-results).
 
+## Product journey
+
+October 13 local acceptance covers authorized Increments 0–2. A targeted support
+review and eight-key independent controls preceded the 100-key/two-location catalog.
+The expanded package retains 605 actual PostgreSQL 18 reports at three business
+cutoffs, with original report reconstruction hashes and origin-visible sources.
+Its deterministic Risk/Opportunity/Evidence Problem/No-alert counts are respectively
+49/26/12/13, 62/25/0/13 and 37/25/12/26. These are authored synthetic controls,
+not retailer outcomes or population accuracy. [Contract and exact expectations](product-contract.md).
+
+One final focused run passed **62/62** product, independent oracle, legacy Lab,
+API and hosting tests in 47.873 seconds. The independent subset checks all 300
+key/cutoff outcomes, all 605 original report hashes, values above float precision,
+wrong-key/cutoff binding, future knowledge, coherently rehashed corruption, supply
+identity/completeness and same-size/restored-mtime package replacement. Recorded
+stock totals are 2010/1542/1776 pieces; zero-stock cells are 13 at every cutoff.
+Missing evidence retains trustworthy stock but suppresses derived proposals;
+unknown history cannot masquerade as resolution. Original kernels and 411 retained
+artifact/kernel hashes have no drift. This is focused local acceptance, not a fresh
+full database suite or remote CI result.
+
+Eight frontend state/input controls pass. Eighteen Chrome 155 browser controls
+cover the complete journey, exact projection rows, presets/manual filters,
+archive-bound saved/shareable selections, stale/reset/error/retry/export, a real
+held-response race, blocked decisions/history, keyboard, 320px layout and CSS 400%
+zoom with forced colors. The race and mobile overflow failed before correction
+and passed afterward. Native browser zoom, screen-reader/comprehension review and
+accessibility conformance remain unverified. [Desktop](review/product-overview.png)
+and [mobile](review/product-mobile.png) screenshots are developer observations.
+
+Frontend gzip sizes are 80,435 JS and 3,493 CSS bytes against frozen 256,000/40,960
+limits; initial API data was 56,040 bytes against 204,800. A fresh lockfile install
+reproduced five asset hashes. Installed-wheel verification runs outside the checkout
+with no database/Node runtime and verifies the product, original Lab, exact 12/18/null
+controls and served bytes. Clean temporary builds reject obsolete hashed assets;
+full upstream MIT notices and dependency metadata ship with the product.
+[Receipts and reproduction](EVIDENCE.md#product-journey).
+
+The advisory prefix proposal, no-order/proposal projection and separate periodic
+simulation retain different meanings. Only common scored windows have supported
+cost deltas; total-cost deltas are null when runoff differs. Transfers, expedited
+receipt feasibility, arbitrary order execution, monetary savings, operational
+imports and public release remain unsupported/unverified.
+
 ## Forecast selection and advisory planning
 
 Seven synthetic groups, 180 days, three stdlib methods, 7/14/28-day horizons and

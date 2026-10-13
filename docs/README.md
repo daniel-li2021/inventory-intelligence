@@ -11,7 +11,7 @@
 | [EVIDENCE](EVIDENCE.md) | Immutable reports, original Git source views and audit reproduction. |
 | [CONTRACTS](CONTRACTS.md) | Current interfaces/version identifiers; inventory, planning, Copilot and research kernels. |
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
-| [Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
+| [Product / Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
 | [Engineering pilot](RESULTS.md#local-engineering-pilot) / [reproduction](EVIDENCE.md#local-engineering-pilot) | Local exploratory measurements, limits and pending confirmation. |
 | [Engineering continuation](RESULTS.md#engineering-continuation) / [receipts](EVIDENCE.md#engineering-continuation) | Paired SQL improvement, scale/ARM64/runtime/recovery evidence and explicit remaining gates. |
 | [VALIDATION](VALIDATION.md) | Independent checks and disposable-database acceptance. |
@@ -22,13 +22,13 @@
 | Active plan | Scope / status | Next action |
 |---|---|---|
 | [Engineering readiness](PLAN.md) | Local continuation complete as practical; one continuous HTTP campaign | Remaining continuous/rate/client cells, x86/two-date, dense-evidence, serial1000 and human gates. |
-| [Next implementation phases](ROADMAP.md) | Increments 0–2 assigned October 13; implementation in progress | Targeted capability/experience review → complete synthetic Inventory Decision Journey; engineering and product slices delivered together. |
+| [Next implementation phases](ROADMAP.md) | Increments 0–2 delivered locally October 13; Increments 3–4 proposed | Actual-planner protocol and decision quality next when assigned; human/public/real-workflow gates remain. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.
 The paused unmerged planner commits and unavailable checkout are identified in STATE,
-not an accepted implementation. ROADMAP owns remaining future execution; the October 13 assignment authorizes
-Increments 0–2, without approving new decision-quality studies or deployment.
+not an accepted implementation. ROADMAP owns remaining future execution; the automation assignment authorizes integrated acceptance and Increments 3–4,
+including bounded frozen synthetic decision-quality studies; deployment remains excluded.
 
 ## Maintenance rules
 

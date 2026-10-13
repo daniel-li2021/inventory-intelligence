@@ -2,7 +2,7 @@
 
 Start with the [architecture, cost boundary and release gates](README.md#serving-architecture-and-limits).
 This package prepares a public synthetic demo; **nothing is deployed**. The local
-`lab_api:app` remains available. Hosted serving uses `lab_hosted:app`, one process,
+`lab_api:app` serves the product workbench at `/` and the original Lab at `/lab`. Hosted serving uses `lab_hosted:app`, one process,
 4 KiB scenario bodies / five-second read deadline, a global burst-20 / 2-per-second
 API allowance and four active API requests. Admission limits return 429/503 and
 do not change inventory arithmetic or create writes.
@@ -24,7 +24,7 @@ archive identity, strict type rejection, oversized-body rejection, restricted do
 and browser headers. It performs bounded synthetic POSTs, not inventory actions.
 For a real release use HTTPS; `--ca-file` is only for an explicit test/private CA.
 
-API and index responses use `no-store`; exact asset paths may cache for one hour.
+API and index responses use `no-store`; exact built JS/CSS/SVG/license asset paths may cache for one hour.
 No API documentation, arbitrary static paths or uploads are exposed. CSP permits
 same-origin scripts and same-origin/inline styles because charts set CSS custom
 properties; it does not permit inline scripts. Reverse-proxy errors receive the
@@ -69,11 +69,14 @@ python -m scripts.check_hosted_lab --base-url "https://$LAB_DOMAIN" \
 The examples above require real reviewed values. Only Caddy publishes 80/443;
 Uvicorn has no host port. Caddy certificate/config volumes persist. App filesystem
 is read-only and runs as UID/GID 10001 with capabilities dropped and no secrets.
-The health check reads and validates the packaged synthetic evidence endpoint.
+The health check uses `/health/ready`, which verifies the packaged product archive
+before publishing a read-only validation receipt. File replacement invalidates it;
+invalid evidence yields 503. `/health/live` checks process liveness. Neither route
+spends user request allowance or runs scenarios.
 `depends_on: service_healthy` gates proxy startup; it does not implement continuing
 health-driven recovery. Restart policy restarts exited containers, not merely
-unhealthy live processes. Rate/concurrency saturation may temporarily fail a
-health probe; investigate before claiming evidence corruption.
+unhealthy live processes. Product readiness does not spend user rate/concurrency allowance; an application
+process or evidence failure still requires investigation.
 
 Resource caps are app 0.5 CPU / 256 MiB / 64 PIDs and proxy 0.25 CPU / 128 MiB /
 64 PIDs; swap limits equal memory caps. Actual enforcement requires Linux runtime
@@ -180,3 +183,13 @@ archive HTTP503. Its proxy is root as configured and bound only to loopback HTTP
 with an additional bridge for local ingress. Runtime/load/fault receipts are
 separate from x86/two-date reference confirmation, public TLS and independent
 human release acceptance; the slow-body proxy outcome remains a release gap.
+
+## Product package boundary
+
+The October 13 product adds bounded catalog/detail/evidence/history/scenario routes
+under the same admission/body/security envelope. The [local product acceptance](../../docs/EVIDENCE.md#product-journey)
+and installed-wheel smoke are distinct from prior ARM64 image/runtime receipts.
+No new product container, proxy 408 repair, public TLS, uptime or release acceptance
+was performed. The pinned Docker recipe now checks product readiness; build and
+verify an actual new image before making hosted claims. The original slow-body and
+reference/stability gaps remain in the engineering plan.

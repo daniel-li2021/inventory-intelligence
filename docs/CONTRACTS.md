@@ -7,6 +7,7 @@ Historical experiment grids and source bytes are recoverable from Git via
 Shared versioned interfaces require an explicit amendment, never an implicit change.
 
 
+- [Inventory product v1](#inventory-product-v1)
 - [Inventory v1](#inventory-v1)
 - [Planning v1](#planning-v1)
 - [Copilot v1](#copilot-v1)
@@ -16,6 +17,30 @@ Shared versioned interfaces require an explicit amendment, never an implicit cha
 - [Lost sales v1](#lost-sales-v1)
 - [Physical count v1](#physical-count-v1)
 - [Observed sales adapter](#observed-sales-adapter)
+
+## Inventory product v1
+
+`inventory-product-v1` is an additive read-only view over the versioned inventory,
+planning and separate simulation kernels. It does not supersede their interfaces
+or the original `decision-lab-v1` replay. The packaged evidence format is
+`inventory-product-evidence-v1`; the insight rule set is `inventory-insights-v1`.
+The [catalog contract](product-contract.md) owns fields, bounds, exact synthetic
+controls, normalized source/report retention and history comparability.
+
+Product quantities are decimal strings, fractions are `{numerator, denominator}`
+string pairs, unavailable values are null, and bounded page/count metadata is
+integer JSON. No client-side business arithmetic is permitted. Existing Lab integer/
+rational-string transport remains unchanged. Cutoff selectors are exact business
+dates, with explicit America/Los_Angeles origin/known-at clocks and separate saved
+report creation time. An old archive/schema cannot silently become current data.
+
+GET routes: `/api/product/overview` (also `/api/product`), `/explore`, `/detail`,
+`/history` and `/evidence` under `/api/product`. POST `/api/product/scenario`
+(alias `/scenarios`) requires selected cutoff/SKU/location, the archive digest and
+bounded partial control overrides. Unknown/repeated query fields or invalid
+selectors/controls return 422, archive mismatch 409 and invalid/missing evidence
+503. Evidence pages are selected-key/section-bound; there is no full-archive API.
+Live/ready health routes are separate from admitted user calculation requests.
 
 ## Inventory v1
 

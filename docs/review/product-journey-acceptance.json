@@ -1,0 +1,340 @@
+{
+  "accessibility_conformance": "not_claimed",
+  "actual_saved_reports": 605,
+  "archive_digest": "b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9",
+  "developer_api_acceptance": {
+    "blocked_keys_per_cutoff": [
+      12,
+      0,
+      12
+    ],
+    "business_key_cutoff_controls": 300,
+    "checks": [
+      "Exact full risk/opportunity/evidence/no-alert sets and quantities",
+      "New/persistent/worsening/improved/unknown history states",
+      "Preset-equivalent filters, zero-count selections, complete filtered matrices",
+      "Origin LA midnight at 08:00 UTC; unknown clock/key/filters fail422",
+      "Archive selection mismatch409 and invalid archive503",
+      "Cross-key/cross-cutoff rehashed bindings fail503",
+      "Rehashed calculation corruption and future knowledge fail503",
+      "Global nonpassing duplicate inventory blocks recommendations",
+      "Same-size restored-mtime cache replacement fails503; restoring original succeeds",
+      "Source and original report bytes/hashes remain immutable; corruption fixtures are deep copies",
+      "Incomplete recommendation/comparison values null, unsupported capabilities false",
+      "Legacy Lab proposals12/18/12; delayed fill11/28; zero denominator null and penalty490",
+      "Inspectable isolated duplicate control: two22piece source rows, R005fail, nullproposal; normal88assessable catalog unchanged, unknownselector422/stalearchive409"
+    ],
+    "command": "PYTHONPATH=src:/private/tmp/ii-next-phase-deps python3 -m unittest discover -s tests -p test_product_journey.py -v",
+    "elapsed_seconds": 29.913,
+    "large_integer_public_transport": {
+      "on_hand": "9007199254740993",
+      "proposal": "0",
+      "terminal_surplus_above_safety": "9007199254740973"
+    },
+    "original_reconstructed_report_hash_controls": 605,
+    "scope_note": "Independent frozen hand controls over actual saved synthetic outputs; no load/reference/public-runtime or commercial-benefit claim.",
+    "status": "pass",
+    "tests": 16,
+    "trusted_stock_totals": [
+      2010,
+      1542,
+      1776
+    ],
+    "zero_stock_keys_per_cutoff": [
+      13,
+      13,
+      13
+    ]
+  },
+  "developer_browser_acceptance": {
+    "accessibility_conformance": "not_claimed",
+    "api_response_sizes": [
+      {
+        "bytes": 29017,
+        "path": "/api/product/overview"
+      },
+      {
+        "bytes": 28783,
+        "path": "/api/product/overview"
+      },
+      {
+        "bytes": 3155,
+        "path": "/api/product/control"
+      },
+      {
+        "bytes": 53446,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 42778,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 3903,
+        "path": "/api/product/detail"
+      },
+      {
+        "bytes": 1087,
+        "path": "/api/product/evidence"
+      },
+      {
+        "bytes": 3772,
+        "path": "/api/product/scenario"
+      },
+      {
+        "bytes": 29017,
+        "path": "/api/product/overview"
+      },
+      {
+        "bytes": 3906,
+        "path": "/api/product/detail"
+      },
+      {
+        "bytes": 4546,
+        "path": "/api/product/history"
+      },
+      {
+        "bytes": 40341,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 25237,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 4042,
+        "path": "/api/product/detail"
+      },
+      {
+        "bytes": 4559,
+        "path": "/api/product/history"
+      }
+    ],
+    "assets": [
+      {
+        "bytes": 263252,
+        "gzip_bytes": 80955,
+        "path": "/product-static/index-DraVftRN.js"
+      },
+      {
+        "bytes": 13116,
+        "gzip_bytes": 3514,
+        "path": "/product-static/index-NGZggGQj.css"
+      },
+      {
+        "bytes": 217,
+        "gzip_bytes": 182,
+        "path": "/product-static/favicon.svg"
+      }
+    ],
+    "browser": "155.0.8059.40",
+    "checks": [
+      "overview_loaded",
+      "lazy_duplicate_control_original_rows_and_blocked_proposal",
+      "preset_manual_equivalence",
+      "url_reload_saved_view",
+      "saved_source_projection_independent_quantities",
+      "investigate_evidence",
+      "compare_supported_scenario",
+      "stale_reset",
+      "error_retry_last_good",
+      "export",
+      "late_old_scenario_cannot_replace_new_cutoff",
+      "decide_advisory",
+      "history_three_cutoffs",
+      "blocked_journey_missing_is_unknown",
+      "mobile_320_no_body_overflow",
+      "keyboard_focus",
+      "zoom_400_forced_colors_keyboard",
+      "no_console_errors",
+      "bounded_assets_and_view_data"
+    ],
+    "console_errors": [],
+    "human_comprehension": "not_performed",
+    "initial_view_bytes": 57800,
+    "injected_failure_console_messages": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "kind": "developer_browser_acceptance",
+    "model_calls": 0,
+    "operational_writes": 0,
+    "scope_note": "No unexpected console errors; controlled injected 503 messages are recorded separately. CSS 400 percent focus check does not establish native browser zoom or accessibility conformance.",
+    "status": "pass",
+    "synthetic_only": true,
+    "viewport_checked": 320,
+    "zoom_check": "CSS 400 percent with keyboard focus"
+  },
+  "independent_human_comprehension": {
+    "requirement": "An independent person completes the journey and distinguishes planner proposals, periodic simulation, blocked decisions and executed actions; agent/browser checks cannot satisfy this gate.",
+    "status": "not_performed"
+  },
+  "kind": "synthetic_product_journey_acceptance",
+  "oracle": {
+    "100_key_category_counts": [
+      {
+        "evidence": 12,
+        "none": 13,
+        "opportunity": 26,
+        "risk": 49
+      },
+      {
+        "evidence": 0,
+        "none": 13,
+        "opportunity": 25,
+        "risk": 62
+      },
+      {
+        "evidence": 12,
+        "none": 26,
+        "opportunity": 25,
+        "risk": 37
+      }
+    ],
+    "business_facts": {
+      "accepted_pieces_per_day": 4,
+      "confirmed_inbound_day_one": 5,
+      "lead_days": 2,
+      "minimum_order_pieces": 10,
+      "pack_pieces": 6,
+      "pending_inbound_excluded": 100,
+      "reservations_due_day_zero": 3,
+      "review_days": 3,
+      "safety_pieces": 2,
+      "training_days": 28
+    },
+    "first_eight_proposals": [
+      [
+        12,
+        0,
+        0,
+        0,
+        12,
+        12,
+        null,
+        18
+      ],
+      [
+        18,
+        12,
+        0,
+        0,
+        12,
+        12,
+        0,
+        18
+      ],
+      [
+        0,
+        12,
+        0,
+        0,
+        12,
+        null,
+        0,
+        18
+      ]
+    ],
+    "history_controls": {
+      "key_0": [
+        "unknown",
+        "worsening",
+        "improved"
+      ],
+      "key_1": [
+        "unknown",
+        "new",
+        "persistent"
+      ],
+      "key_5": [
+        "unknown",
+        "persistent",
+        "unknown"
+      ],
+      "key_6": [
+        "unknown",
+        "new",
+        "persistent"
+      ]
+    },
+    "method": "Independent hand arithmetic from frozen docs/product-contract.md, no implementation calculators",
+    "projection_controls": {
+      "pending_only": {
+        "proposal": 18,
+        "raw_need": 15,
+        "stock": 10
+      },
+      "stock_10": {
+        "balances": [
+          3,
+          4,
+          0,
+          -4,
+          -8
+        ],
+        "proposal": 12,
+        "raw_need": 10
+      },
+      "stock_22": {
+        "balances": [
+          15,
+          16,
+          12,
+          8,
+          4
+        ],
+        "proposal": 0
+      },
+      "stock_4": {
+        "balances": [
+          -3,
+          -2,
+          -6,
+          -10,
+          -14
+        ],
+        "proposal": 18,
+        "raw_need": 16
+      },
+      "stock_40": {
+        "balances": [
+          33,
+          34,
+          30,
+          26,
+          22
+        ],
+        "proposal": 0,
+        "terminal_surplus_above_safety": 20
+      },
+      "zero_demand": {
+        "fill": null,
+        "fill_denominator": 0,
+        "proposal": 0
+      }
+    }
+  },
+  "production_or_real_business_benefit": "not_claimed",
+  "public_runtime_release": "not_claimed",
+  "scope": "Authorized roadmap Increments 0\u20132, local synthetic offline read-only product",
+  "screenshots": {
+    "desktop": {
+      "path": "/private/tmp/ii-product-overview.png",
+      "sha256": "063ee3524cae78cf0316a4f8074d8d46de1ee6b26979616af6b2034e9979378a"
+    },
+    "mobile_320": {
+      "path": "/private/tmp/ii-product-mobile.png",
+      "sha256": "5844629299334650b990683334113d4064090201600c33bbdc97d0ea0829f61f"
+    }
+  },
+  "small_independent_acceptance": {
+    "actual_saved_reports": 53,
+    "archive_digest": "f04e01ae8175e615203038736f01ef763ecf26637074f48a7372ca98bd75347a",
+    "business_clock_controls": 24,
+    "cutoffs": 3,
+    "keys": 8,
+    "proposal_and_category_controls": 24,
+    "scope": "Independent values fixed in receipt before adapter; actual saved outputs, no generated expected quantities",
+    "status": "pass"
+  }
+}

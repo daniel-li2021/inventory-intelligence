@@ -13,7 +13,8 @@ python -m pip install --no-build-isolation '.[lab]'
 python -m uvicorn inventory_intelligence.lab_api:app --host 127.0.0.1 --port 8000
 ```
 
-Open http://127.0.0.1:8000. The wheel includes frontend assets and synthetic
+Open http://127.0.0.1:8000 for the product workbench or `/lab` for the original
+single-item replay. The wheel includes frontend assets and synthetic
 evidence. No database, external fonts/CDNs, model key or LLM request is needed.
 API routes are GET `/api/lab`, POST `/api/scenarios`, GET `/api/evidence`.
 Controls accept bounded integers only; unknown fields are rejected. The app has
@@ -93,7 +94,7 @@ archive evidence yields HTTP 503; direct adapter evaluation suppresses both side
 `/api/lab/evidence` aliases `/api/evidence`. Injected archive/override inputs are
 copied; the clean baseline stays immutable when a scenario is blocked.
 
-The packaged frontend renders backend business values and exact rational tables;
+The original Lab frontend renders backend business values and exact rational tables;
 number conversion is for chart/display coordinates only. Input edits mark results
 stale; failed requests retain the last successful response and expose a focusable
 error/retry. Server evidence is rendered as text. No external font/CDN/chart library,
@@ -186,3 +187,31 @@ human comprehension and accessibility conformance. Public TLS, hosting/cost, lar
 engineering capacity and real/private workflows keep their existing gates. This
 bounded product assignment does not reopen consumed model studies or planner
 execution research. See the remaining [roadmap](ROADMAP.md#delivery-sequence-and-acceptance-gates).
+
+## Delivered product API and local demo
+
+The product shell uses React/TypeScript/Vite because six linked pages share exact
+key, cutoff, evidence, scenario and saved-view state. Built files, upstream notices
+and the normalized synthetic archive ship in the Python package. Runtime startup
+remains the command above; no Node, database or model key is needed.
+
+The additive [product contract](CONTRACTS.md#inventory-product-v1) and
+[frozen catalog controls](product-contract.md) define the bounded read API.
+Summary/detail/history views avoid sending whole reports; source inspection fetches
+one selected section/page. The server validates the full package before caching a
+read-only receipt bound to file identity, and fails closed on replacement/corruption.
+Health liveness and readiness are separate and do not run user scenarios.
+
+[Three-minute walkthrough](../README.md#try-the-decision-workbench),
+[measured results](RESULTS.md#product-journey) and
+[installed-wheel/browser reproduction](EVIDENCE.md#product-journey) describe the
+current 100-key/two-location/three-cutoff envelope. Comparison exports retain source
+and calculation references, assumptions and stale state. Costs use a common 28-day
+scored window; unequal runoff totals have no supported numeric delta. History
+after missing coverage can introduce a newly supported insight while its numeric
+comparability remains unknown.
+
+The original `/api/lab`, `/api/scenarios` and `/api/evidence` contracts are unchanged.
+They serve the original fixed fixture; product controls cannot rewrite its archive.
+Public deployment, native zoom/screen-reader testing, independent comprehension,
+real data and executed orders remain unverified/unassigned as applicable.

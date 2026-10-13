@@ -4,12 +4,20 @@ One worker owns one global bucket; this limits admitted API work, not network Do
 """
 import asyncio
 import json
+from pathlib import Path
 import time
 
 from .lab_api import create_app
 
-API_PATHS = {'/api/lab', '/api/evidence', '/api/lab/evidence'}
-ASSETS = {'/', '/static/lab.css', '/static/lab.js'}
+API_PATHS = {'/api/lab', '/api/evidence', '/api/lab/evidence', '/api/product',
+             '/api/product/overview', '/api/product/explore', '/api/product/detail',
+             '/api/product/history', '/api/product/evidence', '/api/product/control'}
+POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios'}
+HEALTH_PATHS = {'/health/live', '/health/ready'}
+ASSETS = {'/', '/lab', '/static/lab.css', '/static/lab.js'} | {
+    '/product-static/'+path.name for path in Path(__file__).with_name('product_static').glob('*')
+    if path.is_file() and (path.suffix in {'.js', '.css', '.svg'}
+                          or path.name == 'THIRD_PARTY_LICENSES.txt')}
 HEADERS = [(b'x-content-type-options', b'nosniff'),
            (b'referrer-policy', b'no-referrer'),
            (b'permissions-policy', b'camera=(), microphone=(), geolocation=()'),
@@ -34,8 +42,10 @@ class HostedLab:
 
         async def secured(message):
             if message['type'] == 'http.response.start':
-                cache = b'public, max-age=3600' if path in ASSETS and path != '/' else b'no-store'
-                message = {**message, 'headers': [*message.get('headers', []), *HEADERS, (b'cache-control', cache)]}
+                cache = b'public, max-age=3600' if path in ASSETS and path not in {'/', '/lab'} else b'no-store'
+                existing = [(name, value) for name, value in message.get('headers', [])
+                            if name.lower() != b'cache-control']
+                message = {**message, 'headers': [*existing, *HEADERS, (b'cache-control', cache)]}
             await send(message)
 
         async def reject(status, detail, *, retry=False):
@@ -44,10 +54,10 @@ class HostedLab:
             await secured({'type': 'http.response.start', 'status': status, 'headers': headers})
             await secured({'type': 'http.response.body', 'body': json.dumps({'detail': detail}).encode()})
 
-        api = path in API_PATHS or path == '/api/scenarios'
-        if path not in API_PATHS | ASSETS | {'/api/scenarios'}:
+        api = path in API_PATHS | POST_PATHS
+        if path not in API_PATHS | POST_PATHS | ASSETS | HEALTH_PATHS:
             return await reject(404, 'Not found')
-        expected = 'POST' if path == '/api/scenarios' else 'GET'
+        expected = 'POST' if path in POST_PATHS else 'GET'
         if method != expected:
             return await reject(405, 'Method not allowed')
         if not api: return await self.application(scope, receive, secured)

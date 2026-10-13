@@ -2,10 +2,10 @@
 
 Investigated 2026-10-12 (America/Los_Angeles), against main `b5b8d5a`.
 Direction revised 2026-10-13 from the user's product-intelligence/UX guidance.
-Status: **Increments 0–2 authorized on 2026-10-13; implementation in progress**.
-The subsequent user assignment resumes these product increments under AUTO,
-including necessary engineering. Increments 3–4, new decision-quality studies,
-operational data and public/paid deployment remain unassigned. [STATE](STATE.md) owns scope; [PLAN](PLAN.md) retains the unfinished
+Status: **Increments 0–2 implemented and locally validated on 2026-10-13**.
+The subsequent user assignment authorized these product increments under AUTO,
+including necessary engineering. The automation now assigns integrated acceptance and Increments 3–4 with frozen
+synthetic studies. Operational data and public/paid deployment remain excluded. [STATE](STATE.md) owns scope; [PLAN](PLAN.md) retains the unfinished
 engineering confirmation protocol. This is the single pending product roadmap;
 completed findings belong in [KB](KB.md#next-phase-investigation), measured results
 in [RESULTS](RESULTS.md), and reference metadata in
@@ -821,6 +821,9 @@ synthetic demo and its measured/unsupported capability boundary (O20).
 
 ### Increment 0 — product capability and experience review
 
+**Delivered:** [capability/support map](DECISION_LAB.md#product-capability-and-experience-boundary),
+[frontend decision](DECISIONS.md) and frozen [independent controls](product-contract.md).
+
 **User outcome:** a concrete, feasible Inventory Decision Journey is ready to build.
 Reuse the October 12 investigation; this is a targeted product capability/UX review,
 not another broad backend audit. Map O06/O17/O18/O23–O25 to existing outputs and
@@ -842,6 +845,10 @@ The frozen eight-key controls and 100-key expansion are in the
 [product contract](product-contract.md).
 
 ### Increment 1 — first complete insight-to-decision journey
+
+**Delivered locally:** complete read-only journey after independent eight-key controls,
+with actual saved reports, exact insights, scoped evidence, supported scenarios and
+blocked/advisory decisions. [Results and explicit gates](RESULTS.md#product-journey).
 
 **User outcome:** opening the demo reveals a useful stockout/supply risk; the user
 can investigate its evidence, compare a supported what-if and understand the
@@ -869,6 +876,10 @@ calls are needed. Independent comprehension checks are recorded separately from
 developer checks; public or accessibility-conformance claims remain gated.
 
 ### Increment 2 — broader exploration, history and comparison
+
+**Delivered locally:** 100 keys/two locations/three immutable cutoffs, apparel matrix,
+manual/preset/saved/shareable views and compatible history deltas. Missing coverage
+remains unknown. [Acceptance](EVIDENCE.md#product-journey).
 
 **User outcome:** users explore styles and locations, revisit a saved view and see
 whether an insight appeared, persisted, worsened or improved across cutoffs.
@@ -924,9 +935,9 @@ remaining runtime/recovery, host/domain/cost and public-TLS approval. **Real/pri
 workflows:** O08/O19, identities/approval/action contracts and explicit data rights.
 Open gates do not imply failed unrelated local journey work or successful production.
 
-**Recommended next assignment:** Increment 0's targeted Product Capability &
-Experience Review, followed by Increment 1's complete synthetic Inventory Decision
-Journey. Keep the next development slice centered on “open an insight, understand
-its evidence, compare a supported response, and see the advisory/blocked decision,”
-with engineering scoped to that experience. The subsequent October 13 assignment authorizes Increments 0–2 end-to-end.
-Actual-planner studies, operational writes and deployment remain outside that scope.
+**Recommended next assignment:** Increment 3's bounded actual-planner protocol and
+independent controls, before claiming realized decision quality or adding models.
+Increments 0–2 are delivered within the declared synthetic/local envelope; independent
+human comprehension, accessibility conformance and public-runtime release remain
+separate unverified gates. No operational writes, new decision-quality study or
+paid/public deployment follows automatically from this completed product assignment.

@@ -5,6 +5,58 @@ This catalog consolidates acceptance/provenance from retired reviews. Reports in
 mutable current status. [STATE](STATE.md) owns present scope; [RESULTS](RESULTS.md)
 owns measured core outcomes; [KB](KB.md) owns constraints and unresolved questions.
 
+## Product journey
+
+[Independent acceptance](review/product-journey-acceptance.json) freezes manual
+expectations before implementation and records the separate eight-key, API/oracle,
+browser and unperformed human-comprehension boundaries. The
+[eight-key saved archive](review/product-small-evidence.json.gz) precedes the bundled
+`src/inventory_intelligence/product_evidence.json.gz` (100 keys, three cutoffs,
+605 saved reports). Content-addressed source/training objects reconstruct each
+original report and its digest without changing its values. Hashes are integrity
+checks, not signed producer attestations or current business truth.
+
+The [integration receipt](review/product-integration-acceptance.json) records the
+final 62-test run, original artifact/kernel preservation, installed-wheel checks
+and implementation source hashes. [Build budgets](../frontend/bundle-receipt.json)
+and [dependency/license inventory](../frontend/dependency-licenses.json) bind the
+locally bundled frontend. Existing research and Lab report bytes remain unchanged.
+
+Focused saved-only reproduction, with `.[lab]` installed:
+
+```sh
+python -m unittest tests.test_product tests.test_product_journey tests.test_product_hosted tests.test_lab tests.test_lab_api tests.test_lab_hosted -v
+python scripts/check_product_browser.py --base-url http://127.0.0.1:8000 --output /tmp/new-product-browser.json
+```
+
+The browser checker accepts `--node`, `--playwright`, `--chrome` and
+`--screenshot-dir`; `PLAYWRIGHT_MODULE`/`CHROME_EXECUTABLE` can select installed
+browser tooling. CI pins Playwright 1.62.1; the local observed browser was Chrome
+155. Browser tests make bounded synthetic requests and save local browser views,
+without external communications or operational actions.
+
+Build a wheel in a clean temporary source tree, install it, then run the smoke
+from outside the checkout; do not set `PYTHONPATH=src`:
+
+```sh
+python scripts/build_product_wheel.py --output-dir /tmp/new-product-wheels
+python -m pip install --no-deps /tmp/new-product-wheels/inventory_intelligence-0.1.0-py3-none-any.whl
+cd /tmp
+python /path/to/inventory-intelligence/scripts/check_product_package.py --output /tmp/new-product-wheel.json
+```
+
+The output directory must not contain that wheel already. Build tools remain
+pinned in README; `.[lab]` dependencies must be installed in the smoke environment.
+The clean builder compares exact asset sets/bytes and packaged evidence against
+validated source, rejecting retained obsolete hashed assets from incremental
+setuptools builds. A wheel hash identifies that build, not a promise that another
+build's ZIP timestamps reproduce it. [Fresh synthetic DB export](product-contract.md)
+is separate from saved-only acceptance; never overwrite retained archives.
+
+No fresh public TLS/container/release, capacity campaign, full database suite,
+independent human comprehension or accessibility-conformance result is claimed.
+The new CI job is defined; local success is not proof that it ran remotely.
+
 ## Next-phase investigation
 
 [October 12 receipt](review/next-phase-investigation.json) binds main `b5b8d5a`,
