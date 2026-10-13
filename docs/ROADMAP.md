@@ -2,9 +2,10 @@
 
 Investigated 2026-10-12 (America/Los_Angeles), against main `b5b8d5a`.
 Direction revised 2026-10-13 from the user's product-intelligence/UX guidance.
-Status: **proposed; investigation and planning only**. Nothing here resumes paused
-features, assigns a new benchmark program, approves operational data or authorizes
-deployment. [STATE](STATE.md) owns scope; [PLAN](PLAN.md) retains the unfinished
+Status: **Increments 0–2 authorized on 2026-10-13; implementation in progress**.
+The subsequent user assignment resumes these product increments under AUTO,
+including necessary engineering. Increments 3–4, new decision-quality studies,
+operational data and public/paid deployment remain unassigned. [STATE](STATE.md) owns scope; [PLAN](PLAN.md) retains the unfinished
 engineering confirmation protocol. This is the single pending product roadmap;
 completed findings belong in [KB](KB.md#next-phase-investigation), measured results
 in [RESULTS](RESULTS.md), and reference metadata in
@@ -836,7 +837,9 @@ versus O22 based on accepted screens/state, not a preselected framework rewrite.
 **Exit:** a field-by-field support/gap map, independent fixture expectations and
 explicit acceptance for every journey state. Mockups/illustrative values are labelled;
 no unsupported feasibility or realized action outcomes appear as existing results.
-This increment is proposed; the present task only revises the plan.
+The October 13 implementation assignment authorizes this increment.
+The frozen eight-key controls and 100-key expansion are in the
+[product contract](product-contract.md).
 
 ### Increment 1 — first complete insight-to-decision journey
 
@@ -925,5 +928,5 @@ Open gates do not imply failed unrelated local journey work or successful produc
 Experience Review, followed by Increment 1's complete synthetic Inventory Decision
 Journey. Keep the next development slice centered on “open an insight, understand
 its evidence, compare a supported response, and see the advisory/blocked decision,”
-with engineering scoped to that experience. This task authorizes the revised plan
-only; no feature implementation, fresh study or deployment is assigned.
+with engineering scoped to that experience. The subsequent October 13 assignment authorizes Increments 0–2 end-to-end.
+Actual-planner studies, operational writes and deployment remain outside that scope.

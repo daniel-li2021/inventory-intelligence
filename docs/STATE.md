@@ -5,9 +5,11 @@ material checkpoint; link evidence instead of appending a progress diary.
 
 Integration mode: AUTO
 
-Phase: product-journey roadmap revised; next increments await assignment.
+Phase: product journey Increments 0–2 assigned; implementation in progress.
 Engineering reference/stability/release gates remain pending.
-Features remain paused. The user assigned the remaining benchmark checks and one
+The October 13 assignment resumes product Increments 0–2 end-to-end under AUTO;
+actual planner execution, operational intake and deployment remain outside scope.
+The user assigned the remaining benchmark checks and one
 evidence-led optimization on October 4, selecting available local runtimes only.
 Native batch/scale checks, five fresh ARM64 Linux campaigns and timed JIT diagnosis
 are complete. One full continuous HTTP window and verified app crash passed;
@@ -16,7 +18,7 @@ Wall-clock discontinuities caused the three-hour target to overrun; measurements
 stopped and clock guards/journaling were repaired. Paid deployment and planner
 feature resumption require their own scope decision. The October 12 assignment
 authorized investigation and planning only. October 13 revised the plan toward
-product intelligence and UX; no product code, study or deployment was assigned.
+product intelligence and UX; no product code, study or deployment was assigned by that earlier revision.
 
 ## Integrated and measured
 
@@ -45,7 +47,9 @@ product intelligence and UX; no product code, study or deployment was assigned.
   O17/O18 and supported O24 comparisons lead; O25 history follows. Unrelated scale/
   performance gates do not block a bounded local prototype once assigned; exact
   evidence, fail-closed behavior and public/real-workflow gates remain mandatory.
-  Implementation remains unassigned/paused.
+  Increments 0–2 are now authorized: eight-key independent controls, then a
+  100-key/two-location/three-cutoff packaged replay; React/TypeScript/Vite shell.
+  [Product contract](product-contract.md) freezes expectations before implementation.
   [Fresh focused review receipt](review/next-phase-investigation.json): 34 Lab/API/
   hosted checks and six API controls; no new DB/load/model/deployment evidence.
 - [Engineering plan](PLAN.md): remaining continuity-verified HTTP/rate/client,

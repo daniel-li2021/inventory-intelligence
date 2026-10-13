@@ -139,16 +139,50 @@ acceptance remain in [EVIDENCE](EVIDENCE.md#acceptance-history), with original
 receipts/screenshots unchanged. These are bounded synthetic/local observations;
 public service, full accessibility and production/business outcomes remain unverified.
 
-## Proposed next interface
+## Product capability and experience boundary
 
-The October 12 [roadmap](ROADMAP.md#ui-direction-and-reference-comparison) compares
-Linear/Shopify/InvenTree workflow patterns and popular component/table/chart
-repositories, with checked links and adoption boundaries. The October 13 revision
-positions the Lab as a What-if Decision Explorer in the Inventory Decision Journey:
-Overview → Explore → Investigate → Compare → Decide. Automatic insights, apparel
-dimensions, presets, inline evidence explanations and visible freshness/coverage
-lead the product plan. Existing hidden-delay/projection comparisons stay distinct
-from feasible earlier receipts, arbitrary order execution or transfers, which need
-further contracts. A React/Vite redesign depends on accepted interaction complexity.
-These are plans, not delivered UI changes; current API/validator/kernel semantics
-above stay authoritative. See [increments and gates](ROADMAP.md#delivery-sequence-and-acceptance-gates).
+The authorized product journey is Overview → Explore → Investigate → Compare →
+Decide, with History linked from the selected key. The original replay remains at
+`/lab`; its v1 APIs and saved archive retain their meanings. The product adapter
+is additive, with a frozen [catalog and independent controls](product-contract.md).
+
+The targeted capability review maps existing evidence as follows:
+
+- **Inventory and apparel exploration (O06/O18):** operational styles/SKUs/warehouses,
+  snapshot/opening/coverage rows and saved R001–R005 results support dimensions and
+  recorded key-level stock. A complete global reliability pass is still required
+  by the planner; local clean stock cannot waive it. The adapter adds bounded
+  catalog/matrix/filter views, without relaxing the original fixed-Lab validator.
+- **Discovery (O23):** saved prefix projections support replenishment exposure and
+  pre-arrival shortage. A complete five-day no-order projection can support an
+  excess opportunity above the declared safety threshold. Missing demand, supply
+  or reconciliation becomes an Evidence Problem with null derived quantities.
+  These business rules are separate from R001–R005; reliability can pass while an
+  opportunity exists. Supplier lateness, lifecycle/age, valuation and feasible
+  transfer insights lack the necessary sources and remain unavailable.
+- **Explanation and comparison (O17/O24):** retained rule inputs, exact rounding and
+  calculation/source references support deterministic explanations. Prefix balance
+  with/without a proposal supports a projection comparison. Existing periodic
+  simulation supports hidden-delay what-ifs with its own policy and accounting
+  windows; it does not measure execution of the prefix proposal. Earlier lead time
+  is an assumption. Arbitrary order quantities, transfers, purchase execution and
+  commercial savings require later contracts.
+- **History (O25/O21 minimum):** separately saved cutoff/known-at reports support
+  key/rule observations and compatible exact deltas. Missing evidence is unknown;
+  changed policy/model/horizon must explain noncomparability. Immutable reports
+  retain their source bindings; later evidence cannot replace historical inputs.
+
+Each screen needs loading, unavailable/retry and explicit replay-context states.
+Explore has empty/filter/reset states. Investigate distinguishes recorded stock,
+applicability and missing evidence. Compare keeps saved baseline, edited controls,
+stale result and last successful result distinct. Decide renders advisory/blocked
+status and required review, with no execution control. History distinguishes new,
+persistent, worsening, improved and unknown observations. Saved local views and
+shareable URLs bind filter schema and archive identity; they do not promise live
+refresh or confer access.
+
+Developer checks and automated browser observations remain separate from independent
+human comprehension and accessibility conformance. Public TLS, hosting/cost, larger
+engineering capacity and real/private workflows keep their existing gates. This
+bounded product assignment does not reopen consumed model studies or planner
+execution research. See the remaining [roadmap](ROADMAP.md#delivery-sequence-and-acceptance-gates).
