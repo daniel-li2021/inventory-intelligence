@@ -47,7 +47,8 @@ final-code latency or throughput claim. Maximum 50×2 keys/12 versions remains a
 validation envelope; its execution/scale/resource acceptance is unmeasured.
 
 Final **118/118** focused backend/database/legacy controls pass in **61.335 s** on a
-fresh disposable PostgreSQL18 database; eight frontend controls and TypeScript/build
+fresh disposable PostgreSQL18 database; 23/23 retained-evidence/lineage controls
+pass against the committed implementation. Eight frontend controls and TypeScript/build
 budgets pass. **22/22** default and **14/14** dynamic Chrome developer browser checks
 cover stale/error/last-good/export, source bindings, delayed quantities, history,
 blocked evidence and actual 320px layout. An initially disabled manual comparison

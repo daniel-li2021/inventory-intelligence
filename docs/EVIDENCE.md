@@ -23,6 +23,9 @@ unmeasured. Reader measurements use the final code and warm filesystem. The
 [acceptance receipt](review/dynamic-phase-acceptance.json) records final 118-test,
 frontend, default/dynamic browser and installed-wheel evidence separately. Do not
 pool developer checks into human/efficacy/reference/production acceptance.
+[Final lineage confirmation](review/dynamic-phase-confirmation.json) records 23/23
+retained-evidence checks against the committed implementation; the original guard
+correctly refused uncommitted lineage-bound sources before that commit.
 
 ## Product journey
 

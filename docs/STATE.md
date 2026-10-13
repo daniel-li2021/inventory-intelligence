@@ -21,7 +21,8 @@ Public deployment and real operational intake remain excluded from this assignme
   days. Delay assumptions stay explicit; blocked data returns null. Quiet demand
   retains the extra-order cost counterexample. No new repeated-policy ranking.
 - Final local controls: 118/118 backend/database/legacy regressions, eight frontend
-  state controls, 22 default and 14 dynamic browser checks. Installed wheel serves
+  state controls, 23 retained-evidence/lineage checks, 22 default and 14 dynamic
+  browser checks. Installed wheel serves
   both catalogs/contrasts offline. [Evidence and limitations](RESULTS.md#dynamic-replay-and-insight-discovery-v2).
 
 - Overview → Explore → Investigate → Compare → Decide → History: 100 apparel keys,

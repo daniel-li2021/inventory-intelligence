@@ -1,0 +1,22 @@
+{
+  "implementation_commit": "394d848d555066432e7861030b1559809d32274f",
+  "kind": "final-local-lineage-confirmation",
+  "precondition": "The first run refused uncommitted lineage-bound sources; committing implementation satisfied the original guard. No historical archive was rebuilt or overwritten.",
+  "production_reference_or_public_acceptance": false,
+  "retained_evidence_and_lineage_tests": {
+    "passed": 23,
+    "seconds": 31.616,
+    "skips": 0,
+    "total": 23
+  },
+  "source_sha256": {
+    "docs/SYNTHETIC_REPLAY.md": "6274b3525b4d29d043259f02a6ec47f1a5dd7f4e1756c85163868d7998f10544",
+    "docs/examples/dynamic-controls-v1.json": "d28a664d8ca10078f74a4f3a9aecf18d59ef06d550c1e95c04c08d9294d56679",
+    "src/inventory_intelligence/decision_contrast.py": "d71dc80f18d86706af13322b99fe039bffd85986e6a1907935e05c79d5704992",
+    "src/inventory_intelligence/insights.py": "31cb24b46079d92b2ba77952401b1d2ce7d625eeaa2240634d40ed6e7b95f641",
+    "src/inventory_intelligence/planner_loop.py": "950f8d1de2fc0dc3073bd3f4b8ce3506df092548b187cd666ac5915dacd1dd24",
+    "src/inventory_intelligence/product.py": "3f7db88885d8a246ea9cdc11a1c6ec924ce73428d6e6ab609fbfa2fb96df2142",
+    "src/inventory_intelligence/product_api.py": "bb6a9c18d4665eecde05f19fbebb7096d601448ce9ec856f73727680232db703",
+    "src/inventory_intelligence/synthetic_replay.py": "44b781444d4d595b3c4dbef482713de753b608442e6441393459544a5192301e"
+  }
+}
