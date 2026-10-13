@@ -120,6 +120,22 @@
         {
           "bytes": 5062,
           "path": "/api/product/history"
+        },
+        {
+          "bytes": 15715,
+          "path": "/api/execution"
+        },
+        {
+          "bytes": 39,
+          "path": "/api/execution/journal"
+        },
+        {
+          "bytes": 5976,
+          "path": "/api/execution/detail"
+        },
+        {
+          "bytes": 5621,
+          "path": "/api/execution/detail"
         }
       ],
       "assets": [
@@ -237,18 +253,46 @@
         {
           "bytes": 5062,
           "path": "/api/product/history"
+        },
+        {
+          "bytes": 15714,
+          "path": "/api/execution"
+        },
+        {
+          "bytes": 5976,
+          "path": "/api/execution/detail"
+        },
+        {
+          "bytes": 1688,
+          "path": "/api/execution/journal"
+        },
+        {
+          "bytes": 5621,
+          "path": "/api/execution/detail"
+        },
+        {
+          "bytes": 761,
+          "path": "/api/execution/admit"
+        },
+        {
+          "bytes": 133,
+          "path": "/api/execution/event"
+        },
+        {
+          "bytes": 1284,
+          "path": "/api/execution/journal"
         }
       ],
       "assets": [
         {
-          "bytes": 271899,
-          "gzip_bytes": 83417,
-          "path": "/product-static/index-Ct2J_hVi.js"
-        },
-        {
           "bytes": 13558,
           "gzip_bytes": 3594,
           "path": "/product-static/index-CrszOey6.css"
+        },
+        {
+          "bytes": 271899,
+          "gzip_bytes": 83417,
+          "path": "/product-static/index-Ct2J_hVi.js"
         },
         {
           "bytes": 217,
@@ -285,6 +329,7 @@
       "human_comprehension": "not_performed",
       "initial_view_bytes": 60680,
       "injected_failure_console_messages": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
         "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
       ],
       "kind": "developer_browser_acceptance",
@@ -298,6 +343,7 @@
     "tests": 72
   },
   "date": "2026-10-13",
+  "deployment_performed": false,
   "frontend": {
     "bundle": {
       "files": [
@@ -339,11 +385,11 @@
     "src/inventory_intelligence/planner_loop.py": "7ad947b7a9cac20cfdd7ead8f4b41f2e9d3a2b842a8c4474e41738fa130d2343",
     "src/inventory_intelligence/planner_loop_audit.py": "d5e96a70e2b244c9c0eaa0cbe0f57493c5336009aa45c9be9cce468160d5284a",
     "src/inventory_intelligence/product_api.py": "766856d4d2c36a625e2e82269f0d6d4e0ecd521afe2d92e15cf5f48284e01c8b",
-    "src/inventory_intelligence/workflow.py": "c88d5ce52563a18c034611112603b63828f681a59939270d12eaa5ab6f70222e",
+    "src/inventory_intelligence/workflow.py": "9a46fa04a55c81ef972d183a2501a1f4895ef03eb14f4941976b5c876d5762e9",
     "tests/test_execution_api.py": "2855a6cdb6cb02ac2131bee7b29908ff7df60e855462359b947eb3d2942a42b0",
     "tests/test_planner_loop.py": "5ddbd14ab18c40982085672bad54addbe635720fafd5b42958c91eb730ddf67d",
     "tests/test_planner_loop_saved.py": "c85d3639cff50eee836a1a1c270e1264d5461a8569012cf881b27f69f820e562",
-    "tests/test_workflow.py": "54d25a14d9a32aa46b3f6f664f38397a0818ee3af7eb2b4f78e2dff9f1e50293"
+    "tests/test_workflow.py": "063b2d22369595b04473eb644f6ec7a53b778e0123a7e2cc57f7e6cb4ee2af2b"
   },
   "increment4": {
     "confirmed_quantity": 12,
@@ -365,6 +411,7 @@
   },
   "installed_wheel": {
     "archive_digest": "b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9",
+    "bytes": 1305164,
     "default_journal_disabled": true,
     "execution_archive_digest": "3442674a51263aedfbb01062e427f8474de5988142a4a97e15f5f33a7340bdb4",
     "execution_controls": 7,
@@ -384,6 +431,7 @@
       "index-CrszOey6.css",
       "index-Ct2J_hVi.js"
     ],
+    "sha256": "0d45b9e2b833c3d05c5456f57915764d4447fe1e6ed57ef5db341e389c21d106",
     "status": "pass"
   },
   "kind": "increments-0-4-local-acceptance",
@@ -395,9 +443,34 @@
     "Local journal atomicity does not span source-owner PostgreSQL staging"
   ],
   "local_demo": "http://127.0.0.1:8020/#/execution",
+  "local_demo_verified": {
+    "installed_wheel": true,
+    "loopback_only": true,
+    "status": "ready",
+    "synthetic_journal": true
+  },
+  "model_calls": 0,
+  "post_regression_chronology_fix": {
+    "controls": "Global admission/event knowledge monotonicity, source-staged real planner feedback, independent saved audit, API and durable journal",
+    "note": "Targeted validation after the 278-test committed-snapshot regression; no repeated whole suite",
+    "seconds": 4.314,
+    "status": "pass",
+    "tests": 17
+  },
+  "real_orders": 0,
   "regression": {
-    "environment": "native PostgreSQL18; strict PostgreSQL17 reference class remains open",
-    "status": "pending_committed_snapshot_run"
+    "code_commit": "2ce11b0",
+    "errors": 0,
+    "excluded_reference_class": "test_acceptance.Acceptance requires PostgreSQL17",
+    "failures": 0,
+    "fresh_disposable_database": true,
+    "reference_test_methods": 23,
+    "scope": "All locally eligible modules; PostgreSQL17 reference class explicitly excluded, not counted as a pass",
+    "seconds": 89.407,
+    "server_version": 180003,
+    "skips": 0,
+    "status": "pass",
+    "tests": 278
   },
   "synthetic_only": true,
   "timezone": "America/Los_Angeles"

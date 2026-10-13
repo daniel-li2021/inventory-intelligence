@@ -54,6 +54,8 @@ not fresh held-out decision-quality evidence. The 12 new stress traces remain fr
 36 paired policy cells: 129 real `run_checks`/`run_plan` reviews, each reloaded through
 the persisted report validator. The committed source binding is retained at `c8322f7`;
 current auditors add stricter source/key/UTC/gate controls without rewriting bytes.
+Portable recovery snapshot `6fff524` retains the original protocol/control bytes;
+the original paused commits remain local and unmerged.
 All seven corrected trajectories/costs match a [second fresh database](review/planner-loop-confirmation.json).
 The original control is six passes/one rejected oracle; the erratum is explicit.
 
@@ -71,7 +73,7 @@ and exact partial receipt events. Natural scenario/date identity prevents repeat
 planner UUIDs from creating another order. Source case/input/context digests remain
 inspectable. SQLite triggers reject update/delete; immediate transactions serialize
 admission and receipt conservation. Snapshot reads use one coherent transaction.
-Knowledge is at business-date grain; backdated events reject. An identical event ID
+Knowledge is at business-date grain; backdated events and new admissions reject globally across decisions. An identical event ID
 and payload repeats harmlessly; conflicting identity or overreceipt rejects.
 The local sandbox supports at most 256 events; pieces remain exact decimal strings
 at the new API boundary. Positive receipts cannot precede the original feasible

@@ -23,7 +23,7 @@ Public deployment and real operational intake remain excluded from this assignme
   feedback in a new supply batch changes the actual proposal 12→0. Read-only
   package is default; loopback sandbox is explicitly configured.
 - 72 focused backend/API/hosting/legacy tests, eight frontend controls and 22 browser
-  checks in each of read-only/sandbox modes pass. Fresh regression acceptance and
+  checks in each of read-only/sandbox modes pass. 278 native18 regressions and 17 postreview feedback checks pass;
   installed-wheel details are in the [acceptance receipt](review/increments-0-4-acceptance.json).
   Human comprehension/accessibility conformance remain unverified.
 

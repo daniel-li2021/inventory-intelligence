@@ -66,6 +66,8 @@ class Journal:
             if existing:
                 if existing['binding']!=binding:raise ValueError('Conflicting decision identity')
                 return json.loads(existing['payload'])
+            latest=conn.execute('SELECT max(known_day) FROM events').fetchone()[0]
+            if latest is not None and origin<latest:raise ValueError('Backdated decision admission')
             conn.execute('INSERT INTO decisions VALUES (?,?,?)',(payload['id'],binding,json.dumps(payload,sort_keys=True)))
             if payload['quantity']:
                 event=dict(id=payload['id']+':confirmed',decision_id=payload['id'],kind='confirmed',known_day=origin,
@@ -100,7 +102,8 @@ class Journal:
             decision=json.loads(decision['payload'])
             if not decision['quantity']:raise ValueError('Blocked/zero decision has no inbound order')
             events=[json.loads(r['payload']) for r in conn.execute('SELECT payload FROM events WHERE decision_id=? ORDER BY sequence',(decision_id,))]
-            if known_day<max(e['known_day'] for e in events):raise ValueError('Backdated journal knowledge')
+            latest=conn.execute('SELECT max(known_day) FROM events').fetchone()[0]
+            if known_day<latest:raise ValueError('Backdated journal knowledge')
             remaining=decision['quantity']-sum(e['quantity'] for e in events if e['kind']=='receipt')
             if remaining==0:raise ValueError('Order is already fully received')
             if kind=='receipt' and (quantity>remaining or known_day<events[0]['eta']):

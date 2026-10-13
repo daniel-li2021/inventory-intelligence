@@ -81,3 +81,13 @@ class WorkflowTests(unittest.TestCase):
         with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(receive,range(2)))
         self.assertEqual(sum(r is not None for r in results),1)
         self.assertEqual(self.journal.snapshot('2026-03-09')['received_pieces'],7)
+
+    def test_knowledge_cannot_backdate_a_different_order_or_new_decision(self):
+        identity=self.admit();second=self.journal.admit(self.clean,3)['id']
+        self.journal.record(decision_id=identity,event_id='late',kind='receipt',known_day='2026-03-12',quantity=5)
+        before=self.journal.snapshot('2026-03-20')
+        with self.assertRaises(ValueError):self.journal.record(decision_id=second,event_id='earlier',
+            kind='eta',known_day='2026-03-11',eta='2026-03-13')
+        with self.assertRaises(ValueError):self.journal.admit(self.blocked,0)
+        self.assertEqual(self.journal.snapshot('2026-03-20'),before)
+        self.assertEqual(self.journal.admit(self.clean,0)['id'],identity)

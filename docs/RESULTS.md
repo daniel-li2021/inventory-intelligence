@@ -71,6 +71,9 @@ reopen, duplicate/conflicting IDs, concurrent overreceipt, rollback and historic
 visibility. Staging its 12-piece commitment as new synthetic supply changes a real
 planner proposal 12→0; the old report remains 12. Two browser modes pass 22 controls
 each and 320px execution layout; eight frontend and 72 focused regressions pass.
+The committed-snapshot fresh native18 run passed 278 tests with no skips, excluding
+23 methods requiring PostgreSQL17. A final cross-order chronology fix passed 17
+affected feedback/audit/API tests; the whole suite was not repeated afterward.
 Reference PostgreSQL17, independent human/accessibility and public deployment remain
 open. [Final measured receipt](review/increments-0-4-acceptance.json).
 
