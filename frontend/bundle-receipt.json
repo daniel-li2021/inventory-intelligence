@@ -5,26 +5,14 @@
     "initial_data": 204800
   },
   "measured_bytes": {
-    "js_gzip": 80955,
-    "css_gzip": 3514
+    "js_gzip": 83417,
+    "css_gzip": 3594
   },
   "files": [
     "THIRD_PARTY_LICENSES.txt",
     "favicon.svg",
-    "index-DraVftRN.js",
-    "index-NGZggGQj.css",
+    "index-CrszOey6.css",
+    "index-Ct2J_hVi.js",
     "index.html"
-  ],
-  "reproducibility": {
-    "fresh_lockfile_install": "npm ci --ignore-scripts",
-    "asset_count": 5,
-    "identical_sha256": true,
-    "sha256": {
-      "index.html": "2c321abc8163efeb9b28ddfdf387c4ee1b512790d0d5bb4918ebc1be60e79393",
-      "THIRD_PARTY_LICENSES.txt": "09061478598723dc97817d17c763624ab5b9075d03627dd7f8f15217cacce655",
-      "index-DraVftRN.js": "2bf7080fb181a45860fe49f04471f850732e7e8e02bed4c2cbe7cbd4730e0a63",
-      "index-NGZggGQj.css": "c8140ea007cb74f4659c31afbc26b702e15dcd1f7365969ae3e3f72b2c94c554",
-      "favicon.svg": "055e635be11affb84d13e8f5be067e984e8f71009edbdde5a14b491974d09ee9"
-    }
-  }
+  ]
 }

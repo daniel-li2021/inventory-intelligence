@@ -57,3 +57,9 @@ For distribution, `python scripts/build_product_wheel.py --output-dir /tmp/new-w
 from the repository root builds in a clean temporary source tree and verifies exact
 asset/archive bytes. This avoids obsolete hashed assets retained by incremental
 setuptools builds. [Packaging reproduction](../docs/EVIDENCE.md#product-journey).
+
+Execution adds separate March research clocks, actual proposals/paid trajectories,
+paired stress costs and an optional durable local receipt sandbox. Its APIs use
+`/api/execution`; default packaged mode has journal writes disabled. Both default
+and sandbox browser journeys cover execution export, blocked history and 320px
+layout. Synthetic receipts never execute real orders or modify source stock.

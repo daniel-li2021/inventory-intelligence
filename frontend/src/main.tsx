@@ -206,6 +206,93 @@ function Inspector({
     </dl>
   );
 }
+function Execution() {
+  const [retry, setRetry] = useState(0);
+  const [selected, setSelected] = useState("clean");
+  const [asOf, setAsOf] = useState("2026-03-20");
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const overview = useResource<any>("/api/execution", retry);
+  const digest = overview.data?.archive_digest;
+  const detail = useResource<any>(digest ? `/api/execution/detail?name=${selected}&archive_digest=${digest}` : null, retry);
+  const journal = useResource<any>(digest ? `/api/execution/journal?as_of=${asOf}&archive_digest=${digest}` : null, retry);
+  const selectedData = !detail.stale && !detail.loading && !detail.error ? detail.data : undefined;
+  const journalData = !journal.stale && !journal.loading && !journal.error ? journal.data : undefined;
+  async function write(path: string, data: any) {
+    if (busy || !digest) return;
+    setBusy(true); setMessage("");
+    try {
+      const response = await fetch(`/api/execution/${path}`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, archive_digest: digest }),
+      });
+      if (!response.ok) throw Error(`Journal action rejected (${response.status}). Existing entries are retained.`);
+      await response.json(); setRetry(v => v + 1);
+      setMessage("Synthetic journal saved. Repeating the same event is idempotent.");
+    } catch (error: any) { setMessage(error.message); }
+    finally { setBusy(false); }
+  }
+  const cleanDecision = journalData?.decisions?.find((d: any) => d.id === "manual:clean:review-0");
+  return <section className="execution-workbench">
+    <div className="context-bar">
+      <div><span className="context-label">ACTUAL PLANNER RESEARCH</span>
+        <strong>March 7–20, 2026 · America/Los_Angeles</strong>
+        <small>9 scored days + 5 paid closure days. Initial stock is purchased.</small>
+        <small>This execution archive is separate from the January product cutoffs.</small>
+      </div>
+      {digest && <details className="archive"><summary>Execution archive & source</summary><code>{digest}</code><p>Committed implementation: {overview.data.code_commit}</p></details>}
+    </div>
+    <Notice {...overview} retry={() => setRetry(v => v + 1)} />
+    {overview.data && !overview.stale && !overview.error && <>
+      <h2>Actual proposals → receipts → fulfillment</h2>
+      <p>These outcomes execute saved prefix-planner proposals. Each review rechecks physical inventory, origin-visible demand and supply. A blocked review creates no order.</p>
+      <p className="notice warning">Original cold-shortage control had an arithmetic error: need 17 pieces rounds to 18, rather than 12. Its original bytes remain preserved with an explicit erratum.</p>
+      <label>Execution control <select aria-label="Execution control" value={selected} onChange={e => setSelected(e.target.value)}>
+        {overview.data.manual.map((c: any) => <option value={c.name} key={c.name}>{title(c.name.replaceAll("-", "_"))}</option>)}
+      </select></label>
+      <Notice {...detail} retry={() => setRetry(v => v + 1)} />
+      {selectedData && <>
+        <div className="metric-grid">
+          <div><span>Full paid cost · synthetic units</span><strong>{selectedData.summary.total_cost}</strong></div>
+          <div><span>Immediate pieces / accepted pieces</span><strong>{selectedData.summary.immediate_fulfilled} / {selectedData.summary.accepted}</strong></div>
+          <div><span>Eventually fulfilled / accepted</span><strong>{selectedData.summary.eventual_fulfilled} / {selectedData.summary.accepted}</strong></div>
+          <div><span>Terminal stock / backlog · pieces</span><strong>{selectedData.summary.terminal_stock} / {selectedData.summary.terminal_backlog}</strong></div>
+        </div>
+        <p>Initial purchased stock cost: {selectedData.initial_purchase_cost} synthetic units. Full cost includes initial purchase and every scored/closure day.</p>
+        <Inspector data={selectedData.summary.cost_components} name="Full paid cost components" />
+        <div className="table-scroll"><table><caption>Actual saved review decisions and evidence</caption><thead><tr><th>Origin known-at</th><th>Status</th><th>Proposal · pieces</th><th>Evidence</th></tr></thead><tbody>
+          {selectedData.reviews.map((r: any) => <tr key={r.day}><td>{r.origin}</td><td><Badge value={r.status} /><small>{r.reasons.join(", ")}</small></td><td>{r.proposed_order_qty ?? "Blocked"}</td><td><a href={`/api/execution/evidence?name=${selected}&day=${r.day}&archive_digest=${digest}`} target="_blank" rel="noreferrer">Inspect saved report</a><small>{r.report_id}</small></td></tr>)}
+        </tbody></table></div>
+        <div className="table-scroll"><table><caption>Physical daily execution · exact pieces and paid cost units</caption><thead><tr><th>Date / phase</th><th>Receipts</th><th>Accepted</th><th>Immediate fill</th><th>Ending stock</th><th>Ending backlog</th><th>Daily cost</th></tr></thead><tbody>
+          {selectedData.days.map((d: any) => <tr key={d.date}><td>{d.date}<small>{d.phase}</small></td><td>{d.receipts.map((r: any) => r.quantity).join(" + ") || "0"}</td><td>{d.accepted}</td><td>{d.new_filled}</td><td>{d.end_stock}</td><td>{d.end_backlog}</td><td>{Object.entries(d.cost).map(([k,v]) => `${k}: ${v}`).join(" · ")}</td></tr>)}
+        </tbody></table></div>
+        <Download data={selectedData} name={`actual-planner-${selected}`} label="Export execution" />
+      </>}
+      <h2>Paired decision quality</h2>
+      <p>12 frozen stress traces × 3 policies. All policies respect the actual planner's evidence gates; demand, supplier rules and the paid 14-day window match. No tuning on these results.</p>
+      <div className="table-scroll"><table><caption>Total paid synthetic cost units · identical score and closure windows</caption><thead><tr><th>Trace</th><th>Actual proposals</th><th>Do Nothing</th><th>Fixed 18 pieces</th></tr></thead><tbody>
+        {overview.data.comparisons.map((c: any) => <tr key={c.name}><td>{title(c.name.replaceAll("-", "_"))}</td>{["actual", "do-nothing", "fixed-18"].map(p => <td key={p}>{c.policies[p].total_cost}<small>Immediate {c.policies[p].immediate_fulfilled}/{c.policies[p].accepted} · backlog {c.policies[p].terminal_backlog}</small></td>)}</tr>)}
+      </tbody></table></div>
+      <p className="notice">Quiet trace: Do Nothing costs 160 versus actual 330. These bounded synthetic paths establish no universal policy winner or commercial savings.</p>
+      <h2>Durable synthetic commitment sandbox</h2>
+      {overview.data.journal_enabled ? <>
+        <p>This local journal writes synthetic decision and receipt events only. It preserves earlier source batches and never executes real purchases or changes stock tables.</p>
+        <div className="view-tools">
+          <button disabled={busy} onClick={() => write("admit", {name: "clean", day: 0})}>Admit clean proposal · 12 pieces</button>
+          <button disabled={busy || !cleanDecision} onClick={() => write("event", {decision_id: cleanDecision.id, event_id: "demo:clean:partial-5", kind: "receipt", known_day: "2026-03-09", quantity: 5})}>Receive 5 pieces · March 9</button>
+          <button disabled={busy || !cleanDecision} onClick={() => write("event", {decision_id: cleanDecision.id, event_id: "demo:clean:eta", kind: "eta", known_day: "2026-03-10", eta: "2026-03-11"})}>Notify ETA · March 11</button>
+          <button disabled={busy || !cleanDecision} onClick={() => write("event", {decision_id: cleanDecision.id, event_id: "demo:clean:final-7", kind: "receipt", known_day: "2026-03-11", quantity: 7})}>Receive remaining 7 · March 11</button>
+        </div>
+        <p role="status">{message}</p>
+        <label>Journal as of <input aria-label="Journal as of" type="date" value={asOf} onChange={e => setAsOf(e.target.value)} /></label>
+        <Notice {...journal} retry={() => setRetry(v => v + 1)} />
+        {journalData && <><p className="journal-totals">Received {journalData.received_pieces} pieces · pending {journalData.pending_pieces} pieces · {journalData.events.length} durable events</p><Inspector data={journalData} name="Origin-visible synthetic journal" /><Download data={journalData} name="synthetic-receipt-journal" label="Export journal" /></>}
+      </> : <p>Read-only packaged mode. Launch the loopback local demo to exercise durable synthetic commitments and partial receipts.</p>}
+      <ul>{overview.data.limitations.map((s: string) => <li key={s}>{s}</li>)}</ul>
+    </>}
+  </section>;
+}
+
 function App() {
   const [route, setRoute] = useState<Route>(
     () => parseRoute(location.hash) as Route,
@@ -318,7 +405,7 @@ function App() {
             <span className="breadcrumb">
               Inventory / <strong>{title(route.page)}</strong>
             </span>
-            <span className="read-only">Read only · No order execution</span>
+            <span className="read-only">{route.page === "execution" ? "Synthetic research · No real orders" : "Read only · No order execution"}</span>
           </header>
           <main id="main" tabIndex={-1}>
             <div className="page-heading">
@@ -345,13 +432,15 @@ function App() {
                           "Review the advisory proposal and the boundaries of this decision.",
                         history:
                           "See what appeared, persisted or changed across saved cutoffs.",
+                        execution:
+                          "Inspect actual synthetic planner outcomes and trace commitments through receipts.",
                       } as Record<string, string>
                     )[route.page]
                   }
                 </p>
               </div>
             </div>
-            <div className="context-bar">
+            {route.page !== "execution" && <><div className="context-bar">
               <label>
                 Cutoff
                 <select
@@ -456,7 +545,8 @@ function App() {
               </button>
               <span role="status">{message}</span>
             </div>
-            {context && !bound && !overview.stale && (
+            </>}
+            {route.page === "execution" ? <Execution /> : context && !bound && !overview.stale && (
               <>
                 {route.page === "overview" ? (
                   <Overview data={context} route={route} go={navigate} />
@@ -469,7 +559,7 @@ function App() {
             )}
             <footer className="product-footer">
               <strong>Evidence before action.</strong> Synthetic inputs do not
-              demonstrate commercial savings. Transfers, purchase execution and
+              demonstrate commercial savings. Transfers, real purchase execution and
               observed supplier lateness are unsupported.{" "}
               <a href="/product-static/THIRD_PARTY_LICENSES.txt">
                 Third-party notices

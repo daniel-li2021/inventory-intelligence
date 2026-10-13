@@ -4,11 +4,14 @@ import json
 import os
 from pathlib import Path
 import unittest
+import tempfile
 from uuid import uuid4
 
 import psycopg
 from inventory_intelligence.planner_loop import Admission, run_case
 from inventory_intelligence.planner_loop_audit import audit_case
+from inventory_intelligence.replenishment import run_plan
+from inventory_intelligence.workflow import Journal
 
 
 class PlannerLoopTests(unittest.TestCase):
@@ -75,6 +78,24 @@ class PlannerLoopTests(unittest.TestCase):
                          [(d['end_stock'],d['end_backlog'],d['cost']) for d in self.cases['clean']['days']])
         origins=[r['report']['context']['origin'] for r in repeated['reviews']]
         self.assertEqual(origins,['2026-03-07T08:00:00+00:00','2026-03-10T07:00:00+00:00','2026-03-13T07:00:00+00:00'])
+
+    def test_durable_commitment_new_supply_reduces_actual_planner_proposal(self):
+        case=self.cases['clean'];report=case['reviews'][0]['report'];context=report['context']
+        with tempfile.TemporaryDirectory() as directory:
+            journal=Journal(Path(directory)/'journal.sqlite');journal.admit(case,0)
+            policy={k:report['result']['supply']['policy'][k] for k in ('lead_days','review_days','safety_qty','pack_size','moq')}
+            batch='journal-feedback:'+str(uuid4())
+            staged=journal.publish_supply(self.owner,batch_id=batch,sku_id=context['sku_id'],
+                warehouse_id=context['warehouse_id'],as_of=context['origin_day'],reservations=[],policy=policy)
+            self.assertEqual([r['remaining_qty'] for r in staged['inbound']],[12])
+            from datetime import date
+            options={k:context[k] for k in ('batch_id','sku_id','warehouse_id','method','reliability_run_id')}
+            options.update(start_day=date.fromisoformat(context['start_day']),origin_day=date.fromisoformat(context['origin_day']),supply_batch_id=batch)
+            new=run_plan(self.runner,**options)
+            self.assertEqual(new['result']['proposed_order_qty'],0)
+            self.assertEqual([p['balance_without_order'] for p in new['result']['projection']],['7','4','13','10','7'])
+            old=self.owner.execute('SELECT result FROM planning.runs WHERE run_id=%s',(report['run_id'],)).fetchone()[0]
+            self.assertEqual(old['proposed_order_qty'],12)
 
 
 if __name__=='__main__':unittest.main()

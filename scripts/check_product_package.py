@@ -27,6 +27,12 @@ def main():
         assert overview['summary'] == dict(risk=37, opportunity=25, evidence=12, none=26,
                                            keys=100, assessable=88, blocked=12)
         assert client.get('/api/lab').json()['baseline']['plan']['proposed_order_qty'] == 12
+        execution=client.get('/api/execution').json()
+        assert len(execution['manual'])==7 and len(execution['comparisons'])==12
+        assert execution['journal_enabled'] is False
+        assert client.post('/api/execution/admit',json={}).status_code==404
+        cold=client.get('/api/execution/detail?name=cold-shortage').json()
+        assert cold['summary']['total_cost']=='776' and cold['summary']['proposals']==['18',None,None]
         selected = dict(cutoff='2026-01-05', sku_id='product:sku-00', warehouse_id='product:harbor',
                         archive_digest=overview['archive_digest'])
         detail = client.get('/api/product/detail', params=selected)
@@ -47,6 +53,8 @@ def main():
         result = dict(status='pass', installed_module=str(module), no_database=True, no_node_runtime=True,
                       archive_digest=overview['archive_digest'], packaged_evidence_sha256=hashlib.sha256(evidence.read_bytes()).hexdigest(),
                       served_assets=names, independently_expected_proposals=['12', '18', None])
+        result.update(execution_archive_digest=execution['archive_digest'],execution_controls=7,paired_policy_cells=36,
+                      default_journal_disabled=True)
     if args.output:
         args.output.write_text(json.dumps(result, indent=2, sort_keys=True)+'\n')
     print(json.dumps(result, sort_keys=True))

@@ -11,7 +11,8 @@ from .lab_api import create_app
 
 API_PATHS = {'/api/lab', '/api/evidence', '/api/lab/evidence', '/api/product',
              '/api/product/overview', '/api/product/explore', '/api/product/detail',
-             '/api/product/history', '/api/product/evidence', '/api/product/control'}
+             '/api/product/history', '/api/product/evidence', '/api/product/control',
+             '/api/execution','/api/execution/detail','/api/execution/evidence','/api/execution/journal'}
 POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios'}
 HEALTH_PATHS = {'/health/live', '/health/ready'}
 ASSETS = {'/', '/lab', '/static/lab.css', '/static/lab.js'} | {
@@ -28,6 +29,8 @@ class HostedLab:
     def __init__(self, application=None, *, clock=time.monotonic, rate=2, burst=20,
                  concurrent=4, body_limit=4096, body_seconds=5):
         self.application = application if application is not None else create_app()
+        self.posts = POST_PATHS | ({'/api/execution/admit','/api/execution/event'}
+                                  if getattr(getattr(self.application,'state',None),'journal_enabled',False) else set())
         self.clock, self.rate, self.burst = clock, rate, burst
         self.tokens, self.last, self.active = float(burst), clock(), 0
         self.concurrent, self.body_limit, self.body_seconds = concurrent, body_limit, body_seconds
@@ -54,10 +57,10 @@ class HostedLab:
             await secured({'type': 'http.response.start', 'status': status, 'headers': headers})
             await secured({'type': 'http.response.body', 'body': json.dumps({'detail': detail}).encode()})
 
-        api = path in API_PATHS | POST_PATHS
-        if path not in API_PATHS | POST_PATHS | ASSETS | HEALTH_PATHS:
+        api = path in API_PATHS | self.posts
+        if path not in API_PATHS | self.posts | ASSETS | HEALTH_PATHS:
             return await reject(404, 'Not found')
-        expected = 'POST' if path in POST_PATHS else 'GET'
+        expected = 'POST' if path in self.posts else 'GET'
         if method != expected:
             return await reject(405, 'Method not allowed')
         if not api: return await self.application(scope, receive, secured)

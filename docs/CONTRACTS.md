@@ -7,6 +7,7 @@ Historical experiment grids and source bytes are recoverable from Git via
 Shared versioned interfaces require an explicit amendment, never an implicit change.
 
 
+- [Actual planner execution / synthetic journal](#actual-planner-execution-and-synthetic-journal)
 - [Inventory product v1](#inventory-product-v1)
 - [Inventory v1](#inventory-v1)
 - [Planning v1](#planning-v1)
@@ -17,6 +18,25 @@ Shared versioned interfaces require an explicit amendment, never an implicit cha
 - [Lost sales v1](#lost-sales-v1)
 - [Physical count v1](#physical-count-v1)
 - [Observed sales adapter](#observed-sales-adapter)
+
+## Actual planner execution and synthetic journal
+
+`planner-loop-evidence-v1` / `planner-execution-view-v1` are additive research/view
+contracts. They preserve planning-v1, the January product catalog and the distinct
+periodic simulator. [Execution guide and frozen controls](PLANNER_EXECUTION.md) own
+clocks, paid accounting, admission, known supplier updates and the retained oracle
+erratum. GET `/api/execution`, `/detail`, `/evidence`, `/journal` exposes bounded
+saved views; exact pieces/costs are decimal strings, undefined fill is null.
+Manual control selectors and review day 0/3/6 are allowlisted. Changed archive returns
+409; invalid selection 422; invalid archive 503. Evidence expansion is capped at
+32 MiB, compressed package at 2 MiB; the 18.1 MB saved study is a separate envelope
+from the old 16 MiB planning reader, whose reports remain individually bounded.
+
+A local app explicitly configured with a journal path enables POST `/api/execution/admit`
+and `/event` over same-origin loopback JSON only. Strict selector/digest/event payloads
+and the serving wrapper's original body/rate/concurrency bounds apply. Default hosted
+app has no journal writer. SQLite journal semantics, source-owner staging and remaining
+operational/authentication/deployment boundaries are in the execution guide.
 
 ## Inventory product v1
 

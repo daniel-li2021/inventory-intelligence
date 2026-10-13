@@ -142,5 +142,11 @@ def install_product_routes(application, supplied=None):
     @application.get('/health/ready', include_in_schema=False)
     def ready():
         data = catalog()
-        return JSONResponse({'status': 'ready', 'synthetic': True, 'archive_digest': data['digest']},
+        from .execution import load_execution
+        try:
+            _, execution_digest = load_execution()
+        except (ValueError,OSError,KeyError,TypeError,IndexError,EOFError) as error:
+            raise HTTPException(503,'Synthetic execution evidence is unavailable or invalid') from error
+        return JSONResponse({'status': 'ready', 'synthetic': True, 'archive_digest': data['digest'],
+                             'execution_archive_digest':execution_digest},
                             headers={'Cache-Control': 'no-store'})

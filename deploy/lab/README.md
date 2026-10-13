@@ -193,3 +193,14 @@ No new product container, proxy 408 repair, public TLS, uptime or release accept
 was performed. The pinned Docker recipe now checks product readiness; build and
 verify an actual new image before making hosted claims. The original slow-body and
 reference/stability gaps remain in the engineering plan.
+
+## Increment 4 packaging boundary
+
+The wheel now also ships actual planner execution evidence and its independent
+controls. Read-only Execution views are supported by the original HTTP envelope;
+readiness validates both product and execution packages. Journal POST routes are
+absent from the default hosted application. The explicitly configured loopback
+local sandbox is for synthetic feedback only and must not be exposed as an anonymous
+operational writer. No real deployment/image-runtime acceptance was performed for
+this increment. Reference/runtime/TLS, identity, supplier adapters, data rights and
+operational executor gates remain open. [Local guide](../../docs/PLANNER_EXECUTION.md).

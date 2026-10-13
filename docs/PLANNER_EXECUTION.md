@@ -32,8 +32,8 @@ A saved-only auditor uses events, integer conservation, FIFO and declared costs,
 without calling the planner, forecast or periodic simulator. Reports/protocol/code
 hashes bind committed source. Export refuses existing output files.
 
-Implementation/results and next capability scope will be recorded here after the
-frozen controls pass. Real intake, orders, deployment and public runtime remain gated.
+Implementation and validation are complete within this local synthetic scope.
+Real intake, orders, deployment and public runtime remain gated.
 
 ## Original control erratum
 
@@ -47,3 +47,71 @@ recalculated outcome: stock 0/0/9/6/3/0/0/0/0, backlog 3/6/0/0/0/0/3/6/9;
 720 backlog + 2 setup = 776. The original expectation must continue to reject.
 The corrected control is a diagnostic arithmetic repair after first execution,
 not fresh held-out decision-quality evidence. The 12 new stress traces remain frozen.
+
+## Measured acceptance
+
+[Saved actual archive](review/planner-loop-v1.json.gz) contains seven controls plus
+36 paired policy cells: 129 real `run_checks`/`run_plan` reviews, each reloaded through
+the persisted report validator. The committed source binding is retained at `c8322f7`;
+current auditors add stricter source/key/UTC/gate controls without rewriting bytes.
+All seven corrected trajectories/costs match a [second fresh database](review/planner-loop-confirmation.json).
+The original control is six passes/one rejected oracle; the erratum is explicit.
+
+Actual proposal costs versus Do Nothing versus fixed-18 across all 12 stress traces
+sum to 3160 / 11350 / 6134 synthetic cost units. These sums describe the frozen grid,
+not expected commercial economics. Actual is cheaper than fixed-18 on 12/12 and
+Do Nothing on 11/12; quiet reverses the comparison (330 / 160 / 760). Eleven nonzero
+actual cells have immediate fill 1; quiet fill is null. Seven manual controls retain
+shortage/blocking counterexamples and must not be pooled into that service claim.
+
+## Durable synthetic feedback contract
+
+`Journal` atomically appends source-bound decisions and confirmed inbound, then ETA
+and exact partial receipt events. Natural scenario/date identity prevents repeated
+planner UUIDs from creating another order. Source case/input/context digests remain
+inspectable. SQLite triggers reject update/delete; immediate transactions serialize
+admission and receipt conservation. Snapshot reads use one coherent transaction.
+Knowledge is at business-date grain; backdated events reject. An identical event ID
+and payload repeats harmlessly; conflicting identity or overreceipt rejects.
+The local sandbox supports at most 256 events; pieces remain exact decimal strings
+at the new API boundary. Positive receipts cannot precede the original feasible
+promise; ETA notifications cannot precede their known date. Blocked/zero reviews
+never create inbound. These are local synthetic constraints, not supplier calendars,
+producer authentication or an operational exactly-once executor.
+
+`publish_supply` is a separate synthetic-owner stage. It requires explicit current
+reservation evidence and policy, filters journal commitments by SKU/location, and
+inserts a fresh supply batch without changing source stock or earlier reports. Its
+PostgreSQL write and the SQLite journal are separate boundaries; no cross-database
+atomic production handoff is claimed. Independent feedback control: initial 12-piece
+proposal becomes confirmed inbound; new actual plan is 0 with balances 7/4/13/10/7,
+while the original saved proposal stays 12. Partial receipts 5 then 7 conserve 12;
+reopen, concurrent overreceipt, transaction failure and historical views pass.
+
+## Local demo and reproduction
+
+With the existing `.[lab]` environment installed:
+
+```sh
+python scripts/run_local_demo.py --port 8020 --journal output/local-demo.sqlite
+```
+
+Open `http://127.0.0.1:8020/#/execution`. The demo binds loopback only and enables
+synthetic journal writes explicitly. Exercise Admit 12 → Receive 5 → Notify ETA →
+Receive 7, then choose March 8/9/11 history. Each event is durable/idempotent; no reset
+or source repair is implicit. Use a new journal path for a new isolated experiment.
+Default `inventory_intelligence.lab_hosted:app` remains read-only, including the
+execution archive, and has no journal write routes. No database/Node/model runtime
+is needed for either packaged view or local journal; a database is required only
+for separately authorized synthetic owner staging/live research.
+
+```sh
+PYTHONPATH=src python scripts/export_planner_loop.py --audit --output docs/review/planner-loop-v1.json.gz
+PYTHONPATH=src python -m unittest tests.test_planner_loop_saved tests.test_workflow tests.test_execution_api -v
+```
+
+Live `tests.test_planner_loop` requires fresh disposable owner/`ii_runner` connections
+via `TEST_DATABASE_URL` and `DATABASE_URL`; bootstrap follows VALIDATION. Export binds
+committed protocols/implementation, never overwrites an archive, and uses a separate
+fresh database. Original studies/holdouts are reused, never tuned or rerun for a new
+accuracy claim. [Final acceptance](review/increments-0-4-acceptance.json).

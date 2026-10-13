@@ -50,6 +50,30 @@ cost deltas; total-cost deltas are null when runoff differs. Transfers, expedite
 receipt feasibility, arbitrary order execution, monetary savings, operational
 imports and public release remain unsupported/unverified.
 
+## Actual planner execution and durable feedback
+
+October 13 Increments 3–4 establish bounded synthetic execution, distinct from the
+periodic simulator. The first seven frozen manual controls yielded six matches and
+one arithmetic oracle rejection: cold stock 0 needs 17, rounded to 18; original
+12-piece expectation is preserved. The explicit erratum yields paid cost 776,
+immediate 12/27 and eventual 18/27. All seven corrected controls reproduce in a
+second fresh database. [Protocol, correction and commands](PLANNER_EXECUTION.md).
+
+Twelve fresh frozen stress paths × actual / Do Nothing / fixed-18 produced 36 cells,
+129 total real review pairs including manual controls. Saved-only audits independently
+check FIFO, conservation, source/key/clock gates, service and every paid component.
+Actual is cheaper than fixed-18 on 12/12 and Do Nothing on 11/12; quiet is a counterexample
+(330 actual / 160 no order / 760 fixed). This grid is not random efficacy or commercial
+benefit, and stockout/overdue gates retain blocked recovery outcomes.
+
+Durable synthetic journal controls cover 5+7 receipts conserving 12, ETA notifications,
+reopen, duplicate/conflicting IDs, concurrent overreceipt, rollback and historical
+visibility. Staging its 12-piece commitment as new synthetic supply changes a real
+planner proposal 12→0; the old report remains 12. Two browser modes pass 22 controls
+each and 320px execution layout; eight frontend and 72 focused regressions pass.
+Reference PostgreSQL17, independent human/accessibility and public deployment remain
+open. [Final measured receipt](review/increments-0-4-acceptance.json).
+
 ## Forecast selection and advisory planning
 
 Seven synthetic groups, 180 days, three stdlib methods, 7/14/28-day horizons and

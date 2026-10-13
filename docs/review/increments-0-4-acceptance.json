@@ -1,0 +1,404 @@
+{
+  "actual_planner": {
+    "actual_cheaper_than_do_nothing": "11/12",
+    "actual_cheaper_than_fixed18": "12/12",
+    "actual_reviews": 129,
+    "artifact_sha256": "f8943925446e1d92d757d9e4fe454e93ca5aaaa500a838387573674ee374e0b2",
+    "claim": "Bounded synthetic stress; no random efficacy or universal winner",
+    "corrected_controls_passed": 7,
+    "counterexample": {
+      "actual": 330,
+      "do_nothing": 160,
+      "fixed18": 760,
+      "trace": "quiet"
+    },
+    "fresh_confirmation": {
+      "controls": 7,
+      "date": "2026-10-13",
+      "fresh_disposable_database": true,
+      "normalized_physical_hashes": {
+        "clean": "16b612e30b039513eb89a5f0f0a594603540424dc33aceba9f9eb80462a45eef",
+        "cold-shortage": "a28ba1c37d36fe66c92105e102854c91a367a088c2b1e5363ffea4ae9c970114",
+        "missing": "e06cdae7bb37425511c8395a52d76451bc01524e4c31e7053585eaf1abc72861",
+        "notified-delay": "d698786a6f06397c378dd52ea49e72ab384a9010d225eb98dfc4003bc480b57c",
+        "spike": "96eee3e0078922f7a902cdadd8fc1487780444971dd0ebd0d82db4163f5e3383",
+        "unannounced-delay": "9a358bec8ee648a11daa936bdec5ac735271fb4609f66620ff290d8404eb97cb",
+        "zero": "129bfbc03e8bf930a331a26d80b1c0fd042175bafd348cafe525f807a61c9f94"
+      },
+      "original_cold_oracle": "rejected; explicit retained erratum used",
+      "server_version": 180003,
+      "status": "pass",
+      "tests": 6
+    },
+    "independent_saved_only_audit": "pass",
+    "manual_erratum": "Cold stock0 needs17 rounded18; cost776",
+    "original_code_commit": "c8322f7efd69140e4a69b74472ce837da5d9af46",
+    "original_controls_matching": 6,
+    "original_oracle_rejected": 1,
+    "paid_cost_totals": {
+      "actual": 3160,
+      "do-nothing": 11350,
+      "fixed-18": 6134
+    },
+    "paired_traces": 12,
+    "policy_cells": 36,
+    "saved_reports": 258
+  },
+  "baseline": {
+    "focused_passed": 64,
+    "frontend_passed": 8,
+    "initial_class_setup_errors": [
+      "PostgreSQL17 required; native18 available",
+      "Uncommitted lineage source; resolved by commit"
+    ],
+    "initial_regression_tests_passed": 256,
+    "key_cutoff_controls": 300,
+    "lineage_after_commit_passed": 6,
+    "original_evidence_files_unchanged": 411,
+    "original_report_reconstructions": 605
+  },
+  "browsers": {
+    "read_only": {
+      "accessibility_conformance": "not_claimed",
+      "api_response_sizes": [
+        {
+          "bytes": 30457,
+          "path": "/api/product/overview"
+        },
+        {
+          "bytes": 30223,
+          "path": "/api/product/overview"
+        },
+        {
+          "bytes": 3155,
+          "path": "/api/product/control"
+        },
+        {
+          "bytes": 55246,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 44578,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 3993,
+          "path": "/api/product/detail"
+        },
+        {
+          "bytes": 1087,
+          "path": "/api/product/evidence"
+        },
+        {
+          "bytes": 3772,
+          "path": "/api/product/scenario"
+        },
+        {
+          "bytes": 30457,
+          "path": "/api/product/overview"
+        },
+        {
+          "bytes": 3996,
+          "path": "/api/product/detail"
+        },
+        {
+          "bytes": 5032,
+          "path": "/api/product/history"
+        },
+        {
+          "bytes": 42141,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 26317,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 4132,
+          "path": "/api/product/detail"
+        },
+        {
+          "bytes": 5062,
+          "path": "/api/product/history"
+        }
+      ],
+      "assets": [
+        {
+          "bytes": 271899,
+          "gzip_bytes": 83417,
+          "path": "/product-static/index-Ct2J_hVi.js"
+        },
+        {
+          "bytes": 13558,
+          "gzip_bytes": 3594,
+          "path": "/product-static/index-CrszOey6.css"
+        },
+        {
+          "bytes": 217,
+          "gzip_bytes": 182,
+          "path": "/product-static/favicon.svg"
+        }
+      ],
+      "browser": "155.0.8059.40",
+      "checks": [
+        "overview_loaded",
+        "lazy_duplicate_control_original_rows_and_blocked_proposal",
+        "preset_manual_equivalence",
+        "url_reload_saved_view",
+        "saved_source_projection_independent_quantities",
+        "investigate_evidence",
+        "compare_supported_scenario",
+        "stale_reset",
+        "error_retry_last_good",
+        "export",
+        "late_old_scenario_cannot_replace_new_cutoff",
+        "decide_advisory",
+        "history_three_cutoffs",
+        "blocked_journey_missing_is_unknown",
+        "actual_planner_execution_blocked_history_cost_and_export",
+        "packaged_execution_keeps_journal_disabled",
+        "execution_mobile_320_no_body_overflow",
+        "mobile_320_no_body_overflow",
+        "keyboard_focus",
+        "zoom_400_forced_colors_keyboard",
+        "no_console_errors",
+        "bounded_assets_and_view_data"
+      ],
+      "console_errors": [],
+      "human_comprehension": "not_performed",
+      "initial_view_bytes": 60680,
+      "injected_failure_console_messages": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+      ],
+      "kind": "developer_browser_acceptance",
+      "viewport_checked": 320,
+      "zoom_check": "CSS 400 percent with keyboard focus"
+    },
+    "sandbox": {
+      "accessibility_conformance": "not_claimed",
+      "api_response_sizes": [
+        {
+          "bytes": 30457,
+          "path": "/api/product/overview"
+        },
+        {
+          "bytes": 30223,
+          "path": "/api/product/overview"
+        },
+        {
+          "bytes": 3155,
+          "path": "/api/product/control"
+        },
+        {
+          "bytes": 55246,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 44578,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 3993,
+          "path": "/api/product/detail"
+        },
+        {
+          "bytes": 1087,
+          "path": "/api/product/evidence"
+        },
+        {
+          "bytes": 3772,
+          "path": "/api/product/scenario"
+        },
+        {
+          "bytes": 30457,
+          "path": "/api/product/overview"
+        },
+        {
+          "bytes": 3996,
+          "path": "/api/product/detail"
+        },
+        {
+          "bytes": 5032,
+          "path": "/api/product/history"
+        },
+        {
+          "bytes": 42141,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 26317,
+          "path": "/api/product/explore"
+        },
+        {
+          "bytes": 4132,
+          "path": "/api/product/detail"
+        },
+        {
+          "bytes": 5062,
+          "path": "/api/product/history"
+        }
+      ],
+      "assets": [
+        {
+          "bytes": 271899,
+          "gzip_bytes": 83417,
+          "path": "/product-static/index-Ct2J_hVi.js"
+        },
+        {
+          "bytes": 13558,
+          "gzip_bytes": 3594,
+          "path": "/product-static/index-CrszOey6.css"
+        },
+        {
+          "bytes": 217,
+          "gzip_bytes": 182,
+          "path": "/product-static/favicon.svg"
+        }
+      ],
+      "browser": "155.0.8059.40",
+      "checks": [
+        "overview_loaded",
+        "lazy_duplicate_control_original_rows_and_blocked_proposal",
+        "preset_manual_equivalence",
+        "url_reload_saved_view",
+        "saved_source_projection_independent_quantities",
+        "investigate_evidence",
+        "compare_supported_scenario",
+        "stale_reset",
+        "error_retry_last_good",
+        "export",
+        "late_old_scenario_cannot_replace_new_cutoff",
+        "decide_advisory",
+        "history_three_cutoffs",
+        "blocked_journey_missing_is_unknown",
+        "actual_planner_execution_blocked_history_cost_and_export",
+        "durable_partial_receipt_eta_reopen_idempotency_and_history",
+        "execution_mobile_320_no_body_overflow",
+        "mobile_320_no_body_overflow",
+        "keyboard_focus",
+        "zoom_400_forced_colors_keyboard",
+        "no_console_errors",
+        "bounded_assets_and_view_data"
+      ],
+      "console_errors": [],
+      "human_comprehension": "not_performed",
+      "initial_view_bytes": 60680,
+      "injected_failure_console_messages": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+      ],
+      "kind": "developer_browser_acceptance",
+      "viewport_checked": 320,
+      "zoom_check": "CSS 400 percent with keyboard focus"
+    }
+  },
+  "current_focused": {
+    "seconds": 51.11,
+    "status": "pass",
+    "tests": 72
+  },
+  "date": "2026-10-13",
+  "frontend": {
+    "bundle": {
+      "files": [
+        "THIRD_PARTY_LICENSES.txt",
+        "favicon.svg",
+        "index-CrszOey6.css",
+        "index-Ct2J_hVi.js",
+        "index.html"
+      ],
+      "frozen_budgets_bytes": {
+        "css_gzip": 40960,
+        "initial_data": 204800,
+        "js_gzip": 256000
+      },
+      "measured_bytes": {
+        "css_gzip": 3594,
+        "js_gzip": 83417
+      }
+    },
+    "status": "pass",
+    "tests": 8
+  },
+  "implementation_sha256": {
+    "frontend/src/main.tsx": "01697f116991c58d02dba667407909bec3c7752fdec2686dabcb5177fecaf3ee",
+    "frontend/src/state.mjs": "5042a8bc28f09718fc577d1e30b4bc5f02585feeb979ffe6378307011f7f589d",
+    "frontend/src/style.css": "07f0c4b8eac29aef3d277d35b83339ca64991f289f4b9b0e4a1b3d88061d4843",
+    "pyproject.toml": "bac7086e6494b052b46952c3c21d1eed63317888f9f71fa9d09bcb0e6045b072",
+    "scripts/build_product_wheel.py": "6dd015fa4b7e42be78bd7cb872af62cc658a1e3d7c2f9a68e8bacf271a3d7233",
+    "scripts/check_product_browser.py": "ec34f34bdec9ce1c243cf82b9f4d5f02a74f55df3e65a29e6e210fc0dc819c5c",
+    "scripts/check_product_package.py": "9b57afa0352a160a727418e02b8585df1aa4531b1d74e54a917da396222b717c",
+    "scripts/export_planner_loop.py": "67c4de39f7e473b6f032849cd84d0ebc5f793f2317761bf6b257c53cba73c1c3",
+    "scripts/run_local_demo.py": "c2b5b314e92e1c2619e1e267c6688414297a16b5288229479e663ef68c2e324a",
+    "src/inventory_intelligence/execution.py": "a2185d480b4a3f32742b37ffa81071faba3b213f61a9138d1db8752df57e6709",
+    "src/inventory_intelligence/execution_api.py": "c9ab8a7541d2dd0d84edb3c14658262d8ab408a2c6015dced9b705f62a6a11bc",
+    "src/inventory_intelligence/execution_controls.json": "58a6d924dc871459808a3bd2e5eee3c8de96f326b31a039282c9d567b31a9dcb",
+    "src/inventory_intelligence/execution_evidence.json.gz": "f8943925446e1d92d757d9e4fe454e93ca5aaaa500a838387573674ee374e0b2",
+    "src/inventory_intelligence/lab_api.py": "164c7f7610082223c0d32d3dd2a29b6f7cfc34599e3672cdebca5014f1388e8c",
+    "src/inventory_intelligence/lab_hosted.py": "a155ea4c7152fbcd47d59feee59dbcf410f9f1440f2f309628e2ba0ee014a00e",
+    "src/inventory_intelligence/planner_loop.py": "7ad947b7a9cac20cfdd7ead8f4b41f2e9d3a2b842a8c4474e41738fa130d2343",
+    "src/inventory_intelligence/planner_loop_audit.py": "d5e96a70e2b244c9c0eaa0cbe0f57493c5336009aa45c9be9cce468160d5284a",
+    "src/inventory_intelligence/product_api.py": "766856d4d2c36a625e2e82269f0d6d4e0ecd521afe2d92e15cf5f48284e01c8b",
+    "src/inventory_intelligence/workflow.py": "c88d5ce52563a18c034611112603b63828f681a59939270d12eaa5ab6f70222e",
+    "tests/test_execution_api.py": "2855a6cdb6cb02ac2131bee7b29908ff7df60e855462359b947eb3d2942a42b0",
+    "tests/test_planner_loop.py": "5ddbd14ab18c40982085672bad54addbe635720fafd5b42958c91eb730ddf67d",
+    "tests/test_planner_loop_saved.py": "c85d3639cff50eee836a1a1c270e1264d5461a8569012cf881b27f69f820e562",
+    "tests/test_workflow.py": "54d25a14d9a32aa46b3f6f664f38397a0818ee3af7eb2b4f78e2dff9f1e50293"
+  },
+  "increment4": {
+    "confirmed_quantity": 12,
+    "cross_database_atomicity": "not_claimed",
+    "default_journal_disabled": true,
+    "durable_partial_receipts": [
+      5,
+      7
+    ],
+    "loopback_synthetic_only": true,
+    "old_report_retains": 12,
+    "real_planner_feedback_proposal": [
+      12,
+      0
+    ],
+    "remaining_after_final": 0,
+    "remaining_after_first": 7,
+    "reopen_idempotency_concurrent_rollback_historical": "pass"
+  },
+  "installed_wheel": {
+    "archive_digest": "b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9",
+    "default_journal_disabled": true,
+    "execution_archive_digest": "3442674a51263aedfbb01062e427f8474de5988142a4a97e15f5f33a7340bdb4",
+    "execution_controls": 7,
+    "independently_expected_proposals": [
+      "12",
+      "18",
+      null
+    ],
+    "installed_module": "/private/tmp/ii-product-package-env/lib/python3.12/site-packages/inventory_intelligence/product.py",
+    "no_database": true,
+    "no_node_runtime": true,
+    "packaged_evidence_sha256": "33fcd78419f5d218dea9e4b5ce9a0902491c780f2b8a58dd0d608f9e188c455d",
+    "paired_policy_cells": 36,
+    "served_assets": [
+      "THIRD_PARTY_LICENSES.txt",
+      "favicon.svg",
+      "index-CrszOey6.css",
+      "index-Ct2J_hVi.js"
+    ],
+    "status": "pass"
+  },
+  "kind": "increments-0-4-local-acceptance",
+  "limitations": [
+    "PostgreSQL17 strict reference acceptance not run on available native18",
+    "Independent human comprehension/accessibility conformance unverified",
+    "Public/container/TLS runtime acceptance and real deployment not performed",
+    "No real data, orders, stock writes, authenticated operational executor or commercial value",
+    "Local journal atomicity does not span source-owner PostgreSQL staging"
+  ],
+  "local_demo": "http://127.0.0.1:8020/#/execution",
+  "regression": {
+    "environment": "native PostgreSQL18; strict PostgreSQL17 reference class remains open",
+    "status": "pending_committed_snapshot_run"
+  },
+  "synthetic_only": true,
+  "timezone": "America/Los_Angeles"
+}

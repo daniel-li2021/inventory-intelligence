@@ -416,6 +416,32 @@ small {
   width: 100%;
   overflow: auto;
 }
+.execution-workbench {
+  min-width: 0;
+}
+.execution-workbench h2 {
+  margin-top: 28px;
+}
+.execution-workbench .metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.execution-workbench .metric-grid span,
+.execution-workbench td small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.execution-workbench .metric-grid strong {
+  display: block;
+  font-size: 22px;
+}
+.execution-workbench label {
+  display: block;
+  margin: 12px 0;
+}
 table {
   width: 100%;
   border-collapse: collapse;

@@ -19,6 +19,12 @@ def _midnight(day):
     return datetime.combine(day,time(),ZoneInfo('America/Los_Angeles')).astimezone(timezone.utc).isoformat()
 
 
+def _clock(value):
+    parsed=datetime.fromisoformat(value)
+    _require(parsed.tzinfo is not None and parsed.utcoffset()==timedelta(0), 'Source knowledge must be canonical UTC')
+    return parsed
+
+
 def audit_case(case, manual=None):
     """Recompute FIFO, stock, purchase/holding/backlog/setup and service denominators."""
     start=date(2026,3,7)
@@ -31,6 +37,8 @@ def audit_case(case, manual=None):
         _require(row['day']==day and row['date']==(start+timedelta(days=day)).isoformat()
                  and row['phase']==('score' if day<9 else 'closure'), 'Wrong daily clock')
         _require(row['accepted']==(case['demand'][day] if day<9 else 0), 'Changed exogenous demand')
+        _require(all(type(row[k]) is int and row[k]>=0 for k in ('accepted','new_filled','end_stock','end_backlog')),
+                 'Physical quantities must be whole pieces')
         for receipt in row['receipts']:
             order=open_orders.get(receipt['order_id'])
             _require(order is not None and receipt['quantity']==order['quantity'], 'Unknown/partial/duplicate receipt')
@@ -59,16 +67,35 @@ def audit_case(case, manual=None):
             _require(sum(m['quantity'] for m in inventory['movements'])+case['initial_stock']==stock, 'Ledger conservation failure')
             _require(context['reliability_run_id']==review['reliability']['run_id']
                      and str(result['inventory']['run']['run_id'])==review['reliability']['run_id'], 'Wrong reliability identity')
+            _require(context['batch_id']==planning['demand_batches'][0]['batch_id']
+                     and context['supply_batch_id']==planning['supply_batches'][0]['batch_id']
+                     and inventory['batches'][0]['batch_id']==review['reliability']['ledger_batch_id']
+                     and inventory['batches'][1]['batch_id']==review['reliability']['snapshot_batch_id'], 'Wrong source batch binding')
+            expected_quantities=case['history']+case['demand'][:day]
+            _require(len(planning['day_observations'])==len(expected_quantities), 'Missing completed evidence')
+            for index,(observation,amount) in enumerate(zip(planning['day_observations'],expected_quantities)):
+                local_day=(start+timedelta(days=index-28)).isoformat()
+                orders=[r for r in planning['order_versions'] if r['accepted_at'][:10]==local_day]
+                availability='available' if index<28 or case['days'][index-28]['new_filled']==amount else 'stockout'
+                _require(observation['business_day']==local_day and observation['availability']==availability
+                         and observation['expected_lines']==int(amount>0) and len(orders)==int(amount>0)
+                         and sum(r['accepted_qty'] for r in orders)==amount, 'Accepted/history evidence changed')
+                _require(all((r['sku_id'],r['warehouse_id'])==(context['sku_id'],context['warehouse_id'])
+                             for r in [observation,*orders]), 'Wrong source key')
             for records in (planning['order_versions'],planning['day_observations'],
                             planning['inbound'],planning['reservations'],inventory['movements']):
                 for record in records:
-                    _require(all(record.get(clock,context['origin'])<=context['origin'] for clock in ('source_recorded_at','observed_at')), 'Future knowledge leakage')
+                    _require(all(_clock(record.get(clock,context['origin']))<=_clock(context['origin'])
+                                 for clock in ('source_recorded_at','observed_at')), 'Future knowledge leakage')
             _require(all(r['business_day']<row['date'] for r in planning['day_observations']), 'Future demand leakage')
             supply=result['supply']
             _require(supply['batch']==planning['supply_batches'][0]
                      and supply['reservations']==planning['reservations'] and supply['inbound']==planning['inbound']
                      and supply['policy']==planning['policies'][0], 'Supply source mismatch')
-            _require(sum(r['remaining_qty'] for r in supply['reservations'])==sum(q['remaining'] for q in queue), 'Backlog reservation loss')
+            _require({k:supply['policy'][k] for k in ('lead_days','review_days','safety_qty','pack_size','moq')}==
+                     dict(lead_days=2,review_days=3,safety_qty=2,pack_size=6,moq=10), 'Frozen planning policy changed')
+            _require({r['reservation_id']:(r['remaining_qty'],r['due_day']) for r in supply['reservations']}==
+                     {q['id']:(q['remaining'],(start+timedelta(days=q['day'])).isoformat()) for q in queue}, 'Backlog identity/date loss')
             _require({r['inbound_id']:(r['remaining_qty'],r['arrival_day']) for r in supply['inbound']}==
                 {k:(v['quantity'],(start+timedelta(days=v['eta'])).isoformat()) for k,v in open_orders.items()}, 'Promise/physical information boundary failure')
             expected_days=planning['day_observations'][-28:]

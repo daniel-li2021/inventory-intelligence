@@ -165,3 +165,22 @@ real inventory imports, source repair and order execution are outside the demo.
 Public hosting has separate runtime/release/cost gates. Never include company code,
 data, screenshots, credentials or confidential schemas. Original material is
 [MIT licensed](LICENSE); dependencies and approved public data retain their licenses.
+
+### Actual execution and durable synthetic receipts
+
+The **Execution** page separately shows the actual planner's seven controls and
+12 paired stress traces, with paid costs, source reports, blocked reviews and the
+retained cold-oracle arithmetic erratum. It preserves the existing advisory
+100-key journey and distinct periodic simulation.
+
+For the local synthetic receipt sandbox, after installing `.[lab]`:
+
+```sh
+python scripts/run_local_demo.py --port 8020 --journal output/local-demo.sqlite
+```
+
+Open `http://127.0.0.1:8020/#/execution`. Admit 12 → receive 5 → notify ETA → receive
+7; choose historical dates and export the durable journal. Repeating identical
+events is harmless. This writes synthetic journal events only. The default hosted
+package stays read-only. No Node/database/model key is needed at demo runtime.
+[Actual evidence, reproduction and limits](docs/PLANNER_EXECUTION.md).

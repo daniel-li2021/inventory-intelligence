@@ -1,62 +1,56 @@
 # Current project state
 
-Updated: 2026-10-13 (America/Los_Angeles). Replace stale facts after each phase or
-material checkpoint; link evidence instead of appending a progress diary.
+Updated: 2026-10-13 (America/Los_Angeles).
 
 Integration mode: AUTO
 
-Phase: product journey Increments 0–2 implemented and locally validated.
-Public runtime, independent human comprehension and accessibility conformance
-remain unverified. Increment 3 execution and Increment 4 scope/implementation are now assigned by the
-automation; real operational intake and deployment remain outside this assignment.
+Phase: Increments 0–4 implemented and accepted within the local synthetic envelope.
+Public deployment and real operational intake remain excluded from this assignment.
 
-## Integrated product scope
+## Integrated product
 
-- Overview → Explore → Investigate → Compare → Decide plus three-cutoff History;
-  50 apparel SKUs × two locations, reusable filters/presets, availability matrix,
-  deterministic Risk/Opportunity/Evidence Problem insights and local saved views.
-- React/TypeScript/Vite is built into the Python wheel; FastAPI remains the static
-  and API host. Original single-item Lab at `/lab` and v1 APIs remain available.
-  Runtime needs no database, Node, model key, external data or source/order writes.
-- First independent eight-key replay: 53 saved reports and 24 proposal/category
-  controls before expansion. Full catalog: 605 actual saved PostgreSQL 18 reports,
-  complete source/run/key bindings, original hashes and exact arithmetic.
-  [Product contract](product-contract.md), [journey evidence](EVIDENCE.md#product-journey),
-  [local walkthrough](../README.md#try-the-decision-workbench).
-- 62 focused backend/API/hosting/legacy regressions, eight frontend state controls
-  and 18 browser checks passed. Browser controls verified blocked/stale/retry/export,
-  race prevention and 320px layout; CSS zoom/forced-colors checks are bounded
-  observations, not conformance. Human comprehension is recorded separately.
+- Overview → Explore → Investigate → Compare → Decide → History: 100 apparel keys,
+  three cutoffs, 605 actual saved PostgreSQL reports; original kernels/411 retained
+  artifact hashes preserved. [Product contract](product-contract.md).
+- Execution: seven actual planner closed-loop controls and 12 fresh paired stress
+  traces × three policies, 129 real restricted-runner reviews. Six original manual
+  controls agree; cold-shortage original is rejected and preserved with an explicit
+  arithmetic erratum (18 pieces, paid cost 776). All seven corrected trajectories
+  reproduced in a second fresh database. [Execution / feedback](PLANNER_EXECUTION.md).
+- Durable local synthetic decisions, commitments, ETA notifications and partial
+  receipts use an immutable SQLite journal separate from operational sources.
+  Idempotent/reopen/concurrent/rollback/history controls pass; confirmed 12-piece
+  feedback in a new supply batch changes the actual proposal 12→0. Read-only
+  package is default; loopback sandbox is explicitly configured.
+- 72 focused backend/API/hosting/legacy tests, eight frontend controls and 22 browser
+  checks in each of read-only/sandbox modes pass. Fresh regression acceptance and
+  installed-wheel details are in the [acceptance receipt](review/increments-0-4-acceptance.json).
+  Human comprehension/accessibility conformance remain unverified.
 
-## Engineering evidence and remaining gates
+## What the measurements demonstrate
 
-- Reliability, advisory planning, read-only Copilot, Lab and research are integrated
-  (PRs 14–26; pre-cleanup baseline `208d5b3`). Retained remote correctness acceptance:
-  240 tests / OK at `9d7c55f` ([receipt](review/engineering-readiness-baseline.json)).
-- [Engineering continuation](RESULTS.md#engineering-continuation) retains the one
-  paired SQL improvement (~12x), 1M upper tier, serial100/backtest/defect grids,
-  ARM64 Linux enforcement and scaled recovery. One continuous HTTP campaign and
-  verified app crash passed; interrupted/discontinuous attempts remain excluded.
-  Original artifact/kernel hashes remain unchanged by product implementation.
-- [Engineering plan](PLAN.md): continuity/rate/client cells, x86/two-date,
-  dense-evidence, serial1000 and independent human/public release gates remain open.
-  No new capacity, universal model/policy winner or commercial benefit is claimed.
+The fresh stress grid is bounded synthetic evidence, not random efficacy or a
+universal ranking. Actual proposals cost less than fixed-18 on 12/12 traces and
+Do Nothing on 11/12. The quiet trace favors Do Nothing (160 versus actual 330).
+Stockout training and overdue commitments still block; journal events waive no gates.
+No real supplier, monetary savings, production exactly-once or operational stock
+write is demonstrated. React assets and both evidence archives ship in the offline
+Python wheel; runtime needs no Node, database or model key.
 
-## Active plans and next action
+## Remaining gates and next work
 
-- [Roadmap](ROADMAP.md): Increments 0–2 delivered within the local synthetic
-  envelope. Increments 3–4 remain proposed/unassigned: actual planner closed loop
-  and decision quality first, then feasible supplier/transfer/lifecycle workflows.
-  Existing research holdouts and public/real-workflow approval gates remain intact.
-- Preserve unmerged planner protocol/control commits `55f4170` / `538d29d` on
-  `codex/planner-closed-loop`. The earlier temporary checkout is unavailable;
-  reconstruct the assigned Increment 3 from committed frozen controls.
-- AUTO integrates validated assigned scope. After merge verify remote main, return
-  the primary checkout to current main and delete only the completed local branch.
+- PostgreSQL17 contract reference acceptance is open on this available native18
+  runtime; local18 tests do not waive its version requirement. Independent human,
+  accessibility and public-runtime/container/TLS acceptance remain separate.
+- [Engineering plan](PLAN.md) retains continuity/rate/client cells, x86/two-date,
+  dense evidence and serial1000. Existing Linux/crash/scale evidence is unchanged.
+- [Roadmap](ROADMAP.md) retains future supplier feasibility, transfers, lifecycle,
+  adapters and authenticated multi-user workflows. No new model or consumed-holdout
+  tuning follows from this task. Deployment was not performed.
+- Preserve unmerged original planner commits `55f4170` / `538d29d`; recovered frozen
+  controls and their historical originals remain traceable. Do not delete that
+  unmerged branch. AUTO integrates only this assigned, validated scope.
 
-Operational inputs are synthetic. The UCI exception remains separate offline
-observed-sales research with attributed aggregates and ignored raw data; it is
-not stock truth, accepted-order demand or permission for operational imports.
-
+Operational inputs remain synthetic. The approved UCI exception is separate offline
+observed-sales research; it is not stock truth or operational import permission.
 Read [workflow](../CONTRIBUTING.md), [index](README.md), [decisions](DECISIONS.md).
-Say “Switch to REVIEW” or “Switch to AUTO” to persistently update the mode line.

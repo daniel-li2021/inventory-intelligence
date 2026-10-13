@@ -22,7 +22,8 @@
 | Active plan | Scope / status | Next action |
 |---|---|---|
 | [Engineering readiness](PLAN.md) | Local continuation complete as practical; one continuous HTTP campaign | Remaining continuous/rate/client cells, x86/two-date, dense-evidence, serial1000 and human gates. |
-| [Next implementation phases](ROADMAP.md) | Increments 0–2 delivered locally October 13; Increments 3–4 proposed | Actual-planner protocol and decision quality next when assigned; human/public/real-workflow gates remain. |
+| [Actual planner execution / feedback](PLANNER_EXECUTION.md) | Increments 3–4 delivered locally; frozen protocols, actual outcomes and durable journal | Human/reference/public-runtime gates; deployment excluded. |
+| [Next implementation phases](ROADMAP.md) | Increments 0–4 delivered locally October 13; future capabilities remain | Supplier feasibility/transfer/lifecycle next when assigned; human/public/real-workflow gates remain. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.

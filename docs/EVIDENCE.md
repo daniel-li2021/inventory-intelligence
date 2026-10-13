@@ -314,3 +314,22 @@ Operational/public customer data, model calls, paid provisioning and public
 deployment are absent. Linux ARM64, one date, fixed batch order, uncontrolled OS
 cache, smaller defect denominators, remaining HTTP/grid cells and unmeasured serial1000 remain explicit
 limits. Historical pilot bytes/source bindings remain unchanged.
+
+## Actual planner execution and feedback
+
+[Saved actual archive](review/planner-loop-v1.json.gz) binds full source archives,
+129 saved restricted-runner reliability/planning pairs, immutable natural decisions,
+physical events, costs and the committed implementation `c8322f7`. Its original
+bytes are also shipped as `execution_evidence.json.gz`; the package adds independently
+frozen controls. [Second database confirmation](review/planner-loop-confirmation.json)
+checks seven normalized physical trajectories and corrected exact expectations.
+The two recovered original protocol/control documents remain byte-identical to
+`55f4170` / `538d29d`; the cold-oracle [erratum](examples/planner-loop-errata-v1.json)
+is additive, not a rewritten original. [Guide and saved-only commands](PLANNER_EXECUTION.md).
+
+[Increments 0–4 acceptance](review/increments-0-4-acceptance.json) records current
+implementation hashes, focused/regression/browser/packaging results and explicit
+reference, human and public-runtime limitations. Developer browser checks are not
+human comprehension or accessibility conformance. SQLite event integrity/idempotency
+is scoped to the configured local synthetic sandbox; no producer authentication,
+real supplier/stock truth or cross-database production exactly-once is established.

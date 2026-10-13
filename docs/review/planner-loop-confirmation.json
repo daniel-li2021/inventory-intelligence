@@ -1,0 +1,18 @@
+{
+  "controls": 7,
+  "date": "2026-10-13",
+  "fresh_disposable_database": true,
+  "normalized_physical_hashes": {
+    "clean": "16b612e30b039513eb89a5f0f0a594603540424dc33aceba9f9eb80462a45eef",
+    "cold-shortage": "a28ba1c37d36fe66c92105e102854c91a367a088c2b1e5363ffea4ae9c970114",
+    "missing": "e06cdae7bb37425511c8395a52d76451bc01524e4c31e7053585eaf1abc72861",
+    "notified-delay": "d698786a6f06397c378dd52ea49e72ab384a9010d225eb98dfc4003bc480b57c",
+    "spike": "96eee3e0078922f7a902cdadd8fc1487780444971dd0ebd0d82db4163f5e3383",
+    "unannounced-delay": "9a358bec8ee648a11daa936bdec5ac735271fb4609f66620ff290d8404eb97cb",
+    "zero": "129bfbc03e8bf930a331a26d80b1c0fd042175bafd348cafe525f807a61c9f94"
+  },
+  "original_cold_oracle": "rejected; explicit retained erratum used",
+  "server_version": 180003,
+  "status": "pass",
+  "tests": 6
+}
