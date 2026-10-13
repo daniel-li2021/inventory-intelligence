@@ -22,7 +22,7 @@
 | Active plan | Scope / status | Next action |
 |---|---|---|
 | [Engineering readiness](PLAN.md) | Local continuation complete as practical; one continuous HTTP campaign | Remaining continuous/rate/client cells, x86/two-date, dense-evidence, serial1000 and human gates. |
-| [Next implementation phases](ROADMAP.md) | Proposed; October 12 investigation complete, implementation unassigned | Scope reliable read-only workbench; serving boundaries/JIT/Lab clarity first, bounded evidence and multi-item views next. |
+| [Next implementation phases](ROADMAP.md) | Proposed; October 13 product/UX revision, 25 opportunities; implementation unassigned | Targeted capability/experience review → complete synthetic Inventory Decision Journey; engineering and product slices delivered together. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.

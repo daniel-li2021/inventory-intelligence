@@ -10,9 +10,11 @@ explain saved results. Missing, stale or contradictory evidence yields
 [Current project state](docs/STATE.md) · [Engineering plan](docs/PLAN.md) ·
 [Knowledge and evidence](docs/README.md) · [Development workflow](CONTRIBUTING.md)
 
-[Proposed next phases](docs/ROADMAP.md): reliable read-only workbench, bounded
-evidence access and later actual-planner/supplier workflows. Investigation only;
-features remain paused until separately assigned.
+[Proposed next phases](docs/ROADMAP.md): an Inventory Decision Journey with proactive
+insights, style/color/size/location exploration, evidence explanations and supported
+what-if comparisons. Engineering and product improvements share each increment;
+actual-planner/supplier workflows follow. Planning only; features remain paused
+until separately assigned.
 
 ```mermaid
 flowchart LR

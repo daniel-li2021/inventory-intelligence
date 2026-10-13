@@ -1,6 +1,7 @@
 # Next implementation phases
 
 Investigated 2026-10-12 (America/Los_Angeles), against main `b5b8d5a`.
+Direction revised 2026-10-13 from the user's product-intelligence/UX guidance.
 Status: **proposed; investigation and planning only**. Nothing here resumes paused
 features, assigns a new benchmark program, approves operational data or authorizes
 deployment. [STATE](STATE.md) owns scope; [PLAN](PLAN.md) retains the unfinished
@@ -11,47 +12,76 @@ in [RESULTS](RESULTS.md), and reference metadata in
 
 ## Recommendation and priorities
 
-Build a **reliable, read-only inventory workbench** next. Let an operator identify
-which SKU/location needs attention, understand the blocker, inspect a proposal and
-compare a clearly labelled scenario. This makes the existing engineering useful
-and visible before expanding forecasting or taking purchasing actions.
+Build an **Inventory Decision Intelligence product**, beginning with a synthetic,
+read-only **Inventory Decision Journey**: Overview → Explore → Investigate →
+Compare → Decide. The system should proactively show what deserves attention,
+explain why, expose the evidence and help the user compare feasible responses.
+Detect risks and opportunities as well as evidence problems; a useful business
+insight need not be a validation failure.
+
+Keep the technical route and original O01–O22 opportunities. Add O23–O25 as product
+goals composed from those capabilities, not independent large services. Bring
+O06, lightweight O17/O18 and O20 into the first integrated experience. External
+inventory products are useful functional/interaction references; overlapping
+features are not a reason to limit this personal project's ambition. Data rights,
+confidentiality, licenses and honest capability claims remain separate boundaries.
 
 The system's strongest differentiator is evidence-gated decisions and inspectable
-failure, not the number of forecasting models. Preserve SQL-first reconciliation,
+explanation, not the number of forecasting models. Preserve SQL-first reconciliation,
 exact pieces/rationals, source identities, business/knowledge clocks, independent
 oracles and append-only results. Keep the public synthetic replay separate from a
 future authenticated operational application.
 
+Use two coordinated tracks: **engineering** (reliability, exact evidence, performance
+and evaluation) and **product** (insights, exploration, comparison and user journeys).
+Each increment improves one complete journey and only the engineering needed to
+make it correct. Do not mechanically implement the opportunity list in ID order.
+Unrelated JIT, x86, serial1000 or full evidence-v2 completion must not block a
+bounded local UI prototype; public/runtime claims and large-report support retain
+their own gates. Correct arithmetic, complete evidence for the selected claim,
+explicit clocks and fail-closed behavior are never optional.
+
 Priority means recommended sequencing, not current authorization. Effort is a
 relative planning estimate: S = one focused delivery; M = several connected
 deliveries; L = a separately scoped phase. It is not a measured calendar estimate.
+Dependencies below name the minimum needed slice, not completion of an entire
+opportunity. O06/O17/O18/O23 share one catalog/insight contract and can be delivered
+together; the table is not a serial backend-before-frontend execution order.
 
 | Priority | Opportunity | Value / confidence | Effort | Dependencies |
 |---|---|---|---|---|
-| Now / P0 | [O01 Serving failure boundaries](#o01-serving-failure-boundaries) | Release blocker; measured | S–M | Existing PLAN |
-| Now / P0 | [O02 Planning latency](#o02-planning-latency) | Measured bottleneck | S | Fresh bounded paired comparison |
-| Now / P0 | [O03 Scalable evidence access](#o03-scalable-evidence-access) | Valid results become unreadable; measured | M–L | Additive evidence contract |
-| Now / P0 | [O04 Budgets and observability](#o04-budgets-and-observability) | Predictable failures; inspected gap | M | Explicit runtime envelope |
-| Now / P1 | [O05 Lab clarity and navigation](#o05-lab-clarity-and-navigation) | Faster comprehension; observed UX gap | S–M | Preserve current API/kernel |
-| Now / P1 | [O06 Multi-item workbench](#o06-multi-item-workbench) | Practical daily workflow; inspected gap | M–L | O03/O05; synthetic multi-key archive |
-| Now / P1 | [O07 Delivery and developer experience](#o07-delivery-and-developer-experience) | Maintainability and reproducibility | M | Separate historical/current validation |
-| Now / P1 | [O20 Portfolio and bounded release](#o20-portfolio-and-bounded-release) | Demonstrable system; conditional release | S–M | O01/O04/O05; separate hosting decision |
+| Now / highest product | [O06 Multi-item workbench](#o06-multi-item-workbench) | Explore actual dimensions and relevant decisions | M–L | O03 minimum read path/O05/O23; synthetic catalog |
+| Now / product | [O23 Insight discovery and prioritization](#o23-insight-discovery-and-prioritization) | Proactive risk/opportunity/evidence highlights | M | O06; validated saved results and versioned rules |
+| Now / product | [O05 Lab clarity and navigation](#o05-lab-clarity-and-navigation) | Understand and compare existing capabilities | S–M | Preserve current API/kernel; O24 labels |
+| Now / product | [O24 Decision comparison experience](#o24-decision-comparison-experience) | Connect insight to supported what-if response | M–L | O05/O06; action-specific capability gates |
+| Now / light slice | [O17 Evidence Copilot in the workbench](#o17-evidence-copilot-in-the-workbench) | Explain the selected insight offline | S–M | O06/O23; explicit evidence/calculation selection |
+| Now / light slice | [O18 Apparel and lifecycle analytics](#o18-apparel-and-lifecycle-analytics) | Style/color/size availability, not only SKU totals | S–M | O06; complete key-level evidence; lifecycle later |
+| Now / every increment | [O20 Portfolio and bounded release](#o20-portfolio-and-bounded-release) | Demonstrable journey; public release separately gated | S–M | Local journey acceptance; O01/O04 before hosting |
+| Now / engineering track | [O01 Serving failure boundaries](#o01-serving-failure-boundaries) | Measured public-runtime release blocker | S–M | Existing PLAN; not a local prototype prerequisite |
+| Now / engineering track | [O02 Planning latency](#o02-planning-latency) | Measured bottleneck; isolated comparison | S | Fresh bounded assignment; not a UI prerequisite |
+| Now / minimum then expand | [O03 Scalable evidence access](#o03-scalable-evidence-access) | Bound the selected journey; fix large reports separately | M–L | Current-sized validation first; additive v2 later |
+| Now / engineering track | [O04 Budgets and observability](#o04-budgets-and-observability) | Predictable journey failures | M | Envelope for the chosen local/hosted surface |
+| Now / scoped support | [O07 Delivery and developer experience](#o07-delivery-and-developer-experience) | Reproducible packaging and journey checks | M | Separate historical/current validation |
+| Next / history slice | [O25 Inventory history and trend exploration](#o25-inventory-history-and-trend-exploration) | New/persistent/improved insights across cutoffs | M | Two comparable saved cutoffs; O06/O23/O21 minimum |
 | Later / P2 | [O08 Immutable input staging](#o08-immutable-input-staging) | Repeatable source onboarding | L | Data authorization; new adapter contract |
 | Later / P2 | [O09 Exception review workflow](#o09-exception-review-workflow) | Close the investigation loop | M | O06; reviewer identity/auth |
 | Later / P2 | [O10 Actual planner closed loop](#o10-actual-planner-closed-loop) | Tests what actual proposals do | M–L | Recover committed protocol; feature scope |
 | Later / P2 | [O11 Supplier and purchase lifecycle](#o11-supplier-and-purchase-lifecycle) | Proposals become traceable commitments | L | O08/O10; durable action journal |
 | Later / P2 | [O14 Count and quality workflow](#o14-count-and-quality-workflow) | Physical stock evidence, not ledger alone | M–L | O09/O08; existing count kernel |
-| Later / P2 | [O17 Evidence Copilot in the workbench](#o17-evidence-copilot-in-the-workbench) | Explain decisions without new arithmetic | M | O03/O06; explicit selection |
 | Later / P2 | [O21 Stronger provenance and replay](#o21-stronger-provenance-and-replay) | Audit changing inputs and deployed bytes | M | O08; authenticated producer boundary |
 | Later / P3 | [O12 Supplier calendars and capacity](#o12-supplier-calendars-and-capacity) | More realistic feasible replenishment | L | O11 and explicit constraint semantics |
 | Later / P3 | [O13 Multi-location transfers](#o13-multi-location-transfers) | Use existing surplus before buying | L | O11; transit/reservation contract |
 | Later / P3 | [O15 Forecast and service intelligence](#o15-forecast-and-service-intelligence) | Decision-aware uncertainty | L | O10/O16; new frozen evidence |
-| Later / P3 | [O16 Decision-quality evaluation](#o16-decision-quality-evaluation) | Measured policy quality, not just MAE | M–L | O10; new assigned study |
-| Later / P3 | [O18 Apparel and lifecycle analytics](#o18-apparel-and-lifecycle-analytics) | Domain depth and working-capital insight | M–L | O08/O11; cost/age evidence |
+| Next research phase | [O16 Decision-quality evaluation](#o16-decision-quality-evaluation) | Test actual proposal outcomes before more models | M–L | O10; new assigned study; O24 comparison contract |
 | Later / operational gate | [O19 Identity and tenant isolation](#o19-identity-and-tenant-isolation) | Mandatory before real multi-user data | L | Defined users, tenancy and threat model |
 | Later / optional | [O22 Larger frontend redesign](#o22-larger-frontend-redesign) | Useful when screens/state justify it | L | O06 API/view-model contract; UX validation |
 
 ## Verified baseline and limitations
+
+The following observations belong to the October 12 investigation. This October 13
+revision changes product priorities and planned increments, not their evidence or
+the current implementation. New capabilities and illustrative supplier/style counts
+in the user's direction are not accepted project results.
 
 - Remote main matched local `b5b8d5aa856d03a27b5fdb3a105aca600e2595e9` after
   fetch. The only additional local branch is `codex/planner-closed-loop`, with two
@@ -112,8 +142,11 @@ flowchart LR
   D --> P
   R --> E[Versioned evidence catalog and bounded views]
   P --> E
-  E --> W[Read-only operator workbench and Copilot]
+  E --> H[Rule-based risk / opportunity / evidence problem insights]
+  H --> W[Explore / investigate / compare / advisory decision]
+  E --> W
   E --> L[Packaged synthetic Lab]
+  W --> L
   P -. later .-> J[Approved synthetic action journal]
   J -. receipts and new evidence .-> I
   S[Separate periodic and lost-sales research] --> L
@@ -168,7 +201,11 @@ JIT and cache changes into one uninterpretable benchmark.
 ### O03 Scalable evidence access
 
 **Value/evidence:** legitimate reports exceed consumer caps; repeated raw training
-and source records in folds grow history. **Approach:** design additive evidence-v2
+and source records in folds grow history. **Approach:** first provide the bounded
+summary/detail/inspect path needed by the selected O23/O24 journey, using complete
+currently readable reports and immutable references. This does not require all
+large-report work to finish before UI exploration. When that journey exceeds the
+existing envelope, design additive evidence-v2
 with immutable source bundles, a small result/summary manifest, complete record
 counts/digests and bounded evidence pages. Separate whole-run semantic validation
 from bounded retrieval of already validated material. Persist validation/version
@@ -183,7 +220,9 @@ allowlisted sort/filter fields and maximum page/body limits; no arbitrary SQL.
 changed hashing; JavaScript loses integers above `2^53−1`. Use decimal strings for
 wide pieces and rational strings at the new transport boundary; chart coordinates
 may be approximate but exact tables/citations cannot be.
-**Success:** saved 730-day and dense-report use cases are inspectable in bounded
+**Success:** the first journey can inspect all evidence supporting its selected
+claim without mistaking a preview for complete evidence. Expanded acceptance:
+saved 730-day and dense-report use cases are inspectable in bounded
 pages without truncation, rewritten historical reports or raised v1 caps. Missing,
 duplicated, reordered or altered chunks reject; complete counts and independent
 scores/quantities agree. Measure total storage, producer time and reader memory.
@@ -234,24 +273,36 @@ WCAG conformance from automated checks alone.
 ### O06 Multi-item workbench
 
 **Value/evidence:** schema already models styles/color/size and warehouses, but
-`lab.KEY` and validator bind one item. There is no inventory/run browser or daily
-exception queue. **Approach:** add a bounded synthetic catalog exported from actual
-multi-key saved runs, with read-only summaries and drilldown. Start with inventory,
-exceptions, proposal detail and Lab; filters for warehouse/style/status/reason and
-cutoff, stable pagination, exact on-hand/committed/incoming labels and links to the
-selected run. Show unknown totals as unknown and assessable-zero separately from
-blocked. Render recorded key-level reconciliation where available, while retaining
-the planner's current global nonpassing-run gate. Do not silently permit planning
-because some other keys are clean. Keep a later DB-backed reader behind the same
-view contract; a packaged public demo need not expose a live operational DB.
+`lab.KEY` and validator bind one item. There is no cross-dimensional inventory
+explorer or proactive attention queue. **Approach:** make O06 the product shell for
+O23 insights, lightweight O17 explanations/O18 matrices, O24 comparisons and O25
+history. Export a bounded synthetic catalog from actual multi-key saved runs, with
+summary → item/style detail → insight → supporting calculation/source drilldown.
+Filters include style, color, size, SKU, location, insight type/status and cutoff;
+use stable pagination, exact on-hand/committed/incoming labels and selected-run links.
+Provide preset and manual exploration with the same explicit filter state: At-risk
+Stock, Excess Stock, Untrusted Evidence, and only when supported Supply Delays and
+Transfer Candidates. Include a Scenario Lab entry. Saved/shareable local views bind
+filter schema and source/archive version; links do not grant access or promise live
+refresh. Unsupported lifecycle or sales presets wait for the required data/rules.
 
-**Dependencies:** O03/O05 and a versioned multi-key replay adapter, not a relaxed
+Show unknown totals as unknown, filtered coverage/denominators and assessable-zero
+separately from blocked. Render recorded key-level reconciliation while retaining
+the planner's global nonpassing-run gate; local clean keys do not override it.
+Keep a later DB-backed reader behind the same view contract; a packaged public
+demo need not expose a live operational DB.
+
+**Dependencies:** O03 minimum read path/O05 and a versioned multi-key replay adapter,
+O23 rules and lightweight O18 dimension mapping, not a relaxed
 fixed-fixture validator. **Risks:** cross-key joins, misleading aggregates, changing
 historical selection to latest data. **Success:** a synthetic 100-key/two-location
 catalog can navigate a known duplicate, shortage, clean proposal and blocked supply
-case; each value resolves to the correct run/key/cutoff. Bounded pages include
-filtered totals; independent stock/order quantities and invalid cross-key selectors
-are checked. This is a proposed fixture size, not current acceptance.
+case plus a business opportunity that is not a validation failure; each value
+resolves to the correct run/key/cutoff. Preset/manual views select identical records
+for identical filters; style/color/size cells retain location/coverage context.
+Bounded pages include filtered totals; independent stock/order quantities and
+invalid cross-key selectors are checked. This is a proposed fixture size, not
+current acceptance; the first vertical slice may start smaller with an explicit envelope.
 
 ### O07 Delivery and developer experience
 
@@ -275,7 +326,7 @@ reports decode unchanged; browser and API boundaries are checked in CI; software
 bill of materials and a reviewed vulnerability scan record versions/results.
 No current CVE-free or branch-protection claim follows from this investigation.
 
-## Later: practical inventory workflows
+## Inventory workflows, explanation and provenance
 
 ### O08 Immutable input staging
 
@@ -399,14 +450,19 @@ adjustment creates a traceable new event and reconciles without overwriting stoc
 ### O17 Evidence Copilot in the workbench
 
 **Value/gap:** deterministic saved-run explanations and optional intent routing
-exist in CLI; the Lab trace is not a conversational Copilot. **Approach:** begin
-with selected-run buttons: explain blocker, explain rounding, show shortage before
-arrival and compare recorded runs. Responses contain typed claims, exact citation
-links and needed evidence. An entity selector chooses run/finding/SKU explicitly;
+exist in CLI; the Lab trace is not a conversational Copilot. **Approach:** bring a
+lightweight deterministic explanation into the first journey: explain the selected
+O23 insight, why it matters, applicable rule, calculation and missing evidence.
+Use selected-run buttons for blocker, rounding and shortage before arrival.
+Responses contain typed claims, exact citation links and supported next steps;
+scenario-derived claims cite calculation nodes rather than stored baseline UUIDs.
+This explanation adapter needs no LLM and is not an autonomous decision agent.
+An entity selector chooses run/finding/SKU explicitly;
 the model must not select records or invent arithmetic. Natural-language multi-step
 comparison later gets a new bounded intent contract and fresh unseen matrix, with
 separate intent, entity, evidence, numeric and refusal scores. No free-form SQL.
-**Dependencies:** O03/O06; saved comparison nodes for every derived claim.
+**Dependencies:** O03 minimum/O06/O23; calculation nodes for derived claims. Rich
+conversation and cross-run explanation follow O24/O25 rather than block the light slice.
 **Risks:** source identity being presented as current authority, stale answers,
 prompt injection and consumed holdout tuning. **Success:** works offline; invalid
 selectors/cross-key questions fail closed; no source/action writes or new proposed
@@ -429,7 +485,7 @@ signature as business truth; deleting shared evidence during retention cleanup.
 reuse an old pass; original runs replay at original clocks; build and source
 identities are independently checkable. Historical artifacts remain untouched.
 
-## Later: stronger decisions and domain depth
+## Decision quality, apparel intelligence and private operation
 
 ### O15 Forecast and service intelligence
 
@@ -473,14 +529,23 @@ required to complete this opportunity.
 
 **Value/gap:** apparel styles/color/size exist, but no style-size availability,
 assortment gaps, aged stock, monetary value or lifecycle workflow is exposed.
-**Approach:** first add exact size/color/location pivots and completeness-aware
-shortage/excess summaries to O06. Later add receipts/lot age and dated valuation
+**Approach:** bring the light slice forward with O06: style → color×size availability
+matrix, location/cutoff selector and drilldown to exact SKU/insight evidence. Show
+zero separately from missing/untrusted cells; quantity colors need a stated rule
+using demand, supply, location and horizon rather than arbitrary illustrative
+thresholds. A large style total must not hide a missing size. Keep the existing
+style/color/size identities and natural future lifecycle extension points.
+Later add receipts/lot age and dated valuation
 for inventory aging/turns/working-capital views; do not infer inventory age from a
 current snapshot. Define slow-mover/retirement signals from known observations;
 recommend transfer/markdown review before claiming a liquidation strategy. Returns
 keep inspection/disposition evidence and cannot become negative accepted demand.
 Promotions, substitution and new-product pooling require their own source features
-and evaluation. **Dependencies:** O08/O11/O14; economics and price evidence.
+and evaluation. **Dependencies:** light slice needs O06's complete SKU/dimension
+mapping and O23 rules, not a new importer or PO system. Phase-out colors, size curves,
+slow movers, location-specific demand, age and seasonality expand only when their
+history/lifecycle/receipt features are available; the full slice needs O08/O11/O14
+and economics/price evidence.
 **Risks:** sums hiding missing sizes, overstated margin, unreliable ABC/XYZ thresholds
 and applying an apparel rule to all products. **Success:** style totals equal exact
 SKU totals only on complete coverage; missing sizes remain unknown; age/value bands
@@ -501,6 +566,106 @@ login screen while evidence IDs remain globally readable. **Success:** cross-ten
 run/source/action identifiers deny access, approvals enforce independent roles,
 secrets never enter response/log/build context and restore preserves isolation.
 This is a prerequisite to real operation, not a reason to add auth to today's demo.
+
+## Product intelligence and experience goals
+
+The user's October 13 direction adds these goals to O01–O22. They reuse the
+workbench, evidence and kernels; they do not imply three new backend services or
+authorize implementation. External example counts, inventory matrices and sample
+recommendations are illustrative, not measurements or existing planner outputs.
+
+### O23 Insight discovery and prioritization
+
+**Value/gap:** users should learn what deserves attention before knowing a question
+to ask. Current validation findings identify evidence defects; they do not cover
+every business risk or opportunity. **Approach:** a deterministic rule layer inside
+the O06 read model, over validated saved results and explicitly scoped sources.
+Use three types: **Risk**, **Opportunity**, **Evidence Problem**. Define rule version,
+semantic insight identity, observation/run identity, SKU/style/location scope,
+as-of/known-at/evaluated-at, applicability, trigger facts, exact exposure, source/
+calculation links and supported next step. Separate a rule's business priority
+from inventory validation severity; do not add/alter R001–R005 to manufacture risks.
+
+First rule candidates: projected pre-arrival shortage; finite-window excess above
+declared policy; incomplete/inconsistent evidence; supplier delay; demand shift;
+and cross-location transfer candidate. Release only the subset with supporting
+evidence. Current Lab delay is a hypothetical parameter, not observed supplier
+lateness; demand-shift rules require complete comparable history windows; transfer
+candidates require trustworthy origin/destination stock/obligations and remain
+investigation opportunities until O13 supplies transit/capacity feasibility.
+Excess is tied to demand, obligations, horizon and policy, not a stock-only threshold
+or proof of obsolete inventory. Unknown evidence yields a problem/blocker, not a
+fabricated shortage quantity, days-of-cover, money exposure or zero demand.
+
+Prioritize with versioned interpretable tiers and explicit sort keys (urgency/date,
+supported piece exposure, then stable identity); do not collapse incompatible units
+into an opaque score. Highlight counts disclose eligible/blocked keys and coverage;
+group repeated observations without dropping their history. Users can inspect the
+rule/filter and choose manual exploration instead of accepting the default ranking.
+**Dependencies:** O06's minimum catalog contract, O03 bounded evidence; O17 explains
+the selected insight. O09 tracking and advanced actions are later slices.
+**Risks:** false certainty from incomplete facts, double-counted SKU/style highlights,
+look-ahead ranking and assuming all opportunities are feasible actions.
+**Success:** independently specified synthetic risk/opportunity/problem controls
+produce exact expected insight sets and deterministic order; a valid business
+opportunity can coexist with passing reliability. Invalid/missing inputs suppress
+unsupported quantities. Every highlight drills into its facts/evidence and identifies
+the next review or missing evidence; no LLM discovers or calculates first-version rules.
+
+### O24 Decision comparison experience
+
+**Value/gap:** insight → explanation → evidence → suggested action → scenario
+comparison is more useful than disconnected parameters and charts. **Approach:**
+open a selected insight in the What-if Decision Explorer with its item/location,
+recorded cutoff and baseline assumptions preserved. Compare supported alternatives
+using deterministic kernels, clear feasibility/assumption status and exact metrics.
+Keep baseline/edited/result state separate; show parameter diffs and retain the
+last good response on error. The Decide step summarizes a supported advisory proposal,
+tradeoffs, constraints and required human review; it does not approve/place orders.
+
+| Comparison | Initial support / truthful presentation | Required extension |
+|---|---|---|
+| Do Nothing | Current prefix `balance_without_order` versus computed proposal balance; projection-only | Actual no-action service/cost needs a compatible executor/control in O10/O16 |
+| Supplier Delay | Existing Lab hidden-delay scenario and separately identified periodic-policy outcomes | Observed supplier lateness/ETA updates need source and workflow evidence |
+| Replenish Earlier | Declared lead-time what-if is an assumption, not proof of feasible earlier receipt | Supported ETA/calendar/capacity plus O10/O11/O12 before calling it feasible |
+| Order More | Current proposal and rounding can be inspected; arbitrary 500-versus-700 execution is unavailable | Explicit action quantity, paid stock and common-window executor in O10/O16 |
+| Transfer Stock | Investigate cross-location candidate facts when complete | O13 conservation/transit/donor protection before comparing realized service/cost |
+
+Unsupported actions stay visibly unavailable with reasons; no mock result should
+look like a kernel outcome. Do not compare an executed planner proposal with a
+different simulator policy as if they were the same action. Common initial state,
+scored/settlement windows, costs, policy and demand/supply path must be explicit.
+If they differ, restrict comparison to compatible measures and explain differences;
+disable unsupported savings/dominance claims. Preserve null service denominators.
+**Dependencies:** O05/O06/O23 and O03 minimum; O10/O16 unlock actual decision-quality
+comparisons, O11–O13 unlock action-specific feasibility. **Risks:** misleading causal
+claims, free starting/transferred stock, hidden future supply leaking into planning.
+**Success:** a user can inspect one stockout/delay insight, compare a currently
+supported scenario and explain the result's policy/assumptions. A matched incomplete-
+supply case blocks recommendations/comparison outputs correctly; every new metric
+has exact calculation/evidence links. Later action controls independently establish
+conservation, full costs and common-window service before richer options appear.
+
+### O25 Inventory history and trend exploration
+
+**Value/gap:** users need to see whether an insight is new, persistent, worse or
+improved, rather than repeatedly inspect isolated snapshots. **Approach:** compare
+immutable saved reports at explicitly selected cutoffs/knowledge times. Reuse O06
+filters and O23 semantic scope to link observations; show quantities, recommendation,
+rule/status and evidence changes. Keep item/location/unit, coverage, policy/model
+version and calendar comparability visible. Separate business change from new
+knowledge/revision or changed rules. A newly missing report is unknown, not resolved;
+only sufficiently complete comparable evidence supports an improvement conclusion.
+Start with two or three authored synthetic cutoffs and a bounded read-only timeline;
+no new importer or wholesale provenance platform is needed for that slice.
+**Dependencies:** O06/O23 and retained run/source bindings; O21's minimum as-of/
+known-at semantics. Full O21 producer attestations and O08 ingestion remain later.
+**Risks:** survivorship bias, history rewrite, aligning different horizons as one
+trend and replaying later knowledge into earlier insights. **Success:** independent
+new/persistent/worsening/improving/unknown controls, exact compatible deltas, unchanged
+original report hashes and strict historical selectors. Future revisions cannot
+alter the original historical view; noncomparable observations explain why a
+numeric trend cannot be assessed. No population trend or efficacy claim follows.
 
 ## UI direction and reference comparison
 
@@ -530,21 +695,40 @@ typography, tabular numerals, explicit text states plus color, unobtrusive borde
 and short labels. Keep the large introductory hero on a portfolio entry page;
 operational pages should lead with context and the next decision.
 
-Proposed information architecture:
+Proposed information architecture follows one journey, not a list of backend modules:
 
-1. **Overview / attention:** three useful summaries (evidence blocked, shortage
-   before arrival, actionable proposals) with denominators and click-to-queue.
-2. **Inventory:** SKU/style/location list, quantities in separately defined states,
-   completeness and historical-cutoff selector; searchable item detail.
-3. **Exceptions:** blocked/review-needed findings with evidence, owner/next step
-   only after O09 provides actual workflow records.
-4. **Replenishment:** recommendation list → decision detail: requirement/rounding,
-   arrival, obligations, projection and evidence. Distinguish zero from blocked.
-5. **Decision Lab:** guided counterfactual comparison, scenario settings and visible
-   accounting windows; two-policy distinction stays next to the outputs.
-6. **Evidence:** bounded saved runs, source lineage and research results, each with
-   reproducible identity and synthetic/observed-sales labels.
-7. **Suppliers / purchasing:** add navigation only after O11 exists; no empty menus.
+1. **Overview:** automatic Risk/Opportunity/Evidence Problem highlights and a
+   sortable attention queue. Explain the trigger and eligible/blocked denominator;
+   a user should not need to ask Copilot what to inspect.
+2. **Explore:** presets or manual style/color/size/SKU/location/status/time filters,
+   list or apparel matrix, saved/shareable view state and item drilldown. Start
+   with supported At-risk Stock, Excess Stock and Untrusted Evidence; enable Supply
+   Delays/Transfer Candidates only when their rules/data exist. Scenario Lab is
+   an entry point, not a substitute for discovering insights.
+3. **Investigate:** selected insight → why it matters → exact stock/demand/supply
+   facts → calculation/source evidence → suggested review. Put lightweight O17
+   explanation beside the insight, not behind a separate technical Evidence tab.
+4. **Compare:** selected item/insight opens the What-if Decision Explorer. Carry
+   context into supported alternatives; label hypothetical assumptions, policy,
+   feasible/unavailable actions, accounting windows and compatible metrics.
+5. **Decide:** summarize the assessable advisory proposal or evidence blocker,
+   tradeoffs, limits and human review needed. No implied order approval/execution.
+   Link back to the exact comparison or to O09 follow-up when that workflow exists.
+
+Evidence/run/research catalogs remain available for deeper inspection; sources
+and calculation links must also be present at each journey step. O25 adds history
+inside item/insight detail. Supplier/purchasing navigation appears with O11, not as
+empty menus. These stages need not become five separate pages or services.
+
+Make freshness and coverage visible at the overview, item, insight and comparison:
+source as-of/known-at, last evaluation/generation, covered versus expected locations/
+keys/days, missing sources, stale calculations and blocked recommendations. A new
+generation time does not make an old stock cutoff fresh. Distinguish **source
+completeness**, **recorded validation**, **rule applicability**, **forecast uncertainty**
+and **action feasibility**. Use explicit states/reasons and measured denominators;
+never invent a composite “AI confidence 92%” or calibrated probability. Forecast
+uncertainty may be unavailable even when data is complete. Missing coverage must
+remain visible when users filter to a subset.
 
 Decision detail layout: compact top context (item/location, historical cutoff,
 archive and status); decision/arrival/blocker on the first row; stock/demand/receipt
@@ -556,7 +740,8 @@ before total/runoff deltas; unequal exposure must remain visible.
 
 Component inventory: context bar, status-with-reason, bounded filter toolbar,
 accessible paginated table, key detail link, exact value/denominator disclosure,
-timeline + equivalent table, change diff, trace inspector, stale-result indicator,
+timeline + equivalent table, apparel matrix with exact cell drilldown, insight
+type/trigger/priority, evidence-context disclosure, change diff, trace inspector, stale-result indicator,
 error/retry and download. Use a sticky primary action only when focus/zoom checks
 show it cannot obscure content. Avoid ambiguous disabled controls; explain why.
 
@@ -587,13 +772,16 @@ SSR, microfrontends and server actions for this same-origin static application.
 **Value/gap:** README already has a case study and screenshot; it has no public demo
 and some early hosting paragraphs lag later verified container evidence.
 **Approach:** refresh the maintained overview/hosting status from exact receipts;
-provide a three-minute clean → demand change → hidden delay → blocked walkthrough,
+provide a three-minute insight → explore → explanation/evidence → supported scenario
+comparison → advisory/blocked decision walkthrough for each increment,
 one architecture view and a compact claim/evidence catalog including negative
 results. Record release commit, built image/dependency/archive digest, rollback
 image and supported envelope. Add external uptime and redacted error monitoring
 only after a reviewed host/domain/cost decision and end-to-end release checks.
-Keep the local no-key/no-DB path available. **Dependencies:** O01/O04/O05; human
-cold-start/readability checks and separate paid/public deployment authorization.
+Keep the local no-key/no-DB path available where the packaged slice supports it.
+**Dependencies:** local demos follow the selected journey's correctness/UX checks;
+O01/O04 and human cold-start/readability plus separate paid/public deployment
+authorization gate hosting, not production of every local increment demo.
 **Risks:** presenting synthetic performance as retailer impact; impressive counts
 hiding test denominators; a public limiter being mistaken for DoS protection.
 **Success:** independent readers can reproduce the example, explain the two
@@ -624,41 +812,118 @@ Public TLS/rollback/uptime are verified before describing a live deployed servic
 
 ## Delivery sequence and acceptance gates
 
-**Phase A — reliable read-only workbench (recommended next assignment).**
-Split into reviewable deliveries: (1) O01/O04 failure-boundary and diagnostics;
-(2) O02 one isolated JIT comparison/change only if justified; (3) O03 bounded evidence
-contract and read path; (4) O05 immediate Lab clarity; (5) O06 minimal multi-key
-synthetic catalog/list/detail; (6) focused O07 packaging/browser checks and O20
-portfolio narrative. O03 can first deliver summary/detail for current-sized history;
-do not claim 730-day support until the normalized producer/validator actually works.
-Keep React migration out of the first Lab polish; choose O22 explicitly for the
-multi-route workbench if the accepted interaction scope warrants its added cost.
+These increments replace the October 12 backend-first Phase A/B/C ordering.
+Original opportunities and benchmark evidence stay intact. Work both tracks within
+each assigned increment; do not require completion of every engineering opportunity
+before exposing a correct bounded experience. Each increment ends with a local
+synthetic demo and its measured/unsupported capability boundary (O20).
 
-Completion: current scenario quantities/nulls remain correct; selected evidence
-is bounded and traceable; known exception/proposal journeys work across two locations;
-failure states and retry are useful; an independent reader understands the system.
-Report x86/two-date, remaining load/sample and human gates individually, including
-any still unverified. Approving Phase A can authorize a smaller local synthetic
-claim without silently marking the full production-reference PLAN complete.
+### Increment 0 — product capability and experience review
 
-**Phase B — actual-planner feedback and inventory workflow.**
-Assign O10's seven manual controls first; characterize blocked recovery behavior.
-Then synthetic O08/O09/O11/O14/O17/O21: immutable intake, review journal, durable
-commitments/partial receipts and count evidence. Gate real operation behind O19.
-Completion is traceable synthetic proposal → reviewed commitment → receipt →
-new reliability/planning run, with restart/idempotency/source-history controls.
-No real order connector or source repair is included by implication.
+**User outcome:** a concrete, feasible Inventory Decision Journey is ready to build.
+Reuse the October 12 investigation; this is a targeted product capability/UX review,
+not another broad backend audit. Map O06/O17/O18/O23–O25 to existing outputs and
+identify adapter, rule, source-field and action gaps. Define one journey, small
+synthetic fixture scope, exact expected insight sets, comparison capability matrix,
+evidence-context contract and screen/state flow before implementation.
 
-**Phase C — supply/network decisions and calibrated intelligence.**
-Choose a specific binding constraint from O12/O13; evaluate it through O16 before
-O15 model promotion. Add O18 domain analytics where the required evidence exists.
-Completion is a fresh, paired paid cost/service result on the actual planner;
-no-winner or infeasible findings are valid outcomes. Additional datasets, models,
-large experiments and infrastructure each need separately bounded scope.
+**Product track:** Overview → Explore → Investigate → Compare → Decide; prioritize
+the first stockout/supply-delay insight and one evidence-blocked counterpart; plan
+lightweight apparel/preset entry points. **Engineering track:** minimum O03 read
+path, per-key/source binding, clocks, rule/calculation references and strict input
+bounds. Existing projection/periodic outcomes keep separate labels. Decide vanilla
+versus O22 based on accepted screens/state, not a preselected framework rewrite.
+**Exit:** a field-by-field support/gap map, independent fixture expectations and
+explicit acceptance for every journey state. Mockups/illustrative values are labelled;
+no unsupported feasibility or realized action outcomes appear as existing results.
+This increment is proposed; the present task only revises the plan.
 
-Next decision: assign Phase A's desired local/public boundary and included
-deliveries. **Recommended starting slice: serving timeout/deadline diagnostics,
-one isolated planning-JIT comparison, and incremental Lab hierarchy/terminology.**
-Then deliver bounded evidence and the multi-item workbench. This closes measured
-gaps and exposes useful decisions while keeping purchasing/model expansion behind
-explicit later gates. Implementation remains paused until assigned.
+### Increment 1 — first complete insight-to-decision journey
+
+**User outcome:** opening the demo reveals a useful stockout/supply risk; the user
+can investigate its evidence, compare a supported what-if and understand the
+advisory decision or reason it is blocked. Start with a small declared synthetic
+catalog including style/color/size and two locations; freeze its exact size before
+coding rather than require the 100-key exploratory envelope up front.
+
+**Product track:** O06 shell, initial O23 rules/attention queue, lightweight O17
+explanation/O18 availability matrix, O05 clarity and O24 supported scenario flow.
+Include Risk/Opportunity/Evidence Problem views, usable preset/manual filters and
+visible freshness/coverage/applicability; ship a short O20 local demonstration.
+**Engineering track:** actual saved synthetic source/results, independently checked
+insight rules, minimum bounded complete evidence access, a versioned catalog adapter
+and O07 journey checks. Add only O04 diagnostics required for clear failure/retry.
+O01 release fixes and O02 isolated JIT work remain scoped engineering work alongside
+the journey; x86/serial1000/full evidence-v2 do not block this local slice.
+
+**Exit:** users complete all five stages; highlight/selection/matrix quantities and
+calculation/source links match independent expected facts. A passing-reliability
+opportunity is distinct from a validation failure. Incomplete evidence suppresses
+recommendation and unsupported comparison values, retaining the last good result.
+Existing scenario controls/null denominators and policy distinctions remain correct;
+keyboard, stale/reset/error/retry/export paths work. No order/source writes or model
+calls are needed. Independent comprehension checks are recorded separately from
+developer checks; public or accessibility-conformance claims remain gated.
+
+### Increment 2 — broader exploration, history and comparison
+
+**User outcome:** users explore styles and locations, revisit a saved view and see
+whether an insight appeared, persisted, worsened or improved across cutoffs.
+**Product track:** expand presets/matrices and lightweight O17 explanations; add
+O25 two/three-cutoff history and O24 comparison context with compatible deltas.
+Broader lifecycle/transfer presets ship only with evidence and explicit capability.
+**Engineering track:** minimum O21 temporal/source bindings, stable insight/view
+identity and version comparability; expand O03 producer/reader representation only
+where the chosen history actually requires it. Then validate the intended multi-key
+envelope, including the previously proposed 100-key/two-location case if assigned.
+**Exit:** new/persistent/improved/unknown controls match independent expectations,
+old report bytes remain unchanged, future knowledge cannot leak backward, missing
+coverage cannot look resolved, and preset/manual/shareable selections agree.
+Every demo explains compatible comparison windows and unsupported alternatives.
+
+### Increment 3 — actual planner decision quality and feedback
+
+**User outcome:** comparisons can demonstrate what the actual planner's proposals
+do, instead of relying on a different periodic policy. Prioritize O10/O16 before
+additional O15 forecasting models. **Product track:** truthful Do Nothing/actual
+proposal/alternative quantity comparison, with paid inventory, service, constraints
+and common accounting windows; connect O09 follow-up to discovered insights.
+**Engineering track:** recover O10's committed protocol and seven independent
+controls, then characterize blocked recovery. Any altered recovery policy/action
+executor needs an additive contract and fresh frozen O16 comparison; do not change
+training/supply gates to make the demonstration succeed. O08/O11 durable synthetic
+commitments/receipts and O21 replay follow the accepted feedback slice; an in-memory
+journal is not a production executor. **Exit:** conservation, identity/idempotency,
+hidden-information boundaries, full paid costs and fresh paired decision outcomes
+are independently validated. No-winner/blocked outcomes remain valid findings.
+Real imports/users/orders still require their own scope and O19 protections.
+
+### Increment 4 — feasible supply/network actions and deeper apparel intelligence
+
+**User outcome:** where supported, compare feasible earlier receipts, supplier
+constraints and stock transfers; explore size curves, lifecycle and aged inventory.
+**Product track:** add the O24 options unlocked by O11–O14 and richer O18 evidence,
+not placeholder actions. **Engineering track:** supplier calendars/capacity, transit
+conservation/donor service, partial receipts, count/quality and economic/history
+contracts. Choose the binding use case, baseline and fresh O16 evaluation first;
+O15 challengers follow measured weaknesses. **Exit:** supported actions have exact
+availability/timing, complete costs and verified service/stock effects; insufficient
+data or infeasible supply is explicit. Broader supply-chain features remain valid
+long-term directions, not exclusions to avoid similarity with external products.
+
+### Gate ownership and next assignment
+
+**Every local journey:** exact quantities, applicable rules, selected-source
+completeness, explicit clocks/citations, null/block behavior and bounded failures.
+UI prototype acceptance cannot waive these. **Large-scale support:** O02/O03 and
+the specific PLAN cells measuring the claimed workload. **Public hosting:** O01/O04,
+remaining runtime/recovery, host/domain/cost and public-TLS approval. **Real/private
+workflows:** O08/O19, identities/approval/action contracts and explicit data rights.
+Open gates do not imply failed unrelated local journey work or successful production.
+
+**Recommended next assignment:** Increment 0's targeted Product Capability &
+Experience Review, followed by Increment 1's complete synthetic Inventory Decision
+Journey. Keep the next development slice centered on “open an insight, understand
+its evidence, compare a supported response, and see the advisory/blocked decision,”
+with engineering scoped to that experience. This task authorizes the revised plan
+only; no feature implementation, fresh study or deployment is assigned.

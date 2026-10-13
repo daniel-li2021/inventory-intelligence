@@ -1,11 +1,11 @@
 # Current project state
 
-Updated: 2026-10-12 (America/Los_Angeles). Replace stale facts after each phase or
+Updated: 2026-10-13 (America/Los_Angeles). Replace stale facts after each phase or
 material checkpoint; link evidence instead of appending a progress diary.
 
 Integration mode: AUTO
 
-Phase: next-phase investigation complete; proposed roadmap awaits implementation scope.
+Phase: product-journey roadmap revised; next increments await assignment.
 Engineering reference/stability/release gates remain pending.
 Features remain paused. The user assigned the remaining benchmark checks and one
 evidence-led optimization on October 4, selecting available local runtimes only.
@@ -15,7 +15,8 @@ short/discontinuous/interrupted attempts remain excluded from stability confirma
 Wall-clock discontinuities caused the three-hour target to overrun; measurements
 stopped and clock guards/journaling were repaired. Paid deployment and planner
 feature resumption require their own scope decision. The October 12 assignment
-authorized investigation and planning only; no product code was changed.
+authorized investigation and planning only. October 13 revised the plan toward
+product intelligence and UX; no product code, study or deployment was assigned.
 
 ## Integrated and measured
 
@@ -38,10 +39,13 @@ authorized investigation and planning only; no product code was changed.
 
 ## Active work and next action
 
-- [Next phases](ROADMAP.md): 22 actionable opportunities and researched UI choices.
-  Recommendation: reliable read-only workbench, beginning with serving boundaries,
-  one isolated planning-JIT comparison and incremental Lab clarity; then bounded
-  evidence access/multi-item views. Implementation remains unassigned/paused.
+- [Next phases](ROADMAP.md): 25 opportunities, integrated engineering/product tracks.
+  Next: targeted Product Capability & Experience Review, then the synthetic
+  Overview → Explore → Investigate → Compare → Decide journey. O06/O23, lightweight
+  O17/O18 and supported O24 comparisons lead; O25 history follows. Unrelated scale/
+  performance gates do not block a bounded local prototype once assigned; exact
+  evidence, fail-closed behavior and public/real-workflow gates remain mandatory.
+  Implementation remains unassigned/paused.
   [Fresh focused review receipt](review/next-phase-investigation.json): 34 Lab/API/
   hosted checks and six API controls; no new DB/load/model/deployment evidence.
 - [Engineering plan](PLAN.md): remaining continuity-verified HTTP/rate/client,

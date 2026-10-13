@@ -143,7 +143,12 @@ public service, full accessibility and production/business outcomes remain unver
 
 The October 12 [roadmap](ROADMAP.md#ui-direction-and-reference-comparison) compares
 Linear/Shopify/InvenTree workflow patterns and popular component/table/chart
-repositories, with checked links and adoption boundaries. It recommends incremental
-Lab hierarchy and terminology first, followed by a read-only multi-item workbench;
-a React/Vite redesign is conditional on that multi-route scope. These are plans,
-not delivered UI changes. Current API/validator/kernel semantics above stay authoritative.
+repositories, with checked links and adoption boundaries. The October 13 revision
+positions the Lab as a What-if Decision Explorer in the Inventory Decision Journey:
+Overview → Explore → Investigate → Compare → Decide. Automatic insights, apparel
+dimensions, presets, inline evidence explanations and visible freshness/coverage
+lead the product plan. Existing hidden-delay/projection comparisons stay distinct
+from feasible earlier receipts, arbitrary order execution or transfers, which need
+further contracts. A React/Vite redesign depends on accepted interaction complexity.
+These are plans, not delivered UI changes; current API/validator/kernel semantics
+above stay authoritative. See [increments and gates](ROADMAP.md#delivery-sequence-and-acceptance-gates).

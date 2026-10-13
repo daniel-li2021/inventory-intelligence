@@ -120,12 +120,20 @@ the [proposed roadmap](ROADMAP.md), not automatic feature resumption.
   migrations and private-user isolation need explicit designs. Their absence is
   not proof of a current anonymous synthetic-demo security incident. Branch
   protection was inaccessible (401); public ruleset listing was empty.
-- Recommended UI is a compact attention queue, item/decision detail and guided Lab
-  with linked exact evidence. [Reference comparison](ROADMAP.md#ui-direction-and-reference-comparison)
+- UI references support a compact attention queue, item/decision detail and guided
+  exploration with linked exact evidence. [Reference comparison](ROADMAP.md#ui-direction-and-reference-comparison)
   distinguishes borrowed patterns from code adoption. Current metadata/SHAs are
   appended separately in [research metadata](research/repositories.json), preserving
-  the earlier inspection. Incremental vanilla improvements precede conditional
-  React/Vite/TanStack adoption for a genuinely multi-route scope.
+  the earlier inspection. The October 13 product direction now prioritizes the
+  Inventory Decision Journey, deterministic Risk/Opportunity/Evidence Problem
+  insights, presets, lightweight apparel matrices and selected-insight explanations.
+  O23–O25 compose existing capabilities; they need not be separate services.
+  Local prototype correctness gates differ from scale/public/real-workflow gates;
+  unresolved peripheral optimization must not block all UI work once assigned.
+  Forecast uncertainty, source coverage, freshness and rule/action applicability
+  stay distinct; no invented composite AI-confidence score. External functional
+  similarity is useful inspiration, not a scope restriction; data/license boundaries
+  persist. All added examples and capabilities remain plans, not fresh measurements.
 
 ## Source and tool lessons
 

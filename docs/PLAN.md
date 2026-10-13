@@ -12,12 +12,15 @@ chosen two-hour ceiling, not the completed original pilot's receipt.
 Reference workload/SLOs remain unchanged. The separate eight-hour program,
 feature resumption, paid host and public deployment remain outside this assignment.
 
-The October 12 [next-phase investigation](ROADMAP.md) reuses these outcomes and
-proposes a smaller reliable-workbench phase. It does not complete or rewrite this
-confirmation protocol, authorize new measurements, or resume features. Serving
-timeout/deadline and planning-JIT changes need separately assigned scope; all
-unmeasured reference/stability cells below remain open. A future local synthetic
-release envelope must be stated separately from the full reference claim.
+The October 12 investigation and October 13 [product-journey revision](ROADMAP.md)
+reuse these outcomes. Future increments pair necessary engineering with a complete
+user experience; unrelated JIT/x86/serial1000/full evidence-v2 completion is not a
+blanket prerequisite for a bounded local synthetic prototype. That prototype must
+preserve exact quantities, applicable rules, selected-source completeness, clocks
+and fail-closed behavior. This revision does not complete/rewrite the confirmation
+protocol, authorize measurements, or resume features. Serving timeout/deadline and
+planning-JIT work still need assigned scope; all unmeasured reference/stability
+cells remain open. Large-scale/public claims keep their own gates/envelope.
 
 ## Phase handoff and checkpoints
 
