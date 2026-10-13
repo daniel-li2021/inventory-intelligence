@@ -385,3 +385,12 @@ capacity point. Historical `wall_seconds` fields used active clocks; the publish
 derived view explicitly records the original wall/active discrepancies and target
 overrun. The corrected runtime reports both clocks. Clock/journal repairs have
 hand controls and were not given new performance claims.
+
+## Controlled synthetic intake and replay
+
+Use the [local replay guide](SYNTHETIC_REPLAY.md#working-local-walkthrough) for a
+new synthetic dataset/version set. First admission requires an empty bootstrapped
+local database and explicit `--local-synthetic`; owner and restricted runner URLs
+select the same local database. CLI source writes and immutable archive publication
+are separate from serving. Select a complete archive with `run_local_demo.py
+--catalog PATH`; no public upload/source-write endpoint exists.

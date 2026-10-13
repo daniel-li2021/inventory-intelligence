@@ -1,0 +1,1217 @@
+[
+  {
+    "contract_version": "synthetic-intake-v1",
+    "synthetic": true,
+    "dataset_id": "dynamic-controls-v1",
+    "version_id": "v1",
+    "cutoff": "2026-04-06",
+    "known_at": "2026-04-06T07:00:00+00:00",
+    "dimensions": {
+      "styles": [
+        {
+          "style_id": "product-dynamic:style",
+          "style_code": "DYN",
+          "name": "Synthetic essentials"
+        }
+      ],
+      "skus": [
+        {
+          "sku_id": "product-dynamic:a",
+          "style_id": "product-dynamic:style",
+          "sku_code": "A",
+          "color": "Ink",
+          "size": "S",
+          "base_uom": "each"
+        },
+        {
+          "sku_id": "product-dynamic:b",
+          "style_id": "product-dynamic:style",
+          "sku_code": "B",
+          "color": "Ink",
+          "size": "M",
+          "base_uom": "each"
+        }
+      ],
+      "warehouses": [
+        {
+          "warehouse_id": "product-dynamic:harbor",
+          "warehouse_code": "HARBOR",
+          "name": "Harbor"
+        },
+        {
+          "warehouse_id": "product-dynamic:upland",
+          "warehouse_code": "UPLAND",
+          "name": "Upland"
+        }
+      ]
+    },
+    "keys": [
+      {
+        "sku_id": "product-dynamic:a",
+        "warehouse_id": "product-dynamic:harbor",
+        "stock": 10,
+        "demand": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 3,
+            "day": "2026-04-06",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 5,
+            "day": "2026-04-07",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:a",
+        "warehouse_id": "product-dynamic:upland",
+        "stock": 80,
+        "demand": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 3,
+            "day": "2026-04-06",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 5,
+            "day": "2026-04-07",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:b",
+        "warehouse_id": "product-dynamic:harbor",
+        "stock": 40,
+        "demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 0,
+            "day": "2026-04-06",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 0,
+            "day": "2026-04-07",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:b",
+        "warehouse_id": "product-dynamic:upland",
+        "stock": 10,
+        "demand": [
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 0,
+            "day": "2026-04-06",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 0,
+            "day": "2026-04-07",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "contract_version": "synthetic-intake-v1",
+    "synthetic": true,
+    "dataset_id": "dynamic-controls-v1",
+    "version_id": "v2",
+    "cutoff": "2026-04-13",
+    "known_at": "2026-04-13T07:00:00+00:00",
+    "dimensions": {
+      "styles": [
+        {
+          "style_id": "product-dynamic:style",
+          "style_code": "DYN",
+          "name": "Synthetic essentials"
+        }
+      ],
+      "skus": [
+        {
+          "sku_id": "product-dynamic:a",
+          "style_id": "product-dynamic:style",
+          "sku_code": "A",
+          "color": "Ink",
+          "size": "S",
+          "base_uom": "each"
+        },
+        {
+          "sku_id": "product-dynamic:b",
+          "style_id": "product-dynamic:style",
+          "sku_code": "B",
+          "color": "Ink",
+          "size": "M",
+          "base_uom": "each"
+        }
+      ],
+      "warehouses": [
+        {
+          "warehouse_id": "product-dynamic:harbor",
+          "warehouse_code": "HARBOR",
+          "name": "Harbor"
+        },
+        {
+          "warehouse_id": "product-dynamic:upland",
+          "warehouse_code": "UPLAND",
+          "name": "Upland"
+        }
+      ]
+    },
+    "keys": [
+      {
+        "sku_id": "product-dynamic:a",
+        "warehouse_id": "product-dynamic:harbor",
+        "stock": 4,
+        "demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 3,
+            "day": "2026-04-13",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 3,
+            "day": "2026-04-16",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:a",
+        "warehouse_id": "product-dynamic:upland",
+        "stock": 80,
+        "demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 3,
+            "day": "2026-04-13",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 3,
+            "day": "2026-04-16",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:b",
+        "warehouse_id": "product-dynamic:harbor",
+        "stock": 40,
+        "demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 0,
+            "day": "2026-04-13",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 0,
+            "day": "2026-04-16",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:b",
+        "warehouse_id": "product-dynamic:upland",
+        "stock": 10,
+        "demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 0,
+            "day": "2026-04-13",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 0,
+            "day": "2026-04-16",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "contract_version": "synthetic-intake-v1",
+    "synthetic": true,
+    "dataset_id": "dynamic-controls-v1",
+    "version_id": "v3",
+    "cutoff": "2026-04-20",
+    "known_at": "2026-04-20T07:00:00+00:00",
+    "dimensions": {
+      "styles": [
+        {
+          "style_id": "product-dynamic:style",
+          "style_code": "DYN",
+          "name": "Synthetic essentials"
+        }
+      ],
+      "skus": [
+        {
+          "sku_id": "product-dynamic:a",
+          "style_id": "product-dynamic:style",
+          "sku_code": "A",
+          "color": "Ink",
+          "size": "S",
+          "base_uom": "each"
+        },
+        {
+          "sku_id": "product-dynamic:b",
+          "style_id": "product-dynamic:style",
+          "sku_code": "B",
+          "color": "Ink",
+          "size": "M",
+          "base_uom": "each"
+        }
+      ],
+      "warehouses": [
+        {
+          "warehouse_id": "product-dynamic:harbor",
+          "warehouse_code": "HARBOR",
+          "name": "Harbor"
+        },
+        {
+          "warehouse_id": "product-dynamic:upland",
+          "warehouse_code": "UPLAND",
+          "name": "Upland"
+        }
+      ]
+    },
+    "keys": [
+      {
+        "sku_id": "product-dynamic:a",
+        "warehouse_id": "product-dynamic:harbor",
+        "stock": 4,
+        "demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 3,
+            "day": "2026-04-20",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 3,
+            "day": "2026-04-23",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:a",
+        "warehouse_id": "product-dynamic:upland",
+        "stock": 80,
+        "demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 3,
+            "day": "2026-04-20",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 3,
+            "day": "2026-04-23",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:b",
+        "warehouse_id": "product-dynamic:harbor",
+        "stock": 40,
+        "demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "supply_complete": true,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 0,
+            "day": "2026-04-20",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 0,
+            "day": "2026-04-23",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "sku_id": "product-dynamic:b",
+        "warehouse_id": "product-dynamic:upland",
+        "stock": 10,
+        "demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "supply_complete": false,
+        "policy": {
+          "lead_days": 2,
+          "review_days": 3,
+          "safety_qty": 2,
+          "pack_size": 6,
+          "moq": 6
+        },
+        "reservations": [
+          {
+            "id": "obligation",
+            "quantity": 0,
+            "day": "2026-04-20",
+            "status": "open"
+          }
+        ],
+        "inbound": [
+          {
+            "id": "purchase-1",
+            "quantity": 0,
+            "day": "2026-04-23",
+            "status": "confirmed"
+          }
+        ],
+        "future_demand": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]

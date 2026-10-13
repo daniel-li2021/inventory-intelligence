@@ -5,6 +5,25 @@ This catalog consolidates acceptance/provenance from retired reviews. Reports in
 mutable current status. [STATE](STATE.md) owns present scope; [RESULTS](RESULTS.md)
 owns measured core outcomes; [KB](KB.md) owns constraints and unresolved questions.
 
+## Dynamic synthetic replay
+
+[Contract / reproduction / walkthrough](SYNTHETIC_REPLAY.md) declares source scope,
+exact controls and common paid windows before outcomes. New
+[synthetic controls](examples/dynamic-controls-v1.json) and
+[actual PostgreSQL archive](review/dynamic-replay-v1.json.gz) retain three source
+versions, four keys and 27 reports; original input UTF-8 bytes are embedded unchanged.
+Source-table reconstruction binds every report to its complete input. Original
+product/execution/research packages and frozen historical protocols are unchanged.
+
+[Bounded measurement](review/dynamic-replay-measurement.json) records exact sizes,
+latency denominators, host/process RSS and source SHA-256 values. Its
+`capture_seconds_single_sample` field refers to the first successful capture before
+the final occupied-DB guard/reliability reload; final-code replay performance remains
+unmeasured. Reader measurements use the final code and warm filesystem. The
+[acceptance receipt](review/dynamic-phase-acceptance.json) records final 118-test,
+frontend, default/dynamic browser and installed-wheel evidence separately. Do not
+pool developer checks into human/efficacy/reference/production acceptance.
+
 ## Product journey
 
 [Independent acceptance](review/product-journey-acceptance.json) freezes manual

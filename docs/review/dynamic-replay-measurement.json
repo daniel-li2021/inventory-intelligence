@@ -1,0 +1,166 @@
+{
+  "kind": "bounded_local_synthetic_controls",
+  "runtime": "PostgreSQL server_version=180003; restricted ii_runner",
+  "host": "macOS-15.6.1-arm64-arm-64bit",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "archive_digest": "60c1f726af74fddde0ed66caeaa616a4f201541deb598c9661807c7a32fd8137",
+  "archive_sha256": "c82761fa11d831491f7d8dc861286013954debdf4a9cd9bb7f6e902ffa70d42a",
+  "source_versions": 3,
+  "keys_per_version": 4,
+  "key_cutoff_observations": 12,
+  "saved_reports": 27,
+  "independently_expected_discovery_triggers": 15,
+  "matched_triggers": 15,
+  "unexpected_triggers": 0,
+  "simple_baseline": "V1 categories/history expose two risk transitions; demand/supply/ETA and imbalance require V2. Correctness controls, not detection accuracy on an unseen sample.",
+  "predeclared_quality_holdout_executions": 0,
+  "capture_seconds_single_sample": 0.3187765828333795,
+  "evidence": {
+    "raw_bytes": 680251,
+    "compressed_bytes": 26410,
+    "raw_input_bytes": 21263,
+    "interned_objects": 15,
+    "cutoff_growth": [
+      {
+        "cutoff": "2026-04-06",
+        "keys": 4,
+        "findings": 3,
+        "unknown_sections": 2,
+        "saved_reports": 9
+      },
+      {
+        "cutoff": "2026-04-13",
+        "keys": 4,
+        "findings": 8,
+        "unknown_sections": 0,
+        "saved_reports": 9
+      },
+      {
+        "cutoff": "2026-04-20",
+        "keys": 4,
+        "findings": 4,
+        "unknown_sections": 2,
+        "saved_reports": 9
+      }
+    ]
+  },
+  "latency": {
+    "cold_validation": {
+      "samples": 10,
+      "median_ms": 45.81841640174389,
+      "p95_nearest_rank_ms": 47.7851249743253,
+      "max_ms": 47.7851249743253
+    },
+    "discovery": {
+      "samples": 30,
+      "median_ms": 0.33191649708896875,
+      "p95_nearest_rank_ms": 0.3447080962359905,
+      "max_ms": 0.40045916102826595
+    },
+    "one_review_contrast": {
+      "samples": 30,
+      "median_ms": 0.32245845068246126,
+      "p95_nearest_rank_ms": 0.3349580802023411,
+      "max_ms": 0.3688330762088299
+    },
+    "retained_100key_discovery": {
+      "samples": 30,
+      "median_ms": 16.66410407051444,
+      "p95_nearest_rank_ms": 17.36833294853568,
+      "max_ms": 25.42470791377127
+    }
+  },
+  "max_process_rss_bytes": 157958144,
+  "source_sha256": {
+    "src/inventory_intelligence/synthetic_replay.py": "44b781444d4d595b3c4dbef482713de753b608442e6441393459544a5192301e",
+    "src/inventory_intelligence/insights.py": "31cb24b46079d92b2ba77952401b1d2ce7d625eeaa2240634d40ed6e7b95f641",
+    "src/inventory_intelligence/decision_contrast.py": "d71dc80f18d86706af13322b99fe039bffd85986e6a1907935e05c79d5704992",
+    "src/inventory_intelligence/product.py": "3f7db88885d8a246ea9cdc11a1c6ec924ce73428d6e6ab609fbfa2fb96df2142",
+    "src/inventory_intelligence/product_api.py": "bb6a9c18d4665eecde05f19fbebb7096d601448ce9ec856f73727680232db703",
+    "src/inventory_intelligence/planner_loop.py": "950f8d1de2fc0dc3073bd3f4b8ce3506df092548b187cd666ac5915dacd1dd24",
+    "docs/examples/dynamic-controls-v1.json": "d28a664d8ca10078f74a4f3a9aecf18d59ef06d550c1e95c04c08d9294d56679",
+    "docs/SYNTHETIC_REPLAY.md": "6274b3525b4d29d043259f02a6ec47f1a5dd7f4e1756c85163868d7998f10544"
+  },
+  "paid_controls": {
+    "actual_proposal": {
+      "quantity": "6",
+      "arrival_day": "2",
+      "accepted": "112",
+      "immediate_fulfilled": "18",
+      "eventual_fulfilled": "18",
+      "immediate_fill": {
+        "numerator": "9",
+        "denominator": "56"
+      },
+      "eventual_fill": {
+        "numerator": "9",
+        "denominator": "56"
+      },
+      "terminal_stock": "0",
+      "terminal_backlog": "94",
+      "cost_components": {
+        "purchase": "42",
+        "holding": "15",
+        "backlog": "16220",
+        "setup": "4"
+      },
+      "total_cost": "16281"
+    },
+    "no_action": {
+      "quantity": "0",
+      "arrival_day": null,
+      "accepted": "112",
+      "immediate_fulfilled": "12",
+      "eventual_fulfilled": "12",
+      "immediate_fill": {
+        "numerator": "3",
+        "denominator": "28"
+      },
+      "eventual_fill": {
+        "numerator": "3",
+        "denominator": "28"
+      },
+      "terminal_stock": "0",
+      "terminal_backlog": "100",
+      "cost_components": {
+        "purchase": "30",
+        "holding": "7",
+        "backlog": "18000",
+        "setup": "2"
+      },
+      "total_cost": "18039"
+    },
+    "alternative": {
+      "quantity": "12",
+      "arrival_day": "2",
+      "accepted": "112",
+      "immediate_fulfilled": "24",
+      "eventual_fulfilled": "24",
+      "immediate_fill": {
+        "numerator": "3",
+        "denominator": "14"
+      },
+      "eventual_fill": {
+        "numerator": "3",
+        "denominator": "14"
+      },
+      "terminal_stock": "0",
+      "terminal_backlog": "88",
+      "cost_components": {
+        "purchase": "54",
+        "holding": "31",
+        "backlog": "14520",
+        "setup": "4"
+      },
+      "total_cost": "14609"
+    }
+  },
+  "negative_control": "Quiet demand: additional order has higher paid cost than no action; no universal winner.",
+  "limits": [
+    "Replay latency is one four-key/three-version local capture, not a throughput claim.",
+    "Read latency uses retained evidence and warm filesystem; not network or reference-host acceptance.",
+    "Maximum 50x2 keys/12 versions is a parser envelope; its full execution/performance is unmeasured.",
+    "RSS is whole-process peak, not per-request allocation.",
+    "No supplier capacity/calendar, real data, paid service, human comprehension or public runtime validation."
+  ]
+}

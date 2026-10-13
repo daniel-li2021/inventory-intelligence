@@ -726,7 +726,8 @@ function Overview({
       <section className="panel">
         <CardTable items={data.highlights} go={go} />
       </section>
-      <DuplicateControl context={data} />
+      <Discovery data={data.insight_discovery} go={go} />
+      {data.controls?.duplicate_inventory && <DuplicateControl context={data} />}
       <div className="note-grid">
         <section className="panel note">
           <h3>What this workspace can tell you</h3>
@@ -747,6 +748,28 @@ function Overview({
       </div>
     </>
   );
+}
+
+function Discovery({ data, go }: { data: any; go?: (r: Partial<Route>) => void }) {
+  if (!data) return null;
+  return <section className="panel detail-panel" aria-label="Insight Discovery V2">
+    <h2>Insight Discovery V2</h2>
+    <p>{data.total_findings ?? data.findings.length} supported findings across {data.evaluated_keys} keys. {data.previous_cutoff ? `Prior cutoff: ${data.previous_cutoff}.` : "No previous cutoff."}</p>
+    {data.total_findings > data.findings.length && <p>Showing the first {data.findings.length} findings. Investigate an exact key for its complete findings; the discovery API returns the full bounded set.</p>}
+    <p>{data.boundary}</p>
+    {data.findings.map((finding: any) => <article key={finding.id} className="panel">
+      <p className="eyebrow">{finding.rule_id} · {finding.rules_version}</p>
+      <h3>{finding.title}</h3>
+      <p><strong>Observed evidence:</strong> {finding.observed}</p>
+      {finding.model_hypothesis && <p><strong>Model hypothesis:</strong> {finding.model_hypothesis}</p>}
+      <p><strong>Supported next step:</strong> {finding.next_step}</p>
+      <p><strong>Missing evidence:</strong> {finding.missing_evidence.join(" ")}</p>
+      <Inspector data={{values:finding.values,references:finding.references,known_at:finding.known_at}} name="Insight evidence" />
+      {go && <button onClick={() => go({page:"investigate",item: finding.sku_id+"|"+finding.warehouse_id})}>Investigate finding →</button>}
+    </article>)}
+    {data.unknown.length > 0 && <details><summary>Evidence gaps ({data.total_unknown ?? data.unknown.length})</summary><Inspector data={data.unknown} name="Unknown evidence" /></details>}
+    <Download data={data} name="insight-discovery-v2" label="Export insight discovery" />
+  </section>;
 }
 function DuplicateControl({ context }: { context: Context }) {
   const [expanded, setExpanded] = useState(false);
@@ -1311,6 +1334,7 @@ function Selected({
                   </p>
                   <Inspector data={data.trace} name="Calculation step" />
                 </article>
+                <Discovery data={data.insight_discovery} />
                 <article className="panel detail-panel">
                   <h3>Capability boundary</h3>
                   <Inspector data={data.capabilities} />
@@ -1476,6 +1500,7 @@ function History({
                           "unknown",
                       )}
                     </small>
+                    {point.discovery_findings?.map((finding: any) => <small key={finding.id}>{finding.title}</small>)}
                   </td>
                   <td className="numeric">{exact(c.on_hand)}</td>
                   <td className="numeric">{exact(c.proposed_order_qty)}</td>
@@ -1717,6 +1742,7 @@ function Comparison({
           Hidden delay is hypothetical, not observed supplier lateness.
         </p>
       </div>
+      {route.page === "compare" && <OneReview key={key} card={card} context={context} unavailable={unavailable} />}
       {route.page === "decide" ? (
         <section className="panel detail-panel">
           <p className="eyebrow">ADVISORY DECISION</p>
@@ -2028,5 +2054,31 @@ function Comparison({
       )}
     </>
   );
+}
+function OneReview({ card, context, unavailable }: {card: Card; context: Context; unavailable: boolean}) {
+  const [quantity, setQuantity] = useState("");
+  const [delay, setDelay] = useState("0");
+  const [submitted, setSubmitted] = useState<string | null>(null);
+  const [retry, setRetry] = useState(0);
+  const params = new URLSearchParams({cutoff:context.cutoff,sku_id:card.sku_id,warehouse_id:card.warehouse_id,archive_digest:context.archive_digest,delay_days:delay});
+  if(quantity) params.set("quantity",quantity);
+  const path="/api/product/contrast?"+params;
+  const resource = useResource<any>(submitted,retry);
+  const stale=unavailable || submitted!==path || resource.stale || resource.loading || Boolean(resource.error);
+  return <section className="panel detail-panel" aria-label="One-review execution comparison">
+    <h2>One-review execution comparison</h2>
+    <p>Actual saved prefix proposal versus no action and an optional alternative quantity. Uses saved inputs, independently of the periodic scenario controls below. FIFO execution over 28 declared demand days plus 5 common closure days, with no later orders. Supplier capacity and calendars remain unverified.</p>
+    <label>Alternative order · pieces <input aria-label="Alternative order · pieces" type="number" min="0" max="2000" step="1" value={quantity} onChange={e=>setQuantity(e.target.value)} /></label>
+    <label>Declared order delay · days <input aria-label="Declared order delay · days" type="number" min="0" max="3" step="1" value={delay} onChange={e=>setDelay(e.target.value)} /></label>
+    <button disabled={unavailable || (Boolean(submitted) && resource.loading)} onClick={()=>{setSubmitted(path);setRetry(v=>v+1);}}>Compare one review</button>
+    {submitted && <Notice {...resource} retry={()=>setRetry(v=>v+1)} />}
+    {resource.data && <>
+      {stale && <p role="status">Inputs changed or unavailable · saved contrast is stale.</p>}
+      <p>{resource.data.semantics}</p>
+      {resource.data.arms ? <div className="table-scroll" tabIndex={0}><table><caption>Common 33-day paid outcomes · synthetic cost units</caption><thead><tr><th>Decision</th><th>Quantity</th><th>Immediate new fill</th><th>Eventual new fill</th><th>Terminal backlog</th><th>Total paid cost</th></tr></thead><tbody>{Object.entries(resource.data.arms).map(([name,arm]:[string,any])=><tr key={name}><td>{title(name)}</td><td>{arm.quantity}</td><td>{arm.immediate_fulfilled}/{arm.accepted}</td><td>{arm.eventual_fulfilled}/{arm.accepted}</td><td>{arm.terminal_backlog}</td><td>{arm.total_cost}</td></tr>)}</tbody></table></div>:<p>Not assessable · {resource.data.reasons.join(", ")}</p>}
+      <Inspector data={resource.data} name="Paid execution evidence" />
+      <Download data={{...resource.data,stale}} name="one-review-contrast" label="Export one-review comparison" />
+    </>}
+  </section>;
 }
 createRoot(document.getElementById("root")!).render(<App />);

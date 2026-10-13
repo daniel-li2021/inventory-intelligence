@@ -30,6 +30,8 @@ export interface Context {
   summary: Record<string, number>;
   highlights: Card[];
   dimensions: Record<string, unknown>;
+  insight_discovery?: any;
+  controls?: Record<string, unknown>;
 }
 export interface Route {
   page: string;

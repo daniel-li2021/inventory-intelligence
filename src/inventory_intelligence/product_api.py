@@ -26,7 +26,7 @@ class ProductScenario(BaseModel):
     overrides: dict = Field(default_factory=dict)
 
 
-def install_product_routes(application, supplied=None):
+def install_product_routes(application, supplied=None, catalog_path=None):
     # Imports remain inside setup to preserve the legacy module boundary.
     from . import product
     injected = deepcopy(supplied)
@@ -41,7 +41,7 @@ def install_product_routes(application, supplied=None):
             # Replacement, including same-size edits, invalidates the receipt.
             # No trust/cache is shared with live operational database transactions.
             with lock:
-                path = Path(product.__file__).with_name('product_evidence.json.gz')
+                path = Path(catalog_path) if catalog_path else Path(product.__file__).with_name('product_evidence.json.gz')
                 stat = path.stat() if injected is None else None
                 current = _package_identity(stat) if stat is not None else 'injected'
                 if cached is None or current != identity:
@@ -106,6 +106,21 @@ def install_product_routes(application, supplied=None):
                 archive_digest: str | None = Query(default=None, max_length=64)):
         return invoke(request, {'sku_id', 'warehouse_id', 'archive_digest'},
                       product.history, sku_id, warehouse_id, archive_digest=archive_digest)
+
+    @application.get('/api/product/insights')
+    def insights(request: Request, cutoff: str | None = Query(default=None, max_length=100),
+                 archive_digest: str | None = Query(default=None, max_length=64)):
+        from .insights import discover
+        return invoke(request, {'cutoff','archive_digest'}, discover, cutoff, archive_digest=archive_digest)
+
+    @application.get('/api/product/contrast')
+    def contrast(request: Request, cutoff: Selector, sku_id: Selector, warehouse_id: Selector,
+                 quantity: int | None = Query(default=None,ge=0,le=2000),
+                 delay_days: int = Query(default=0,ge=0,le=3),
+                 archive_digest: str | None = Query(default=None,max_length=64)):
+        from .decision_contrast import compare
+        return invoke(request, {'cutoff','sku_id','warehouse_id','quantity','delay_days','archive_digest'},
+                      compare,cutoff,sku_id,warehouse_id,quantity,delay_days,archive_digest=archive_digest)
 
     @application.get('/api/product/control')
     def control(request: Request, name: Literal['duplicate_inventory'],

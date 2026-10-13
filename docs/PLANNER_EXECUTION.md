@@ -35,6 +35,14 @@ hashes bind committed source. Export refuses existing output files.
 Implementation and validation are complete within this local synthetic scope.
 Real intake, orders, deployment and public runtime remain gated.
 
+The additive [one-review contrast](SYNTHETIC_REPLAY.md#one-review-decision-contrast-predeclared-arithmetic-controls)
+compares a selected saved actual proposal, no action and a pack/MOQ alternative over
+33 common paid days. It shares FIFO physical execution with this runner, includes
+initial stock/confirmed inbound/purchase/holding/backlog/setup and preserves blocked
+gates. It uses declared future synthetic demand and makes no later review/order;
+it extends the user comparison journey, not this frozen repeated-policy study.
+The original protocols, stress traces and archive bytes remain unchanged.
+
 ## Original control erratum
 
 The first actual-run check rejected one of the seven original controls. For cold

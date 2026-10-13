@@ -23,6 +23,18 @@ def digest(value):
                                     allow_nan=False).encode()).hexdigest()
 
 
+def fulfil_fifo(stock, backlog, day):
+    """Shared physical execution step; callers supply accepted obligations."""
+    fulfilled=[]; new_filled=0; total=0
+    for row in backlog:
+        quantity=min(stock,row['remaining'])
+        if quantity:
+            stock-=quantity;row['remaining']-=quantity;total+=quantity
+            new_filled+=quantity if row['day']==day and row.get('kind','demand')=='demand' else 0
+            fulfilled.append(dict(acceptance_id=row['id'],accepted_day=row['day'],quantity=quantity))
+    return stock,[row for row in backlog if row['remaining']],fulfilled,new_filled,total
+
+
 class Admission:
     """One-process research admission; durable workflow is a separate contract."""
     def __init__(self):
@@ -194,15 +206,10 @@ def run_case(owner, runner, *, namespace, demand, initial_stock=10, history=None
         accepted = demand[day] if day<9 else 0
         if accepted:
             backlog.append(dict(id=f'{namespace}:accepted-{day}',day=day,remaining=accepted))
-        fulfilled=[]; new_filled=0
-        for row in backlog:
-            quantity=min(stock,row['remaining'])
-            if quantity:
-                stock-=quantity;row['remaining']-=quantity;eventual+=quantity
-                new_filled+=quantity if row['day']==day else 0
-                fulfilled.append(dict(acceptance_id=row['id'],accepted_day=row['day'],quantity=quantity))
-                movements.append(dict(id=f'{row["id"]}:shipment-{day}',day=day,hour=12,quantity=-quantity,type='shipment'))
-        backlog=[row for row in backlog if row['remaining']]
+        stock,backlog,fulfilled,new_filled,total=fulfil_fifo(stock,backlog,day)
+        eventual+=total
+        for row in fulfilled:
+            movements.append(dict(id=f'{row["acceptance_id"]}:shipment-{day}',day=day,hour=12,quantity=-row['quantity'],type='shipment'))
         immediate+=new_filled
         end_backlog=sum(row['remaining'] for row in backlog)
         if day<9:

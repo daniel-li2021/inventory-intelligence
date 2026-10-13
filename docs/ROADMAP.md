@@ -3,6 +3,11 @@
 Investigated 2026-10-12 (America/Los_Angeles), against main `b5b8d5a`.
 Direction revised 2026-10-13 from the user's product-intelligence/UX guidance.
 Status: **Increments 0–4 implemented and locally accepted on 2026-10-13**.
+The subsequent Next Product & Engineering Phase assignment adds controlled local
+synthetic version intake/replay, Insight Discovery V2 and a bounded single-review
+actual-proposal/no-action/quantity comparison. [Contract and working walkthrough](SYNTHETIC_REPLAY.md)
+own the supported scope; [results](RESULTS.md#dynamic-replay-and-insight-discovery-v2)
+retain exact controls and limitations. Public/paid deployment and real data are excluded.
 The subsequent user assignment authorized these product increments under AUTO,
 including necessary engineering. The automation now assigns integrated acceptance and Increments 3–4 with frozen
 synthetic studies. Operational data and public/paid deployment remain excluded. [STATE](STATE.md) owns scope; [PLAN](PLAN.md) retains the unfinished
@@ -957,11 +962,16 @@ remaining runtime/recovery, host/domain/cost and public-TLS approval. **Real/pri
 workflows:** O08/O19, identities/approval/action contracts and explicit data rights.
 Open gates do not imply failed unrelated local journey work or successful production.
 
-**Current outcome:** Increments 0–4 are delivered within the synthetic/local envelope.
+**Current outcome:** Increments 0–4 plus controlled dynamic replay, discovery V2 and
+one-review paid contrasts are delivered within the synthetic/local envelope.
 [Measured actual outcomes and feedback](PLANNER_EXECUTION.md) establish the specific
 controls and stress grid, including the original oracle rejection and quiet-trace
-counterexample. No universal winner is claimed. Next unassigned capabilities are
-supplier calendars/capacity, donor-safe transfers and lifecycle economics, chosen
-with new frozen evidence; real intake requires identity/data rights/action gates.
+counterexample. No universal winner is claimed. Supplier calendars/capacity remain
+the next feasibility contract; donor-safe transfers follow transit/reservation/service
+controls. Lifecycle economics and cross-style patterns need additional evidence,
+chosen with new frozen controls; real intake requires identity/data rights/action
+gates. The new one-review contrasts share FIFO execution with the actual loop but
+do not establish a new repeated-policy ranking. Snapshot changes alone cannot
+identify receipts or supplier causes.
 Independent human comprehension, accessibility, reference hardware and public
 runtime remain open. Deployment is excluded from the present assignment.

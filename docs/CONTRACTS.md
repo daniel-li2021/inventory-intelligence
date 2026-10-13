@@ -818,3 +818,20 @@ partial2011-12-09 is excluded from benchmark dates; raw audit still includes it.
 Raw archives, all row/invalid/exclusion evidence, reconstructable series and item
 selection manifests stay ignored/local. Git may contain only adapter/benchmark
 code, synthetic tests, protocols and attributed aggregate metrics.
+
+## Controlled local replay and discovery extensions
+
+[synthetic-intake-v1](SYNTHETIC_REPLAY.md#bounded-input-and-evidence-contract) accepts
+only explicit local synthetic, independent stock counts, 28 accepted-demand days
+and bounded reservations/inbound. An occupied database rejects first admission.
+`inventory-product-evidence-v2` extends V1 with immutable source versions, exact
+original input bytes and complete source reconstruction bindings. It preserves V1
+decoding and all original report bytes; dimensions/cutoffs may vary within 50×2×12.
+
+`inventory-insights-v2` adds I201–I206 discovery over validated saved evidence.
+Existing V1 cards/rules/signatures remain unchanged.
+`one-review-contrast-v1` uses one saved actual prefix proposal with FIFO execution
+over 33 common paid days; no later orders. Nominal pack/MOQ/lead and 0–3 declared
+delay constraints are checked; calendar/capacity remain unknown. UI/API exact
+quantities remain decimal strings/rationals. Read routes are
+`GET /api/product/insights` and `GET /api/product/contrast`; no HTTP intake route.

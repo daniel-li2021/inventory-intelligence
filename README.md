@@ -17,6 +17,12 @@ The bundled synthetic catalog contains actual saved checker, forecast and planne
 outputs. [Product guide](docs/DECISION_LAB.md#product-capability-and-experience-boundary)
 · [Remaining roadmap](docs/ROADMAP.md#delivery-sequence-and-acceptance-gates).
 
+[Controlled local synthetic replay](docs/SYNTHETIC_REPLAY.md) adds immutable input
+versions, richer demand/supply/risk/imbalance discovery and actual saved-proposal
+versus no-action/quantity comparisons over a common paid window. The packaged
+default stays read-only; source admission uses an explicit local CLI and dedicated
+synthetic database. The guide includes a working April demo and exact controls.
+
 ```mermaid
 flowchart LR
   S[Source records + completeness] --> R[Inventory reliability]

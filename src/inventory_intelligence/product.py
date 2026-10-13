@@ -165,11 +165,12 @@ def validate_catalog(catalog):
     try:
         _require(isinstance(catalog,dict) and len(json.dumps(catalog))<=MAX_BYTES)
         _exact(catalog)
-        _require(catalog['contract_version']=='inventory-product-evidence-v1' and catalog['synthetic'] is True and
+        _require(catalog['contract_version'] in ('inventory-product-evidence-v1','inventory-product-evidence-v2') and catalog['synthetic'] is True and
                  catalog['business_data']=='synthetic only' and catalog['rules_version']=='inventory-insights-v1' and
                  catalog['digest']==archive_digest(catalog))
+        dynamic=catalog['contract_version']=='inventory-product-evidence-v2'
         dimensions=catalog['dimensions']
-        _require(set(dimensions)=={'styles','skus','warehouses'} and len(dimensions['skus']) in (4,50) and len(dimensions['warehouses'])==2)
+        _require(set(dimensions)=={'styles','skus','warehouses'} and ((1<=len(dimensions['skus'])<=50 and 1<=len(dimensions['warehouses'])<=2) if dynamic else (len(dimensions['skus']) in (4,50) and len(dimensions['warehouses'])==2)))
         for table,field in (('styles','style_id'),('skus','sku_id'),('warehouses','warehouse_id')):
             _require(len({r[field] for r in dimensions[table]})==len(dimensions[table]))
             _require(all(isinstance(r[field],str) and r[field].startswith('product') for r in dimensions[table]))
@@ -177,7 +178,7 @@ def validate_catalog(catalog):
         for table,columns in (('styles',{'style_id','style_code','name'}),('skus',{'sku_id','style_id','sku_code','color','size','base_uom'}),('warehouses',{'warehouse_id','warehouse_code','name'})):
             _require(all(set(row)==columns and all(isinstance(value,str) and value.strip() for value in row.values()) for row in dimensions[table]))
         _require(all(s['style_id'] in styles and s['base_uom']=='each' for s in dimensions['skus']))
-        _require(len(catalog['objects'])<=700 and len(catalog['reports'])<=610 and len(catalog['cutoffs'])==3)
+        _require(len(catalog['objects'])<=(2500 if dynamic else 700) and len(catalog['reports'])<=(2412 if dynamic else 610) and (1<=len(catalog['cutoffs'])<=12 if dynamic else len(catalog['cutoffs'])==3))
         for identity,obj in catalog['objects'].items():
             _require(identity==archive_digest(obj,exclude_digest=False))
         expanded={run_id:_report(catalog,run_id) for run_id in catalog['reports']}
@@ -230,8 +231,8 @@ def validate_catalog(catalog):
                 _require(batch['batch_id']==context['supply_batch_id'] and batch['as_of']==origin.isoformat() and
                          all(batch[k]==key[k] for k in ('sku_id','warehouse_id')) and _instant(batch['observed_at'])<=origin)
                 _require(type(batch['reservations_complete']) is bool and type(batch['inbound_complete']) is bool)
-                # V1 controls replace one obligation and one confirmed receipt.
-                _require(len(supply['reservations'])==1 and supply['reservations'][0]['status']=='open' and
+                # V1 fixture shape is frozen; local V2 sources bind their own bounded rows.
+                if not dynamic: _require(len(supply['reservations'])==1 and supply['reservations'][0]['status']=='open' and
                          len(supply['inbound'])==2 and sorted(r['status'] for r in supply['inbound'])==['confirmed','pending'])
                 supply_rows=supply['policies']+supply['reservations']+supply['inbound']
                 row_ids=[row['row_id'] for row in supply_rows]
@@ -263,34 +264,38 @@ def validate_catalog(catalog):
                 future=key['future_demand']
                 _require(len(future['quantities'])==28 and all(type(q) is int and q>=0 for q in future['quantities']) and future['id'].startswith(context['batch_id'].rsplit(':demand',1)[0]))
             _require(len(validated_sources)==1)
-        control=catalog['controls']['duplicate_inventory']
-        defect=expanded[control['reliability_run_id']]; blocked=expanded[control['plan_run_id']]
-        _validate_report(defect)
-        _require(defect['overall_status']=='fail' and blocked['status']=='not_assessable' and
-                 blocked['context']['reliability_run_id']==defect['run_id'] and
-                 'nonpassing_or_missing_inventory_run' in blocked['result']['reasons'] and
-                 blocked['result']['proposed_order_qty'] is None)
-        latest=catalog['cutoffs'][-1]
-        selected=next(k for k in latest['keys'] if all(k[field]==blocked['context'][field] for field in ('sku_id','warehouse_id')))
-        normal=expanded[selected['plan_run_id']]
-        _require(all(blocked['context'][field]==value for field,value in normal['context'].items() if field!='reliability_run_id'))
-        _require(defect['as_of']==defect['evaluated_at']==normal['context']['origin'])
-        _require(all(defect[k]==normal['result']['inventory']['run'][k]+':duplicate-control' for k in ('ledger_batch_id','snapshot_batch_id')))
-        _require(blocked['result']['training']==normal['result']['training'] and blocked['result']['supply']==normal['result']['supply'])
-        _require(blocked['result']['inventory']['run']=={k:v for k,v in defect.items() if k not in ('checks','findings')})
-        _require(blocked['result']['inventory']['checks']==defect['checks'])
-        _require([{k:v for k,v in f.items() if k!='run_id'} for f in blocked['result']['inventory']['findings']]==defect['findings'])
-        _require(len(defect['findings'])==1)
-        finding=defect['findings'][0]
-        _require(finding['rule_id']=='R005' and finding['reason']=='duplicate_snapshot' and
-                 all(finding[field]==selected[field] for field in ('sku_id','warehouse_id')))
-        snapshots=[row for row in normal['result']['inventory']['source']['snapshots'] if all(row[field]==selected[field] for field in ('sku_id','warehouse_id'))]
-        _require(len(snapshots)==1)
-        expected=snapshots[0]|dict(batch_id=defect['snapshot_batch_id'],row_id=snapshots[0]['row_id']+':duplicate-control')
-        duplicate=expected|dict(row_id=expected['row_id']+':extra')
-        records=finding['evidence']['source_records']
-        _require(finding['evidence']['row_count']==2 and records==[dict(source='snapshot',record=expected),dict(source='snapshot',record=duplicate)] and
-                 finding['source_row_ids']==[expected['row_id'],duplicate['row_id']])
+        if dynamic:
+            from .synthetic_replay import validate_bindings
+            validate_bindings(catalog,expanded)
+        else:
+            control=catalog['controls']['duplicate_inventory']
+            defect=expanded[control['reliability_run_id']]; blocked=expanded[control['plan_run_id']]
+            _validate_report(defect)
+            _require(defect['overall_status']=='fail' and blocked['status']=='not_assessable' and
+                     blocked['context']['reliability_run_id']==defect['run_id'] and
+                     'nonpassing_or_missing_inventory_run' in blocked['result']['reasons'] and
+                     blocked['result']['proposed_order_qty'] is None)
+            latest=catalog['cutoffs'][-1]
+            selected=next(k for k in latest['keys'] if all(k[field]==blocked['context'][field] for field in ('sku_id','warehouse_id')))
+            normal=expanded[selected['plan_run_id']]
+            _require(all(blocked['context'][field]==value for field,value in normal['context'].items() if field!='reliability_run_id'))
+            _require(defect['as_of']==defect['evaluated_at']==normal['context']['origin'])
+            _require(all(defect[k]==normal['result']['inventory']['run'][k]+':duplicate-control' for k in ('ledger_batch_id','snapshot_batch_id')))
+            _require(blocked['result']['training']==normal['result']['training'] and blocked['result']['supply']==normal['result']['supply'])
+            _require(blocked['result']['inventory']['run']=={k:v for k,v in defect.items() if k not in ('checks','findings')})
+            _require(blocked['result']['inventory']['checks']==defect['checks'])
+            _require([{k:v for k,v in f.items() if k!='run_id'} for f in blocked['result']['inventory']['findings']]==defect['findings'])
+            _require(len(defect['findings'])==1)
+            finding=defect['findings'][0]
+            _require(finding['rule_id']=='R005' and finding['reason']=='duplicate_snapshot' and
+                     all(finding[field]==selected[field] for field in ('sku_id','warehouse_id')))
+            snapshots=[row for row in normal['result']['inventory']['source']['snapshots'] if all(row[field]==selected[field] for field in ('sku_id','warehouse_id'))]
+            _require(len(snapshots)==1)
+            expected=snapshots[0]|dict(batch_id=defect['snapshot_batch_id'],row_id=snapshots[0]['row_id']+':duplicate-control')
+            duplicate=expected|dict(row_id=expected['row_id']+':extra')
+            records=finding['evidence']['source_records']
+            _require(finding['evidence']['row_count']==2 and records==[dict(source='snapshot',record=expected),dict(source='snapshot',record=duplicate)] and
+                     finding['source_row_ids']==[expected['row_id'],duplicate['row_id']])
         return catalog
     except (KeyError,TypeError,ValueError,OverflowError,AttributeError,RecursionError,StopIteration):
         raise ValueError('invalid or inconsistent product evidence') from None
@@ -407,7 +412,10 @@ def overview(catalog,cutoff=None):
     groups={category:sorted((c for c in cards if c['category']==category),key=_priority)[:limit]
             for category,limit in (('risk',3),('opportunity',2),('evidence',3))}
     highlights=groups['risk']+groups['opportunity']+groups['evidence']
-    return _envelope(catalog,binding)|dict(cutoffs=[b['cutoff'] for b in catalog['cutoffs']],summary=summary,
+    from .insights import discover
+    discovery=discover(catalog,binding['cutoff'])
+    discovery=discovery|dict(total_findings=len(discovery['findings']),total_unknown=len(discovery['unknown']),findings=discovery['findings'][:8],unknown=discovery['unknown'][:8])
+    return _envelope(catalog,binding)|dict(insight_discovery=discovery,cutoffs=[b['cutoff'] for b in catalog['cutoffs']],summary=summary,
         highlights=highlights,highlight_groups=groups,highlight_policy='Up to three highest-priority risks, two surplus opportunities and three evidence blockers; exact key tie-breaks.',dimensions=deepcopy(catalog['dimensions']),capabilities=deepcopy(CAPABILITIES),
         controls=deepcopy(catalog['controls']),rules_version=catalog['rules_version'])
 
@@ -448,7 +456,9 @@ def detail(catalog,cutoff,sku_id,warehouse_id):
         ('demand','Origin-known demand','Mean of 28 complete accepted-order days; future revisions excluded.',[card['references'][1]],dict(status=result['training']['status'],start_day=report['context']['start_day'],end_day=report['context']['origin_day'])),
         ('supply','Supply completeness','Only confirmed inbound counts. Pending inbound is excluded.',[_ref('planning_input.supply_batches',report['context']['supply_batch_id'])],dict(reasons=result['supply']['reasons'])),
         ('proposal','Prefix proposal','Exact maximum safety shortfall after lead time, rounded to whole packs/MOQ. Advisory only.',[card['references'][0]],dict(proposed_order_qty=card['proposed_order_qty'],reasons=result['reasons'])))]
-    return _envelope(catalog,binding)|card|dict(clocks=dict(business_cutoff=report['context']['origin'],decision_known_at=report['context']['origin'],
+    from .insights import discover
+    discovery=discover(catalog,cutoff)
+    return _envelope(catalog,binding)|card|dict(insight_discovery=discovery|dict(findings=[f for f in discovery['findings'] if card['id'] in f['members']],unknown=[u for u in discovery['unknown'] if u.get('sku_id')==sku_id and u.get('warehouse_id',warehouse_id)==warehouse_id]),clocks=dict(business_cutoff=report['context']['origin'],decision_known_at=report['context']['origin'],
         inventory_evaluated_at=card['evaluated_at'],report_created_at=report['created_at'],business_timezone=report['context']['business_timezone'],
         training_start=report['context']['start_day'],training_end=report['context']['origin_day']),
         trace=trace,capabilities=deepcopy(CAPABILITIES),evidence=dict(sections=['inventory','training','supply','plan','forecast','reliability'],references=card['references']),
@@ -473,6 +483,7 @@ def evidence(catalog,cutoff,sku_id,warehouse_id,section,page=1,page_size=20):
 
 
 def history(catalog,sku_id,warehouse_id):
+    from .insights import discover
     points=[]; before=None
     for binding in catalog['cutoffs']:
         _,key=_key(catalog,binding['cutoff'],sku_id,warehouse_id); card=_card(catalog,binding,key)
@@ -481,7 +492,8 @@ def history(catalog,sku_id,warehouse_id):
                 else 'incomplete_evidence' if before['status']!='assessable' or card['status']!='assessable' else None)
         comparable=reason is None
         delta=str(int(card['on_hand'])-int(before['on_hand'])) if comparable and before['on_hand'] is not None and card['on_hand'] is not None else None
-        points.append(dict(cutoff=binding['cutoff'],item=card,state=card['history_state'],stock_delta=delta,comparable=comparable,comparison_reason=reason))
+        findings=[f for f in discover(catalog,binding['cutoff'])['findings'] if card['id'] in f['members']]
+        points.append(dict(cutoff=binding['cutoff'],item=card,state=card['history_state'],stock_delta=delta,comparable=comparable,comparison_reason=reason,discovery_findings=findings))
         before=card
     return dict(contract_version=CONTRACT_VERSION,archive_digest=catalog['digest'],synthetic=True,sku_id=sku_id,warehouse_id=warehouse_id,points=points,
         comparison_basis='An emerging insight after missing coverage is new but numeric comparability remains unavailable. Comparability requires identical key/unit/rules/model/policy/timezone/window and lead/review/safety/pack/MOQ signature. Changed scope is unknown with no numeric delta. Same 28-day origin-known training windows; independent synthetic snapshots, not a movement narrative.')
@@ -525,6 +537,10 @@ def _parameters(report,overrides):
 def _side(catalog,binding,key,parameters):
     report=_report(catalog,key['plan_run_id']); result=report['result']; refs=[_ref('planning.runs',report['run_id']),_ref('planning.runs',key['forecast_run_id'])]
     run_id='product:'+archive_digest(dict(archive=catalog['digest'],key=key['plan_run_id'],parameters=parameters),exclude_digest=False)
+    if catalog['contract_version']=='inventory-product-evidence-v2':
+        reservations=result['supply']['reservations']; confirmed=[r for r in result['supply']['inbound'] if r['status']=='confirmed']
+        if (len(reservations)!=1 or reservations[0]['status']!='open' or reservations[0]['due_day']!=binding['cutoff'] or len(confirmed)>1):
+            return dict(status='not_assessable',reasons=['legacy_scenario_requires_one_current_obligation_and_at_most_one_confirmed_receipt; use_one_review_contrast'],parameters=parameters,plan=None,forecast=None,simulation=None,costs=None,risk=None,trace=[],run_id=None)
     if report['status']!='assessable' or parameters['evidence_case']=='incomplete_supply':
         return dict(status='not_assessable',reasons=result['reasons'] or ['counterfactual_incomplete_supply'],parameters=parameters,plan=None,forecast=None,simulation=None,costs=None,risk=None,trace=[],run_id=None)
     origin=date.fromisoformat(binding['cutoff']); percent=parameters['demand_percent']

@@ -4,10 +4,25 @@ Updated: 2026-10-13 (America/Los_Angeles).
 
 Integration mode: AUTO
 
-Phase: Increments 0–4 implemented and accepted within the local synthetic envelope.
+Phase: Increments 0–4 plus controlled dynamic replay, insights V2 and one-review
+decision contrasts implemented and accepted within the local synthetic envelope.
 Public deployment and real operational intake remain excluded from this assignment.
 
 ## Integrated product
+
+- [Controlled synthetic replay](SYNTHETIC_REPLAY.md): explicit local CLI, dedicated
+  empty database, atomic/idempotent source admission, immutable source versions,
+  persisted restricted-runner checks/forecasts/plans and immutable archive publication.
+  New retained controls: four keys × three cutoffs, 27 actual reports, 15/15 exact
+  discovery triggers. Demand/supply changes, known ETA changes, persistent/worsening
+  risk and complete-scope location imbalance have cited facts/hypotheses/unknowns.
+- Compare now supports saved actual proposal/no action/pack-MOQ alternative using
+  shared FIFO execution, all purchase/holding/backlog/setup costs and 33 common paid
+  days. Delay assumptions stay explicit; blocked data returns null. Quiet demand
+  retains the extra-order cost counterexample. No new repeated-policy ranking.
+- Final local controls: 118/118 backend/database/legacy regressions, eight frontend
+  state controls, 22 default and 14 dynamic browser checks. Installed wheel serves
+  both catalogs/contrasts offline. [Evidence and limitations](RESULTS.md#dynamic-replay-and-insight-discovery-v2).
 
 - Overview → Explore → Investigate → Compare → Decide → History: 100 apparel keys,
   three cutoffs, 605 actual saved PostgreSQL reports; original kernels/411 retained
@@ -47,6 +62,10 @@ Python wheel; runtime needs no Node, database or model key.
 - [Roadmap](ROADMAP.md) retains future supplier feasibility, transfers, lifecycle,
   adapters and authenticated multi-user workflows. No new model or consumed-holdout
   tuning follows from this task. Deployment was not performed.
+- Next: supplier calendar/capacity feasibility before donor-safe transfers; movement
+  intake/revisions, cross-style evidence and observed-outcome attribution need new
+  contracts. The 50×2×12 input bound is supported validation, not measured full-scale
+  execution. PostgreSQL17/reference/public/human gates remain open.
 - Preserve unmerged original planner commits `55f4170` / `538d29d`; recovered frozen
   controls and their historical originals remain traceable. Do not delete that
   unmerged branch. AUTO integrates only this assigned, validated scope.

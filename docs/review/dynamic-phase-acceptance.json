@@ -1,0 +1,266 @@
+{
+  "archive_digest": "60c1f726af74fddde0ed66caeaa616a4f201541deb598c9661807c7a32fd8137",
+  "boundaries": {
+    "business_data": "synthetic only",
+    "human_comprehension": 0,
+    "maximum_input_envelope_execution_measured": false,
+    "new_quality_holdout_executions": 0,
+    "paid_services": false,
+    "production_exactly_once": false,
+    "public_deployment": false,
+    "reference_postgresql17_acceptance": "open",
+    "supplier_calendar_capacity": "deferred prerequisite to transfers"
+  },
+  "date": "2026-10-13",
+  "default_browser": {
+    "accessibility_conformance": "not_claimed",
+    "api_response_sizes": [
+      {
+        "bytes": 44338,
+        "path": "/api/product/overview"
+      },
+      {
+        "bytes": 45111,
+        "path": "/api/product/overview"
+      },
+      {
+        "bytes": 3155,
+        "path": "/api/product/control"
+      },
+      {
+        "bytes": 55246,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 44578,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 4537,
+        "path": "/api/product/detail"
+      },
+      {
+        "bytes": 1087,
+        "path": "/api/product/evidence"
+      },
+      {
+        "bytes": 3772,
+        "path": "/api/product/scenario"
+      },
+      {
+        "bytes": 44338,
+        "path": "/api/product/overview"
+      },
+      {
+        "bytes": 7361,
+        "path": "/api/product/detail"
+      },
+      {
+        "bytes": 10916,
+        "path": "/api/product/history"
+      },
+      {
+        "bytes": 42141,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 26317,
+        "path": "/api/product/explore"
+      },
+      {
+        "bytes": 5115,
+        "path": "/api/product/detail"
+      },
+      {
+        "bytes": 7749,
+        "path": "/api/product/history"
+      },
+      {
+        "bytes": 15715,
+        "path": "/api/execution"
+      },
+      {
+        "bytes": 5976,
+        "path": "/api/execution/detail"
+      },
+      {
+        "bytes": 39,
+        "path": "/api/execution/journal"
+      },
+      {
+        "bytes": 5621,
+        "path": "/api/execution/detail"
+      }
+    ],
+    "assets": [
+      {
+        "bytes": 13558,
+        "gzip_bytes": 3594,
+        "path": "/product-static/index-CrszOey6.css"
+      },
+      {
+        "bytes": 276535,
+        "gzip_bytes": 84570,
+        "path": "/product-static/index-CdHM-SRv.js"
+      },
+      {
+        "bytes": 217,
+        "gzip_bytes": 182,
+        "path": "/product-static/favicon.svg"
+      }
+    ],
+    "browser": "155.0.8059.40",
+    "checks": [
+      "overview_loaded",
+      "lazy_duplicate_control_original_rows_and_blocked_proposal",
+      "preset_manual_equivalence",
+      "url_reload_saved_view",
+      "saved_source_projection_independent_quantities",
+      "investigate_evidence",
+      "compare_supported_scenario",
+      "stale_reset",
+      "error_retry_last_good",
+      "export",
+      "late_old_scenario_cannot_replace_new_cutoff",
+      "decide_advisory",
+      "history_three_cutoffs",
+      "blocked_journey_missing_is_unknown",
+      "actual_planner_execution_blocked_history_cost_and_export",
+      "packaged_execution_keeps_journal_disabled",
+      "execution_mobile_320_no_body_overflow",
+      "mobile_320_no_body_overflow",
+      "keyboard_focus",
+      "zoom_400_forced_colors_keyboard",
+      "no_console_errors",
+      "bounded_assets_and_view_data"
+    ],
+    "console_errors": [],
+    "human_comprehension": "not_performed",
+    "initial_view_bytes": 89449,
+    "injected_failure_console_messages": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "kind": "developer_browser_acceptance",
+    "viewport_checked": 320,
+    "zoom_check": "CSS 400 percent with keyboard focus"
+  },
+  "dynamic_browser": {
+    "accessibility_conformance": "not_claimed",
+    "api_offer": "paced at <=2/s; correctness, not load acceptance",
+    "browser": "155.0.8059.40",
+    "checks": [
+      "latest_v2_discovery",
+      "cross_location_insight_exact_key_drilldown",
+      "observed_hypothesis_unknown_distinction",
+      "independent_33day_paid_quantity_controls",
+      "delay_stale_and_common_window",
+      "source_bound_export",
+      "invalid_pack_last_good_retained_stale",
+      "discovery_history_three_cutoffs",
+      "incomplete_supply_blocks_contrast",
+      "actual_320px_layout",
+      "legacy_lab_available",
+      "no_http_ingestion",
+      "archive_binding_blocks_saved_view",
+      "no_unexpected_browser_errors"
+    ],
+    "console_errors": [],
+    "expected_422_console_messages": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ],
+    "human_comprehension": "not_performed",
+    "kind": "developer_dynamic_browser_acceptance",
+    "viewport_checked": 320
+  },
+  "final_backend_regressions": {
+    "log": "ii-dynamic-final-regressions-complete.log",
+    "passed": 118,
+    "seconds": 61.335,
+    "skips": 0,
+    "total": 118
+  },
+  "fresh_disposable_database": true,
+  "frontend_state_controls": {
+    "passed": 8,
+    "total": 8
+  },
+  "installed_dynamic_offline_smoke": {
+    "alternative_12_paid_cost": "14609",
+    "discovery_triggers_first_cutoff": 3,
+    "http_ingestion_status": 404,
+    "passed": true
+  },
+  "installed_wheel": {
+    "archive_digest": "b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9",
+    "default_journal_disabled": true,
+    "execution_archive_digest": "3442674a51263aedfbb01062e427f8474de5988142a4a97e15f5f33a7340bdb4",
+    "execution_controls": 7,
+    "independently_expected_proposals": [
+      "12",
+      "18",
+      null
+    ],
+    "installed_module": "/private/tmp/ii-dynamic-wheel-env/lib/python3.12/site-packages/inventory_intelligence/product.py",
+    "no_database": true,
+    "no_node_runtime": true,
+    "packaged_evidence_sha256": "33fcd78419f5d218dea9e4b5ce9a0902491c780f2b8a58dd0d608f9e188c455d",
+    "paired_policy_cells": 36,
+    "served_assets": [
+      "THIRD_PARTY_LICENSES.txt",
+      "favicon.svg",
+      "index-CdHM-SRv.js",
+      "index-CrszOey6.css"
+    ],
+    "status": "pass"
+  },
+  "kind": "next-product-phase-local-acceptance",
+  "measurement": "dynamic-replay-measurement.json",
+  "measurement_context": "The initial capture latency field belongs to the first successful replay, before final occupied-DB/persisted-reliability controls; reader latency samples use final code.",
+  "negative_and_failure_results": [
+    "Quiet demand: additional ordering increases cost.",
+    "Missing demand and incomplete supply suppress quantities and complete-scope patterns.",
+    "Conflicting version rolls back the entire admission.",
+    "Occupied database refuses first admission.",
+    "Unpaced developer journey exceeded unchanged anonymous rate; paced correctness passes are not a load campaign.",
+    "Initial comparison button stayed disabled before first request; repaired and covered by browser journey."
+  ],
+  "persisted_reload": {
+    "matched": 27,
+    "original_capture_database_reopened": true,
+    "role": "ii_runner",
+    "total": 27
+  },
+  "preserved_original_sha256": {
+    "docs/CONTRACT_PLANNER_LOOP_V1.md": "30a079522625e63ba1f7a3c79ff962fd47e3588db339137e09d39758b768f6b9",
+    "docs/examples/planner-loop-manual-v1.json": "9cabdf1a81da09a64d29c4b37085040a92de073460d7ddf3ff701da15634db3c",
+    "docs/examples/planner-quality-stress-v1.json": "5cc9ad4559b2c9a6e869f63cfc58388982af5db8102bb8451eea18310e6863a6",
+    "docs/review/planner-loop-v1.json.gz": "f8943925446e1d92d757d9e4fe454e93ca5aaaa500a838387573674ee374e0b2",
+    "src/inventory_intelligence/execution_evidence.json.gz": "f8943925446e1d92d757d9e4fe454e93ca5aaaa500a838387573674ee374e0b2",
+    "src/inventory_intelligence/lab_evidence.json": "6b6fa00788bb09f0ecb2f9f5078b035c23987e051c73914f99c6f5a7f7e65002",
+    "src/inventory_intelligence/product_evidence.json.gz": "33fcd78419f5d218dea9e4b5ce9a0902491c780f2b8a58dd0d608f9e188c455d"
+  },
+  "runtime": "native macOS ARM64; PostgreSQL 18.3; Python 3.12",
+  "source_sha256": {
+    "docs/SYNTHETIC_REPLAY.md": "6274b3525b4d29d043259f02a6ec47f1a5dd7f4e1756c85163868d7998f10544",
+    "docs/examples/dynamic-controls-v1.json": "d28a664d8ca10078f74a4f3a9aecf18d59ef06d550c1e95c04c08d9294d56679",
+    "src/inventory_intelligence/decision_contrast.py": "d71dc80f18d86706af13322b99fe039bffd85986e6a1907935e05c79d5704992",
+    "src/inventory_intelligence/insights.py": "31cb24b46079d92b2ba77952401b1d2ce7d625eeaa2240634d40ed6e7b95f641",
+    "src/inventory_intelligence/planner_loop.py": "950f8d1de2fc0dc3073bd3f4b8ce3506df092548b187cd666ac5915dacd1dd24",
+    "src/inventory_intelligence/product.py": "3f7db88885d8a246ea9cdc11a1c6ec924ce73428d6e6ab609fbfa2fb96df2142",
+    "src/inventory_intelligence/product_api.py": "bb6a9c18d4665eecde05f19fbebb7096d601448ce9ec856f73727680232db703",
+    "src/inventory_intelligence/synthetic_replay.py": "44b781444d4d595b3c4dbef482713de753b608442e6441393459544a5192301e"
+  },
+  "wheel": {
+    "assets": [
+      "THIRD_PARTY_LICENSES.txt",
+      "favicon.svg",
+      "index-CdHM-SRv.js",
+      "index-CrszOey6.css",
+      "index.html"
+    ],
+    "evidence_matches": true,
+    "sha256": "bf5dab7375b7b80cbf5041955db4ace2817d531528f64b50ba8160e92df52155",
+    "wheel": "/private/tmp/ii-dynamic-wheels/inventory_intelligence-0.1.0-py3-none-any.whl"
+  }
+}

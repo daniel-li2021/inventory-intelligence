@@ -6,6 +6,57 @@ synthetic/local studies, not commercial savings, production readiness or fresh
 results from documentation cleanup. Research studies have separate indexed
 [research results below](#research-results).
 
+## Dynamic replay and Insight Discovery V2
+
+October 13 next-phase local delivery adds an explicit synthetic intake CLI and
+immutable version registry; no upload/write service is added to the read-only demo.
+Three new source versions × four keys create **27 actual PostgreSQL18 reports**:
+three reliability, 12 forecasts and 12 plans. All 27 match persisted restricted-runner
+reloads. The [retained archive](review/dynamic-replay-v1.json.gz) keeps exact original
+input bytes, source identities, complete selected evidence and history. Source
+admission/retry/conflict/rollback/reopen/update-delete/permission controls pass;
+first admission refuses an occupied database. [Contract / walkthrough](SYNTHETIC_REPLAY.md).
+
+Independent hand controls match **15/15** discovery triggers over 12 key/cutoff
+observations, with no extra trigger: 3/8/4 at the three cutoffs. Rules distinguish
+observed accepted-demand and known supply/ETA changes from predicted prefix exposure
+and unknown external causes. The previous category/history baseline already exposes
+the two risk transitions; V2 adds explicit demand/supply/ETA and cross-location
+discovery. This authored control matrix is not an unseen detection-accuracy study.
+Missing demand or supply suppresses comparisons and complete-scope location patterns.
+
+The single-review actual-proposal/no-action/alternative comparison shares physical
+FIFO execution with the real planner loop, uses one saved review and 33 common paid
+days, and includes initial stock, confirmed inbound, new purchases, holding, backlog
+and setup. First-cutoff Harbor hand costs match **18039 / 16281 / 14609** for no
+action / saved 6 / alternative 12; terminal backlog is **100 / 94 / 88** pieces.
+Three-day delay changes the saved proposal's paid cost to **16373**, immediate new
+fill 18→12, eventual new fill stays 18/112. Quiet demand retains the negative result:
+extra ordering costs more than no action. These are scenario arithmetic controls;
+no new repeated-policy efficacy claim, supplier capacity/calendar or feasible
+transfer follows. Existing March stress evidence remains byte-identical.
+
+[Saved-only measurement](review/dynamic-replay-measurement.json): 680251 raw / 26410
+compressed archive bytes, 27 reports across three cutoffs. Ten full validation
+reads have median **45.818 ms**; 30 four-key discovery calls **0.332 ms**; 30
+one-review contrasts **0.322 ms**; 30 retained 100-key discovery calls **16.664 ms**.
+Filesystem is warm. Process peak RSS is **157958144 bytes**, including the retained
+100-key package, not per-request allocation. The recorded **0.319 s** initial replay
+predates the final occupied-DB guard and persisted reliability reload; it is not a
+final-code latency or throughput claim. Maximum 50×2 keys/12 versions remains a
+validation envelope; its execution/scale/resource acceptance is unmeasured.
+
+Final **118/118** focused backend/database/legacy controls pass in **61.335 s** on a
+fresh disposable PostgreSQL18 database; eight frontend controls and TypeScript/build
+budgets pass. **22/22** default and **14/14** dynamic Chrome developer browser checks
+cover stale/error/last-good/export, source bindings, delayed quantities, history,
+blocked evidence and actual 320px layout. An initially disabled manual comparison
+button was found and fixed. The unpaced script exceeded the unchanged anonymous
+rate; correctness clients now offer ≤2/s and wait for React request completion.
+This is not a load campaign. Installed wheel/default/custom catalog smoke passes
+without database/Node/model calls. Human comprehension, accessibility conformance,
+PostgreSQL17/reference hardware and public runtime remain unverified.
+
 ## Product journey
 
 October 13 local acceptance covers authorized Increments 0–2. A targeted support

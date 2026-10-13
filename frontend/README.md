@@ -63,3 +63,12 @@ paired stress costs and an optional durable local receipt sandbox. Its APIs use
 `/api/execution`; default packaged mode has journal writes disabled. Both default
 and sandbox browser journeys cover execution export, blocked history and 320px
 layout. Synthetic receipts never execute real orders or modify source stock.
+
+Insight Discovery V2 appears in Overview, Investigate and History. Observed facts,
+model hypotheses, missing causes and supported next steps retain exact source refs.
+Overview caps displayed findings at eight with complete counts; selected-key detail
+and the read-only discovery API expose the complete bounded set. Compare adds one
+saved-review FIFO execution contrast against no action/pack-MOQ alternatives, with
+33 common paid days and a 0–3-day declared delay. It is separate from the periodic
+scenario controls; source mismatch/errors retain stale last-good results.
+[Controlled local replay walkthrough](../docs/SYNTHETIC_REPLAY.md).

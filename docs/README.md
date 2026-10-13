@@ -12,6 +12,7 @@
 | [CONTRACTS](CONTRACTS.md) | Current interfaces/version identifiers; inventory, planning, Copilot and research kernels. |
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
 | [Product / Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
+| [Synthetic replay / insights V2](SYNTHETIC_REPLAY.md) | Controlled local intake, immutable versions, discovery rules, one-review comparisons and walkthrough. |
 | [Engineering pilot](RESULTS.md#local-engineering-pilot) / [reproduction](EVIDENCE.md#local-engineering-pilot) | Local exploratory measurements, limits and pending confirmation. |
 | [Engineering continuation](RESULTS.md#engineering-continuation) / [receipts](EVIDENCE.md#engineering-continuation) | Paired SQL improvement, scale/ARM64/runtime/recovery evidence and explicit remaining gates. |
 | [VALIDATION](VALIDATION.md) | Independent checks and disposable-database acceptance. |
@@ -23,7 +24,7 @@
 |---|---|---|
 | [Engineering readiness](PLAN.md) | Local continuation complete as practical; one continuous HTTP campaign | Remaining continuous/rate/client cells, x86/two-date, dense-evidence, serial1000 and human gates. |
 | [Actual planner execution / feedback](PLANNER_EXECUTION.md) | Increments 3–4 delivered locally; frozen protocols, actual outcomes and durable journal | Human/reference/public-runtime gates; deployment excluded. |
-| [Next implementation phases](ROADMAP.md) | Increments 0–4 delivered locally October 13; future capabilities remain | Supplier feasibility/transfer/lifecycle next when assigned; human/public/real-workflow gates remain. |
+| [Next implementation phases](ROADMAP.md) | Increments 0–4 and bounded dynamic replay/discovery/comparison delivered locally | Supplier feasibility before transfers; lifecycle/human/public/real-workflow gates remain. |
 
 Keep another plan only when concrete future execution needs it; index its scope,
 status, gaps and next action here. Ideas and deferred possibilities belong in KB.
