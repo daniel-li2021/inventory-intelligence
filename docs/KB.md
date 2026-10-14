@@ -226,3 +226,56 @@ STATE and the active plan own prioritization and progress; these are not assignm
 | 20 Accessibility/cold start | [Targeted local review](RESULTS.md#browser-and-accessibility-results) | Speech/zoom/forced colors/download bytes and human cold start remain scoped manual checks. |
 | 21 Hosted read-only Lab | [Design evidence](../deploy/lab/README.md#serving-architecture-and-limits), [operations](../deploy/lab/README.md) | Actual Linux/runtime/recovery plus reviewed host/domain/cost before public TLS/uptime claims. |
 | 22 Portfolio wording | [Case study](../README.md), [historical claim receipt](review/portfolio-claims.json) | Refresh from exact merged/deployed/measured evidence only. |
+
+
+## Full product roadmap outcome and opportunity audit
+
+The October13–14 full local synthetic assignment superseded the old limited
+increment pauses. One master plan was frozen at commit73a2271; its completed
+execution narrative is retained in Git. Current capabilities/reproduction belong
+in [platform case studies](PLATFORM_GUIDE.md), not another completed-plan library.
+
+| Opportunity | Current disposition | Evidence / remaining value |
+|---|---|---|
+| O01 serving boundaries | Partial | Local request/body/rate/concurrency/recovery guards; sustained/public gates remain PLAN. |
+| O02 planning latency | Partial; JIT candidate not adopted |64 real calls,4.02% large-clean reduction below 20% gate; retain old/runtime differences. |
+| O03 scalable evidence | Partial | Bounded source-bound inspection above old caps; full large-report semantic/producer acceptance remains open. |
+| O04 budgets/observability | Partial | Local study guards, durations/reasons, immutable exports and recovery; public load/security separate. |
+| O05 clarity/navigation | Full locally | Compact light workbench with progressive evidence inspection and tested states. |
+| O06 multi-item workbench | Full locally | Original100 keys plus independent changed six-key datasets; no new framework. |
+| O07 delivery/developer experience | Full local packaging; external reference partial | Current wheel/offline controls, additive journal upgrade, real PG17 regressions; exact hardware/runtime gates explicit. |
+| O08 immutable staging | Full controlled synthetic scope | Version registry, source identity/clocks, real reports/replay, atomic last-good publication. |
+| O09 exception review | Full local synthetic scope | Immutable source-bound acknowledgment/investigation/resolution; facts/gates never suppressed. |
+| O10 actual planner closed loop | Full bounded scope | Original controls/stress traces and fresh48 loops/144 reviews; blocking/losers retained. |
+| O11 purchase lifecycle | Full local synthetic scope | Feasible commitments, revised ETA, partial receipts and separate owner feedback; no ERP/real orders. |
+| O12 supplier feasibility | Full declared synthetic scope | Weekday/cutoff/daily capacity, exact promises and compound negative controls. |
+| O13 transfers | Full bounded two-location scope | Donor-safe reservations/dispatch/transit/partial receipts/ETA, conservation, paid comparison and actual feedback. |
+| O14 count/quality | Partial | Existing blind-count/corroboration/review kernel; operational count intake beyond this scope. |
+| O15 forecast/service intelligence | Partial | Existing intermittent/calibration research plus fresh point-baseline/decision evaluation; no intervals or new methods promoted. |
+| O16 decision evaluation | Full bounded synthetic scope | Fresh selection/evaluation split, independent arithmetic, complete paid outcomes, ties/no-winner and blocks. |
+| O17 evidence explanation | Full bounded scope | Cited saved facts, contributing factors, hypotheses/unknowns and exact backend arithmetic. |
+| O18 apparel/lifecycle | Partial | Existing style/color/size matrix and location patterns; aging/margin/markdown lack inputs. |
+| O19 identity/tenancy | Unimplemented operational gate | Real authenticated multi-user/private intake explicitly excluded. |
+| O20 portfolio | Full local portfolio scope | Six connected reproducible case studies, working demo and explicit external gates. |
+| O21 provenance/replay | Full local synthetic scope | Immutable sources/reports/versions/clocks/journals; authenticated upstream provenance remains separate. |
+| O22 larger rewrite | No longer valuable | Existing React/Vite supports the cohesive journey; no Next.js/SSR/frontend replacement justified. |
+| O23 discovery/prioritization | Full bounded rule scope | Expected triggers, exact factor values and explainable ordering; no detection/population accuracy claim. |
+| O24 comparison | Full local bounded scope | Saved actual/no-action/feasible quantities, supplier constraints and network/transport economics. |
+| O25 history | Full bounded scope | Compatible cutoff/source/knowledge history, origin-known ETA/partial effects and preserved missing scope. |
+
+Lessons: short-prefix imbalance is not donor-safe surplus; full declared-demand
+protection correctly blocks the original 80-stock/112-demand donor. Transfer goods
+are paid once, not purchased again. Expensive transport can reverse the choice.
+Accuracy-selected forecasts need not minimize paid costs; only 2/8 fresh choices pass
+the downstream gate. Later arrival can reduce holding cost without lowering service.
+A transfer reservation does not admit a residual purchase. Contradictory shared
+supplier/day capacity cannot expand allocations; transport versions are immutable.
+A new stock count and source basis require explicit owner evidence/reconciliation.
+Pages are inspection, not complete semantic acceptance. Local/diagnostic/developer
+checks never become unseen efficacy, independent human review or production evidence.
+
+Valuable future work is conditional: independent human/accessibility acceptance,
+exact runtime/hardware/sustained-serving confirmation, explicit donor-basis
+reconciliation and fresh multi-review network studies, operational producer/tenant
+identity and supplier/transport adapters, or lifecycle economics after required
+inputs exist. New models/optimizers/services require a measured unmet need.

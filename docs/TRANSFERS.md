@@ -25,20 +25,20 @@ not purchased a second time. Each arm checks network conservation and unchanged
 donor immediate service; missing purchase terms withhold that arm's outcomes.
 
 The [frozen independent arithmetic](examples/transfer-controls-v1.json) predates
-implementation: donor30/recipient0, five days of demand1/3, transfer12, lead2,
-pack6/MOQ6 gives protected surplus23, purchase-only18 and residual6. Common paid
+implementation: donor 30/recipient 0, five days of demand1/3, transfer 12, lead2,
+pack6/MOQ6 gives protected surplus23, purchase-only 18 and residual6. Common paid
 costs are 5545 / 1125 / 667; donor fills5/5 in every arm. The transfer network has
-36 paid incoming pieces,20 consumed and16 ending pieces. Concurrent12-piece
+36 paid incoming pieces,20 consumed and 16 ending pieces. Concurrent12-piece
 reservations cannot both consume23 pieces; excessive/early receipts and failed
 transactions leave the previous state intact.
 
 On the [fresh coast catalog](review/generalization-v1/generalization-two-site-v1.json.gz),
-May4 donor stock80 with declared1/day has protected surplus51. Transfer12 yields
-costs6763 / 5154 / 3533, recipient immediate fill3/28 / 9/28 / 15/28, donor28/28 in
-all arms. Expensive transport reverses the choice: transfer5529 versus purchase5154.
+May4 donor stock 80 with declared1/day has protected surplus51. Transfer12 yields
+costs 6763 / 5154 / 3533, recipient immediate fill3/28 / 9/28 / 15/28, donor 28/28 in
+all arms. Expensive transport reverses the choice: transfer 5529 versus purchase 5154.
 [Saved comparisons and arithmetic audit](review/transfer-comparisons-v1.json) retain
 both outcomes. These are finite declared-demand synthetic costs, not savings or
-unseen efficacy. The original April donor80 with declared4/day is correctly blocked.
+unseen efficacy. The original April donor 80 with declared4/day is correctly blocked.
 
 ## Durable lifecycle and feedback
 
@@ -48,10 +48,12 @@ identity makes an identical retry harmless and a changed choice conflicting.
 Reservations and all events are immutable SQLite rows. One source basis cannot
 be reused beyond its protected surplus, including after receipt. A new donor basis
 requires explicit reconciliation; a changed source cannot silently reset spent stock.
-The sandbox allows128 transfers/256 events, serializes writes, and preserves history
+The sandbox allows 128 transfers/256 events, serializes writes, and preserves history
 on reopen, concurrent admission, invalid events and transaction failure.
 
-Dispatch must match the protected origin; late dispatch needs replanning. It moves
+Dispatch must match the protected origin; late dispatch needs replanning. Supply
+projection retains that original reservation date, so an undispatched late reservation
+blocks as overdue instead of being silently moved to the new cutoff. It moves
 reserved pieces to in-transit, with no recipient stock until an explicit receipt.
 Partial receipts retain exact remaining pieces. Receipts cannot precede dispatch
 plus original transit; overreceipt/backdated events reject. ETA notices retain their
@@ -70,8 +72,8 @@ modify stock sources or earlier reports. Dispatch/receipts require independently
 reconciled new stock evidence; the journal never silently adjusts an inventory table.
 SQLite/PostgreSQL publication is not a cross-database atomic production handoff.
 
-Actual PostgreSQL feedback control: a coast proposal6 becomes0 after confirmed
-transfer12; after partial receipt5, an independent stock6 count proposes4 without
+Actual PostgreSQL feedback control: a coast proposal 6 becomes0 after confirmed
+transfer 12; after partial receipt5, an independent stock 6 count proposes4 without
 inbound. Remaining7 with an overdue promise blocks planning; an origin-known revised
 ETA then yields0. Original proposal/source/history remain unchanged. No real dispatch,
 purchasing, operational exactly-once or stochastic donor-service guarantee is claimed.

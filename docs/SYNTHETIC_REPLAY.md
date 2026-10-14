@@ -140,3 +140,49 @@ for completed React requests. They are correctness/developer checks, not a load
 campaign, human study or accessibility conformance. Saved measurements refuse an
 existing output. Original archives and consumed quality studies are never replayed
 for a new accuracy claim.
+
+
+## Independent dataset generalization and source-bound review
+
+Two new frozen designs extend the original 100-key/April controls without reusing
+those source identities: coast3 SKUs×2 sites/three May cutoffs and inland6 SKUs×1
+site/two November cutoffs with DST UTC08 origins. [Predeclared exact inputs/oracles](examples/generalization-protocol-v1.json)
+precede execution; [actual PG17 receipt](review/generalization-v1/receipt.json) retains
+30 exact key/cutoff cells,18 expected rule triggers and 65 persisted reports. Replay
+single samples are0.889/0.392 seconds; total campaign3.189 seconds and native max RSS
+67,158,016 bytes. These small measurements are not percentile/SLO/maximum-envelope
+or unseen detection claims. The first harness attempt compared exact serialized
+rational strings with Fraction objects and rejected; correcting normalization did
+not change any frozen expected value or source input.
+
+Controls preserve idempotent source retry, version-conflict and late-transaction
+rollback, owner/runner write denial, fresh historical semantic rerun and atomic
+last-good publication. Original report/source bytes are never rewritten. New
+sources automatically regenerate actual saved runs; insights derive from the
+validated selected catalog. CLI selection/activation remains explicit, with no
+HTTP import or implicit operational repair.
+
+`inventory-insights-v2` now exposes exact contributing stock/demand/reservation/
+confirmed-inbound/safety/proposal factors and stable priority: risk before
+opportunity, more pre-arrival shortage days, then larger proposal, rule/id tie-break.
+The ordering explains attention, not causal certainty, calibrated risk or economic
+value. IDs/V1 meanings remain unchanged. Unknown coverage/causes remain explicit.
+
+`exception-review-v1` stores acknowledged/investigating/resolved notes in an
+append-only local SQLite journal. Each note binds full finding calculation digest,
+observation/archive/cutoff, source references and aware UTC review time. Wrong/stale
+binding, conflicting event identity, backdated review and more than256 events reject.
+Resolution never hides facts, repairs a source or waives planning. Changed observations
+start a new chain; previous archive notes remain recoverable with their original
+catalog. Read-only defaults and same-origin loopback writes are unchanged.
+
+```sh
+python scripts/generalization_study.py --output-dir output/new-diagnostic-generalization
+python -m unittest tests.test_exception_review tests.test_insight_priority -v
+```
+
+The study needs owner/restricted URLs on a local PostgreSQL17 and creates/drops only
+its own disposable databases. Published paths are now consumed diagnostic controls,
+not another fresh accuracy evaluation. [Full platform walkthrough](PLATFORM_GUIDE.md)
+connects this intake/discovery slice to [supplier feasibility](SUPPLIER_FEASIBILITY.md),
+[donor-safe transfers](TRANSFERS.md) and independently saved actual feedback.

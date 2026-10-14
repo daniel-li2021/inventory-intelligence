@@ -835,3 +835,29 @@ over 33 common paid days; no later orders. Nominal pack/MOQ/lead and 0–3 decla
 delay constraints are checked; calendar/capacity remain unknown. UI/API exact
 quantities remain decimal strings/rationals. Read routes are
 `GET /api/product/insights` and `GET /api/product/contrast`; no HTTP intake route.
+
+
+## Feasible decisions, transfers and local reviews
+
+[supplier-feasibility-v1](SUPPLIER_FEASIBILITY.md) binds explicit synthetic key/version/
+knowledge date, ordering/receiving weekdays, cutoff minute and dated capacity/external
+reservations. Promises are genuine within those declared terms; unknown/conflicting
+capacity blocks. `one-review-contrast-v2` adds feasible quantities and assumed partial
+receipts over the unchanged33 paid days; V1 nominal comparisons remain decoded.
+Supplier journal admission rechecks aggregate capacity and rejects contradictory
+shared supplier/day profiles. ETA/partial receipts remain immutable known events.
+
+[donor-safe-transfer-v1](TRANSFERS.md) binds two assessable same-item/cutoff sources,
+full declared-demand donor protection, positive transit and explicit transport costs.
+Network conservation and source service are exact. Reservation/dispatch/partial
+receipt/ETA rows are immutable; owner supply projection writes new batches only.
+A residual purchase requires separate admission. New donor bases need explicit
+reconciliation; no implicit stock repair or global optimizer claim.
+
+`exception-review-v1` binds full finding digest/observation/source/cutoff and UTC
+review time. A review note never suppresses facts, repairs data or clears a gate.
+[persisted-evidence-page-v1](ENGINEERING_SUPPORT.md) provides bounded source-bound
+inspection, preserving the old semantic readers and all original report bytes.
+The [fresh actual-planner study](FORECAST_DECISION.md) evaluates existing baselines
+without changing their version or promoting a policy. All new paths remain synthetic;
+public/operational tenancy/authenticity and real action gates are separate.

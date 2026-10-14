@@ -2,7 +2,7 @@
 
 Status: **local continuation measured; remaining reference/stability/release gates
 explicit**. [STATE](STATE.md) owns current AUTO mode and [ROADMAP](ROADMAP.md) owns
-the full October 13 local synthetic product/engineering assignment. That assignment
+the remaining external acceptance after the full October13–14 local synthetic assignment. That assignment
 supersedes earlier feature pauses and limited-increment authorization; this file
 retains the original engineering confirmation recipes and acceptance gates, not a
 second product roadmap. Previously measured artifacts remain unchanged.
@@ -11,9 +11,10 @@ The original existing-Mac pilot and October 4 continuation used native PostgreSQ
 and Docker Desktop ARM64 Linux with a three-hour ceiling including harness repairs
 and HTTP windows. Its clock discontinuity/overrun is retained, not repaired by a
 new label. New bounded measurements follow ROADMAP budgets and existing guards;
-reuse completed cells. No x86 host was available in that evidence. Actual
-PostgreSQL17/current regression checks and necessary performance/evidence/recovery
-work now belong to the full assignment where feasible. Native18 is not a version17
+reuse completed cells. No x86 host was available in that evidence. Actual PostgreSQL17.9 correctness and latest-code regressions are now checked on
+ARM64/Python3.12.14; see [engineering support](ENGINEERING_SUPPORT.md) for fresh JIT
+non-adoption and bounded inspection above old reader caps. Exact pinned runtime/
+hardware and full large-report producer/semantic acceptance remain open. Native18 is not a version17
 reference. Public/paid deployment, real/company inputs and real purchasing remain
 excluded.
 

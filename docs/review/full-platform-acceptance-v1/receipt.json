@@ -1,0 +1,133 @@
+{
+  "contract_version": "inventory-full-platform-acceptance-v1",
+  "accepted_date": "2026-10-14",
+  "synthetic_only": true,
+  "baseline_integrated_main": "e1217b7",
+  "requested_ancestor": "3d25409",
+  "validated_code_commit": "770f2f51b321b6ec06c0f735da8154bb8ee650b8",
+  "source_sha256": {
+    "src/inventory_intelligence/transfers.py": "dc6c21e4c2bb5b6a82735c04fe73ce6ce88d6167082d54f9f0620fe10b0b88d2",
+    "src/inventory_intelligence/workflow.py": "35b29aa309bf6cb38195005f422f7e811210b714539185423386c1175ef90a14",
+    "src/inventory_intelligence/insights.py": "53ce347b3f375fdb50900a161202da59b29e85609f2741b59e4062eeffe35ee3",
+    "src/inventory_intelligence/product_api.py": "334d30e724f6365d48e0d71c4fd056a987830503b8a124117a499e24156acc82",
+    "src/inventory_intelligence/evidence_pages.py": "203f9eca4a2adad33d6bf0d90a7982bab1d897e66a448dd98eb8bd761d3c2264",
+    "src/inventory_intelligence/exception_review.py": "09a8b1eb1b2f4db33de01a695ae4164129a47ff851fd5ea4bb15877cde5ac930",
+    "src/inventory_intelligence/forecast_decision_study.py": "ffa0d5505f368e8d9e0e3f7b69327df6fa69ca39e11b4ff63a3ed48616e5c28c",
+    "src/inventory_intelligence/evaluation_summary.py": "30da2080df682c57477d706684af1c8e23a14b28b47bed7cd8ecbbae010fe95e",
+    "frontend/src/main.tsx": "734b49729da7363524fa634646cfe2083d2048924f7a46018a5f170a2e2e8d78",
+    "frontend/src/style.css": "12784b326f473d16ca7020b88799ba062a374edfd03372f48fbd2374be892316",
+    "frontend/src/state.mjs": "c5a73b871772311097b9db2a009c3d7baef29adaab8f6304edbcd4e33e2628bc",
+    "pyproject.toml": "2bc29d0374b6150d5bdf29e6405c94ee3b97eb80c00dc7e0575829408f8fc97d"
+  },
+  "postgres": {
+    "server_version": 170009,
+    "architecture": "ARM64 Docker Linux; native macOS test client",
+    "python": "3.12.14",
+    "psycopg": "3.3.6",
+    "restricted_runner": "ii_runner"
+  },
+  "regressions": {
+    "tests": 368,
+    "passed": 368,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 110.388,
+    "fresh_database": true
+  },
+  "initial_failure": {
+    "exercised": 365,
+    "errors": 2,
+    "reason": "Existing tests reused password-masked info.dsn on reconnect; fixed to retain configured owner options; no source/kernel repair"
+  },
+  "frontend": {
+    "state_controls": 8,
+    "browser_controls": 16,
+    "legacy_browser_controls": 22,
+    "actual_narrow_width": 320,
+    "js_gzip_bytes": 89064,
+    "css_gzip_bytes": 3976,
+    "initial_legacy_data_bytes": 100189,
+    "unexpected_console_errors": 0
+  },
+  "installed_wheel": {
+    "sha256": "bdd023977f1535237abbdbdab76167256d61f95d6f58976e2277311f9e241bf9",
+    "bytes": 1384560,
+    "no_database": true,
+    "no_node_runtime": true,
+    "default_journal_disabled": true,
+    "feasible_supplier_and_saved_feedback": true
+  },
+  "generalization": {
+    "independent_designs": 2,
+    "exact_key_cutoff_cells": 30,
+    "exact_discovery_triggers": 18,
+    "persisted_reports": 65,
+    "rollback_history_last_good_passed": true
+  },
+  "forecast_decisions": {
+    "independent_paths": 16,
+    "loops": 48,
+    "actual_reviews": 144,
+    "blocked_reviews": 39,
+    "selected_decision_gates_passed": 2,
+    "denominator": 8,
+    "global_winner": null,
+    "promoted_policy": null
+  },
+  "transfers": {
+    "common_paid_days": 33,
+    "no_action_cost": "6763",
+    "purchase_only_cost": "5154",
+    "transfer_before_purchase_cost": "3533",
+    "donor_fulfilled": "28",
+    "donor_accepted": "28",
+    "expensive_transfer_cost": "5529",
+    "conservation_verified": true,
+    "residual_purchase_admitted_implicitly": false,
+    "reservation_deadline_shifted": false
+  },
+  "actual_feedback": {
+    "original_proposal": 6,
+    "confirmed_transfer": 0,
+    "independent_count": 4,
+    "overdue_partial": null,
+    "revised_eta": 0,
+    "unchanged_source_history": true
+  },
+  "jit": {
+    "real_persisted_calls": 64,
+    "measured_per_arm_cell": 6,
+    "large_clean_reduction_fraction": 0.0402,
+    "adoption_gate": 0.2,
+    "adopted": false,
+    "exact_semantics_equal": true
+  },
+  "evidence_pages": {
+    "page_bytes_limit": 262144,
+    "records_per_page_limit": 100,
+    "old_aggregate_caps_preserved": true,
+    "inspection_only": true,
+    "complete_semantic_large_report_gate_waived": false
+  },
+  "boundaries": {
+    "unseen_accuracy_claim": false,
+    "commercial_savings": false,
+    "real_data": false,
+    "real_orders": false,
+    "public_or_paid_deployment": false,
+    "human_comprehension": "not_performed",
+    "accessibility_conformance": "not_claimed",
+    "exact_pinned_python31212_reference": "open",
+    "x86_two_date_performance": "open",
+    "stochastic_donor_guarantee": false,
+    "operational_exactly_once": false
+  },
+  "integration": "AUTO delivery verified separately via Git remote ref; this receipt binds the validated implementation commit, not its own documentation commit",
+  "receipt_files_sha256": {
+    "postgres17-latest-tests.log.gz": "256d42fe32a47ea2fabc3d37e47687f21bb363296bc8159583cf6bd8efef1bb9",
+    "initial-reconnect-harness-errors.log.gz": "69d6a7fea9111108c0a74335f94919b5ffb5f4c0a190f5449cfd8392fa07c3b7",
+    "platform-browser.json": "1be1a4e926e99a49251df46d1567fdf4fc3742f6a70ac687b95da2f7096224e0",
+    "legacy-browser.json": "71a7e138e6d426c40465ac47e1b5d85af589ccdbbaa7879b8481ccdd587895f2",
+    "installed-wheel.json": "2281d1be2ffe2650036bb2c8150f1d5714d45012ebe31f6a0d7e356e5343dccd"
+  }
+}

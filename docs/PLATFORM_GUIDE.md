@@ -81,8 +81,8 @@ Use the same May 4 item/location → donor site1, transfer twelve, transit one d
 Compare transfer before purchase. Full declared donor demand leaves fifty-one safe
 pieces; the short-prefix signal alone does not authorize dispatch. Network no-action/
 purchase/transfer costs are 6763/5154/3533; recipient immediate service is 3/28,
-9/28 and15/28; donor remains28/28. A costly transport reverses the choice to
-purchase5154 versus transfer5529. Every arm retains exact conservation and paid
+9/28 and 15/28; donor remains28/28. A costly transport reverses the choice to
+purchase 5154 versus transfer 5529. Every arm retains exact conservation and paid
 stock, backlog, transport and purchase components.
 
 Reserve → Dispatch May 4 → Receive five May 5 → Receive seven May 6. Inspect the
@@ -96,13 +96,13 @@ No stochastic donor guarantee, global optimum or real transport is claimed.
 The supplier and transfer journals preserve identities, partial quantities and the
 then-known ETA. Owner publication creates a new complete supply batch; independent
 new counts remain separate source evidence. Actual PostgreSQL transfer feedback:
-proposal6→0 with confirmed twelve inbound; partial five leaves seven; independently
+proposal 6→0 with confirmed twelve inbound; partial five leaves seven; independently
 observed stock six would propose four; overdue remaining inbound blocks; a known
 revised ETA restores an assessable zero. Historical proposal six is unchanged.
 
 `tests.test_transfer_feedback` executes this with the real restricted planner in its
 own disposable database. Existing [supplier feedback](PLANNER_EXECUTION.md) independently
-preserves the original12→0 control. Neither journal is an operational exactly-once
+preserves the original 12→0 control. Neither journal is an operational exactly-once
 executor or cross-database atomic handoff.
 
 ### 6. Unsafe evidence blocks without corrupting history
@@ -117,8 +117,8 @@ and [transfer negative controls](TRANSFERS.md).
 
 ## Evaluation and product design
 
-Evaluation shows sixteen fresh independent paths, forty-eight actual loops and144
-restricted reviews. Accuracy-selected alternatives pass only2/8 downstream decision
+Evaluation shows sixteen fresh independent paths, forty-eight actual loops and 144
+restricted reviews. Accuracy-selected alternatives pass only 2/8 downstream decision
 gates;39 blocked reviews, losses, ties and undefined zero-demand service remain.
 Point baselines have no predictive intervals, so calibration is unavailable. Existing
 intermittent/calibration/supply/recovery research is retained, not retuned. No new
@@ -133,7 +133,7 @@ original evidence remains inspectable. No other project's data, business logic,
 assets or frontend framework were copied.
 
 Developer browser controls cover constraints/staleness, admissions, partial lifecycle,
-source-bound review, exact exports, evaluation and1280/320px layout. These checks are
+source-bound review, exact exports, evaluation and 1280/320px layout. These checks are
 separate from human comprehension or WCAG conformance. [Browser receipt](review/platform-browser-v1.json).
 [Engineering support](ENGINEERING_SUPPORT.md) retains the JIT no-adoption result,
 bounded evidence inspection, upgrades and recovery. [RESULTS](RESULTS.md) owns final

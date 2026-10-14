@@ -17,11 +17,22 @@ The bundled synthetic catalog contains actual saved checker, forecast and planne
 outputs. [Product guide](docs/DECISION_LAB.md#product-capability-and-experience-boundary)
 · [Remaining roadmap](docs/ROADMAP.md#delivery-sequence-and-acceptance-gates).
 
-[Controlled local synthetic replay](docs/SYNTHETIC_REPLAY.md) adds immutable input
-versions, richer demand/supply/risk/imbalance discovery and actual saved-proposal
-versus no-action/quantity comparisons over a common paid window. The packaged
-default stays read-only; source admission uses an explicit local CLI and dedicated
-synthetic database. The guide includes a working April demo and exact controls.
+The completed local platform adds [controlled synthetic intake/replay](docs/SYNTHETIC_REPLAY.md),
+explainable priority/review, [feasible supplier choices](docs/SUPPLIER_FEASIBILITY.md),
+[donor-safe transfers and receipt/ETA feedback](docs/TRANSFERS.md), and fresh
+[forecast-to-decision evaluation](docs/FORECAST_DECISION.md). The compact light
+workbench keeps exact evidence and blocked/stale states visible. The default wheel
+is read-only; explicit loopback configuration enables synthetic journals.
+
+[Six connected case studies and working demo](docs/PLATFORM_GUIDE.md) cover new
+sources, risk, feasible alternatives, transfers, actual later plans and unsafe data.
+Fresh evaluation preserves losing policies and no winner; the JIT candidate was
+not adopted. [Engineering limits](docs/ENGINEERING_SUPPORT.md) and
+[remaining validation](docs/ROADMAP.md) stay separate from production claims.
+
+```sh
+python scripts/run_local_demo.py --port 8040 --catalog docs/review/generalization-v1/generalization-two-site-v1.json.gz --journal output/my-platform-demo.sqlite
+```
 
 ```mermaid
 flowchart LR

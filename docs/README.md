@@ -13,6 +13,9 @@
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
 | [Product / Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
 | [Synthetic replay / insights V2](SYNTHETIC_REPLAY.md) | Controlled local intake, immutable versions, discovery rules, one-review comparisons and walkthrough. |
+| [Platform and case studies](PLATFORM_GUIDE.md) | Working integrated local demo, six scenarios, benchmarks and boundaries. |
+| [Supplier feasibility](SUPPLIER_FEASIBILITY.md) / [transfers](TRANSFERS.md) | Declared calendars/capacity, durable lifecycles, donor protection, costs and actual feedback. |
+| [Forecast and decision evaluation](FORECAST_DECISION.md) / [engineering support](ENGINEERING_SUPPORT.md) | Fresh study, losing/no-winner paths, JIT non-adoption and bounded evidence inspection. |
 | [Actual planner execution / feedback](PLANNER_EXECUTION.md) | Completed frozen protocols, arithmetic erratum, measured actual execution and durable-journal reproduction guide. |
 | [Engineering pilot](RESULTS.md#local-engineering-pilot) / [reproduction](EVIDENCE.md#local-engineering-pilot) | Local exploratory measurements, limits and pending confirmation. |
 | [Engineering continuation](RESULTS.md#engineering-continuation) / [receipts](EVIDENCE.md#engineering-continuation) | Paired SQL improvement, scale/ARM64/runtime/recovery evidence and explicit remaining gates. |
@@ -23,8 +26,8 @@
 
 | Active plan | Scope / status | Next action |
 |---|---|---|
-| [Master product and engineering plan](ROADMAP.md) | Full local synthetic A–F assignment; O01–O25 audited against implementation/evidence | Independent datasets/insights, feasible suppliers, donor-safe transfers, fresh policy evidence and cohesive product acceptance. |
-| [Engineering reference protocol](PLAN.md) | Retained uncompleted reference/stability cells; measured local evidence unchanged | Available PostgreSQL17/current regression and necessary engineering under ROADMAP; x86/two-date/human/public gates stay explicit. |
+| [Remaining validation roadmap](ROADMAP.md) | Local master implementation complete; independent product/reference acceptance pending | Human task acceptance and missing available runtime cells; conditional future capabilities live in KB. |
+| [Engineering reference protocol](PLAN.md) | Retained uncompleted reference/stability cells; measured local evidence unchanged | PG17 correctness checked; x86/two-date/human/public gates stay explicit. |
 
 Only these two documents own pending execution. PLANNER_EXECUTION is a durable
 completed guide, not an ongoing plan. Keep another plan only when concrete future

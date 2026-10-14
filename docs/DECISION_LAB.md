@@ -147,7 +147,9 @@ Decide, with History linked from the selected key. The original replay remains a
 `/lab`; its v1 APIs and saved archive retain their meanings. The product adapter
 is additive, with a frozen [catalog and independent controls](product-contract.md).
 
-The targeted capability review maps existing evidence as follows:
+The following describes the original product/V1 scenario surface. Current declared
+supplier/transfer/review/feedback workflows are additive; see the [integrated platform](PLATFORM_GUIDE.md).
+The original capability review maps its evidence as follows:
 
 - **Inventory and apparel exploration (O06/O18):** operational styles/SKUs/warehouses,
   snapshot/opening/coverage rows and saved R001–R005 results support dimensions and

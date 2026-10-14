@@ -397,8 +397,8 @@ extra operating period; it is not an equal-duration steady-state cost estimate.
 
 An independent small oracle makes that distinction explicit: with demand2/day,
 L1/R1 and zero starting stock, two warmup days produce score fill1 versus cold
-fill1/2 and score operating cost4 versus24. Complete intervention costs are
-52 versus40 after procurement/warmup/settlement. The state entering scoring has
+fill1/2 and score operating cost 4 versus 24. Complete intervention costs are
+52 versus 40 after procurement/warmup/settlement. The state entering scoring has
 pipeline2, which arrives naturally; it was neither inserted nor given free.
 
 #### Nominal quantile is not achieved inventory service
@@ -448,9 +448,9 @@ but owns102 pieces and loses1/20 of full-score fill versus expanding. Declaring 
 SKU obsolete or simply zeroing safety would not reverse those historical orders.
 
 Temporary-pause controls show the other side of adaptation. On pause/3709,
-recovery fill is23/33 expanding,43/66 recent and17/22 decay. Recent retention
+recovery fill is23/33 expanding,43/66 recent and 17/22 decay. Recent retention
 shrinks its tail at the cost of weaker recovery; decay has better recovery here
-but higher complete cost. On pause/4027, recent reduces complete cost by2232
+but higher complete cost. On pause/4027, recent reduces complete cost by 2232
 while aggregate fill regresses7/185; it is not a cost-and-service success.
 Seasonal-low and gradual-decline controls remain in the artifact, including their
 three block-level denominators and service failures.
@@ -493,7 +493,7 @@ cannot isolate forecast quality.
 
 #### A concrete root-cause intervention
 
-Lumpy/5301 has 166 scored units. Under cold mean/fixed0, lead5/medium/R7/stock10/
+Lumpy/5301 has 166 scored units. Under cold mean/fixed0, lead5/medium/R7/stock 10/
 pack2/MOQ4 misses 82 units: zero are independently startup-unavoidable and all
 82 occur at/after the earliest possible receipt. Complete cost is 7002.
 
@@ -571,7 +571,7 @@ and [exact aggregate artifact](review/public-sales-forecast-v1.json).
 Chen, D. (2015), Online Retail, UCI Machine Learning Repository,
 DOI10.24432/C5BW33. The [official source](https://archive.ics.uci.edu/dataset/352/online%2Bretail)
 states [CC BY4.0](https://creativecommons.org/licenses/by/4.0/). The official archive
-was acquired on2026-10-03 at15:16:37 UTC. Archive SHA-256:
+was acquired on 2026-10-03 at 15:16:37 UTC. Archive SHA-256:
 `f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b`.
 Its workbook member hash, sizes, URL, UTC acquisition timestamp and immutable
 source metadata are retained locally and in the aggregate provenance receipt.
@@ -612,7 +612,7 @@ counts: mean11, SBA6, Croston4, TSB4, naive4, seasonal-naive2, zero1.
 
 #### Held-out outcomes
 
-All32 items have one28-day holdout origin, giving896 scored points and15373
+All32 items have one28-day holdout origin, giving896 scored points and 15373
 actual observed units. Aggregate results (display rounded; artifact exact):
 
 - Expanding mean: daily MAE 15.0173, cumulative MAE 247.8501, WAPE 0.8753.
@@ -671,18 +671,18 @@ Coverage uses three complete targets per item; final review at day 77 is exclude
 
 For mean/q95/L2/no delay, fill is14319/15373, cycle service108/128 and coverage
 88/96. Only22/30 positive-sale items attain95% fill;20/32 attain95% cycle service,
-and24/32 attain95% coverage. Protection-target pinball loss is791/64. The signed
+and 24/32 attain95% coverage. Protection-target pinball loss is791/64. The signed
 empirical residual quantile has neither guaranteed its out-of-sample coverage
 nor translated into a95% service floor.
 
 For SBA/q95/L2/no delay, fill15016/15373 exceeds95% in aggregate, while cycle
-service121/128 falls below95%.27/30 positive-sale items meet the fill target,
+service121/128 falls below 95%.27/30 positive-sale items meet the fill target,
 26/32 the cycle target,29/32 coverage. Its coverage93/96 and pinball12137/960
 measure cumulative demand targets, a different outcome from actual availability.
 
 An extra hidden three days leaves demand forecasts/calibration/coverage unchanged
 at every paired origin but lowers actual fill. With L5/q95, no-delay fill is78.19%
-for mean and94.54% for SBA; delayed fill is61.04% and83.47%. Demand-only calibration
+for mean and 94.54% for SBA; delayed fill is61.04% and 83.47%. Demand-only calibration
 does not absorb an incorrectly modeled protection period or supplier timing.
 
 #### Service and costs must be evaluated together
@@ -693,14 +693,14 @@ regression. These correlated cases do not establish a universal monotonic rule
 or statistical confidence. Costs can rise even when service improves.
 
 For SBA/L2/no delay, q95 raises full cost from788483 to866644 (+78161). In19/32
-items cost rises,12 falls and one is equal. q90 costs758967 and has lower service
+items cost rises,12 falls and one is equal. q90 costs 758967 and has lower service
 than q95. No safety policy is selected on these outcomes. Mean/q95's aggregate
 cost reduction mostly comes from lower synthetic backlog penalties; it is not
 retailer savings, and paid safety inventory remains at settlement.
 
 Mean/q95/L2/no-delay costs split into warmup426618, holdout258032 and settlement
 90338, totaling774988. The stock and backlog at the score boundary are actual
-policy-owned carryover, not a reset: aggregate stock2148, backlog1395. Historical
+policy-owned carryover, not a reset: aggregate stock 2148, backlog1395. Historical
 warmup backlog consumes holdout supply through FIFO without entering the holdout
 new-demand denominator. Every purchased piece is paid at order placement.
 
@@ -819,15 +819,15 @@ database, model API or purchase execution is involved.
 19 distinct complete paths (18 variable plus the shared all-zero reference).
 The fixed mean/seasonal-naive, safety0/6, lead2/5 and fixed/variable supply grid
 produces **288 semantics pairs / 576 logical arms**, using480 exact-input cached
-computations and376 distinct native physical trajectories. Deterministic demand
+computations and 376 distinct native physical trajectories. Deterministic demand
 controls repeat across seeds; costs repriced at different tariffs are not new
 physical simulations or independent statistical evidence.
 
 Each arm has56 paid warmup dates,28 score dates and a common100-day accounting
-window, including16 settlement dates. Initial10 pieces and every order cost2 per
+window, including16 settlement dates. Initial10 pieces and every order cost 2 per
 piece. Ending stock is retained and charged through the common end, with no
-salvage credit. Holding1 and setup2 are shared. Backlog costs10 per unit-day;
-lost sales cost10 or40 **once per permanently lost unit**. These penalty units
+salvage credit. Holding1 and setup2 are shared. Backlog costs 10 per unit-day;
+lost sales cost 10 or40 **once per permanently lost unit**. These penalty units
 represent different business obligations and are not interchangeable retailer
 cost estimates. Warmup's lost units and owed debt remain in full costs.
 
@@ -871,12 +871,12 @@ identical forecast targets. Their policy-owned warmup boundary differs:
 Backlog's paid costs split into warmup1498, score446 and settlement256. Lost sales
 at penalty10 splits1090/471/256. The latter's one extra immediate score unit does
 not restore its32 permanently lost warmup/score units. Its eventual score fill
-is27/28, while backlog eventually delivers all84 score obligations.
+is27/28, while backlog eventually delivers all 84 score obligations.
 
 Lost-sales non-loss costs are1497. Conditional on backlog's fixed10/unit-day
 valuation, its32 lost units make the algebraic break-even lost-unit penalty
-`(2200-1497)/32 = 703/32` (about21.97). Penalty10 therefore costs383 less, while
-penalty40 costs577 more. This is a finite synthetic counterfactual, not a claim a
+`(2200-1497)/32 = 703/32` (about21.97). Penalty10 therefore costs 383 less, while
+penalty40 costs 577 more. This is a finite synthetic counterfactual, not a claim a
 retailer can reduce costs by abandoning accepted orders or a selected optimal rule.
 
 #### A negative service result is retained
@@ -884,8 +884,8 @@ retailer can reduce costs by abandoning accepted orders or a selected optimal ru
 Weekly/seed9101, seasonal-naive/safety0, lead2 and variable supply has backlog
 immediate fill78/84 versus lost-sales77/84. Their new-demand cycle service is
 2/4 in both arms. Lost-sales ordering is34 pieces lower, but immediate service
-regresses by1/84; its77 served units never become84 through later receipts.
-Full costs are1688 backlog versus1507/2587 lost sales at penalty10/40. Lower
+regresses by 1/84; its77 served units never become84 through later receipts.
+Full costs are1688 backlog versus 1507/2587 lost sales at penalty10/40. Lower
 purchases or one particular tariff cannot establish a general service winner.
 
 The benchmark selects no model, policy or fulfillment contract. Viewed paths are
@@ -1299,3 +1299,59 @@ and separate passing run remain retained.
 Source, raw failures and derivations are in [continuation evidence](EVIDENCE.md#engineering-continuation).
 Reference/two-date, remaining stability/grid, dense-evidence, serial1000 and
 independent human/public-TLS gates remain pending; features remain paused.
+
+## Full local decision platform acceptance
+
+The October13–14 full master scope is complete within the declared synthetic/local
+boundary. [Final implementation receipt](review/full-platform-acceptance-v1/receipt.json)
+binds code 770f2f5, source hashes,368/368 fresh PostgreSQL17.9 regressions with zero
+skips/failures, eight frontend state controls, sixteen platform and twenty-two
+original browser controls, and an installed offline wheel. Browser checks use an
+actual320px viewport and retain zero unexpected console errors; no independent
+human/WCAG/public-runtime claim follows. Runtime is ARM64 PostgreSQL Docker plus
+native macOS/Python3.12.14/Psycopg3.3.6, not the exact pinned Python3.12.12/x86
+performance reference. Two initial reconnect harness errors from password-masked
+DSNs are retained alongside their fix and the final clean suite.
+
+Two independent input designs pass 30 exact key/cutoff cells,18 rule triggers and 65
+persisted reports, preserving version-conflict/late-transaction rollback, role
+boundaries, fresh historical semantic rerun and last-good publication. Single replay
+samples are0.889/0.392 seconds; they do not establish a percentile or full50×2×12
+execution envelope. Exact factors and lexicographic priority explain attention;
+review notes never suppress facts or waive gates. [Replay/generalization](SYNTHETIC_REPLAY.md).
+
+[Feasible supplier controls](SUPPLIER_FEASIBILITY.md) cover calendars/cutoffs/capacity,
+source-bound commitments, exact partial/ETA effects and compatible33-day paid costs.
+Later arrival can lower holding cost without reducing service. Contradictory shared
+supplier/day capacity and zero-action budget bypass reject; no real purchases occur.
+[Transfers](TRANSFERS.md) retain complete network costs 6763/5154/3533, donor 28/28 and
+recipient 3/28→9/28→15/28 immediate service. Transport expense reverses the choice:
+transfer 5529 versus purchase 5154. All outcomes are declared-demand synthetic cases,
+not monetary savings or a population effect. The original 80-stock/112-demand donor
+correctly yields no safe transfer despite its short-prefix imbalance.
+
+[Saved actual feedback](review/transfer-feedback-v1.json) records real restricted
+planner proposals6→0 after confirmed transfer 12; after receipt5 and independent
+stock 6, no-inbound proposal 4 becomes blocked with overdue7, then0 with a known
+revised ETA. Full original reports/known history are inspectable in the wheel;
+owner source/supply publication stays separate from journal events. Reservations
+retain original dispatch dates; no source repair or implicit residual purchase.
+
+The [fresh forecast-to-decision study](FORECAST_DECISION.md) has16 independent paths,
+48 loops,144 reviews and 39 blocked reviews. Only2/8 accuracy-selected baselines pass
+the downstream gate: shift-up naive lowers paid cost by 3260 and steady seasonal by 32;
+shift-down naive loses170, weekly selection is not the cheapest, and ties/zero-demand
+undefined service remain. No policy promotion/global winner; point intervals/calibration
+are unavailable. Original intermittent/calibration studies were reused, not tuned.
+
+The [JIT comparison](ENGINEERING_SUPPORT.md) retains 64 exact equivalent persisted
+calls, six measured samples per arm/cell, source equality and no session leak.
+Large-clean median0.7686→0.7377s (4.02%) fails the20% adoption gate; no optimizer
+change was adopted. Bounded evidence pages inspect above 2 MiB/16 MiB while preserving
+all semantic gates and record bytes. Single-record/metadata/page limits reject rather
+than truncate; this is client inspection support, not a dense-producer SLO result.
+
+[Six connected case studies](PLATFORM_GUIDE.md) expose the user-visible outcomes.
+[Remaining validation](ROADMAP.md) and [reference protocol](PLAN.md) keep human,
+exact runtime/hardware, sustained/public serving and operational identity gates
+separate. No confidential data, paid/public deployment or production claim.

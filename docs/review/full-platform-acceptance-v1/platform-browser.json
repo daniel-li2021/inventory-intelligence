@@ -1,0 +1,27 @@
+{
+  "kind": "developer_platform_browser_acceptance",
+  "checks": [
+    "missing_numeric_input_does_not_become_zero",
+    "feasible_calendar_paid_purchase",
+    "capacity_block_and_stale_state",
+    "purchase_admission_partial_receipt_history",
+    "complete_network_cost_and_donor_surplus",
+    "donor_service_and_source_bound_export",
+    "reserved_dispatched_partial_full_transfer",
+    "source_bound_actual_feedback_reports",
+    "changed_transport_blocks_stale_admission",
+    "review_loop_keeps_facts_and_gates",
+    "fresh_forecast_decision_counterexamples",
+    "evaluation_actual_320px_layout",
+    "decisions_actual_320px_layout",
+    "keyboard_navigation",
+    "only_available_archive_controls_shown",
+    "no_console_page_errors"
+  ],
+  "viewport_checked": 320,
+  "browser": "155.0.8059.40",
+  "human_comprehension": "not_performed",
+  "accessibility_conformance": "not_claimed",
+  "offer": "paced <=2/s; correctness, not load",
+  "console_errors": []
+}

@@ -1,0 +1,145 @@
+{
+  "accessibility_conformance": "not_claimed",
+  "api_response_sizes": [
+    {
+      "bytes": 50236,
+      "path": "/api/product/overview"
+    },
+    {
+      "bytes": 49953,
+      "path": "/api/product/overview"
+    },
+    {
+      "bytes": 3155,
+      "path": "/api/product/control"
+    },
+    {
+      "bytes": 55246,
+      "path": "/api/product/explore"
+    },
+    {
+      "bytes": 44578,
+      "path": "/api/product/explore"
+    },
+    {
+      "bytes": 4859,
+      "path": "/api/product/detail"
+    },
+    {
+      "bytes": 1087,
+      "path": "/api/product/evidence"
+    },
+    {
+      "bytes": 2373,
+      "path": "/api/product/decision-context"
+    },
+    {
+      "bytes": 4094,
+      "path": "/api/product/scenario"
+    },
+    {
+      "bytes": 50236,
+      "path": "/api/product/overview"
+    },
+    {
+      "bytes": 8815,
+      "path": "/api/product/detail"
+    },
+    {
+      "bytes": 2373,
+      "path": "/api/product/decision-context"
+    },
+    {
+      "bytes": 13180,
+      "path": "/api/product/history"
+    },
+    {
+      "bytes": 42141,
+      "path": "/api/product/explore"
+    },
+    {
+      "bytes": 26317,
+      "path": "/api/product/explore"
+    },
+    {
+      "bytes": 5437,
+      "path": "/api/product/detail"
+    },
+    {
+      "bytes": 2373,
+      "path": "/api/product/decision-context"
+    },
+    {
+      "bytes": 8881,
+      "path": "/api/product/history"
+    },
+    {
+      "bytes": 15715,
+      "path": "/api/execution"
+    },
+    {
+      "bytes": 5976,
+      "path": "/api/execution/detail"
+    },
+    {
+      "bytes": 39,
+      "path": "/api/execution/journal"
+    },
+    {
+      "bytes": 5621,
+      "path": "/api/execution/detail"
+    }
+  ],
+  "assets": [
+    {
+      "bytes": 15430,
+      "gzip_bytes": 3976,
+      "path": "/product-static/index-CIqITiwX.css"
+    },
+    {
+      "bytes": 294752,
+      "gzip_bytes": 89064,
+      "path": "/product-static/index-EhfoCNI8.js"
+    },
+    {
+      "bytes": 217,
+      "gzip_bytes": 182,
+      "path": "/product-static/favicon.svg"
+    }
+  ],
+  "browser": "155.0.8059.40",
+  "checks": [
+    "overview_loaded",
+    "lazy_duplicate_control_original_rows_and_blocked_proposal",
+    "preset_manual_equivalence",
+    "url_reload_saved_view",
+    "saved_source_projection_independent_quantities",
+    "investigate_evidence",
+    "compare_supported_scenario",
+    "stale_reset",
+    "error_retry_last_good",
+    "export",
+    "late_old_scenario_cannot_replace_new_cutoff",
+    "decide_advisory",
+    "history_three_cutoffs",
+    "blocked_journey_missing_is_unknown",
+    "actual_planner_execution_blocked_history_cost_and_export",
+    "packaged_execution_keeps_journal_disabled",
+    "execution_mobile_320_no_body_overflow",
+    "mobile_320_no_body_overflow",
+    "keyboard_focus",
+    "zoom_400_forced_colors_keyboard",
+    "no_console_errors",
+    "bounded_assets_and_view_data"
+  ],
+  "console_errors": [],
+  "human_comprehension": "not_performed",
+  "initial_view_bytes": 100189,
+  "injected_failure_console_messages": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "kind": "developer_browser_acceptance",
+  "viewport_checked": 320,
+  "zoom_check": "CSS 400 percent with keyboard focus"
+}

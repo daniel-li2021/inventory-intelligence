@@ -355,3 +355,30 @@ reference, human and public-runtime limitations. Developer browser checks are no
 human comprehension or accessibility conformance. SQLite event integrity/idempotency
 is scoped to the configured local synthetic sandbox; no producer authentication,
 real supplier/stock truth or cross-database production exactly-once is established.
+
+## Full local platform evidence
+
+[Final acceptance](review/full-platform-acceptance-v1/receipt.json) binds implementation
+770f2f5, exact source/wheel hashes, current PG17 tests and developer/installed-package
+controls. Its directory preserves both the initial masked-DSN test reconnect failure
+and final clean regression log, plus final platform/legacy browser and wheel receipts.
+Those are current local checks, not a new efficacy claim or independent human review.
+
+Original master plan/protocol freeze is73a2271. O01–O25 outcomes moved into KB;
+completed execution prose was retired from the maintained plan surface. Immutable
+[generalization inputs/oracles](examples/generalization-protocol-v1.json),
+[actual source/reports](review/generalization-v1/receipt.json),
+[supplier controls](review/supplier-feasibility-v1.json),
+[transfer costs and transport reversal](review/transfer-comparisons-v1.json),
+[actual transfer feedback](review/transfer-feedback-v1.json),
+[fresh forecast/decision study](review/forecast-decision-study-v1.json.gz) and
+[JIT negative finding](review/planning-jit-v1.json.gz) retain their original bytes.
+
+The transfer-comparison source snapshot is a140712; actual-feedback source snapshot
+is ce00834. Current later changes only tighten admission/source-deadline safety;
+do not silently rewrite old source hashes. Audit originals with `git show` at these
+commits. Forecast study's current-source audit reports no drift. All synthetic
+source/report clocks, exact quantities, blocked/losing/tied cases and independent
+expected controls remain traceable. [Engineering boundaries](ENGINEERING_SUPPORT.md)
+and [case-study reproduction](PLATFORM_GUIDE.md) distinguish available local evidence
+from missing exact reference/public/human/operational acceptance.

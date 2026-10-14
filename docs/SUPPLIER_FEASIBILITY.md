@@ -106,3 +106,7 @@ cancellation/rebooking optimization, independent production executor or real
 purchasing. Automatic replanning still requires explicit fresh operational source
 admission; a journal receipt alone is not stock truth. PostgreSQL reference,
 public-runtime, human usability and real operational security gates remain separate.
+
+The combined purchase journal permits at most 256 decisions, including zero/no-action
+choices; identical retries remain harmless at the cap. Source profiles for the same
+supplier/day cannot disagree about capacity/reservations to expand allocations.
