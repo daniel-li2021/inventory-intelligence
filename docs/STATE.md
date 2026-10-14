@@ -4,7 +4,8 @@ Updated: 2026-10-14 (America/Los_Angeles).
 
 Integration mode: AUTO
 
-Phase: full local master roadmap complete and accepted; validated AUTO delivery.
+Phase: final bounded functional audit complete; Functional Closure recommended for
+the local synthetic core. Next focus is dedicated UI/UX redesign.
 Execution is sequential at the user's preference. Operational inputs are synthetic.
 Real orders, confidential/company intake and public/paid deployment remain excluded.
 
@@ -36,6 +37,11 @@ Real orders, confidential/company intake and public/paid deployment remain exclu
 
 ## Accepted evidence and remaining gates
 
+- [Final functional audit](review/final-functional-audit-v1/receipt.json):126/126
+  focused regressions, actual PG17 feedback and installed offline wheel pass.
+  Equal-length evidence selections now have distinct bindings; reservations obey
+  the event budget; dated demo transport versions allow later independent items.
+  All477 existing evidence/control/research files retain baseline bytes.
 - [Final receipt](review/full-platform-acceptance-v1/receipt.json):368/368 latest
   regressions on PostgreSQL17.9 ARM64/Python3.12.14, eight frontend controls,
   16 platform and 22 legacy browser controls, installed-wheel/source integrity.
@@ -47,8 +53,10 @@ Real orders, confidential/company intake and public/paid deployment remain exclu
   [PLAN](PLAN.md) retains exact Python3.12.12/x86/two-date, sustained serving,
   dense-producer/whole semantic-reader and public-runtime/TLS gates. Developer
   checks do not establish human comprehension, WCAG or production readiness.
-- Valuable future work: explicit donor-basis reconciliation/fresh multi-review
-  studies, approved operational identity/adapters, or lifecycle inputs when justified.
+- No remaining confirmed high-impact defect in the bounded core was found. Valuable
+  future work requires explicit donor-basis reconciliation/fresh multi-review
+  studies before expanding network execution, approved operational identity/adapters,
+  or lifecycle inputs when justified.
   No global optimizer, stochastic donor guarantee or operational exactly-once claim.
 - Preserve unmerged original planner commits55f4170/538d29d and their branch.
 

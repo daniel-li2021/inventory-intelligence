@@ -1355,3 +1355,42 @@ than truncate; this is client inspection support, not a dense-producer SLO resul
 [Remaining validation](ROADMAP.md) and [reference protocol](PLAN.md) keep human,
 exact runtime/hardware, sustained/public serving and operational identity gates
 separate. No confidential data, paid/public deployment or production claim.
+
+## Final bounded functional audit
+
+The October14 audit recommends **Functional Closure of the bounded local synthetic
+core** and dedicated UI/UX redesign next. Current implementation and retained
+acceptance establish Data → Insights → Decisions → synthetic Execution/Feedback →
+Evaluation, including real restricted PostgreSQL feedback. No remaining confirmed
+high-impact defect in that scope was found after the following fixes.
+
+Three regressions first reproduced defects: equal-length evidence sections/candidates
+could reuse a page binding; new transfer reservations could exceed256 events; later
+independent-item reservations reused an immutable demo transport version with a
+changed knowledge date. Selection-bound hashes, atomic event admission and dated
+transport versions correct them. Exact retries/history, changed-donor rejection,
+source immutability, complete decision gates and independent controls remain intact.
+
+[Audit receipt](review/final-functional-audit-v1/receipt.json) records126/126 focused
+regressions with zero errors/skips, PostgreSQL17.9 ARM64/Python3.12.14/Psycopg3.3.6,
+a clean installed offline wheel, and477 existing evidence/control/research files
+unchanged against fde8779. The prior368-test full acceptance and browser controls
+are retained evidence; this audit ran a focused subset, with no new browser/human
+acceptance or performance campaign. An initial nonexistent test-module selector
+error is retained separately from the final clean run.
+
+Benchmarks support exact **local synthetic** claims: two independent dataset designs,
+30 key/cutoff cells and65 reports;16 fresh forecast/decision paths,48 loops,144 reviews,
+39 blocked and only2/8 selected decision-gate passes. Transfer conservation/donor
+service, cost reversals, losing/tied/undefined outcomes and JIT non-adoption remain.
+The retained SQL improvement has12 measured samples per variant; only one of three
+required continuous HTTP campaigns qualifies. Dense-producer deadlines, aggregate
+reader limits, exact x86/two-date/Python reference and broader serving remain open.
+
+The highest-value future functional extension is explicit owner donor-basis
+reconciliation with fresh predeclared multi-review network evidence **before**
+expanding repeated execution. It is outside the current one-review transfer contract,
+which safely blocks changed bases. Physical counts and owner supply publication stay
+explicit separate steps. Human/accessibility acceptance belongs with the next UI/UX
+phase; operational identity, real execution and public readiness remain excluded or
+unaccepted. These boundaries do not require more core services or model families.

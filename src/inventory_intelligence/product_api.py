@@ -142,7 +142,7 @@ def install_product_routes(application, supplied=None, catalog_path=None, journa
         def context(data):
             product._key(data, cutoff, sku_id, warehouse_id)
             return dict(supplier=example_profile(cutoff, sku_id, warehouse_id),
-                        transport=dict(version_id='declared-demo-transit-v1', known_day=cutoff,
+                        transport=dict(version_id='declared-demo-transit-v1-'+cutoff, known_day=cutoff,
                                        transit_days=1, capacity=24, setup_cost=4, per_piece_cost=1),
                         locations=data['dimensions']['warehouses'], journal_enabled=journal_path is not None,
                         assumption_label='Explicit synthetic demonstration terms; separate from saved source evidence')

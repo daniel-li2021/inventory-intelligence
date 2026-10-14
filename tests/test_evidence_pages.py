@@ -66,5 +66,22 @@ class EvidencePageTests(unittest.TestCase):
         with self.assertRaises(psycopg.Error):self.runner.execute('DELETE FROM planning.runs WHERE run_id=%s',(self.planning,))
         self.assertEqual(self.owner.execute('SELECT count(*) FROM reliability.findings WHERE run_id=%s',(self.reliability,)).fetchone()[0],100)
 
+    def test_binding_rejects_equal_length_section_and_candidate_changes(self):
+        run=str(uuid4())
+        result=dict(projection=[dict(quantity=1),dict(quantity=2)],
+                    training=dict(days=[dict(quantity=3),dict(quantity=4)]),
+                    candidates=[dict(training=dict(days=[dict(quantity=5),dict(quantity=6)])),
+                                dict(training=dict(days=[dict(quantity=7),dict(quantity=8)]))])
+        self.owner.execute("INSERT INTO planning.runs VALUES (%s,'planning-v1','inspection-test','baselines-v1','backtest',now(),'input','assessable','{}',%s)",(run,Jsonb(result)))
+        first=read_page(self.runner,run,'planning','projection',page_size=1)
+        second=read_page(self.runner,run,'planning','projection',page=2,page_size=1,expected_binding=first['binding'])
+        self.assertEqual(second['rows'],[dict(ordinal=1,record=dict(quantity=2))])
+        with self.assertRaisesRegex(ValueError,'binding changed'):
+            read_page(self.runner,run,'planning','training',expected_binding=first['binding'])
+        candidate=read_page(self.runner,run,'planning','candidate_training',candidate=0)
+        with self.assertRaisesRegex(ValueError,'binding changed'):
+            read_page(self.runner,run,'planning','candidate_training',candidate=1,expected_binding=candidate['binding'])
+        self.assertEqual(self.owner.execute('SELECT result FROM planning.runs WHERE run_id=%s',(run,)).fetchone()[0],result)
+
 
 if __name__=='__main__':unittest.main()

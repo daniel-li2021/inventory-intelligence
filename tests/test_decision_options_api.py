@@ -66,6 +66,25 @@ class DecisionOptionsApiTests(unittest.TestCase):
         self.assertEqual(snapshot('2026-05-03')['transfers'],[])
         self.assertEqual(event('back','dispatch','2026-05-04').status_code,422)
 
+    def test_later_independent_item_uses_new_demo_transport_version(self):
+        first=self.client.post('/api/product/transfer-reserve',json=self.transfer)
+        self.assertEqual(first.status_code,200)
+        later=self.base|dict(cutoff='2026-05-11',sku_id='product-coast:sku-2')
+        context=self.client.get('/api/product/decision-context',params=later).json()
+        body=later|dict(quantity=1,donor_id='product-coast:site-1',
+                        supplier=context['supplier'],transport=context['transport'])
+        self.assertEqual(self.client.post('/api/product/transfer-reserve',json=body).status_code,200)
+        history=self.client.get('/api/product/transfer-history',params=dict(as_of='2026-05-11')).json()
+        self.assertEqual(sorted(int(r['reserved']) for r in history['transfers']),[1,12])
+        self.assertNotEqual(context['transport']['version_id'],self.config['transport']['version_id'])
+        changed=self.base|dict(cutoff='2026-05-11')
+        terms=self.client.get('/api/product/decision-context',params=changed).json()
+        self.assertEqual(self.client.post('/api/product/transfer-reserve',json=changed|dict(quantity=12,
+            donor_id='product-coast:site-1',supplier=terms['supplier'],transport=terms['transport'])).status_code,422)
+        self.assertEqual(self.client.get('/api/product/transfer-history',params=dict(as_of='2026-05-11')).json(),history)
+        earlier=self.client.get('/api/product/transfer-history',params=dict(as_of='2026-05-04')).json()
+        self.assertEqual([r['id'] for r in earlier['transfers']],[first.json()['id']])
+
     def test_supplier_commitment_receipts_and_unknown_source_block(self):
         admitted=self.client.post('/api/product/supplier-admit',json=self.purchase)
         self.assertEqual(admitted.status_code,200)

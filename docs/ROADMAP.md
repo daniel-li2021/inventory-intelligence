@@ -8,6 +8,13 @@ negative findings and boundaries. [STATE](STATE.md) owns integration mode/status
 
 ## Delivery sequence and acceptance gates
 
+The [final bounded functional audit](RESULTS.md#final-bounded-functional-audit)
+recommends Functional Closure of the local synthetic core after three small safety/
+version fixes and focused PostgreSQL/installed-package acceptance. Dedicated UI/UX
+redesign is the next focus; the following external acceptance gates remain open.
+Changed donor bases continue to reject; closure does not extend the one-review
+transfer contract into repeated network execution or claim production readiness.
+
 Only these genuine pending validation workstreams remain. They are not authorization
 for public deployment, real intake, company data or paid services.
 

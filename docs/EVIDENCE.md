@@ -382,3 +382,30 @@ source/report clocks, exact quantities, blocked/losing/tied cases and independen
 expected controls remain traceable. [Engineering boundaries](ENGINEERING_SUPPORT.md)
 and [case-study reproduction](PLATFORM_GUIDE.md) distinguish available local evidence
 from missing exact reference/public/human/operational acceptance.
+
+## Final bounded functional audit
+
+[Receipt](review/final-functional-audit-v1/receipt.json) binds the three amended
+implementation modules, regression sources, exact runtime and installed-wheel hash.
+It contains the full126-test reproduction command, workflow coverage, benchmark
+assessment and remaining limits. Use disposable owner/restricted-runner connections
+from [VALIDATION](VALIDATION.md); never reset an existing demo.
+
+The receipt directory retains [original defect probes](review/final-functional-audit-v1/reproduced-defects.log.gz),
+[transport-version probe](review/final-functional-audit-v1/transport-version-defect.log.gz),
+[initial test-selector error](review/final-functional-audit-v1/initial-test-selector-error.log.gz),
+[clean focused regressions](review/final-functional-audit-v1/regressions.log.gz),
+[wheel build](review/final-functional-audit-v1/wheel-build.log.gz) and
+[installed offline consumer](review/final-functional-audit-v1/installed-wheel.json).
+All477 preexisting files under review/examples/research retain exact fde8779 bytes.
+The earlier full acceptance's12 implementation and five receipt-file hashes matched
+before amendment; its historical hashes are not rewritten to match the new code.
+
+Focused reproduction of the new controls and actual feedback:
+
+```sh
+PYTHONPATH=src python -m unittest tests.test_evidence_pages tests.test_transfers tests.test_decision_options_api tests.test_transfer_feedback -v
+```
+
+No consumed study, large benchmark, frontend build or human acceptance was rerun.
+[Results and closure boundary](RESULTS.md#final-bounded-functional-audit).

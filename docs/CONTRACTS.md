@@ -9,6 +9,7 @@ Shared versioned interfaces require an explicit amendment, never an implicit cha
 
 - [Actual planner execution / synthetic journal](#actual-planner-execution-and-synthetic-journal)
 - [Inventory product v1](#inventory-product-v1)
+- [Inspection and transfer safety amendment](#inspection-and-transfer-safety-amendment)
 - [Inventory v1](#inventory-v1)
 - [Planning v1](#planning-v1)
 - [Copilot v1](#copilot-v1)
@@ -61,6 +62,20 @@ bounded partial control overrides. Unknown/repeated query fields or invalid
 selectors/controls return 422, archive mismatch 409 and invalid/missing evidence
 503. Evidence pages are selected-key/section-bound; there is no full-archive API.
 Live/ready health routes are separate from admitted user calculation requests.
+
+## Inspection and transfer safety amendment
+
+October14 final audit preserves `persisted-evidence-page-v1` response fields and
+inspection-only semantics, while correcting the binding to include section and
+candidate identity. Earlier tokens reject; refresh the first page. No saved report
+or whole-report decision gate changes. [Inspection guide](ENGINEERING_SUPPORT.md).
+
+`donor-safe-transfer-v1` reservations consume the existing256-event budget before
+append; exact admitted retries remain valid at capacity. Generated demonstration
+transport version IDs include cutoff, preserving immutable knowledge-date terms
+across independent later items. Old journals retain original bindings/terms for
+exact retries; no migration, stock repair or changed-donor reconciliation occurs.
+[Transfer guide](TRANSFERS.md), [validated receipt](review/final-functional-audit-v1/receipt.json).
 
 ## Inventory v1
 

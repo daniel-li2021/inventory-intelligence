@@ -59,7 +59,7 @@ def read_page(conn, run_id, kind, section, *, page=1, page_size=50, expected_bin
                 FROM reliability.findings f WHERE run_id=%s''',(run_id,)).fetchone()
             metadata.update(aggregate)
         metadata=exact_json(metadata)
-        binding=archive_digest(dict(kind=kind,metadata=metadata),False)
+        binding=archive_digest(dict(kind=kind,section=section,candidate=candidate,metadata=metadata),False)
         if expected_binding is not None and expected_binding!=binding:
             raise ValueError('Persisted evidence binding changed')
         offset=(page-1)*page_size

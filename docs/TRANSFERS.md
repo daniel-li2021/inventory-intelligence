@@ -50,6 +50,11 @@ be reused beyond its protected surplus, including after receipt. A new donor bas
 requires explicit reconciliation; a changed source cannot silently reset spent stock.
 The sandbox allows 128 transfers/256 events, serializes writes, and preserves history
 on reopen, concurrent admission, invalid events and transaction failure.
+New reservations also consume the event budget atomically; identical retries still
+return the original admission when the budget is full. Generated demo transport
+versions include their cutoff because their knowledge date changes. Later transfers
+of independently evidenced items are allowed; this does not reconcile changed donor
+bases. Existing journal choices retain their original terms for exact retries.
 
 Dispatch must match the protected origin; late dispatch needs replanning. Supply
 projection retains that original reservation date, so an undispatched late reservation

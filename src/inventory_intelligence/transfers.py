@@ -197,6 +197,7 @@ class TransferJournal:
                 return payload
             rows = [json.loads(r[0]) for r in conn.execute('SELECT payload FROM transfers')]
             if len(rows) >= 128: raise ValueError('Transfer sandbox limit')
+            if conn.execute('SELECT count(*) FROM transfer_events').fetchone()[0] >= 256: raise ValueError('Transfer event limit')
             latest = conn.execute('SELECT max(known_day) FROM transfer_events').fetchone()[0]
             if latest and binding['cutoff'] < latest: raise ValueError('Backdated reservation')
             for previous in rows:

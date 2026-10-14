@@ -39,6 +39,10 @@ Pages are **inspection-only**: they do not claim whole-report semantic validatio
 waive the original 2 MiB/16 MiB readers, or feed decisions/Copilot as authoritative runs.
 Existing product catalog interning and validated read caching remain separate.
 
+The October14 safety amendment includes section/candidate identity in the binding,
+so equal-length selections cannot share it. Previously issued bindings require a new
+first-page read; persisted evidence and report bytes are unchanged.
+
 Independent PostgreSQL controls retain100 reliability records above 2 MiB and an
 18,000-day training array above 16 MiB. The original readers continue to reject them;
 small pages expose exact original quantities/ordinals, stable bindings, first/last

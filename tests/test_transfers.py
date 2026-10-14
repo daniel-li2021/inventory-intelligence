@@ -113,6 +113,22 @@ class TransfersTest(unittest.TestCase):
             with self.assertRaises(sqlite3.IntegrityError): journal.record(snapshot['transfers'][0]['id'], 'fail', 'dispatch', '2026-06-01')
             self.assertEqual(journal.snapshot('2026-06-01'), snapshot)
 
+    def test_reservation_cannot_bypass_full_event_envelope(self):
+        with TemporaryDirectory() as folder:
+            path=Path(folder)/'journal.sqlite';journal=TransferJournal(path)
+            result=self.calculation();admitted=journal._reserve(result)
+            journal.record(admitted['id'],'dispatch','dispatch','2026-06-01')
+            for i in range(254):
+                journal.record(admitted['id'],f'notice-{i}','eta','2026-06-01',eta='2026-06-02')
+            before=journal.snapshot('2026-06-01')
+            self.assertEqual(len(before['events']),256)
+            another=deepcopy(result);another['binding']['sku_id']='another-item'
+            with self.assertRaisesRegex(ValueError,'Transfer event limit'):
+                journal._reserve(another)
+            reopened=TransferJournal(path)
+            self.assertEqual(reopened.snapshot('2026-06-01'),before)
+            self.assertEqual(reopened._reserve(result),admitted)
+
     def test_real_catalog_adapter_and_missing_donor(self):
         from inventory_intelligence.product import load_catalog
         catalog = load_catalog(Path('docs/review/dynamic-replay-v1.json.gz'))

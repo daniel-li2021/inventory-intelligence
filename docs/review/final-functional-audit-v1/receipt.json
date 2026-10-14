@@ -1,0 +1,168 @@
+{
+  "audit_date": "2026-10-14",
+  "baseline_acceptance": {
+    "acceptance_file_hashes_verified": 5,
+    "implementation_hashes_verified": 12,
+    "new_full_suite_executed": false,
+    "receipt": "docs/review/full-platform-acceptance-v1/receipt.json",
+    "retained_full_regressions": 368
+  },
+  "baseline_commit": "fde877959513a9a5efb40fdcafea72ec6939beb7",
+  "benchmark_assessment": {
+    "decision_study": {
+      "blocked": 39,
+      "families": 8,
+      "loops": 48,
+      "paths": 16,
+      "promoted_policy": null,
+      "reviews": 144,
+      "selected_gates_passed": 2
+    },
+    "engineering": {
+      "continuous_http_campaigns": 1,
+      "jit_adopted": false,
+      "jit_adoption_threshold": 0.2,
+      "jit_benefit_fraction": 0.0402,
+      "measured_per_variant": 12,
+      "new_performance_measurements": false,
+      "paired_after_median_seconds": 0.8562568335,
+      "paired_before_median_seconds": 10.2510425,
+      "required_campaigns": 3
+    },
+    "generalization": {
+      "cells": 30,
+      "designs": 2,
+      "reports": 65,
+      "triggers": 18
+    },
+    "local_synthetic_claims_supported": true,
+    "negative_results": [
+      "accuracy selection can lose or tie; undefined zero-demand service",
+      "dense producer SQL deadlines and aggregate reader caps remain",
+      "JIT comparison fails adoption threshold",
+      "short/discontinuous/interrupted HTTP campaigns excluded",
+      "crash recovery includes502; proxy slow-body path504/closure"
+    ],
+    "production_reference_ready": false
+  },
+  "contract_version": "inventory-final-functional-audit-v1",
+  "defects": [
+    {
+      "after": "Binding includes section and candidate; changed selections reject, same-selection pagination passes.",
+      "before": "Equal-length planning sections/candidates could reuse the same page binding.",
+      "id": "evidence-selection-binding",
+      "regression": "tests.test_evidence_pages.EvidencePageTests.test_binding_rejects_equal_length_section_and_candidate_changes"
+    },
+    {
+      "after": "Atomic admission checks event budget; original retries and reopened history remain intact.",
+      "before": "A new reservation could append event257 after notices filled the256-event envelope.",
+      "id": "transfer-event-budget",
+      "regression": "tests.test_transfers.TransfersTest.test_reservation_cannot_bypass_full_event_envelope"
+    },
+    {
+      "after": "Generated version includes cutoff; one laterSKU2 piece admits alongside twelve earlierSKU0 pieces; changed donor basis still rejects.",
+      "before": "Later independent-item admission rejected because changed known_day reused an immutable demo version.",
+      "id": "demo-transport-version",
+      "regression": "tests.test_decision_options_api.DecisionOptionsApiTests.test_later_independent_item_uses_new_demo_transport_version"
+    }
+  ],
+  "high_value_followups": [
+    "Independent human task/accessibility acceptance in the dedicated UI/UX phase",
+    "Donor-basis reconciliation and fresh predeclared multi-review studies only before expanding repeated network execution",
+    "Only missing reference/runtime cells before broader engineering claims"
+  ],
+  "installed_wheel": {
+    "bytes": 1384568,
+    "changed_modules_match_source": true,
+    "default_writes_disabled": true,
+    "no_database": true,
+    "no_node_runtime": true,
+    "sha256": "15d063534d960c0acb017c9177c868898e48aeac91be8d4e11db5d0042ac542e",
+    "status": "pass"
+  },
+  "receipt_files_sha256": {
+    "initial-test-selector-error.log.gz": "ba6dd7c5df9d5df9b37e89d40e47f47ec975864d2fbef2c63685ad50ac88ea00",
+    "installed-wheel.json": "89a35432ac36ed0d9a280a558a04e95b7e196af3b1a347c5442248ee6360ba05",
+    "regressions.log.gz": "2e98ac7de1b02e0dac6d9f8c813cd0207580ef1f69d1ffec44c002ddbf213c2d",
+    "reproduced-defects.log.gz": "5340b24bfd08528f8031ab7a0b4e47095e9dbccfebee665dffbdaa4c0e59e359",
+    "transport-version-defect.log.gz": "8d55363d98ea10c6ec00bf39e331353ff7ecc55984a9ef846376b4504b071f78",
+    "wheel-build.log.gz": "617543a8aa749f07e91b6405f56c8f59bbba782e7dca15f1c4cef930528d5e9d"
+  },
+  "recommendation": "Functional Closure of the bounded local synthetic core; dedicated UI/UX redesign next",
+  "regressions": {
+    "database": "New disposable audit DB on existing local server; isolated feedback/replay DBs created/dropped by their tests",
+    "errors": 0,
+    "failed": 0,
+    "initial_selector_error": "First batch passed64 real tests plus one nonexistent tests.test_generalization loader error; final named126-test batch is clean. Initial log retained.",
+    "modules": [
+      "tests.test_transfers",
+      "tests.test_evidence_pages",
+      "tests.test_transfer_feedback",
+      "tests.test_supplier_feasibility",
+      "tests.test_decision_options_api",
+      "tests.test_workflow",
+      "tests.test_synthetic_replay",
+      "tests.test_synthetic_replay_db",
+      "tests.test_forecast_decision_study",
+      "tests.test_planner_loop_saved",
+      "tests.test_planning_jit_saved",
+      "tests.test_research_lineage",
+      "tests.test_decision_benchmark",
+      "tests.test_intermittent_benchmark",
+      "tests.test_policy_comparison",
+      "tests.test_engineering_confirmation",
+      "tests.test_product",
+      "tests.test_product_journey",
+      "tests.test_product_hosted"
+    ],
+    "passed": 126,
+    "runtime": {
+      "client": "macOS Python3.12.14",
+      "postgresql": "17.9 ARM64 Docker Linux",
+      "psycopg": "3.3.6",
+      "role": "ii_runner"
+    },
+    "seconds": 98.005,
+    "skipped": 0,
+    "tests": 126
+  },
+  "remaining_limitations": [
+    "Repeated same-donor execution from changed source bases remains blocked; no owner reconciliation operation or fresh multi-review network efficacy study. This is outside the current one-review transfer contract.",
+    "Physical stock evidence and owner PostgreSQL supply publication are explicit separate steps; SQLite/PostgreSQL is not an atomic production handoff.",
+    "Exact Python3.12.12/x86/two-date reference, remaining sustained serving/rate/client/dense-producer cells are open.",
+    "Human comprehension, accessibility, authenticated producer/tenant identities, real execution and public/TLS deployment are unaccepted/excluded."
+  ],
+  "reproduction": {
+    "database_setup": "docs/VALIDATION.md; use disposable owner TEST_DATABASE_URL and restricted DATABASE_URL",
+    "installed_package": "scripts/build_product_wheel.py then installed scripts/check_product_package.py outside checkout",
+    "test_command": "PYTHONPATH=src python -m unittest tests.test_transfers tests.test_evidence_pages tests.test_transfer_feedback tests.test_supplier_feasibility tests.test_decision_options_api tests.test_workflow tests.test_synthetic_replay tests.test_synthetic_replay_db tests.test_forecast_decision_study tests.test_planner_loop_saved tests.test_planning_jit_saved tests.test_research_lineage tests.test_decision_benchmark tests.test_intermittent_benchmark tests.test_policy_comparison tests.test_engineering_confirmation tests.test_product tests.test_product_journey tests.test_product_hosted -v"
+  },
+  "retained_evidence": {
+    "baseline": "fde877959513a9a5efb40fdcafea72ec6939beb7",
+    "comparison": "Exact bytes against Git baseline; original consumed studies and protocols not replayed or overwritten",
+    "files_verified": 477,
+    "frontend": "Original frontend source/assets unchanged; previous browser controls reused, no new human/browser acceptance claimed",
+    "roots": [
+      "docs/review",
+      "docs/examples",
+      "docs/research"
+    ]
+  },
+  "source_sha256": {
+    "src/inventory_intelligence/evidence_pages.py": "71f0b2c0faeefd51006a2e89e251cb0dda80a3ea6b98b9287e52edd1f06c2a47",
+    "src/inventory_intelligence/product_api.py": "a14b68b26b923daa26660414949c322aa0cccc4a9767fedcf9651fe8762b35b7",
+    "src/inventory_intelligence/transfers.py": "7f22849c67d0a28d73b4977ab56f07d7c72f184a18da00ab94860c120679f9e8",
+    "tests/test_decision_options_api.py": "a1e344529d63254a6009aa028d9cf16e08bea63a781b0333361fb4c6049ea51c",
+    "tests/test_evidence_pages.py": "5bef2b67349ef842a89d1fb6b4029544eef0f7c5e0e8b418daad9057277e6385",
+    "tests/test_transfers.py": "3c6d8b8a8eae6d58fd95c2c140fe058e95e400949f92b8166b9bcaa41ce728cc"
+  },
+  "synthetic_only": true,
+  "workflow_verified": [
+    "immutable synthetic admission/version/replay/rollback and last-good publication",
+    "deterministic insights and exact evidence; review does not clear gates",
+    "feasible supplier and protected transfer comparisons; complete costs and negative cases",
+    "immutable local lifecycle; exact partial receipts, ETA, retries, concurrent admission and rollback",
+    "actual restricted PostgreSQL feedback6->0; independent_count4; overdue_partial null; revised_eta0",
+    "saved independent forecast/decision, historical planner, intermittent and policy controls"
+  ]
+}
