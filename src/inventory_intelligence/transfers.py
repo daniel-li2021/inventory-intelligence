@@ -287,7 +287,7 @@ class TransferJournal:
             if binding['sku_id'] != sku_id: continue
             if binding['donor_id'] == warehouse_id and int(row['reserved']):
                 reservations.append(dict(source_system='synthetic-transfer', reservation_id=row['id']+':reserved',
-                                         remaining_qty=int(row['reserved']), due_day=as_of, status='open'))
+                                         remaining_qty=int(row['reserved']), due_day=binding['cutoff'], status='open'))
             if binding['recipient_id'] == warehouse_id and int(row['in_transit']):
                 inbound.append(dict(source_system='synthetic-transfer', inbound_id=row['id']+':in-transit',
                                     remaining_qty=int(row['in_transit']), arrival_day=row['eta'], status='confirmed'))

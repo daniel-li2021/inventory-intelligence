@@ -68,6 +68,7 @@ class TransfersTest(unittest.TestCase):
             path = Path(folder)/'journal.sqlite'; journal = TransferJournal(path)
             result = self.calculation(); admitted = journal._reserve(result); identity = admitted['id']
             self.assertEqual(journal._reserve(result), admitted)
+            self.assertEqual(journal.supply_effects('2026-06-03','a','donor')['reservations'][0]['due_day'],'2026-06-01')
             self.assertEqual(journal.snapshot('2026-05-31')['transfers'], [])
             journal.record(identity, 'dispatch', 'dispatch', '2026-06-01')
             with self.assertRaises(ValueError): journal.record(identity, 'early', 'receipt', '2026-06-01', 1)
