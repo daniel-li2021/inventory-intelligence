@@ -1,0 +1,17 @@
+{
+  "version": "planning-jit-v1",
+  "synthetic_only": true,
+  "namespace": "master-jit-v1",
+  "keys": [1, 1000],
+  "movements_per_key": 0,
+  "demand_days": 180,
+  "horizon": 7,
+  "states": ["clean", "contradictory-current-snapshot"],
+  "arms": ["default-jit", "transaction-local-jit-off"],
+  "warmups_per_arm": 2,
+  "measured_pairs": 6,
+  "counterbalance": "Alternate default/off and off/default pairs",
+  "wall_cap_seconds": 180,
+  "adoption_gate": "All exact persisted semantics equal, independent clean order 30, contradictory source blocked with null, no session-setting leak, at least 20 percent median reduction on larger clean cell and no more than 10ms small-cell regression",
+  "boundary": "One local ARM64 PostgreSQL17 campaign; not x86/two-date confirmation or universal SLO"
+}

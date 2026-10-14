@@ -1041,3 +1041,27 @@ label small {
 .duplicate-control .facts dd {
   font-size: 14px;
 }
+/* Compact decision workbench: readable originals beside concise operational facts. */
+main { padding-top: 22px; }
+.page-heading { margin-bottom: 18px; }
+.topbar { padding-top: 14px; padding-bottom: 14px; }
+.context-bar { padding-top: 12px; padding-bottom: 12px; }
+.detail-panel { padding: 18px; }
+.panel { box-shadow: 0 1px 2px #24352f05; }
+.detail-grid > aside { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; }
+.decision-options { border-top: 3px solid var(--green); }
+.decision-options h3 { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+.decision-result { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); }
+.decision-result th { background: #edf2ee; }
+.decision-result td:nth-child(3) { font-variant-numeric: tabular-nums; font-weight: 650; }
+.lifecycle, .review-controls { margin-top: 18px; padding: 14px; background: #f7f8f4; border: 1px solid var(--line); border-radius: 7px; }
+.lifecycle > summary, .review-controls > summary { cursor: pointer; font-weight: 650; }
+textarea { display: block; width: 100%; min-height: 76px; border: 1px solid #abb8ab; border-radius: 6px; padding: 10px; font: inherit; color: var(--ink); }
+.metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin: 18px 0; }
+.metric-grid > div { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #f8faf7; }
+.metric-grid span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 7px; }
+.metric-grid strong { font-size: 24px; font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) { .detail-grid > aside { position: static; max-height: none; } .metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 540px) { main { padding-left: 14px; padding-right: 14px; } .detail-panel { padding: 14px; } .filter-grid { grid-template-columns: minmax(0,1fr); } .decision-options input, .decision-options select { max-width: 100%; min-width: 0; } }
+.evidence-disclosure { margin: 12px 0; border-left: 3px solid #c9d5ca; padding: 8px 12px; background: #f8faf7; }
+.evidence-disclosure > summary { cursor: pointer; font-size: 12px; font-weight: 600; }

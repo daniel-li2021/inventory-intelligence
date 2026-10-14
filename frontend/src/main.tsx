@@ -432,6 +432,8 @@ function App() {
                           "Review the advisory proposal and the boundaries of this decision.",
                         history:
                           "See what appeared, persisted or changed across saved cutoffs.",
+                        evaluation:
+                          "Compare forecast accuracy with actual planner service, cost and blocked recovery.",
                         execution:
                           "Inspect actual synthetic planner outcomes and trace commitments through receipts.",
                       } as Record<string, string>
@@ -440,7 +442,7 @@ function App() {
                 </p>
               </div>
             </div>
-            {route.page !== "execution" && <><div className="context-bar">
+            {!(["execution","evaluation"].includes(route.page)) && <><div className="context-bar">
               <label>
                 Cutoff
                 <select
@@ -546,7 +548,7 @@ function App() {
               <span role="status">{message}</span>
             </div>
             </>}
-            {route.page === "execution" ? <Execution /> : context && !bound && !overview.stale && (
+            {route.page === "evaluation" ? <Evaluation /> : route.page === "execution" ? <Execution /> : context && !bound && !overview.stale && (
               <>
                 {route.page === "overview" ? (
                   <Overview data={context} route={route} go={navigate} />
@@ -558,9 +560,9 @@ function App() {
               </>
             )}
             <footer className="product-footer">
-              <strong>Evidence before action.</strong> Synthetic inputs do not
-              demonstrate commercial savings. Transfers, real purchase execution and
-              observed supplier lateness are unsupported.{" "}
+              <strong>Evidence before action.</strong> Synthetic outcomes do not
+              demonstrate commercial savings. Supplier and transfer terms are declared
+              assumptions; real purchasing and operational dispatch remain excluded.{" "}
               <a href="/product-static/THIRD_PARTY_LICENSES.txt">
                 Third-party notices
               </a>
@@ -764,13 +766,45 @@ function Discovery({ data, go }: { data: any; go?: (r: Partial<Route>) => void }
       {finding.model_hypothesis && <p><strong>Model hypothesis:</strong> {finding.model_hypothesis}</p>}
       <p><strong>Supported next step:</strong> {finding.next_step}</p>
       <p><strong>Missing evidence:</strong> {finding.missing_evidence.join(" ")}</p>
-      <Inspector data={{values:finding.values,references:finding.references,known_at:finding.known_at}} name="Insight evidence" />
+      <p><strong>Priority {finding.priority?.rank}:</strong> {finding.priority?.basis}</p>
+      <Inspector data={{values:finding.values,contributing_factors:finding.contributing_factors,references:finding.references,known_at:finding.known_at}} name="Insight evidence" />
       {go && <button onClick={() => go({page:"investigate",item: finding.sku_id+"|"+finding.warehouse_id})}>Investigate finding →</button>}
     </article>)}
     {data.unknown.length > 0 && <details><summary>Evidence gaps ({data.total_unknown ?? data.unknown.length})</summary><Inspector data={data.unknown} name="Unknown evidence" /></details>}
+    <ReviewControls discovery={data} />
     <Download data={data} name="insight-discovery-v2" label="Export insight discovery" />
   </section>;
 }
+function ReviewControls({discovery}: {discovery:any}) {
+  const [expanded,setExpanded] = useState(false);
+  const [retry,setRetry] = useState(0);
+  const [selected,setSelected] = useState('');
+  const [status,setStatus] = useState('investigating');
+  const [note,setNote] = useState('');
+  const [timestamp,setTimestamp] = useState('');
+  const [busy,setBusy] = useState(false);
+  const [message,setMessage] = useState('');
+  const query = new URLSearchParams({cutoff:discovery.cutoff,archive_digest:discovery.archive_digest});
+  const resource = useResource<any>(expanded ? '/api/product/reviews?' + query : null,retry);
+  const current = discovery.findings.find((f:any)=>f.id===selected) || discovery.findings[0];
+  const binding = resource.data?.bindings.find((b:any)=>b.finding_id===current?.id);
+  async function save() {
+    setBusy(true);setMessage('');
+    try {
+      const response = await fetch('/api/product/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cutoff:discovery.cutoff,archive_digest:discovery.archive_digest,finding_id:current.id,calculation_digest:binding.calculation_digest,event_id:'review:'+crypto.randomUUID(),status,note,reviewed_at:timestamp || current.known_at})});
+      if (!response.ok) throw Error(`Review rejected (${response.status}). Existing evidence and notes are retained.`);
+      setMessage('Review saved. Facts and decision gates remain visible.');setRetry(v=>v+1);
+    } catch(error:any){setMessage(error.message);}
+    finally {setBusy(false);}
+  }
+  if (!discovery.findings.length) return null;
+  return <details className="review-controls" onToggle={e=>setExpanded(e.currentTarget.open)}><summary>Review a source-bound finding</summary>
+    <p>Track acknowledgment, investigation or resolution in the local synthetic journal. A resolved note does not hide the finding or waive a decision gate.</p>
+    <Notice {...resource} retry={()=>setRetry(v=>v+1)} />
+    {resource.data?.journal_enabled ? <><label>Finding<select aria-label="Review finding" value={current?.id || ''} onChange={e=>{setSelected(e.target.value);setTimestamp('');}}>{discovery.findings.map((f:any)=><option key={f.id} value={f.id}>{f.title} · {f.sku_id}</option>)}</select></label><div className="filter-grid"><label>Review state<select aria-label="Review state" value={status} onChange={e=>setStatus(e.target.value)}><option value="acknowledged">Acknowledged</option><option value="investigating">Investigating</option><option value="resolved">Resolved</option></select></label><label>Synthetic reviewed at · UTC<input aria-label="Review timestamp" value={timestamp || current?.known_at || ''} onChange={e=>setTimestamp(e.target.value)} /></label></div><label>Investigation note<textarea aria-label="Investigation note" value={note} maxLength={500} onChange={e=>setNote(e.target.value)} /></label><button disabled={busy || !note.trim() || !binding || resource.stale || Boolean(resource.error)} onClick={save}>Save finding review</button><p role="status">{message}</p><EvidenceDisclosure data={resource.data.history} name="Source-bound review history" /></> : resource.data && <p>Read-only mode. Run the loopback synthetic sandbox to save reviews.</p>}
+  </details>;
+}
+
 function DuplicateControl({ context }: { context: Context }) {
   const [expanded, setExpanded] = useState(false);
   const [retry, setRetry] = useState(0);
@@ -1181,6 +1215,138 @@ function Matrix({
     </div>
   );
 }
+function EvidenceDisclosure({data,name="Saved evidence"}: {data:unknown;name?:string}) {
+  return <details className="evidence-disclosure"><summary>{name}</summary><Inspector data={data} name={name} /></details>;
+}
+
+function Evaluation() {
+  const [retry, setRetry] = useState(0);
+  const resource = useResource<any>('/api/product/evaluation', retry);
+  const data = resource.data;
+  return <section className="panel detail-panel" aria-label="Forecast and decision evaluation">
+    <h2>Forecast accuracy meets decision quality</h2>
+    <p>Fresh synthetic paths separate baseline selection from evaluation. Every policy uses the actual planner and pays for opening stock, all purchases, holding, backlog and closure.</p>
+    <Notice {...resource} retry={() => setRetry(v => v + 1)} />
+    {data && !resource.stale && !resource.error && <>
+      <div className="metric-grid"><div><span>Independent paths</span><strong>{data.independent_paths}</strong></div><div><span>Actual planner reviews</span><strong>{data.reviews}</strong></div><div><span>Blocked reviews retained</span><strong>{data.blocked_reviews}</strong></div><div><span>Decision gate passed</span><strong>{data.decision_gate_passes} / {data.families.length}</strong></div></div>
+      <p className="notice">No global winner or policy promotion. Point forecasts provide no prediction intervals; calibration is undefined.</p>
+      <div className="table-scroll"><table><caption>Independent evaluation outcomes · exact synthetic costs and pieces</caption><thead><tr><th>Demand / supply path</th><th>Selection choice</th><th>Cost versus mean</th><th>Decision gate</th><th>Inspect</th></tr></thead><tbody>{data.families.map((f: any) => <tr key={f.family}><td>{title(f.family.replaceAll('-', '_'))}</td><td>{title(f.selected_from_selection)}</td><td>{f.evaluation_cost_delta_vs_mean}<small>Fill {f.evaluation_fill ?? 'Undefined'} · {f.selected_blocked_reviews} blocked reviews</small></td><td>{f.decision_gate_passed ? 'Passed' : 'No promotion'}<small>{f.decision_gate_failures.join(', ')}</small></td><td><EvidenceDisclosure data={f.arms} name={`Accuracy, costs and service · ${f.family}`} /></td></tr>)}</tbody></table></div>
+      <EvidenceDisclosure data={{protocol:data.protocol_sha256,source_artifact:data.source_artifact_sha256,runtime:data.runtime}} name="Study provenance" />
+      <Download data={data} name="forecast-decision-evaluation" label="Export evaluation" />
+    </>}
+  </section>;
+}
+
+function DecisionOptions({card, context}: {card: Card; context: Context}) {
+  const [retry, setRetry] = useState(0);
+  const [quantity, setQuantity] = useState('12');
+  const [capacity, setCapacity] = useState('12');
+  const [minute, setMinute] = useState('540');
+  const [donor, setDonor] = useState('');
+  const [transit, setTransit] = useState('1');
+  const [purchaseResult, setPurchaseResult] = useState<any>(null);
+  const [transferResult, setTransferResult] = useState<any>(null);
+  const [purchaseBinding, setPurchaseBinding] = useState('');
+  const [transferBinding, setTransferBinding] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const [transferId, setTransferId] = useState('');
+  const [receipt, setReceipt] = useState('5');
+  const [eventDay, setEventDay] = useState(context.cutoff);
+  const [asOf, setAsOf] = useState(context.cutoff);
+  const [purchaseId, setPurchaseId] = useState('');
+  const [eta, setEta] = useState(context.cutoff);
+  const base = {cutoff:context.cutoff, sku_id:card.sku_id, warehouse_id:card.warehouse_id, archive_digest:context.archive_digest};
+  const query = new URLSearchParams(base);
+  const config = useResource<any>('/api/product/decision-context?' + query, retry);
+  const history = useResource<any>(config.data?.journal_enabled ? '/api/product/transfer-history?' + new URLSearchParams({as_of:asOf,archive_digest:context.archive_digest}) : null, retry);
+  const purchases = useResource<any>(config.data?.journal_enabled ? '/api/product/purchase-history?' + new URLSearchParams({as_of:asOf,archive_digest:context.archive_digest}) : null, retry);
+  const locations = config.data?.locations.filter((w: any) => w.warehouse_id !== card.warehouse_id) || [];
+  const donorId = donor || locations[0]?.warehouse_id || '';
+  const supplier = config.data ? {...config.data.supplier, version_id:`declared-capacity-${capacity}-${context.cutoff}`, capacity:config.data.supplier.capacity.map((r: any) => ({...r,capacity:Number(capacity)}))} : null;
+  const transport = config.data ? {...config.data.transport, version_id:`declared-transit-${transit}-${context.cutoff}`, transit_days:Number(transit)} : null;
+  const purchaseBody = {...base,quantity:Number(quantity),order_minute:Number(minute),supplier};
+  const transferBody = {...base,quantity:Number(quantity),donor_id:donorId,transport,supplier};
+  const purchaseStale = purchaseBinding !== JSON.stringify(purchaseBody);
+  const transferStale = transferBinding !== JSON.stringify(transferBody);
+  async function request(path: string, body: any) {
+    setBusy(true); setMessage('');
+    try {
+      const response = await fetch('/api/product/' + path, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      if (!response.ok) throw Error(`Request rejected (${response.status}). Retained results and history remain available.`);
+      return await response.json();
+    } catch (error: any) {setMessage(error.message);return null;}
+    finally {setBusy(false);}
+  }
+  async function calculate(kind: 'supplier'|'transfer') {
+    const body = kind === 'supplier' ? purchaseBody : transferBody;
+    const result = await request(kind+'-contrast', body);
+    if (result) {
+      if (kind === 'supplier') {setPurchaseResult(result);setPurchaseBinding(JSON.stringify(body));}
+      else {setTransferResult(result);setTransferBinding(JSON.stringify(body));}
+    }
+  }
+  async function admit() {
+    const data = await request('supplier-admit',purchaseBody);
+    if (data) {setPurchaseId(data.id);setEta(data.feasibility?.promised_day || context.cutoff);setMessage('Synthetic commitment admitted. Receipts and ETA notices require explicit events.');setRetry(v=>v+1);}
+  }
+  async function reserve() {
+    const data = await request('transfer-reserve',transferBody);
+    if (data) {setTransferId(data.id);setMessage('Transfer reserved. Any residual purchase requires separate admission.');setRetry(v=>v+1);}
+  }
+  async function event(kind: 'dispatch'|'receipt', purchase=false) {
+    const identity = purchase ? purchaseId : transferId;
+    const body = {archive_digest:context.archive_digest, event_id:`ui:${identity}:${kind}:${eventDay}:${purchase ? 'purchase' : 'transfer'}:${kind==='receipt' ? receipt : ''}`, known_day:eventDay, kind, ...(purchase ? {decision_id:identity} : {transfer_id:identity}), ...(kind==='receipt' ? {quantity:Number(receipt)} : {})};
+    if (await request(purchase ? 'purchase-event' : 'transfer-event',body)) {setMessage('Synthetic event saved. Identical events are idempotent.');setRetry(v=>v+1);}
+  }
+  return <section className="panel detail-panel decision-options" aria-label="Feasible decision explorer">
+    <p className="eyebrow">FEASIBLE SYNTHETIC RESPONSES</p><h2>Purchase, transfer or no action</h2>
+    <p>Compare one review over 33 paid days. Supplier and transport terms below are explicit synthetic assumptions. Full declared future demand protects the donor; a short-term imbalance alone does not authorize transfer.</p>
+    <Notice {...config} retry={()=>setRetry(v=>v+1)} />
+    <div className="filter-grid">
+      <label>Alternative / transfer · pieces<input aria-label="Feasible alternative quantity" type="number" min="0" max="2000" step="1" value={quantity} onChange={e=>setQuantity(e.target.value)} /></label>
+      <label>Supplier dispatch capacity · pieces<input aria-label="Supplier capacity" type="number" min="0" max="2000" value={capacity} onChange={e=>setCapacity(e.target.value)} /></label>
+      <label>Supplier-local order minute<input aria-label="Supplier-local order minute" type="number" min="0" max="1439" value={minute} onChange={e=>setMinute(e.target.value)} /></label>
+    </div>
+    <p>Ordering Monday–Friday, daily cutoff 17:00; receiving every day. Missing dated capacity blocks purchase. These terms are independently versioned from stock evidence.</p>
+    <button disabled={busy || !config.data || config.stale || Boolean(config.error)} onClick={()=>calculate('supplier')}>Compare feasible purchases</button>
+    <p role="status">{message}</p>
+    {purchaseResult && <section className="decision-result" aria-label="Supplier decision results">
+      {purchaseStale && <p className="notice warning">Retained comparison is stale. Recalculate after changing assumptions.</p>}
+      <DecisionRows data={purchaseResult} />
+      <EvidenceDisclosure data={purchaseResult} name="Supplier constraints, daily outcomes and provenance" />
+      <Download data={{...purchaseResult,stale:purchaseStale}} name="feasible-purchase" label="Export feasible purchases" />
+      {config.data?.journal_enabled && <button disabled={busy || purchaseStale || purchaseResult.arms?.alternative?.status!=='assessable' || Number(quantity)<=0} onClick={admit}>Admit alternative to synthetic journal</button>}
+    </section>}
+    <h3>Use donor-safe surplus</h3>
+    {locations.length ? <><div className="filter-grid"><label>Donor location<select aria-label="Donor location" value={donorId} onChange={e=>setDonor(e.target.value)}>{locations.map((w:any)=><option key={w.warehouse_id} value={w.warehouse_id}>{w.name || w.location || w.warehouse_id}</option>)}</select></label><label>Transit · full days<input aria-label="Transfer transit days" type="number" min="1" max="32" value={transit} onChange={e=>setTransit(e.target.value)} /></label></div><p>Dispatch capacity 24 pieces. Transport costs 4 per dispatch + 1 per piece; no purchase charge for transferred stock.</p><button disabled={busy || !config.data || config.stale || Boolean(config.error)} onClick={()=>calculate('transfer')}>Compare transfer before purchase</button></> : <p>A transfer needs two declared locations for this item.</p>}
+    {transferResult && <section className="decision-result" aria-label="Transfer decision results">
+      {transferStale && <p className="notice warning">Retained transfer comparison is stale. Recalculate before reserving.</p>}
+      <p>Protected donor surplus: {transferResult.safe_surplus ?? 'Unknown'} pieces. {transferResult.reasons.join(', ')}</p>
+      <DecisionRows data={transferResult} />
+      <EvidenceDisclosure data={transferResult} name="Network conservation, donor service and evidence" />
+      <Download data={{...transferResult,stale:transferStale}} name="transfer-comparison" label="Export transfer comparison" />
+      {config.data?.journal_enabled && <button disabled={busy || transferStale || transferResult.status!=='assessable' || transferResult.arms?.transfer_before_purchase?.status!=='feasible' || Number(quantity)<=0} onClick={reserve}>Reserve synthetic transfer</button>}
+    </section>}
+    {config.data?.journal_enabled ? <details className="lifecycle"><summary>Synthetic commitments, dispatch and partial receipts</summary>
+      <p>Transfer reservation allocates donor pieces only. It does not admit a residual purchase or write operational stock. Business dates cannot be backdated; late dispatch requires replanning.</p>
+      <div className="filter-grid"><label>Transfer identity<input aria-label="Transfer identity" value={transferId} onChange={e=>setTransferId(e.target.value)} /></label><label>Purchase identity<input aria-label="Purchase identity" value={purchaseId} onChange={e=>setPurchaseId(e.target.value)} /></label><label>Event business date<input aria-label="Event business date" type="date" value={eventDay} onChange={e=>setEventDay(e.target.value)} /></label><label>Partial receipt · pieces<input aria-label="Partial receipt pieces" type="number" min="1" value={receipt} onChange={e=>setReceipt(e.target.value)} /></label></div>
+      <div className="view-tools"><button disabled={busy || !transferId} onClick={()=>event('dispatch')}>Dispatch reserved transfer</button><button disabled={busy || !transferId} onClick={()=>event('receipt')}>Receive transfer pieces</button><button disabled={busy || !purchaseId} onClick={()=>event('receipt',true)}>Receive purchase pieces</button></div>
+      <label>Revised supplier / transport ETA<input aria-label="Revised supplier ETA" type="date" value={eta} onChange={e=>setEta(e.target.value)} /></label><button disabled={busy || !purchaseId} onClick={async()=>{if(await request('purchase-event',{archive_digest:context.archive_digest,decision_id:purchaseId,event_id:`ui:${purchaseId}:eta:${eventDay}:${eta}`,kind:'eta',known_day:eventDay,eta})){setMessage('Synthetic ETA notice saved.');setRetry(v=>v+1);}}}>Notify revised ETA</button>
+      <button disabled={busy || !transferId} onClick={async()=>{if(await request('transfer-event',{archive_digest:context.archive_digest,transfer_id:transferId,event_id:`ui:${transferId}:eta:${eventDay}:${eta}`,kind:'eta',known_day:eventDay,eta})){setMessage('Synthetic transport ETA saved.');setRetry(v=>v+1);}}}>Notify transfer ETA</button>
+      <label>History as of<input aria-label="Decision history as of" type="date" value={asOf} onChange={e=>setAsOf(e.target.value)} /></label>
+      <Notice {...history} retry={()=>setRetry(v=>v+1)} /><Notice {...purchases} retry={()=>setRetry(v=>v+1)} />
+      {!history.stale && history.data && <EvidenceDisclosure data={history.data} name="Transfer reservation, in-transit and receipt history" />}
+      {!purchases.stale && purchases.data && <EvidenceDisclosure data={purchases.data} name="Supplier commitment and ETA history" />}
+    </details> : <p>Packaged mode is read-only. The local loopback sandbox enables explicit synthetic commitments and events.</p>}
+  </section>;
+}
+
+function DecisionRows({data}: {data:any}) {
+  if (!data.arms) return <p className="notice warning">Not assessable: {data.reasons.join(', ')}. Unsafe outcome quantities are withheld.</p>;
+  return <div className="table-scroll"><table><caption>Compatible 33-day outcomes · exact pieces and synthetic cost units</caption><thead><tr><th>Decision</th><th>Feasibility / promise</th><th>Paid cost</th><th>Service / exposure</th></tr></thead><tbody>{Object.entries(data.arms).map(([name,raw])=>{const arm:any=raw;return <tr key={name}><td>{title(name)}<small>Purchase {arm.purchase_quantity ?? arm.quantity ?? 'Unknown'} · transfer {arm.transfer_quantity ?? '0'}</small></td><td>{title(arm.status || 'assessable')}<small>{arm.feasibility?.promised_day || arm.purchase_promise?.promised_day || 'No purchase promise'}{arm.reasons?.join(', ')}</small></td><td>{arm.total_cost ?? 'Withheld'}</td><td>{arm.recipient ? `Recipient fill ${exact(arm.recipient.immediate_fill)} · donor fill ${exact(arm.donor.immediate_fill)}` : `Immediate ${arm.immediate_fulfilled ?? 'Unknown'} / ${arm.accepted ?? 'Unknown'}`}<small>Terminal backlog {arm.recipient?.terminal_backlog ?? arm.terminal_backlog ?? 'Unknown'}</small></td></tr>;})}</tbody></table></div>;
+}
+
 function Selected({
   route,
   context,
@@ -1276,7 +1442,7 @@ function Selected({
               <History data={history.data} go={go} item={selectedId} />
             </>
           ) : route.page === "compare" || route.page === "decide" ? (
-            <Comparison
+            <><DecisionOptions key={context.archive_digest+context.cutoff+card.id} card={card} context={context} /><Comparison
               card={card}
               detail={data}
               context={context}
@@ -1285,7 +1451,7 @@ function Selected({
               unavailable={
                 resource.stale || resource.loading || Boolean(resource.error)
               }
-            />
+            /></>
           ) : (
             <div className="detail-grid">
               <section>

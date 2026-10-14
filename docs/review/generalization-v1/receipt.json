@@ -1,0 +1,480 @@
+{
+  "protocol_version": "synthetic-generalization-v1",
+  "synthetic": true,
+  "protocol_sha256": "f2a2b938b3dda1f1f75f040e997788f181390c41469763e0b65aa537675faad3",
+  "code_commit": "73a2271ba40ab7a9c4b0f32ad1cbf79f92383701",
+  "source_sha256": {
+    "scripts/generalization_study.py": "e0a5e61fe7548fe6447df0a8d2aeb05869afa7d277204a1ba7a0c44bae744466",
+    "src/inventory_intelligence/insights.py": "53ce347b3f375fdb50900a161202da59b29e85609f2741b59e4062eeffe35ee3",
+    "src/inventory_intelligence/synthetic_replay.py": "44b781444d4d595b3c4dbef482713de753b608442e6441393459544a5192301e",
+    "src/inventory_intelligence/exception_review.py": "09a8b1eb1b2f4db33de01a695ae4164129a47ff851fd5ea4bb15877cde5ac930"
+  },
+  "datasets": [
+    {
+      "input": "docs/examples/generalization-two-site-v1.json",
+      "runtime": "PostgreSQL 170009; restricted ii_runner",
+      "input_sha256": "025cd709ca79f74359d9cb0d2f6c6f402580a90b9f0a59e06ad85ceb8cf1c1ab",
+      "archive_digest": "c96bec1c99b6951d1be109f669f89ad023abdc0e83516789534819eb2625ef72",
+      "keys_per_version": 6,
+      "cutoffs": 3,
+      "saved_reports": 39,
+      "checked_cells": [
+        {
+          "cutoff": "2026-05-04",
+          "sku_id": "product-coast:sku-0",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 6,
+          "balances": [
+            "1",
+            "-1",
+            "-3",
+            "-5"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-04",
+          "sku_id": "product-coast:sku-0",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "78",
+            "76",
+            "74",
+            "72"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-04",
+          "sku_id": "product-coast:sku-1",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "4",
+            "3",
+            "2",
+            "1"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-04",
+          "sku_id": "product-coast:sku-1",
+          "warehouse_id": "product-coast:site-1",
+          "status": "not_assessable",
+          "order": null,
+          "balances": null,
+          "reasons": [
+            "ineligible_or_unavailable_forecast"
+          ]
+        },
+        {
+          "cutoff": "2026-05-04",
+          "sku_id": "product-coast:sku-2",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "35/2",
+            "15",
+            "25/2",
+            "10"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-04",
+          "sku_id": "product-coast:sku-2",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "30",
+            "30",
+            "30",
+            "30"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-11",
+          "sku_id": "product-coast:sku-0",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 12,
+          "balances": [
+            "-2",
+            "-5",
+            "-8",
+            "-11"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-11",
+          "sku_id": "product-coast:sku-0",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "78",
+            "76",
+            "74",
+            "72"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-11",
+          "sku_id": "product-coast:sku-1",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "4",
+            "3",
+            "2",
+            "1"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-11",
+          "sku_id": "product-coast:sku-1",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "4",
+            "3",
+            "2",
+            "1"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-11",
+          "sku_id": "product-coast:sku-2",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "19",
+            "18",
+            "17",
+            "16"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-11",
+          "sku_id": "product-coast:sku-2",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "30",
+            "30",
+            "30",
+            "30"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-18",
+          "sku_id": "product-coast:sku-0",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 12,
+          "balances": [
+            "-2",
+            "-5",
+            "-8",
+            "-11"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-18",
+          "sku_id": "product-coast:sku-0",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "78",
+            "76",
+            "74",
+            "72"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-18",
+          "sku_id": "product-coast:sku-1",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "4",
+            "3",
+            "2",
+            "1"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-18",
+          "sku_id": "product-coast:sku-1",
+          "warehouse_id": "product-coast:site-1",
+          "status": "not_assessable",
+          "order": null,
+          "balances": null,
+          "reasons": [
+            "incomplete_or_mismatched_supply",
+            "ineligible_or_unavailable_forecast"
+          ]
+        },
+        {
+          "cutoff": "2026-05-18",
+          "sku_id": "product-coast:sku-2",
+          "warehouse_id": "product-coast:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "19",
+            "18",
+            "17",
+            "16"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-05-18",
+          "sku_id": "product-coast:sku-2",
+          "warehouse_id": "product-coast:site-1",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "30",
+            "30",
+            "30",
+            "30"
+          ],
+          "reasons": []
+        }
+      ],
+      "exact_rule_triggers": 9,
+      "replay_seconds_single_sample": 0.8894565829541534,
+      "compressed_bytes": 39782,
+      "raw_bytes": 1142063,
+      "archive_name": "generalization-two-site-v1.json.gz",
+      "controls": {
+        "idempotent": true,
+        "version_conflict_rollback": true,
+        "late_transaction_rollback": true,
+        "invalid_sources": true,
+        "source_write_denied": true,
+        "historical_fresh_rerun": true,
+        "last_good_publication": true
+      }
+    },
+    {
+      "input": "docs/examples/generalization-single-site-v1.json",
+      "runtime": "PostgreSQL 170009; restricted ii_runner",
+      "input_sha256": "f3fdd0c9ba633258dfcb4a9acd4403e4035aa9e83dd4a8454f4ed6c62544a312",
+      "archive_digest": "7fa2089b12db2c5a9cd512f8b4676df4de0656a28b0deef31a425db8edaa27e5",
+      "keys_per_version": 6,
+      "cutoffs": 2,
+      "saved_reports": 26,
+      "checked_cells": [
+        {
+          "cutoff": "2026-11-02",
+          "sku_id": "product-inland:sku-0",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "0",
+            "-1",
+            "-2",
+            "3",
+            "2"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-02",
+          "sku_id": "product-inland:sku-1",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "50",
+            "50",
+            "50",
+            "50",
+            "50"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-02",
+          "sku_id": "product-inland:sku-2",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "2",
+            "2",
+            "2",
+            "2",
+            "2"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-02",
+          "sku_id": "product-inland:sku-3",
+          "warehouse_id": "product-inland:site-0",
+          "status": "not_assessable",
+          "order": null,
+          "balances": null,
+          "reasons": [
+            "incomplete_or_mismatched_supply",
+            "ineligible_or_unavailable_forecast"
+          ]
+        },
+        {
+          "cutoff": "2026-11-02",
+          "sku_id": "product-inland:sku-4",
+          "warehouse_id": "product-inland:site-0",
+          "status": "not_assessable",
+          "order": null,
+          "balances": null,
+          "reasons": [
+            "ineligible_or_unavailable_forecast"
+          ]
+        },
+        {
+          "cutoff": "2026-11-02",
+          "sku_id": "product-inland:sku-5",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "28",
+            "26",
+            "24",
+            "22",
+            "20"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-09",
+          "sku_id": "product-inland:sku-0",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 9,
+          "balances": [
+            "-1",
+            "-3",
+            "-5",
+            "-7",
+            "-6"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-09",
+          "sku_id": "product-inland:sku-1",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "48",
+            "46",
+            "44",
+            "42",
+            "40"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-09",
+          "sku_id": "product-inland:sku-2",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "2",
+            "2",
+            "2",
+            "2",
+            "2"
+          ],
+          "reasons": []
+        },
+        {
+          "cutoff": "2026-11-09",
+          "sku_id": "product-inland:sku-3",
+          "warehouse_id": "product-inland:site-0",
+          "status": "not_assessable",
+          "order": null,
+          "balances": null,
+          "reasons": [
+            "incomplete_or_mismatched_supply",
+            "ineligible_or_unavailable_forecast"
+          ]
+        },
+        {
+          "cutoff": "2026-11-09",
+          "sku_id": "product-inland:sku-4",
+          "warehouse_id": "product-inland:site-0",
+          "status": "not_assessable",
+          "order": null,
+          "balances": null,
+          "reasons": [
+            "ineligible_or_unavailable_forecast"
+          ]
+        },
+        {
+          "cutoff": "2026-11-09",
+          "sku_id": "product-inland:sku-5",
+          "warehouse_id": "product-inland:site-0",
+          "status": "assessable",
+          "order": 0,
+          "balances": [
+            "29",
+            "28",
+            "27",
+            "26",
+            "25"
+          ],
+          "reasons": []
+        }
+      ],
+      "exact_rule_triggers": 9,
+      "replay_seconds_single_sample": 0.39151754090562463,
+      "compressed_bytes": 27552,
+      "raw_bytes": 751073,
+      "archive_name": "generalization-single-site-v1.json.gz",
+      "controls": {
+        "idempotent": true,
+        "version_conflict_rollback": true,
+        "late_transaction_rollback": true,
+        "invalid_sources": true,
+        "source_write_denied": true,
+        "historical_fresh_rerun": true,
+        "last_good_publication": true
+      }
+    }
+  ],
+  "total_seconds": 3.1893513328395784,
+  "max_rss_platform_units": 67158016,
+  "boundary": "Fresh independent arithmetic/discovery/rollback controls. No unseen detection accuracy, policy promotion, maximum-scale, network or production claim."
+}

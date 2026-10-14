@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 from threading import Lock
+import sqlite3
 from typing import Annotated, Literal
 
 from fastapi import HTTPException, Query, Request
@@ -26,9 +27,63 @@ class ProductScenario(BaseModel):
     overrides: dict = Field(default_factory=dict)
 
 
-def install_product_routes(application, supplied=None, catalog_path=None):
+class DecisionRequest(ProductScenario):
+    quantity: Annotated[int, Field(ge=0, le=2000)] | None = None
+    order_minute: Annotated[int, Field(ge=0, le=1439)] = 540
+    supplier: dict | None = None
+    deliveries: dict | None = None
+
+
+class TransferRequest(ProductScenario):
+    donor_id: Selector
+    quantity: Annotated[int, Field(ge=0, le=2000)]
+    transport: dict
+    supplier: dict | None = None
+
+
+class TransferEvent(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    archive_digest: Annotated[str, Field(pattern=r'^[0-9a-f]{64}$')]
+    transfer_id: Selector
+    event_id: Annotated[str, Field(min_length=1, max_length=200)]
+    kind: Literal['dispatch', 'receipt', 'eta']
+    eta: Annotated[str, Field(max_length=10)] | None = None
+    known_day: Annotated[str, Field(max_length=10)]
+    quantity: Annotated[int, Field(ge=1, le=2000)] | None = None
+
+
+class ReviewRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    cutoff: Selector
+    finding_id: Annotated[str, Field(min_length=1, max_length=200)]
+    event_id: Annotated[str, Field(min_length=1, max_length=200)]
+    status: Literal['acknowledged', 'investigating', 'resolved']
+    note: Annotated[str, Field(min_length=1, max_length=1000)]
+    reviewed_at: Annotated[str, Field(max_length=40)]
+    calculation_digest: Annotated[str, Field(pattern=r'^[0-9a-f]{64}$')]
+    archive_digest: Annotated[str, Field(pattern=r'^[0-9a-f]{64}$')]
+
+
+class PurchaseEvent(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    archive_digest: Annotated[str, Field(pattern=r'^[0-9a-f]{64}$')]
+    decision_id: Annotated[str, Field(min_length=1, max_length=200)]
+    event_id: Annotated[str, Field(min_length=1, max_length=200)]
+    kind: Literal['receipt', 'eta']
+    known_day: Annotated[str, Field(max_length=10)]
+    quantity: Annotated[int, Field(ge=1, le=2000)] | None = None
+    eta: Annotated[str, Field(max_length=10)] | None = None
+
+
+def install_product_routes(application, supplied=None, catalog_path=None, journal_path=None):
     # Imports remain inside setup to preserve the legacy module boundary.
     from . import product
+    from .transfers import TransferJournal
+    from .workflow import Journal
+    from .exception_review import ReviewJournal
+    transfer_journal = TransferJournal(journal_path) if journal_path is not None else None
+    purchase_journal = Journal(journal_path) if journal_path is not None else None
+    reviews = ReviewJournal(journal_path) if journal_path is not None else None
     injected = deepcopy(supplied)
     cached = None
     identity = None
@@ -63,9 +118,120 @@ def install_product_routes(application, supplied=None, catalog_path=None):
             raise HTTPException(409, 'Saved view uses different evidence; reset to this archive explicitly')
         try:
             result = function(data, *args, **kwargs)
-        except (ValueError, KeyError) as error:
+        except (ValueError, KeyError, TypeError) as error:
             raise HTTPException(422, 'Invalid product selection or scenario') from error
         return JSONResponse(result, headers={'Cache-Control': 'no-store'})
+
+    def local(request):
+        origin = request.headers.get('origin')
+        if journal_path is None: raise HTTPException(404, 'Synthetic journal disabled')
+        if (request.url.hostname not in ('127.0.0.1','localhost','::1') or
+            (origin is not None and origin != str(request.base_url).rstrip('/')) or
+            request.headers.get('content-type','').split(';')[0] != 'application/json'):
+            raise HTTPException(403, 'Synthetic writes require same-origin loopback JSON')
+
+    def storage(function):
+        try: return function()
+        except (sqlite3.Error, OSError) as error:
+            raise HTTPException(503, 'Synthetic journal unavailable; retained state unchanged') from error
+
+    @application.get('/api/product/decision-context')
+    def decision_context(request: Request, cutoff: Selector, sku_id: Selector, warehouse_id: Selector,
+                         archive_digest: str | None = Query(default=None, max_length=64)):
+        from .supplier_feasibility import example_profile
+        def context(data):
+            product._key(data, cutoff, sku_id, warehouse_id)
+            return dict(supplier=example_profile(cutoff, sku_id, warehouse_id),
+                        transport=dict(version_id='declared-demo-transit-v1', known_day=cutoff,
+                                       transit_days=1, capacity=24, setup_cost=4, per_piece_cost=1),
+                        locations=data['dimensions']['warehouses'], journal_enabled=journal_path is not None,
+                        assumption_label='Explicit synthetic demonstration terms; separate from saved source evidence')
+        return invoke(request, {'cutoff','sku_id','warehouse_id','archive_digest'}, context, archive_digest=archive_digest)
+
+    @application.post('/api/product/supplier-contrast')
+    def supplier_contrast(request: Request, body: DecisionRequest):
+        from .decision_contrast import compare
+        if body.overrides or body.supplier is None: raise HTTPException(422, 'Explicit supplier profile required; overrides unsupported')
+        return invoke(request, set(), compare, body.cutoff, body.sku_id, body.warehouse_id,
+                      body.quantity, supplier=body.supplier, order_minute=body.order_minute,
+                      deliveries=body.deliveries, archive_digest=body.archive_digest)
+
+    @application.post('/api/product/supplier-admit')
+    def supplier_admit(request: Request, body: DecisionRequest):
+        local(request)
+        if body.overrides or body.deliveries: raise HTTPException(422, 'Admission cannot use hypothetical outcomes')
+        return invoke(request, set(), lambda data: storage(lambda: product._wire(purchase_journal.admit_supplier(data,
+                      cutoff=body.cutoff, sku_id=body.sku_id, warehouse_id=body.warehouse_id, supplier=body.supplier,
+                      quantity=body.quantity, order_minute=body.order_minute,
+                      arm='alternative' if body.quantity is not None else 'actual_proposal'))), archive_digest=body.archive_digest)
+
+    @application.post('/api/product/transfer-contrast')
+    def transfer_contrast(request: Request, body: TransferRequest):
+        from .transfers import compare
+        if body.overrides: raise HTTPException(422, 'Unsupported transfer overrides')
+        return invoke(request, set(), compare, body.cutoff, body.sku_id, body.donor_id, body.warehouse_id,
+                      body.quantity, body.transport, body.supplier, archive_digest=body.archive_digest)
+
+    @application.post('/api/product/transfer-reserve')
+    def transfer_reserve(request: Request, body: TransferRequest):
+        from .transfers import compare
+        local(request)
+        if body.overrides: raise HTTPException(422, 'Unsupported transfer overrides')
+        def reserve(data):
+            return storage(lambda: product._wire(transfer_journal.reserve(data, body.cutoff, body.sku_id,
+                body.donor_id, body.warehouse_id, body.quantity, body.transport, body.supplier)))
+        return invoke(request, set(), reserve, archive_digest=body.archive_digest)
+
+    @application.post('/api/product/transfer-event')
+    def transfer_event(request: Request, body: TransferEvent):
+        local(request)
+        return invoke(request, set(), lambda data: storage(lambda: product._wire(transfer_journal.record(
+                      **body.model_dump(exclude={'archive_digest'})))), archive_digest=body.archive_digest)
+
+    @application.get('/api/product/transfer-history')
+    def transfer_history(request: Request, as_of: str = Query(max_length=10),
+                         archive_digest: str | None = Query(default=None, max_length=64)):
+        return invoke(request, {'as_of','archive_digest'}, lambda data: storage(lambda: transfer_journal.snapshot(as_of))
+                      if transfer_journal else dict(enabled=False, synthetic_only=True), archive_digest=archive_digest)
+
+
+    @application.get('/api/product/evaluation')
+    def evaluation(request: Request):
+        if request.query_params: raise HTTPException(422, 'Evaluation has no selection fields')
+        from .evaluation_summary import load_summary
+        try: return JSONResponse(load_summary(), headers={'Cache-Control':'no-store'})
+        except (ValueError, OSError) as error:
+            raise HTTPException(503, 'Saved evaluation unavailable') from error
+
+    @application.get('/api/product/reviews')
+    def review_history(request: Request, cutoff: str | None = Query(default=None, max_length=10),
+                       archive_digest: str | None = Query(default=None, max_length=64)):
+        from .insights import discover
+        from .exception_review import finding_binding
+        def history(data):
+            discovery = discover(data, cutoff)
+            return dict(journal_enabled=reviews is not None,
+                        bindings=[dict(finding_id=f['id'], calculation_digest=product.archive_digest(f, False), known_at=f['known_at']) for f in discovery['findings']],
+                        history=storage(lambda: reviews.snapshot(data, cutoff)) if reviews else None)
+        return invoke(request, {'cutoff','archive_digest'}, history, archive_digest=archive_digest)
+
+    @application.post('/api/product/review')
+    def review(request: Request, body: ReviewRequest):
+        local(request)
+        return invoke(request, set(), lambda data: storage(lambda: reviews.append(data,
+                      **body.model_dump(exclude={'archive_digest'}))), archive_digest=body.archive_digest)
+
+    @application.get('/api/product/purchase-history')
+    def purchase_history(request: Request, as_of: str = Query(max_length=10),
+                         archive_digest: str | None = Query(default=None, max_length=64)):
+        return invoke(request, {'as_of','archive_digest'}, lambda data: storage(lambda: product._wire(purchase_journal.snapshot(as_of)))
+                      if purchase_journal else dict(enabled=False, synthetic_only=True), archive_digest=archive_digest)
+
+    @application.post('/api/product/purchase-event')
+    def purchase_event(request: Request, body: PurchaseEvent):
+        local(request)
+        return invoke(request, set(), lambda data: storage(lambda: product._wire(purchase_journal.record(
+                      **body.model_dump(exclude={'archive_digest'})))), archive_digest=body.archive_digest)
 
     @application.get('/api/product')
     @application.get('/api/product/overview')

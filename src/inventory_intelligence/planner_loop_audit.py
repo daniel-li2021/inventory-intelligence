@@ -57,7 +57,9 @@ def audit_case(case, manual=None):
             _require(review['reliability']['overall_status']=='pass', 'Untrusted inventory')
             _require(context['origin_day']==row['date'] and context['origin']==_midnight(start+timedelta(days=day))
                      and context['start_day']==(start+timedelta(days=day-28)).isoformat()
-                     and context['method']=='mean' and context['business_timezone']=='America/Los_Angeles', 'Wrong review binding')
+                     and context['method']==case.get('method','mean')
+                     and context['method'] in ('mean','naive','seasonal_naive')
+                     and context['business_timezone']=='America/Los_Angeles', 'Wrong review binding')
             inputs={key:result[key] for key in ('inventory','supply','training')}
             _require(report['input_digest']==_hash(dict(context=context,inputs=inputs)), 'Changed persisted source inputs')
             inventory=source['inventory'];planning=source['planning']
@@ -110,14 +112,17 @@ def audit_case(case, manual=None):
             else:
                 train=result['training']['days']
                 _require(all(type(r['quantity']) is int and r['quantity']>=0 for r in train), 'Invalid exact training')
-                mean=Fraction(sum(r['quantity'] for r in train),28)
-                _require(result['forecast']['predictions']==[str(mean)]*5, 'Forecast differs from independent mean')
+                values=[r['quantity'] for r in train]
+                predictions=([Fraction(sum(values),28)]*5 if context['method']=='mean' else
+                    [Fraction(values[-1])]*5 if context['method']=='naive' else
+                    [Fraction(values[-7+i]) for i in range(5)])
+                _require(result['forecast']['predictions']==list(map(str,predictions)), 'Forecast differs from independent baseline')
                 balance=Fraction(stock); deficits=[]
                 for i in range(5):
                     current=(start+timedelta(days=day+i)).isoformat()
                     inbound=sum(o['quantity'] for o in open_orders.values() if o['eta']==day+i)
                     reserved=sum(q['remaining'] for q in queue if q['day']==day+i)
-                    balance+=inbound-reserved-mean
+                    balance+=inbound-reserved-predictions[i]
                     projection=result['projection'][i]
                     _require(projection['day']==current and Fraction(projection['balance_without_order'])==balance
                              and projection['inbound']==inbound and projection['reservations']==reserved, 'Independent projection mismatch')

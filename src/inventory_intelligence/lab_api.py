@@ -15,7 +15,7 @@ def create_app(evidence=None, product_evidence=None, *, journal_path=None, catal
     """Keep injected evidence immutable; requests fail closed on archive problems."""
     application = FastAPI(title='Inventory Decision Intelligence', version='2')
     from .product_api import install_product_routes
-    install_product_routes(application, product_evidence, catalog_path)
+    install_product_routes(application, product_evidence, catalog_path, journal_path)
     from .execution_api import install_execution_routes
     install_execution_routes(application, journal_path)
     supplied = deepcopy(evidence)

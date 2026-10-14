@@ -11,9 +11,9 @@ from .lab_api import create_app
 
 API_PATHS = {'/api/lab', '/api/evidence', '/api/lab/evidence', '/api/product',
              '/api/product/overview', '/api/product/explore', '/api/product/detail',
-             '/api/product/history', '/api/product/evidence', '/api/product/control', '/api/product/insights', '/api/product/contrast',
+             '/api/product/evaluation', '/api/product/reviews', '/api/product/purchase-history', '/api/product/decision-context', '/api/product/transfer-history', '/api/product/history', '/api/product/evidence', '/api/product/control', '/api/product/insights', '/api/product/contrast',
              '/api/execution','/api/execution/detail','/api/execution/evidence','/api/execution/journal'}
-POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios'}
+POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios', '/api/product/supplier-contrast', '/api/product/transfer-contrast'}
 HEALTH_PATHS = {'/health/live', '/health/ready'}
 ASSETS = {'/', '/lab', '/static/lab.css', '/static/lab.js'} | {
     '/product-static/'+path.name for path in Path(__file__).with_name('product_static').glob('*')
@@ -29,7 +29,7 @@ class HostedLab:
     def __init__(self, application=None, *, clock=time.monotonic, rate=2, burst=20,
                  concurrent=4, body_limit=4096, body_seconds=5):
         self.application = application if application is not None else create_app()
-        self.posts = POST_PATHS | ({'/api/execution/admit','/api/execution/event'}
+        self.posts = POST_PATHS | ({'/api/execution/admit','/api/execution/event','/api/product/supplier-admit', '/api/product/transfer-reserve', '/api/product/transfer-event', '/api/product/purchase-event', '/api/product/review'}
                                   if getattr(getattr(self.application,'state',None),'journal_enabled',False) else set())
         self.clock, self.rate, self.burst = clock, rate, burst
         self.tokens, self.last, self.active = float(burst), clock(), 0

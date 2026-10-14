@@ -1,76 +1,52 @@
 # Current project state
 
-Updated: 2026-10-13 (America/Los_Angeles).
+Updated: 2026-10-14 (America/Los_Angeles).
 
 Integration mode: AUTO
 
-Phase: Increments 0–4 plus controlled dynamic replay, insights V2 and one-review
-decision contrasts implemented and accepted within the local synthetic envelope.
-Public deployment and real operational intake remain excluded from this assignment.
+Phase: full master roadmap implementation; final local acceptance/integration in
+progress. Execution is sequential at the user's preference. Operational inputs
+remain synthetic; real orders, confidential data and public/paid deployment excluded.
 
-## Integrated product
+## Implemented and focused acceptance
 
-- [Controlled synthetic replay](SYNTHETIC_REPLAY.md): explicit local CLI, dedicated
-  empty database, atomic/idempotent source admission, immutable source versions,
-  persisted restricted-runner checks/forecasts/plans and immutable archive publication.
-  New retained controls: four keys × three cutoffs, 27 actual reports, 15/15 exact
-  discovery triggers. Demand/supply changes, known ETA changes, persistent/worsening
-  risk and complete-scope location imbalance have cited facts/hypotheses/unknowns.
-- Compare now supports saved actual proposal/no action/pack-MOQ alternative using
-  shared FIFO execution, all purchase/holding/backlog/setup costs and 33 common paid
-  days. Delay assumptions stay explicit; blocked data returns null. Quiet demand
-  retains the extra-order cost counterexample. No new repeated-policy ranking.
-- Final local controls: 118/118 backend/database/legacy regressions, eight frontend
-  state controls, 23 retained-evidence/lineage checks, 22 default and 14 dynamic
-  browser checks. Installed wheel serves
-  both catalogs/contrasts offline. [Evidence and limitations](RESULTS.md#dynamic-replay-and-insight-discovery-v2).
+- Existing Increments0–4,100-key/three-cutoff product archive, actual planner loop,
+  immutable commitments/ETA/receipts, original Lab and original411 artifact hashes
+  are retained. [Original acceptance](review/increments-0-4-acceptance.json).
+- A/B: two independent dataset designs,30 exact key/cutoff cells,18 discovery
+  triggers and65 saved reports on PostgreSQL17.9; rollback/retry/role/last-good/
+  historical rerun controls pass. Priority factors are deterministic/cited; source-
+  bound review notes never suppress facts or waive gates. [Replay](SYNTHETIC_REPLAY.md).
+- C: declared supplier calendars/cutoffs/dated capacity, feasible quantity choices,
+  common paid costs, assumed partial receipts and supplier-bound durable admission.
+  A later arrival can reduce holding cost without changing service. [Guide](SUPPLIER_FEASIBILITY.md).
+- D: donor-safe reservations/dispatch/transit/partial receipts/ETA history, complete
+  network costs and conservation. Coast costs6763/5154/3533 retain an expensive-
+  transport reversal5529>5154. Actual feedback6→0; new count4→overdue block→0 after
+  known ETA. No implicit stock repair or residual purchase admission. [Transfers](TRANSFERS.md).
+- E:16 independent paths,48 actual loops,144 reviews,39 blocked;2/8 accuracy-selected
+  choices pass the decision gate. Losing/tied/undefined paths remain; no model or
+  policy promotion. [Fresh evaluation](FORECAST_DECISION.md).
+- F: bounded persisted evidence inspection above old aggregate caps preserves
+  semantic reader gates. JIT candidate fails adoption (4.02% versus20% required);
+  no planner change. [Engineering support](ENGINEERING_SUPPORT.md).
+- Compact light workbench integrates supplier/transfer comparisons, readable evidence,
+  local review/lifecycle and Evaluation.13 new browser controls pass at1280/320px;
+  eight frontend state controls pass. Human/WCAG acceptance remains unverified.
 
-- Overview → Explore → Investigate → Compare → Decide → History: 100 apparel keys,
-  three cutoffs, 605 actual saved PostgreSQL reports; original kernels/411 retained
-  artifact hashes preserved. [Product contract](product-contract.md).
-- Execution: seven actual planner closed-loop controls and 12 fresh paired stress
-  traces × three policies, 129 real restricted-runner reviews. Six original manual
-  controls agree; cold-shortage original is rejected and preserved with an explicit
-  arithmetic erratum (18 pieces, paid cost 776). All seven corrected trajectories
-  reproduced in a second fresh database. [Execution / feedback](PLANNER_EXECUTION.md).
-- Durable local synthetic decisions, commitments, ETA notifications and partial
-  receipts use an immutable SQLite journal separate from operational sources.
-  Idempotent/reopen/concurrent/rollback/history controls pass; confirmed 12-piece
-  feedback in a new supply batch changes the actual proposal 12→0. Read-only
-  package is default; loopback sandbox is explicitly configured.
-- 72 focused backend/API/hosting/legacy tests, eight frontend controls and 22 browser
-  checks in each of read-only/sandbox modes pass. 278 native18 regressions and 17 postreview feedback checks pass;
-  installed-wheel details are in the [acceptance receipt](review/increments-0-4-acceptance.json).
-  Human comprehension/accessibility conformance remain unverified.
+## Remaining acceptance and gates
 
-## What the measurements demonstrate
+- Latest PostgreSQL17 full suite exercised365 tests:363 pass; two reconnection
+  harness errors lose masked DSN credentials. Fix/recheck before accepting the suite.
+  Reference runtime is PostgreSQL17.9 ARM64/Python3.12.14; exact pinned Python3.12.12,
+  x86/two-date performance and public-runtime evidence remain separate gates.
+- Next: final regression receipt, installed-wheel/legacy browser confirmation,
+  canonical case studies/docs and verified AUTO integration/remote main.
+- [ROADMAP](ROADMAP.md) owns this full assignment; [PLAN](PLAN.md) retains external
+  continuity/hardware/human/public gates. Sustained HTTP and dense-producer acceptance
+  are not established by page inspection or developer browser tests.
+- Preserve unmerged planner commits55f4170/538d29d and their original branch.
+  No real intake/authenticated multi-user executor, stochastic donor guarantee,
+  global optimizer, commercial savings or operational exactly-once claim.
 
-The fresh stress grid is bounded synthetic evidence, not random efficacy or a
-universal ranking. Actual proposals cost less than fixed-18 on 12/12 traces and
-Do Nothing on 11/12. The quiet trace favors Do Nothing (160 versus actual 330).
-Stockout training and overdue commitments still block; journal events waive no gates.
-No real supplier, monetary savings, production exactly-once or operational stock
-write is demonstrated. React assets and both evidence archives ship in the offline
-Python wheel; runtime needs no Node, database or model key.
-
-## Remaining gates and next work
-
-- PostgreSQL17 contract reference acceptance is open on this available native18
-  runtime; local18 tests do not waive its version requirement. Independent human,
-  accessibility and public-runtime/container/TLS acceptance remain separate.
-- [Engineering plan](PLAN.md) retains continuity/rate/client cells, x86/two-date,
-  dense evidence and serial1000. Existing Linux/crash/scale evidence is unchanged.
-- [Roadmap](ROADMAP.md) retains future supplier feasibility, transfers, lifecycle,
-  adapters and authenticated multi-user workflows. No new model or consumed-holdout
-  tuning follows from this task. Deployment was not performed.
-- Next: supplier calendar/capacity feasibility before donor-safe transfers; movement
-  intake/revisions, cross-style evidence and observed-outcome attribution need new
-  contracts. The 50×2×12 input bound is supported validation, not measured full-scale
-  execution. PostgreSQL17/reference/public/human gates remain open.
-- Preserve unmerged original planner commits `55f4170` / `538d29d`; recovered frozen
-  controls and their historical originals remain traceable. Do not delete that
-  unmerged branch. AUTO integrates only this assigned, validated scope.
-
-Operational inputs remain synthetic. The approved UCI exception is separate offline
-observed-sales research; it is not stock truth or operational import permission.
-Read [workflow](../CONTRIBUTING.md), [index](README.md), [decisions](DECISIONS.md).
+Read [index](README.md), [workflow](../CONTRIBUTING.md), [decisions](DECISIONS.md).

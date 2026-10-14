@@ -18,6 +18,7 @@ class ReplayDatabaseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         options=conninfo_to_dict(os.environ['TEST_DATABASE_URL'])
+        cls.owner_options=options
         cls.admin=psycopg.connect(os.environ['TEST_DATABASE_URL'],autocommit=True)
         cls.db='ii_replay_test_'+uuid4().hex[:12]
         cls.admin.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(cls.db)))
@@ -59,13 +60,13 @@ class ReplayDatabaseTests(unittest.TestCase):
         self.assertEqual(self.owner.execute('SELECT count(*) FROM synthetic_replay.sources').fetchone()[0],3)
 
     def test_original_source_rows_survive_reopen(self):
-        with psycopg.connect(self.owner.info.dsn,autocommit=True) as conn:
+        with psycopg.connect(make_conninfo(**(self.owner_options|dict(dbname=self.db))),autocommit=True) as conn:
             for source in self.sources:
                 digest,payload=conn.execute('SELECT digest,payload FROM synthetic_replay.sources WHERE dataset_id=%s AND version_id=%s',(source['dataset_id'],source['version_id'])).fetchone()
                 self.assertEqual((digest,payload),(archive_digest(source,False),source))
 
     def test_first_admission_refuses_an_occupied_database(self):
-        options=conninfo_to_dict(self.owner.info.dsn);name='ii_replay_occupied_'+uuid4().hex[:12]
+        options=self.owner_options;name='ii_replay_occupied_'+uuid4().hex[:12]
         self.admin.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name)))
         try:
             with psycopg.connect(make_conninfo(**(options|dict(dbname=name))),autocommit=True) as conn:

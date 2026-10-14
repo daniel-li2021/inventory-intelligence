@@ -13,6 +13,7 @@ from .demand import BUSINESS_TIMEZONE, midnight
 from .planning_runs import exact_json
 from .reliability import run_checks
 from .replenishment import run_plan
+from .forecasting import METHODS
 
 START = date(2026, 3, 7)
 POLICIES = ('actual', 'do-nothing', 'fixed-18')
@@ -141,12 +142,13 @@ def publish(owner, *, namespace, day, initial_stock, stock, movements, observati
 
 def run_case(owner, runner, *, namespace, demand, initial_stock=10, history=None,
              first_order_delay=0, notification=True, missing_day_zero=False, policy='actual',
-             code_version='planner-loop-v1'):
+             code_version='planner-loop-v1', method='mean'):
     """Nine scored days plus five common closure days; owner and runner are separate."""
     if (len(demand)!=9 or any(type(q) is not int or q<0 for q in demand)
             or type(initial_stock) is not int or initial_stock<0
             or type(first_order_delay) is not int or first_order_delay not in range(4)
-            or type(notification) is not bool or type(missing_day_zero) is not bool or policy not in POLICIES):
+            or type(notification) is not bool or type(missing_day_zero) is not bool or policy not in POLICIES
+            or method not in METHODS):
         raise ValueError('Outside frozen execution envelope')
     history = [3]*28 if history is None else list(history)
     if len(history)!=28 or any(type(q) is not int or q<0 for q in history):
@@ -186,7 +188,7 @@ def run_case(owner, runner, *, namespace, demand, initial_stock=10, history=None
                 raise ValueError('Physical state failed real SQL reconciliation')
             report=run_plan(runner,**{key:identifiers[key] for key in ('batch_id','supply_batch_id','sku_id','warehouse_id')},
                 reliability_run_id=reliability['run_id'],start_day=origin_day-timedelta(days=28),
-                origin_day=origin_day,method='mean',code_version=code_version)
+                origin_day=origin_day,method=method,code_version=code_version)
             saved=load_planning_run(runner,report['run_id'])
             if saved!=report:
                 raise ValueError('Persisted planner report changed')
@@ -241,4 +243,6 @@ def run_case(owner, runner, *, namespace, demand, initial_stock=10, history=None
             terminal_stock=stock,terminal_backlog=sum(row['remaining'] for row in backlog),
             cost_components=costs,total_cost=sum(costs.values()),score_cost=score_cost,
             closure_cost=sum(costs.values())-score_cost))
+    if method != 'mean':
+        result['method'] = method
     return exact_json(result)

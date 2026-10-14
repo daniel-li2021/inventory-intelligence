@@ -23,7 +23,9 @@ MAX_BYTES=64*1024*1024
 CAPABILITIES={
     'prefix_projection':{'supported':True,'label':'Advisory prefix-stock-v1 proposal'},
     'periodic_simulation':{'supported':True,'label':'Separate periodic policy simulation; not execution of the prefix proposal'},
-    'transfer':{'supported':False,'reason':'No transit or donor-service contract'},
+    'transfer':{'supported':False,'reason':'This original periodic scenario has no transfer input; use the separate bounded transfer workflow'},
+    'bounded_transfer':{'supported':True,'label':'Declared synthetic donor-safe transfer, exact lifecycle and 33-day paid outcomes'},
+    'supplier_calendar_comparison':{'supported':True,'label':'Explicit synthetic calendar/cutoff/dated capacity and receipt scenarios'},
     'expedite':{'supported':False,'reason':'No supplier capacity or feasible receipt contract'},
     'markdown':{'supported':False,'reason':'No price elasticity or margin evidence'},
     'purchase_execution':{'supported':False,'reason':'Read-only synthetic replay'},

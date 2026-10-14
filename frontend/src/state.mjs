@@ -6,6 +6,7 @@ export const pages = [
   "decide",
   "history",
   "execution",
+  "evaluation",
 ];
 const fields = [
   "snapshot",

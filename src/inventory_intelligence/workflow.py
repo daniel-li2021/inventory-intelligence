@@ -80,6 +80,57 @@ class Journal:
         conn.execute('INSERT INTO events (id,decision_id,kind,known_day,payload) VALUES (?,?,?,?,?)',
             (event['id'],event['decision_id'],event['kind'],event['known_day'],json.dumps(event,sort_keys=True)))
 
+    def admit_supplier(self,catalog,*,cutoff,sku_id,warehouse_id,supplier,quantity=None,
+                       order_minute=540,arm='actual_proposal'):
+        """Bind one feasible saved-source choice; assumed receipt outcomes are not admissions."""
+        from .product import validate_catalog,_key,_report
+        from .decision_contrast import compare
+        validate_catalog(catalog)
+        if supplier is None or arm not in ('actual_proposal','alternative','no_action'):
+            raise ValueError('Explicit supplier profile and compared arm required')
+        comparison=compare(catalog,cutoff,sku_id,warehouse_id,quantity,
+                           supplier=supplier,order_minute=order_minute)
+        selected=(comparison.get('arms') or {}).get(arm)
+        if selected is None or selected['status']!='assessable':
+            raise ValueError('Only feasible, assessable supplier decisions may be admitted')
+        _,key=_key(catalog,cutoff,sku_id,warehouse_id)
+        report=_report(catalog,key['plan_run_id']);context=report['context']
+        feasibility=selected['feasibility'];pieces=int(selected['quantity'])
+        identity=digest(dict(cutoff=cutoff,sku_id=sku_id,warehouse_id=warehouse_id,
+                             demand_batch=context['batch_id'],supply_batch=context['supply_batch_id'],
+                             supplier_id=supplier['supplier_id']))
+        binding=digest(dict(context=context,input_digest=report['input_digest'],quantity=pieces,
+                            supplier=supplier,order_minute=order_minute))
+        payload=dict(id='supplier:'+identity,synthetic_only=True,kind='synthetic_supplier_commitment',
+                     report_id=report['run_id'],input_digest=report['input_digest'],context=context,
+                     quantity=pieces,status='assessable',source_case_digest=comparison['calculation_id'],
+                     supplier_profile=supplier,feasibility=feasibility)
+        with self._connection() as conn:
+            conn.execute('BEGIN IMMEDIATE')
+            existing=conn.execute('SELECT * FROM decisions WHERE id=?',(payload['id'],)).fetchone()
+            if existing:
+                if existing['binding']!=binding:raise ValueError('Conflicting decision identity')
+                return json.loads(existing['payload'])
+            latest=conn.execute('SELECT max(known_day) FROM events').fetchone()[0]
+            if latest is not None and cutoff<latest:raise ValueError('Backdated decision admission')
+            prior=[json.loads(r['payload']) for r in conn.execute('SELECT payload FROM decisions')]
+            profile_identity=tuple(supplier[k] for k in ('supplier_id','version_id','sku_id','warehouse_id'))
+            for d in prior:
+                old=d.get('supplier_profile')
+                if old and tuple(old[k] for k in ('supplier_id','version_id','sku_id','warehouse_id'))==profile_identity and old!=supplier:
+                    raise ValueError('Conflicting immutable supplier profile version')
+            if pieces:
+                allocated=sum(d['quantity'] for d in prior if d.get('supplier_profile',{}).get('supplier_id')==supplier['supplier_id']
+                              and d.get('feasibility',{}).get('accepted_day')==feasibility['accepted_day'])
+                if allocated+pieces>int(feasibility['available_capacity']):
+                    raise ValueError('Journal commitments exhaust declared supplier dispatch capacity')
+                if conn.execute('SELECT count(*) FROM events').fetchone()[0]>=256:
+                    raise ValueError('Local synthetic journal event envelope exhausted')
+            conn.execute('INSERT INTO decisions VALUES (?,?,?)',(payload['id'],binding,json.dumps(payload,sort_keys=True)))
+            if pieces:self._append(conn,dict(id=payload['id']+':confirmed',decision_id=payload['id'],kind='confirmed',
+                                          known_day=cutoff,quantity=pieces,eta=feasibility['promised_day']))
+        return payload
+
     def record(self,*,decision_id,event_id,kind,known_day,quantity=None,eta=None):
         _day(known_day)
         if not isinstance(event_id,str) or not event_id.strip() or len(event_id)>200 or kind not in ('receipt','eta'):

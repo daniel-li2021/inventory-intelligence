@@ -1,0 +1,1133 @@
+{
+  "blocked_reviews": 39,
+  "decision_gate_passes": 2,
+  "families": [
+    {
+      "arms": {
+        "mean": {
+          "accepted": 43,
+          "accuracy": {
+            "bias": "-41/35",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "43/21",
+            "origin_lead_pairs": 15,
+            "wape": "215/448"
+          },
+          "blocked_reviews": 3,
+          "closure_cost": 2150,
+          "cost_components": {
+            "backlog": 4280,
+            "holding": 0,
+            "purchase": 0,
+            "setup": 0
+          },
+          "eventual_fill": "0",
+          "eventual_fulfilled": 0,
+          "immediate_fill": "0",
+          "immediate_fulfilled": 0,
+          "proposals": [
+            null,
+            null,
+            null
+          ],
+          "score_cost": 2130,
+          "selection_accuracy": {
+            "bias": "-29/28",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "839/420",
+            "origin_lead_pairs": 15,
+            "wape": "839/1820"
+          },
+          "terminal_backlog": 43,
+          "terminal_stock": 0,
+          "total_cost": 4280
+        },
+        "naive": {
+          "accepted": 43,
+          "accuracy": {
+            "bias": "-3/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "31/15",
+            "origin_lead_pairs": 15,
+            "wape": "31/64"
+          },
+          "blocked_reviews": 3,
+          "closure_cost": 2150,
+          "cost_components": {
+            "backlog": 4280,
+            "holding": 0,
+            "purchase": 0,
+            "setup": 0
+          },
+          "eventual_fill": "0",
+          "eventual_fulfilled": 0,
+          "immediate_fill": "0",
+          "immediate_fulfilled": 0,
+          "proposals": [
+            null,
+            null,
+            null
+          ],
+          "score_cost": 2130,
+          "selection_accuracy": {
+            "bias": "0",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "34/15",
+            "origin_lead_pairs": 15,
+            "wape": "34/65"
+          },
+          "terminal_backlog": 43,
+          "terminal_stock": 0,
+          "total_cost": 4280
+        },
+        "seasonal_naive": {
+          "accepted": 43,
+          "accuracy": {
+            "bias": "-4/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "32/15",
+            "origin_lead_pairs": 15,
+            "wape": "1/2"
+          },
+          "blocked_reviews": 3,
+          "closure_cost": 2150,
+          "cost_components": {
+            "backlog": 4280,
+            "holding": 0,
+            "purchase": 0,
+            "setup": 0
+          },
+          "eventual_fill": "0",
+          "eventual_fulfilled": 0,
+          "immediate_fill": "0",
+          "immediate_fulfilled": 0,
+          "proposals": [
+            null,
+            null,
+            null
+          ],
+          "score_cost": 2130,
+          "selection_accuracy": {
+            "bias": "-1/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "31/15",
+            "origin_lead_pairs": 15,
+            "wape": "31/65"
+          },
+          "terminal_backlog": 43,
+          "terminal_stock": 0,
+          "total_cost": 4280
+        }
+      },
+      "decision_gate_failures": [
+        "paid_cost_not_lower"
+      ],
+      "decision_gate_passed": false,
+      "evaluation_cost_delta_vs_mean": 0,
+      "evaluation_cost_minima": [
+        "naive",
+        "mean",
+        "seasonal_naive"
+      ],
+      "evaluation_fill": "0",
+      "family": "blocked-recovery",
+      "mean_blocked_reviews": 3,
+      "mean_fill": "0",
+      "selected_blocked_reviews": 3,
+      "selected_from_selection": "mean",
+      "unique_cost_winner": null
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 27,
+          "accuracy": {
+            "bias": "23/60",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "95/84",
+            "origin_lead_pairs": 15,
+            "wape": "25/56"
+          },
+          "blocked_reviews": 1,
+          "closure_cost": 15,
+          "cost_components": {
+            "backlog": 100,
+            "holding": 54,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 27,
+          "immediate_fill": "20/27",
+          "immediate_fulfilled": 20,
+          "proposals": [
+            0,
+            12,
+            null
+          ],
+          "score_cost": 201,
+          "selection_accuracy": {
+            "bias": "19/28",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "349/420",
+            "origin_lead_pairs": 15,
+            "wape": "349/980"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 3,
+          "total_cost": 216
+        },
+        "naive": {
+          "accepted": 27,
+          "accuracy": {
+            "bias": "4/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "6/5",
+            "origin_lead_pairs": 15,
+            "wape": "9/19"
+          },
+          "blocked_reviews": 1,
+          "closure_cost": 15,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 80,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 27,
+          "immediate_fill": "1",
+          "immediate_fulfilled": 27,
+          "proposals": [
+            12,
+            null,
+            0
+          ],
+          "score_cost": 127,
+          "selection_accuracy": {
+            "bias": "1/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "19/15",
+            "origin_lead_pairs": 15,
+            "wape": "19/35"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 3,
+          "total_cost": 142
+        },
+        "seasonal_naive": {
+          "accepted": 27,
+          "accuracy": {
+            "bias": "8/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "6/5",
+            "origin_lead_pairs": 15,
+            "wape": "9/19"
+          },
+          "blocked_reviews": 1,
+          "closure_cost": 15,
+          "cost_components": {
+            "backlog": 100,
+            "holding": 54,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 27,
+          "immediate_fill": "20/27",
+          "immediate_fulfilled": 20,
+          "proposals": [
+            0,
+            12,
+            null
+          ],
+          "score_cost": 201,
+          "selection_accuracy": {
+            "bias": "3/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "1",
+            "origin_lead_pairs": 15,
+            "wape": "3/7"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 3,
+          "total_cost": 216
+        }
+      },
+      "decision_gate_failures": [
+        "paid_cost_not_lower"
+      ],
+      "decision_gate_passed": false,
+      "evaluation_cost_delta_vs_mean": 0,
+      "evaluation_cost_minima": [
+        "naive"
+      ],
+      "evaluation_fill": "20/27",
+      "family": "hidden-delay",
+      "mean_blocked_reviews": 1,
+      "mean_fill": "20/27",
+      "selected_blocked_reviews": 1,
+      "selected_from_selection": "mean",
+      "unique_cost_winner": "naive"
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 21,
+          "accuracy": {
+            "bias": "-45/28",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "359/140",
+            "origin_lead_pairs": 15,
+            "wape": "1077/980"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 150,
+          "cost_components": {
+            "backlog": 210,
+            "holding": 105,
+            "purchase": 36,
+            "setup": 0
+          },
+          "eventual_fill": "6/7",
+          "eventual_fulfilled": 18,
+          "immediate_fill": "6/7",
+          "immediate_fulfilled": 18,
+          "proposals": [
+            0,
+            0,
+            0
+          ],
+          "score_cost": 201,
+          "selection_accuracy": {
+            "bias": "29/210",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "361/210",
+            "origin_lead_pairs": 15,
+            "wape": "361/196"
+          },
+          "terminal_backlog": 3,
+          "terminal_stock": 0,
+          "total_cost": 351
+        },
+        "naive": {
+          "accepted": 21,
+          "accuracy": {
+            "bias": "0",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "14/5",
+            "origin_lead_pairs": 15,
+            "wape": "6/5"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 135,
+          "cost_components": {
+            "backlog": 30,
+            "holding": 267,
+            "purchase": 96,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 21,
+          "immediate_fill": "6/7",
+          "immediate_fulfilled": 18,
+          "proposals": [
+            0,
+            0,
+            30
+          ],
+          "score_cost": 260,
+          "selection_accuracy": {
+            "bias": "16/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "44/15",
+            "origin_lead_pairs": 15,
+            "wape": "22/7"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 27,
+          "total_cost": 395
+        },
+        "seasonal_naive": {
+          "accepted": 21,
+          "accuracy": {
+            "bias": "-23/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "47/15",
+            "origin_lead_pairs": 15,
+            "wape": "47/35"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 150,
+          "cost_components": {
+            "backlog": 210,
+            "holding": 105,
+            "purchase": 36,
+            "setup": 0
+          },
+          "eventual_fill": "6/7",
+          "eventual_fulfilled": 18,
+          "immediate_fill": "6/7",
+          "immediate_fulfilled": 18,
+          "proposals": [
+            0,
+            0,
+            0
+          ],
+          "score_cost": 201,
+          "selection_accuracy": {
+            "bias": "2/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "14/15",
+            "origin_lead_pairs": 15,
+            "wape": "1"
+          },
+          "terminal_backlog": 3,
+          "terminal_stock": 0,
+          "total_cost": 351
+        }
+      },
+      "decision_gate_failures": [
+        "paid_cost_not_lower"
+      ],
+      "decision_gate_passed": false,
+      "evaluation_cost_delta_vs_mean": 0,
+      "evaluation_cost_minima": [
+        "mean",
+        "seasonal_naive"
+      ],
+      "evaluation_fill": "6/7",
+      "family": "intermittent",
+      "mean_blocked_reviews": 0,
+      "mean_fill": "6/7",
+      "selected_blocked_reviews": 0,
+      "selected_from_selection": "seasonal_naive",
+      "unique_cost_winner": null
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 26,
+          "accuracy": {
+            "bias": "163/420",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "451/420",
+            "origin_lead_pairs": 15,
+            "wape": "451/1092"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 80,
+          "cost_components": {
+            "backlog": 40,
+            "holding": 149,
+            "purchase": 84,
+            "setup": 4
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 26,
+          "immediate_fill": "11/13",
+          "immediate_fulfilled": 22,
+          "proposals": [
+            0,
+            12,
+            12
+          ],
+          "score_cost": 197,
+          "selection_accuracy": {
+            "bias": "1/35",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "33/35",
+            "origin_lead_pairs": 15,
+            "wape": "99/287"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 16,
+          "total_cost": 277
+        },
+        "naive": {
+          "accepted": 26,
+          "accuracy": {
+            "bias": "-3/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "17/15",
+            "origin_lead_pairs": 15,
+            "wape": "17/39"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 20,
+          "cost_components": {
+            "backlog": 40,
+            "holding": 77,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 26,
+          "immediate_fill": "11/13",
+          "immediate_fulfilled": 22,
+          "proposals": [
+            0,
+            12,
+            0
+          ],
+          "score_cost": 159,
+          "selection_accuracy": {
+            "bias": "14/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "6/5",
+            "origin_lead_pairs": 15,
+            "wape": "18/41"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 4,
+          "total_cost": 179
+        },
+        "seasonal_naive": {
+          "accepted": 26,
+          "accuracy": {
+            "bias": "1/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "1",
+            "origin_lead_pairs": 15,
+            "wape": "5/13"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 20,
+          "cost_components": {
+            "backlog": 40,
+            "holding": 77,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 26,
+          "immediate_fill": "11/13",
+          "immediate_fulfilled": 22,
+          "proposals": [
+            0,
+            12,
+            0
+          ],
+          "score_cost": 159,
+          "selection_accuracy": {
+            "bias": "1/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "7/5",
+            "origin_lead_pairs": 15,
+            "wape": "21/41"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 4,
+          "total_cost": 179
+        }
+      },
+      "decision_gate_failures": [
+        "paid_cost_not_lower"
+      ],
+      "decision_gate_passed": false,
+      "evaluation_cost_delta_vs_mean": 0,
+      "evaluation_cost_minima": [
+        "naive",
+        "seasonal_naive"
+      ],
+      "evaluation_fill": "11/13",
+      "family": "notified-delay",
+      "mean_blocked_reviews": 0,
+      "mean_fill": "11/13",
+      "selected_blocked_reviews": 0,
+      "selected_from_selection": "mean",
+      "unique_cost_winner": null
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 0,
+          "accuracy": {
+            "bias": "221/84",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "221/84",
+            "origin_lead_pairs": 15,
+            "wape": null
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 90,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 252,
+            "purchase": 36,
+            "setup": 0
+          },
+          "eventual_fill": null,
+          "eventual_fulfilled": 0,
+          "immediate_fill": null,
+          "immediate_fulfilled": 0,
+          "proposals": [
+            0,
+            0,
+            0
+          ],
+          "score_cost": 198,
+          "selection_accuracy": {
+            "bias": "107/42",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "107/42",
+            "origin_lead_pairs": 15,
+            "wape": null
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 18,
+          "total_cost": 288
+        },
+        "naive": {
+          "accepted": 0,
+          "accuracy": {
+            "bias": "4/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "4/3",
+            "origin_lead_pairs": 15,
+            "wape": null
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 150,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 396,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": null,
+          "eventual_fulfilled": 0,
+          "immediate_fill": null,
+          "immediate_fulfilled": 0,
+          "proposals": [
+            12,
+            0,
+            0
+          ],
+          "score_cost": 308,
+          "selection_accuracy": {
+            "bias": "2/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "2/3",
+            "origin_lead_pairs": 15,
+            "wape": null
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 30,
+          "total_cost": 458
+        },
+        "seasonal_naive": {
+          "accepted": 0,
+          "accuracy": {
+            "bias": "31/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "31/15",
+            "origin_lead_pairs": 15,
+            "wape": null
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 90,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 252,
+            "purchase": 36,
+            "setup": 0
+          },
+          "eventual_fill": null,
+          "eventual_fulfilled": 0,
+          "immediate_fill": null,
+          "immediate_fulfilled": 0,
+          "proposals": [
+            0,
+            0,
+            0
+          ],
+          "score_cost": 198,
+          "selection_accuracy": {
+            "bias": "5/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "5/3",
+            "origin_lead_pairs": 15,
+            "wape": null
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 18,
+          "total_cost": 288
+        }
+      },
+      "decision_gate_failures": [
+        "paid_cost_not_lower",
+        "service_undefined"
+      ],
+      "decision_gate_passed": false,
+      "evaluation_cost_delta_vs_mean": 170,
+      "evaluation_cost_minima": [
+        "mean",
+        "seasonal_naive"
+      ],
+      "evaluation_fill": null,
+      "family": "shift-down",
+      "mean_blocked_reviews": 0,
+      "mean_fill": null,
+      "selected_blocked_reviews": 0,
+      "selected_from_selection": "naive",
+      "unique_cost_winner": null
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 63,
+          "accuracy": {
+            "bias": "-19/7",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "26/7",
+            "origin_lead_pairs": 15,
+            "wape": "13/21"
+          },
+          "blocked_reviews": 2,
+          "closure_cost": 2250,
+          "cost_components": {
+            "backlog": 3990,
+            "holding": 12,
+            "purchase": 36,
+            "setup": 0
+          },
+          "eventual_fill": "2/7",
+          "eventual_fulfilled": 18,
+          "immediate_fill": "2/7",
+          "immediate_fulfilled": 18,
+          "proposals": [
+            0,
+            null,
+            null
+          ],
+          "score_cost": 1788,
+          "selection_accuracy": {
+            "bias": "-115/42",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "267/70",
+            "origin_lead_pairs": 15,
+            "wape": "801/1330"
+          },
+          "terminal_backlog": 45,
+          "terminal_stock": 0,
+          "total_cost": 4038
+        },
+        "naive": {
+          "accepted": 63,
+          "accuracy": {
+            "bias": "0",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "14/5",
+            "origin_lead_pairs": 15,
+            "wape": "7/15"
+          },
+          "blocked_reviews": 1,
+          "closure_cost": 450,
+          "cost_components": {
+            "backlog": 630,
+            "holding": 36,
+            "purchase": 108,
+            "setup": 4
+          },
+          "eventual_fill": "6/7",
+          "eventual_fulfilled": 54,
+          "immediate_fill": "16/21",
+          "immediate_fulfilled": 48,
+          "proposals": [
+            12,
+            24,
+            null
+          ],
+          "score_cost": 328,
+          "selection_accuracy": {
+            "bias": "-1",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "49/15",
+            "origin_lead_pairs": 15,
+            "wape": "49/95"
+          },
+          "terminal_backlog": 9,
+          "terminal_stock": 0,
+          "total_cost": 778
+        },
+        "seasonal_naive": {
+          "accepted": 63,
+          "accuracy": {
+            "bias": "-26/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "58/15",
+            "origin_lead_pairs": 15,
+            "wape": "29/45"
+          },
+          "blocked_reviews": 2,
+          "closure_cost": 2250,
+          "cost_components": {
+            "backlog": 3990,
+            "holding": 12,
+            "purchase": 36,
+            "setup": 0
+          },
+          "eventual_fill": "2/7",
+          "eventual_fulfilled": 18,
+          "immediate_fill": "2/7",
+          "immediate_fulfilled": 18,
+          "proposals": [
+            0,
+            null,
+            null
+          ],
+          "score_cost": 1788,
+          "selection_accuracy": {
+            "bias": "-2",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "58/15",
+            "origin_lead_pairs": 15,
+            "wape": "58/95"
+          },
+          "terminal_backlog": 45,
+          "terminal_stock": 0,
+          "total_cost": 4038
+        }
+      },
+      "decision_gate_failures": [],
+      "decision_gate_passed": true,
+      "evaluation_cost_delta_vs_mean": -3260,
+      "evaluation_cost_minima": [
+        "naive"
+      ],
+      "evaluation_fill": "16/21",
+      "family": "shift-up",
+      "mean_blocked_reviews": 2,
+      "mean_fill": "2/7",
+      "selected_blocked_reviews": 1,
+      "selected_from_selection": "naive",
+      "unique_cost_winner": "naive"
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 25,
+          "accuracy": {
+            "bias": "149/210",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "79/70",
+            "origin_lead_pairs": 15,
+            "wape": "237/476"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 85,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 177,
+            "purchase": 84,
+            "setup": 4
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 25,
+          "immediate_fill": "1",
+          "immediate_fulfilled": 25,
+          "proposals": [
+            0,
+            12,
+            12
+          ],
+          "score_cost": 180,
+          "selection_accuracy": {
+            "bias": "121/140",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "137/140",
+            "origin_lead_pairs": 15,
+            "wape": "411/952"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 17,
+          "total_cost": 265
+        },
+        "naive": {
+          "accepted": 25,
+          "accuracy": {
+            "bias": "16/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "4/3",
+            "origin_lead_pairs": 15,
+            "wape": "10/17"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 85,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 249,
+            "purchase": 84,
+            "setup": 4
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 25,
+          "immediate_fill": "1",
+          "immediate_fulfilled": 25,
+          "proposals": [
+            12,
+            12,
+            0
+          ],
+          "score_cost": 252,
+          "selection_accuracy": {
+            "bias": "16/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "6/5",
+            "origin_lead_pairs": 15,
+            "wape": "9/17"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 17,
+          "total_cost": 337
+        },
+        "seasonal_naive": {
+          "accepted": 25,
+          "accuracy": {
+            "bias": "16/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "26/15",
+            "origin_lead_pairs": 15,
+            "wape": "13/17"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 55,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 159,
+            "purchase": 72,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 25,
+          "immediate_fill": "1",
+          "immediate_fulfilled": 25,
+          "proposals": [
+            0,
+            18,
+            0
+          ],
+          "score_cost": 178,
+          "selection_accuracy": {
+            "bias": "3/5",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "13/15",
+            "origin_lead_pairs": 15,
+            "wape": "13/34"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 11,
+          "total_cost": 233
+        }
+      },
+      "decision_gate_failures": [],
+      "decision_gate_passed": true,
+      "evaluation_cost_delta_vs_mean": -32,
+      "evaluation_cost_minima": [
+        "seasonal_naive"
+      ],
+      "evaluation_fill": "1",
+      "family": "steady",
+      "mean_blocked_reviews": 0,
+      "mean_fill": "1",
+      "selected_blocked_reviews": 0,
+      "selected_from_selection": "seasonal_naive",
+      "unique_cost_winner": "seasonal_naive"
+    },
+    {
+      "arms": {
+        "mean": {
+          "accepted": 26,
+          "accuracy": {
+            "bias": "44/105",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "78/35",
+            "origin_lead_pairs": 15,
+            "wape": "234/301"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 80,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 197,
+            "purchase": 84,
+            "setup": 4
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 26,
+          "immediate_fill": "1",
+          "immediate_fulfilled": 26,
+          "proposals": [
+            12,
+            0,
+            12
+          ],
+          "score_cost": 205,
+          "selection_accuracy": {
+            "bias": "10/21",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "34/15",
+            "origin_lead_pairs": 15,
+            "wape": "17/20"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 16,
+          "total_cost": 285
+        },
+        "naive": {
+          "accepted": 26,
+          "accuracy": {
+            "bias": "-8/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "28/15",
+            "origin_lead_pairs": 15,
+            "wape": "28/43"
+          },
+          "blocked_reviews": 1,
+          "closure_cost": 20,
+          "cost_components": {
+            "backlog": 20,
+            "holding": 91,
+            "purchase": 60,
+            "setup": 2
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 26,
+          "immediate_fill": "12/13",
+          "immediate_fulfilled": 24,
+          "proposals": [
+            0,
+            12,
+            null
+          ],
+          "score_cost": 153,
+          "selection_accuracy": {
+            "bias": "-2/3",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "32/15",
+            "origin_lead_pairs": 15,
+            "wape": "4/5"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 4,
+          "total_cost": 173
+        },
+        "seasonal_naive": {
+          "accepted": 26,
+          "accuracy": {
+            "bias": "11/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "11/15",
+            "origin_lead_pairs": 15,
+            "wape": "11/43"
+          },
+          "blocked_reviews": 0,
+          "closure_cost": 80,
+          "cost_components": {
+            "backlog": 0,
+            "holding": 197,
+            "purchase": 84,
+            "setup": 4
+          },
+          "eventual_fill": "1",
+          "eventual_fulfilled": 26,
+          "immediate_fill": "1",
+          "immediate_fulfilled": 26,
+          "proposals": [
+            12,
+            0,
+            12
+          ],
+          "score_cost": 205,
+          "selection_accuracy": {
+            "bias": "8/15",
+            "calibration": null,
+            "calibration_reason": "Point baselines have no predictive intervals",
+            "mae": "8/15",
+            "origin_lead_pairs": 15,
+            "wape": "1/5"
+          },
+          "terminal_backlog": 0,
+          "terminal_stock": 16,
+          "total_cost": 285
+        }
+      },
+      "decision_gate_failures": [
+        "paid_cost_not_lower"
+      ],
+      "decision_gate_passed": false,
+      "evaluation_cost_delta_vs_mean": 0,
+      "evaluation_cost_minima": [
+        "naive"
+      ],
+      "evaluation_fill": "1",
+      "family": "weekly",
+      "mean_blocked_reviews": 0,
+      "mean_fill": "1",
+      "selected_blocked_reviews": 0,
+      "selected_from_selection": "seasonal_naive",
+      "unique_cost_winner": "naive"
+    }
+  ],
+  "global_winner": null,
+  "independent_paths": 16,
+  "loops": 48,
+  "promoted_policy": null,
+  "protocol_sha256": "d802adf74cfdfbdefb8ca6bc22b24444b99fdaa89f5b76f5116b0293e18655ba",
+  "reviews": 144,
+  "runtime": {
+    "runner": "ii_runner",
+    "server_version": 170009
+  },
+  "source_artifact_sha256": "b2ebae604c691abc85cc20f3beb5ebf7202e869de5bdd3081fb6d8e76b6be69e",
+  "synthetic_only": true,
+  "version": "forecast-decision-summary-v1"
+}

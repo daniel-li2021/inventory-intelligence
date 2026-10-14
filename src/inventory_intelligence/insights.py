@@ -96,8 +96,36 @@ def discover(catalog, cutoff=None):
                 dict(risk_location=risk['warehouse_id'],surplus_location=donor['warehouse_id'],proposal_pieces=risk['proposed_order_qty'],surplus_exposure=donor['exposure']),risk['references']+donor['references'],
                 'Review location allocation. A transfer requires donor service, transit, reservation and capacity evidence; no transferable quantity is claimed.',
                 members=[risk['id'],donor['id']])
-    # Stable ordering independent of dictionary, database or input key order.
-    findings.sort(key=lambda f:({'risk':0,'opportunity':1}[f['category']],f['rule_id'],f['id']))
+    # These factors explain modeled exposure; they do not attribute external causes.
+    for finding in findings:
+        key = next(k for k in binding['keys'] if
+                   (k['sku_id'], k['warehouse_id']) == (finding['sku_id'], finding['warehouse_id']))
+        result = _report(catalog, key['plan_run_id'])['result']
+        supply = result['supply']; training = result['training']
+        assessable = result['status'] == 'assessable'
+        daily = Fraction(sum(d['quantity'] for d in training['days']), len(training['days'])) if training['status'] == 'eligible' else None
+        finding['contributing_factors'] = dict(
+            stock_pieces=str(result['inventory']['on_hand']) if result['inventory']['on_hand'] is not None else None,
+            accepted_daily=_rational(daily) if daily is not None else None,
+            reservation_pieces=str(sum(r['remaining_qty'] for r in supply['reservations'] if r['status']=='open')) if not supply['reasons'] else None,
+            confirmed_inbound_pieces=str(sum(r['remaining_qty'] for r in supply['inbound'] if r['status']=='confirmed')) if not supply['reasons'] else None,
+            safety_pieces=str(supply['policy']['safety_qty']) if not supply['reasons'] else None,
+            proposal_pieces=str(result['proposed_order_qty']) if assessable else None,
+            pre_arrival_shortage_days=str(len(result['pre_arrival_shortage_days'])) if assessable else None,
+            boundary='Origin-known inputs and modeled exposure; factors are not additive causal effects.')
+    # Explicit lexicographic urgency; no arbitrary weighted confidence score.
+    def priority_key(f):
+        factors = f['contributing_factors']
+        return ({'risk':0,'opportunity':1}[f['category']],
+                -int(factors['pre_arrival_shortage_days'] or 0),
+                -int(factors['proposal_pieces'] or 0), f['rule_id'], f['id'])
+    findings.sort(key=priority_key)
+    for rank, finding in enumerate(findings, 1):
+        finding['priority'] = dict(rank=rank,
+            basis='Risk before opportunity, then more modeled pre-arrival shortage days, then larger saved proposal; rule and stable identity break ties.',
+            category=finding['category'],
+            pre_arrival_shortage_days=finding['contributing_factors']['pre_arrival_shortage_days'],
+            proposal_pieces=finding['contributing_factors']['proposal_pieces'])
     return _envelope(catalog,binding)|dict(rules_version=VERSION,findings=findings,unknown=unknown,
         evaluated_keys=len(binding['keys']),previous_cutoff=previous['cutoff'] if previous else None,
         boundary='Observed input changes and modeled exposure are distinct. Next steps are advisory; no commercial certainty or feasible transfer is implied.')

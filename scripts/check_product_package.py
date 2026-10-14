@@ -53,6 +53,16 @@ def main():
         result = dict(status='pass', installed_module=str(module), no_database=True, no_node_runtime=True,
                       archive_digest=overview['archive_digest'], packaged_evidence_sha256=hashlib.sha256(evidence.read_bytes()).hexdigest(),
                       served_assets=names, independently_expected_proposals=['12', '18', None])
+        evaluation=client.get('/api/product/evaluation').json()
+        assert evaluation['reviews']==144 and evaluation['decision_gate_passes']==2 and evaluation['global_winner'] is None
+        terms=client.get('/api/product/decision-context',params=selected).json()
+        feasible=client.post('/api/product/supplier-contrast',json=selected|dict(quantity=18,supplier=terms['supplier'])).json()
+        assert feasible['arms']['actual_proposal']['feasibility']['promised_day']=='2026-01-07'
+        assert feasible['arms']['alternative']['total_cost'] is None
+        assert client.post('/api/product/supplier-admit',json={}).status_code==404
+        assert client.post('/api/product/transfer-reserve',json={}).status_code==404
+        result.update(evaluation_reviews=144, evaluation_summary_sha256=hashlib.sha256(module.with_name('forecast_decision_summary.json').read_bytes()).hexdigest(),
+                      feasible_supplier_calendar=True,blocked_capacity_arm=True)
         result.update(execution_archive_digest=execution['archive_digest'],execution_controls=7,paired_policy_cells=36,
                       default_journal_disabled=True)
     if args.output:

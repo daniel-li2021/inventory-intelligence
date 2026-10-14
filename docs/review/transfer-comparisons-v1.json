@@ -1,0 +1,3987 @@
+{
+  "contract_version": "transfer-comparison-receipt-v1",
+  "synthetic": true,
+  "controls": "docs/examples/transfer-controls-v1.json",
+  "source_sha256": {
+    "src/inventory_intelligence/transfers.py": "1c3163413fb0057ddb1ca3e3deca1932c9608914ea1332492e7c380a39f91a07",
+    "src/inventory_intelligence/supplier_feasibility.py": "2eb53f4512bfb498bcee2d436ff46cebae655d6b672dbe609e418db83c13373c"
+  },
+  "positive": {
+    "contract_version": "donor-safe-transfer-v1",
+    "synthetic": true,
+    "binding": {
+      "archive_digest": "c96bec1c99b6951d1be109f669f89ad023abdc0e83516789534819eb2625ef72",
+      "cutoff": "2026-05-04",
+      "sku_id": "product-coast:sku-0",
+      "donor_id": "product-coast:site-1",
+      "recipient_id": "product-coast:site-0",
+      "quantity": "12",
+      "transport_profile": {
+        "version_id": "portfolio-transit-v1",
+        "known_day": "2026-05-04",
+        "transit_days": "1",
+        "capacity": "24",
+        "setup_cost": "4",
+        "per_piece_cost": "1"
+      },
+      "supplier_profile": {
+        "contract_version": "supplier-feasibility-v1",
+        "synthetic_only": true,
+        "supplier_id": "synthetic-demo-supplier",
+        "version_id": "demo-capacity-12-2026-05-04-cdb61cccfa3b",
+        "sku_id": "product-coast:sku-0",
+        "warehouse_id": "product-coast:site-0",
+        "known_day": "2026-05-04",
+        "order_weekdays": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "receipt_weekdays": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "cutoff_minute": "1020",
+        "capacity": [
+          {
+            "day": "2026-05-04",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-05",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-06",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-07",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-08",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-09",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-10",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-11",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-12",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-13",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-14",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-15",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-16",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-17",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-18",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-19",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-20",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-21",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-22",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-23",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-24",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-25",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-26",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-27",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-28",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-29",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-30",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-31",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-01",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-02",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-03",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-04",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-05",
+            "capacity": "12",
+            "reserved": "0"
+          }
+        ]
+      }
+    },
+    "calculation_id": "85786e7c5bbb4433c4da438307658bbda67879f1534a2709d1519b19b291faed",
+    "common_days": "33",
+    "limitations": [
+      "Declared synthetic demand protects donor service only within this scenario.",
+      "One review; residual purchase uses existing prefix projection, no global optimum.",
+      "Missing supplier evidence withholds purchase outcomes; transport profile is a declared synthetic assumption."
+    ],
+    "status": "assessable",
+    "reasons": [],
+    "safe_surplus": "51",
+    "arms": {
+      "no_action": {
+        "status": "feasible",
+        "reasons": [],
+        "purchase_quantity": "0",
+        "transfer_quantity": "0",
+        "purchase_promise": {
+          "status": "feasible",
+          "reasons": []
+        },
+        "donor": {
+          "accepted": "28",
+          "immediate_fulfilled": "28",
+          "eventual_fulfilled": "28",
+          "immediate_fill": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "terminal_stock": "52",
+          "terminal_backlog": "0",
+          "consumed": "28",
+          "cost_components": {
+            "purchase": "160",
+            "holding": "2094",
+            "backlog": "0",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "2254",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "79",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "78",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "77",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "76",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "75",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "74",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "73",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "72",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "71",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "70",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "69",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "68",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "67",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "66",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "65",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "64",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "63",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "62",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "61",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "60",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "59",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "58",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "57",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "56",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "55",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "54",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "53",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "recipient": {
+          "accepted": "28",
+          "immediate_fulfilled": "3",
+          "eventual_fulfilled": "3",
+          "immediate_fill": {
+            "numerator": "3",
+            "denominator": "28"
+          },
+          "terminal_stock": "0",
+          "terminal_backlog": "25",
+          "consumed": "3",
+          "cost_components": {
+            "purchase": "6",
+            "holding": "3",
+            "backlog": "4500",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "4509",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "1",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "1",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "2",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "3",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "4",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "5",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "6",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "7",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "8",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "9",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "10",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "11",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "12",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "14",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "15",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "16",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "17",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "18",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "20",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "21",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "22",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "23",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "24",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "total_cost": "6763",
+        "network_pieces": "83",
+        "terminal_pieces": "52"
+      },
+      "purchase_only": {
+        "status": "feasible",
+        "reasons": [],
+        "purchase_quantity": "6",
+        "transfer_quantity": "0",
+        "purchase_promise": {
+          "status": "feasible",
+          "accepted_day": "2026-05-04",
+          "promised_day": "2026-05-05",
+          "available_capacity": "12",
+          "profile_digest": "ada3d830ffd49b87febb9b61f0b69e20a1433df2e8869851b5ddfc0a4ac56061",
+          "reasons": []
+        },
+        "donor": {
+          "accepted": "28",
+          "immediate_fulfilled": "28",
+          "eventual_fulfilled": "28",
+          "immediate_fill": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "terminal_stock": "52",
+          "terminal_backlog": "0",
+          "consumed": "28",
+          "cost_components": {
+            "purchase": "160",
+            "holding": "2094",
+            "backlog": "0",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "2254",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "79",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "78",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "77",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "76",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "75",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "74",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "73",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "72",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "71",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "70",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "69",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "68",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "67",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "66",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "65",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "64",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "63",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "62",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "61",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "60",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "59",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "58",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "57",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "56",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "55",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "54",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "53",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "recipient": {
+          "accepted": "28",
+          "immediate_fulfilled": "9",
+          "eventual_fulfilled": "9",
+          "immediate_fill": {
+            "numerator": "9",
+            "denominator": "28"
+          },
+          "terminal_stock": "0",
+          "terminal_backlog": "19",
+          "consumed": "9",
+          "cost_components": {
+            "purchase": "18",
+            "holding": "30",
+            "backlog": "2850",
+            "setup": "2",
+            "transport": "0"
+          },
+          "total_cost": "2900",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "6",
+              "end_stock": "7",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "6",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "5",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "4",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "3",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "1",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "1",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "2",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "3",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "4",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "5",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "6",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "7",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "8",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "9",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "10",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "11",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "12",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "14",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "15",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "16",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "17",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "18",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "total_cost": "5154",
+        "network_pieces": "89",
+        "terminal_pieces": "52"
+      },
+      "transfer_before_purchase": {
+        "status": "feasible",
+        "reasons": [],
+        "purchase_quantity": "0",
+        "transfer_quantity": "12",
+        "purchase_promise": {
+          "status": "feasible",
+          "reasons": []
+        },
+        "donor": {
+          "accepted": "28",
+          "immediate_fulfilled": "28",
+          "eventual_fulfilled": "28",
+          "immediate_fill": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "terminal_stock": "40",
+          "terminal_backlog": "0",
+          "consumed": "28",
+          "cost_components": {
+            "purchase": "160",
+            "holding": "1698",
+            "backlog": "0",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "1858",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "67",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "66",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "65",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "64",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "63",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "62",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "61",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "60",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "59",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "58",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "57",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "56",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "55",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "54",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "53",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "51",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "50",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "49",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "48",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "47",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "46",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "45",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "44",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "43",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "42",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "41",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "recipient": {
+          "accepted": "28",
+          "immediate_fulfilled": "15",
+          "eventual_fulfilled": "15",
+          "immediate_fill": {
+            "numerator": "15",
+            "denominator": "28"
+          },
+          "terminal_stock": "0",
+          "terminal_backlog": "13",
+          "consumed": "15",
+          "cost_components": {
+            "purchase": "6",
+            "holding": "93",
+            "backlog": "1560",
+            "setup": "0",
+            "transport": "16"
+          },
+          "total_cost": "1675",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "12",
+              "end_stock": "13",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "12",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "11",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "10",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "9",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "8",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "7",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "6",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "5",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "4",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "3",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "1",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "1",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "2",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "3",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "4",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "5",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "6",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "7",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "8",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "9",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "10",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "11",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "12",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "total_cost": "3533",
+        "network_pieces": "83",
+        "terminal_pieces": "40"
+      }
+    },
+    "donor_input_digest": "3362aa4c5199ce3f538ec47730e9e163f5b932a643ff168c37c25729e2117c63",
+    "recipient_input_digest": "4abda693b9488bf6b2e72729a32e0bff0a6a3d4a7b4929ca43fee562dd84a03a",
+    "donor_report_id": "3077ceef-d0ce-4286-b352-dfe2d08f708e",
+    "recipient_report_id": "5ea41271-5516-46c8-91ca-296247bd6010"
+  },
+  "transport_counterexample": {
+    "contract_version": "donor-safe-transfer-v1",
+    "synthetic": true,
+    "binding": {
+      "archive_digest": "c96bec1c99b6951d1be109f669f89ad023abdc0e83516789534819eb2625ef72",
+      "cutoff": "2026-05-04",
+      "sku_id": "product-coast:sku-0",
+      "donor_id": "product-coast:site-1",
+      "recipient_id": "product-coast:site-0",
+      "quantity": "12",
+      "transport_profile": {
+        "version_id": "expensive-transport-v1",
+        "known_day": "2026-05-04",
+        "transit_days": "1",
+        "capacity": "24",
+        "setup_cost": "2000",
+        "per_piece_cost": "1"
+      },
+      "supplier_profile": {
+        "contract_version": "supplier-feasibility-v1",
+        "synthetic_only": true,
+        "supplier_id": "synthetic-demo-supplier",
+        "version_id": "demo-capacity-12-2026-05-04-cdb61cccfa3b",
+        "sku_id": "product-coast:sku-0",
+        "warehouse_id": "product-coast:site-0",
+        "known_day": "2026-05-04",
+        "order_weekdays": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "receipt_weekdays": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "cutoff_minute": "1020",
+        "capacity": [
+          {
+            "day": "2026-05-04",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-05",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-06",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-07",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-08",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-09",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-10",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-11",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-12",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-13",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-14",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-15",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-16",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-17",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-18",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-19",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-20",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-21",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-22",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-23",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-24",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-25",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-26",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-27",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-28",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-29",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-30",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-05-31",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-01",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-02",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-03",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-04",
+            "capacity": "12",
+            "reserved": "0"
+          },
+          {
+            "day": "2026-06-05",
+            "capacity": "12",
+            "reserved": "0"
+          }
+        ]
+      }
+    },
+    "calculation_id": "788868bf20b34b27479e7740fd61005629852a12b3842f7661ca66861c0fc50b",
+    "common_days": "33",
+    "limitations": [
+      "Declared synthetic demand protects donor service only within this scenario.",
+      "One review; residual purchase uses existing prefix projection, no global optimum.",
+      "Missing supplier evidence withholds purchase outcomes; transport profile is a declared synthetic assumption."
+    ],
+    "status": "assessable",
+    "reasons": [],
+    "safe_surplus": "51",
+    "arms": {
+      "no_action": {
+        "status": "feasible",
+        "reasons": [],
+        "purchase_quantity": "0",
+        "transfer_quantity": "0",
+        "purchase_promise": {
+          "status": "feasible",
+          "reasons": []
+        },
+        "donor": {
+          "accepted": "28",
+          "immediate_fulfilled": "28",
+          "eventual_fulfilled": "28",
+          "immediate_fill": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "terminal_stock": "52",
+          "terminal_backlog": "0",
+          "consumed": "28",
+          "cost_components": {
+            "purchase": "160",
+            "holding": "2094",
+            "backlog": "0",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "2254",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "79",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "78",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "77",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "76",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "75",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "74",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "73",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "72",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "71",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "70",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "69",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "68",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "67",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "66",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "65",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "64",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "63",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "62",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "61",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "60",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "59",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "58",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "57",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "56",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "55",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "54",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "53",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "recipient": {
+          "accepted": "28",
+          "immediate_fulfilled": "3",
+          "eventual_fulfilled": "3",
+          "immediate_fill": {
+            "numerator": "3",
+            "denominator": "28"
+          },
+          "terminal_stock": "0",
+          "terminal_backlog": "25",
+          "consumed": "3",
+          "cost_components": {
+            "purchase": "6",
+            "holding": "3",
+            "backlog": "4500",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "4509",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "1",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "1",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "2",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "3",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "4",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "5",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "6",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "7",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "8",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "9",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "10",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "11",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "12",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "14",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "15",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "16",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "17",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "18",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "20",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "21",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "22",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "23",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "24",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "25",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "total_cost": "6763",
+        "network_pieces": "83",
+        "terminal_pieces": "52"
+      },
+      "purchase_only": {
+        "status": "feasible",
+        "reasons": [],
+        "purchase_quantity": "6",
+        "transfer_quantity": "0",
+        "purchase_promise": {
+          "status": "feasible",
+          "accepted_day": "2026-05-04",
+          "promised_day": "2026-05-05",
+          "available_capacity": "12",
+          "profile_digest": "ada3d830ffd49b87febb9b61f0b69e20a1433df2e8869851b5ddfc0a4ac56061",
+          "reasons": []
+        },
+        "donor": {
+          "accepted": "28",
+          "immediate_fulfilled": "28",
+          "eventual_fulfilled": "28",
+          "immediate_fill": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "terminal_stock": "52",
+          "terminal_backlog": "0",
+          "consumed": "28",
+          "cost_components": {
+            "purchase": "160",
+            "holding": "2094",
+            "backlog": "0",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "2254",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "79",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "78",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "77",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "76",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "75",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "74",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "73",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "72",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "71",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "70",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "69",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "68",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "67",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "66",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "65",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "64",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "63",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "62",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "61",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "60",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "59",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "58",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "57",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "56",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "55",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "54",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "53",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "recipient": {
+          "accepted": "28",
+          "immediate_fulfilled": "9",
+          "eventual_fulfilled": "9",
+          "immediate_fill": {
+            "numerator": "9",
+            "denominator": "28"
+          },
+          "terminal_stock": "0",
+          "terminal_backlog": "19",
+          "consumed": "9",
+          "cost_components": {
+            "purchase": "18",
+            "holding": "30",
+            "backlog": "2850",
+            "setup": "2",
+            "transport": "0"
+          },
+          "total_cost": "2900",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "6",
+              "end_stock": "7",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "6",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "5",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "4",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "3",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "1",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "1",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "2",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "3",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "4",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "5",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "6",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "7",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "8",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "9",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "10",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "11",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "12",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "14",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "15",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "16",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "17",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "18",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "19",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "total_cost": "5154",
+        "network_pieces": "89",
+        "terminal_pieces": "52"
+      },
+      "transfer_before_purchase": {
+        "status": "feasible",
+        "reasons": [],
+        "purchase_quantity": "0",
+        "transfer_quantity": "12",
+        "purchase_promise": {
+          "status": "feasible",
+          "reasons": []
+        },
+        "donor": {
+          "accepted": "28",
+          "immediate_fulfilled": "28",
+          "eventual_fulfilled": "28",
+          "immediate_fill": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "terminal_stock": "40",
+          "terminal_backlog": "0",
+          "consumed": "28",
+          "cost_components": {
+            "purchase": "160",
+            "holding": "1698",
+            "backlog": "0",
+            "setup": "0",
+            "transport": "0"
+          },
+          "total_cost": "1858",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "67",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "0",
+              "end_stock": "66",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "65",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "64",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "63",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "62",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "61",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "60",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "59",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "58",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "57",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "56",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "55",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "54",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "53",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "52",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "51",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "50",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "49",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "48",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "47",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "46",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "45",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "44",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "43",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "42",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "41",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "40",
+              "end_backlog": "0",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "recipient": {
+          "accepted": "28",
+          "immediate_fulfilled": "15",
+          "eventual_fulfilled": "15",
+          "immediate_fill": {
+            "numerator": "15",
+            "denominator": "28"
+          },
+          "terminal_stock": "0",
+          "terminal_backlog": "13",
+          "consumed": "15",
+          "cost_components": {
+            "purchase": "6",
+            "holding": "93",
+            "backlog": "1560",
+            "setup": "0",
+            "transport": "2012"
+          },
+          "total_cost": "3671",
+          "days": [
+            {
+              "day": "0",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "1",
+              "receipts": "12",
+              "end_stock": "13",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "2",
+              "receipts": "0",
+              "end_stock": "12",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "3",
+              "receipts": "0",
+              "end_stock": "11",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "4",
+              "receipts": "0",
+              "end_stock": "10",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "5",
+              "receipts": "0",
+              "end_stock": "9",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "6",
+              "receipts": "0",
+              "end_stock": "8",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "7",
+              "receipts": "0",
+              "end_stock": "7",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "8",
+              "receipts": "0",
+              "end_stock": "6",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "9",
+              "receipts": "0",
+              "end_stock": "5",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "10",
+              "receipts": "0",
+              "end_stock": "4",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "11",
+              "receipts": "0",
+              "end_stock": "3",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "12",
+              "receipts": "0",
+              "end_stock": "2",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "13",
+              "receipts": "0",
+              "end_stock": "1",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "14",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "0",
+              "consumed": "1",
+              "accepted": "1"
+            },
+            {
+              "day": "15",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "1",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "16",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "2",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "17",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "3",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "18",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "4",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "19",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "5",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "20",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "6",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "21",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "7",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "22",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "8",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "23",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "9",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "24",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "10",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "25",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "11",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "26",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "12",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "27",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "1"
+            },
+            {
+              "day": "28",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "29",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "30",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "31",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            },
+            {
+              "day": "32",
+              "receipts": "0",
+              "end_stock": "0",
+              "end_backlog": "13",
+              "consumed": "0",
+              "accepted": "0"
+            }
+          ]
+        },
+        "total_cost": "5529",
+        "network_pieces": "83",
+        "terminal_pieces": "40"
+      }
+    },
+    "donor_input_digest": "3362aa4c5199ce3f538ec47730e9e163f5b932a643ff168c37c25729e2117c63",
+    "recipient_input_digest": "4abda693b9488bf6b2e72729a32e0bff0a6a3d4a7b4929ca43fee562dd84a03a",
+    "donor_report_id": "3077ceef-d0ce-4286-b352-dfe2d08f708e",
+    "recipient_report_id": "5ea41271-5516-46c8-91ca-296247bd6010"
+  },
+  "saved_arithmetic_audit": true,
+  "boundary": "Bounded declared-demand synthetic outcomes; not unseen efficacy or commercial savings"
+}

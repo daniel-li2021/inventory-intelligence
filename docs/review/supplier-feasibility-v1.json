@@ -1,0 +1,14 @@
+{
+  "contract_version": "supplier-feasibility-acceptance-v1",
+  "date": "2026-10-13",
+  "synthetic_only": true,
+  "validation": "PYTHONPATH=src /private/tmp/ii-master-eval-venv/bin/python -m unittest tests.test_supplier_feasibility tests.test_decision_contrast tests.test_workflow -v",
+  "runtime": {"python": "3.12.14", "database_required": false},
+  "tests": {"supplier": 8, "retained_contrast": 7, "retained_workflow": 6, "passed": 21, "failed": 0},
+  "frozen_controls": "docs/examples/supplier-feasibility-controls-v1.json",
+  "observed_saved_actual_quantity": 6,
+  "observed_costs": {"full_day2": 16281, "cutoff_day3": 16275, "partial_day2_day4": 16286, "eta_day5": 16373, "no_action": 18039},
+  "observed_immediate_fulfilled": {"full_day2": 18, "cutoff_day3": 18, "partial_day2_day4": 17, "eta_day5": 12},
+  "negative_findings": ["A later feasible arrival can lower holding cost without changing service", "18 pieces exceeds declared 12-piece supplier capacity and returns null outcomes"],
+  "boundaries": ["Independent arithmetic correctness controls only", "Declared synthetic supplier sources and future receipt outcomes", "No real supplier or commercial efficacy claim", "No new repeated-policy ranking", "Original evidence bytes unchanged"]
+}
