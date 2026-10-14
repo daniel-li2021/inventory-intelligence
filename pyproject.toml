@@ -17,7 +17,7 @@ research = ["openpyxl==3.1.5"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-inventory_intelligence = ["lab_evidence.json", "lab_static/*", "product_evidence.json.gz", "product_static/*", "execution_evidence.json.gz", "execution_controls.json", "forecast_decision_summary.json"]
+inventory_intelligence = ["lab_evidence.json", "lab_static/*", "product_evidence.json.gz", "product_static/*", "execution_evidence.json.gz", "execution_controls.json", "forecast_decision_summary.json", "transfer_feedback_evidence.json"]
 
 [tool.setuptools.data-files]
 "share/inventory_intelligence" = ["sql/views.sql", "sql/checks.sql"]

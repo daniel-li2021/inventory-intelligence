@@ -111,6 +111,8 @@ class Journal:
             if existing:
                 if existing['binding']!=binding:raise ValueError('Conflicting decision identity')
                 return json.loads(existing['payload'])
+            if conn.execute('SELECT count(*) FROM decisions').fetchone()[0]>=256:
+                raise ValueError('Local synthetic decision envelope exhausted')
             latest=conn.execute('SELECT max(known_day) FROM events').fetchone()[0]
             if latest is not None and cutoff<latest:raise ValueError('Backdated decision admission')
             prior=[json.loads(r['payload']) for r in conn.execute('SELECT payload FROM decisions')]
@@ -120,6 +122,14 @@ class Journal:
                 if old and tuple(old[k] for k in ('supplier_id','version_id','sku_id','warehouse_id'))==profile_identity and old!=supplier:
                     raise ValueError('Conflicting immutable supplier profile version')
             if pieces:
+                day=feasibility['accepted_day']
+                terms=next(r for r in supplier['capacity'] if r['day']==day)
+                for previous in prior:
+                    if (previous.get('supplier_profile',{}).get('supplier_id')==supplier['supplier_id'] and
+                        previous.get('feasibility',{}).get('accepted_day')==day and previous['quantity']):
+                        previous_terms=next(r for r in previous['supplier_profile']['capacity'] if r['day']==day)
+                        if previous_terms!=terms:
+                            raise ValueError('Conflicting shared supplier/day capacity; reconcile before new admission')
                 allocated=sum(d['quantity'] for d in prior if d.get('supplier_profile',{}).get('supplier_id')==supplier['supplier_id']
                               and d.get('feasibility',{}).get('accepted_day')==feasibility['accepted_day'])
                 if allocated+pieces>int(feasibility['available_capacity']):

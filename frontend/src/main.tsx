@@ -28,6 +28,7 @@ const labels: Record<string, string> = {
   new: "New",
   unknown: "Unknown",
 };
+const wholeInput = (s: string, minimum: number, maximum: number) => /^(0|[1-9]\d*)$/.test(s) && Number.isSafeInteger(Number(s)) && Number(s)>=minimum && Number(s)<=maximum;
 const title = (s: string) =>
   labels[s] || s.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase());
 function exact(value: Exact | undefined): string {
@@ -1219,6 +1220,18 @@ function EvidenceDisclosure({data,name="Saved evidence"}: {data:unknown;name?:st
   return <details className="evidence-disclosure"><summary>{name}</summary><Inspector data={data} name={name} /></details>;
 }
 
+function FeedbackExample() {
+  const [expanded,setExpanded] = useState(false);
+  const [retry,setRetry] = useState(0);
+  const resource = useResource<any>(expanded ? '/api/product/feedback-example' : null,retry);
+  const data = resource.data;
+  return <details className="lifecycle" onToggle={e=>setExpanded(e.currentTarget.open)}><summary>Inspect subsequent actual planner decisions</summary>
+    <p>A saved coast demonstration shows separate owner publication and independently observed stock. It does not automatically change the source catalog currently selected here.</p>
+    <Notice {...resource} retry={()=>setRetry(v=>v+1)} />
+    {data && !resource.stale && !resource.error && <><div className="table-scroll"><table><caption>Source-bound actual planner feedback · synthetic pieces</caption><thead><tr><th>Known evidence</th><th>Business origin</th><th>Proposal</th><th>Reason / inspect</th></tr></thead><tbody>{Object.entries(data.reports).map(([name,value])=>{const report:any=value;return <tr key={name}><td>{title(name)}</td><td>{report.context.origin_day}</td><td>{report.result.proposed_order_qty ?? 'Blocked'}</td><td>{report.result.reasons.join(', ')}<EvidenceDisclosure data={report} name={`Original report · ${title(name)}`} /></td></tr>;})}</tbody></table></div><Download data={data} name="actual-transfer-feedback" label="Export actual feedback" /><EvidenceDisclosure data={data.journal_history} name="Then-known transfer and ETA history" /></>}
+  </details>;
+}
+
 function Evaluation() {
   const [retry, setRetry] = useState(0);
   const resource = useResource<any>('/api/product/evaluation', retry);
@@ -1237,7 +1250,7 @@ function Evaluation() {
   </section>;
 }
 
-function DecisionOptions({card, context}: {card: Card; context: Context}) {
+function DecisionOptions({card, context, unavailable=false}: {card: Card; context: Context; unavailable?:boolean}) {
   const [retry, setRetry] = useState(0);
   const [quantity, setQuantity] = useState('12');
   const [capacity, setCapacity] = useState('12');
@@ -1261,15 +1274,19 @@ function DecisionOptions({card, context}: {card: Card; context: Context}) {
   const config = useResource<any>('/api/product/decision-context?' + query, retry);
   const history = useResource<any>(config.data?.journal_enabled ? '/api/product/transfer-history?' + new URLSearchParams({as_of:asOf,archive_digest:context.archive_digest}) : null, retry);
   const purchases = useResource<any>(config.data?.journal_enabled ? '/api/product/purchase-history?' + new URLSearchParams({as_of:asOf,archive_digest:context.archive_digest}) : null, retry);
+  const blocked = unavailable || config.loading || config.stale || Boolean(config.error);
   const locations = config.data?.locations.filter((w: any) => w.warehouse_id !== card.warehouse_id) || [];
   const donorId = donor || locations[0]?.warehouse_id || '';
   const supplier = config.data ? {...config.data.supplier, version_id:`declared-capacity-${capacity}-${context.cutoff}`, capacity:config.data.supplier.capacity.map((r: any) => ({...r,capacity:Number(capacity)}))} : null;
   const transport = config.data ? {...config.data.transport, version_id:`declared-transit-${transit}-${context.cutoff}`, transit_days:Number(transit)} : null;
   const purchaseBody = {...base,quantity:Number(quantity),order_minute:Number(minute),supplier};
   const transferBody = {...base,quantity:Number(quantity),donor_id:donorId,transport,supplier};
-  const purchaseStale = purchaseBinding !== JSON.stringify(purchaseBody);
-  const transferStale = transferBinding !== JSON.stringify(transferBody);
+  const validPurchase = wholeInput(quantity,0,2000) && wholeInput(capacity,0,2000) && wholeInput(minute,0,1439);
+  const validTransfer = validPurchase && wholeInput(transit,1,32);
+  const purchaseStale = blocked || !validPurchase || purchaseBinding !== JSON.stringify(purchaseBody);
+  const transferStale = blocked || !validTransfer || transferBinding !== JSON.stringify(transferBody);
   async function request(path: string, body: any) {
+    if (busy || blocked) return null;
     setBusy(true); setMessage('');
     try {
       const response = await fetch('/api/product/' + path, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
@@ -1309,31 +1326,32 @@ function DecisionOptions({card, context}: {card: Card; context: Context}) {
       <label>Supplier-local order minute<input aria-label="Supplier-local order minute" type="number" min="0" max="1439" value={minute} onChange={e=>setMinute(e.target.value)} /></label>
     </div>
     <p>Ordering Monday–Friday, daily cutoff 17:00; receiving every day. Missing dated capacity blocks purchase. These terms are independently versioned from stock evidence.</p>
-    <button disabled={busy || !config.data || config.stale || Boolean(config.error)} onClick={()=>calculate('supplier')}>Compare feasible purchases</button>
+    <button disabled={busy || blocked || !validPurchase || !config.data || config.stale || Boolean(config.error)} onClick={()=>calculate('supplier')}>Compare feasible purchases</button>
     <p role="status">{message}</p>
     {purchaseResult && <section className="decision-result" aria-label="Supplier decision results">
       {purchaseStale && <p className="notice warning">Retained comparison is stale. Recalculate after changing assumptions.</p>}
       <DecisionRows data={purchaseResult} />
       <EvidenceDisclosure data={purchaseResult} name="Supplier constraints, daily outcomes and provenance" />
       <Download data={{...purchaseResult,stale:purchaseStale}} name="feasible-purchase" label="Export feasible purchases" />
-      {config.data?.journal_enabled && <button disabled={busy || purchaseStale || purchaseResult.arms?.alternative?.status!=='assessable' || Number(quantity)<=0} onClick={admit}>Admit alternative to synthetic journal</button>}
+      {config.data?.journal_enabled && <button disabled={busy || blocked || purchaseStale || purchaseResult.arms?.alternative?.status!=='assessable' || Number(quantity)<=0} onClick={admit}>Admit alternative to synthetic journal</button>}
     </section>}
     <h3>Use donor-safe surplus</h3>
-    {locations.length ? <><div className="filter-grid"><label>Donor location<select aria-label="Donor location" value={donorId} onChange={e=>setDonor(e.target.value)}>{locations.map((w:any)=><option key={w.warehouse_id} value={w.warehouse_id}>{w.name || w.location || w.warehouse_id}</option>)}</select></label><label>Transit · full days<input aria-label="Transfer transit days" type="number" min="1" max="32" value={transit} onChange={e=>setTransit(e.target.value)} /></label></div><p>Dispatch capacity 24 pieces. Transport costs 4 per dispatch + 1 per piece; no purchase charge for transferred stock.</p><button disabled={busy || !config.data || config.stale || Boolean(config.error)} onClick={()=>calculate('transfer')}>Compare transfer before purchase</button></> : <p>A transfer needs two declared locations for this item.</p>}
+    {locations.length ? <><div className="filter-grid"><label>Donor location<select aria-label="Donor location" value={donorId} onChange={e=>setDonor(e.target.value)}>{locations.map((w:any)=><option key={w.warehouse_id} value={w.warehouse_id}>{w.name || w.location || w.warehouse_id}</option>)}</select></label><label>Transit · full days<input aria-label="Transfer transit days" type="number" min="1" max="32" value={transit} onChange={e=>setTransit(e.target.value)} /></label></div><p>Dispatch capacity 24 pieces. Transport costs 4 per dispatch + 1 per piece; no purchase charge for transferred stock.</p><button disabled={busy || blocked || !validTransfer || !config.data || config.stale || Boolean(config.error)} onClick={()=>calculate('transfer')}>Compare transfer before purchase</button></> : <p>A transfer needs two declared locations for this item.</p>}
     {transferResult && <section className="decision-result" aria-label="Transfer decision results">
       {transferStale && <p className="notice warning">Retained transfer comparison is stale. Recalculate before reserving.</p>}
       <p>Protected donor surplus: {transferResult.safe_surplus ?? 'Unknown'} pieces. {transferResult.reasons.join(', ')}</p>
       <DecisionRows data={transferResult} />
       <EvidenceDisclosure data={transferResult} name="Network conservation, donor service and evidence" />
       <Download data={{...transferResult,stale:transferStale}} name="transfer-comparison" label="Export transfer comparison" />
-      {config.data?.journal_enabled && <button disabled={busy || transferStale || transferResult.status!=='assessable' || transferResult.arms?.transfer_before_purchase?.status!=='feasible' || Number(quantity)<=0} onClick={reserve}>Reserve synthetic transfer</button>}
+      {config.data?.journal_enabled && <button disabled={busy || blocked || transferStale || transferResult.status!=='assessable' || transferResult.arms?.transfer_before_purchase?.status!=='feasible' || Number(quantity)<=0} onClick={reserve}>Reserve synthetic transfer</button>}
     </section>}
     {config.data?.journal_enabled ? <details className="lifecycle"><summary>Synthetic commitments, dispatch and partial receipts</summary>
       <p>Transfer reservation allocates donor pieces only. It does not admit a residual purchase or write operational stock. Business dates cannot be backdated; late dispatch requires replanning.</p>
       <div className="filter-grid"><label>Transfer identity<input aria-label="Transfer identity" value={transferId} onChange={e=>setTransferId(e.target.value)} /></label><label>Purchase identity<input aria-label="Purchase identity" value={purchaseId} onChange={e=>setPurchaseId(e.target.value)} /></label><label>Event business date<input aria-label="Event business date" type="date" value={eventDay} onChange={e=>setEventDay(e.target.value)} /></label><label>Partial receipt · pieces<input aria-label="Partial receipt pieces" type="number" min="1" value={receipt} onChange={e=>setReceipt(e.target.value)} /></label></div>
-      <div className="view-tools"><button disabled={busy || !transferId} onClick={()=>event('dispatch')}>Dispatch reserved transfer</button><button disabled={busy || !transferId} onClick={()=>event('receipt')}>Receive transfer pieces</button><button disabled={busy || !purchaseId} onClick={()=>event('receipt',true)}>Receive purchase pieces</button></div>
-      <label>Revised supplier / transport ETA<input aria-label="Revised supplier ETA" type="date" value={eta} onChange={e=>setEta(e.target.value)} /></label><button disabled={busy || !purchaseId} onClick={async()=>{if(await request('purchase-event',{archive_digest:context.archive_digest,decision_id:purchaseId,event_id:`ui:${purchaseId}:eta:${eventDay}:${eta}`,kind:'eta',known_day:eventDay,eta})){setMessage('Synthetic ETA notice saved.');setRetry(v=>v+1);}}}>Notify revised ETA</button>
-      <button disabled={busy || !transferId} onClick={async()=>{if(await request('transfer-event',{archive_digest:context.archive_digest,transfer_id:transferId,event_id:`ui:${transferId}:eta:${eventDay}:${eta}`,kind:'eta',known_day:eventDay,eta})){setMessage('Synthetic transport ETA saved.');setRetry(v=>v+1);}}}>Notify transfer ETA</button>
+      <div className="view-tools"><button disabled={busy || blocked || !transferId} onClick={()=>event('dispatch')}>Dispatch reserved transfer</button><button disabled={busy || blocked || !transferId} onClick={()=>event('receipt')}>Receive transfer pieces</button><button disabled={busy || blocked || !purchaseId} onClick={()=>event('receipt',true)}>Receive purchase pieces</button></div>
+      <label>Revised supplier / transport ETA<input aria-label="Revised supplier ETA" type="date" value={eta} onChange={e=>setEta(e.target.value)} /></label><button disabled={busy || blocked || !purchaseId} onClick={async()=>{if(await request('purchase-event',{archive_digest:context.archive_digest,decision_id:purchaseId,event_id:`ui:${purchaseId}:eta:${eventDay}:${eta}`,kind:'eta',known_day:eventDay,eta})){setMessage('Synthetic ETA notice saved.');setRetry(v=>v+1);}}}>Notify revised ETA</button>
+      <button disabled={busy || blocked || !transferId} onClick={async()=>{if(await request('transfer-event',{archive_digest:context.archive_digest,transfer_id:transferId,event_id:`ui:${transferId}:eta:${eventDay}:${eta}`,kind:'eta',known_day:eventDay,eta})){setMessage('Synthetic transport ETA saved.');setRetry(v=>v+1);}}}>Notify transfer ETA</button>
+      <FeedbackExample />
       <label>History as of<input aria-label="Decision history as of" type="date" value={asOf} onChange={e=>setAsOf(e.target.value)} /></label>
       <Notice {...history} retry={()=>setRetry(v=>v+1)} /><Notice {...purchases} retry={()=>setRetry(v=>v+1)} />
       {!history.stale && history.data && <EvidenceDisclosure data={history.data} name="Transfer reservation, in-transit and receipt history" />}
@@ -1442,7 +1460,7 @@ function Selected({
               <History data={history.data} go={go} item={selectedId} />
             </>
           ) : route.page === "compare" || route.page === "decide" ? (
-            <><DecisionOptions key={context.archive_digest+context.cutoff+card.id} card={card} context={context} /><Comparison
+            <><DecisionOptions key={context.archive_digest+context.cutoff+card.id} card={card} context={context} unavailable={resource.stale || resource.loading || Boolean(resource.error)} /><Comparison
               card={card}
               detail={data}
               context={context}

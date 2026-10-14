@@ -53,6 +53,9 @@ def main():
         result = dict(status='pass', installed_module=str(module), no_database=True, no_node_runtime=True,
                       archive_digest=overview['archive_digest'], packaged_evidence_sha256=hashlib.sha256(evidence.read_bytes()).hexdigest(),
                       served_assets=names, independently_expected_proposals=['12', '18', None])
+        feedback=client.get('/api/product/feedback-example').json()
+        assert feedback['reports']['overdue_partial']['result']['proposed_order_qty'] is None
+        assert feedback['reports']['revised_eta']['result']['proposed_order_qty']==0
         evaluation=client.get('/api/product/evaluation').json()
         assert evaluation['reviews']==144 and evaluation['decision_gate_passes']==2 and evaluation['global_winner'] is None
         terms=client.get('/api/product/decision-context',params=selected).json()

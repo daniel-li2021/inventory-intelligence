@@ -24,7 +24,7 @@ def verify_assets(wheel, root=ROOT):
         evidence = archive.read('inventory_intelligence/product_evidence.json.gz')
         if evidence != (root/'src/inventory_intelligence/product_evidence.json.gz').read_bytes():
             raise ValueError('Wheel evidence differs from the validated product archive')
-        for name in ('execution_evidence.json.gz','execution_controls.json','forecast_decision_summary.json'):
+        for name in ('execution_evidence.json.gz','execution_controls.json','forecast_decision_summary.json','transfer_feedback_evidence.json'):
             if archive.read('inventory_intelligence/'+name)!=(root/'src/inventory_intelligence'/name).read_bytes():
                 raise ValueError('Wheel execution evidence differs from the validated archive')
     return sorted(actual)

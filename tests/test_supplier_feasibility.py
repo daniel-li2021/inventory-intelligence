@@ -101,6 +101,38 @@ class SupplierTests(unittest.TestCase):
         for name,arm in legacy['arms'].items():
             self.assertEqual(r['arms'][name]['total_cost'],arm['total_cost'])
 
+    def test_zero_action_decisions_cannot_bypass_journal_budget(self):
+        import json
+        with TemporaryDirectory() as tmp:
+            journal=Journal(Path(tmp)/'journal.sqlite')
+            terms=self.profile()
+            original=journal.admit_supplier(self.catalog,cutoff=CUTOFF,sku_id=SKU,warehouse_id=WAREHOUSE,supplier=terms,arm='no_action')
+            with journal._connection() as conn:
+                rows=[]
+                for i in range(255):
+                    payload=dict(original,id='budget-fixture:'+str(i))
+                    rows.append((payload['id'],'synthetic-budget-fixture',json.dumps(payload)))
+                conn.executemany('INSERT INTO decisions VALUES (?,?,?)',rows)
+            changed=deepcopy(terms);changed['supplier_id']='new-supplier'
+            with self.assertRaisesRegex(ValueError,'decision envelope'):
+                journal.admit_supplier(self.catalog,cutoff=CUTOFF,sku_id=SKU,warehouse_id=WAREHOUSE,supplier=changed,arm='no_action')
+            self.assertEqual(journal.admit_supplier(self.catalog,cutoff=CUTOFF,sku_id=SKU,warehouse_id=WAREHOUSE,supplier=terms,arm='no_action'),original)
+            self.assertEqual(len(journal.snapshot(CUTOFF)['decisions']),256)
+
+    def test_conflicting_global_capacity_profiles_do_not_expand_allocations(self):
+        with TemporaryDirectory() as tmp:
+            journal=Journal(Path(tmp)/'journal.sqlite')
+            first=example_profile(CUTOFF,SKU,WAREHOUSE)
+            journal.admit_supplier(self.catalog,cutoff=CUTOFF,sku_id=SKU,warehouse_id=WAREHOUSE,supplier=first)
+            second_warehouse='product-dynamic:upland'
+            different=example_profile(CUTOFF,SKU,second_warehouse)
+            for row in different['capacity']:row['capacity']=24
+            before=journal.snapshot(CUTOFF)
+            with self.assertRaisesRegex(ValueError,'Conflicting shared supplier/day capacity'):
+                journal.admit_supplier(self.catalog,cutoff=CUTOFF,sku_id=SKU,warehouse_id=second_warehouse,
+                                       supplier=different,quantity=6,arm='alternative')
+            self.assertEqual(journal.snapshot(CUTOFF),before)
+
     def test_journal_bound_promises_partial_eta_and_exact_history(self):
         with TemporaryDirectory() as tmp:
             path=Path(tmp)/'journal.sqlite';journal=Journal(path)

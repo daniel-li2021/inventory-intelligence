@@ -11,3 +11,16 @@ def load_summary():
     if hashlib.sha256(data).hexdigest() != SUMMARY_SHA256:
         raise ValueError('Evaluation summary binding changed')
     return json.loads(data)
+
+
+FEEDBACK_SHA256 = '709d7474d46834a5fdb0da06381ce0d1d64030555cc6f9ce336c9b8b180e138b'
+
+
+def load_feedback():
+    from .copilot_planning import _validate
+    data = Path(__file__).with_name('transfer_feedback_evidence.json').read_bytes()
+    if hashlib.sha256(data).hexdigest() != FEEDBACK_SHA256:
+        raise ValueError('Feedback evidence binding changed')
+    result = json.loads(data)
+    for report in result['reports'].values(): _validate(report)
+    return result

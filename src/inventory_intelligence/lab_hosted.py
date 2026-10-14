@@ -11,7 +11,7 @@ from .lab_api import create_app
 
 API_PATHS = {'/api/lab', '/api/evidence', '/api/lab/evidence', '/api/product',
              '/api/product/overview', '/api/product/explore', '/api/product/detail',
-             '/api/product/evaluation', '/api/product/reviews', '/api/product/purchase-history', '/api/product/decision-context', '/api/product/transfer-history', '/api/product/history', '/api/product/evidence', '/api/product/control', '/api/product/insights', '/api/product/contrast',
+             '/api/product/feedback-example', '/api/product/evaluation', '/api/product/reviews', '/api/product/purchase-history', '/api/product/decision-context', '/api/product/transfer-history', '/api/product/history', '/api/product/evidence', '/api/product/control', '/api/product/insights', '/api/product/contrast',
              '/api/execution','/api/execution/detail','/api/execution/evidence','/api/execution/journal'}
 POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios', '/api/product/supplier-contrast', '/api/product/transfer-contrast'}
 HEALTH_PATHS = {'/health/live', '/health/ready'}

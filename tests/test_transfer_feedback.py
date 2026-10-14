@@ -13,6 +13,9 @@ from psycopg.conninfo import conninfo_to_dict,make_conninfo
 from inventory_intelligence.synthetic_replay import replay
 from inventory_intelligence.product import _key,_report
 from inventory_intelligence.replenishment import run_plan
+from inventory_intelligence.planning_runs import exact_json
+from inventory_intelligence.copilot_planning import load_planning_run
+import hashlib
 from inventory_intelligence.transfers import TransferJournal
 from inventory_intelligence.supplier_feasibility import example_profile
 
@@ -49,7 +52,8 @@ class TransferFeedbackTests(unittest.TestCase):
                             start_day=date.fromisoformat(context['start_day']),origin_day=date.fromisoformat(context['origin_day']),
                             method=context['method'],reliability_run_id=context['reliability_run_id'],supply_batch_id=batch,code_version='transfer-feedback-test')
                     journal.publish_supply(owner,batch_id='transfer-pending',sku_id=sku,warehouse_id=recipient,as_of=cutoff,reservations=[],inbound=[],policy=policy)
-                    self.assertEqual(plan(report,'transfer-pending')['result']['proposed_order_qty'],0)
+                    confirmed=plan(report,'transfer-pending')
+                    self.assertEqual(confirmed['result']['proposed_order_qty'],0)
                     self.assertEqual(report['result']['proposed_order_qty'],6)
                     journal.record(identity,'partial','receipt','2026-05-05',5)
                     self.assertEqual(journal.supply_effects('2026-05-05',sku,recipient)['inbound'][0]['remaining_qty'],7)
@@ -68,11 +72,26 @@ class TransferFeedbackTests(unittest.TestCase):
                     self.assertIn('overdue_inbound',blocked['result']['reasons'])
                     journal.record(identity,'eta','eta','2026-05-06',eta='2026-05-07')
                     journal.publish_supply(owner,batch_id='transfer-revised',sku_id=sku,warehouse_id=recipient,as_of='2026-05-06',reservations=[],inbound=[],policy=policy)
-                    self.assertEqual(plan(newreport,'transfer-revised')['result']['proposed_order_qty'],0)
+                    revised=plan(newreport,'transfer-revised')
+                    self.assertEqual(revised['result']['proposed_order_qty'],0)
                     self.assertEqual(journal.snapshot('2026-05-05')['transfers'][0]['eta'],'2026-05-05')
                     self.assertEqual(journal.snapshot('2026-05-06')['transfers'][0]['eta'],'2026-05-07')
                     # Journal projection inserted supply only; source counts stayed independently declared.
                     self.assertEqual(_report(new,newkey['plan_run_id'])['result']['inventory']['on_hand'],6)
+                    for saved in (report,confirmed,newreport,blocked,revised):
+                        self.assertEqual(load_planning_run(runner,saved['run_id']),saved)
+                    output=os.environ.get('TRANSFER_FEEDBACK_OUTPUT')
+                    if output:
+                        artifact=dict(contract_version='transfer-feedback-example-v1',synthetic=True,
+                            runtime=dict(server_version=runner.info.server_version,role=runner.info.user),
+                            source_versions=[source,later],reports=dict(original=report,confirmed_transfer=confirmed,
+                                independent_count=newreport,overdue_partial=blocked,revised_eta=revised),
+                            journal_history={day:journal.snapshot(day) for day in ('2026-05-04','2026-05-05','2026-05-06')},
+                            source_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in
+                                ('tests/test_transfer_feedback.py','src/inventory_intelligence/transfers.py','src/inventory_intelligence/replenishment.py')},
+                            boundary='Saved actual-planner synthetic arithmetic/feedback control; not automatic modification of the served source catalog')
+                        with Path(output).open('x') as stream:stream.write(json.dumps(exact_json(artifact),indent=2)+'\n')
+
             finally:admin.execute(sql.SQL('DROP DATABASE {}').format(sql.Identifier(db)))
 
 

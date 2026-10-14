@@ -102,6 +102,10 @@ class DecisionOptionsApiTests(unittest.TestCase):
             self.assertEqual(evaluation['reviews'],144)
             self.assertEqual(evaluation['decision_gate_passes'],2)
             self.assertEqual(evaluation['global_winner'],None)
+            feedback=readonly.get('/api/product/feedback-example').json()
+            self.assertEqual({k:r['result']['proposed_order_qty'] for k,r in feedback['reports'].items()},
+                dict(original=6,confirmed_transfer=0,independent_count=4,overdue_partial=None,revised_eta=0))
+            self.assertEqual(feedback['runtime']['server_version'],170009)
 
 
 if __name__=='__main__':unittest.main()

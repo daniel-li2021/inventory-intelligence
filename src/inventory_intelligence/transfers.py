@@ -199,6 +199,10 @@ class TransferJournal:
             if len(rows) >= 128: raise ValueError('Transfer sandbox limit')
             latest = conn.execute('SELECT max(known_day) FROM transfer_events').fetchone()[0]
             if latest and binding['cutoff'] < latest: raise ValueError('Backdated reservation')
+            for previous in rows:
+                old_terms=previous['binding']['transport_profile']
+                if old_terms['version_id']==binding['transport_profile']['version_id'] and old_terms!=binding['transport_profile']:
+                    raise ValueError('Conflicting immutable transport version')
             own = [r for r in rows if (r['binding']['sku_id'], r['binding']['donor_id']) == (binding['sku_id'], binding['donor_id'])]
             if any(r['donor_input_digest'] != payload['donor_input_digest'] for r in own):
                 raise ValueError('New donor basis requires explicit reconciliation; cannot reset spent stock')
@@ -295,7 +299,12 @@ class TransferJournal:
         from .demand import midnight
         from .planner_loop import _insert
         from .planning_runs import exact_json
+        from .synthetic_replay import _local
+        _local(owner)
         origin = midnight(_date(as_of))
+        visible=self.snapshot(as_of)['transfers']
+        if not any(r['binding']['sku_id']==sku_id and warehouse_id in (r['binding']['donor_id'],r['binding']['recipient_id']) for r in visible):
+            raise ValueError('Unknown origin-visible transfer source key')
         if not isinstance(batch_id,str) or not batch_id.strip(): raise ValueError('New supply batch required')
         fields = {'lead_days','review_days','safety_qty','pack_size','moq'}
         if (not isinstance(policy,dict) or set(policy)!=fields or any(type(v) is not int for v in policy.values()) or

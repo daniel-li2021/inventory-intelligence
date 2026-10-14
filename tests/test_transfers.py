@@ -85,6 +85,16 @@ class TransfersTest(unittest.TestCase):
                 with self.assertRaises(sqlite3.IntegrityError): conn.execute('DELETE FROM transfers')
                 with self.assertRaises(sqlite3.IntegrityError): conn.execute('UPDATE transfer_events SET known_day="2026-07-01"')
 
+    def test_conflicting_transport_version_cannot_relabel_new_route(self):
+        with TemporaryDirectory() as folder:
+            journal=TransferJournal(Path(folder)/'journal.sqlite')
+            first=self.calculation();journal._reserve(first)
+            second=deepcopy(first);second['binding']['recipient_id']='recipient-two'
+            second['binding']['transport_profile']['transit_days']='2'
+            with self.assertRaisesRegex(ValueError,'Conflicting immutable transport version'):
+                journal._reserve(second)
+            self.assertEqual(len(journal.snapshot('2026-06-01')['transfers']),1)
+
     def test_concurrent_donor_reservations_and_rollback(self):
         with TemporaryDirectory() as folder:
             path = Path(folder)/'journal.sqlite'; journal = TransferJournal(path)

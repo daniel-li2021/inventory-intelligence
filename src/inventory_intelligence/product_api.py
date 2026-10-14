@@ -195,6 +195,14 @@ def install_product_routes(application, supplied=None, catalog_path=None, journa
                       if transfer_journal else dict(enabled=False, synthetic_only=True), archive_digest=archive_digest)
 
 
+    @application.get('/api/product/feedback-example')
+    def feedback_example(request: Request):
+        if request.query_params: raise HTTPException(422, 'Saved feedback example has no selection fields')
+        from .evaluation_summary import load_feedback
+        try: return JSONResponse(load_feedback(), headers={'Cache-Control':'no-store'})
+        except (ValueError, OSError) as error:
+            raise HTTPException(503, 'Saved feedback unavailable') from error
+
     @application.get('/api/product/evaluation')
     def evaluation(request: Request):
         if request.query_params: raise HTTPException(422, 'Evaluation has no selection fields')
