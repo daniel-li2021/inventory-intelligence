@@ -1,0 +1,29 @@
+{
+  "audit_receipt_sha256": "72e6fd15fa6d25f9ec31244d3cdf14d31467cefd38b221061445cd4bc3bcf0fa",
+  "cleanup": {
+    "audit_database_dropped": true,
+    "existing_server_and_demo_preserved": true
+  },
+  "contract_version": "inventory-final-functional-postcommit-v1",
+  "documentation": {
+    "diff_whitespace_valid": true,
+    "local_links": 516,
+    "markdown_files": 29,
+    "mode": "AUTO",
+    "navigation_valid": true,
+    "research_json_valid": true
+  },
+  "lineage": {
+    "errors": 0,
+    "passed": 6,
+    "precommit_guard": "Before committing amended EVIDENCE.md the source-bound guard correctly refused archival; after commit six lineage controls passed.",
+    "seconds": 35.641,
+    "skipped": 0,
+    "tests": 6
+  },
+  "receipt_files_sha256": {
+    "committed-lineage.log.gz": "10b48a858bcf9262350cc0e9023bf6683f4fbd88522e4847d3c8617e4aac1798",
+    "precommit-lineage-guard.log.gz": "7076af56ab9d1fd26219c0e18b3daf6676b43ca47f9c3437b544cbc4f59ed9f0"
+  },
+  "validated_commit": "b9b6b43540d3eb4094f5fffb7803f4c3f2478426"
+}
