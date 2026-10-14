@@ -1,0 +1,18 @@
+{
+  "contract_version": "supplier-feasibility-controls-v1",
+  "synthetic_only": true,
+  "frozen_before_implementation": "2026-10-13",
+  "selection_boundary": "Arithmetic acceptance controls only; no policy selection or forecast claim",
+  "calendar_controls": [
+    {"origin": "2026-04-10", "order_minute": 1019, "quantity": 12, "lead_days": 2, "accepted_day": "2026-04-10", "promised_day": "2026-04-13"},
+    {"origin": "2026-04-10", "order_minute": 1020, "quantity": 12, "lead_days": 2, "accepted_day": "2026-04-13", "promised_day": "2026-04-15"},
+    {"origin": "2026-04-10", "order_minute": 1020, "quantity": 18, "lead_days": 2, "blocked_reason": "dispatch_capacity_exceeded"}
+  ],
+  "saved_harbor_controls": [
+    {"name": "full_day2", "deliveries": [{"arrival_day": "2026-04-08", "quantity": 6}], "total_cost": 16281, "holding": 15, "backlog_cost": 16220, "immediate": 18, "eventual": 18, "terminal_backlog": 94},
+    {"name": "cutoff_day3", "order_minute": 1020, "total_cost": 16275, "holding": 9, "backlog_cost": 16220, "immediate": 18, "eventual": 18, "terminal_backlog": 94},
+    {"name": "partial_day2_day4", "deliveries": [{"arrival_day": "2026-04-08", "quantity": 3}, {"arrival_day": "2026-04-10", "quantity": 3}], "total_cost": 16286, "holding": 10, "backlog_cost": 16230, "immediate": 17, "eventual": 18, "terminal_backlog": 94},
+    {"name": "eta_day5", "deliveries": [{"arrival_day": "2026-04-11", "quantity": 6}], "total_cost": 16373, "holding": 7, "backlog_cost": 16320, "immediate": 12, "eventual": 18, "terminal_backlog": 94}
+  ],
+  "negative_controls": ["missing_profile", "future_profile", "wrong_key", "missing_capacity", "reserved_capacity", "fractional_or_boolean_pieces", "delivery_before_promise", "delivery_sum_mismatch", "receipt_before_promise", "overreceipt", "conflicting_admission", "append_only_history", "source_digest_unchanged"]
+}

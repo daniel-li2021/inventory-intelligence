@@ -1,26 +1,26 @@
 # Engineering readiness plan
 
-Status: **local continuation measured and validated; reference/stability/release gates pending**. Current phase/mode
-and scope gates live in [STATE](STATE.md). The user approved implementation and a
-pilot on the existing Mac on 2026-10-03. On October 4 the user explicitly assigned
-the remaining engineering checks and one evidence-led optimization, then selected
-available local runtimes only. The continuation uses the existing native cluster
-and Docker Desktop ARM64 Linux VM; no x86 host is available. Its ceiling is three
-hours including retained harness repairs and full sustained HTTP windows, with
-the existing resource guards/caps. This replaces the continuation's initially
-chosen two-hour ceiling, not the completed original pilot's receipt.
-Reference workload/SLOs remain unchanged. The separate eight-hour program,
-feature resumption, paid host and public deployment remain outside this assignment.
+Status: **local continuation measured; remaining reference/stability/release gates
+explicit**. [STATE](STATE.md) owns current AUTO mode and [ROADMAP](ROADMAP.md) owns
+the full October 13 local synthetic product/engineering assignment. That assignment
+supersedes earlier feature pauses and limited-increment authorization; this file
+retains the original engineering confirmation recipes and acceptance gates, not a
+second product roadmap. Previously measured artifacts remain unchanged.
 
-The October 12 investigation and October 13 [product-journey revision](ROADMAP.md)
-reuse these outcomes. Future increments pair necessary engineering with a complete
-user experience; unrelated JIT/x86/serial1000/full evidence-v2 completion is not a
-blanket prerequisite for a bounded local synthetic prototype. That prototype must
-preserve exact quantities, applicable rules, selected-source completeness, clocks
-and fail-closed behavior. This revision does not complete/rewrite the confirmation
-protocol, authorize measurements, or resume features. Serving timeout/deadline and
-planning-JIT work still need assigned scope; all unmeasured reference/stability
-cells remain open. Large-scale/public claims keep their own gates/envelope.
+The original existing-Mac pilot and October 4 continuation used native PostgreSQL
+and Docker Desktop ARM64 Linux with a three-hour ceiling including harness repairs
+and HTTP windows. Its clock discontinuity/overrun is retained, not repaired by a
+new label. New bounded measurements follow ROADMAP budgets and existing guards;
+reuse completed cells. No x86 host was available in that evidence. Actual
+PostgreSQL17/current regression checks and necessary performance/evidence/recovery
+work now belong to the full assignment where feasible. Native18 is not a version17
+reference. Public/paid deployment, real/company inputs and real purchasing remain
+excluded.
+
+Selected-claim quantities, completeness, clocks and fail-closed behavior gate every
+local milestone. Unavailable x86/two-date, sustained public runtime and independent
+human checks remain separate; they do not block all bounded local product work or
+permit unsupported production/large-scale claims.
 
 ## Phase handoff and checkpoints
 
@@ -62,15 +62,16 @@ Remaining: two further continuity-verified HTTP campaigns and sparse rate/client
 controls; x86 reference/Python3.12.12/two-date confirmation; serial1000 and remaining
 archive-growth/defect cells; independent human accessibility/cold start and public
 TLS. Planning latency, dense-evidence SQL deadlines, reader size limits and proxy
-slow-body timeout behavior remain explicit gaps. Features remain paused.
+slow-body timeout behavior remain explicit gaps. ROADMAP owns their scoped implementation and local acceptance.
 
 Next action: repeat only the missing continuous HTTP/rate/client cells on a runtime
 with verified clock continuity, then obtain the x86/two-date reference evidence
 when an available local host supports it. The 180-minute target was exceeded by
 clock discontinuities (192.8 minutes); measurements stopped and guards/journaling
 were repaired. Keep the x86/two-date,
-planning SLO, dense-evidence, proxy timeout and human checks explicit. Broader
-features remain paused; this plan remains necessary for pending confirmation.
+planning SLO, dense-evidence, proxy timeout and human checks explicit. The full ROADMAP assignment
+authorizes core feature implementation; this protocol remains necessary only for
+pending engineering confirmation.
 
 ## Questions and supported claims
 

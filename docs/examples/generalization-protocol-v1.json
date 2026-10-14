@@ -1,0 +1,354 @@
+{
+  "protocol_version": "synthetic-generalization-v1",
+  "synthetic": true,
+  "purpose": "Independent hand arithmetic and insight rules on changed dimensions, identities, clocks and policies; no detection efficacy or holdout promotion.",
+  "source_sha256": {
+    "docs/examples/generalization-two-site-v1.json": "025cd709ca79f74359d9cb0d2f6c6f402580a90b9f0a59e06ad85ceb8cf1c1ab",
+    "docs/examples/generalization-single-site-v1.json": "f3fdd0c9ba633258dfcb4a9acd4403e4035aa9e83dd4a8454f4ed6c62544a312"
+  },
+  "datasets": [
+    {
+      "input": "docs/examples/generalization-two-site-v1.json",
+      "expected": [
+        {
+          "rule_keys": [
+            {
+              "rule": "I201",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I201",
+              "sku": 2,
+              "site": 0
+            },
+            {
+              "rule": "I206",
+              "sku": 0,
+              "site": 0
+            }
+          ],
+          "orders": [
+            6,
+            0,
+            0,
+            null,
+            0,
+            0
+          ],
+          "balances": [
+            [
+              1,
+              -1,
+              -3,
+              -5
+            ],
+            [
+              78,
+              76,
+              74,
+              72
+            ],
+            [
+              4,
+              3,
+              2,
+              1
+            ],
+            null,
+            [
+              "35/2",
+              15,
+              "25/2",
+              10
+            ],
+            [
+              30,
+              30,
+              30,
+              30
+            ]
+          ],
+          "unknown": 2
+        },
+        {
+          "rule_keys": [
+            {
+              "rule": "I202",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I202",
+              "sku": 2,
+              "site": 0
+            },
+            {
+              "rule": "I205",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I206",
+              "sku": 0,
+              "site": 0
+            }
+          ],
+          "orders": [
+            12,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "balances": [
+            [
+              -2,
+              -5,
+              -8,
+              -11
+            ],
+            [
+              78,
+              76,
+              74,
+              72
+            ],
+            [
+              4,
+              3,
+              2,
+              1
+            ],
+            [
+              4,
+              3,
+              2,
+              1
+            ],
+            [
+              19,
+              18,
+              17,
+              16
+            ],
+            [
+              30,
+              30,
+              30,
+              30
+            ]
+          ],
+          "unknown": 0
+        },
+        {
+          "rule_keys": [
+            {
+              "rule": "I205",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I206",
+              "sku": 0,
+              "site": 0
+            }
+          ],
+          "orders": [
+            12,
+            0,
+            0,
+            null,
+            0,
+            0
+          ],
+          "balances": [
+            [
+              -2,
+              -5,
+              -8,
+              -11
+            ],
+            [
+              78,
+              76,
+              74,
+              72
+            ],
+            [
+              4,
+              3,
+              2,
+              1
+            ],
+            null,
+            [
+              19,
+              18,
+              17,
+              16
+            ],
+            [
+              30,
+              30,
+              30,
+              30
+            ]
+          ],
+          "unknown": 2
+        }
+      ]
+    },
+    {
+      "input": "docs/examples/generalization-single-site-v1.json",
+      "expected": [
+        {
+          "rule_keys": [
+            {
+              "rule": "I201",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I201",
+              "sku": 5,
+              "site": 0
+            }
+          ],
+          "orders": [
+            0,
+            0,
+            0,
+            null,
+            null,
+            0
+          ],
+          "balances": [
+            [
+              0,
+              -1,
+              -2,
+              3,
+              2
+            ],
+            [
+              50,
+              50,
+              50,
+              50,
+              50
+            ],
+            [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            null,
+            null,
+            [
+              28,
+              26,
+              24,
+              22,
+              20
+            ]
+          ],
+          "unknown": 1
+        },
+        {
+          "rule_keys": [
+            {
+              "rule": "I201",
+              "sku": 1,
+              "site": 0
+            },
+            {
+              "rule": "I202",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I202",
+              "sku": 1,
+              "site": 0
+            },
+            {
+              "rule": "I202",
+              "sku": 5,
+              "site": 0
+            },
+            {
+              "rule": "I203",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I204",
+              "sku": 0,
+              "site": 0
+            },
+            {
+              "rule": "I205",
+              "sku": 0,
+              "site": 0
+            }
+          ],
+          "orders": [
+            9,
+            0,
+            0,
+            null,
+            null,
+            0
+          ],
+          "balances": [
+            [
+              -1,
+              -3,
+              -5,
+              -7,
+              -6
+            ],
+            [
+              48,
+              46,
+              44,
+              42,
+              40
+            ],
+            [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            null,
+            null,
+            [
+              29,
+              28,
+              27,
+              26,
+              25
+            ]
+          ],
+          "unknown": 2
+        }
+      ]
+    }
+  ],
+  "negative_controls": [
+    "conflicting version identity rolls back prior new version",
+    "duplicate version and null stock rejected",
+    "future known_at rejected",
+    "restricted runner denies source write",
+    "late trigger admission failure has no new versions",
+    "published good bytes survive invalid publish and duplicate publish",
+    "historical semantic outcomes unchanged after new versions and fresh replay"
+  ],
+  "budget_seconds": 900
+}

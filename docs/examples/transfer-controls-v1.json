@@ -1,0 +1,45 @@
+{
+  "protocol_version": "donor-safe-transfer-v1",
+  "synthetic": true,
+  "frozen_before_implementation": true,
+  "scope": "One SKU, two locations, one review, 28 demand days and five paid closure days",
+  "inputs": {
+    "donor_stock": 30,
+    "donor_demand": [1, 1, 1, 1, 1],
+    "donor_safety": 2,
+    "recipient_stock": 0,
+    "recipient_demand": [3, 3, 3, 3, 3],
+    "recipient_forecast": [3, 3, 3, 3, 3],
+    "lead_days": 2,
+    "pack_size": 6,
+    "moq": 6,
+    "transfer_quantity": 12,
+    "transit_days": 1,
+    "transport_setup": 4,
+    "transport_per_piece": 1
+  },
+  "independent_expected": {
+    "safe_surplus": 23,
+    "purchase_only_order": 18,
+    "transfer_before_purchase_order": 6,
+    "no_action_total_cost": 5545,
+    "purchase_only_total_cost": 1125,
+    "transfer_before_purchase_total_cost": 667,
+    "donor_immediate_fulfilled_each_arm": 5,
+    "transfer_arm_terminal_donor_stock": 13,
+    "transfer_arm_terminal_recipient_stock": 3,
+    "transfer_arm_network_pieces": 36,
+    "transfer_arm_consumed": 20,
+    "transfer_arm_terminal_pieces": 16
+  },
+  "negative_controls": [
+    "24 pieces exceeds donor-safe surplus",
+    "receipt before dispatch plus transit rejects",
+    "partial receipt 5 leaves 7 in transit; final receipt 7 conserves 12",
+    "two concurrent 12-piece reservations cannot both consume 23-piece surplus",
+    "duplicate identity is idempotent; changed identity payload rejects",
+    "future/contradictory/incomplete donor evidence blocks all transfer conclusions",
+    "new source basis cannot silently reset previously dispatched donor stock"
+  ],
+  "limits": ["Declared synthetic demand; no stochastic donor-service guarantee", "No real dispatch or purchasing", "No global optimum claim"]
+}

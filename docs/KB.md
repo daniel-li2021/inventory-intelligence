@@ -91,49 +91,45 @@ Redis, Kubernetes, sharding, ORMs, indexes or advanced models do not follow from
 
 ## Next-phase investigation
 
-October 12 inspection of main `b5b8d5a` and fresh bounded Lab checks is recorded in
-[this receipt](review/next-phase-investigation.json). The actionable follow-up is
-the [proposed roadmap](ROADMAP.md), not automatic feature resumption.
+The [October 12 receipt](review/next-phase-investigation.json) records historical
+inspection of `b5b8d5a`; its fixed-SKU UI and paused-feature gaps are superseded by
+Increments 0–4 and controlled replay/discovery V2. [ROADMAP](ROADMAP.md) owns the
+current full implementation assignment. Keep the original receipt unchanged.
 
-- The architecture already supports warehouse-grained reliability and has extensive
-  decision research. Its largest capability gap is the operational journey: one
-  browser replay cannot browse inventory, triage findings, review commitments,
-  follow receipts or demonstrate execution of actual planner proposals.
-- Whole-batch revalidation and archive-wide demand reads are visible in the code;
-  only the saved JIT profile establishes a measured second bottleneck. Scoped JIT
-  comparison precedes batch reuse/index/cache changes. Valid-but-unreadable large
-  reports need a versioned complete-evidence representation, not larger caps or
-  frontend virtualization alone.
-- The Lab multiplier transforms training and future together; it is a coherent
-  counterfactual rather than a forecast-surprise experiment. Service threshold
-  compares a result and does not set safety. Total cost comparisons can cover
-  unequal runoff lengths. These distinctions should shape controls/navigation.
-- Fresh 34 focused tests and six API controls passed without changing the archive
-  digest. Assessable responses were 333,120–338,392 bytes. Desktop review showed
-  first metric cards at approximately y=671px in a 1280×720 viewport. A 320px
-  override did not take effect, so fresh mobile/speech/zoom acceptance is absent.
-- `codex/planner-closed-loop` retains only two unmerged committed protocol/control
-  files relative to main. Its registered temporary checkout now contains no files
-  or `.git`; previously noted uncommitted implementation cannot be presumed saved.
-  Preserve the branch; recreate from committed controls only when assigned.
-- Runtime core SQL deadlines, application metrics, persistent product workflows,
-  migrations and private-user isolation need explicit designs. Their absence is
-  not proof of a current anonymous synthetic-demo security incident. Branch
-  protection was inaccessible (401); public ruleset listing was empty.
-- UI references support a compact attention queue, item/decision detail and guided
-  exploration with linked exact evidence. [Reference comparison](ROADMAP.md#ui-direction-and-reference-comparison)
-  distinguishes borrowed patterns from code adoption. Current metadata/SHAs are
-  appended separately in [research metadata](research/repositories.json), preserving
-  the earlier inspection. The October 13 product direction now prioritizes the
-  Inventory Decision Journey, deterministic Risk/Opportunity/Evidence Problem
-  insights, presets, lightweight apparel matrices and selected-insight explanations.
-  O23–O25 compose existing capabilities; they need not be separate services.
-  Local prototype correctness gates differ from scale/public/real-workflow gates;
-  unresolved peripheral optimization must not block all UI work once assigned.
-  Forecast uncertainty, source coverage, freshness and rule/action applicability
-  stay distinct; no invented composite AI-confidence score. External functional
-  similarity is useful inspiration, not a scope restriction; data/license boundaries
-  persist. All added examples and capabilities remain plans, not fresh measurements.
+Durable lessons from the completed product/execution work:
+
+- The actual prefix planner, periodic simulator and one-review contrast have
+  different action/review semantics. Label them before comparing outcomes; retain
+  complete common paid windows, source identities and compatible metric denominators.
+- Actual execution rejected one original cold-shortage oracle: a 17-piece need
+  rounds to 18, not 12. The original expectation and explicit erratum remain;
+  correcting an oracle after seeing execution is not fresh held-out quality evidence.
+- On the frozen 12-trace grid, actual proposals beat fixed-18 on 12/12 and no-action
+  on 11/12; quiet demand favors no action. Training stockouts and overdue commitments
+  still block. Neither attractive sums nor a journal waive source/training gates.
+  [Exact measurements](PLANNER_EXECUTION.md#measured-acceptance).
+- Durable decisions and receipt events need source-bound natural identity and
+  coherent transactions. Promise/ETA changes are knowledge, not physical receipt;
+  partial receipts conserve outstanding pieces. SQLite journal and PostgreSQL
+  owner publication are separate boundaries, not a production atomic handoff.
+- Variable synthetic datasets already use immutable source versions/original text,
+  actual restricted-runner reports and automatic discovery. A source digest proves
+  byte identity, not real stock truth or trusted ownership. Reusing a new cutoff
+  must not leak later knowledge into historical runs.
+- Discovery verifies observable demand/supply/projection changes, not external
+  causation. Explain measured facts, model hypotheses and absent evidence separately.
+  Source completeness, freshness, applicability, uncertainty and feasible action
+  remain different states; no composite AI-confidence percentage is supported.
+- Location imbalance is not executable surplus. A transfer needs donor protection,
+  reservations, dispatch/transit/receipt conservation, feasible timing and network
+  economics. Nominal pack/MOQ/lead is not a supplier calendar/capacity contract.
+- Readable context/evidence belongs beside the selected insight and decision.
+  Existing React routes, matrix and exact inspector meet the bounded journey; another
+  framework rewrite has no measured value. Independent human accessibility and
+  comprehension remain separate from developer browser checks.
+- Whole-batch revalidation/archive-wide reads remain visible; retained JIT profiles
+  justify isolated measurement before caches/indexes. Large unreadable reports need
+  complete versioned evidence access, not truncated findings or raised caps.
 
 ## Source and tool lessons
 
@@ -221,11 +217,11 @@ STATE and the active plan own prioritization and progress; these are not assignm
 | 11 Source provenance | [Lineage protocol](EVIDENCE.md#historical-provenance-and-independent-audits), [integration evidence](EVIDENCE.md#historical-provenance-and-independent-audits) | Demonstrated missing semantic link; hashes are not signed authenticity. |
 | 12 Property/mutation QA | Existing independent controls in `tests/`, [readiness evidence](EVIDENCE.md#acceptance-history) | A concrete uncovered invariant; test counts are not a quality target. |
 | 13 Backlog versus lost sales | [Contract](CONTRACTS.md#lost-sales-v1), [paired results](RESULTS.md#matched-lost-sales) | Keep permanent losses and owed backlog plus different cost units explicit. |
-| 14 Actual planner closed loop | Paused `codex/planner-closed-loop` protocol/unfinished work; see STATE | Preserve action/receipt identity, repeated clocks and actual reliability/supply gates; resume only after scope approval. |
+| 14 Actual planner closed loop | [Completed local execution guide](PLANNER_EXECUTION.md); original unmerged controls preserved | Fresh assigned studies keep action/receipt identity, repeated clocks and actual reliability/supply gates; no consumed-holdout tuning. |
 | 15 Physical inventory truth | [Contract](CONTRACTS.md#physical-count-v1), [results](RESULTS.md#physical-count-controls) | Authenticated count/business evidence needed for real truth; no automatic inventory write. |
 | 16 Performance/scale | [Engineering investigation](KB.md#engineering-gaps-and-hypotheses), [PLAN](PLAN.md) | Program/host/budget review before a runner; report measured envelope and failures. |
-| 17 Multi-location allocation | SKU/warehouse grain and paired transfer legs do not define transit availability, transport costs or optimal allocation. | Demonstrated transfer benefit, then a transit/cost/capacity contract and independent service oracle. |
-| 18 Supplier capacity/calendar | MOQ/pack rounding is not supplier capacity or a working-day calendar. ERP reordering features do not establish optimization of this project's objective. | A binding use case and receipt/approval/timing contract before extending constraints. |
+| 17 Multi-location allocation | SKU/warehouse grain and immediate paired legs do not define transit stock or donor-safe allocation. | Current ROADMAP assigns bounded durable transfer controls; advanced optimization needs measured heuristic counterexamples. |
+| 18 Supplier capacity/calendar | MOQ/pack rounding is not supplier capacity or a working-day calendar. | Current ROADMAP assigns effective constraints with independent cutoff/capacity/receipt controls; no real supplier claim. |
 | 19 Guided demo | [Lab](DECISION_LAB.md), [three-minute case study](../README.md) | Reuse clean/spike/delay/blocked walkthrough; add structure only for a demonstrated UX gap. |
 | 20 Accessibility/cold start | [Targeted local review](RESULTS.md#browser-and-accessibility-results) | Speech/zoom/forced colors/download bytes and human cold start remain scoped manual checks. |
 | 21 Hosted read-only Lab | [Design evidence](../deploy/lab/README.md#serving-architecture-and-limits), [operations](../deploy/lab/README.md) | Actual Linux/runtime/recovery plus reviewed host/domain/cost before public TLS/uptime claims. |
