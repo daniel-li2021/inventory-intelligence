@@ -13,6 +13,7 @@
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
 | [Product / Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
 | [Synthetic replay / insights V2](SYNTHETIC_REPLAY.md) | Controlled local intake, immutable versions, discovery rules, one-review comparisons and walkthrough. |
+| [Product design exploration](PRODUCT_DESIGN.md) | Selected white Desk implementation, preserved Brief alternative, research and browser checks. |
 | [Platform and case studies](PLATFORM_GUIDE.md) | Working integrated local demo, six scenarios, benchmarks and boundaries. |
 | [Supplier feasibility](SUPPLIER_FEASIBILITY.md) / [transfers](TRANSFERS.md) | Declared calendars/capacity, durable lifecycles, donor protection, costs and actual feedback. |
 | [Forecast and decision evaluation](FORECAST_DECISION.md) / [engineering support](ENGINEERING_SUPPORT.md) | Fresh study, losing/no-winner paths, JIT non-adoption and bounded evidence inspection. |

@@ -1,5 +1,5 @@
 {
-  "source": "npm lockfile metadata; direct dependencies MIT except TypeScript Apache-2.0",
+  "source": "npm lockfile metadata; React MIT; Lucide ISC; TypeScript Apache-2.0",
   "packages": [
     {
       "package": "@esbuild/aix-ppc64",
@@ -413,6 +413,13 @@
       "license": "MIT",
       "development_only": true,
       "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="
+    },
+    {
+      "package": "lucide-react",
+      "version": "0.577.0",
+      "license": "ISC",
+      "development_only": false,
+      "integrity": "sha512-4LjoFv2eEPwYDPg/CUdBJQSDfPyzXCRrVW1X7jrx/trgxnxkHFjnVZINbzvzxjN70dxychOfg+FTYwBiS3pQ5A=="
     },
     {
       "package": "nanoid",

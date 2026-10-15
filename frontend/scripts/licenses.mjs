@@ -14,7 +14,7 @@ writeFileSync(
   JSON.stringify(
     {
       source:
-        "npm lockfile metadata; direct dependencies MIT except TypeScript Apache-2.0",
+        "npm lockfile metadata; React MIT; Lucide ISC; TypeScript Apache-2.0",
       packages: inventory,
     },
     null,
@@ -24,7 +24,7 @@ writeFileSync(
 const notices = [
   "React and its supporting runtime are distributed under the following licenses.\n",
 ];
-for (const name of ["react", "react-dom", "scheduler"]) {
+for (const name of ["react", "react-dom", "scheduler", "lucide-react"]) {
   const metadata = JSON.parse(
     readFileSync(`node_modules/${name}/package.json`),
   );

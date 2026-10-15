@@ -5,8 +5,8 @@ Updated: 2026-10-14 (America/Los_Angeles).
 Integration mode: AUTO
 
 Phase: final bounded functional audit complete; Functional Closure recommended for
-the local synthetic core. Next focus is dedicated UI/UX redesign.
-Execution is sequential at the user's preference. Operational inputs are synthetic.
+the local synthetic core. The selected direct white Desk UI is implemented and
+validated locally; the editorial Brief prototype is preserved. Operational inputs are synthetic.
 Real orders, confidential/company intake and public/paid deployment remain excluded.
 
 ## Coherent platform
@@ -34,6 +34,19 @@ Real orders, confidential/company intake and public/paid deployment remain exclu
 - Compact light workbench integrates insights/evidence, feasible comparisons,
   journals, saved actual feedback and Evaluation. The wheel works offline without
   Node, database or model key; default mode is read-only, writes opt into loopback.
+
+## Product design selection
+
+- Owner selected the direct white Desk direction and authorized implementation.
+  Larger type, wider cells, quieter source controls and a responsive context panel
+  adapt the selected design to all existing workbench controls.
+- The editorial Brief alternative remains runnable in the isolated prototype app
+  for a future switch. [Research and review](PRODUCT_DESIGN.md).
+- Eight production screens pass desktop/mobile/320px browser inspection; 8 frontend,
+  6 prototype and 3 hosted tests pass. Installed offline wheel and isolated synthetic
+  reservation/dispatch/partial receipt pass. All 521 protected backend/evidence files
+  retain original hashes. [Validation and screenshots](PRODUCT_DESIGN.md#selection-and-validation).
+- Backend closure, calculations, API contracts and historical evidence stay fixed.
 
 ## Accepted evidence and remaining gates
 

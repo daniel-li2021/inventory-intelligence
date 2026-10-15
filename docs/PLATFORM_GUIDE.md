@@ -124,13 +124,15 @@ Point baselines have no predictive intervals, so calibration is unavailable. Exi
 intermittent/calibration/supply/recovery research is retained, not retuned. No new
 model family or policy promotion is justified. [Full fresh study](FORECAST_DECISION.md).
 
-The owner's selected compact light direction adapts FinRAG Meridian's structured
-numeric comparison and Folio's readable evidence inspection. It retains React/Vite,
-semantic navigation, original values and exact exports. Main comparisons show cost,
-service, constraints and next action first; detailed daily/source evidence is a named
-progressive disclosure. Narrow views stack controls and scroll tables; selected
-original evidence remains inspectable. No other project's data, business logic,
-assets or frontend framework were copied.
+The owner selected the direct white **Desk** direction after browser review of two
+navigable alternatives. The workbench retains React/Vite and all existing controls,
+with a graphite navigation rail, white working surfaces, violet selection, larger
+native system typography, more room around table cells and an optional item
+context panel. At narrower desktop widths the context panel stacks beneath the
+working table. Original records appear before progressively disclosed source clocks
+and identities; calculations remain in the backend. The more editorial **Brief**
+alternative is preserved as a separate runnable frontend. [Design research and
+validation](PRODUCT_DESIGN.md) records the choice and its boundaries.
 
 Developer browser controls cover constraints/staleness, admissions, partial lifecycle,
 source-bound review, exact exports, evaluation and 1280/320px layout. These checks are

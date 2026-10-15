@@ -11,7 +11,9 @@ negative findings and boundaries. [STATE](STATE.md) owns integration mode/status
 The [final bounded functional audit](RESULTS.md#final-bounded-functional-audit)
 recommends Functional Closure of the local synthetic core after three small safety/
 version fixes and focused PostgreSQL/installed-package acceptance. Dedicated UI/UX
-redesign is the next focus; the following external acceptance gates remain open.
+[selected Desk implementation](PRODUCT_DESIGN.md) follows the owner's visual choice:
+implement the direct white direction with larger text and more readable columns;
+preserve Brief as a future alternative; the following external acceptance gates remain open.
 Changed donor bases continue to reject; closure does not extend the one-review
 transfer contract into repeated network execution or claim production readiness.
 

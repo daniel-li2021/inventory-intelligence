@@ -1,0 +1,255 @@
+{
+  "scope": "isolated loopback synthetic journal; browser reserve, dispatch and receipt; original sources unchanged",
+  "history": {
+    "synthetic_only": true,
+    "as_of": "2026-05-05",
+    "transfers": [
+      {
+        "binding": {
+          "archive_digest": "c96bec1c99b6951d1be109f669f89ad023abdc0e83516789534819eb2625ef72",
+          "cutoff": "2026-05-04",
+          "donor_id": "product-coast:site-1",
+          "quantity": "12",
+          "recipient_id": "product-coast:site-0",
+          "sku_id": "product-coast:sku-0",
+          "supplier_profile": {
+            "capacity": [
+              {
+                "capacity": "12",
+                "day": "2026-05-04",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-05",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-06",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-07",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-08",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-09",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-10",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-11",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-12",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-13",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-14",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-15",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-16",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-17",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-18",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-19",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-20",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-21",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-22",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-23",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-24",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-25",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-26",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-27",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-28",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-29",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-30",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-05-31",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-06-01",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-06-02",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-06-03",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-06-04",
+                "reserved": "0"
+              },
+              {
+                "capacity": "12",
+                "day": "2026-06-05",
+                "reserved": "0"
+              }
+            ],
+            "contract_version": "supplier-feasibility-v1",
+            "cutoff_minute": "1020",
+            "known_day": "2026-05-04",
+            "order_weekdays": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "receipt_weekdays": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
+            ],
+            "sku_id": "product-coast:sku-0",
+            "supplier_id": "synthetic-demo-supplier",
+            "synthetic_only": true,
+            "version_id": "declared-capacity-12-2026-05-04",
+            "warehouse_id": "product-coast:site-0"
+          },
+          "transport_profile": {
+            "capacity": "24",
+            "known_day": "2026-05-04",
+            "per_piece_cost": "1",
+            "setup_cost": "4",
+            "transit_days": "1",
+            "version_id": "declared-transit-1-2026-05-04"
+          }
+        },
+        "calculation_id": "4975537082471c94eeb7bfaaa38926c13af29652fa74cb5b41d2ff1492453a89",
+        "donor_input_digest": "3362aa4c5199ce3f538ec47730e9e163f5b932a643ff168c37c25729e2117c63",
+        "id": "6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103",
+        "safe_surplus": "51",
+        "eta": "2026-05-05",
+        "overdue": false,
+        "reserved": "0",
+        "dispatched": "12",
+        "in_transit": "7",
+        "received": "5"
+      }
+    ],
+    "events": [
+      {
+        "id": "6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103:reserve",
+        "kind": "reserve",
+        "known_day": "2026-05-04",
+        "quantity": "12",
+        "transfer_id": "6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103"
+      },
+      {
+        "eta": null,
+        "id": "ui:6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103:dispatch:2026-05-04:transfer:",
+        "kind": "dispatch",
+        "known_day": "2026-05-04",
+        "quantity": null,
+        "transfer_id": "6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103"
+      },
+      {
+        "eta": null,
+        "id": "ui:6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103:receipt:2026-05-05:transfer:5",
+        "kind": "receipt",
+        "known_day": "2026-05-05",
+        "quantity": "5",
+        "transfer_id": "6c66b45dc9ebe06c0347c57002a3324b1abdbfc5ce14f65660ceb41afe528103"
+      }
+    ]
+  }
+}

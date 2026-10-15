@@ -1,0 +1,627 @@
+{
+  "scope": "Developer browser validation with saved synthetic Coast archive; no independent user acceptance",
+  "captures": [
+    {
+      "name": "desk-desktop-compare",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Compare",
+        "What changes if you act?",
+        "Compared outcomes",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-desktop-capacity-blocked",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Compare",
+        "What changes if you act?",
+        "Compared outcomes",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-desktop-transfer",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Compare",
+        "What changes if you act?",
+        "Compared outcomes",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-desktop-decide",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Decision",
+        "A proposal ready for human review",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-desktop-history",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "History",
+        "How this item changed",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-desktop-execution",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Execution",
+        "Follow the outcome, keep the history",
+        "Reservation to partial receipt",
+        "Actual planner feedback",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-desktop-evaluation",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Evaluation",
+        "Forecast accuracy is only part of the decision",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-mobile-evaluation",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Evaluation",
+        "Forecast accuracy is only part of the decision",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "desk-mobile-overview",
+      "height": 844,
+      "scrollWidth": 566,
+      "width": 390,
+      "headings": [
+        "Overview",
+        "Attention queue 4",
+        "What changed in the inputs",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Recent demand decrease",
+        "COAST-0",
+        "Replenishment attention",
+        "Related findings"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-overview",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Your inventory, in focus.",
+        "Replenishment attention",
+        "Understand.Compare.Then decide.",
+        "Worth a closer look",
+        "A little more context",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Recent demand decrease"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-investigate",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Follow the evidence.",
+        "Replenishment attention",
+        "A trace you can follow",
+        "Saved inventory reliability",
+        "Origin-known demand",
+        "Supply completeness",
+        "Prefix proposal",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Evidence inspector"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-explore",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "See the whole picture.",
+        "Item locations"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-compare",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Make the tradeoffs visible.",
+        "What changes if you act?",
+        "Saved proposal vs no action"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-decide",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "A considered next step.",
+        "A proposal ready for human review"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-history",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Every cutoff, kept intact.",
+        "How this item changed"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-execution",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "From proposal to outcome.",
+        "Follow the outcome, keep the history",
+        "Reservation to partial receipt",
+        "Actual planner feedback"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-desktop-evaluation",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Better forecasts. Better decisions?",
+        "Forecast accuracy is only part of the decision"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-overview",
+      "height": 844,
+      "scrollWidth": 569,
+      "width": 390,
+      "headings": [
+        "Your inventory, in focus.",
+        "Replenishment attention",
+        "Worth a closer look",
+        "A little more context",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Recent demand decrease"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-explore",
+      "height": 844,
+      "scrollWidth": 569,
+      "width": 390,
+      "headings": [
+        "See the whole picture.",
+        "Item locations"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-investigate",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Follow the evidence.",
+        "Replenishment attention",
+        "A trace you can follow",
+        "Saved inventory reliability",
+        "Origin-known demand",
+        "Supply completeness",
+        "Prefix proposal",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Evidence inspector"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-compare",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Make the tradeoffs visible.",
+        "What changes if you act?",
+        "Saved proposal vs no action"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-decide",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "A considered next step.",
+        "A proposal ready for human review"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-history",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Every cutoff, kept intact.",
+        "How this item changed"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-execution",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "From proposal to outcome.",
+        "Follow the outcome, keep the history",
+        "Reservation to partial receipt",
+        "Actual planner feedback"
+      ],
+      "loading": false
+    },
+    {
+      "name": "brief-mobile-evaluation",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Better forecasts. Better decisions?",
+        "Forecast accuracy is only part of the decision"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-investigate",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Investigate",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Replenishment attention",
+        "Calculation trace",
+        "Insight Discovery V2",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Capability boundary",
+        "Sources behind this claim"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-overview",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Overview",
+        "Attention queue",
+        "Insight Discovery V2",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Recent demand decrease",
+        "What this workspace can tell you",
+        "What still needs human review",
+        "COAST-0",
+        "Replenishment attention"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-explore",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Explore",
+        "Inventory workbench",
+        "COAST-0",
+        "Replenishment attention"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-compare",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Compare",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Purchase, transfer or no action",
+        "Use donor-safe surplus",
+        "One-review execution comparison",
+        "What-if decision explorer",
+        "Exact comparison",
+        "Prefix stock: no order vs proposal"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-decide",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Decide",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Purchase, transfer or no action",
+        "Use donor-safe surplus",
+        "Recommendation withheld"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-history",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "History",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Saved history",
+        "Compatible change evidence"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-execution",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Execution",
+        "Actual proposals \u2192 receipts \u2192 fulfillment",
+        "Paired decision quality",
+        "Durable synthetic commitment sandbox"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-desktop-evaluation",
+      "height": 1000,
+      "scrollWidth": 1440,
+      "width": 1440,
+      "headings": [
+        "Evaluation",
+        "Forecast accuracy meets decision quality"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-overview",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Overview",
+        "Attention queue",
+        "Insight Discovery V2",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Recent demand decrease",
+        "What this workspace can tell you",
+        "What still needs human review",
+        "COAST-0",
+        "Replenishment attention"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-explore",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Explore",
+        "Inventory workbench",
+        "COAST-0",
+        "Replenishment attention"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-investigate",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Investigate",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Replenishment attention",
+        "Calculation trace",
+        "Insight Discovery V2",
+        "Recent demand increase",
+        "Same-item location imbalance",
+        "Capability boundary",
+        "Sources behind this claim"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-compare",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Compare",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Purchase, transfer or no action",
+        "Use donor-safe surplus",
+        "One-review execution comparison",
+        "What-if decision explorer",
+        "Exact comparison",
+        "Prefix stock: no order vs proposal"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-decide",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Decide",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Purchase, transfer or no action",
+        "Use donor-safe surplus",
+        "Recommendation withheld"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-history",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "History",
+        "Synthetic coast group 0 Slate \u00b7 XS",
+        "Saved history",
+        "Compatible change evidence"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-execution",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Execution",
+        "Actual proposals \u2192 receipts \u2192 fulfillment",
+        "Paired decision quality",
+        "Durable synthetic commitment sandbox"
+      ],
+      "loading": false
+    },
+    {
+      "name": "selected-desk-mobile-evaluation",
+      "height": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "headings": [
+        "Evaluation",
+        "Forecast accuracy meets decision quality"
+      ],
+      "loading": false
+    }
+  ],
+  "narrow": [
+    {
+      "page": "Overview",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "Explore",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "Investigate",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "Compare",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "Decide",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "History",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "Execution",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "page": "Evaluation",
+      "scrollWidth": 320,
+      "width": 320
+    }
+  ]
+}

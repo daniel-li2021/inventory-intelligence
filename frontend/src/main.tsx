@@ -13,7 +13,11 @@ import {
   readSharedScenario,
 } from "./state.mjs";
 import type { Card, Context, Exact, Route } from "./types";
+import { Boxes, LayoutDashboard, ListFilter, ScanLine, GitCompareArrows, ClipboardCheck, History as HistoryIcon, Activity, ShieldCheck, ChevronRight, ArrowUpRight, PanelRightClose, PanelRightOpen, CalendarDays, Database, Bookmark, FlaskConical } from "lucide-react";
 import "./style.css";
+import "./desk.css";
+
+const pageIcons: Record<string, React.ElementType> = {overview: LayoutDashboard, explore: ListFilter, investigate: ScanLine, compare: GitCompareArrows, decide: ClipboardCheck, history: HistoryIcon, execution: Activity, evaluation: ShieldCheck};
 
 const labels: Record<string, string> = {
   risk: "Risk",
@@ -177,7 +181,8 @@ function Inspector({
               <summary>
                 {typeof r === "object" && r
                   ? String(
-                      r.id ||
+                      r.label ||
+                        r.id ||
                         r.date ||
                         r.day ||
                         r.kind ||
@@ -300,6 +305,8 @@ function App() {
   );
   const [retry, setRetry] = useState(0);
   const [message, setMessage] = useState("");
+  const [showContext, setShowContext] = useState(true);
+  const PageIcon = pageIcons[route.page] || LayoutDashboard;
   const focus = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     const handle = () => setRoute(parseRoute(location.hash) as Route);
@@ -366,98 +373,20 @@ function App() {
       </a>
       <div className="shell">
         <aside className="sidebar">
-          <a className="brand" href="#/overview">
-            <span className="brand-icon" aria-hidden="true">
-              ▤
-            </span>
-            <span>
-              Inventory
-              <br />
-              <strong>Intelligence</strong>
-            </span>
-          </a>
-          <div className="workspace-label">DECISION WORKBENCH</div>
+          <a className="brand" href="#/overview" aria-label="Inventory Intelligence overview"><Boxes size={26}/></a>
           <nav aria-label="Product navigation">
-            {pages.map((page: string, i: number) => (
-              <a
-                key={page}
-                href={routeHash({ ...route, page })}
-                aria-current={route.page === page ? "page" : undefined}
-              >
-                <span className="nav-index" aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {title(page)}
-              </a>
-            ))}
+            {pages.map((page: string) => { const Icon = pageIcons[page]; return <a key={page} href={routeHash({ ...route, page })} aria-current={route.page === page ? "page" : undefined}><Icon size={21}/><span>{title(page)}</span></a>; })}
           </nav>
-          <div className="sidebar-footer">
-            <span className="badge synthetic">Synthetic workspace</span>
-            <p>
-              Saved evidence. Exact pieces.
-              <br />
-              Advisory decisions.
-            </p>
-            <a href="/lab">Open Scenario Lab ↗</a>
-          </div>
+          <div className="sidebar-footer"><a href="/lab"><FlaskConical size={19}/><span>Scenario Lab</span></a></div>
         </aside>
         <div className="workspace">
-          <header className="topbar">
-            <span className="breadcrumb">
-              Inventory / <strong>{title(route.page)}</strong>
-            </span>
-            <span className="read-only">{route.page === "execution" ? "Synthetic research · No real orders" : "Read only · No order execution"}</span>
-          </header>
+          <header className="topbar"><span className="workspace-name"><strong>Inventory Intelligence</strong><ChevronRight size={15}/><span>Decision workbench</span></span><span className="environment-label"><span/>Synthetic workspace</span></header>
+          <div className="workbench-viewbar"><div><PageIcon size={22}/><h1 ref={focus} tabIndex={-1}>{title(route.page)}</h1><span className="read-only">{route.page === "execution" ? "Synthetic research" : "Read only"}</span></div><div className="viewbar-actions">
+          {!["execution","evaluation"].includes(route.page) && <label className="cutoff-control"><CalendarDays size={16}/><select aria-label="Cutoff" value={route.snapshot || context?.cutoff || ""} onChange={e=>navigate({snapshot:e.target.value,offset:0})}>{context?.cutoffs.map(c=><option key={c}>{c}</option>)}</select></label>}
+          {["overview","explore"].includes(route.page) && <button className="context-toggle" aria-label={showContext?"Hide item context":"Show item context"} aria-pressed={showContext} onClick={()=>setShowContext(v=>!v)}>{showContext?<PanelRightClose size={20}/>:<PanelRightOpen size={20}/>}<span>Context</span></button>}</div></div>
           <main id="main" tabIndex={-1}>
-            <div className="page-heading">
-              <div>
-                <p className="eyebrow">INVENTORY DECISION JOURNEY</p>
-                <h1 ref={focus} tabIndex={-1}>
-                  {route.page === "overview"
-                    ? "Focus on the decisions that matter"
-                    : title(route.page)}
-                </h1>
-                <p className="subtitle">
-                  {
-                    (
-                      {
-                        overview:
-                          "Discover risk, opportunity and evidence gaps from saved synthetic outputs.",
-                        explore:
-                          "Explore exact stock by style, color, size and location.",
-                        investigate:
-                          "Understand the trigger, its assumptions and original evidence.",
-                        compare:
-                          "Compare supported assumptions without changing operational inputs.",
-                        decide:
-                          "Review the advisory proposal and the boundaries of this decision.",
-                        history:
-                          "See what appeared, persisted or changed across saved cutoffs.",
-                        evaluation:
-                          "Compare forecast accuracy with actual planner service, cost and blocked recovery.",
-                        execution:
-                          "Inspect actual synthetic planner outcomes and trace commitments through receipts.",
-                      } as Record<string, string>
-                    )[route.page]
-                  }
-                </p>
-              </div>
-            </div>
-            {!(["execution","evaluation"].includes(route.page)) && <><div className="context-bar">
-              <label>
-                Cutoff
-                <select
-                  aria-label="Cutoff"
-                  value={route.snapshot || context?.cutoff || ""}
-                  onChange={(e) =>
-                    navigate({ snapshot: e.target.value, offset: 0 })
-                  }
-                >
-                  {context?.cutoffs.map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
-                </select>
-              </label>
+            <p className="page-intro">{({overview:"Your inventory attention queue, with the evidence one click away.",explore:"Filter exact saved inventory by item, style, color, size and location.",investigate:"Trace the selected item from original inputs to the saved proposal.",compare:"Compare explicit alternatives, with cost, service and constraints in view.",decide:"Review the advisory decision, its evidence and supported next actions.",history:"Reopen immutable observations across business cutoffs.",execution:"Inspect actual saved planner reviews and synthetic commitment feedback.",evaluation:"Inspect forecast accuracy alongside actual service, cost and blocked reviews."} as Record<string,string>)[route.page]}</p>
+            {!(["execution","evaluation"].includes(route.page)) && <><details className="source-context"><summary><Database size={15}/> Evidence context <span>· Business as of {context?.cutoff || "Loading"}</span></summary><div className="context-bar">
               <div>
                 <span className="context-label">SOURCE BOUNDARY</span>
                 <strong>Business as of {context?.cutoff || "Loading"}</strong>
@@ -476,7 +405,7 @@ function App() {
                   {context?.contract_version} · Synthetic, historical replay
                 </p>
               </details>
-            </div>
+            </div></details>
             <Notice
               data={overview.data}
               loading={overview.loading}
@@ -495,7 +424,7 @@ function App() {
                 </button>
               </div>
             )}
-            <div className="view-tools">
+            <details className="view-disclosure"><summary><Bookmark size={15}/> Saved views & sharing</summary><div className="view-tools">
               <button onClick={save} disabled={!context || bound}>
                 Save view
               </button>
@@ -547,8 +476,9 @@ function App() {
                 Reset view
               </button>
               <span role="status">{message}</span>
-            </div>
+            </div></details>
             </>}
+            <div className={`workbench-layout ${showContext && ["overview","explore"].includes(route.page)?"with-context":""}`}><div className="workbench-content">
             {route.page === "evaluation" ? <Evaluation /> : route.page === "execution" ? <Execution /> : context && !bound && !overview.stale && (
               <>
                 {route.page === "overview" ? (
@@ -560,6 +490,7 @@ function App() {
                 )}
               </>
             )}
+            </div>{showContext && ["overview","explore"].includes(route.page) && context && !bound && !overview.stale && <FocusContext context={context} route={route} go={navigate}/>}</div>
             <footer className="product-footer">
               <strong>Evidence before action.</strong> Synthetic outcomes do not
               demonstrate commercial savings. Supplier and transfer terms are declared
@@ -621,7 +552,7 @@ function CardTable({
               <td className="numeric">{exact(card.proposed_order_qty)}</td>
               <td>
                 <Badge value={card.status} />
-                <small>{title(card.history_state)}</small>
+                <small>History: {title(card.history_state)}</small>
               </td>
               <td>
                 <button
@@ -649,108 +580,19 @@ function CardTable({
     </div>
   );
 }
-function Overview({
-  data,
-  route,
-  go,
-}: {
-  data: Context;
-  route: Route;
-  go: (r: Partial<Route>) => void;
-}) {
-  return (
-    <>
-      <section className="summary-grid" aria-label="Workspace coverage">
-        {[
-          ["keys", "Inventory keys"],
-          ["assessable", "Assessable keys"],
-          ["blocked", "Blocked keys"],
-          ["risk", "Risk signals"],
-        ].map(([key, label]) => (
-          <div className="stat" key={key}>
-            <span>{label}</span>
-            <strong>{data.summary[key] ?? "Unavailable"}</strong>
-            <small>
-              {key === "keys"
-                ? "SKU × location"
-                : key === "assessable"
-                  ? "Complete selected evidence"
-                  : key === "blocked"
-                    ? "Recommendation withheld"
-                    : "Deterministic rule triggers"}
-            </small>
-          </div>
-        ))}
-      </section>
-      <div className="section-heading">
-        <div>
-          <h2>Attention queue</h2>
-          <p>
-            Prioritized by evidence state and deterministic exposure, not an AI
-            confidence score.
-          </p>
-        </div>
-        <button onClick={() => go({ page: "explore", offset: 0 })}>
-          Explore all items →
-        </button>
-      </div>
-      <div className="preset-grid">
-        {[
-          [
-            "risk",
-            "At-risk stock",
-            "Review projected shortages and supported responses.",
-          ],
-          [
-            "opportunity",
-            "Excess stock",
-            "Inspect surplus with passing source evidence.",
-          ],
-          [
-            "evidence",
-            "Untrusted evidence",
-            "Resolve incomplete evidence before a proposal.",
-          ],
-        ].map(([type, label, desc]) => (
-          <button
-            className={`preset ${type}`}
-            key={type}
-            onClick={() => go(preset(route, type))}
-          >
-            <span>
-              <Badge value={type} />{" "}
-              <span className="preset-count">{data.summary[type]} signals</span>
-            </span>
-            <strong>{label} →</strong>
-            <span>{desc}</span>
-          </button>
-        ))}
-      </div>
-      <section className="panel">
-        <CardTable items={data.highlights} go={go} />
-      </section>
-      <Discovery data={data.insight_discovery} go={go} />
-      {data.controls?.duplicate_inventory && <DuplicateControl context={data} />}
-      <div className="note-grid">
-        <section className="panel note">
-          <h3>What this workspace can tell you</h3>
-          <p>
-            Exact stock, accepted demand, confirmed supply and prefix planning
-            proposals from independently saved synthetic runs.
-          </p>
-        </section>
-        <section className="panel note">
-          <h3>What still needs human review</h3>
-          <p>
-            Forecast uncertainty is uncalibrated. Proposed pieces are advisory;
-            a separate periodic simulation does not prove the actual proposal's
-            outcome.
-          </p>
-          <a href="/lab">Inspect the original Scenario Lab →</a>
-        </section>
-      </div>
-    </>
-  );
+function FocusContext({context,route,go}:{context:Context;route:Route;go:(r:Partial<Route>)=>void}) {
+  const card=context.highlights.find(c=>c.id===route.item)||context.highlights.find(c=>c.category==='risk')||context.highlights[0];
+  if(!card)return null;
+  return <aside className="focus-context"><div className="context-heading"><ScanLine size={16}/> Review focus <Badge value={card.category}/></div><h2>{card.sku_code}</h2><p className="context-variant">{card.color} / {card.size} · {card.location}</p><div className="context-quantities"><div><span>On hand · pieces</span><strong>{exact(card.on_hand)}</strong></div><div><span>Saved proposal · pieces</span><strong>{exact(card.proposed_order_qty)}</strong></div></div><p className="eyebrow">Saved observation</p><h3>{card.title}</h3><p>{card.explanation}</p><button className="primary" onClick={()=>go({page:'investigate',item:card.id})}>Inspect original evidence<ArrowUpRight size={16}/></button><div className="context-links"><button onClick={()=>go({page:'compare',item:card.id})}><GitCompareArrows size={16}/>Compare</button><button onClick={()=>go({page:'history',item:card.id})}><HistoryIcon size={16}/>History</button></div><div className="context-source"><span>Business cutoff</span><strong>{context.cutoff}</strong><span>Saved source identity</span><code>{card.references[0]?.id}</code></div><p className="context-boundary"><ShieldCheck size={16}/>Saved synthetic evidence. Proposals are advisory; no real orders.</p></aside>;
+}
+function Overview({data,route,go}:{data:Context;route:Route;go:(r:Partial<Route>)=>void}) {
+  return <>
+    <section className="summary-grid" aria-label="Workspace coverage">{[["keys","Inventory scope","item locations"],["risk","Risk","needs attention"],["opportunity","Opportunity","to review"],["evidence","Evidence problem","blocked"]].map(([key,name,unit])=><button className={`stat ${key}`} key={key} onClick={()=>go(key==='keys'?{page:'explore',type:'',offset:0}:preset(route,key))}><span>{name}</span><strong>{data.summary[key]??"Unknown"}</strong><small>{unit}</small></button>)}</section>
+    <section className="panel attention-panel"><div className="section-heading"><div><p className="eyebrow">Start here</p><h2>Attention queue</h2><p>Saved priorities across risk, surplus exposure and missing evidence.</p></div><button onClick={()=>go({page:'explore',offset:0})}>View all inventory<ArrowUpRight size={16}/></button></div><CardTable items={data.highlights} go={go}/><div className="coverage-note"><ShieldCheck size={14}/>{data.summary.assessable} of {data.summary.keys} item locations assessable · {data.summary.blocked} blocked<span>Quantities in exact pieces</span></div></section>
+    <Discovery data={data.insight_discovery} go={go}/>
+    {data.controls?.duplicate_inventory && <DuplicateControl context={data}/>}
+    <div className="note-grid"><section className="panel note"><h3>What this workspace can tell you</h3><p>Exact stock, accepted demand, confirmed supply and advisory prefix proposals from saved synthetic runs.</p></section><section className="panel note"><h3>What still needs human review</h3><p>Forecast uncertainty remains uncalibrated. Synthetic costs are not observed commercial savings.</p><a href="/lab">Inspect the original Scenario Lab<ArrowUpRight size={14}/></a></section></div>
+  </>;
 }
 
 function Discovery({ data, go }: { data: any; go?: (r: Partial<Route>) => void }) {
@@ -1532,102 +1374,20 @@ function Selected({
     </>
   );
 }
-function Evidence({
-  detail,
-  context,
-  params,
-}: {
-  detail: any;
-  context: Context;
-  params: URLSearchParams;
-}) {
-  const [section, setSection] = useState("");
-  const [page, setPage] = useState(1);
-  const [retry, setRetry] = useState(0);
-  const query = new URLSearchParams(params);
-  query.set("section", section);
-  query.set("page", String(page));
-  query.set("page_size", "20");
-  const resource = useResource<any>(
-    section ? "/api/product/evidence?" + query : null,
-    retry,
-  );
-  return (
-    <aside className="panel detail-panel evidence-panel">
-      <p className="eyebrow">EVIDENCE INSPECTOR</p>
-      <h2>Sources behind this claim</h2>
-      <p>
-        Business as of <strong>{context.cutoff}</strong>. Known-at/source clocks
-        remain attached to each original row. Archive hashes check integrity,
-        not producer authenticity.
-      </p>
-      <div className="citation-list">
-        {(detail.references || detail.item?.references || []).map(
-          (ref: any, i: number) => (
-            <div key={i}>
-              <span>{ref.source}</span>
-              <code>{ref.id}</code>
-            </div>
-          ),
-        )}
-      </div>
-      <h3>Clocks and coverage</h3>
-      <Inspector data={detail.clocks} />
-      <Inspector data={detail.coverage} />
-      <Inspector data={detail.evidence} />
-      <label>
-        Source section
-        <select
-          aria-label="Source section"
-          value={section}
-          onChange={(e) => {
-            setSection(e.target.value);
-            setPage(1);
-          }}
-        >
-          <option value="">Select original records</option>
-          {[
-            "inventory",
-            "training",
-            "supply",
-            "plan",
-            "forecast",
-            "reliability",
-          ].map((s) => (
-            <option key={s} value={s}>
-              {title(s)}
-            </option>
-          ))}
-        </select>
-      </label>
-      {section && (
-        <>
-          <Notice {...resource} retry={() => setRetry((v) => v + 1)} />
-          {resource.data && (
-            <>
-              <Inspector data={resource.data} />
-              <div className="pagination">
-                <button
-                  disabled={page <= 1}
-                  onClick={() => setPage((v) => v - 1)}
-                >
-                  Earlier records
-                </button>
-                <button
-                  disabled={!resource.data.pages || page >= resource.data.pages}
-                  onClick={() => setPage((v) => v + 1)}
-                >
-                  More records
-                </button>
-              </div>
-            </>
-          )}
-        </>
-      )}
-      <Download data={detail} name="selected-inventory-evidence" />
-    </aside>
-  );
+function EvidenceRecords({rows}:{rows:Record<string,any>[]}) {
+  if(!rows.length)return <p>No original rows in this section.</p>;
+  const columns=Array.from(new Set(rows.flatMap(row=>Object.keys(row))));
+  return <div className="table-scroll source-records" tabIndex={0} aria-label="Original evidence records, horizontally scrollable"><table><caption className="sr-only">Original saved evidence, exact values</caption><thead><tr>{columns.map(key=><th key={key}>{title(key)}</th>)}</tr></thead><tbody>{rows.map((row,i)=><tr key={i}>{columns.map(key=><td key={key}>{row[key]!==null&&typeof row[key]==='object'?<details><summary>Record details</summary><Inspector data={row[key]}/></details>:<Inspector data={row[key]}/>}</td>)}</tr>)}</tbody></table></div>;
 }
+function Evidence({detail,context,params}:{detail:any;context:Context;params:URLSearchParams}) {
+  const [section,setSection]=useState("plan"),[page,setPage]=useState(1),[retry,setRetry]=useState(0);
+  useEffect(()=>setPage(1),[context.cutoff,detail.id]);
+  const query=new URLSearchParams(params);query.set('section',section);query.set('page',String(page));query.set('page_size','20');
+  const resource=useResource<any>(section?'/api/product/evidence?'+query:null,retry);
+  const current=resource.data&&!resource.stale&&!resource.loading&&!resource.error;
+  return <aside className="panel detail-panel evidence-panel"><p className="eyebrow">Evidence inspector</p><h2>Sources behind this claim</h2><p>Business as of <strong>{context.cutoff}</strong>. Original source clocks and identities stay attached to the saved evidence.</p><div className="source-toolbar"><label>Source section<select aria-label="Source section" value={section} onChange={e=>{setSection(e.target.value);setPage(1);}}>{['inventory','training','supply','plan','forecast','reliability'].map(s=><option key={s} value={s}>{title(s)}</option>)}</select></label></div><Notice {...resource} retry={()=>setRetry(v=>v+1)}/>{current&&<><div className="source-coverage"><Badge value={resource.data.status}/><span>{resource.data.total} original rows</span></div><EvidenceRecords rows={resource.data.rows||[]}/><div className="pagination"><button disabled={page<=1} onClick={()=>setPage(v=>v-1)}>Earlier records</button><span>Page {page} of {resource.data.pages||1}</span><button disabled={!resource.data.pages||page>=resource.data.pages} onClick={()=>setPage(v=>v+1)}>More records</button><Download data={resource.data} name={'original-'+section} label="Export original records"/></div></>}<details className="evidence-metadata"><summary>Source identities, clocks & coverage</summary><div className="citation-list">{(detail.references||detail.item?.references||[]).map((ref:any,i:number)=><div key={i}><span>{ref.source}</span><code>{ref.id}</code></div>)}</div><Inspector data={detail.clocks}/><Inspector data={detail.coverage}/><Inspector data={detail.evidence}/><p>Archive hashes check integrity, not producer authenticity.</p></details><Download data={detail} name="selected-inventory-evidence"/></aside>;
+}
+
 function History({
   data,
   go,
