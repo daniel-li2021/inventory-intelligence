@@ -1,0 +1,110 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "name": "empty filter state",
+      "status": "pass",
+      "detail": "No matching results; reset remains available"
+    },
+    {
+      "name": "exact item and cutoff",
+      "status": "pass",
+      "detail": "http://127.0.0.1:8766/#/investigate?snapshot=2026-01-05&item=product%3Asku-00%7Cproduct%3Aharbor&location=product%3Aharbor&q=II-00&sort=priority"
+    },
+    {
+      "name": "saved baseline proposal",
+      "status": "pass",
+      "detail": "Independent 12-piece proposal"
+    },
+    {
+      "name": "structured demand and supply drivers",
+      "status": "pass",
+      "detail": "Saved inputs and evidence disclosures"
+    },
+    {
+      "name": "original evidence pagination",
+      "status": "pass",
+      "detail": "28 original demand rows; second page reachable"
+    },
+    {
+      "name": "source-bound JSON export",
+      "status": "pass",
+      "detail": "{\"cutoff\":\"2026-01-05\",\"rows\":8,\"archive\":\"b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9\"}"
+    },
+    {
+      "name": "calculation and capability limits",
+      "status": "pass",
+      "detail": "Unsupported actions remain visible with blocked badges"
+    },
+    {
+      "name": "return preserves filters",
+      "status": "pass",
+      "detail": "http://127.0.0.1:8766/#/explore?snapshot=2026-01-05&item=product%3Asku-00%7Cproduct%3Aharbor&location=product%3Aharbor&q=II-00&sort=priority"
+    },
+    {
+      "name": "feasible supplier comparison",
+      "status": "pass",
+      "detail": "Compatible 33-day outcomes · exact pieces and synthetic cost units\nDecision\tFeasibility / promise\tPaid cost\tService / exposure\nActual proposal\nPurchase 12 · transfer 0\n\tAssessable\n2026-01-07\n\t14609\tImmediate 24 / 112\nTerminal backlog 88\n\nNo action\nPurchase 0 · transfer 0\n\tAssessable\nNo purchase promise\n\t18039\tImmediate 12 / 112\nTerminal backlog 100\n\nAlternative\nPurchase 12 · transfer 0\n\tAssessable\n2026-01-07\n\t14609\tImmediate 24 / 112\nTerminal backlog 88\nSupplier constraints, daily outcomes and provenance\nExport feasible purchases"
+    },
+    {
+      "name": "stale supplier warning",
+      "status": "pass",
+      "detail": "Changed capacity marks previous result stale"
+    },
+    {
+      "name": "one-review outcome comparison",
+      "status": "pass",
+      "detail": "Exact common-window table remains available"
+    },
+    {
+      "name": "independent demand scenario",
+      "status": "pass",
+      "detail": "125% demand retains expected 18-piece proposal"
+    },
+    {
+      "name": "scenario preserved in advisory decision",
+      "status": "pass",
+      "detail": "Saved shared assumptions reach Decide"
+    },
+    {
+      "name": "blocked evidence warnings visible",
+      "status": "pass",
+      "detail": "Known stock remains separate from withheld proposal"
+    },
+    {
+      "name": "blocked recommendation remains withheld",
+      "status": "pass",
+      "detail": "No proposal presented for approval"
+    },
+    {
+      "name": "execution daily outcomes section",
+      "status": "pass",
+      "detail": "Daily exact pieces remain available"
+    },
+    {
+      "name": "execution paired policies section",
+      "status": "pass",
+      "detail": "All 12 frozen traces and no-winner boundary retained"
+    },
+    {
+      "name": "isolated synthetic partial receipt",
+      "status": "pass",
+      "detail": "Temporary journal: admitted 12, received 5, pending 7, two durable events"
+    },
+    {
+      "name": "keyboard focus visible",
+      "status": "pass",
+      "detail": "{\"outline\":\"3px\",\"tag\":\"BUTTON\",\"text\":\"Daily outcomes\"}"
+    },
+    {
+      "name": "expanded insight evidence",
+      "status": "pass",
+      "detail": "Hypothesis, missing evidence, priority and source references remain accessible"
+    },
+    {
+      "name": "context for selected item outside highlights",
+      "status": "pass",
+      "detail": "II-00 stays selected instead of unrelated II-03 priority fallback"
+    }
+  ]
+}

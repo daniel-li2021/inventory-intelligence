@@ -1,0 +1,332 @@
+{
+  "status": "pass",
+  "browser": "Codex in-app browser",
+  "harness": "Packaged read-only app on loopback with local test rate allowance; production limits unchanged",
+  "cells": [
+    {
+      "page": "overview",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 2337,
+      "pageWidth": 1440,
+      "rows": [
+        160.1875,
+        160.1875,
+        160.1875,
+        160.1875
+      ],
+      "width": 1440
+    },
+    {
+      "page": "explore",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 2366,
+      "pageWidth": 1440,
+      "rows": [],
+      "width": 1440
+    },
+    {
+      "page": "investigate",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 1486,
+      "pageWidth": 1440,
+      "rows": [
+        157.1875,
+        140.6875
+      ],
+      "width": 1440
+    },
+    {
+      "page": "compare",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 1167,
+      "pageWidth": 1440,
+      "rows": [],
+      "width": 1440
+    },
+    {
+      "page": "decide",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 1636,
+      "pageWidth": 1440,
+      "rows": [],
+      "width": 1440
+    },
+    {
+      "page": "history",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 1052,
+      "pageWidth": 1440,
+      "rows": [],
+      "width": 1440
+    },
+    {
+      "page": "execution",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 1257,
+      "pageWidth": 1440,
+      "rows": [],
+      "width": 1440
+    },
+    {
+      "page": "evaluation",
+      "height": 900,
+      "nestedScroll": [],
+      "pageHeight": 1562,
+      "pageWidth": 1440,
+      "rows": [],
+      "width": 1440
+    },
+    {
+      "page": "overview",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 2394,
+      "pageWidth": 1280,
+      "rows": [
+        160.1875,
+        160.1875,
+        160.1875,
+        160.1875
+      ],
+      "width": 1280
+    },
+    {
+      "page": "explore",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 2406,
+      "pageWidth": 1280,
+      "rows": [],
+      "width": 1280
+    },
+    {
+      "page": "investigate",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 1504,
+      "pageWidth": 1280,
+      "rows": [
+        157.1875,
+        140.6875
+      ],
+      "width": 1280
+    },
+    {
+      "page": "compare",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 1206,
+      "pageWidth": 1280,
+      "rows": [],
+      "width": 1280
+    },
+    {
+      "page": "decide",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 1697,
+      "pageWidth": 1280,
+      "rows": [],
+      "width": 1280
+    },
+    {
+      "page": "history",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 1071,
+      "pageWidth": 1280,
+      "rows": [],
+      "width": 1280
+    },
+    {
+      "page": "execution",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 1298,
+      "pageWidth": 1280,
+      "rows": [],
+      "width": 1280
+    },
+    {
+      "page": "evaluation",
+      "height": 800,
+      "nestedScroll": [],
+      "pageHeight": 1643,
+      "pageWidth": 1280,
+      "rows": [],
+      "width": 1280
+    },
+    {
+      "page": "overview",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 2468,
+      "pageWidth": 768,
+      "rows": [
+        160.1875,
+        160.1875,
+        160.1875,
+        160.1875
+      ],
+      "width": 768
+    },
+    {
+      "page": "explore",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 2808,
+      "pageWidth": 768,
+      "rows": [],
+      "width": 768
+    },
+    {
+      "page": "investigate",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 1561,
+      "pageWidth": 768,
+      "rows": [
+        157.1875,
+        140.6875
+      ],
+      "width": 768
+    },
+    {
+      "page": "compare",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 1344,
+      "pageWidth": 768,
+      "rows": [],
+      "width": 768
+    },
+    {
+      "page": "decide",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 1855,
+      "pageWidth": 768,
+      "rows": [],
+      "width": 768
+    },
+    {
+      "page": "history",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 1231,
+      "pageWidth": 768,
+      "rows": [],
+      "width": 768
+    },
+    {
+      "page": "execution",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 1405,
+      "pageWidth": 768,
+      "rows": [],
+      "width": 768
+    },
+    {
+      "page": "evaluation",
+      "height": 1024,
+      "nestedScroll": [],
+      "pageHeight": 2179,
+      "pageWidth": 768,
+      "rows": [],
+      "width": 768
+    },
+    {
+      "page": "overview",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 3444,
+      "pageWidth": 390,
+      "rows": [
+        268.78125,
+        268.78125,
+        268.78125,
+        268.78125
+      ],
+      "width": 390
+    },
+    {
+      "page": "explore",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 3116,
+      "pageWidth": 390,
+      "rows": [],
+      "width": 390
+    },
+    {
+      "page": "investigate",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 2037,
+      "pageWidth": 390,
+      "rows": [
+        228.78125,
+        212.28125
+      ],
+      "width": 390
+    },
+    {
+      "page": "compare",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 1764,
+      "pageWidth": 390,
+      "rows": [],
+      "width": 390
+    },
+    {
+      "page": "decide",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 2376,
+      "pageWidth": 390,
+      "rows": [],
+      "width": 390
+    },
+    {
+      "page": "history",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 1429,
+      "pageWidth": 390,
+      "rows": [],
+      "width": 390
+    },
+    {
+      "page": "execution",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 2008,
+      "pageWidth": 390,
+      "rows": [],
+      "width": 390
+    },
+    {
+      "page": "evaluation",
+      "height": 844,
+      "nestedScroll": [],
+      "pageHeight": 2368,
+      "pageWidth": 390,
+      "rows": [],
+      "width": 390
+    }
+  ],
+  "limits": [
+    "No human task acceptance or full WCAG certification",
+    "Wide source and comparison tables deliberately scroll horizontally"
+  ],
+  "baselineOverviewHeight": 15810
+}

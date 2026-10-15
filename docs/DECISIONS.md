@@ -49,3 +49,13 @@ When a decision changes, append its replacement with date, reason and evidence;
 mark the old entry superseded **by that ID** without erasing its reasoning.
 Routine progress updates STATE and the affected plan; mode switches update STATE only. A new contract version
 must state which old interface it supersedes or extends and preserve old decoding.
+
+### Desk UX hierarchy refinement (2026-10-15)
+
+Continue the selected Desk direction with compact insight summaries and native-button
+sections for investigation, comparison and execution. Put facts and the advisory
+recommendation before technical detail; keep blockers visible and original evidence
+exportable. Use one document scroll and horizontal overflow for wide tables. Shared
+status tones default unrecognized codes to neutral; preserve source-bound URL state
+and server-owned arithmetic. This supersedes the initial always-expanded discovery
+layout and large uniform table spacing. [Audit and validation](PRODUCT_DESIGN.md#product-wide-ux-refinement--october-15).

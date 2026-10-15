@@ -14,6 +14,7 @@ import {
 } from "./state.mjs";
 import type { Card, Context, Exact, Route } from "./types";
 import { Boxes, LayoutDashboard, ListFilter, ScanLine, GitCompareArrows, ClipboardCheck, History as HistoryIcon, Activity, ShieldCheck, ChevronRight, ArrowUpRight, PanelRightClose, PanelRightOpen, CalendarDays, Database, Bookmark, FlaskConical } from "lucide-react";
+import { Badge, ViewNav } from "./ui";
 import "./style.css";
 import "./desk.css";
 
@@ -45,9 +46,6 @@ function exact(value: Exact | undefined): string {
     return "Unknown";
   if (value.denominator === "1") return value.numerator;
   return `${value.numerator}/${value.denominator}`;
-}
-function Badge({ value }: { value: string }) {
-  return <span className={`badge ${value}`}>{title(value)}</span>;
 }
 function Download({
   data,
@@ -213,6 +211,7 @@ function Inspector({
   );
 }
 function Execution() {
+  const [view,setView]=useState("reviews");
   const [retry, setRetry] = useState(0);
   const [selected, setSelected] = useState("clean");
   const [asOf, setAsOf] = useState("2026-03-20");
@@ -253,6 +252,8 @@ function Execution() {
       <h2>Actual proposals → receipts → fulfillment</h2>
       <p>These outcomes execute saved prefix-planner proposals. Each review rechecks physical inventory, origin-visible demand and supply. A blocked review creates no order.</p>
       <p className="notice warning">Original cold-shortage control had an arithmetic error: need 17 pieces rounds to 18, rather than 12. Its original bytes remain preserved with an explicit erratum.</p>
+      <ViewNav label="Execution sections" value={view} onChange={setView} options={[["reviews","Review decisions"],["daily","Daily outcomes"],["quality","Policy comparison"],["journal","Commitments & receipts"]]}/>
+      <div hidden={!["reviews","daily"].includes(view)}>
       <label>Execution control <select aria-label="Execution control" value={selected} onChange={e => setSelected(e.target.value)}>
         {overview.data.manual.map((c: any) => <option value={c.name} key={c.name}>{title(c.name.replaceAll("-", "_"))}</option>)}
       </select></label>
@@ -265,22 +266,22 @@ function Execution() {
           <div><span>Terminal stock / backlog · pieces</span><strong>{selectedData.summary.terminal_stock} / {selectedData.summary.terminal_backlog}</strong></div>
         </div>
         <p>Initial purchased stock cost: {selectedData.initial_purchase_cost} synthetic units. Full cost includes initial purchase and every scored/closure day.</p>
-        <Inspector data={selectedData.summary.cost_components} name="Full paid cost components" />
-        <div className="table-scroll"><table><caption>Actual saved review decisions and evidence</caption><thead><tr><th>Origin known-at</th><th>Status</th><th>Proposal · pieces</th><th>Evidence</th></tr></thead><tbody>
+        <EvidenceDisclosure data={selectedData.summary.cost_components} name="Full paid cost components" />
+        <div hidden={view!=="reviews"}><div className="table-scroll" tabIndex={0} aria-label="Saved review decisions"><table><caption>Actual saved review decisions and evidence</caption><thead><tr><th>Origin known-at</th><th>Status</th><th>Proposal · pieces</th><th>Evidence</th></tr></thead><tbody>
           {selectedData.reviews.map((r: any) => <tr key={r.day}><td>{r.origin}</td><td><Badge value={r.status} /><small>{r.reasons.join(", ")}</small></td><td>{r.proposed_order_qty ?? "Blocked"}</td><td><a href={`/api/execution/evidence?name=${selected}&day=${r.day}&archive_digest=${digest}`} target="_blank" rel="noreferrer">Inspect saved report</a><small>{r.report_id}</small></td></tr>)}
         </tbody></table></div>
-        <div className="table-scroll"><table><caption>Physical daily execution · exact pieces and paid cost units</caption><thead><tr><th>Date / phase</th><th>Receipts</th><th>Accepted</th><th>Immediate fill</th><th>Ending stock</th><th>Ending backlog</th><th>Daily cost</th></tr></thead><tbody>
+        </div><div hidden={view!=="daily"}><div className="table-scroll" tabIndex={0} aria-label="Physical daily outcomes"><table><caption>Physical daily execution · exact pieces and paid cost units</caption><thead><tr><th>Date / phase</th><th>Receipts</th><th>Accepted</th><th>Immediate fill</th><th>Ending stock</th><th>Ending backlog</th><th>Daily cost</th></tr></thead><tbody>
           {selectedData.days.map((d: any) => <tr key={d.date}><td>{d.date}<small>{d.phase}</small></td><td>{d.receipts.map((r: any) => r.quantity).join(" + ") || "0"}</td><td>{d.accepted}</td><td>{d.new_filled}</td><td>{d.end_stock}</td><td>{d.end_backlog}</td><td>{Object.entries(d.cost).map(([k,v]) => `${k}: ${v}`).join(" · ")}</td></tr>)}
         </tbody></table></div>
-        <Download data={selectedData} name={`actual-planner-${selected}`} label="Export execution" />
+        </div><Download data={selectedData} name={`actual-planner-${selected}`} label="Export execution" />
       </>}
-      <h2>Paired decision quality</h2>
+      </div><div hidden={view!=="quality"} className="panel detail-panel"><h2>Paired decision quality</h2>
       <p>12 frozen stress traces × 3 policies. All policies respect the actual planner's evidence gates; demand, supplier rules and the paid 14-day window match. No tuning on these results.</p>
       <div className="table-scroll"><table><caption>Total paid synthetic cost units · identical score and closure windows</caption><thead><tr><th>Trace</th><th>Actual proposals</th><th>Do Nothing</th><th>Fixed 18 pieces</th></tr></thead><tbody>
         {overview.data.comparisons.map((c: any) => <tr key={c.name}><td>{title(c.name.replaceAll("-", "_"))}</td>{["actual", "do-nothing", "fixed-18"].map(p => <td key={p}>{c.policies[p].total_cost}<small>Immediate {c.policies[p].immediate_fulfilled}/{c.policies[p].accepted} · backlog {c.policies[p].terminal_backlog}</small></td>)}</tr>)}
       </tbody></table></div>
       <p className="notice">Quiet trace: Do Nothing costs 160 versus actual 330. These bounded synthetic paths establish no universal policy winner or commercial savings.</p>
-      <h2>Durable synthetic commitment sandbox</h2>
+      </div><div hidden={view!=="journal"} className="panel detail-panel"><h2>Durable synthetic commitment sandbox</h2>
       {overview.data.journal_enabled ? <>
         <p>This local journal writes synthetic decision and receipt events only. It preserves earlier source batches and never executes real purchases or changes stock tables.</p>
         <div className="view-tools">
@@ -292,9 +293,9 @@ function Execution() {
         <p role="status">{message}</p>
         <label>Journal as of <input aria-label="Journal as of" type="date" value={asOf} onChange={e => setAsOf(e.target.value)} /></label>
         <Notice {...journal} retry={() => setRetry(v => v + 1)} />
-        {journalData && <><p className="journal-totals">Received {journalData.received_pieces} pieces · pending {journalData.pending_pieces} pieces · {journalData.events.length} durable events</p><Inspector data={journalData} name="Origin-visible synthetic journal" /><Download data={journalData} name="synthetic-receipt-journal" label="Export journal" /></>}
+        {journalData && <><p className="journal-totals">Received {journalData.received_pieces} pieces · pending {journalData.pending_pieces} pieces · {journalData.events.length} durable events</p><EvidenceDisclosure data={journalData} name="Origin-visible synthetic journal" /><Download data={journalData} name="synthetic-receipt-journal" label="Export journal" /></>}
       </> : <p>Read-only packaged mode. Launch the loopback local demo to exercise durable synthetic commitments and partial receipts.</p>}
-      <ul>{overview.data.limitations.map((s: string) => <li key={s}>{s}</li>)}</ul>
+      </div><details className="evidence-disclosure"><summary>Execution limitations</summary><ul>{overview.data.limitations.map((s: string) => <li key={s}>{s}</li>)}</ul></details>
     </>}
   </section>;
 }
@@ -305,7 +306,7 @@ function App() {
   );
   const [retry, setRetry] = useState(0);
   const [message, setMessage] = useState("");
-  const [showContext, setShowContext] = useState(true);
+  const [showContext, setShowContext] = useState(false);
   const PageIcon = pageIcons[route.page] || LayoutDashboard;
   const focus = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -330,8 +331,9 @@ function App() {
     : false;
   const nav = (page: string) => navigate({ page });
   useEffect(() => {
-    focus.current?.focus();
-  }, [route.page]);
+    focus.current?.focus({preventScroll:true});
+    window.scrollTo({top:0});
+  }, [route.page, route.item, route.snapshot]);
   const save = () => {
     if (!context) return;
     try {
@@ -380,12 +382,12 @@ function App() {
           <div className="sidebar-footer"><a href="/lab"><FlaskConical size={19}/><span>Scenario Lab</span></a></div>
         </aside>
         <div className="workspace">
-          <header className="topbar"><span className="workspace-name"><strong>Inventory Intelligence</strong><ChevronRight size={15}/><span>Decision workbench</span></span><span className="environment-label"><span/>Synthetic workspace</span></header>
-          <div className="workbench-viewbar"><div><PageIcon size={22}/><h1 ref={focus} tabIndex={-1}>{title(route.page)}</h1><span className="read-only">{route.page === "execution" ? "Synthetic research" : "Read only"}</span></div><div className="viewbar-actions">
+          <header className="topbar"><span className="workspace-name"><strong>Inventory Intelligence</strong><ChevronRight size={15}/><span>Decision workbench</span></span><span className="environment-label"><span/>Synthetic workspace</span><a className="mobile-lab" href="/lab" aria-label="Scenario Lab">Lab</a></header>
+          <div className="workbench-viewbar"><div><PageIcon size={22}/><h1 ref={focus} tabIndex={-1}>{title(route.page)}</h1><span className="read-only">Synthetic · advisory</span></div><div className="viewbar-actions">
           {!["execution","evaluation"].includes(route.page) && <label className="cutoff-control"><CalendarDays size={16}/><select aria-label="Cutoff" value={route.snapshot || context?.cutoff || ""} onChange={e=>navigate({snapshot:e.target.value,offset:0})}>{context?.cutoffs.map(c=><option key={c}>{c}</option>)}</select></label>}
           {["overview","explore"].includes(route.page) && <button className="context-toggle" aria-label={showContext?"Hide item context":"Show item context"} aria-pressed={showContext} onClick={()=>setShowContext(v=>!v)}>{showContext?<PanelRightClose size={20}/>:<PanelRightOpen size={20}/>}<span>Context</span></button>}</div></div>
-          <main id="main" tabIndex={-1}>
-            <p className="page-intro">{({overview:"Your inventory attention queue, with the evidence one click away.",explore:"Filter exact saved inventory by item, style, color, size and location.",investigate:"Trace the selected item from original inputs to the saved proposal.",compare:"Compare explicit alternatives, with cost, service and constraints in view.",decide:"Review the advisory decision, its evidence and supported next actions.",history:"Reopen immutable observations across business cutoffs.",execution:"Inspect actual saved planner reviews and synthetic commitment feedback.",evaluation:"Inspect forecast accuracy alongside actual service, cost and blocked reviews."} as Record<string,string>)[route.page]}</p>
+          <main id="main" tabIndex={-1} data-page={route.page}>
+            <p className="page-intro">{({overview:"Your inventory attention queue, with the evidence one click away.",explore:"Filter exact saved inventory by item, style, color, size and location.",investigate:"Review saved facts, drivers and supported next steps.",compare:"Compare explicit alternatives, with cost, service and constraints in view.",decide:"Review the advisory decision, its evidence and supported next actions.",history:"Reopen immutable observations across business cutoffs.",execution:"Inspect actual saved planner reviews and synthetic commitment feedback.",evaluation:"Inspect forecast accuracy alongside actual service, cost and blocked reviews."} as Record<string,string>)[route.page]}</p>
             {!(["execution","evaluation"].includes(route.page)) && <><details className="source-context"><summary><Database size={15}/> Evidence context <span>· Business as of {context?.cutoff || "Loading"}</span></summary><div className="context-bar">
               <div>
                 <span className="context-label">SOURCE BOUNDARY</span>
@@ -482,7 +484,7 @@ function App() {
             {route.page === "evaluation" ? <Evaluation /> : route.page === "execution" ? <Execution /> : context && !bound && !overview.stale && (
               <>
                 {route.page === "overview" ? (
-                  <Overview data={context} route={route} go={navigate} />
+                  <Overview key={context.archive_digest+context.cutoff} data={context} route={route} go={navigate} />
                 ) : route.page === "explore" ? (
                   <Explore route={route} context={context} go={navigate} />
                 ) : (
@@ -581,41 +583,53 @@ function CardTable({
   );
 }
 function FocusContext({context,route,go}:{context:Context;route:Route;go:(r:Partial<Route>)=>void}) {
-  const card=context.highlights.find(c=>c.id===route.item)||context.highlights.find(c=>c.category==='risk')||context.highlights[0];
-  if(!card)return null;
+  const split=route.item?.split('|');
+  const params=split?new URLSearchParams({cutoff:context.cutoff,archive_digest:context.archive_digest,sku_id:split[0],warehouse_id:split[1]}):null;
+  const selected=useResource<any>(params?'/api/product/detail?'+params:null);
+  const card=route.item?(!selected.loading&&!selected.stale&&!selected.error?selected.data:undefined):context.highlights.find(c=>c.category==='risk')||context.highlights[0];
+  if(!card)return <aside className="focus-context"><h2>Selected item</h2><p>Open the investigation to review this item and its source-bound evidence.</p><button onClick={()=>go({page:'investigate'})}>Open investigation</button></aside>;
   return <aside className="focus-context"><div className="context-heading"><ScanLine size={16}/> Review focus <Badge value={card.category}/></div><h2>{card.sku_code}</h2><p className="context-variant">{card.color} / {card.size} · {card.location}</p><div className="context-quantities"><div><span>On hand · pieces</span><strong>{exact(card.on_hand)}</strong></div><div><span>Saved proposal · pieces</span><strong>{exact(card.proposed_order_qty)}</strong></div></div><p className="eyebrow">Saved observation</p><h3>{card.title}</h3><p>{card.explanation}</p><button className="primary" onClick={()=>go({page:'investigate',item:card.id})}>Inspect original evidence<ArrowUpRight size={16}/></button><div className="context-links"><button onClick={()=>go({page:'compare',item:card.id})}><GitCompareArrows size={16}/>Compare</button><button onClick={()=>go({page:'history',item:card.id})}><HistoryIcon size={16}/>History</button></div><div className="context-source"><span>Business cutoff</span><strong>{context.cutoff}</strong><span>Saved source identity</span><code>{card.references[0]?.id}</code></div><p className="context-boundary"><ShieldCheck size={16}/>Saved synthetic evidence. Proposals are advisory; no real orders.</p></aside>;
 }
 function Overview({data,route,go}:{data:Context;route:Route;go:(r:Partial<Route>)=>void}) {
+  const [allHighlights,setAllHighlights]=useState(false);
   return <>
     <section className="summary-grid" aria-label="Workspace coverage">{[["keys","Inventory scope","item locations"],["risk","Risk","needs attention"],["opportunity","Opportunity","to review"],["evidence","Evidence problem","blocked"]].map(([key,name,unit])=><button className={`stat ${key}`} key={key} onClick={()=>go(key==='keys'?{page:'explore',type:'',offset:0}:preset(route,key))}><span>{name}</span><strong>{data.summary[key]??"Unknown"}</strong><small>{unit}</small></button>)}</section>
-    <section className="panel attention-panel"><div className="section-heading"><div><p className="eyebrow">Start here</p><h2>Attention queue</h2><p>Saved priorities across risk, surplus exposure and missing evidence.</p></div><button onClick={()=>go({page:'explore',offset:0})}>View all inventory<ArrowUpRight size={16}/></button></div><CardTable items={data.highlights} go={go}/><div className="coverage-note"><ShieldCheck size={14}/>{data.summary.assessable} of {data.summary.keys} item locations assessable · {data.summary.blocked} blocked<span>Quantities in exact pieces</span></div></section>
-    <Discovery data={data.insight_discovery} go={go}/>
+    <section className="panel attention-panel"><div className="section-heading"><div><p className="eyebrow">Start here</p><h2>Attention queue</h2><p>Saved priorities across risk, surplus exposure and missing evidence.</p></div><button onClick={()=>go({page:'explore',offset:0})}>View all inventory<ArrowUpRight size={16}/></button></div><CardTable items={allHighlights?data.highlights:data.highlights.slice(0,5)} go={go}/>{data.highlights.length>5 && <button className="queue-more" aria-expanded={allHighlights} onClick={()=>setAllHighlights(v=>!v)}>{allHighlights?"Show priority summary":`Show all ${data.highlights.length} attention items`}</button>}<div className="coverage-note"><ShieldCheck size={14}/>{data.summary.assessable} of {data.summary.keys} item locations assessable · {data.summary.blocked} blocked<span>Quantities in exact pieces</span></div></section>
+    <Discovery data={data.insight_discovery} context={data} go={go}/>
     {data.controls?.duplicate_inventory && <DuplicateControl context={data}/>}
     <div className="note-grid"><section className="panel note"><h3>What this workspace can tell you</h3><p>Exact stock, accepted demand, confirmed supply and advisory prefix proposals from saved synthetic runs.</p></section><section className="panel note"><h3>What still needs human review</h3><p>Forecast uncertainty remains uncalibrated. Synthetic costs are not observed commercial savings.</p><a href="/lab">Inspect the original Scenario Lab<ArrowUpRight size={14}/></a></section></div>
   </>;
 }
 
-function Discovery({ data, go }: { data: any; go?: (r: Partial<Route>) => void }) {
-  if (!data) return null;
-  return <section className="panel detail-panel" aria-label="Insight Discovery V2">
-    <h2>Insight Discovery V2</h2>
-    <p>{data.total_findings ?? data.findings.length} supported findings across {data.evaluated_keys} keys. {data.previous_cutoff ? `Prior cutoff: ${data.previous_cutoff}.` : "No previous cutoff."}</p>
-    {data.total_findings > data.findings.length && <p>Showing the first {data.findings.length} findings. Investigate an exact key for its complete findings; the discovery API returns the full bounded set.</p>}
-    <p>{data.boundary}</p>
-    {data.findings.map((finding: any) => <article key={finding.id} className="panel">
-      <p className="eyebrow">{finding.rule_id} · {finding.rules_version}</p>
-      <h3>{finding.title}</h3>
-      <p><strong>Observed evidence:</strong> {finding.observed}</p>
-      {finding.model_hypothesis && <p><strong>Model hypothesis:</strong> {finding.model_hypothesis}</p>}
-      <p><strong>Supported next step:</strong> {finding.next_step}</p>
-      <p><strong>Missing evidence:</strong> {finding.missing_evidence.join(" ")}</p>
-      <p><strong>Priority {finding.priority?.rank}:</strong> {finding.priority?.basis}</p>
-      <Inspector data={{values:finding.values,contributing_factors:finding.contributing_factors,references:finding.references,known_at:finding.known_at}} name="Insight evidence" />
-      {go && <button onClick={() => go({page:"investigate",item: finding.sku_id+"|"+finding.warehouse_id})}>Investigate finding →</button>}
-    </article>)}
-    {data.unknown.length > 0 && <details><summary>Evidence gaps ({data.total_unknown ?? data.unknown.length})</summary><Inspector data={data.unknown} name="Unknown evidence" /></details>}
-    <ReviewControls discovery={data} />
-    <Download data={data} name="insight-discovery-v2" label="Export insight discovery" />
+function Discovery({data,go,context}:{data:any;go?:(r:Partial<Route>)=>void;context?:Context}) {
+  const [showAll,setShowAll]=useState(false);
+  if(!data)return null;
+  const findings=showAll?data.findings:data.findings.slice(0,4);
+  const dims=context?.dimensions as any;
+  return <section className="panel detail-panel discovery" aria-label="Insight Discovery V2">
+    <div className="section-heading"><div><h2>Inventory insights</h2><p>{data.total_findings ?? data.findings.length} findings · {data.evaluated_keys} item locations{data.previous_cutoff?` · Compared with ${data.previous_cutoff}`:' · No prior cutoff'}</p></div><Download data={data} name="insight-discovery-v2" label="Export insight discovery" /></div>
+    <p className="insight-boundary">{data.boundary}</p>
+    {!data.findings.length && <p className="empty">No supported findings at this cutoff. Evidence gaps remain listed below.</p>}
+    <div className="insight-list">{findings.map((finding:any)=>{
+      const sku=dims?.skus?.find((v:any)=>v.sku_id===finding.sku_id);
+      const site=dims?.warehouses?.find((v:any)=>v.warehouse_id===finding.warehouse_id);
+      return <article className="insight-row" key={finding.id}>
+        <div className="insight-heading"><Badge value={finding.category}/><h3>{finding.title}</h3><span className="insight-identity">{sku?.sku_code || finding.sku_id} · {site?.name || finding.warehouse_id}</span>{finding.priority?.rank && <span className="insight-rank">Priority {finding.priority.rank}</span>}</div>
+        <p className="insight-observed"><strong>Observed inputs / modeled exposure:</strong> {finding.observed}</p>
+        <div className="finding-changes">{[['previous_proposal','current_proposal','Proposal · pcs'],['older_daily','recent_daily','14-day daily mean'],['previous_daily','current_daily','Daily mean'],['previous_pieces','current_pieces','Confirmed inbound · pcs'],['previous_eta','current_eta','Promised date']].filter(([before,after])=>before in finding.values && after in finding.values).map(([before,after,label])=><span key={before}>{label} <strong>{exact(finding.values[before])} → {exact(finding.values[after])}</strong></span>)}</div>
+        <details><summary>Explanation & evidence</summary><div className="insight-detail">
+          {finding.model_hypothesis && <p><strong>Model hypothesis:</strong> {finding.model_hypothesis}</p>}
+          <p><strong>Supported next step:</strong> {finding.next_step}</p>
+          <p><strong>Missing evidence:</strong> {finding.missing_evidence.join(' ')}</p>
+          <p><strong>Priority basis:</strong> {finding.priority?.basis}</p>
+          <Inspector data={{values:finding.values,contributing_factors:finding.contributing_factors,references:finding.references,known_at:finding.known_at,rule_id:finding.rule_id,rules_version:finding.rules_version}} name="Insight evidence"/>
+        </div></details>
+        {go && <button className="text-button" aria-label={`Investigate ${sku?.sku_code || finding.sku_id} at ${site?.name || finding.warehouse_id}`} onClick={()=>go({page:'investigate',item:finding.sku_id+'|'+finding.warehouse_id})}>Investigate <ArrowUpRight size={14}/></button>}
+      </article>;
+    })}</div>
+    <div className="discovery-footer">{data.findings.length>4 && <button aria-expanded={showAll} onClick={()=>setShowAll(v=>!v)}>{showAll?'Show fewer findings':`Show all ${data.findings.length} saved summaries`}</button>}<small>Showing {findings.length} of {data.total_findings ?? data.findings.length} findings.{data.total_findings>data.findings.length?' Open an exact item for its complete findings.':''}</small></div>
+    {data.unknown.length>0 && <details className="evidence-disclosure"><summary>Evidence gaps ({data.total_unknown ?? data.unknown.length})</summary><Inspector data={data.unknown} name="Unknown evidence"/></details>}
+    <ReviewControls discovery={data}/>
   </section>;
 }
 function ReviewControls({discovery}: {discovery:any}) {
@@ -742,6 +756,7 @@ function Explore({
   go: (r: Partial<Route>) => void;
 }) {
   const [retry, setRetry] = useState(0);
+  const [moreFilters,setMoreFilters]=useState(Boolean(route.style || route.color || route.size || route.status));
   const params = requestQuery({ ...route, snapshot: context.cutoff });
   params.set("archive_digest", context.archive_digest);
   const resource = useResource<any>("/api/product/explore?" + params, retry);
@@ -803,7 +818,7 @@ function Explore({
           </button>
         ))}
       </div>
-      <section className="panel filters">
+      <section className="panel filters" aria-label="Inventory filters">
         <label className="search">
           Search items
           <input
@@ -813,7 +828,11 @@ function Explore({
             onChange={(e) => go({ q: e.target.value, offset: 0 })}
           />
         </label>
-        {filters.map(([key, label, dim]) => (
+        <label>Location<select aria-label="Location" value={route.location || ''} onChange={e=>go({location:e.target.value,offset:0})}><option value="">All locations</option>{dimension('warehouses').map((v:any)=><option value={v.id} key={v.id}>{v.label}</option>)}</select></label>
+        <button className="filter-toggle" aria-expanded={moreFilters} aria-controls="additional-filters" onClick={()=>setMoreFilters(v=>!v)}>More filters{[route.style,route.color,route.size,route.status].filter(Boolean).length?` (${[route.style,route.color,route.size,route.status].filter(Boolean).length} active)`:''}</button>
+        <button className="text-button" onClick={()=>go({q:'',style:'',color:'',size:'',location:'',type:'',status:'',sort:'priority',offset:0})}>Clear filters</button>
+        <div className="additional-filters" id="additional-filters" hidden={!moreFilters}>
+        {filters.filter(([key])=>key!=='location').map(([key, label, dim]) => (
           <label key={key}>
             {label}
             <select
@@ -857,6 +876,7 @@ function Explore({
             <option value="not_assessable">Blocked</option>
           </select>
         </label>
+        </div>
         <label>
           Sort
           <select
@@ -1080,12 +1100,12 @@ function Evaluation() {
   const data = resource.data;
   return <section className="panel detail-panel" aria-label="Forecast and decision evaluation">
     <h2>Forecast accuracy meets decision quality</h2>
-    <p>Fresh synthetic paths separate baseline selection from evaluation. Every policy uses the actual planner and pays for opening stock, all purchases, holding, backlog and closure.</p>
+    <p>Saved independent synthetic paths separate baseline selection from evaluation. Every policy uses the actual planner and pays for opening stock, all purchases, holding, backlog and closure.</p>
     <Notice {...resource} retry={() => setRetry(v => v + 1)} />
     {data && !resource.stale && !resource.error && <>
       <div className="metric-grid"><div><span>Independent paths</span><strong>{data.independent_paths}</strong></div><div><span>Actual planner reviews</span><strong>{data.reviews}</strong></div><div><span>Blocked reviews retained</span><strong>{data.blocked_reviews}</strong></div><div><span>Decision gate passed</span><strong>{data.decision_gate_passes} / {data.families.length}</strong></div></div>
       <p className="notice">No global winner or policy promotion. Point forecasts provide no prediction intervals; calibration is undefined.</p>
-      <div className="table-scroll"><table><caption>Independent evaluation outcomes · exact synthetic costs and pieces</caption><thead><tr><th>Demand / supply path</th><th>Selection choice</th><th>Cost versus mean</th><th>Decision gate</th><th>Inspect</th></tr></thead><tbody>{data.families.map((f: any) => <tr key={f.family}><td>{title(f.family.replaceAll('-', '_'))}</td><td>{title(f.selected_from_selection)}</td><td>{f.evaluation_cost_delta_vs_mean}<small>Fill {f.evaluation_fill ?? 'Undefined'} · {f.selected_blocked_reviews} blocked reviews</small></td><td>{f.decision_gate_passed ? 'Passed' : 'No promotion'}<small>{f.decision_gate_failures.join(', ')}</small></td><td><EvidenceDisclosure data={f.arms} name={`Accuracy, costs and service · ${f.family}`} /></td></tr>)}</tbody></table></div>
+      <div className="table-scroll"><table><caption>Independent evaluation outcomes · exact synthetic costs and pieces</caption><thead><tr><th>Demand / supply path</th><th>Selection choice</th><th>Cost versus mean</th><th>Decision gate</th><th>Inspect</th></tr></thead><tbody>{data.families.map((f: any) => <tr key={f.family}><td>{title(f.family.replaceAll('-', '_'))}</td><td>{title(f.selected_from_selection)}</td><td>{f.evaluation_cost_delta_vs_mean}<small>Fill {f.evaluation_fill ?? 'Undefined'} · {f.selected_blocked_reviews} blocked reviews</small></td><td>{f.decision_gate_passed ? 'Passed' : 'No promotion'}<small>{f.decision_gate_failures.map((reason:string)=>title(reason)).join(' · ')}</small></td><td><EvidenceDisclosure data={f.arms} name={`Accuracy, costs and service · ${f.family}`} /></td></tr>)}</tbody></table></div>
       <EvidenceDisclosure data={{protocol:data.protocol_sha256,source_artifact:data.source_artifact_sha256,runtime:data.runtime}} name="Study provenance" />
       <Download data={data} name="forecast-decision-evaluation" label="Export evaluation" />
     </>}
@@ -1204,7 +1224,7 @@ function DecisionOptions({card, context, unavailable=false}: {card: Card; contex
 
 function DecisionRows({data}: {data:any}) {
   if (!data.arms) return <p className="notice warning">Not assessable: {data.reasons.join(', ')}. Unsafe outcome quantities are withheld.</p>;
-  return <div className="table-scroll"><table><caption>Compatible 33-day outcomes · exact pieces and synthetic cost units</caption><thead><tr><th>Decision</th><th>Feasibility / promise</th><th>Paid cost</th><th>Service / exposure</th></tr></thead><tbody>{Object.entries(data.arms).map(([name,raw])=>{const arm:any=raw;return <tr key={name}><td>{title(name)}<small>Purchase {arm.purchase_quantity ?? arm.quantity ?? 'Unknown'} · transfer {arm.transfer_quantity ?? '0'}</small></td><td>{title(arm.status || 'assessable')}<small>{arm.feasibility?.promised_day || arm.purchase_promise?.promised_day || 'No purchase promise'}{arm.reasons?.join(', ')}</small></td><td>{arm.total_cost ?? 'Withheld'}</td><td>{arm.recipient ? `Recipient fill ${exact(arm.recipient.immediate_fill)} · donor fill ${exact(arm.donor.immediate_fill)}` : `Immediate ${arm.immediate_fulfilled ?? 'Unknown'} / ${arm.accepted ?? 'Unknown'}`}<small>Terminal backlog {arm.recipient?.terminal_backlog ?? arm.terminal_backlog ?? 'Unknown'}</small></td></tr>;})}</tbody></table></div>;
+  return <div className="table-scroll"><table><caption>Compatible 33-day outcomes · exact pieces and synthetic cost units</caption><thead><tr><th>Decision</th><th>Feasibility / promise</th><th>Paid cost</th><th>Service / exposure</th></tr></thead><tbody>{Object.entries(data.arms).map(([name,raw])=>{const arm:any=raw;return <tr key={name}><td>{title(name)}<small>Purchase {arm.purchase_quantity ?? arm.quantity ?? 'Unknown'} · transfer {arm.transfer_quantity ?? '0'}</small></td><td><Badge value={arm.status || 'unknown'}/><small>{arm.feasibility?.promised_day || arm.purchase_promise?.promised_day || 'No purchase promise'}{arm.reasons?.join(', ')}</small></td><td>{arm.total_cost ?? 'Withheld'}</td><td>{arm.recipient ? `Recipient fill ${exact(arm.recipient.immediate_fill)} · donor fill ${exact(arm.donor.immediate_fill)}` : `Immediate ${arm.immediate_fulfilled ?? 'Unknown'} / ${arm.accepted ?? 'Unknown'}`}<small>Terminal backlog {arm.recipient?.terminal_backlog ?? arm.terminal_backlog ?? 'Unknown'}</small></td></tr>;})}</tbody></table></div>;
 }
 
 function Selected({
@@ -1217,6 +1237,7 @@ function Selected({
   go: (r: Partial<Route>) => void;
 }) {
   const [retry, setRetry] = useState(0);
+  const [compareMode,setCompareMode]=useState(route.scenario?"scenario":"feasible");
   const selectedId = route.item || context.highlights[0]?.id;
   useEffect(() => {
     if (selectedId && !route.item) go({ item: selectedId });
@@ -1260,6 +1281,7 @@ function Selected({
       <Notice {...resource} retry={() => setRetry((v) => v + 1)} />
       {data && card?.sku_id && (
         <>
+          <button className="text-button back-link" onClick={()=>go({page:"explore"})}>← Back to inventory results</button>
           <section className="selected-context panel">
             <div>
               <p className="eyebrow">
@@ -1271,7 +1293,6 @@ function Selected({
                   {card.color} · {card.size}
                 </span>
               </h2>
-              <p>{card.title}</p>
             </div>
             <div>
               <Badge value={card.category} />
@@ -1302,78 +1323,50 @@ function Selected({
               <History data={history.data} go={go} item={selectedId} />
             </>
           ) : route.page === "compare" || route.page === "decide" ? (
-            <><DecisionOptions key={context.archive_digest+context.cutoff+card.id} card={card} context={context} unavailable={resource.stale || resource.loading || Boolean(resource.error)} /><Comparison
-              card={card}
-              detail={data}
-              context={context}
-              route={{ ...route, item: selectedId }}
-              go={go}
-              unavailable={
-                resource.stale || resource.loading || Boolean(resource.error)
-              }
-            /></>
-          ) : (
-            <div className="detail-grid">
-              <section>
-                <article className="panel detail-panel">
-                  <p className="eyebrow">WHY IT DESERVES ATTENTION</p>
-                  <h2>{card.title}</h2>
-                  <p className="explanation">{card.explanation}</p>
-                  <Facts
-                    facts={[
-                      ["On hand · pieces", exact(card.on_hand)],
-                      ["Daily mean · pieces", exact(card.forecast_daily)],
-                      [
-                        "Prefix proposal · pieces",
-                        exact(card.proposed_order_qty),
-                      ],
-                      ["Rule exposure", exact(card.exposure)],
-                    ]}
-                  />
-                  {card.reasons?.length > 0 && (
-                    <div className="notice warning">
-                      <strong>Evidence blockers</strong>
-                      <ul>
-                        {card.reasons.map((r) => (
-                          <li key={r}>{title(r)}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  <button
-                    className="primary"
-                    disabled={
-                      resource.stale ||
-                      resource.loading ||
-                      Boolean(resource.error)
-                    }
-                    onClick={() => go({ page: "compare", item: selectedId })}
-                  >
-                    Compare supported responses →
-                  </button>
-                </article>
-                <article className="panel detail-panel">
-                  <h3>Calculation trace</h3>
-                  <p>
-                    Exact saved kernel steps. Forecasts and quantities are not
-                    generated by the interface.
-                  </p>
-                  <Inspector data={data.trace} name="Calculation step" />
-                </article>
-                <Discovery data={data.insight_discovery} />
-                <article className="panel detail-panel">
-                  <h3>Capability boundary</h3>
-                  <Inspector data={data.capabilities} />
-                </article>
-              </section>
-              <Evidence detail={data} context={context} params={params} />
+            <div className={`decision-flow ${route.page}`}>
+              {route.page==='compare' && <ViewNav label="Comparison workspace" value={compareMode} onChange={setCompareMode} options={[["feasible","Feasible responses"],["one-review","One-review outcomes"],["scenario","What-if model"]]}/>}
+              <div className="decision-summary" hidden={route.page==='compare' && compareMode!=='scenario'}><Comparison card={card} detail={data} context={context} route={{...route,item:selectedId}} go={go} unavailable={resource.stale || resource.loading || Boolean(resource.error)}/></div>
+              <div className="feasible-panel" hidden={route.page==='compare' && compareMode!=='feasible'}><DecisionOptions key={context.archive_digest+context.cutoff+card.id} card={card} context={context} unavailable={resource.stale || resource.loading || Boolean(resource.error)}/></div>
+              {route.page==='compare' && <div hidden={compareMode!=='one-review'}><OneReview key={context.archive_digest+context.cutoff+card.id} card={card} context={context} unavailable={resource.stale || resource.loading || Boolean(resource.error)}/></div>}
+
             </div>
+          ) : (
+            <Investigation key={context.archive_digest+context.cutoff+card.id} card={card} data={data} context={context} params={params} unavailable={resource.stale || resource.loading || Boolean(resource.error)} go={go}/>
+
           )}
         </>
       )}
     </>
   );
 }
+function Investigation({card,data,context,params,unavailable,go}:{card:Card;data:any;context:Context;params:URLSearchParams;unavailable:boolean;go:(r:Partial<Route>)=>void}) {
+  const [view,setView]=useState('summary');
+  const factors=data.insight_discovery?.findings.find((f:any)=>f.contributing_factors?.stock_pieces!==undefined)?.contributing_factors;
+  return <section className="investigation" aria-label="Item investigation">
+    <article className="panel detail-panel investigation-summary">
+      <div className="section-heading"><div><p className="eyebrow">Issue & supported response</p><h2>{card.title}</h2></div></div>
+      <Facts facts={[["On hand · pieces",exact(card.on_hand)],["Accepted daily mean · pieces",exact(card.forecast_daily)],["Saved proposal · pieces",exact(card.proposed_order_qty)],["Modeled rule exposure",exact(card.exposure)]]}/>
+      <p className="explanation">{card.explanation}</p>
+      <p className="model-boundary"><ShieldCheck size={16}/>Modeled exposure is not an observed stockout. Proposals are advisory; forecast uncertainty is uncalibrated.</p>
+      {card.reasons?.length>0 && <div className="notice warning" role="alert"><strong>Evidence blockers · recommendation limited</strong><ul>{card.reasons.map(r=><li key={r}>{title(r)}</li>)}</ul></div>}
+      <button className="primary investigation-action" disabled={unavailable} onClick={()=>go({page:"compare",item:card.id})}>Compare responses <ArrowUpRight size={16}/></button>
+    </article>
+    <ViewNav label="Investigation sections" value={view} onChange={setView} options={[["summary","Findings"],["drivers","Demand, stock & inbound"],["sources","Source records"],["calculation","Calculation & limits"]]}/>
+    <div hidden={view!=='summary'}><Discovery data={data.insight_discovery} context={context}/></div>
+    <div hidden={view!=='drivers'} className="panel detail-panel">
+      <h2>What contributes to this proposal</h2><p>Origin-known inputs from saved evidence. These factors are not additive causal effects.</p>
+      <Facts facts={[["Observed stock · pieces",exact(card.on_hand)],["Accepted demand · daily pieces",exact(card.forecast_daily)],["Reservations · pieces",exact(factors?.reservation_pieces)],["Confirmed inbound · pieces",exact(factors?.confirmed_inbound_pieces)],["Declared safety · pieces",exact(factors?.safety_pieces)],["Modeled pre-arrival shortage · days",exact(factors?.pre_arrival_shortage_days)]]}/>
+      <div className="driver-grid">{(data.trace || []).filter((step:any)=>['demand','supply','reliability'].includes(step.stage)).map((step:any)=><article className="driver-card" key={step.stage}><p className="eyebrow">{title(step.stage)}</p><h3>{step.label}</h3><p>{step.explanation}</p><EvidenceDisclosure data={{...step.data,references:step.references}} name="Saved supporting evidence"/></article>)}</div>
+    </div>
+    <div hidden={view!=='sources'}><Evidence detail={data} context={context} params={params}/></div>
+    <div hidden={view!=='calculation'} className="panel detail-panel"><h2>Calculation & decision limits</h2><p>Exact saved steps, assumptions and original references. Values are calculated by the server.</p>
+      {(data.trace || []).map((step:any)=><details className="evidence-disclosure" key={step.stage}><summary>{step.label}</summary><p>{step.explanation}</p><Inspector data={step.data}/><Inspector data={step.references}/></details>)}
+      <h3>Available actions</h3><ul className="capability-list">{Object.entries(data.capabilities || {}).map(([name,raw])=>{const cap=raw as any;return <li key={name}><Badge value={cap.supported?'assessable':'not_assessable'}/><div><strong>{title(name)}</strong><p>{cap.label || cap.reason}</p></div></li>;})}</ul>
+      <Download data={data} name="selected-inventory-evidence" label="Export investigation"/>
+    </div>
+  </section>;
+}
+
 function EvidenceRecords({rows}:{rows:Record<string,any>[]}) {
   if(!rows.length)return <p>No original rows in this section.</p>;
   const columns=Array.from(new Set(rows.flatMap(row=>Object.keys(row))));
@@ -1476,15 +1469,7 @@ function History({
           </tbody>
         </table>
       </div>
-      <h3>Compatible change evidence</h3>
-      <Inspector
-        data={
-          data.comparison_basis ||
-          data.deltas ||
-          data.comparability ||
-          data.comparison
-        }
-      />
+      <EvidenceDisclosure name="Compatible change evidence" data={data.comparison_basis || data.deltas || data.comparability || data.comparison}/>
     </section>
   );
 }
@@ -1675,9 +1660,8 @@ function Comparison({
   const current = result?.scenario;
   const plan = current?.plan;
   const projection = plan?.projection || [];
-  return (
-    <>
-      <div className="notice">
+  const policyBoundary = (
+    <div className="notice">
         <strong>Two policies, explicit assumptions</strong>
         <p>
           The prefix proposal compares known no-order stock with its proposed
@@ -1686,7 +1670,10 @@ function Comparison({
           Hidden delay is hypothetical, not observed supplier lateness.
         </p>
       </div>
-      {route.page === "compare" && <OneReview key={key} card={card} context={context} unavailable={unavailable} />}
+  );
+  return (
+    <>
+      {route.page !== "decide" && policyBoundary}
       {route.page === "decide" ? (
         <section className="panel detail-panel">
           <p className="eyebrow">ADVISORY DECISION</p>
@@ -1996,6 +1983,7 @@ function Comparison({
           )}
         </>
       )}
+      {route.page === "decide" && policyBoundary}
     </>
   );
 }
@@ -2020,7 +2008,7 @@ function OneReview({ card, context, unavailable }: {card: Card; context: Context
       {stale && <p role="status">Inputs changed or unavailable · saved contrast is stale.</p>}
       <p>{resource.data.semantics}</p>
       {resource.data.arms ? <div className="table-scroll" tabIndex={0}><table><caption>Common 33-day paid outcomes · synthetic cost units</caption><thead><tr><th>Decision</th><th>Quantity</th><th>Immediate new fill</th><th>Eventual new fill</th><th>Terminal backlog</th><th>Total paid cost</th></tr></thead><tbody>{Object.entries(resource.data.arms).map(([name,arm]:[string,any])=><tr key={name}><td>{title(name)}</td><td>{arm.quantity}</td><td>{arm.immediate_fulfilled}/{arm.accepted}</td><td>{arm.eventual_fulfilled}/{arm.accepted}</td><td>{arm.terminal_backlog}</td><td>{arm.total_cost}</td></tr>)}</tbody></table></div>:<p>Not assessable · {resource.data.reasons.join(", ")}</p>}
-      <Inspector data={resource.data} name="Paid execution evidence" />
+      <EvidenceDisclosure data={resource.data} name="Paid execution evidence" />
       <Download data={{...resource.data,stale}} name="one-review-contrast" label="Export one-review comparison" />
     </>}
   </section>;

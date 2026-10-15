@@ -1,0 +1,27 @@
+{
+  "archive_digest": "b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9",
+  "blocked_capacity_arm": true,
+  "default_journal_disabled": true,
+  "evaluation_reviews": 144,
+  "evaluation_summary_sha256": "a53d04e358ff7e2f86b4309fe44935c97d93541b5f7755a09ebcd383abe12f03",
+  "execution_archive_digest": "3442674a51263aedfbb01062e427f8474de5988142a4a97e15f5f33a7340bdb4",
+  "execution_controls": 7,
+  "feasible_supplier_calendar": true,
+  "independently_expected_proposals": [
+    "12",
+    "18",
+    null
+  ],
+  "installed_module": "/private/tmp/ii-ux-refinement-consumer/lib/python3.12/site-packages/inventory_intelligence/product.py",
+  "no_database": true,
+  "no_node_runtime": true,
+  "packaged_evidence_sha256": "33fcd78419f5d218dea9e4b5ce9a0902491c780f2b8a58dd0d608f9e188c455d",
+  "paired_policy_cells": 36,
+  "served_assets": [
+    "THIRD_PARTY_LICENSES.txt",
+    "favicon.svg",
+    "index-BtjwuY7n.js",
+    "index-D2Nq7X5o.css"
+  ],
+  "status": "pass"
+}

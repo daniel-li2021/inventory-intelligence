@@ -1,0 +1,33 @@
+{
+  "status": "pass",
+  "frontend_tests": 10,
+  "python_regressions": 72,
+  "python_successful_tests_by_command": {
+    "tests.test_product tests.test_lab_hosted tests.test_workflow tests.test_transfers tests.test_supplier_feasibility": 46,
+    "tests.test_product_journey tests.test_product_hosted tests.test_forecast_decision_study": 26
+  },
+  "initial_invocation_note": "First Python invocation also named two nonexistent modules (test_product_api, test_forecast_decision): loader errors only; the 46 actual tests passed. Correct existing remaining modules then passed 26 tests.",
+  "build": "TypeScript and Vite production build, license manifest and frozen bundle budgets pass",
+  "wheel_sha256": "c9c65b16aa892dd325dacaaac997d4ee3d24fc9952a13aa638702efc1d1a1f8c",
+  "bundle": {
+    "frozen_budgets_bytes": {
+      "js_gzip": 256000,
+      "css_gzip": 40960,
+      "initial_data": 204800
+    },
+    "measured_bytes": {
+      "js_gzip": 94515,
+      "css_gzip": 7728
+    },
+    "files": [
+      "THIRD_PARTY_LICENSES.txt",
+      "favicon.svg",
+      "index-BtjwuY7n.js",
+      "index-D2Nq7X5o.css",
+      "index.html"
+    ]
+  },
+  "browser_layout_cells": 32,
+  "browser_interaction_checks": 21,
+  "production_or_public_deployment_verified": false
+}

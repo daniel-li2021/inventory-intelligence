@@ -5,14 +5,14 @@
     "initial_data": 204800
   },
   "measured_bytes": {
-    "js_gzip": 92337,
-    "css_gzip": 7518
+    "js_gzip": 94515,
+    "css_gzip": 7728
   },
   "files": [
     "THIRD_PARTY_LICENSES.txt",
     "favicon.svg",
-    "index-CVIaMH1_.js",
-    "index-sT2kP05Y.css",
+    "index-BtjwuY7n.js",
+    "index-D2Nq7X5o.css",
     "index.html"
   ]
 }

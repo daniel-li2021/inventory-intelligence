@@ -40,7 +40,7 @@ of authenticated competitor features.
   scanning. Both preserve source identity beside analysis. No financial data or
   backend logic is imported into Inventory Intelligence.
 
-## Current workbench findings
+## Initial workbench findings
 
 1. **Overview:** source clocks, archive disclosure and saved-view controls consume
    the first screen before the attention queue. Repeated title/context/card framing
@@ -120,3 +120,69 @@ keep the existing packaged-asset contract; Lucide icons include ISC notices.
 Accessibility observations are bounded developer checks; no WCAG certification,
 human task acceptance or production readiness is claimed. Independent product/runtime
 gates in [ROADMAP](ROADMAP.md) remain open.
+
+## Product-wide UX refinement · October 15
+
+The owner assigned a rendered audit and substantial usability improvements across
+all eight routes, continuing the selected Desk direction. The baseline browser
+review found a 15,810px Overview at 1440×900: expanded discovery reports dominated
+its length. Investigation repeated explanations, raw traces and nested evidence
+scrolling; Explore put eight equal-weight filters before results; Compare stacked
+three different models, while Decide put controls before its recommendation.
+Mobile navigation consumed a fixed side rail and delayed the first useful facts.
+History and Evaluation had sound evidence tables but oversized rows and metadata.
+
+| Route | Implemented structure | Desktop before / after |
+|---|---|---|
+| Overview | Compact coverage and attention rows; four finding summaries, explicit expansion, full exports and evidence gaps | [Before](screenshots/ux-refinement/before-overview.jpg) / [After](screenshots/ux-refinement/after-1440-overview.jpg) |
+| Explore | Search, location and sort first; secondary filters with active count and clear action; existing list/matrix and pagination | [Before](screenshots/ux-refinement/before-explore.jpg) / [After](screenshots/ux-refinement/after-1440-explore.jpg) |
+| Investigate | Key facts first; Findings, Demand/stock/inbound, Source records, Calculation/limits sections | [Before](screenshots/ux-refinement/before-investigate.jpg) / [After](screenshots/ux-refinement/after-1440-investigate.jpg) |
+| Compare | Feasible responses, One-review outcomes and What-if model sections; drafts/results remain mounted when switching | [Before](screenshots/ux-refinement/before-compare.jpg) / [After](screenshots/ux-refinement/after-1440-compare.jpg) |
+| Decide | Advisory recommendation first, then policy boundary and feasible response controls; stale/blocked gates retained | [Before](screenshots/ux-refinement/before-decide.jpg) / [After](screenshots/ux-refinement/after-1440-decide.jpg) |
+| History | Denser cutoff table; compatible-change evidence disclosed on demand | [Before](screenshots/ux-refinement/before-history.jpg) / [After](screenshots/ux-refinement/after-1440-history.jpg) |
+| Execution | Review decisions, Daily outcomes, Policy comparison, Commitments/receipts; material erratum stays visible | [Before](screenshots/ux-refinement/before-execution.jpg) / [After](screenshots/ux-refinement/after-1440-execution.jpg) |
+| Evaluation | Consistent metrics and compact result table; readable gate reasons, original arm evidence and provenance | [Before](screenshots/ux-refinement/before-evaluation.jpg) / [After](screenshots/ux-refinement/after-1440-evaluation.jpg) |
+
+Shared native-button navigation and text-labelled semantic badges replace ad hoc
+status classes; unrecognized codes receive a neutral tone rather than success.
+Saved previous/current values appear directly in [compact insight rows](screenshots/ux-refinement/after-compact-insights.jpg),
+without client business arithmetic. Observed inputs, modeled exposure, hypotheses,
+missing evidence and supported next steps remain distinct. Source identity,
+cutoff, filters and item selections survive related-route transitions; Back to
+inventory results restores the filtered view. Optional context now fetches the
+exact selected item rather than substituting an unrelated priority highlight.
+
+Desk styling is organized in one readable theme file. The document owns vertical
+scrolling; source tables deliberately scroll horizontally. On mobile, an eight-link
+navigation grid replaces the space-consuming rail. Compare [mobile before](screenshots/ux-refinement/before-mobile-investigate.jpg)
+with [mobile after](screenshots/ux-refinement/after-390-investigate.jpg).
+
+Validation is saved in [browser layout cells](review/ux-refinement-v1/browser.json),
+[interaction checks](review/ux-refinement-v1/interactions.json),
+[installed-wheel check](review/ux-refinement-v1/installed-wheel.json),
+[integrity check](review/ux-refinement-v1/integrity.json) and
+[validation receipt](review/ux-refinement-v1/validation.json).
+
+- All eight routes at 1440×900, 1280×800, 768×1024 and 390×844: 32 browser layout
+  cells pass without page-level horizontal overflow or nested vertical main scroll.
+  Representative rendered screenshots were inspected; every cell has a capture.
+- Default Overview height is 2,337px at 1440×900, versus 15,810px before. Its four
+  collapsed insight rows are about 160px each; longer explanations remain available.
+  These are developer layout measurements, not task-completion or comprehension data.
+- 21 browser interaction checks cover empty filters, exact item/cutoff retention,
+  driver/source/calculation navigation, original 28-row evidence pagination and an
+  eight-row page-two JSON export, supplier staleness, one-review and 12→18 scenario
+  comparisons, blocked decisions, keyboard focus and exact optional item context.
+  A new temporary synthetic journal admits 12 and receives 5, leaving 7 pending.
+- 10 frontend tests, TypeScript/build/bundle budgets and 72 focused existing Python
+  regressions pass. The clean installed wheel serves current assets without Node or
+  database calls; expected proposals remain 12/18/Unknown. All 602 protected original
+  backend/test/SQL/evidence/state/type files retain their bytes. No dependency added.
+
+Remaining limits: wide tables require horizontal movement on narrow screens;
+expanded original evidence can still be long by design. Section choices are local
+UI state; existing shared routes preserve item, source binding, cutoff, filters and
+scenario assumptions. Rapid automated browsing exercised the normal demo rate limit
+and Retry recovered; final layout cells used a loopback-only increased allowance,
+without changing public safeguards. Human comprehension, assistive-technology
+acceptance, full WCAG conformance and post-push public deployment remain unverified.

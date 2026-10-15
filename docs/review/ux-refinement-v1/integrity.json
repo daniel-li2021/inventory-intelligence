@@ -1,0 +1,7 @@
+{
+  "status": "pass",
+  "protected_original_files": 602,
+  "changed": [],
+  "path_and_sha256_manifest_digest": "48e4d7449af7dc6fb5f882f68c7bed7f3deffc00462c5191c4778ccba7ff3a53",
+  "scope": "Tracked backend, SQL, tests, original review/example evidence, frontend state and types; generated UI assets excluded"
+}

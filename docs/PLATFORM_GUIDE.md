@@ -134,6 +134,8 @@ and identities; calculations remain in the backend. The more editorial **Brief**
 alternative is preserved as a separate runnable frontend. [Design research and
 validation](PRODUCT_DESIGN.md) records the choice and its boundaries.
 
+The [product-wide UX refinement](PRODUCT_DESIGN.md#product-wide-ux-refinement--october-15) organizes investigation, comparison and execution into task sections, with compact findings and responsive navigation.
+
 Developer browser controls cover constraints/staleness, admissions, partial lifecycle,
 source-bound review, exact exports, evaluation and 1280/320px layout. These checks are
 separate from human comprehension or WCAG conformance. [Browser receipt](review/platform-browser-v1.json).

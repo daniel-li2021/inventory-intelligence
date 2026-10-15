@@ -5,8 +5,8 @@ Updated: 2026-10-15 (America/Los_Angeles).
 Integration mode: AUTO
 
 Phase: final bounded functional audit complete; Functional Closure recommended for
-the local synthetic core. The selected direct white Desk UI is implemented and
-validated locally; Brief remains preserved. Inputs are synthetic; real orders/company intake/paid services are excluded.
+the local synthetic core. The selected direct white Desk UI and product-wide UX refinement are implemented
+and validated locally; Brief remains preserved. Inputs are synthetic; real orders/company intake/paid services are excluded.
 
 Render Free: [Blueprint/setup](../deploy/render/README.md) and [local receipt](review/render-free-v1.json)
 serve one read-only Python/React demo, no database/secrets, GitHub CI-gated deploys.
@@ -41,15 +41,13 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
 
 ## Product design selection
 
-- Owner selected the direct white Desk direction and authorized implementation.
-  Larger type, wider cells, quieter source controls and a responsive context panel
-  adapt the selected design to all existing workbench controls.
-- The editorial Brief alternative remains runnable in the isolated prototype app
-  for a future switch. [Research and review](PRODUCT_DESIGN.md).
-- Eight production screens pass desktop/mobile/320px browser inspection; 8 frontend,
-  6 prototype and 3 hosted tests pass. Installed offline wheel and isolated synthetic
-  reservation/dispatch/partial receipt pass. All 521 protected backend/evidence files
-  retain original hashes. [Validation and screenshots](PRODUCT_DESIGN.md#selection-and-validation).
+- Owner selected white Desk; the isolated Brief alternative remains runnable.
+  [Initial selection and validation](PRODUCT_DESIGN.md#selection-and-validation).
+- Product-wide refinement adds compact findings, task-based sections, secondary
+  filters, semantic badges and mobile navigation. 32 route/viewport cells,
+  21 browser interactions, 10 frontend and 72 focused Python tests plus the installed
+  offline wheel pass. All602 original backend/test/SQL/evidence files retain bytes.
+  [Audit, before/after and limits](PRODUCT_DESIGN.md#product-wide-ux-refinement--october-15).
 - Backend closure, calculations, API contracts and historical evidence stay fixed.
 
 ## Accepted evidence and remaining gates
