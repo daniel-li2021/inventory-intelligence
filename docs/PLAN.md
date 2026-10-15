@@ -15,8 +15,9 @@ reuse completed cells. No x86 host was available in that evidence. Actual Postgr
 ARM64/Python3.12.14; see [engineering support](ENGINEERING_SUPPORT.md) for fresh JIT
 non-adoption and bounded inspection above old reader caps. Exact pinned runtime/
 hardware and full large-report producer/semantic acceptance remain open. Native18 is not a version17
-reference. Public/paid deployment, real/company inputs and real purchasing remain
-excluded.
+reference. The owner separately assigned [Render Free demo preparation](../deploy/render/README.md)
+and verification after supplying its URL. Paid deployment, real/company inputs and
+real purchasing remain excluded; no new reference or load campaign is assigned.
 
 Selected-claim quantities, completeness, clocks and fail-closed behavior gate every
 local milestone. Unavailable x86/two-date, sustained public runtime and independent

@@ -6,8 +6,12 @@ Integration mode: AUTO
 
 Phase: final bounded functional audit complete; Functional Closure recommended for
 the local synthetic core. The selected direct white Desk UI is implemented and
-validated locally; the editorial Brief prototype is preserved. Operational inputs are synthetic.
-Real orders, confidential/company intake and public/paid deployment remain excluded.
+validated locally; Brief remains preserved. Inputs are synthetic; real orders/company intake/paid services are excluded.
+
+Render Free: [Blueprint/setup](../deploy/render/README.md) and [local receipt](review/render-free-v1.json)
+prepare one read-only Python/React service, no database/secrets, GitHub CI-gated deploys.
+Next: owner connects GitHub in Render, deploys and supplies the public URL for checks/fixes.
+Actual Render runtime/TLS/cold start and capacity remain unverified; business evidence is unchanged.
 
 ## Coherent platform
 

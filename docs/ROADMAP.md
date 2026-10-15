@@ -17,8 +17,12 @@ preserve Brief as a future alternative; the following external acceptance gates 
 Changed donor bases continue to reject; closure does not extend the one-review
 transfer contract into repeated network execution or claim production readiness.
 
-Only these genuine pending validation workstreams remain. They are not authorization
-for public deployment, real intake, company data or paid services.
+The owner separately assigned [Render Free deployment preparation](../deploy/render/README.md):
+one read-only synthetic service, no database/secrets/paid resources, GitHub CI-gated
+deploys. Repository setup is locally validated; next the owner authorizes GitHub in
+Render and supplies the public URL for live checks and fixes. This does not complete
+the reference/runtime or independent product gates below, or authorize real intake,
+company data or paid services.
 
 1. **Independent product acceptance.** A human completes new dataset→insight→evidence→
    feasible comparison→commitment/transfer→history tasks. Record exact task outcomes,

@@ -1,7 +1,9 @@
 # Hosted Lab readiness package
 
 Start with the [architecture, cost boundary and release gates](README.md#serving-architecture-and-limits).
-This package prepares a public synthetic demo; **nothing is deployed**. The local
+For the authorized single-service Free deployment, use the [Render guide](../render/README.md)
+and root Blueprint. This document retains the separate Docker/Caddy recipe and its
+historical acceptance boundaries; no Render deployment has been verified yet. The local
 `lab_api:app` serves the product workbench at `/` and the original Lab at `/lab`. Hosted serving uses `lab_hosted:app`, one process,
 4 KiB scenario bodies / five-second read deadline, a global burst-20 / 2-per-second
 API allowance and four active API requests. Admission limits return 429/503 and

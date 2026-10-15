@@ -12,6 +12,7 @@
 | [CONTRACTS](CONTRACTS.md) | Current interfaces/version identifiers; inventory, planning, Copilot and research kernels. |
 | [OPERATIONS](OPERATIONS.md) | Current fixture, reliability and planning commands. |
 | [Product / Lab](DECISION_LAB.md) / [hosting](../deploy/lab/README.md) | API/UX, packaged evidence, serving and rollback. |
+| [Render Free deployment](../deploy/render/README.md) | Single-service read-only Blueprint, GitHub setup, local validation and pending public acceptance. |
 | [Synthetic replay / insights V2](SYNTHETIC_REPLAY.md) | Controlled local intake, immutable versions, discovery rules, one-review comparisons and walkthrough. |
 | [Product design exploration](PRODUCT_DESIGN.md) | Selected white Desk implementation, preserved Brief alternative, research and browser checks. |
 | [Platform and case studies](PLATFORM_GUIDE.md) | Working integrated local demo, six scenarios, benchmarks and boundaries. |
@@ -34,7 +35,8 @@ Only these two documents own pending execution. PLANNER_EXECUTION is a durable
 completed guide, not an ongoing plan. Keep another plan only when concrete future
 execution needs it; extract completed facts into KB, guides, RESULTS and EVIDENCE.
 The full user assignment supersedes the earlier two-increment/paused feature scope;
-AUTO integrates validated assigned work. Public/paid deployment and real operational
+AUTO integrates validated assigned work. The owner assigned Render Free preparation
+and public verification after supplying its URL; paid deployment and real operational
 intake remain excluded. Preserve original unmerged planner controls as STATE directs.
 
 ## Maintenance rules
