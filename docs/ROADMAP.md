@@ -25,7 +25,9 @@ one read-only synthetic service, no database/secrets/paid resources, GitHub CI-g
 deploys. Repository setup and the October 15 [public smoke check](review/render-public-smoke-v1.json)
 pass; trusted TLS, readiness and a brief interactive journey are verified. This does not complete
 the reference/runtime or independent product gates below, or authorize real intake,
-company data or paid services.
+company data or paid services. The [project overview](../README.md) now surfaces the
+demo, current UI screenshot and qualified engineering evidence for recruiters; this
+documentation update adds no new acceptance or benchmark claim.
 
 1. **Independent product acceptance.** A human completes new dataset→insight→evidence→
    feasible comparison→commitment/transfer→history tasks. Record exact task outcomes,

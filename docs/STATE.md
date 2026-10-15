@@ -61,8 +61,8 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
   regressions on PostgreSQL17.9 ARM64/Python3.12.14, eight frontend controls,
   16 platform and 22 legacy browser controls, installed-wheel/source integrity.
   Initial two masked-DSN reconnect test errors are retained and corrected.
-- [Six connected case studies and demo](PLATFORM_GUIDE.md) link the complete journey,
-  independent controls, measured gains, negative findings and reproducible commands.
+- [README](../README.md) now leads with value, demo, current UI and qualified results.
+  [Six case studies](PLATFORM_GUIDE.md) retain the full journey and synthetic limits.
   Completed master narrative lives in Git; current O01–O25 audit belongs in KB.
 - [ROADMAP](ROADMAP.md) retains independent product/reference acceptance;
   [PLAN](PLAN.md) retains exact Python3.12.12/x86/two-date, sustained serving,

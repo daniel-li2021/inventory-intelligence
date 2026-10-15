@@ -1,64 +1,80 @@
 # Inventory Intelligence
 
-**Can this stock be trusted—and what should we replenish if it can?**
+**Find inventory risk, trace the evidence, and compare replenishment decisions.**
 
-A Python/PostgreSQL portfolio system for finished apparel measured in whole
-pieces: reconcile inventory, compute evidence-gated advisory replenishment, and
-explain saved results. Missing, stale or contradictory evidence yields
-`not_assessable` and null quantities. Inputs are never repaired and no orders execute.
+An inventory decision workbench for apparel: identify stock at risk, surplus and
+unreliable data across **50 SKUs at two locations**, then investigate source records
+and compare purchase or transfer options. Built with **Python, PostgreSQL, FastAPI
+and React/TypeScript**.
 
-[Current project state](docs/STATE.md) · [Engineering plan](docs/PLAN.md) ·
-[Knowledge and evidence](docs/README.md) · [Development workflow](CONTRIBUTING.md)
+**[Open the live demo](https://inventory-intelligence-boss.onrender.com)** ·
+[Six engineering case studies](docs/PLATFORM_GUIDE.md) ·
+[Measured results](docs/RESULTS.md) · [Technical docs](docs/README.md)
 
-The Inventory Decision Workbench connects **Overview → Explore → Investigate →
-Compare → Decide**, with saved views and three-cutoff history. It surfaces risk,
-surplus opportunities and evidence problems across 50 apparel SKUs at two locations.
-The bundled synthetic catalog contains actual saved checker, forecast and planner
-outputs. [Product guide](docs/DECISION_LAB.md#product-capability-and-experience-boundary)
-· [Remaining roadmap](docs/ROADMAP.md#delivery-sequence-and-acceptance-gates).
+Saved results: **[368/368 PostgreSQL tests passed](docs/review/full-platform-acceptance-v1/receipt.json)** ·
+**[10.251s → 0.856s local reconciliation median](docs/RESULTS.md#engineering-continuation)**.
 
-The completed local platform adds [controlled synthetic intake/replay](docs/SYNTHETIC_REPLAY.md),
-explainable priority/review, [feasible supplier choices](docs/SUPPLIER_FEASIBILITY.md),
-[donor-safe transfers and receipt/ETA feedback](docs/TRANSFERS.md), and fresh
-[forecast-to-decision evaluation](docs/FORECAST_DECISION.md). The compact light
-workbench keeps exact evidence and blocked/stale states visible. The default wheel
-is read-only; explicit loopback configuration enables synthetic journals.
+*Read-only demo with synthetic data; no real orders execute. The free host may
+need about a minute to wake up. [Public smoke-check receipt](docs/review/render-public-smoke-v1.json).*
 
-[Six connected case studies and working demo](docs/PLATFORM_GUIDE.md) cover new
-sources, risk, feasible alternatives, transfers, actual later plans and unsafe data.
-Fresh evaluation preserves losing policies and no winner; the JIT candidate was
-not adopted. [Engineering limits](docs/ENGINEERING_SUPPORT.md) and
-[remaining validation](docs/ROADMAP.md) stay separate from production claims.
+[![Inventory Intelligence Overview: 100 item locations with risk, opportunity and evidence problems, plus an attention queue linking to source investigation](docs/screenshots/ux-refinement/after-1280-overview.jpg)](https://inventory-intelligence-boss.onrender.com)
 
-```sh
-python scripts/run_local_demo.py --port 8040 --catalog docs/review/generalization-v1/generalization-two-site-v1.json.gz --journal output/my-platform-demo.sqlite
-```
+## Verified engineering results
+
+- **10.251s → 0.856s median reconciliation time** on 1,000 item/location keys and
+  100,000 movements, with identical report semantics and source hashes. Twelve
+  measured calls per variant in a local paired benchmark; the x86/two-date reference
+  gate remains open. [Method and limits](docs/RESULTS.md#engineering-continuation).
+- **368/368 PostgreSQL regressions passed**, followed by a separate **126/126 focused
+  audit** on PostgreSQL 17.9 ARM64 / Python 3.12.14. These are saved October 14
+  acceptance runs, not additive coverage totals.
+  [Full receipt](docs/review/full-platform-acceptance-v1/receipt.json) ·
+  [Audit receipt](docs/review/final-functional-audit-v1/receipt.json).
+- **Installed Python wheel runs the demo without Node, a database or a model key.**
+  Packaged assets, evidence integrity and disabled default writes passed installed
+  package checks. [Package evidence](docs/review/final-functional-audit-v1/receipt.json).
+
+These results establish bounded local/synthetic behavior, not production capacity,
+real business savings or independent human/accessibility acceptance.
+
+## Architecture and product flow
 
 ```mermaid
 flowchart LR
-  S[Source records + completeness] --> R[Inventory reliability]
-  D[Origin-known accepted orders] --> F[Baseline forecasts]
-  R --> P[Evidence-gated planning]
-  F --> P
-  P --> C[Read-only evidence copilot]
-  R --> L[Decision Lab: saved synthetic replay]
-  P --> L
-  B[Separate offline decision simulator] --> L
+  S[Synthetic source records] --> K[Python + PostgreSQL: reconcile, forecast, plan]
+  K --> E[Versioned evidence archives]
+  E --> W[FastAPI + React workbench]
+  M[Separate periodic simulator] --> W
 ```
 
-Reliability compares ledger/snapshot quantities at aligned cutoffs and watermarks.
-Planning requires trusted stock, eligible demand and complete reservations/inbound.
-Copilot reports exact saved evidence; optional language routing chooses intent only.
-The separate periodic simulator reevaluates orders rather than executing the
-planner's prefix proposal. [Durable design decisions](docs/DECISIONS.md).
+The core preserves source identities, business/knowledge clocks and exact whole-piece
+quantities. Missing, stale or contradictory evidence blocks planning with
+`not_assessable` and null quantities. Copilot explains saved evidence; optional
+language routing selects intent without calculating business quantities. The
+simulator evaluates periodic policies separately from the planner's advisory proposal.
+The hosted workbench reads packaged evidence and computes transient comparisons;
+new core runs use PostgreSQL. [Contracts](docs/CONTRACTS.md) ·
+[Design decisions](docs/DECISIONS.md).
 
-The operational demo is synthetic. Separate approved [UCI observed-sales research](docs/RESULTS.md#public-observed-sales)
-keeps raw/reconstructable observations local and publishes aggregates. Sales do not
-establish unconstrained demand, historical availability or real business benefit.
-[Measured results](docs/RESULTS.md) include routing failures, negative safety-policy
-outcomes and service/cost tradeoffs. [Evidence](docs/EVIDENCE.md) binds their original
-source views; [knowledge](docs/KB.md) retains lessons and conditional questions.
-The documentation index routes current interfaces and operations; STATE owns status.
+**Overview → Explore → Investigate → Compare → Decide** connects evidence to action,
+with saved views and three-cutoff history. The platform also supports
+[controlled local synthetic intake/replay](docs/SYNTHETIC_REPLAY.md),
+[feasible supplier choices](docs/SUPPLIER_FEASIBILITY.md),
+[donor-safe transfers and receipt/ETA feedback](docs/TRANSFERS.md), and
+[forecast-to-decision evaluation](docs/FORECAST_DECISION.md).
+Explicit local configuration enables synthetic SQLite journals; the hosted demo
+remains read-only. [Platform walkthrough and local journal command](docs/PLATFORM_GUIDE.md#run-the-working-platform).
+
+All operational inputs are synthetic. Separate approved
+[UCI observed-sales research](docs/RESULTS.md#public-observed-sales) keeps
+raw/reconstructable observations local and publishes attributed aggregates.
+Observed sales do not establish unconstrained demand or historical availability.
+Evaluation retains losing policies and no winner; the JIT candidate was not adopted.
+[Evidence and provenance](docs/EVIDENCE.md) · [Engineering limits](docs/ENGINEERING_SUPPORT.md) ·
+[Knowledge and data rights](docs/KB.md) · [Remaining validation](docs/ROADMAP.md).
+
+[Current project state](docs/STATE.md) · [Engineering plan](docs/PLAN.md) ·
+[Development workflow](CONTRIBUTING.md)
 
 ## Try the Decision Workbench
 
@@ -93,8 +109,6 @@ Three-minute walkthrough:
 4. Explore **Excess stock** for a passing-reliability opportunity; switch to the
    apparel matrix, save a local view, share its archive-bound URL or export exact
    evidence. Missing/blocked quantities remain distinct from recorded zero.
-
-![Synthetic Inventory Decision Workbench](docs/review/product-overview.png)
 
 The original [single-item Scenario Lab](http://127.0.0.1:8000/lab) and its v1 APIs
 remain available:
