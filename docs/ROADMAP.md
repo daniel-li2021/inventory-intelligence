@@ -19,8 +19,8 @@ transfer contract into repeated network execution or claim production readiness.
 
 The owner separately assigned [Render Free deployment preparation](../deploy/render/README.md):
 one read-only synthetic service, no database/secrets/paid resources, GitHub CI-gated
-deploys. Repository setup is locally validated; next the owner authorizes GitHub in
-Render and supplies the public URL for live checks and fixes. This does not complete
+deploys. Repository setup and the October 15 [public smoke check](review/render-public-smoke-v1.json)
+pass; trusted TLS, readiness and a brief interactive journey are verified. This does not complete
 the reference/runtime or independent product gates below, or authorize real intake,
 company data or paid services.
 

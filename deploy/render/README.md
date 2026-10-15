@@ -1,6 +1,6 @@
 # Render Free synthetic demo
 
-The root [Blueprint](../../render.yaml) deploys BOSS as one Free Python web service
+The root [Blueprint](../../render.yaml) deploys Inventory Intelligence as one Free Python web service
 in Oregon. The existing bounded `lab_hosted:app` serves the committed React build,
 original Lab, saved evidence, scenario/feasibility comparisons, execution history,
 feedback example and Evaluation. No database, disk, worker, secret, model call or
@@ -16,7 +16,7 @@ and exports remain available.
    **Install / Authorize**. Return to Render and click **Connect** beside that repo.
    Use the connected GitHub repository, rather than the public-URL option, so
    automatic deployment works.
-3. Name the Blueprint `inventory-intelligence-boss`, choose branch **main**, and
+3. Name the Blueprint `inventory-intelligence`, choose branch **main**, and
    leave **Blueprint Path** as `render.yaml`. Leave Root Directory empty if shown.
 4. Review the proposed resources: exactly **one Web Service**, **Free** instance,
    **Oregon**, Python **3.12.14**, health path **/health/ready**. No environment
@@ -88,6 +88,11 @@ does not replace the previous live version. To retire the demo, delete the Bluep
 a Blueprint alone does not delete its resources. [Resource deletion](https://render.com/docs/infrastructure-as-code#deleting-resources).
 
 [Local validation receipt](../../docs/review/render-free-v1.json) records repository
-readiness only. Actual Render build/runtime, public TLS, cold starts and serving
-capacity remain unverified until the public URL is supplied. No production SLA,
+readiness. The October 15 [public smoke check](../../docs/review/render-public-smoke-v1.json)
+passes trusted HTTPS, readiness, 18 HTTP checks and a brief evidence/scenario/Evaluation
+browser journey with no console errors. The public site is branded Inventory Intelligence.
+The existing generated hostname and Blueprint service identity retain their original
+suffix; changing the YAML name alone can provision another resource, so they are
+retained during this bounded verification. Account-level deployment logs/settings,
+cold-start timing and sustained capacity were not checked. No production SLA,
 independent human acceptance or real operational readiness follows.

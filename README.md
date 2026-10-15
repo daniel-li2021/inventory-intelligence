@@ -109,8 +109,8 @@ metrics; zero-demand fill remains undefined. These are deterministic synthetic
 cases, not commercial savings or service guarantees.
 [Lab semantics, API and operating instructions](docs/DECISION_LAB.md).
 [Hosted-demo readiness package](deploy/lab/README.md) prepares a bounded anonymous
-entry point, pinned container/proxy templates and release acceptance. No public
-service has been verified. The [Render Free Blueprint and click-through guide](deploy/render/README.md)
+entry point, pinned container/proxy templates and release acceptance. The October 15 [public smoke check](docs/review/render-public-smoke-v1.json)
+verifies trusted HTTPS and a brief read-only journey. The [Render Free Blueprint and click-through guide](deploy/render/README.md)
 prepare the complete read-only synthetic demo with GitHub CI-gated automatic deploys.
 ARM64 container controls and one continuous HTTP campaign
 have local evidence; remaining stability, reference, human and public-domain gates

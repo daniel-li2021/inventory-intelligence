@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-15",
+  "name": "Inventory Intelligence",
+  "base_url": "https://inventory-intelligence-boss.onrender.com",
+  "status": "brief_public_smoke_pass",
+  "trusted_public_tls": true,
+  "http_checks": 18,
+  "legacy_checks": [
+    {
+      "bytes": 573,
+      "method": "GET",
+      "path": "/",
+      "sha256": "2d90e97277c1542d090fed380f5ac5593e3028fd1a8e7efe1c486115ace51f4b",
+      "status": 200
+    },
+    {
+      "bytes": 16382,
+      "method": "GET",
+      "path": "/static/lab.css",
+      "sha256": "52597242a70aa75a7a6399c5eed26af56fab1facf6959ec4f815b9db3ffc75b6",
+      "status": 200
+    },
+    {
+      "bytes": 32939,
+      "method": "GET",
+      "path": "/static/lab.js",
+      "sha256": "6308f371748d38a90709af2c7784643e9adf79475dcce52cb09865209957377d",
+      "status": 200
+    },
+    {
+      "bytes": 336257,
+      "method": "GET",
+      "path": "/api/lab",
+      "sha256": "44c336aac508bccd1f803397f58f756f1030ace0761db560d920ab0d4217524f",
+      "status": 200
+    },
+    {
+      "bytes": 336257,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "44c336aac508bccd1f803397f58f756f1030ace0761db560d920ab0d4217524f",
+      "status": 200
+    },
+    {
+      "bytes": 336296,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "bc77641ffd56dd159b3e977467aeaf4eb349662db36897b5c94144e93e516828",
+      "status": 200
+    },
+    {
+      "bytes": 338392,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "c347ab9ec9df50e337aceaaaae95e2209dd32b9d7afcf5348916a8d718f098ba",
+      "status": 200
+    },
+    {
+      "bytes": 176206,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "8208447d1d0fd7534c522d5a8ed16db0af0c5b007500331b74a916480ed3b650",
+      "status": 200
+    },
+    {
+      "bytes": 333241,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "a6dc2976a3af36a4c99c6d2ddf2d7b5c8706025492392c321957478f5e870165",
+      "status": 200
+    },
+    {
+      "bytes": 469848,
+      "method": "GET",
+      "path": "/api/evidence",
+      "sha256": "8ffac224b952f9a4df7a47981a9f360dba6c7a7eea7d0fd07d9ecb7b0aecaf9f",
+      "status": 200
+    },
+    {
+      "bytes": 117,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "26f110e2fb218dd1b9549b80f47e7e8ee9ee07441d76522e9e678439ad267ea5",
+      "status": 422
+    },
+    {
+      "bytes": 46,
+      "method": "POST",
+      "path": "/api/scenarios",
+      "sha256": "5df0e0694c3208575cfd42229c5a9d22cfe25a9a1eee684ffa3fcffc33ca5be4",
+      "status": 413
+    },
+    {
+      "bytes": 23,
+      "method": "GET",
+      "path": "/docs",
+      "sha256": "65bb2fbbc8d7138653aada01dad29233b373d61ad89451de6ab13b6a8beedcd1",
+      "status": 404
+    }
+  ],
+  "extra_checks": [
+    {
+      "path": "/health/ready",
+      "status": 200
+    },
+    {
+      "path": "/api/execution",
+      "status": 200
+    },
+    {
+      "path": "/api/product/evaluation",
+      "status": 200
+    },
+    {
+      "path": "/openapi.json",
+      "status": 404
+    },
+    {
+      "path": "/api/product/transfer-reserve",
+      "method": "POST",
+      "status": 404
+    }
+  ],
+  "browser_checks": [
+    "Overview: 100 keys, 37 risk, 25 opportunity, 12 evidence problems",
+    "Attention queue opens original-evidence Investigate view",
+    "Compare demand spike recomputes selected Upland proposal from 18 to 30 pieces",
+    "Evaluation renders 16 paths, 144 reviews, 39 blocked and 2/8 gate passes",
+    "No browser error logs captured"
+  ],
+  "ci": "success: https://github.com/daniel-li2021/inventory-intelligence/actions/runs/38692884493",
+  "unchanged_provider_identity": true,
+  "limitations": [
+    "Brief smoke check only; no full suite or load test",
+    "No cold-start timing, mobile audit or independent human acceptance",
+    "Render account settings/logs not inspected: connector requires a confirmed workspace"
+  ],
+  "repository_ci_commit": "1ef3cfae44ece35b1be4b25209f2175731e7be84"
+}
