@@ -37,7 +37,7 @@ execution needs it; extract completed facts into KB, guides, RESULTS and EVIDENC
 The full user assignment supersedes the earlier two-increment/paused feature scope;
 AUTO integrates validated assigned work. The owner assigned Render Free preparation
 and public verification after supplying its URL; paid deployment and real operational
-intake remain excluded. Preserve original unmerged planner controls as STATE directs.
+intake remain excluded. Preserve original planner history via the archive tag in STATE.
 
 ## Maintenance rules
 

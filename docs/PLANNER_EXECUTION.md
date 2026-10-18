@@ -63,7 +63,7 @@ not fresh held-out decision-quality evidence. The 12 new stress traces remain fr
 the persisted report validator. The committed source binding is retained at `c8322f7`;
 current auditors add stricter source/key/UTC/gate controls without rewriting bytes.
 Portable recovery snapshot `6fff524` retains the original protocol/control bytes;
-the original paused commits remain local and unmerged.
+the original commits are preserved by tag `archive/integrated/planner-closed-loop`.
 All seven corrected trajectories/costs match a [second fresh database](review/planner-loop-confirmation.json).
 The original control is six passes/one rejected oracle; the erratum is explicit.
 

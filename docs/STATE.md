@@ -1,6 +1,6 @@
 # Current project state
 
-Updated: 2026-10-15 (America/Los_Angeles).
+Updated: 2026-10-18 (America/Los_Angeles).
 
 Integration mode: AUTO
 
@@ -73,6 +73,7 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
   studies before expanding network execution, approved operational identity/adapters,
   or lifecycle inputs when justified.
   No global optimizer, stochastic donor guarantee or operational exactly-once claim.
-- Preserve unmerged original planner commits55f4170/538d29d and their branch.
+- Original planner commits `55f4170`/`538d29d` are preserved by tag
+  `archive/integrated/planner-closed-loop`; identical controls are on main at `6fff524`.
 
 Read [index](README.md), [workflow](../CONTRIBUTING.md), [decisions](DECISIONS.md).
