@@ -67,15 +67,7 @@ class DecisionLabAPITests(unittest.TestCase):
         for key in ("plan", "simulation", "costs", "risk"):
             self.assertIsNone(result["scenario"][key])
 
-    def test_invalid_injected_archive_fails_with_503(self):
-        client = TestClient(create_app(evidence={"synthetic": True}))
-        for method, path in (("get", "/api/lab"), ("get", "/api/evidence"), ("post", "/api/scenarios")):
-            with self.subTest(path=path):
-                response = getattr(client, method)(path, **({"json": {}} if method == "post" else {}))
-                self.assertEqual(response.status_code, 503)
-                self.assertNotIn("proposed_order_qty", response.text)
-
-    def test_rehashed_invalid_receipt_identity_fails_with_503_not_server_error(self):
+    def test_invalid_archives_fail_with_503_without_proposal_or_server_error(self):
         evidence = load_evidence()
         for report in evidence['plans'].values():
             result = report['result']
@@ -85,12 +77,14 @@ class DecisionLabAPITests(unittest.TestCase):
             report['input_digest'] = hashlib.sha256(json.dumps(payload, sort_keys=True,
                 separators=(',', ':')).encode()).hexdigest()
         evidence['digest'] = archive_digest(evidence)
-        client = TestClient(create_app(evidence=evidence))
-        for method, path in (('get', '/api/lab'), ('get', '/api/evidence'), ('post', '/api/scenarios')):
-            with self.subTest(path=path):
-                response = getattr(client, method)(path, **({'json': {}} if method == 'post' else {}))
-                self.assertEqual(response.status_code, 503)
-                self.assertNotIn('proposed_order_qty', response.text)
+        for label, archive in (("missing reports", {"synthetic": True}),
+                               ("rehashed invalid receipt identity", evidence)):
+            client = TestClient(create_app(evidence=archive))
+            for method, path in (('get', '/api/lab'), ('get', '/api/evidence'), ('post', '/api/scenarios')):
+                with self.subTest(archive=label, path=path):
+                    response = getattr(client, method)(path, **({'json': {}} if method == 'post' else {}))
+                    self.assertEqual(response.status_code, 503)
+                    self.assertNotIn('proposed_order_qty', response.text)
 
     def test_app_owns_an_immutable_copy_of_injected_evidence(self):
         evidence = load_evidence()

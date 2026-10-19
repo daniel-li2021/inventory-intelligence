@@ -66,7 +66,7 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
   Completed master narrative lives in Git; current O01–O25 audit belongs in KB.
 - [ROADMAP](ROADMAP.md) retains independent product/reference acceptance;
   [PLAN](PLAN.md) retains exact Python3.12.12/x86/two-date, sustained serving,
-  dense-producer/whole semantic-reader and public-runtime/TLS gates. Developer
+  dense-producer/whole semantic-reader and sustained public-runtime gates. Developer
   checks do not establish human comprehension, WCAG or production readiness.
 - No remaining confirmed high-impact defect in the bounded core was found. Valuable
   future work requires explicit donor-basis reconciliation/fresh multi-review
@@ -76,4 +76,5 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
 - Original planner commits `55f4170`/`538d29d` are preserved by tag
   `archive/integrated/planner-closed-loop`; identical controls are on main at `6fff524`.
 
+Cleanup retired completed plan sections; retained pending gates and consolidated API tests.
 Read [index](README.md), [workflow](../CONTRIBUTING.md), [decisions](DECISIONS.md).

@@ -8,35 +8,24 @@ negative findings and boundaries. [STATE](STATE.md) owns integration mode/status
 
 ## Delivery sequence and acceptance gates
 
-The [final bounded functional audit](RESULTS.md#final-bounded-functional-audit)
-recommends Functional Closure of the local synthetic core after three small safety/
-version fixes and focused PostgreSQL/installed-package acceptance. Dedicated UI/UX
-[selected Desk implementation](PRODUCT_DESIGN.md) follows the owner's visual choice:
-implement the direct white direction with larger text and more readable columns;
-preserve Brief as a future alternative. The assigned [product-wide UX refinement](PRODUCT_DESIGN.md#product-wide-ux-refinement--october-15)
-adds compact findings, task sections, mobile navigation and consistent statuses;
-32 browser layout cells and 21 interaction checks pass. The following external
-acceptance gates remain open.
-Changed donor bases continue to reject; closure does not extend the one-review
-transfer contract into repeated network execution or claim production readiness.
-
-The owner separately assigned [Render Free deployment preparation](../deploy/render/README.md):
-one read-only synthetic service, no database/secrets/paid resources, GitHub CI-gated
-deploys. Repository setup and the October 15 [public smoke check](review/render-public-smoke-v1.json)
-pass; trusted TLS, readiness and a brief interactive journey are verified. This does not complete
-the reference/runtime or independent product gates below, or authorize real intake,
-company data or paid services. The [project overview](../README.md) now surfaces the
-demo, current UI screenshot and qualified engineering evidence for recruiters; this
-documentation update adds no new acceptance or benchmark claim.
+The [final bounded functional audit](RESULTS.md#final-bounded-functional-audit),
+[selected Desk implementation and UX refinement](PRODUCT_DESIGN.md), and
+[October 15 public smoke](review/render-public-smoke-v1.json) are complete within
+their recorded local/synthetic or brief public verification boundaries. Their
+results belong in the linked guides and RESULTS; the following acceptance work
+remains open. Changed donor bases still reject; no repeated network execution,
+real intake, company data or paid services follows from these gates.
 
 1. **Independent product acceptance.** A human completes new dataset→insight→evidence→
    feasible comparison→commitment/transfer→history tasks. Record exact task outcomes,
-   misunderstood states, keyboard/assistive-technology and responsive issues. Developer
-   browser controls are reused, not relabeled as comprehension/WCAG conformance.
+   misunderstood states, keyboard/screen-reader speech, zoom/forced colors and
+   responsive/mobile issues. Include a cold-start walkthrough, error/retry recovery
+   and downloaded JSON-byte identity. Developer browser controls are reused, not
+   relabeled as comprehension/WCAG conformance.
    Stop when the declared human task/control set passes or honest blockers remain.
-2. **Reference/runtime confirmation.** [PLAN](PLAN.md) owns unchanged recipes for exact
+2. **Reference/runtime confirmation.** [PLAN](PLAN.md) retains the confirmation protocol for exact
    Python3.12.12/x86/two-date timing, continuity/rate/client cells, dense producers,
-   serial1000 and public-runtime/TLS gates. PG17.9/ARM64/Python3.12.14 correctness is
+   serial1000 and sustained public-runtime gates. PG17.9/ARM64/Python3.12.14 correctness is
    available local evidence, not a replacement hardware/SLO claim. Run only missing
    cells on an available authorized runtime with existing guards and fresh outputs.
    Stop at the declared ceiling; retain failures/limited cells. Do not rerun consumed

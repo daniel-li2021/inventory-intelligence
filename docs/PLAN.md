@@ -1,79 +1,32 @@
 # Engineering readiness plan
 
-Status: **local continuation measured; remaining reference/stability/release gates
-explicit**. [STATE](STATE.md) owns current AUTO mode and [ROADMAP](ROADMAP.md) owns
-the remaining external acceptance after the full October13–14 local synthetic assignment. That assignment
-supersedes earlier feature pauses and limited-increment authorization; this file
-retains the original engineering confirmation recipes and acceptance gates, not a
-second product roadmap. Previously measured artifacts remain unchanged.
+Status: **reference/stability confirmation pending**. [STATE](STATE.md) owns
+integration mode; [ROADMAP](ROADMAP.md) owns independent product acceptance.
+The local pilot, continuation and single SQL optimization are complete. Their
+outcomes, failures and exact denominators live in [RESULTS](RESULTS.md#engineering-continuation)
+and [EVIDENCE](EVIDENCE.md#engineering-continuation); reusable recipes live in
+[OPERATIONS](OPERATIONS.md#frozen-local-workload-recipes-for-follow-up).
 
-The original existing-Mac pilot and October 4 continuation used native PostgreSQL
-and Docker Desktop ARM64 Linux with a three-hour ceiling including harness repairs
-and HTTP windows. Its clock discontinuity/overrun is retained, not repaired by a
-new label. New bounded measurements follow ROADMAP budgets and existing guards;
-reuse completed cells. No x86 host was available in that evidence. Actual PostgreSQL17.9 correctness and latest-code regressions are now checked on
-ARM64/Python3.12.14; see [engineering support](ENGINEERING_SUPPORT.md) for fresh JIT
-non-adoption and bounded inspection above old reader caps. Exact pinned runtime/
-hardware and full large-report producer/semantic acceptance remain open. Native18 is not a version17
-reference. The owner separately assigned [Render Free demo preparation](../deploy/render/README.md)
-and verification after supplying its URL. Paid deployment, real/company inputs and
-real purchasing remain excluded; no new reference or load campaign is assigned.
+## Remaining execution
 
-Selected-claim quantities, completeness, clocks and fail-closed behavior gate every
-local milestone. Unavailable x86/two-date, sustained public runtime and independent
-human checks remain separate; they do not block all bounded local product work or
-permit unsupported production/large-scale claims.
+| Gate | Available evidence / remaining work | Next action |
+|---|---|---|
+| Reference batch/planning | Five ARM64 Linux campaigns retain 30 reconciliation and 30 selected-plan outcomes; planning misses the one-second threshold. PG17.9/ARM64/Python3.12.14 correctness is checked. Exact x86-64/Python3.12.12/two-date timing remains open. | Obtain an available authorized reference host; reuse frozen inputs and run only missing confirmation cells. |
+| Sustained HTTP | One continuous 30-minute campaign passes 2700/2700. Short, discontinuous and interrupted windows do not qualify. | Run two further continuity-verified campaigns plus missing sparse rate/client cells, subject to the route sample floor and declared budget. |
+| Producer/reader envelope | Serial100, the 1/10-key 30%-zero backtest grid, both original reader limits and 100k-movement recovery are measured. Bounded page inspection is separate from complete semantic acceptance. | Measure serial1000, remaining archive-growth/defect cells and dense-producer/whole semantic-reader acceptance only within the declared ceiling. |
+| Runtime and human use | The October 15 public smoke verifies trusted TLS/readiness and a brief developer journey. Sustained public serving, cold start, independent comprehension and assistive-technology checks remain open; proxy slow bodies close or return 504 instead of 408. | Keep public smoke separate from runtime capacity; use ROADMAP for human acceptance and retain proxy timeout behavior as an unresolved gap. |
 
-## Phase handoff and checkpoints
+Next action: obtain an available authorized runtime for missing continuous HTTP/
+rate/client cells, then the exact reference cells. This cleanup assigns no new
+benchmark campaign, paid host, real/company intake or engine optimization.
+Retain failures, clock discontinuities and limited cells. The original continuation
+exceeded its 180-minute target (192.8 minutes); guard repairs do not erase that result.
+No new planning/JIT benefit follows from reusing consumed studies.
 
-- [x] P0: inspect green correctness baseline, preserve paused planner work and
-  publish [engineering readiness evidence](KB.md#engineering-gaps-and-hypotheses).
-- [x] Local decision gate: retain proposed workload/SLOs; actual Mac runtime and
-  two-hour exploratory pilot approved. Frozen recipes and outcomes: [results](RESULTS.md#local-engineering-pilot),
-  [source/evidence](EVIDENCE.md#local-engineering-pilot), [commands](OPERATIONS.md#engineering-pilot).
-- [x] P1 local implementation: minimal deterministic runner and independent controls;
-  B1/B3 and small-to-medium B2 executed. Limited cells are retained, not retried as successes.
-- [ ] P1 reference confirmation: five fresh ARM64 Linux campaigns completed with
-  two warmups and six measured calls per operation/campaign. All 30 reconciliation
-  and 30 selected-plan outcomes passed; planning missed its one-second threshold.
-  x86-64/Python3.12.12/two-date confirmation remains pending.
-- [x] P2 local subset: preliminary native HTTP, supplemental backtest growth and
-  interrupted-writer/snapshot/crash/restore controls completed. Initial restart
-  harness failure is retained alongside the repaired check.
-- [ ] P2 remaining: container enforcement, defect classes, serial100, full backtest
-  grids and 100k-movement recovery have new evidence. One continuous 30-minute
-  HTTP campaign and a verified process crash passed; short/discontinuous and
-  interrupted windows cannot complete the three-campaign stability gate.
-  Independent human checks and the remaining declared limits still gate completion.
-- [x] P3 local: one grouped-movement SQL optimization, counterbalanced before/after
-  calls on identical immutable fixtures; full x86/two-date confirmation is pending.
-
-Record resumable task status, blockers and the next action here; update STATE at
-material checkpoints. This near-term plan owns pending engineering execution;
-other research possibilities remain conditional knowledge in KB. At completion,
-extract durable knowledge, results and evidence, then retire this task file.
-
-Completed locally: original B1 tiers/shapes/history and both reader boundaries;
-the identical-workload SQL comparison and 1M upper-tier completions; five fresh
-ARM64 Linux batch campaigns and effective container controls; serial100 and the
-1/10-key 30%-zero backtest grid; four further defect classes and 100k-movement DB
-recovery. [Exact outcomes](RESULTS.md#engineering-continuation) preserve both the
-original pilot and new continuation, with their distinct denominators.
-
-Remaining: two further continuity-verified HTTP campaigns and sparse rate/client
-controls; x86 reference/Python3.12.12/two-date confirmation; serial1000 and remaining
-archive-growth/defect cells; independent human accessibility/cold start and public
-TLS. Planning latency, dense-evidence SQL deadlines, reader size limits and proxy
-slow-body timeout behavior remain explicit gaps. ROADMAP owns their scoped implementation and local acceptance.
-
-Next action: repeat only the missing continuous HTTP/rate/client cells on a runtime
-with verified clock continuity, then obtain the x86/two-date reference evidence
-when an available local host supports it. The 180-minute target was exceeded by
-clock discontinuities (192.8 minutes); measurements stopped and guards/journaling
-were repaired. Keep the x86/two-date,
-planning SLO, dense-evidence, proxy timeout and human checks explicit. The full ROADMAP assignment
-authorizes core feature implementation; this protocol remains necessary only for
-pending engineering confirmation.
+Update this table and STATE after material progress. Retire this plan only after
+its remaining work is completed or explicitly superseded; extract durable outcomes
+into KB/RESULTS/EVIDENCE first. Conditional improvements belong in
+[KB](KB.md#engineering-gaps-and-hypotheses).
 
 ## Questions and supported claims
 
@@ -290,7 +243,7 @@ tested offered rate meeting the **entire** declared envelope; do not interpolate
 capacity between sparse rates. Any correctness violation prevents a readiness
 claim irrespective of speed; every timeout/OOM/block/rejection remains in output.
 
-Artifacts proposed for the later implementation: frozen benchmark contract,
+Required artifacts for a fresh confirmation: frozen benchmark contract,
 synthetic workload manifest/independent oracles, environment+schema manifest,
 raw per-call/request JSONL, per-campaign resource/DB-plan logs, exact case statuses,
 compact JSON summary, capacity/result report and independently verifiable hashes.
@@ -299,109 +252,3 @@ CPU/RSS, output bytes, counts, timeouts and oracle outcome. Sampling can miss RS
 peaks; include OS/cgroup high-water values and state platform units. Preserve raw
 failures and censored ≥deadline timings. Never replace a timeout with the deadline
 as a successful sample or compute completed-only latency without its denominator.
-
-## Improvements allowed only after evidence
-
-- **Batch/grain indexes or query reuse:** question: is selected-work latency
-  dominated by unrelated scans or repeated reads? Claim: measured before/after
-  reduction with index storage/load/write cost disclosed and exact duplicate/
-  clock behavior preserved. No unique business-key constraint that hides defects.
-- **Archive validation/cache reuse:** question: does repeated immutable validation
-  dominate Lab CPU? Claim: a measured CPU/latency reduction only if rehashed invalid
-  archive, missing-file and changed-source behavior remains fail closed. No
-  process-wide “trust forever” cache or skipped validation to pass throughput.
-- **Reader/producer boundary or timeout handling:** question: are evidence caps
-  and cancellation honest/contained at scale? Claim: predictable rejection and
-  complete history; a schema/contract change needs its own review. Never increase
-  caps or invent partial evidence to call a failed scale supported.
-- **Concurrency/worker changes:** question: is one worker a measured bottleneck
-  after lower-cost remedies? Claim: measured throughput only with global admission,
-  clock/evidence and resource semantics preserved. Multiworker per-process buckets
-  change total allowance, so are not an interchangeable tuning flag.
-
-Same frozen baseline workloads precede every targeted change; counterbalanced
-before/after campaigns and a new predeclared confirmation workload follow it.
-Publish regressions, extra memory/storage and cells that stop passing. If the
-baseline meets the proposed practical envelope, **do not optimize it**.
-
-## Additional readiness validation and phase gates
-
-- **V1 / P2:** fresh Linux installation and actual container build/config/run,
-  non-root/read-only/network/resource enforcement, missing/corrupt archive assets,
-  clean shutdown/restart. Record exact pass/fail checks. Answers reproducible
-  packaging and resource-control questions; supports only that runtime/topology.
-- **V2 / P2:** interrupted calculation/persistence, client cancellation, restricted
-  concurrent readers and independently timed source-owner transactions, DB/app
-  crash/restart, synthetic backup restore to a second DB. Require no partial result,
-  no lost committed evidence/source identity, coherent repeatable-read boundaries
-  and bounded return to service. Record observed recovery time and loss per fault;
-  do not advertise an RTO/RPO guarantee from a few local interruptions.
-- **V3 / P2:** manual cold-start walkthrough, screen-reader speech, zoom/forced
-  colors, mobile, error/retry and downloaded JSON-byte identity. Answers whether
-  the portfolio demo is understandable and operable without author assistance.
-
-P0 is this design/status review. P1 builds only the approved runner and publishes
-B1/B3 plus pilot B2. P2 completes growth/load/runtime/recovery/manual evidence.
-P3 targets one demonstrated bottleneck, or stops with the baseline frozen.
-Unmet host/Docker/budget gates are explicit not-measured results, not permission
-to resume models or closed-loop feature work. Full-grid execution is not a CI
-requirement; a tiny runner correctness smoke belongs in CI after implementation.
-
-## Frozen local workload recipes for follow-up
-
-Original pilot source/protocol bytes are in Git `970ab16`; current executable
-recipes are in `scripts/engineering_fixtures.py`. This records current reusable
-measurement boundaries; historical receipts remain unchanged in EVIDENCE.
-
-- B1 uniform receipts are +1, opening 1,000, 100 raw rows/key. Skew assigns 80k
-  rows to the first 10/1,000 keys and 20k to the remaining 990; divide exactly and
-  allocate remainders to ascending key indices. Ten warehouses keep K fixed,
-  SKU=floor(key/10), warehouse=key modulo 10. Transfer controls replace the first
-  20 rows/key with paired -3/+3 legs on adjacent warehouses: balances 1,020/1,140.
-  Separate first 5 pending/next 5 future-effective/next 5 above-watermark rows
-  leave 85 eligible rows/key and balance 1,085. Raw manifests keep every row.
-- History appends 1 then 9 total same-size unrelated archives, repeating upstream
-  natural identities with distinct row IDs. Selected semantics must remain equal.
-- B3 labels first 100/1k/10k rows of 100k bad, pairs consecutive duplicate identities:
-  50/500/5k exact groups, 1/10/100 blocked grains, R002 fail and R001 not_assessable.
-  A separate all-key +1 snapshot probe requires exact expected/observed/delta.
-  Other defect cells in the program remain pending.
-- B2's 180-day pattern repeats three zero days then seven quantity-10 days:
-  54 zeros/126 positive lines per key. Every twentieth one-based global positive
-  line gets a same-quantity known revision; every hundredth gets a quantity-1,000
-  late revision, both clocks origin +1 day. Counts use floor(total/20,/100).
-  Origin is 2026-01-02 08:00 UTC; mean is exactly 7. The separate inventory ledger
-  has K grains/zero movements/opening 20; reservation 3 day0, inbound 5 day1,
-  L=2, R=H-2, safety2/pack6/MOQ10. H=7/28/90 needs 29/176/610, orders 30/180/612.
-- Supplemental backtests are constant 4/day, histories 180/365/730 and archive
-  keys 1/10, one selected key. All predictions/actuals are 4, errors zero, tie chooses
-  naive. Freeze origins 28,35,... through days-56 and the days-28 holdout. These
-  controls do not substitute for the 30%-zero grid or serial multi-key backtests.
-- Readers have separate PostgreSQL row_to_json byte and JSON-validation accounting.
-  Compact synthetic reports isolate 999/1k/1,001 findings and exact -1/0/+1 byte
-  points for both layers. Padding is inert; no engine-produced evidence is truncated.
-  Synthetic reader-only fixtures and actual producer reads are distinguished.
-- Native HTTP uses unchanged hosted admission, one Uvicorn worker/limit16/backlog32,
-  independent external schedules at 1.5/s for 20s, three hosted campaigns and one
-  unwrapped local campaign, each mixed/POST/evidence. Mixed order is three POSTs,
-  Lab GET, evidence GET; POSTs rotate clean/spike/delay/incomplete truth. Lag >100ms
-  invalidates offered-load claims; no retries. Bursts20/40 use up to40 client threads;
-  10.2s refill precedes recovery. Slow/oversized/chunked/disconnected bodies are
-  separate faults. A separate offered-5/s, 20s mixed control freezes 100 arrivals
-  and verifies token-exhaustion HTTP429 plus recovery. No p95/p99 confirmation
-  follows from these short campaigns.
-- Native V2 uses a separate two-key fault DB: block findings insertion, kill writer,
-  require no partial history; repeat with an owner +1/observation-clock +1s commit,
-  require old snapshot delta1 and next-time delta2. Immediate DB stop/restart and
-  small custom backup/second-DB restore preserve exact committed source/results.
-
-The local budget is two hours including fixture setup, eight observed CPU-hours,
-30 GiB added disk and a conservative sampled 6 GiB RSS guard; native shared-memory
-sums are not true combined memory or OS enforcement. Fresh worker calls have a
-60s supervisor and 55s SQL/5s lock limit. Report missing receipts after complete
-commits as unverified, not partial/zero/success. Calls include production commit;
-fixture loads, hashes, oracle checks, file writes and EXPLAIN are outside timing.
-Three exploratory process-restarted batch calls are first/repeat access, not
-confirmed warm or DB/OS-cold. Serial driver timing includes supervision and
-verification; blocked calls never count as completed eligible plans. The reference
-confirmation protocol above remains unchanged.

@@ -39,9 +39,6 @@ class HostedLabTests(unittest.TestCase):
                 response=hosted.post('/api/scenarios',json=payload)
                 self.assertEqual(response.status_code,200)
                 self.assertEqual(response.json(),local.post('/api/scenarios',json=payload).json())
-            blocked=hosted.post('/api/scenarios',json={'evidence_case':'incomplete_supply'}).json()
-            for key in ('plan','simulation','risk','costs'): self.assertIsNone(blocked['scenario'][key])
-            self.assertEqual(hosted.get('/api/lab').json()['baseline']['plan']['proposed_order_qty'],12)
 
     def test_restricted_paths_methods_and_headers(self):
         client=TestClient(HostedLab())

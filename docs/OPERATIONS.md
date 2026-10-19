@@ -386,6 +386,73 @@ derived view explicitly records the original wall/active discrepancies and targe
 overrun. The corrected runtime reports both clocks. Clock/journal repairs have
 hand controls and were not given new performance claims.
 
+## Frozen local workload recipes for follow-up
+
+Original pilot source/protocol bytes are in Git `970ab16`; current executable
+recipes are in `scripts/engineering_fixtures.py`. This records current reusable
+measurement boundaries; historical receipts remain unchanged in EVIDENCE.
+
+- B1 uniform receipts are +1, opening 1,000, 100 raw rows/key. Skew assigns 80k
+  rows to the first 10/1,000 keys and 20k to the remaining 990; divide exactly and
+  allocate remainders to ascending key indices. Ten warehouses keep K fixed,
+  SKU=floor(key/10), warehouse=key modulo 10. Transfer controls replace the first
+  20 rows/key with paired -3/+3 legs on adjacent warehouses: balances 1,020/1,140.
+  Separate first 5 pending/next 5 future-effective/next 5 above-watermark rows
+  leave 85 eligible rows/key and balance 1,085. Raw manifests keep every row.
+- History appends 1 then 9 total same-size unrelated archives, repeating upstream
+  natural identities with distinct row IDs. Selected semantics must remain equal.
+- B3 labels first 100/1k/10k rows of 100k bad, pairs consecutive duplicate identities:
+  50/500/5k exact groups, 1/10/100 blocked grains, R002 fail and R001 not_assessable.
+  A separate all-key +1 snapshot probe requires exact expected/observed/delta.
+  Further defect classes are recorded in the continuation results; reuse those cells.
+- B2's 180-day pattern repeats three zero days then seven quantity-10 days:
+  54 zeros/126 positive lines per key. Every twentieth one-based global positive
+  line gets a same-quantity known revision; every hundredth gets a quantity-1,000
+  late revision, both clocks origin +1 day. Counts use floor(total/20,/100).
+  Origin is 2026-01-02 08:00 UTC; mean is exactly 7. The separate inventory ledger
+  has K grains/zero movements/opening 20; reservation 3 day0, inbound 5 day1,
+  L=2, R=H-2, safety2/pack6/MOQ10. H=7/28/90 needs 29/176/610, orders 30/180/612.
+- Supplemental backtests are constant 4/day, histories 180/365/730 and archive
+  keys 1/10, one selected key. All predictions/actuals are 4, errors zero, tie chooses
+  naive. Freeze origins 28,35,... through days-56 and the days-28 holdout. These
+  controls do not substitute for the 30%-zero grid or serial multi-key backtests.
+- Readers have separate PostgreSQL row_to_json byte and JSON-validation accounting.
+  Compact synthetic reports isolate 999/1k/1,001 findings and exact -1/0/+1 byte
+  points for both layers. Padding is inert; no engine-produced evidence is truncated.
+  Synthetic reader-only fixtures and actual producer reads are distinguished.
+- Native HTTP uses unchanged hosted admission, one Uvicorn worker/limit16/backlog32,
+  independent external schedules at 1.5/s for 20s, three hosted campaigns and one
+  unwrapped local campaign, each mixed/POST/evidence. Mixed order is three POSTs,
+  Lab GET, evidence GET; POSTs rotate clean/spike/delay/incomplete truth. Lag >100ms
+  invalidates offered-load claims; no retries. Bursts20/40 use up to40 client threads;
+  10.2s refill precedes recovery. Slow/oversized/chunked/disconnected bodies are
+  separate faults. A separate offered-5/s, 20s mixed control freezes 100 arrivals
+  and verifies token-exhaustion HTTP429 plus recovery. No p95/p99 confirmation
+  follows from these short campaigns.
+- Native V2 uses a separate two-key fault DB: block findings insertion, kill writer,
+  require no partial history; repeat with an owner +1/observation-clock +1s commit,
+  require old snapshot delta1 and next-time delta2. Immediate DB stop/restart and
+  small custom backup/second-DB restore preserve exact committed source/results.
+
+The local budget is two hours including fixture setup, eight observed CPU-hours,
+30 GiB added disk and a conservative sampled 6 GiB RSS guard; native shared-memory
+sums are not true combined memory or OS enforcement. Fresh worker calls have a
+60s supervisor and 55s SQL/5s lock limit. Report missing receipts after complete
+commits as unverified, not partial/zero/success. Calls include production commit;
+fixture loads, hashes, oracle checks, file writes and EXPLAIN are outside timing.
+Three exploratory process-restarted batch calls are first/repeat access, not
+confirmed warm or DB/OS-cold. Serial driver timing includes supervision and
+verification; blocked calls never count as completed eligible plans. The reference
+confirmation protocol in [PLAN](PLAN.md#common-measurement-protocol) remains unchanged.
+
+Packaging/recovery acceptance uses a fresh Linux install and actual container
+build/run: non-root, read-only, network/resource enforcement, missing/corrupt
+assets and clean shutdown/restart. Exercise interrupted persistence, cancellation,
+restricted concurrent readers, timed source-owner transactions, DB/app crash and
+restore to a second disposable DB. Require no partial results or lost committed
+evidence, stable source identity and coherent repeatable reads. Record recovery
+time and loss per fault; local controls do not establish RTO/RPO guarantees.
+
 ## Controlled synthetic intake and replay
 
 Use the [local replay guide](SYNTHETIC_REPLAY.md#working-local-walkthrough) for a

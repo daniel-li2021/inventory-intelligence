@@ -76,25 +76,33 @@ extraction are not measured throughput or service capacity.
 
 | Gap | Finding / hypothesis | Evidence needed |
 |---|---|---|
-| Scale and repeated work | Grouping eligible movements once removes the confirmed 1,000 scans ×99,900 filtered rows. The local paired median fell 10.251→0.856s; the 1M-movement cell now completes. `run_plan` still revalidates its whole batch per key. ARM64 Linux selected planning takes ~3s; a separate zero-ledger profile spent 2.134/2.166s compiling 583 JIT functions. | Keep native/Linux distributions separate; complete x86/two-date confirmation. Any JIT tuning needs a separate comparison; the assigned single optimization is complete. |
+| Scale and repeated work | Grouping eligible movements once removes the confirmed 1,000 scans ×99,900 filtered rows. The local paired median fell 10.251→0.856s; the 1M-movement cell now completes. `run_plan` still revalidates its whole batch per key. ARM64 Linux selected planning takes ~3s; a separate zero-ledger profile spent 2.134/2.166s compiling 583 JIT functions. | Keep native/Linux distributions separate; complete x86/two-date confirmation. The [separate JIT comparison](ENGINEERING_SUPPORT.md#planning-latency-retained-negative-finding) fails its 20% adoption gate (4.02% benefit); no kernel change. Further tuning needs a fresh justified comparison; the single SQL optimization is complete. |
 | Report growth | Reliability readers cap 1,000 findings / 2 MiB; planning readers cap 16 MiB. Local producer growth and both reader accounting boundaries are now measured; larger defect cells hit the SQL deadline. | B3 failure-envelope measurements. Never truncate findings or raise limits merely to improve a chart. |
 | Contention and cancellation | Only benchmark connections have 55s/5s deadlines. Native interruption/snapshot/crash/restore covers a 1k-grain/100k-movement archive with two discrepant probe grains. A verified Lab process crash recovered in 1.652s, with one fault-window 502. Dense duplicate and all-grain discrepancy calls still cancel with no appended history. | Remaining sustained B4/grid cells; do not generalize these faults into RTO/RPO guarantees. |
 | Runtime | Actual ARM64 Linux Lab controls verify UID10001, read-only/no-new-privileges/capability restrictions and 0.5 CPU /256 MiB /64 PID limits. One continuous 30-minute campaign completed 2700/2700; short/discontinuous/interrupted windows are excluded. Active clocks missed a wall-budget overrun; delivered guards and journals address that integrity gap. The proxy slow-body path closes or returns 504 rather than 408. | Three-campaign stability/sample gates, proxy timeout semantics and x86/two-date reference remain open. Harness repairs have correctness controls, not new performance confirmation. |
-| Release and human use | Private-CA HTTPS and bounded keyboard/mobile paths passed. Public uptime, speech/zoom/forced colors and cold-start acceptance remain unmeasured. Branch protection was not verified by green CI. | V3 human checks plus reviewed host/domain/cost/public release. |
+| Release and human use | The October 15 public smoke verifies trusted TLS, readiness and a brief developer journey. Sustained public serving, speech/zoom/forced colors and human cold-start acceptance remain unmeasured. Branch protection was not verified by green CI. | V3 human checks and sustained runtime evidence; brief public smoke is not capacity acceptance. |
 
 Workloads, SLOs, cache/timing definitions, environment and budget remain in PLAN.
 The original existing-Mac pilot is complete. The October 4 assignment authorizes
 remaining checks on available local runtimes and one focused optimization; that
 optimization is now measured. Keep further engine changes separate from diagnosis.
-Speculative queues,
-Redis, Kubernetes, sharding, ORMs, indexes or advanced models do not follow from this.
+Conditional improvements require a demonstrated bottleneck and a fresh assigned
+comparison: batch/grain query reuse or indexes must preserve duplicate/clock evidence
+and disclose storage/write cost; archive caches must reject changed/rehashed invalid
+inputs; reader/timeout changes must retain complete history and honest rejection;
+worker changes must preserve global admission and resource semantics. Compare the
+same frozen workloads before/after, retain regressions and stop if the baseline
+meets its declared envelope. These are hypotheses, not pending implementation.
+Speculative queues, Redis, Kubernetes, sharding, ORMs or advanced models do not
+follow from this.
 
 ## Next-phase investigation
 
 The [October 12 receipt](review/next-phase-investigation.json) records historical
 inspection of `b5b8d5a`; its fixed-SKU UI and paused-feature gaps are superseded by
 Increments 0–4 and controlled replay/discovery V2. [ROADMAP](ROADMAP.md) owns the
-current full implementation assignment. Keep the original receipt unchanged.
+remaining independent acceptance after the completed local implementation. Keep
+the original receipt unchanged.
 
 Durable lessons from the completed product/execution work:
 
@@ -217,14 +225,14 @@ STATE and the active plan own prioritization and progress; these are not assignm
 | 11 Source provenance | [Lineage protocol](EVIDENCE.md#historical-provenance-and-independent-audits), [integration evidence](EVIDENCE.md#historical-provenance-and-independent-audits) | Demonstrated missing semantic link; hashes are not signed authenticity. |
 | 12 Property/mutation QA | Existing independent controls in `tests/`, [readiness evidence](EVIDENCE.md#acceptance-history) | A concrete uncovered invariant; test counts are not a quality target. |
 | 13 Backlog versus lost sales | [Contract](CONTRACTS.md#lost-sales-v1), [paired results](RESULTS.md#matched-lost-sales) | Keep permanent losses and owed backlog plus different cost units explicit. |
-| 14 Actual planner closed loop | [Completed local execution guide](PLANNER_EXECUTION.md); original unmerged controls preserved | Fresh assigned studies keep action/receipt identity, repeated clocks and actual reliability/supply gates; no consumed-holdout tuning. |
+| 14 Actual planner closed loop | [Completed local execution guide](PLANNER_EXECUTION.md); original controls preserved by archive tag | Fresh assigned studies keep action/receipt identity, repeated clocks and actual reliability/supply gates; no consumed-holdout tuning. |
 | 15 Physical inventory truth | [Contract](CONTRACTS.md#physical-count-v1), [results](RESULTS.md#physical-count-controls) | Authenticated count/business evidence needed for real truth; no automatic inventory write. |
-| 16 Performance/scale | [Engineering investigation](KB.md#engineering-gaps-and-hypotheses), [PLAN](PLAN.md) | Program/host/budget review before a runner; report measured envelope and failures. |
-| 17 Multi-location allocation | SKU/warehouse grain and immediate paired legs do not define transit stock or donor-safe allocation. | Current ROADMAP assigns bounded durable transfer controls; advanced optimization needs measured heuristic counterexamples. |
-| 18 Supplier capacity/calendar | MOQ/pack rounding is not supplier capacity or a working-day calendar. | Current ROADMAP assigns effective constraints with independent cutoff/capacity/receipt controls; no real supplier claim. |
+| 16 Performance/scale | [Engineering investigation](KB.md#engineering-gaps-and-hypotheses), [PLAN](PLAN.md) | Reuse the delivered runner and completed cells; review host/budget before a new confirmation program and report failures. |
+| 17 Multi-location allocation | SKU/warehouse grain and immediate paired legs do not define transit stock or donor-safe allocation. | [Bounded durable transfers](TRANSFERS.md) are implemented; repeated execution needs donor-basis reconciliation, and advanced optimization needs measured heuristic counterexamples. |
+| 18 Supplier capacity/calendar | MOQ/pack rounding is not supplier capacity or a working-day calendar. | [Declared constraints and durable admission](SUPPLIER_FEASIBILITY.md) are implemented; new work needs a concrete unmet calendar/capacity need and independent cutoff/receipt controls. |
 | 19 Guided demo | [Lab](DECISION_LAB.md), [three-minute case study](../README.md) | Reuse clean/spike/delay/blocked walkthrough; add structure only for a demonstrated UX gap. |
 | 20 Accessibility/cold start | [Targeted local review](RESULTS.md#browser-and-accessibility-results) | Speech/zoom/forced colors/download bytes and human cold start remain scoped manual checks. |
-| 21 Hosted read-only Lab | [Design evidence](../deploy/lab/README.md#serving-architecture-and-limits), [operations](../deploy/lab/README.md) | Actual Linux/runtime/recovery plus reviewed host/domain/cost before public TLS/uptime claims. |
+| 21 Hosted read-only Lab | [Design evidence](../deploy/lab/README.md#serving-architecture-and-limits), [operations](../deploy/lab/README.md) | [Public smoke](review/render-public-smoke-v1.json) verifies trusted TLS and a brief journey; sustained runtime/cold-start/human acceptance remains open, with no uptime guarantee. |
 | 22 Portfolio wording | [Case study](../README.md), [historical claim receipt](review/portfolio-claims.json) | Refresh from exact merged/deployed/measured evidence only. |
 
 
