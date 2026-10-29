@@ -10,10 +10,11 @@ import time
 from .lab_api import create_app
 
 API_PATHS = {'/api/lab', '/api/evidence', '/api/lab/evidence', '/api/product',
+             '/api/product/demand',
              '/api/product/overview', '/api/product/explore', '/api/product/detail',
              '/api/product/feedback-example', '/api/product/evaluation', '/api/product/reviews', '/api/product/purchase-history', '/api/product/decision-context', '/api/product/transfer-history', '/api/product/history', '/api/product/evidence', '/api/product/control', '/api/product/insights', '/api/product/contrast',
              '/api/execution','/api/execution/detail','/api/execution/evidence','/api/execution/journal'}
-POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios', '/api/product/supplier-contrast', '/api/product/transfer-contrast'}
+POST_PATHS = {'/api/scenarios', '/api/product/scenario', '/api/product/scenarios', '/api/product/supplier-contrast', '/api/product/transfer-contrast', '/api/product/demand-scenario'}
 HEALTH_PATHS = {'/health/live', '/health/ready'}
 ASSETS = {'/', '/lab', '/static/lab.css', '/static/lab.js'} | {
     '/product-static/'+path.name for path in Path(__file__).with_name('product_static').glob('*')

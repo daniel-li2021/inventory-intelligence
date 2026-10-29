@@ -1,0 +1,134 @@
+{
+  "recorded_at": "2026-10-29T00:43:10.731477-07:00",
+  "status": "pass",
+  "scope": "Local synthetic workflow guidance and recovery above the preexisting uncommitted Demand Planning MVP; no commit, push or deployment",
+  "frontend": {
+    "tests_passed": 14,
+    "typecheck": "pass",
+    "production_build": "pass",
+    "bundle": {
+      "frozen_budgets_bytes": {
+        "js_gzip": 256000,
+        "css_gzip": 40960,
+        "initial_data": 204800
+      },
+      "measured_bytes": {
+        "js_gzip": 101219,
+        "css_gzip": 9038
+      },
+      "files": [
+        "THIRD_PARTY_LICENSES.txt",
+        "favicon.svg",
+        "index-BpmC_Li4.css",
+        "index-DvfKJ9kc.js",
+        "index.html"
+      ]
+    },
+    "new_controls": [
+      "status-specific recovery hints",
+      "read deadline and cancellation",
+      "exact JSON retention and network recovery"
+    ]
+  },
+  "python": {
+    "version": "3.12.12",
+    "tests_passed": 35,
+    "modules": [
+      "tests.test_demand_planning",
+      "tests.test_product",
+      "tests.test_lab_hosted"
+    ],
+    "database_used": false
+  },
+  "browser": {
+    "tool": "Codex in-app browser",
+    "runtime": "built assets served from local source checkout; loopback-only fault wrapper for injected 503",
+    "checks": [
+      "Overview demand, risk and evidence entry points target the expected workspace/filter",
+      "Guide opens, closes with Enter and returns focus to How to use",
+      "Invalid cutoff stays visible; HTTP422 recovery returns to latest observation without resetting the item/filter",
+      "Invalid demand key/location retains unavailable options; evidence navigation disabled; first-item recovery loads a forecast",
+      "Invalid initial investigation offers Choose another item and recovers to Explore",
+      "Preset +1/day prepares a draft without applying; Apply yields exact demand112 to140 and order12 to18",
+      "Changing to -25 percent immediately restores labeled baseline; +25 percent Apply yields order18",
+      "Parsed demand download retains exact112/140 totals, order18 and source archive",
+      "Demand-to-investigation preserves exact item and cutoff and uses saved evidence",
+      "Injected Explore503 after Harbor selection disables Export and pagination while retaining last result",
+      "Explicit Retry recovers; parsed export filters include Harbor and all exported rows are Harbor",
+      "Phone390x844 Overview and Demand and tablet768x1024 Demand have page width equal to viewport width",
+      "Final built asset invalid-key controls and recovery paths rechecked after the final build"
+    ],
+    "limits": [
+      "20-second deadline tested with a short injected unit-test deadline, not a 20-second browser wait",
+      "Viewport controls target the active preview tab; earlier captures showing1280px were rejected and phone captures retaken",
+      "Screen-reader speech and full WCAG conformance not checked"
+    ]
+  },
+  "installed_wheel": {
+    "archive_digest": "b28d05232183ee4352cc3a1d2ed670d5888b4bb32f1288c021678096b6f8f9c9",
+    "blocked_capacity_arm": true,
+    "default_journal_disabled": true,
+    "demand_expected_orders": [
+      "12",
+      "18"
+    ],
+    "demand_expected_totals": [
+      "112",
+      "140"
+    ],
+    "demand_planning": true,
+    "evaluation_reviews": 144,
+    "evaluation_summary_sha256": "a53d04e358ff7e2f86b4309fe44935c97d93541b5f7755a09ebcd383abe12f03",
+    "execution_archive_digest": "3442674a51263aedfbb01062e427f8474de5988142a4a97e15f5f33a7340bdb4",
+    "execution_controls": 7,
+    "feasible_supplier_calendar": true,
+    "independently_expected_proposals": [
+      "12",
+      "18",
+      null
+    ],
+    "installed_module": "/private/tmp/ii-ux-current/installed/site-packages/inventory_intelligence/product.py",
+    "no_database": true,
+    "no_node_runtime": true,
+    "packaged_evidence_sha256": "33fcd78419f5d218dea9e4b5ce9a0902491c780f2b8a58dd0d608f9e188c455d",
+    "paired_policy_cells": 36,
+    "served_assets": [
+      "THIRD_PARTY_LICENSES.txt",
+      "favicon.svg",
+      "index-BpmC_Li4.css",
+      "index-DvfKJ9kc.js"
+    ],
+    "status": "pass"
+  },
+  "protected_unchanged_sha256": {
+    "src/inventory_intelligence/product_evidence.json.gz": "33fcd78419f5d218dea9e4b5ce9a0902491c780f2b8a58dd0d608f9e188c455d",
+    "src/inventory_intelligence/lab_evidence.json": "6b6fa00788bb09f0ecb2f9f5078b035c23987e051c73914f99c6f5a7f7e65002",
+    "src/inventory_intelligence/execution_evidence.json.gz": "f8943925446e1d92d757d9e4fe454e93ca5aaaa500a838387573674ee374e0b2",
+    "src/inventory_intelligence/execution_controls.json": "58a6d924dc871459808a3bd2e5eee3c8de96f326b31a039282c9d567b31a9dcb",
+    "src/inventory_intelligence/forecast_decision_summary.json": "a53d04e358ff7e2f86b4309fe44935c97d93541b5f7755a09ebcd383abe12f03",
+    "src/inventory_intelligence/transfer_feedback_evidence.json": "709d7474d46834a5fdb0da06381ce0d1d64030555cc6f9ce336c9b8b180e138b",
+    "src/inventory_intelligence/forecasting.py": "5a0e6f1377e4327fdf0f61d7525eccdac4c434a10a95beff30adeaffbfd9aee7",
+    "src/inventory_intelligence/replenishment.py": "a0c4b38cbba79296ac1787fb44a23dd2e69e2c63916a109fcdd4664c14bf3bda",
+    "src/inventory_intelligence/planning_runs.py": "bf26dc7eeff59cb9956d47e916daae46a9c5823b89a9fcdf8afa574ab3197d04",
+    "src/inventory_intelligence/demand.py": "2a4b6c0320731317a7401f17f355091444a37e8602085af2a6f86057f2c38f72",
+    "src/inventory_intelligence/decision.py": "715d9282e97fa7a303ac411da46ac762da045648a52aa0d5da952a01102adc87"
+  },
+  "validated_sources_sha256": {
+    "frontend/src/main.tsx": "d7ca5943ef51bbd858c168121736f083dd78ce4ac4be6100e9bc83c8a26860f7",
+    "frontend/src/DemandPlanning.tsx": "28d19fcf2be93b64a34a8ae014bd297841d3a234c0409bddb50f8eadb99bfd7b",
+    "frontend/src/resources.tsx": "feb8cf5e50ef5465356fd941476a93e35059e906e373579c5eb51eb1ff5a22b4",
+    "frontend/src/request.mjs": "f56af492b0b0397e31af46c6cc80d3ded684359d3279ec8179b8b1ed217f9792",
+    "frontend/src/desk.css": "b222e37855885932ac9ac9d59ead838323b53152acd88aa054705943df6502cd",
+    "frontend/test/request.test.mjs": "f0a4d57dee15e5d2f8858f968ff2d8f2d22f63130042b10e52226a5dcc1bd982",
+    "frontend/bundle-receipt.json": "7c827db60e971c194522ea1977ffb1d4f311a1944dd58002f5773d526cec88be"
+  },
+  "limits": [
+    "Bounded developer checks only; independent owner acceptance pending",
+    "No new model study or real operational data",
+    "No public runtime or deployment validation"
+  ],
+  "validation_notes": [
+    "Initial installed-target smoke invocation rejected a directory without a site-packages path; final clean wheel installed under site-packages passed",
+    "Final wheel built from an isolated source copy to exclude old build/lib assets; served asset list matches the current bundle"
+  ]
+}

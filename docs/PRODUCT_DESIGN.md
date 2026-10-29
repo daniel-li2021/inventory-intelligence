@@ -186,3 +186,53 @@ scenario assumptions. Rapid automated browsing exercised the normal demo rate li
 and Retry recovered; final layout cells used a loopback-only increased allowance,
 without changing public safeguards. Human comprehension, assistive-technology
 acceptance, full WCAG conformance and post-push public deployment remain unverified.
+
+
+## Workflow guidance and recovery — October 29
+
+Local improvements build on the uncommitted Demand Planning MVP and selected
+Desk. The ClaimFlow process informed the focus: observe actual tasks, clarify the
+next action, reproduce recovery failures, then check complete local journeys.
+No original business evidence, forecast kernel or operational write policy changed.
+
+1. **Choose a task — working.** Overview now offers demand planning, inventory
+   risk and evidence-gap entry points. Risk and evidence shortcuts reuse the
+   existing filters. Compare [before](screenshots/ux-guidance/overview-before.png)
+   and [after](screenshots/ux-guidance/overview-after.png).
+2. **Understand the workflow — working.** **How to use** explains cutoffs,
+   workspace roles, blocked evidence, exports and temporary adjustments on every
+   route. Closing it returns keyboard focus to its opener.
+   [Guide](screenshots/ux-guidance/guide-after.png).
+3. **Test demand — working.** Examples prepare +25%, −25% or +1 piece/day drafts;
+   Apply remains explicit. Editing a preset clears the previous comparison.
+   Inspect this item's evidence preserves key/cutoff and opens saved evidence;
+   the temporary adjustment is not carried into another workspace.
+   [Demand comparison](screenshots/ux-guidance/demand-after.png).
+4. **Recover a selection — working.** An invalid cutoff previously displayed a
+   different date in the selector with only a failing Retry path
+   ([before](screenshots/ux-guidance/cutoff-before.png)). Requested dates now stay
+   visible until loaded; **Use latest saved cutoff** recovers explicitly
+   ([after](screenshots/ux-guidance/cutoff-after.png)).
+   Invalid demand keys remain visibly unavailable with a selection/reset action.
+   Failed initial investigations offer **Choose another item**.
+5. **Retain and export evidence — working.** A failed filtered Explore request
+   retains its labeled last result while disabling export and pagination. Retry
+   recovers the selected filter before export becomes available. This prevents
+   exporting an old result under new filters. Save/share and the main workspace
+   also wait for current context. Read requests have a 20-second deadline and
+   explain network, selection, archive, busy and unavailable-evidence failures;
+   retries remain manual and never replay writes.
+
+[Local validation receipt](review/ux-guidance-v1/receipt.json) records 14 frontend
+checks, 35 focused Python checks, TypeScript/build/bundle budgets, installed-wheel
+acceptance and browser journeys. Parsed downloads retain exact 112→140 demand,
+12→18 orders, and the original archive; a recovered Harbor filter exports only
+Harbor rows. [Phone overview](screenshots/ux-guidance/mobile-overview.png) and
+[phone demand](screenshots/ux-guidance/mobile-demand.png) preserve the selected
+Desk, with no page-level overflow at 390px; demand also checks at 768px.
+
+These are bounded developer checks against synthetic local evidence. Owner
+acceptance, screen-reader speech, full WCAG conformance, sustained runtime and
+public deployment remain unverified. Source publication was separately authorized
+on October 29; deployment remains unassigned. Prior MVP receipts remain unchanged
+and describe their original source hashes. Wide exact-value tables still scroll horizontally by design.

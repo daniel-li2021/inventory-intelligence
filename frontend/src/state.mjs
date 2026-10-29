@@ -1,6 +1,7 @@
 export const pages = [
   "overview",
   "explore",
+  "demand",
   "investigate",
   "compare",
   "decide",

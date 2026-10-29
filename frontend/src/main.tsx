@@ -13,14 +13,17 @@ import {
   readSharedScenario,
 } from "./state.mjs";
 import type { Card, Context, Exact, Route } from "./types";
-import { Boxes, LayoutDashboard, ListFilter, ScanLine, GitCompareArrows, ClipboardCheck, History as HistoryIcon, Activity, ShieldCheck, ChevronRight, ArrowUpRight, PanelRightClose, PanelRightOpen, CalendarDays, Database, Bookmark, FlaskConical } from "lucide-react";
+import { ChartNoAxesCombined, Boxes, LayoutDashboard, ListFilter, ScanLine, GitCompareArrows, ClipboardCheck, History as HistoryIcon, Activity, ShieldCheck, ChevronRight, ArrowUpRight, PanelRightClose, PanelRightOpen, CalendarDays, Database, Bookmark, FlaskConical, CircleHelp } from "lucide-react";
 import { Badge, ViewNav } from "./ui";
+import { exact, Download, useResource, Notice } from "./resources";
+import { DemandPlanning } from "./DemandPlanning";
 import "./style.css";
 import "./desk.css";
 
-const pageIcons: Record<string, React.ElementType> = {overview: LayoutDashboard, explore: ListFilter, investigate: ScanLine, compare: GitCompareArrows, decide: ClipboardCheck, history: HistoryIcon, execution: Activity, evaluation: ShieldCheck};
+const pageIcons: Record<string, React.ElementType> = {demand: ChartNoAxesCombined, overview: LayoutDashboard, explore: ListFilter, investigate: ScanLine, compare: GitCompareArrows, decide: ClipboardCheck, history: HistoryIcon, execution: Activity, evaluation: ShieldCheck};
 
 const labels: Record<string, string> = {
+  demand: "Demand Planning",
   risk: "Risk",
   opportunity: "Opportunity",
   evidence: "Evidence problem",
@@ -36,115 +39,6 @@ const labels: Record<string, string> = {
 const wholeInput = (s: string, minimum: number, maximum: number) => /^(0|[1-9]\d*)$/.test(s) && Number.isSafeInteger(Number(s)) && Number(s)>=minimum && Number(s)<=maximum;
 const title = (s: string) =>
   labels[s] || s.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase());
-function exact(value: Exact | undefined): string {
-  if (value === null || value === undefined) return "Unknown";
-  if (typeof value === "string") return value;
-  if (
-    typeof value.numerator !== "string" ||
-    typeof value.denominator !== "string"
-  )
-    return "Unknown";
-  if (value.denominator === "1") return value.numerator;
-  return `${value.numerator}/${value.denominator}`;
-}
-function Download({
-  data,
-  name,
-  label = "Export evidence",
-}: {
-  data: unknown;
-  name: string;
-  label?: string;
-}) {
-  return (
-    <button
-      onClick={() => {
-        const url = URL.createObjectURL(
-          new Blob([JSON.stringify(data, null, 2)], {
-            type: "application/json",
-          }),
-        );
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${name}.json`;
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      }}
-    >
-      {label}
-    </button>
-  );
-}
-function useResource<T>(path: string | null, retry: number = 0) {
-  const [state, set] = useState<{
-    data?: T;
-    error?: string;
-    loading: boolean;
-    path?: string;
-  }>({ loading: true });
-  useEffect(() => {
-    if (!path) return;
-    const controller = new AbortController();
-    let active = true;
-    set((s) => ({ ...s, error: undefined, loading: true }));
-    fetch(path, { signal: controller.signal, cache: "no-store" })
-      .then(async (r) => {
-        if (!r.ok) throw Error(`Request failed (${r.status}).`);
-        return r.json();
-      })
-      .then((data) => {
-        if (active) set({ data, loading: false, path });
-      })
-      .catch((error) => {
-        if (active && !controller.signal.aborted)
-          set((s) => ({ ...s, error: error.message, loading: false }));
-      });
-    return () => {
-      active = false;
-      controller.abort();
-    };
-  }, [path, retry]);
-  return { ...state, stale: Boolean(state.data && state.path !== path) };
-}
-function Notice({
-  loading,
-  error,
-  stale,
-  retry,
-  data,
-}: {
-  loading: boolean;
-  error?: string;
-  stale: boolean;
-  retry: () => void;
-  data?: unknown;
-}) {
-  return (
-    <>
-      {loading && (
-        <p className="notice" role="status">
-          Loading saved evidence…
-        </p>
-      )}
-      {(error || stale) && (
-        <div className="notice warning" role="alert">
-          <strong>
-            {error
-              ? data
-                ? "Unable to refresh. Last successful result is retained."
-                : "Unable to load saved evidence. No result is available."
-              : "This result belongs to the previous selection."}
-          </strong>
-          <p>
-            Review context before using it. Recommendations remain unavailable
-            until this selection loads.
-          </p>
-          {error && <button onClick={retry}>Retry</button>}
-        </div>
-      )}
-    </>
-  );
-}
 function Facts({ facts }: { facts: [string, React.ReactNode][] }) {
   return (
     <dl className="facts">
@@ -307,6 +201,8 @@ function App() {
   const [retry, setRetry] = useState(0);
   const [message, setMessage] = useState("");
   const [showContext, setShowContext] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
+  const guideToggle = useRef<HTMLButtonElement>(null);
   const PageIcon = pageIcons[route.page] || LayoutDashboard;
   const focus = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -322,6 +218,8 @@ function App() {
     retry,
   );
   const context = overview.data;
+  const contextUnavailable = overview.loading || overview.stale || Boolean(overview.error);
+  const displayedCutoff = context?.cutoff || (overview.error ? "Unavailable" : "Loading");
   const bound = context
     ? bindingMismatch(route, {
         archive_id: context.archive_digest,
@@ -335,7 +233,7 @@ function App() {
     window.scrollTo({top:0});
   }, [route.page, route.item, route.snapshot]);
   const save = () => {
-    if (!context) return;
+    if (!context || contextUnavailable || bound) return;
     try {
       const existing = readSavedViews(localStorage.getItem("ii.views.v1"));
       const name = `${title(route.page)} · ${context.cutoff}`;
@@ -384,14 +282,27 @@ function App() {
         <div className="workspace">
           <header className="topbar"><span className="workspace-name"><strong>Inventory Intelligence</strong><ChevronRight size={15}/><span>Decision workbench</span></span><span className="environment-label"><span/>Synthetic workspace</span><a className="mobile-lab" href="/lab" aria-label="Scenario Lab">Lab</a></header>
           <div className="workbench-viewbar"><div><PageIcon size={22}/><h1 ref={focus} tabIndex={-1}>{title(route.page)}</h1><span className="read-only">Synthetic · advisory</span></div><div className="viewbar-actions">
-          {!["execution","evaluation"].includes(route.page) && <label className="cutoff-control"><CalendarDays size={16}/><select aria-label="Cutoff" value={route.snapshot || context?.cutoff || ""} onChange={e=>navigate({snapshot:e.target.value,offset:0})}>{context?.cutoffs.map(c=><option key={c}>{c}</option>)}</select></label>}
+          <button ref={guideToggle} aria-expanded={showGuide} aria-controls="workspace-guide" onClick={()=>setShowGuide(v=>!v)}><CircleHelp size={17}/><span>How to use</span></button>
+          {!["execution","evaluation"].includes(route.page) && <label className="cutoff-control"><CalendarDays size={16}/><select aria-label="Cutoff" value={route.snapshot || context?.cutoff || ""} onChange={e=>navigate({snapshot:e.target.value,offset:0})}>{route.snapshot && !context?.cutoffs.includes(route.snapshot) && <option value={route.snapshot}>{route.snapshot} · not loaded</option>}{context?.cutoffs.map(c=><option key={c}>{c}</option>)}</select></label>}
           {["overview","explore"].includes(route.page) && <button className="context-toggle" aria-label={showContext?"Hide item context":"Show item context"} aria-pressed={showContext} onClick={()=>setShowContext(v=>!v)}>{showContext?<PanelRightClose size={20}/>:<PanelRightOpen size={20}/>}<span>Context</span></button>}</div></div>
           <main id="main" tabIndex={-1} data-page={route.page}>
-            <p className="page-intro">{({overview:"Your inventory attention queue, with the evidence one click away.",explore:"Filter exact saved inventory by item, style, color, size and location.",investigate:"Review saved facts, drivers and supported next steps.",compare:"Compare explicit alternatives, with cost, service and constraints in view.",decide:"Review the advisory decision, its evidence and supported next actions.",history:"Reopen immutable observations across business cutoffs.",execution:"Inspect actual saved planner reviews and synthetic commitment feedback.",evaluation:"Inspect forecast accuracy alongside actual service, cost and blocked reviews."} as Record<string,string>)[route.page]}</p>
-            {!(["execution","evaluation"].includes(route.page)) && <><details className="source-context"><summary><Database size={15}/> Evidence context <span>· Business as of {context?.cutoff || "Loading"}</span></summary><div className="context-bar">
+            <section className="panel workspace-guide" id="workspace-guide" hidden={!showGuide} aria-label="Workspace guide">
+              <h2>From a question to a supported decision</h2>
+              <ol>
+                <li><strong>Choose a business cutoff.</strong> This is a saved synthetic observation date. Selecting it does not refresh live stock.</li>
+                <li><strong>Choose your task.</strong> Demand Planning tests future demand. Explore finds risk, surplus and evidence gaps across item locations.</li>
+                <li><strong>Inspect before comparing.</strong> Investigate explains a selected item and its sources. Compare tests explicit alternatives; Decide reviews the advisory result.</li>
+                <li><strong>Keep the evidence.</strong> Export the current result as JSON. Saved views keep navigation on this browser; temporary demand adjustments reset when you leave or change the selection.</li>
+              </ol>
+              <p><strong>Blocked means evidence is insufficient.</strong> It does not mean zero demand or healthy stock. Review the missing source before using a proposal.</p>
+              <p>History follows saved observations. Execution shows saved planner feedback; Evaluation is a separate study, not the selected item's forecast accuracy. This demo places no real orders.</p>
+              <button onClick={()=>{setShowGuide(false);guideToggle.current?.focus();}}>Close guide</button>
+            </section>
+            <p className="page-intro" hidden={route.page === 'demand'}>{({overview:"Your inventory attention queue, with the evidence one click away.",explore:"Filter exact saved inventory by item, style, color, size and location.",investigate:"Review saved facts, drivers and supported next steps.",compare:"Compare explicit alternatives, with cost, service and constraints in view.",decide:"Review the advisory decision, its evidence and supported next actions.",history:"Reopen immutable observations across business cutoffs.",execution:"Inspect actual saved planner reviews and synthetic commitment feedback.",evaluation:"Inspect forecast accuracy alongside actual service, cost and blocked reviews."} as Record<string,string>)[route.page]}</p>
+            {!(["execution","evaluation"].includes(route.page)) && <><details className="source-context" hidden={route.page === 'demand'}><summary><Database size={15}/> Evidence context <span>· Business as of {displayedCutoff}</span></summary><div className="context-bar">
               <div>
                 <span className="context-label">SOURCE BOUNDARY</span>
-                <strong>Business as of {context?.cutoff || "Loading"}</strong>
+                <strong>Business as of {displayedCutoff}</strong>
                 <small>Generation does not refresh the stock cutoff.</small>
                 <small>
                   Known-at / evaluated:{" "}
@@ -415,6 +326,7 @@ function App() {
               stale={overview.stale}
               retry={() => setRetry((v) => v + 1)}
             />
+            {overview.error && route.snapshot && <div className="cutoff-recovery"><p>Requested cutoff: <strong>{route.snapshot}</strong>. {context ? 'Choose another available date above, or return to the latest saved observation.' : 'Return to the latest saved observation to choose an available date.'}</p><button onClick={()=>navigate({snapshot:"",offset:0})}>Use latest saved cutoff</button></div>}
             {bound && (
               <div className="notice warning" role="alert">
                 <strong>
@@ -426,8 +338,8 @@ function App() {
                 </button>
               </div>
             )}
-            <details className="view-disclosure"><summary><Bookmark size={15}/> Saved views & sharing</summary><div className="view-tools">
-              <button onClick={save} disabled={!context || bound}>
+            {route.page !== 'demand' && <details className="view-disclosure"><summary><Bookmark size={15}/> Saved views & sharing</summary><div className="view-tools">
+              <button onClick={save} disabled={!context || bound || contextUnavailable}>
                 Save view
               </button>
               <label>
@@ -449,8 +361,9 @@ function App() {
                 </select>
               </label>
               <button
+                disabled={!context || bound || contextUnavailable}
                 onClick={async () => {
-                  if (!context) return;
+                  if (!context || bound || contextUnavailable) return;
                   const view = saveView(route, {
                     archive_id: context.archive_digest,
                     schema_version: context.contract_version,
@@ -478,13 +391,15 @@ function App() {
                 Reset view
               </button>
               <span role="status">{message}</span>
-            </div></details>
+            </div></details>}
             </>}
             <div className={`workbench-layout ${showContext && ["overview","explore"].includes(route.page)?"with-context":""}`}><div className="workbench-content">
-            {route.page === "evaluation" ? <Evaluation /> : route.page === "execution" ? <Execution /> : context && !bound && !overview.stale && (
+            {route.page === "evaluation" ? <Evaluation /> : route.page === "execution" ? <Execution /> : context && !bound && !contextUnavailable && (
               <>
                 {route.page === "overview" ? (
                   <Overview key={context.archive_digest+context.cutoff} data={context} route={route} go={navigate} />
+                ) : route.page === "demand" ? (
+                  <DemandPlanning key={context.archive_digest+context.cutoff} context={context} route={route} go={navigate} />
                 ) : route.page === "explore" ? (
                   <Explore route={route} context={context} go={navigate} />
                 ) : (
@@ -492,7 +407,7 @@ function App() {
                 )}
               </>
             )}
-            </div>{showContext && ["overview","explore"].includes(route.page) && context && !bound && !overview.stale && <FocusContext context={context} route={route} go={navigate}/>}</div>
+            </div>{showContext && ["overview","explore"].includes(route.page) && context && !bound && !contextUnavailable && <FocusContext context={context} route={route} go={navigate}/>}</div>
             <footer className="product-footer">
               <strong>Evidence before action.</strong> Synthetic outcomes do not
               demonstrate commercial savings. Supplier and transfer terms are declared
@@ -593,6 +508,11 @@ function FocusContext({context,route,go}:{context:Context;route:Route;go:(r:Part
 function Overview({data,route,go}:{data:Context;route:Route;go:(r:Partial<Route>)=>void}) {
   const [allHighlights,setAllHighlights]=useState(false);
   return <>
+    <section className="start-tasks" aria-label="Choose a task">
+      <button onClick={()=>go({page:'demand',scenario:'',offset:0})}><ChartNoAxesCombined size={20}/><span><strong>Plan future demand</strong><small>Test an adjustment and inspect its order impact.</small></span><ChevronRight size={17}/></button>
+      <button onClick={()=>go(preset(route,'risk'))}><ScanLine size={20}/><span><strong>Review inventory risk</strong><small>Find an item, inspect its evidence, compare responses.</small></span><ChevronRight size={17}/></button>
+      <button onClick={()=>go(preset(route,'evidence'))}><ShieldCheck size={20}/><span><strong>Resolve evidence questions</strong><small>See what blocks a supported recommendation.</small></span><ChevronRight size={17}/></button>
+    </section>
     <section className="summary-grid" aria-label="Workspace coverage">{[["keys","Inventory scope","item locations"],["risk","Risk","needs attention"],["opportunity","Opportunity","to review"],["evidence","Evidence problem","blocked"]].map(([key,name,unit])=><button className={`stat ${key}`} key={key} onClick={()=>go(key==='keys'?{page:'explore',type:'',offset:0}:preset(route,key))}><span>{name}</span><strong>{data.summary[key]??"Unknown"}</strong><small>{unit}</small></button>)}</section>
     <section className="panel attention-panel"><div className="section-heading"><div><p className="eyebrow">Start here</p><h2>Attention queue</h2><p>Saved priorities across risk, surplus exposure and missing evidence.</p></div><button onClick={()=>go({page:'explore',offset:0})}>View all inventory<ArrowUpRight size={16}/></button></div><CardTable items={allHighlights?data.highlights:data.highlights.slice(0,5)} go={go}/>{data.highlights.length>5 && <button className="queue-more" aria-expanded={allHighlights} onClick={()=>setAllHighlights(v=>!v)}>{allHighlights?"Show priority summary":`Show all ${data.highlights.length} attention items`}</button>}<div className="coverage-note"><ShieldCheck size={14}/>{data.summary.assessable} of {data.summary.keys} item locations assessable · {data.summary.blocked} blocked<span>Quantities in exact pieces</span></div></section>
     <Discovery data={data.insight_discovery} context={data} go={go}/>
@@ -943,18 +863,19 @@ function Explore({
               {data.total} matching keys · Page {data.page} of {data.pages || 1}
             </p>
             <button
-              disabled={data.page <= 1 || resource.loading}
+              disabled={data.page <= 1 || resource.loading || resource.stale || Boolean(resource.error)}
               onClick={() => go({ offset: route.offset - 20 })}
             >
               Previous page
             </button>
             <button
-              disabled={data.page >= data.pages || resource.loading}
+              disabled={data.page >= data.pages || resource.loading || resource.stale || Boolean(resource.error)}
               onClick={() => go({ offset: route.offset + 20 })}
             >
               Next page
             </button>
             <Download
+              disabled={resource.loading || resource.stale || Boolean(resource.error)}
               data={{
                 archive_digest: context.archive_digest,
                 contract_version: context.contract_version,
@@ -1279,6 +1200,7 @@ function Selected({
   return (
     <>
       <Notice {...resource} retry={() => setRetry((v) => v + 1)} />
+      {resource.error && !data && <button onClick={()=>go({page:'explore',item:'',offset:0})}>Choose another item</button>}
       {data && card?.sku_id && (
         <>
           <button className="text-button back-link" onClick={()=>go({page:"explore"})}>← Back to inventory results</button>
@@ -1349,6 +1271,7 @@ function Investigation({card,data,context,params,unavailable,go}:{card:Card;data
       <p className="explanation">{card.explanation}</p>
       <p className="model-boundary"><ShieldCheck size={16}/>Modeled exposure is not an observed stockout. Proposals are advisory; forecast uncertainty is uncalibrated.</p>
       {card.reasons?.length>0 && <div className="notice warning" role="alert"><strong>Evidence blockers · recommendation limited</strong><ul>{card.reasons.map(r=><li key={r}>{title(r)}</li>)}</ul></div>}
+      <button className="text-button" disabled={unavailable} onClick={()=>go({page:"demand",item:card.id})}>Plan demand <ArrowUpRight size={16}/></button>
       <button className="primary investigation-action" disabled={unavailable} onClick={()=>go({page:"compare",item:card.id})}>Compare responses <ArrowUpRight size={16}/></button>
     </article>
     <ViewNav label="Investigation sections" value={view} onChange={setView} options={[["summary","Findings"],["drivers","Demand, stock & inbound"],["sources","Source records"],["calculation","Calculation & limits"]]}/>

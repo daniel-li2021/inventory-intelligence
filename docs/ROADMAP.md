@@ -8,6 +8,14 @@ negative findings and boundaries. [STATE](STATE.md) owns integration mode/status
 
 ## Delivery sequence and acceptance gates
 
+The separately approved [Demand Planning MVP](DEMAND_PLANNING.md) adds temporary
+future-only adjustments and existing forecast/projection kernels to the Desk.
+Local implementation and focused validation precede owner product acceptance.
+The October 29 [guidance/recovery pass](PRODUCT_DESIGN.md#workflow-guidance-and-recovery--october-29) adds task entry points, in-app instructions and explicit recovery. Developer checks remain separate from owner acceptance.
+Next action: review the chart, adjustment, blocked-evidence and mobile journeys;
+source publication is authorized; deployment remains unassigned. No plan persistence or new model
+study is included.
+
 The [final bounded functional audit](RESULTS.md#final-bounded-functional-audit),
 [selected Desk implementation and UX refinement](PRODUCT_DESIGN.md), and
 [October 15 public smoke](review/render-public-smoke-v1.json) are complete within

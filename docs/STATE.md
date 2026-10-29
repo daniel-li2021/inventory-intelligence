@@ -1,12 +1,12 @@
 # Current project state
 
-Updated: 2026-10-18 (America/Los_Angeles).
+Updated: 2026-10-29 (America/Los_Angeles).
 
 Integration mode: AUTO
 
-Phase: final bounded functional audit complete; Functional Closure recommended for
-the local synthetic core. The selected direct white Desk UI and product-wide UX refinement are implemented
-and validated locally; Brief remains preserved. Inputs are synthetic; real orders/company intake/paid services are excluded.
+Phase: [Demand Planning MVP](DEMAND_PLANNING.md) and guidance/recovery validated
+locally; owner acceptance pending. Source push authorized October 29; deployment
+unassigned. Earlier synthetic core retains Functional Closure and the white Desk.
 
 Render Free: [Blueprint/setup](../deploy/render/README.md) and [local receipt](review/render-free-v1.json)
 serve one read-only Python/React demo, no database/secrets, GitHub CI-gated deploys.
@@ -48,7 +48,8 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
   21 browser interactions, 10 frontend and 72 focused Python tests plus the installed
   offline wheel pass. All602 original backend/test/SQL/evidence files retain bytes.
   [Audit, before/after and limits](PRODUCT_DESIGN.md#product-wide-ux-refinement--october-15).
-- Backend closure, calculations, API contracts and historical evidence stay fixed.
+- [Demand Planning](DEMAND_PLANNING.md): additive local MVP; [validation](review/demand-planning-v1/receipt.json).
+- [Guidance and recovery](PRODUCT_DESIGN.md#workflow-guidance-and-recovery--october-29): local task shortcuts, demand presets, explicit selection recovery and stale-export guards.
 
 ## Accepted evidence and remaining gates
 
@@ -76,5 +77,4 @@ Name: Inventory Intelligence; existing provider identity retained. Cold-start/ca
 - Original planner commits `55f4170`/`538d29d` are preserved by tag
   `archive/integrated/planner-closed-loop`; identical controls are on main at `6fff524`.
 
-Cleanup retired completed plan sections; retained pending gates and consolidated API tests.
 Read [index](README.md), [workflow](../CONTRIBUTING.md), [decisions](DECISIONS.md).

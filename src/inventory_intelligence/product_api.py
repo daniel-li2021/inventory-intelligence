@@ -27,6 +27,25 @@ class ProductScenario(BaseModel):
     overrides: dict = Field(default_factory=dict)
 
 
+class DemandAdjustment(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    kind: Literal['percent', 'pieces']
+    value: Annotated[int, Field(ge=-1000, le=1000)]
+    start_day: Annotated[str, Field(min_length=10, max_length=10)]
+    end_day: Annotated[str, Field(min_length=10, max_length=10)]
+
+
+class DemandScenario(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    cutoff: Selector
+    sku_id: Selector
+    warehouse_id: Selector
+    archive_digest: Annotated[str, Field(pattern=r'^[0-9a-f]{64}$')]
+    horizon: Annotated[int, Field(ge=7, le=28)] = 28
+    method: Literal['mean', 'naive', 'seasonal_naive'] = 'mean'
+    adjustment: DemandAdjustment | None = None
+
+
 class DecisionRequest(ProductScenario):
     quantity: Annotated[int, Field(ge=0, le=2000)] | None = None
     order_minute: Annotated[int, Field(ge=0, le=1439)] = 540
@@ -109,6 +128,7 @@ def install_product_routes(application, supplied=None, catalog_path=None, journa
             raise HTTPException(503, 'Synthetic product evidence is unavailable or invalid') from error
 
     def invoke(request, allowed, function, *args, archive_digest=None, **kwargs):
+        from .demand_planning import DemandPlanningError
         if set(request.query_params) - allowed:
             raise HTTPException(422, 'Unknown product query field')
         if any(len(request.query_params.getlist(name)) != 1 for name in request.query_params):
@@ -118,6 +138,8 @@ def install_product_routes(application, supplied=None, catalog_path=None, journa
             raise HTTPException(409, 'Saved view uses different evidence; reset to this archive explicitly')
         try:
             result = function(data, *args, **kwargs)
+        except DemandPlanningError as error:
+            raise HTTPException(422, str(error)) from error
         except (ValueError, KeyError, TypeError) as error:
             raise HTTPException(422, 'Invalid product selection or scenario') from error
         return JSONResponse(result, headers={'Cache-Control': 'no-store'})
@@ -311,6 +333,24 @@ def install_product_routes(application, supplied=None, catalog_path=None, journa
         return invoke(request, {'cutoff', 'sku_id', 'warehouse_id', 'section', 'page', 'page_size', 'archive_digest'},
                       product.evidence, cutoff, sku_id, warehouse_id, section,
                       page=page, page_size=page_size, archive_digest=archive_digest)
+
+    @application.get('/api/product/demand')
+    def demand(request: Request, cutoff: Selector, sku_id: Selector, warehouse_id: Selector,
+               horizon: int = Query(default=28, ge=7, le=28),
+               method: Literal['mean', 'naive', 'seasonal_naive'] = 'mean',
+               archive_digest: str | None = Query(default=None, max_length=64)):
+        from .demand_planning import calculate
+        return invoke(request, {'cutoff', 'sku_id', 'warehouse_id', 'horizon', 'method', 'archive_digest'},
+                      calculate, cutoff, sku_id, warehouse_id, horizon=horizon, method=method,
+                      archive_digest=archive_digest)
+
+    @application.post('/api/product/demand-scenario')
+    def demand_scenario(request: Request, body: DemandScenario):
+        from .demand_planning import calculate
+        return invoke(request, set(), calculate, body.cutoff, body.sku_id, body.warehouse_id,
+                      horizon=body.horizon, method=body.method,
+                      adjustment=body.adjustment.model_dump() if body.adjustment else None,
+                      archive_digest=body.archive_digest)
 
     @application.post('/api/product/scenario')
     @application.post('/api/product/scenarios', include_in_schema=False)

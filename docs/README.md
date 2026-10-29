@@ -18,6 +18,7 @@
 | [Platform and case studies](PLATFORM_GUIDE.md) | Working integrated local demo, six scenarios, benchmarks and boundaries. |
 | [Supplier feasibility](SUPPLIER_FEASIBILITY.md) / [transfers](TRANSFERS.md) | Declared calendars/capacity, durable lifecycles, donor protection, costs and actual feedback. |
 | [Forecast and decision evaluation](FORECAST_DECISION.md) / [engineering support](ENGINEERING_SUPPORT.md) | Fresh study, losing/no-winner paths, JIT non-adoption and bounded evidence inspection. |
+| [Demand Planning](DEMAND_PLANNING.md) | Future-only forecast adjustments, daily/weekly demand, advisory inventory impact and local acceptance walkthrough. |
 | [Actual planner execution / feedback](PLANNER_EXECUTION.md) | Completed frozen protocols, arithmetic erratum, measured actual execution and durable-journal reproduction guide. |
 | [Engineering pilot](RESULTS.md#local-engineering-pilot) / [reproduction](EVIDENCE.md#local-engineering-pilot) | Local exploratory measurements, limits and pending confirmation. |
 | [Engineering continuation](RESULTS.md#engineering-continuation) / [receipts](EVIDENCE.md#engineering-continuation) | Paired SQL improvement, scale/ARM64/runtime/recovery evidence and explicit remaining gates. |

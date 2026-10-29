@@ -117,3 +117,8 @@ test("a saved default view freezes the actual cutoff", () => {
     "2026-01-19",
   );
 });
+
+test("demand planning preserves item and evidence binding in navigation", () => {
+  const route={page:"demand",item:"product:sku-00|product:harbor",snapshot:"2026-01-05",archive:"saved-source",offset:0};
+  assert.deepEqual(parseRoute(routeHash(route)),route);
+});

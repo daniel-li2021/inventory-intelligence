@@ -1,0 +1,60 @@
+.demand-workspace { min-width: 0; }
+.demand-scope { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 20px; padding: 18px 22px; margin: 12px 0 0; }
+.demand-workspace label { display: flex; flex-direction: column; gap: 7px; font-size: 12px; font-weight: 550; color: var(--muted); min-width: 0; }
+.demand-workspace select, .demand-workspace input { width: 100%; padding: 10px 12px; min-height: 42px; color: var(--ink); background: white; }
+.demand-totals { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); padding: 22px 6px; gap: 24px; }
+.demand-totals > div { display: flex; flex-direction: column; gap: 5px; padding-left: 16px; border-left: 2px solid #dedee9; }
+.demand-totals span, .demand-order-comparison span { color: var(--muted); font-size: 12px; }
+.demand-totals strong { font-size: 29px; font-weight: 600; letter-spacing: -.7px; overflow-wrap: anywhere; }
+.demand-totals strong small, .demand-order-comparison strong small { display: inline; font-size: 12px; font-weight: 400; letter-spacing: 0; }
+.demand-totals .adjustment-applied { border-color: #2a8a72; }
+.adjustment-applied strong { color: #20705c; }
+.demand-visual .section-heading { align-items: flex-start; margin-bottom: 8px; }
+.demand-visual h2 { margin: 0 0 4px; }
+.demand-visual .section-heading p { margin: 0; color: var(--muted); font-size: 12px; }
+.demand-visual .demand-chart-unit { font-size: 11px; margin: 10px 0 0; }
+.demand-chart-scroll { overflow-x: auto; }
+.demand-chart { display: block; width: 100%; height: auto; margin: 12px 0 0; overflow: visible; }
+.demand-chart text { fill: #697386; font: 12px ui-sans-serif,system-ui,sans-serif; }
+.demand-chart .chart-period { font-size: 13px; font-weight: 550; }
+.forecast-region { fill: #faf9ff; }
+.chart-grid { stroke: #e4e7ee; stroke-dasharray: 4 5; }
+.forecast-divider { stroke: #b7afcf; stroke-dasharray: 5 4; }
+.demand-line { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.line-history { stroke: #8992a3; }
+.line-baseline { stroke: #7862c7; stroke-width: 3.5; }
+.line-adjusted { stroke: #26876f; stroke-dasharray: 6 5; }
+.chart-point { fill: transparent; stroke: transparent; cursor: crosshair; }
+.chart-point:hover, .chart-point:focus { fill: #26876f; stroke: white; stroke-width: 2; }
+.chart-legend { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 12px; }
+.chart-legend span::before { content: ''; display: inline-block; width: 19px; border-top: 3px solid; margin: 0 7px 3px 0; }
+.legend-history { color: #667183; }.legend-baseline { color: #7256bd; }.legend-adjusted { color: #20705c; }
+.legend-adjusted::before { border-top-style: dashed !important; }
+.demand-visual .chart-inspection { min-height: 24px; margin: 12px 0; text-align: center; font-size: 12px; }
+.demand-methods { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; }
+.demand-methods button { justify-content: space-between; text-align: left; align-items: flex-start; padding: 12px; background: white; gap: 8px; font-size: 12px; }
+.demand-methods button[aria-pressed=true] { background: #f4f1fb; border-color: #a695d1; box-shadow: inset 0 0 0 1px #a695d1; }
+.demand-methods small { display: block; font-size: 10px; font-weight: 400; }
+.demand-methods strong { font-size: 16px; font-weight: 550; text-align: right; }
+.demand-visual .demand-accuracy { font-size: 12px; line-height: 1.65; margin: 16px 0; }
+.demand-visual .demand-method-note { font-size: 11px; margin: 10px 0 0; }
+.demand-records summary, .demand-provenance summary, .demand-impact summary { cursor: pointer; color: #6253a3; }
+.demand-planning-grid { display: grid; grid-template-columns: minmax(300px,.85fr) minmax(0,1.35fr); gap: 20px; }
+.demand-planning-grid h2 { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+.demand-adjustment form { display: grid; gap: 14px; margin-top: 18px; }
+.demand-adjustment .field-help { font-size: 11px; color: var(--muted); margin: -4px 0 0; }
+.demand-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.demand-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.demand-adjustment > .field-help { margin-top: 14px; }
+.demand-applied { color: #20705c; font-size: 12px; }
+.demand-order-comparison { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px; margin-top: 20px; border: 1px solid var(--line); border-radius: 8px; background: #faf9fd; }
+.demand-order-comparison > div { display: flex; flex-direction: column; gap: 4px; }
+.demand-order-comparison strong { font-size: 30px; font-weight: 550; }
+.demand-impact .demand-impact-explanation { border-left: 3px solid #a594cf; padding: 8px 12px; color: #41485b; background: #f7f5fc; }
+.demand-impact details p { font-size: 12px; }
+.demand-export { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 0 20px; }
+.demand-export small { display: block; }
+.demand-provenance { font-size: 12px; }.demand-provenance dd { margin: 4px 0 14px; overflow-wrap: anywhere; }.demand-provenance code { white-space: normal; }
+@media (max-width: 1100px) { .demand-planning-grid { grid-template-columns: minmax(0,1fr); gap: 0; }.demand-methods button { flex-direction: column; }.demand-methods strong { text-align: left; } }
+@media (max-width: 760px) { .demand-scope { gap: 12px; padding: 16px; }.demand-totals { gap: 12px; }.demand-totals strong { font-size: 24px; }.demand-totals > div { padding-left: 10px; }.demand-visual .section-heading { flex-wrap: wrap; gap: 12px; } }
+@media (max-width: 600px) { .demand-scope { grid-template-columns: 1fr; }.demand-totals { grid-template-columns: 1fr 1fr; gap: 18px; }.demand-totals > div:last-child { grid-column: 1/-1; }.demand-methods { grid-template-columns: 1fr; gap: 8px; }.demand-methods button { flex-direction: row; padding: 10px 12px; }.demand-methods strong { text-align: right; }.chart-legend { justify-content: flex-start; gap: 8px 18px; }.demand-dates { grid-template-columns: 1fr; }.demand-export { flex-wrap: wrap; }.demand-order-comparison { padding: 14px; gap: 10px; } }

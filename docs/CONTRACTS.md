@@ -63,6 +63,16 @@ selectors/controls return 422, archive mismatch 409 and invalid/missing evidence
 503. Evidence pages are selected-key/section-bound; there is no full-archive API.
 Live/ready health routes are separate from admitted user calculation requests.
 
+## Demand Planning v1
+
+[Demand Planning](DEMAND_PLANNING.md#contract-and-calculation-boundaries) adds
+source-bound GET `/api/product/demand` and calculation-only POST
+`/api/product/demand-scenario`. It reuses existing point forecasts and prefix
+projection, with one future-only signed percentage or pieces/day adjustment.
+Historical evidence, existing scenario APIs and mean operational default retain
+their semantics. Exact server-owned totals/quantities, missing-data gates and
+archive mismatch handling apply; the public service enables no new writes.
+
 ## Inspection and transfer safety amendment
 
 October14 final audit preserves `persisted-evidence-page-v1` response fields and
