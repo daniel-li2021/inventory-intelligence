@@ -16,6 +16,11 @@ Next action: review the chart, adjustment, blocked-evidence and mobile journeys;
 source publication is authorized; deployment remains unassigned. No plan persistence or new model
 study is included.
 
+October 29 CI maintenance restores current browser navigation and pins Ubuntu
+24.04 for the existing Python reference. Local PostgreSQL acceptance passes all
+383 tests; the [validation guide](VALIDATION.md#documentation-and-retained-provenance)
+records the runner and journey controls. Independent acceptance remains pending.
+
 The [final bounded functional audit](RESULTS.md#final-bounded-functional-audit),
 [selected Desk implementation and UX refinement](PRODUCT_DESIGN.md), and
 [October 15 public smoke](review/render-public-smoke-v1.json) are complete within

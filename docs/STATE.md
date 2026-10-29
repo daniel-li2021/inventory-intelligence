@@ -5,8 +5,8 @@ Updated: 2026-10-29 (America/Los_Angeles).
 Integration mode: AUTO
 
 Phase: [Demand Planning MVP](DEMAND_PLANNING.md) and guidance/recovery validated
-locally; owner acceptance pending. Source push authorized October 29; deployment
-unassigned. Earlier synthetic core retains Functional Closure and the white Desk.
+locally; [CI repairs](VALIDATION.md#documentation-and-retained-provenance) pass locally; owner acceptance pending.
+Source push authorized October 29; deployment unassigned. Earlier synthetic core retains Functional Closure and the white Desk.
 
 Render Free: [Blueprint/setup](../deploy/render/README.md) and [local receipt](review/render-free-v1.json)
 serve one read-only Python/React demo, no database/secrets, GitHub CI-gated deploys.

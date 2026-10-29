@@ -63,9 +63,19 @@ source-hash/settlement evidence without a database/model call or study replay. U
 when documentation affects source bindings. Historical source-view audits are
 [separate](EVIDENCE.md#reproduce-without-rewriting-evidence); never overwrite a manifest.
 
-CI separates hygiene from real PostgreSQL acceptance, with pinned Python 3.12.12,
-PostgreSQL 17.9, Psycopg 3.3.6 and full Git history for lineage. No business secrets,
-external operational data or deployment is involved. Green CI does not prove branch
+CI separates hygiene from real PostgreSQL acceptance, with Ubuntu 24.04, pinned
+Python 3.12.12, PostgreSQL 17.9, Psycopg 3.3.6 and full Git history for lineage.
+The packaged-product job uses Python 3.12.14. Keep the runner OS explicit: the
+October 29 `ubuntu-latest` migration to 26.04 failed Python 3.12.12 setup before
+any database tests ran. The browser journey opens More filters, Source records,
+What-if model, Policy comparison and Commitments & receipts before checking their
+visible controls; UI navigation changes must update this journey in the same change.
+October 29 local maintenance validation passes 383 tests against a fresh disposable
+PostgreSQL 17.9 database on ARM64/Python 3.12.14, 41 packaged API tests, 14 frontend
+tests, the unchanged locked frontend rebuild, 22 browser controls in each of read-only
+and fresh synthetic-journal modes, and installed offline wheel smoke. This does not close the separate reference timing
+or independent human acceptance gates.
+No business secrets, external operational data or deployment is involved. Green CI does not prove branch
 protection, current deployment or service capacity.
 
 ## Engineering runner controls
